@@ -1,0 +1,383 @@
+
+/* Start--- Plantilla Principal para SAM*/
+html{
+    background: #F2F2F2;
+    font-family: Tahoma;
+}
+label{
+    font-size: .8em;
+}
+.lineainicial{  
+    width: 100%;    
+    border: 1px solid #333333;
+}
+.fondo{
+    background: #F2F2F2;
+    width: 100%;
+    height: auto;
+}
+.encabezado{
+    display: inline-block;
+    width: 95%;
+    margin-left: 2%;
+    margin-right: 3%;
+    padding:0;
+}
+.verticalLine {
+    border-left: thick solid #ff0000;
+}
+.contenido{
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 96%;
+    height: 400px;
+    margin-bottom: 0;
+
+}
+.titulo1{   
+    border: 1px solid #DDDDDD;       
+    height: 30px;
+    padding-bottom: 3px;
+    padding-top: 0;
+    padding-left: 15px;
+    width: 100%;
+    background-color: #DDDDDD;
+}
+.titulo1 h1{
+    font-family: Tahoma;
+    font-size: 1.1em;
+    margin-top: 0;
+    font-style: italic;
+}
+.titulo{   
+    border: 1px solid #DDDDDD;       
+    height: 30px;
+    padding-bottom: 3px;
+    padding-top: 0;
+    padding-left: 15px;
+    width: 99%;
+    background-color: #DDDDDD;
+}
+.titulo h1{
+    font-family: Tahoma;
+    font-size: 1.1em;
+    margin-top: 0;
+    font-style: italic;
+}
+.ContenidoScrollbar{
+    width: 100%;
+    height: 120%;
+    overflow: auto;
+    overflow-style: marquee,panner;
+    margin-top: 2px;
+}
+/* Finaizar documentos de creacion*/
+
+.VenfinalizarDocumentos{    
+    position: fixed; 
+    width: 350px; 
+    height: 150px;
+    margin-top: 20px;
+    left: 100%; 
+   
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+}
+#handleDoc{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+  font-family: "Tahoma"; 
+      font-size: .7em;
+    background: #333  top repeat-x;
+}
+.ContenidoFinalizarDoc{
+      font-family: "Tahoma"; 
+      font-size: 1em;
+      margin-top:2%;   
+      margin-right: 2%;
+}
+.imgeninfo{
+    margin-top: 6%;
+    float: left;
+    width: 14%;
+    background: 16px 16px no-repeat url(images/info.gif);
+}
+.imgeninfo img{
+    margin-left: 10%;
+    width: 50%;
+    height: 35%;
+}
+#lbl2finDoc{
+   margin-left: 10%;
+}
+.BotenesFinalizarDocumento{
+    margin-top: 4%;
+   text-align: center;
+}
+.BotenesFinalizarDocumento button{
+    width: 25%;
+}
+/* Folios */
+
+
+footer
+{    
+    width: 100%;
+    height: 8%;
+    bottom: 0;
+    position: fixed;
+    background: #F2F2F2;
+}
+#footerline
+{
+    border-top: 1px solid #333333;
+    position: relative;
+    bottom: 0;
+}
+#msg
+{
+    vertical-align: central;
+    float: left;
+}
+.fecha
+{    
+    text-align: right;
+    margin-right: 3%;
+    margin-left: 2%;
+}
+/* Finish */
+
+/* Estilos para Match*/
+.BtnMatchIcon{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/match.png');
+    background-position: center;
+    background-repeat:no-repeat;
+    vertical-align:middle;
+    margin-top: -2.5px;
+    height: 18px;
+    width: 19px;
+}
+.BtnMatchIcon2{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/busqueda.png');
+    background-position: center;
+    background-repeat:no-repeat;
+    vertical-align:middle;
+    margin-top: -2.5px;
+    height: 18px;
+    width: 19px;
+}
+.VentanaModal{    
+    position: fixed; 
+    width: 450px; 
+    height: 400px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+}
+#handle,#handle3,#handle4, #handle5{
+    margin-left: -2px;
+    height: 6%;
+    width: 101%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+
+#TituloMatch{
+    margin-top: 3%;
+    margin-bottom: 1%;
+    margin-left: 2%;
+    color: #F5F5F5;
+    font-size: 1.1em;
+    font-family: "Tahoma";
+}
+.BuscarParam_u{
+    height: 100%;
+}
+.BotonCerrar_Matc{
+    width: 15px;
+    height: 16px;
+    float: right;
+    color: #F5F5F5;  
+    margin-right: 1%; 
+
+}
+.BotonCerrar_Matc label{
+    font-weight: bold;
+    margin-left: 2px;
+    font-family: Comic Sans, Comic Sans MS, cursive;
+    font-size: 1em;
+    cursor: pointer;
+}
+.BotonCerrar_Matc:hover{
+    background: #007CC0;
+}
+.BotonCerrar_Matc label:hover{
+    color:#fff;
+}
+.PanelBntMatch{
+    margin-top: 0;
+    margin-left: 1%;
+    padding: 0.5%;
+}
+
+.PanelBntMatch button{
+    color: #fff;
+    background-color: #007CC0;
+    font-family: "Tahoma";
+}
+.PanelBntMatch hr{
+    border: 1px solid #007CC0;
+    margin-left: -1%;
+    margin-top: 0;
+}
+.fondo_Match{
+    background-color: #E5E5E5;
+    width: 97%;
+    height: 70%;
+    margin-top: -1%;
+    margin-bottom: 4%;
+    margin-left: .5%;
+    margin-right: -1%;
+}
+.busquedaMatch {
+    padding-top: 4%;
+    padding-left: 2%;
+    width: 100%;
+}
+.busquedaMatch label{
+    font-family: "Tahoma";
+    font-size: 1em;
+    width: 40%;
+    display: inline-block;
+}
+.busquedaMatch hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 40%;
+}
+.Botones_Match{
+    float: right;
+    margin-right: 2%;
+    margin-top: -4%;
+}
+.Botones_Match2{
+    margin-left: 2%;
+}
+.table-scroll {
+    width: 100%;;
+    height: 300px;
+    overflow: auto;
+}
+
+table, td, th {
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+}
+
+tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+    cursor:pointer;
+}
+
+
+.fixedY{
+    position: relative;
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+}
+
+
+.fixedY table{
+    border-collapse: collapse;
+    width: 100%;;
+}
+
+
+.fixedY table th, #fixedY table td {
+    width: 33.33%;
+}
+
+
+.fixedY table th {
+    background-color: #ddd;
+    font: 11% 1em Tahoma;
+    color:#000;
+}
+
+#cuerpoDatos {
+    width: 100%;
+
+}
+
+#cuerpoDatos > div{
+    text-align: center;
+}
+
+#cuerpoDatos > div.nofixedX table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+#cuerpoDatos > div.nofixedX table td {
+    width: 33.33%;
+}
+
+
+/* Finish*/
+
+
+
+
+@media screen and (min-width: 500px) and (max-width: 1200px){
+
+    label{
+        font-size: .7em;
+    }
+
+    .titulo{
+        font-size: .8em;
+    }
+
+    .VentanaModal{    
+        position: fixed; 
+        width: 60%; 
+        margin-top: 10%;
+        margin-right: 15%;
+        height: 40%; 
+        display:none;
+    }
+    .matchencabezado{
+        font-weight: bold;
+        text-align: left; 
+        color: #FFFFFF; 
+        padding: 5px;
+        background-color:#333333;
+    } 
+    
+    .ContentFolios{
+    width: 100%;   
+}
+
+
+}

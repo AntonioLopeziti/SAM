@@ -1,0 +1,462 @@
+.VentanaFecha{
+    position: fixed; 
+    width: 330px; 
+    height: 310px;
+    margin-top: 10px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 17.2px; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002; 
+}
+#handlecalendar{
+    padding-top: .5%;
+    height: 7%;
+    width: 100%;
+    font-family: "TAHOMA";
+    font-size: 14px;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+.btnCalendar{
+    float: right;
+    margin-right: 1%;
+    margin-top: 3%;
+}
+.scrolCale{
+    width: 320px;
+    height: 250px;
+    overflow: scroll;
+}
+.ContentReportes{
+    width: 60%;
+}
+input{
+    font-family: "Courier New";
+}
+select{
+    font-family: "Courier New";
+}
+.DivReporte{
+    height: 260px;
+    margin-top: 2%;
+    background: #fff;
+    width:100%;    
+    padding-bottom: 2%;
+    padding-left: 2%;
+}
+.Btn{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/hoja.PNG');
+    background-repeat:no-repeat;
+    vertical-align:middle;
+    margin-top: 2%;
+    cursor: pointer;
+    margin-left: 8%;
+    width: 28%;
+    height: 10%;
+}
+.DivBusqueda{
+    height: 300px;
+    margin-top: 2%;
+    background: #fff;
+    width:100%;
+    padding-left: 2%;
+    padding-bottom: 5%;
+}
+.DivBusquedaRes{
+    height: 250px;
+    margin-top: 2%;
+    background: #fff;
+    width:100%;
+    padding-left: 2%;
+    padding-bottom: 5%;
+}
+.DivBusquedaNotificaciones{
+    height: 170px;
+    margin-top: 2%;
+    background: #fff;
+    width:100%;
+    padding-left: 2%;
+    padding-bottom: 5%;
+}
+.DivVariante{
+    height: 40px;
+    margin-top: 2%;
+    background: #fff;
+    width:100%;
+    padding-left: 2%;
+    padding-bottom: 5%;
+}
+.DivRadio{
+    height: 170px;
+    margin-top: 2%;
+    background: #fff;
+    width:100%;
+    padding-left: 2%;
+    padding-bottom: 5%;
+}
+#lineatituloReportes{
+    width: 102%;
+    margin-top: 0;
+    margin-left: -2%;
+    border: 1px solid #3892E0;
+}
+.DivIzquierda{
+    float: left;
+    width: 50%;
+}
+.DivIzquierda label{
+    display: inline-block;
+    width: 40%;
+}
+.DivIzquierda hr{
+    width: 40%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.DivLeft{
+    float: left;
+    width: 50%;
+    margin-top: 20px;
+}
+.DivLeft label{
+    display: inline-block;
+    width: 40%;
+}
+.DivLeft hr{
+    width: 40%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.DivRight{
+    float: left;
+    width: 50%;
+    margin-top: 50px;
+}
+.DivRight label{
+    width: 20%;
+    display: inline-block;
+}
+.DivRight hr{
+    width: 20%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.DivDerecha{
+    float: left;
+    width: 50%;
+    margin-top: 30px;
+}
+.DivDerecha label{
+    width: 20%;
+    display: inline-block;
+}
+.DivDerecha hr{
+    width: 20%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+
+.ContentLista{
+    width: 98%;
+}
+.gen{
+    margin-left: .3%;
+    width: 100%; 
+    height: 140px; 
+    margin-top: 10px;
+    background-color: #F2F2F2;
+    border: 1px #000 solid; 
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.labelTitulo{
+    font-family: Verdana;
+    font-size: 22px; 
+}
+.period{
+    margin-top: 10px;
+    width: 100%;
+}
+.period label{
+    font-family: Verdana;
+    font-size: 12px;
+    font-style: italic;
+}
+.general{
+    width: 100.7%; 
+    height: 330px; 
+    margin-top: 5px;
+    background-color: #F2F2F2;
+}
+.container-datos{
+    margin-left: .3%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: 100%;
+    width: 100%;
+    font-family:"Tahoma";
+    font-size: .8em;
+    border: #333333 1px solid; 
+    background-color: #FAFAFA; 
+    color: #000000; 
+    
+}
+.tableContainer table{
+    max-width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #DDDDDD;
+    white-space: pre;
+    white-space: pre-wrap; 
+    white-space: pre-line; 
+    word-wrap: break-word;
+}
+
+
+.tableContainer table tr:first-child td{
+    background-color:#DDDDDD;
+    color:#000;
+    font-family: Tahoma;
+} 
+
+.tableContainer table th { 
+    background: #B0C7DD; 
+    color: white; 
+    vertical-align:middle;
+}
+.tableContainer table td, th { 
+    padding: 3px; 
+    border: 1px solid #ccc; 
+}
+.tableContainer table tr:nth-child(odd){
+    background-color: #D4DFEF;
+}
+
+.tableContainer table tr:nth-child(even){
+    background-color: #EAEDF0;
+}
+
+.tableContainer table tr:hover{
+    background-color: #C9E1ED;
+}
+
+/*Style para radio button*/
+	input[type=radio] {
+	    display:none;
+	}
+	input[type=radio] + label:before {
+	    content: "";  
+	    display: inline-block;  
+	    width: 9px;  
+	    height: 9px;  
+	    vertical-align:middle;
+	    margin-right: 9px;  
+	    background-color: #fff;  
+	    border-radius: 10px;
+            border-style: solid;
+            border-color: #d0d0d0;
+	}
+	input[type=radio]:checked + label:before {
+		content: "\2022";
+		color:#3892E0;
+	        background-color: #fff; 
+		font-size:1.2em;
+		text-align:center;
+		line-height:7px;
+		text-shadow:0px 0px 3px #eee;
+	}
+
+
+
+/*.Botones{
+    width: 40%;
+    margin-top: 20px;
+}
+.DivReporteBotones{
+    width: 100%;
+}*/
+
+/*
+#lineatitulo_reporte{
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    border: 1px solid #3892E0;
+}
+
+#lblTitulo_reporte{
+    margin-left: 1%;
+}
+#botonnotificacion{
+    margin-left: 10%;
+    margin-top: 4%;
+    width: 30%;
+    height: 17%;
+}
+#botonorden{
+    margin-left: 10%;
+    margin-top: 4%;
+    width: 30%;
+    height: 17%;
+}
+#botonsolped{
+    
+}
+#botonavisos{
+    margin-left: 10%;
+    margin-top: 4%;
+    width: 30%;
+     height: 17%;
+}
+#botonmovimientos{
+    margin-left: 10%;
+    margin-top: 4%;
+    width: 30%;
+    height: 17%;
+}
+
+.DivIzquierda{
+    float: left;
+    width: 50%;
+    padding-top: 8px;
+    padding-right: 0;
+}
+.DivIzquierda label{
+    display: inline-block;
+    width: 60%;
+    margin-left: 6%;
+}
+.DivIzquierda input{
+    font-family: Courier New;
+    font-weight: bold;
+    font-size: .8em;
+    margin-left: -5%;
+    display: inline-block;
+    height: 15px;
+}
+.DivIzquierda hr {
+    margin-left: 6%;
+    width: 55%;
+    margin-top: -0.3%;
+}
+.DivDerecha{
+    float:left;
+    width: 35%;
+    padding-top: 8px;
+    padding-right: 0;
+    margin-left: 15%;
+}
+.DivDerecha label{
+    display: inline-block;
+    width: 8%;
+    margin-left: 0px;
+}
+.DivDerecha input{
+    font-family: Courier New;
+    font-weight: bold;
+    font-size: .8em;
+    margin-left: 5%;
+    display: inline-block;
+    height: 15px;
+}
+.DivDerecha hr {
+    width: 13%;
+    margin-top: -0.4%;
+    margin-left: 0%;
+}
+
+.glob {
+    height: 100%;
+    background-color: #F2F2F2;
+    width: 90%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.gen{
+    width: 97%; 
+    height: 140px; 
+    margin-top: 20px;
+    background-color: #F2F2F2;
+    border: 1px #000 solid; 
+}
+.labelTitulo{
+    font-family: Verdana;
+    font-size: 22px;
+}
+.general{
+    width: 97%; 
+    height: 350px; 
+    margin-top: 5px;
+    background-color: #F2F2F2;
+}
+.container-datos{
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: 100%;
+    width: 100%;
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px;
+    font-weight: normal;
+    border: #333333 1px solid; 
+    background-color: #FAFAFA; 
+    color: #000000; 
+}
+#global {
+    height: 470px;
+    background: #f1f1f1;
+    width: 100%;
+}
+.tableContainer table{
+    max-width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #DDDDDD;
+    white-space: pre;
+    white-space: pre-wrap; 
+    white-space: pre-line; 
+    word-wrap: break-word;
+}
+
+
+.tableContainer table tr:first-child td{
+    background-color:#DDDDDD;
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+} 
+
+.tableContainer table th { 
+    background: #B0C7DD; 
+    color: white; 
+    font-weight: bold; 
+    vertical-align:middle;
+}
+.tableContainer table td, th { 
+    padding: 3px; 
+    border: 1px solid #ccc; 
+}
+.titulos{   
+    border: 1px solid #DDDDDD;       
+    height: 30px;
+    padding-bottom: 3px;
+    padding-top: 0;
+    padding-left: 15px;
+    width: 98%;
+    background-color: #DDDDDD;
+}
+.titulos h1{
+    font-family: Tahoma;
+    font-size: 1.1em;
+    margin-top: 0;
+    font-style: italic;
+}*/
+
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    .ContentReportes{
+        width: 100%; 
+    }
+}

@@ -1,0 +1,1990 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+.VentanaModalAvvv
+{
+    position: fixed; 
+    width: 250px; 
+    height: 130px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+#handleAvvv{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+.PanelBnt{
+    margin-top: 0;
+    margin-left: 1%;
+    padding: 0.5%;
+}
+
+.PanelBnt button{
+    color: #000;
+    background-color: #fff;
+    font-family: "Tahoma";
+}
+.PanelBnt hr{
+    border: 1px solid #007CC0;
+    margin-left: -1%;
+    margin-top: 0;
+}
+.txtArL{
+    width: 95%;
+    height: 230px;
+}
+#handleAV
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+.Botones_MatchLM{
+    float: right;
+    margin-right: 2%;
+    margin-top: -7%;
+}
+.VentanaModalCld
+{    
+    position: fixed;
+    width: 1250px;
+    height: 588px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    /*z-index:1002;*/
+}
+.VentanaModalLM
+{    
+    position: fixed;
+    width: 600px;
+    height: 270px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.VentanaModalH
+{    
+    position: fixed;
+    width: 300px;
+    height: 75px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1003;
+}
+#handle22{
+    margin-left: -2px;
+    height: 5%;
+    width: 100.5%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+#handle23{
+    margin-left: -2px;
+    height: 10%;
+    width: 100.5%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+#handle25{
+    margin-left: -2px;
+    height: 20%;
+    width: 100.5%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+.fondo_MatchRG
+{
+    background-color: #E5E5E5;
+    width: 98.5%;
+    height: 90%;
+    margin-top: -1%;
+    margin-bottom: 4%;
+    margin-left: .5%;
+    margin-right: -1%;
+}
+.fondo_MatchRGLM
+{
+    background-color: #E5E5E5;
+    width: 98.5%;
+    height: 85%;
+    margin-top: -1%;
+    margin-bottom: 4%;
+    margin-left: .5%;
+    margin-right: -1%;
+}
+.fondo_MatchH
+{
+    background-color: #E5E5E5;
+    width: 98.5%;
+    height: 68%;
+    margin-top: -4%;
+    margin-bottom: 2%;
+    margin-left: .5%;
+    margin-right: -1%;
+}
+.CldMov
+{
+    width: 100%;
+    padding-bottom: 0.4em;
+    background-color: white;
+}
+.CldMovH
+{
+    width: 100%;
+    height: 30%;
+    padding-bottom: 0.4em;
+    background-color: white;
+    padding-top: 4%;
+}
+.CldMovFr
+{
+    width: 50%;
+    padding-bottom: 0.4em;
+    background-color: white;
+    margin-left: 4%;
+}
+.CldMov > label{ font-size: 1em; }
+.CldMovH > label{ font-size: 1em; }
+.CldMovH hr{ 
+    margin-top: -1px;
+    width: 55%;
+    margin-left: 0;
+}
+.bkCld{
+    margin-left: 10px;
+    display: inline-block;
+}
+.bkCld2{
+    margin-left: 20px;
+    display: inline-block;
+}
+#CldMov1{ width: 26%; }
+#CldMov1n{ width: 26%; }
+#CldMov5{ width: 100%; font-size: 0.8em; }
+#CldMov2{ width: 68%; }
+#CldMov2n{ width: 68%; }
+#CldMov3{ margin-left: 0;width: 36%; }
+#CldMov3n{ margin-left: 0;width: 36%; }
+#CldMov4{ margin-left: 0;width: 63%; }
+#CldMov4n{ margin-left: 0;width: 63%; }
+#CldMov6{ margin-left: 0;width: 95%; font-size: 1.2em;}
+#CldMov2 hr{ 
+    margin-top: -1px;
+    width: 16.5%;
+    margin-left: 0;
+}
+#CldMov2n hr{ 
+    margin-top: -1px;
+    width: 16.5%;
+    margin-left: 0;
+}
+#CldMov3 hr{ 
+    margin-top: -1px;
+    width: 46%;
+    margin-left: 0;
+}
+#CldMov6 hr{ 
+    margin-top: -1px;
+    width: 13.5%;
+    margin-left: 0;
+}
+#CldMov3n hr{ 
+    margin-top: -1px;
+    width: 46%;
+    margin-left: 0;
+}
+#CldMov4 hr{ 
+    margin-top: -1px;
+    width: 19%;
+    margin-left: 0;
+}
+#CldMov4n hr{ 
+    margin-top: -1px;
+    width: 19%;
+    margin-left: 0;
+}
+.cldLeft{
+    display: inline-block;
+    width: 50%;
+}
+.cldLeft3{
+    display: inline-block;
+    width: 20%;
+}
+.cldLeft4{
+    display: inline-block;
+    width: 12%;
+    margin-left: 1%;
+}
+.cldLeft5{
+    display: inline-block;
+    width: 58%;
+    margin-left: 1%;
+}
+.cldLeft6{
+    display: inline-block;
+    width: 50%;
+    margin-left: 1%;
+}
+.bkCld label{ font-size: 1em; }
+.bkCld2 label{ font-size: 1em; }
+.bkCld hr{
+    margin-top: -1px;
+    width: 46%;
+    margin-left: 0;
+}
+.bkCld2 hr{
+    margin-top: -1px;
+    width: 46%;
+    margin-left: 0;
+}
+.cldLeft2{
+    display: inline-block;
+    width: 18%;
+}
+.bx101 { width: 15%; }
+.lnMov
+{
+    border-top: 2px solid #3892E0;
+    margin-left: 4px;
+    margin-top: 0;
+}
+.btnAdj{
+    background-repeat: no-repeat;
+    width: 175px;
+    height: 25px;
+}
+.btnCalidad{
+    background-image: url(..//images/men.png); 
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 25px;
+    padding-right: 1%; 
+    padding-left: 5%;
+    padding-bottom: .6%;
+    margin-top:1px;
+    margin-left: 75%;
+}
+.DobleScroll {
+    width: 17px;
+    display: block;
+    margin-top: 20px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+    float: right;
+    z-index: 1; position:relative;
+}
+#DobleSection { height: 160px; }
+#DobleSection3 { height: 150px; }
+#DobleSection2 { height: 100px; }
+.TableContainer
+{
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.SecHead thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #E6EBEB;
+}
+#SecCuerpoCld { height: 160px; }
+#SecCuerpo3 { height: 150px; }
+#SecCuerpoCld2 { height: 100px; }
+.ocultar { visibility: hidden; }
+.bxcRG{
+    width: 103%;
+    height: 16px;
+    padding: 0;
+    margin-top: -2px;
+    margin-left: -1px;
+    text-align: left;
+    font-family:  Courier New;
+    font-weight: bold;
+}
+.bxcLRG{
+    width: 101%;
+    height: 16px;
+    padding: 0;
+    margin-top: -2px;
+    margin-left: -1px;
+    text-align: left;
+    font-family:  Courier New;
+    font-weight: bold;
+}
+.bxsmall 
+{ 
+    background-repeat: no-repeat;
+    width: 9%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxH
+{ 
+    background-repeat: no-repeat;
+    width: 40%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+
+
+.ContentEquipos{
+    width: 70%;
+    height: auto;
+    margin-bottom: 5%;
+}
+.ContentEquipos input{
+    font-size: .8em;
+    font-family: "Courier New";
+}
+.divmatchequipo{
+    background: #FFFFFF;
+    height: 180px;
+    width: 100%;
+    padding-left: 2%; 
+}
+.subdiv1 {
+    width: 35%; 
+    float: left;
+    height: auto;
+}
+.subdiv1 label{
+    width: 40%;
+    display: inline-block;
+}
+.subdiv1 hr{
+    width: 40%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.subdiv2 {
+    float:left;
+    width: 30%;
+    height: auto;
+}
+.subdiv3 {
+    background: #FFFFFF;
+    float:left;
+    width: 35%;
+    padding-top: -1px;
+    padding-right: 0;;
+
+}
+.subdiv3 button{
+    margin-left:25%;
+    width:60%; 
+    height: 15%;
+    font-family: "Tahoma";
+    font-size: .8em;
+}
+
+.subdiv3 button img {
+    float: left;
+    vertical-align: middle;
+    width: 14%; 
+    height: 22%;
+    padding-left: 0;
+    margin-left: -3%;
+}
+
+.divdatosgralEquipos{
+    margin-top: 10px;
+    padding-left: 2%;
+    background: #FFF;
+    height: 260px;
+    width: 100%;
+}
+.div1gral{
+    background: #FFFFFF;
+    width: 53%; 
+    float: left;
+    height: auto;
+}
+.div1gral label{
+    width: 20%;
+    display: inline-block;
+}
+.div1gral hr{
+    margin-top: -1px;
+    border: 1px solid #fff;
+}
+
+.lineaazul{
+    margin-left: -2%;
+    margin-top: 0;
+    width: 102%;
+    border: 1px solid #3892E0;
+}
+.lineaazul2{
+    margin-left: 0%;
+    margin-top: 0;
+    width: 100%;
+    border: 1px solid #3892E0;
+}
+.VentanaModalCC{    
+    position: fixed; 
+    width: 500px; 
+    height: 400px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.table-scrollM {
+    width: 100%;;
+    height: 300px;
+    overflow: auto;
+}
+
+.table-scrollM table, td, th {
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+}
+
+tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+    cursor:pointer;
+}
+
+
+.fixedYM{
+    position: relative;
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+}
+
+
+.fixedYM table{
+    border-collapse: collapse;
+    width: 100%;;
+}
+
+
+.fixedYM table th, #fixedY table td {
+    width: 33.33%;
+}
+
+
+.fixedYM table th {
+    background-color: #ddd;
+    font: 11% 1em Tahoma;
+    color:#000;
+}
+
+#cuerpoDatos {
+    width: 100%;   
+}
+
+#cuerpoDatos > div{
+    text-align: center;
+}
+
+#cuerpoDatos > div.nofixedXM table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+#cuerpoDatos > div.nofixedXM table td {
+    width: 33.33%;
+}
+
+
+/*boton de match*/
+/*.BtnMatchIcon2{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/busqueda.png');
+    background-position: center;
+    background-repeat:no-repeat;
+    vertical-align:middle;
+    margin-top: -2.5px;
+    margin-left: -5px;
+    height: 18px;
+    width: 19px;
+}*/
+
+/*primer div*/
+
+
+.tituloequipo{
+    margin-left: 15px;    
+}
+
+/*subdivs  del primer div*/
+
+
+/*.subdiv1 input{
+    font-family: Courier New;
+    font-weight: bold;
+    font-size: .8em;
+    margin-left: 25%;
+    display: inline-block;
+    height: 13px;
+    width: 15%;    
+}*/
+#lineaclase{
+    margin-top: -1px;
+    width: 45%;
+    margin-left: 15px;
+}
+/*.subdiv1 label{
+    display: inline-block;
+    width: 15%;
+    margin-left:15px;
+    font-family: Tahoma;
+    font-size: .8em;
+}*/
+
+
+
+
+
+
+/*fin del primer div */
+
+/*segundo div*/
+
+
+
+/*subdivs  del segundo div*/
+
+
+
+/*.div1gral input{
+    font-family: Courier New;
+    font-weight: bold;
+    font-size: .8em;
+    margin-left: 2%;
+    display: inline-block;
+    height: 15px;
+    width: 35%; 
+
+}*/
+
+/*.div1gral label{
+    display: inline-block;
+    width: 20%;
+    margin-left:15px;
+    font-family: Tahoma;
+    font-size: .8em;
+}*/
+/*#labme{
+    margin-left: -60px;
+    color: #BDBDBD; 
+    display: inline-block;
+    width: 25%;
+}*/
+#lineaclase1{
+    margin-top: -1px;
+    width: 45%;
+    margin-left: 15px;
+    color: white;
+}
+
+.div2gral{
+    background: #FFFFFF;
+    float:left;
+    width: 47%;
+    height: 220px;
+    padding-top: -9px;
+}
+
+.div2gral button{
+    margin-left:0%;
+    width:50%; 
+    font-family: Tahoma;
+    font-size: .7em;
+    margin-bottom: 1%;
+    margin-right: -2%;
+}
+
+.div2gral button img{
+    width:19%; 
+    margin-left: -13%;  
+    padding-left:-5%; 
+}
+/*fin del segundo div*/
+
+/*tercer div*/
+.tabdiv{
+    margin-top: 10px;
+    background: #F2F2F2;
+    height: auto;
+    width: 1000px;
+
+}
+
+.tabdiv button{
+    float: right;
+    width:6%; 
+    font-family: Tahoma;
+    font-size: .7em;
+    display: inline;
+    margin-top: -15%;
+}
+
+.tabdiv button img{
+    width:50%; 
+    margin-left:-10%;  
+    padding-left:-5%; 
+
+
+}
+
+/*fin del tercer div*/
+
+/*tabla caracteristicas*/
+.div2gral #table-scroll {
+    width: 99%;;
+    height: 150px;
+    overflow: auto;
+}
+
+.div2gral table, td, th {
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+}
+
+.div2gral tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+    cursor:pointer;
+}
+
+
+.div2gral #fixedY{
+
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+    font-size: .7em;
+}
+
+
+.div2gral #fixedY table{
+    border-collapse: collapse;
+    width: 100%;;
+}
+
+
+.div2gral #fixedY table th, #fixedY table td {
+    width: 50%;
+}
+
+
+.div2gral #fixedY table th {
+    background-color: #d0d0f0;
+    font: 1em Tahoma;
+    color:#000;
+}
+
+.div2gral #cuerpoDatos {
+    width: 100%;
+}
+
+#cuerpoDatos > div{
+    text-align: center;
+}
+
+.div2gral #cuerpoDatos > div#nofixedX table{
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #F2F2F2;
+}
+
+.div2gral #cuerpoDatos > div#nofixedX table td {
+    width: 50%;
+}
+
+
+
+
+
+#cuerpoDatos {
+    width: 100%;
+
+}
+
+#cuerpoDatos > div{
+    text-align: center;
+}
+
+#cuerpoDatos > div.nofixedX table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+#cuerpoDatos > div.nofixedX table td {
+    width: 100%;
+}
+
+#cuerpoDatos > div.nofixedXCLD table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+#cuerpoDatos > div.nofixedXCLD table td {
+    width: 50%;
+}
+
+
+
+
+
+
+
+/*tabla 2 mas grande*/
+
+.tablaSolicitud table
+{
+    display:block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    width: 90%;
+    height: 200px;
+}
+
+.tablaSolicitud table tr:first-child td
+{    
+
+    color:#000;
+    font-family: Tahoma;
+}
+.tablaSolicitud table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: 0.5em;   
+}
+.tablaSolicitud table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+
+
+
+.tablaSolicitud tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+.tablaSolicitud tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+
+
+
+/*bloqueo */
+#overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity:0;
+    -moz-opacity: 0.75;
+    filter: alpha(opacity=75);
+}
+
+#overlayve{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity:0;
+    -moz-opacity: 0.75;
+    filter: alpha(opacity=75);
+}
+/**/
+#handleFile
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#handleFileAdd
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 5%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#addFile{
+    font-size: 18px;
+    text-align: center;
+    margin-left:-15%;
+    margin-top: 12%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    width: 15%;
+    float:left;
+}
+.VentanaModalAv
+{
+    position: fixed; 
+    width: 420px; 
+    height: 130px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.VentanaModalFr
+{
+    position: fixed; 
+    width: 350px; 
+    height: 180px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+#btnCancelar{
+    font-size: 18px;
+    text-align: center;
+    margin-left:-5%;
+    margin-top: 12%;
+    margin-bottom: 10%;
+    width: 15%;
+    float:left;   
+}
+
+/*Ventana agregar archivos*/
+.VentanaModalFiles
+{
+    position: fixed; 
+    width: 450px; 
+    height: 400px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.Botones_MatchFile{
+    float: right;
+    margin-right: 2%;
+    margin-top: -10%;
+}
+.VentanaModalAv
+{
+    position: fixed; 
+    width: 420px; 
+    height: 130px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.fondo_MatchAv > img 
+{
+    margin-left: 10px;
+    margin-top: 7px;
+    vertical-align:middle;
+    cursor:pointer;
+    display: inline-block;
+    margin-bottom: -4%;
+    float: left;
+}
+.fondo_MatchAv > label 
+{
+    margin-left: 7px;
+    margin-top: 15px;
+    float: left;
+}
+.fondo_MatchAv
+{
+    background-color: #E5E5E5;
+    width: 100%;
+    height: 83%;
+}
+/*Ventana agregar archivos*/
+.VentanaModalFiles
+{
+    position: fixed; 
+    width: 450px; 
+    height: 400px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.Botones_MatchFile{
+    float: right;
+    margin-right: 2%;
+    margin-top: -10%;
+}
+.TablaCont table tr:first-child td
+{    
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+}
+.TablaStatusC table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+.TablaStatusC tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+.TablaStatusC tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.TablaCont{
+    width: 95%;
+    height: 300px;
+}
+.TablaCont td:first-child{
+    width: 5%;
+} 
+.TablaStatusC table
+{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+}
+@media screen and (min-width:500px) and (max-width:800px){
+    .ContentEquipos{
+        width: 100%;
+        height: auto;
+        margin-bottom: 5%;
+    }
+}
+
+/*@media screen and (min-width:200px) and (max-width:500px){
+    .ContentEquipos{
+        margin-top: 10px;
+        width: 20px;
+        height: auto;
+
+    }
+    .subdiv2 {
+        height:108px; 
+    }
+    .subdiv3 {
+        height:118px; 
+    } 
+}*/
+
+
+
+/*
+
+
+.VentanaModal{    
+    position: fixed; 
+    width: 450px; 
+    height: 400px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    z-index: 1002;
+    color: #000000;
+    display:none;
+}
+.VentanaModal #handle, #handle6{
+    margin-left: -2px;
+    height: 6%;
+    width: 101%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+
+.VentanaModal #TituloMatch{
+    margin-top: 3%;
+    margin-bottom: 1%;
+    margin-left: 2%;
+    color: #F5F5F5;
+    font-size: 1.1em;
+    font-family: "Tahoma";
+}
+.VentanaModal #BuscarParam_u{
+    height: 100%;
+}
+
+.BotonCerrar_Matc{
+    width: 15px;
+    height: 16px;
+    float: right;
+    color: #F5F5F5;  
+    margin-right: 1%; 
+
+}
+.BotonCerrar_Matc label{
+    font-weight: bold;
+    margin-left: 2px;
+    font-family: Comic Sans, Comic Sans MS, cursive;
+    font-size: 1em;
+    cursor: pointer;
+}
+.BotonCerrar_Matc:hover{
+    background: #007CC0;
+}
+.BotonCerrar_Matc label:hover{
+    color:#fff;
+}
+.PanelBntMatch{
+    margin-top: 0;
+    margin-left: 1%;
+    padding: 0.5%;
+}
+
+.PanelBntMatch button{
+    color: #fff;
+    background-color: #007CC0;
+    font-family: "Tahoma";
+}
+.PanelBntMatch hr{
+    border: 1px solid #007CC0;
+    margin-left: -1%;
+    margin-top: 0;
+}
+.fondo_Match{
+    background-color: #E5E5E5;
+    width: 97%;
+    height: 70%;
+    margin-top: -1%;
+    margin-bottom: 4%;
+    margin-left: .5%;
+    margin-right: -1%;
+}
+.busquedaMatch {
+    padding-top: 4%;
+    padding-left: 2%;
+    width: 100%;
+}
+.busquedaMatch label{
+    font-family: "Tahoma";
+    font-size: 1em;
+    width: 40%;
+    display: inline-block;
+}
+.busquedaMatch hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 40%;
+}
+.Botones_Match{
+    float: right;
+    margin-right: 2%;
+    margin-top: -4%;
+}
+.Botones_Match2{
+    margin-left: 2%;
+}
+.VentanaModal #table-scroll,#table-scroll6 {
+    width: 100%;
+    height: 300px;
+    overflow: auto;
+}
+
+.VentanaModal table, td, th {
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+}
+
+.VentanaModal tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+    cursor:pointer;
+}
+
+
+.VentanaModal #fixedY,#fixedY6{
+    position: relative;
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+}
+
+
+.VentanaModal #fixedY,#fixedY6 table{
+    border-collapse: collapse;
+    width: 100%;;
+}
+
+
+.VentanaModal #fixedY table th, #fixedY table td {
+    width:33.33%;
+}
+
+.VentanaModal #fixedY6 table th, #fixedY6 table td {
+    width:100%;
+}
+.VentanaModal #fixedY table th {
+    background-color: #ddd;
+    font: 1em Tahoma;
+    color:#000;
+}
+.VentanaModal #fixedY6 table th {
+    background-color: #ddd;
+    font: 1em Tahoma;
+    color:#000;
+}
+.VentanaModal #cuerpoDatos {
+    width: 100%;
+}
+
+.VentanaModal #cuerpoDatos > div{
+    text-align: center;
+}
+
+.VentanaModal #cuerpoDatos > div.nofixedX table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.VentanaModal #cuerpoDatos > div.nofixedX table td {
+    width: 33.33%;
+}*/
+
+
+
+.tabdiv input[type="checkbox"].che{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #c8c6c6;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    margin: -1px -5px -5px -1px;
+}
+
+.tabdiv input[type="checkbox"].che:checked{
+    background: #1E90FF;
+}
+.tabdiv input[type="checkbox"].che:focus{
+    outline: none;
+}
+
+.tabdiv input[type="radio"].che{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #c8c6c6;
+    width: 20px;
+    height: 30px;
+    border-radius: 2px;
+    margin: -1px -5px -5px -1px;
+}
+
+.tabdiv input[type="radio"].che:checked{
+    background: #1E90FF;
+}
+.tabdiv input[type="radio"].che:focus{
+    outline: none;
+}
+
+
+
+
+.VenAvisoss{    
+    position: fixed; 
+    width: 400px; 
+    height: 150px;
+    margin-top: 20px;
+    left: 100%; 
+    z-index: 1004; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+}
+#handleAv2, #handleAv3{
+    margin-left: -2px;
+    height: 15%;
+    width: 101%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+#handleAv{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+.ContenidoAv{
+    font-family: "Tahoma"; 
+    font-size: 1em;
+    margin-top:2%;   
+    margin-right: 2%;
+}
+.imgeninfo{
+    margin-top: 6%;
+    float: left;
+    width: 14%;
+    /*background: 16px 16px no-repeat url(images/info.gif);*/
+}
+.imgeninfo img{
+    margin-left: 10%;
+    width: 50%;
+    height: 35%;
+}
+#lbl2finDoc{
+    margin-left: 10%;
+}
+.BotenAv{
+    margin-top: 14%;
+    text-align: center;
+    float: right;
+    margin-right: 5px;
+}
+.BotenAv2{
+    margin-top: 14%;
+    text-align: center;
+    float: right;
+    margin-right: 5px;
+}
+.BotenAv button{
+    width: 20px;
+    height: 20px;
+}
+.BotenAv img{
+    width: 13px;
+    height: 13px;
+    margin-left: -5px;
+
+}
+/*contenido de la ventanapm03*/
+
+.Ventabdes{    
+    position: fixed; 
+    width: 750px; 
+    height: 580px;
+    z-index: 1002;
+    left: 100%;
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+
+}
+#handleDes{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 3%;
+    width: 100%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .9em;
+    background: #333  top repeat-x;
+}
+#handleQm{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 3%;
+    width: 100%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .9em;
+    background: #333  top repeat-x;   
+}
+#handlePM01{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 3%;
+    width: 100%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .9em;
+    background: #333  top repeat-x;   
+}
+.Contentabdes{
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 98%;
+    height: auto;
+}
+.vqm{
+    width: 100%;
+    height: 557px;
+    overflow: auto;
+}
+.divtabdes{
+    background: #FFFFFF;
+    height: 0%;
+    width: 100%;
+    margin-bottom: 13%;
+}
+.div1vtd{
+    background: #FFFFFF;
+    width: 45%; 
+    float: left;
+    padding: auto;
+    margin-top: -1%;  
+}
+.div2vtd{
+    background: #FFFFFF;
+    float:left;
+    width: 55%;
+    padding-top: -9px;
+    margin-top: -1%;
+}
+.div1vtd input{
+    font-family: Courier New;
+    font-weight: bold;
+    font-size: .8em;
+    display: inline-block;
+    height: 13px;
+    width: 15%; 
+    border: none;
+}
+.div1vtd label{
+    display: inline-block;
+    width: 65%;
+    margin-left:8px;
+    font-family: Tahoma;
+    font-size: .8em;
+}
+.div2vtd input{
+    font-family: Courier New;
+    font-weight: bold;
+    font-size: .8em;
+    display: inline-block;
+    height: 13px;
+    width: 15%;   
+    border: none;
+}
+.div2vtd label{
+    display: inline-block;
+    width: 35%;
+    margin-left:8px;
+    font-family: Tahoma;
+    font-size: .8em;
+}
+.tab1{
+    margin-left:13px;
+    width: 99%;
+    margin-top:.5%; 
+}
+
+.tab1 table
+{
+    display:block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    width: 98%;
+    height: 120px;
+}
+
+.tab1 table tr:first-child td
+{    
+
+    color:#000;
+    font-family: Tahoma;
+}
+.tab1 table, th, td
+{
+    border-collapse: inherit;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: 0.5em;   
+}
+.tab1 table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+
+.tab1 tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+.tab1 tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+
+.Botdes{
+    float: right;
+    margin-top: 5%;
+}
+.Botdes1{
+    float: right;
+    margin-top: 2%;
+}
+
+/*final de la ventana/**/
+
+/*ventana de una QM01*/
+/*primer div*/
+.se1qm{
+    background: #FFFFFF;
+    height: 0%;
+    width: 100%;
+    margin-bottom: 1%;  
+}
+
+.se1qm1{
+    background: #FFFFFF;
+    width: 65%; 
+    float: left;
+    padding: auto;
+    margin-top: -1%;
+}
+.se1qm1 input{
+    font-family: Courier New;
+    font-weight: bold;
+    font-size: .7em;
+    display: inline-block;
+    height: 13px;
+    width: 15%; 
+    border: none;
+}
+
+.se1qm1 label{
+    display: inline-block;
+    width: 65%;
+    margin-left:8px;
+    font-family: Tahoma;
+    font-size: .7em;
+}
+
+.se1qm2{
+    background: #FFFFFF;
+    width: 35%; 
+    float: left;
+    padding: auto;
+    margin-top: -1%;
+}
+.se1qm2 input{
+    font-family: Courier New;
+    font-weight: bold;
+    font-size: .8em;
+    display: inline-block;
+    height: 13px;
+    width: 15%; 
+    border: none;
+}
+
+.se1qm2 label{
+    display: inline-block;
+    width: 65%;
+    margin-left:8px;
+    font-family: Tahoma;
+    font-size: .7em;
+}
+/*segundo div*/
+.se2qm{
+    background: #FFFFFF;
+    height: 0%;
+    width: 100%;
+    margin-bottom: 1%;   
+}
+/*tercer div*/
+.se3qm{
+    background: #FFFFFF;
+    height: 0%;
+    width: 100%;
+    margin-bottom: 1%;   
+}
+/*cuarto div*/
+.se4qm{
+    background: #FFFFFF;
+    height: 0%;
+    width: 100%;
+    margin-bottom: -5%;   
+}
+/*final de la ventana QM01/**/
+
+
+/*ventana de la tabla  PM01*/
+/*primer div */
+.ve1pm{
+    background: #FFFFFF;
+    height: 0%;
+    width: 100%;
+    margin-bottom: 9%;
+}
+.ve1pm1{
+    background: #FFFFFF;
+    width: 45%;
+    height: 55px;
+    float: left;
+    padding: auto;
+    margin-top: 0%;
+}
+
+.ve1pm2{
+    background: #FFFFFF;
+    width: 55%; 
+    height: 114px; 
+    float: left;
+    padding: auto;
+    margin-top: -8%;
+}
+.ve1pm21{
+    background: #FFFFFF;
+    width: 49%; 
+    float: left;
+    padding: auto;
+    margin-top: 0%;
+    margin-right: 1%;
+    border: .5px;
+    border: #F2F2F2 .2px solid;
+}
+.ve1pm22{
+    background: #FFFFFF;
+    width: 49%; 
+    float: left;
+    padding: auto;
+    margin-top: 0%;
+    border: #F2F2F2 .5px solid;
+
+}
+/*segundo div*/
+.ve2pm{
+    background: #FFFFFF;
+    height: 0%;
+    width: 100%;
+    margin-bottom: 3%; 
+}
+
+.tab2{
+    margin-left:13px;
+    width: 99%;
+    margin-top:3%; 
+}
+
+.tab2 table
+{
+    display:block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    width: 98%;
+    height: 200px;
+}
+
+.tab2 table tr:first-child td
+{    
+
+    color:#000;
+    font-family: Tahoma;
+}
+.tab2 table, th, td
+{
+
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: 0.5em;   
+}
+/*.tab2 th, td
+{
+    width: 65%;
+}*/
+.tab2 table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+
+.tab2 tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+.tab2 tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+
+.Botpm{
+    float: right;
+    margin-top: 2%;
+    margin-right: 20%;
+}
+/*final de la ventana PM01*/
+
+/* inicio de ventana de equipo montado*/
+
+.VenMontEq{    
+    position: fixed; 
+    width: 650px; 
+    height: 325px;
+    margin-top: 20px;
+    left: 100%; 
+    z-index: 1002; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+}
+#handleEQ{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 10%;
+    width: 100%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+
+.div1gralEQ{
+    background: #FFFFFF;
+    width: 100%; 
+    float: left;
+    height: auto;
+}
+.div1gralEQ label{
+    width: 20%;
+    display: inline-block;
+}
+.div1gralEQ hr{
+    margin-top: -1px;
+    border: 1px solid #fff;
+}
+
+.BotMONTEQ{
+    margin-top: 1%;
+    text-align: center;
+    float: right;
+    margin-right: 5px;
+}
+.BotMONTEQ button{
+    width: 20px;
+    height: 20px;
+}
+.BotMONTEQ img{
+    width: 13px;
+    height: 13px;
+    margin-left: -5px;
+
+}
+/*------Ventana Avisos------*/
+.VentanaModalAv
+{
+    position: fixed; 
+    width: 420px; 
+    height: 130px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.fondo_MatchAv > img 
+{
+    margin-left: 10px;
+    margin-top: 7px;
+    vertical-align:middle;
+    cursor:pointer;
+    display: inline-block;
+    margin-bottom: -4%;
+    float: left;
+}
+.fondo_MatchAv > label 
+{
+    margin-left: 7px;
+    margin-top: 15px;
+    float: left;
+}
+.fondo_MatchAv
+{
+    background-color: #E5E5E5;
+    width: 100%;
+    height: 83%;
+}
+#handleAV
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#handleFileT
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#handleFileAddT
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 5%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#handleFileCalidad
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#addFile{
+    font-size: 18px;
+    text-align: center;
+    margin-left:-15%;
+    margin-top: 12%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    width: 15%;
+    float:left;
+}
+#btnCancelar{
+    font-size: 18px;
+    text-align: center;
+    margin-left:-5%;
+    margin-top: 12%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    width: 15%;
+    float:left;   
+}
+
+/*Ventana agregar archivos*/
+.VentanaModalFiles
+{
+    position: fixed; 
+    width: 450px; 
+    height: 400px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.Botones_MatchFile{
+    float: right;
+    margin-right: 2%;
+    margin-top: -10%;
+}
+/*------------------------*/
+
+#VentanaModalCentroP{
+    width:75%; 
+    height: 370px;
+ }  
