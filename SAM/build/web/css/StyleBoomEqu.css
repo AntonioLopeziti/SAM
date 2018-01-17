@@ -1,0 +1,1340 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12/04/2016, 09:33:00 AM
+    Author     : AREConsulting
+*/
+
+/*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
+
+* {
+    padding:0;
+    margin:0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html{
+    background: rgb(242,242,242);
+   font-family: Tahoma;
+    box-sizing: border-box;
+}
+
+#titulo{
+    background: rgb(221,221,221);
+    width:100%;
+    text-align: left;
+    margin: 10px;
+    padding: 2px;
+    font-style:italic;
+     text-siza:1em;
+}
+.busqueda{
+    background:rgb(255,255,255) ;
+    width:80%;
+    margin: 10px;
+    padding: 5px;  
+   display: line-block;
+    text-align: left;
+    overflow: hidden;
+font-size: .8em;
+    
+    
+}
+.busquedaInterior{
+   background:rgb(255,255,255) ;
+   display: block;
+
+   margin-right: 0px;
+   float: left;
+   display: block;
+
+}
+.busquedaInterior label{
+   
+    margin: 15px 10px 10px 10px;    
+    display: block;
+    width: 100%;   
+    border-bottom: solid 1px #b2abab;
+    
+
+}
+
+
+
+.busqueda2{
+   
+   display: inline-block;  
+   width: 80%;
+   position: absolute;
+     
+
+}
+
+.busqueda2 #boton1{
+  clear: left;
+  display: inline-block;
+   float:left;
+   width: 100%;
+   
+   
+  
+   
+    }
+ .busqueda2 #lm {
+    width: 15%;
+     clear: left;
+     height: 18px;
+    margin-top:14px;
+    border: solid 1px rgb(163,163,163);
+   
+    background-repeat: no-repeat;
+   
+    
+}
+
+    
+    
+.busqueda2 #lm1 {
+    width: 5%;
+     clear: left;
+     height: 18px;
+       margin-top:14px;
+        background-repeat: no-repeat;
+        border: solid 1px rgb(163,163,163);
+}
+
+.busqueda2 #lm2{
+      margin-top:14px;
+    width: 2%;
+     clear: left;
+  height: 18px;
+}
+
+.busqueda2 #boton{
+     margin-top:14px;
+ border: solid 1px rgb(163,163,163);
+    
+            
+   background: rgb(229,229,229);
+    
+    background-image: url('../img/match.png');
+    background-repeat:no-repeat;
+  height:18px;
+  width:18px;
+  background-position:center;
+  position: absolute;
+ 
+}
+
+.busqueda2 #boton2{
+     margin-top:14px;
+ border: solid 1px rgb(163,163,163);
+    
+            
+   background: rgb(229,229,229);
+    
+    background-image: url('../img/busqueda.png');
+    background-repeat:no-repeat;
+  height:18px;
+  width:18px;
+  background-position:center;
+  position: absolute;
+ 
+}
+
+
+
+
+
+
+#TablaStatus
+{
+    width: 78%;
+    height: 100%;
+    margin-left: 14px;
+}
+.TablaCont
+{
+    
+}
+.TablaCont table tr:first-child td
+{    
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+}
+table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: 0.5em;   
+}
+table #CabeceraTabla{
+
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+#cuerpo{
+    margin: 20px;
+    
+}
+
+header{
+    
+    margin: 0 auto;
+    text-align: left;
+    color:#fff;
+    font-size: .8em;
+
+}
+.img-back{
+    width:1.8%;
+    margin-top: 2px;
+    margin: 1.5px;
+    padding:0;
+    height: auto;
+
+}
+
+#header {
+   
+    height: 20px;
+    z-index:1000;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.menu-bar{
+    display: none;
+}
+
+.menu{
+    width: 100%;
+
+}
+
+ul, ol {
+    list-style:none;
+}
+
+.nav > li {
+    display:inline-block;
+    position: relative;
+}
+
+.nav li a {
+    display: block;
+    text-decoration:none; 
+    padding: 10px;
+    font-size: 1.0em;
+    color:#000;
+}
+
+.nav li a:hover {
+    background:#EDF1F5;
+}
+
+.nav li ul {
+    display:none;
+    position:absolute;
+    min-width:140px;
+    width: 100%;
+    background: #CFDDE8;
+}
+
+.nav li:hover > ul {
+    display:block;
+}
+
+.nav li ul li {
+    position:relative;
+}
+
+.nav li ul li ul {
+    right:-140px;
+    top:0px;
+}
+
+.contenido{
+    width: 100%;
+    max-width: 100%;
+    margin-top:40px;
+    margin-bottom: 180px; 
+    text-align: center;
+}
+
+.contenido h1{
+    text-align: center;
+    font-size: 2.5em;
+    margin-top: 50px;
+}
+.logo{
+    width:40%;
+    margin:0 auto;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.logo img{
+    border:none;
+    width: 100%;
+    margin: 0;
+    padding:0;
+    height: auto;
+}
+
+
+.logo2{
+    float: left;
+    width:12%;
+    margin:0 auto;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.logo2 img{
+    border:none;
+    width: 100%;
+    margin: 0;
+    padding:0;
+    height: auto;
+}
+
+.datetime
+{
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-size: .9em;
+}
+
+
+.container-datos{
+    width: 100%;
+    max-width: 100%;
+    margin-top:40px;
+    margin:0 auto;
+    top: 10px;
+}
+.container-datos h1, h3, h4{
+
+    text-align:center;
+
+}
+
+.container-datos input{
+
+    border: 1px solid #3658A3;
+
+}
+
+.VentanaModal{
+    position: absolute; 
+    clear: both;
+    width: 400px; 
+    overflow: scroll; 
+    top: 0; 
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #FAFAFA; 
+    color: #000000;
+    display:none;
+}
+
+.datos
+{
+    width:100%;
+    padding:0;
+}
+
+.divcenter
+{  
+    width: 95%;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+}
+.divcenter label
+{
+    display: inline-block;
+    width: 20%;
+}
+.divcenter input[type="text"]         
+{
+    display: inline-block;
+    width: 30%;
+    margin-bottom: 10px;               
+    border: 1px solid #fff;
+    border-radius: 2px;
+    font-size:1em;
+    color: #000;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #15243b;
+    border-top-color: #0d1827;
+    border-radius: 4px;
+
+}
+.div1
+{
+    float:left;
+    margin-left: 10%;
+    width: 40%;
+    padding:auto;
+
+}
+
+.div1 label
+{
+    display: inline-block;
+    width: 40%;
+}
+.div1 select
+{
+    display: inline-block;
+    width: 40%;
+    margin-bottom: 10px;               
+    border: 1px solid #fff;
+    border-radius: 2px;
+    font-size:1em;
+    color: #000;
+    background: #fff;
+    border: 1px solid #15243b;
+    border-top-color: #0d1827;
+    text-align: center;
+    border-radius: 4px;
+}
+.div1 input            
+{
+    display: inline-block;
+    width: 40%;
+    margin-bottom: 10px;               
+    border: 1px solid #fff;
+    border-radius: 2px;
+    font-size:1em;
+    color: #000;
+    background: #fff;
+    border: 1px solid #15243b;
+    border-top-color: #0d1827;
+    text-align: center;
+    border-radius: 4px;
+
+}
+.div2
+{
+    float:left;
+    margin-right: 10%;
+    width: 40%;
+}
+.div2 label
+{
+    display: inline-block;
+    width: 40%;
+}
+.div2 input, 
+.div2 select
+{
+
+    display: inline-block;
+    width: 40%;
+    margin-bottom: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    font-size:1em;
+    color: #000;
+    background: #fff;
+    border: 1px solid #15243b;
+    border-top-color: #0d1827;
+    text-align: center;
+    border-radius: 4px;
+
+}
+
+
+.configuracion_servidor
+{
+    display: inline-block;
+    width: 40%;
+    margin-top: 2%;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding: auto;
+    height: 210px;
+    padding-top: 30px;
+    margin-bottom: 15%;               
+    border: 1px solid #fff;
+    border-radius: 2px;
+    font-size:1em;
+    color: #000;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #15243b;
+    border-top-color: #0d1827;
+    border-radius: 4px;
+    
+}
+
+footer{
+    clear: both;
+    text-align: center;
+    font-size: 1em;
+    color: #000000; 
+    border-top: 2px solid #999999;
+    font: bold  monospace; 
+    font-size: 1.0em;
+}
+
+
+
+
+
+
+.permisos
+{
+    padding: 5%;
+    text-align:left;
+    width:60%;
+    height: 350px;
+    max-width: 100%;
+    max-height: 350px;
+    overflow: scroll;
+    max-height: 500px;
+    box-shadow: 10px 10px 5px #888888;
+    border:1px solid #b2abab;
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+}
+
+.miVentana{
+        position:absolute !important; 
+        right:0px;
+        top:0px;
+        z-index:10 !important;
+        width: 30%;
+        height: 420px; 
+        top: 0; left: 0;
+        font-family:serif;
+        font-size: 15px; 
+        font-weight: normal; 
+        border: #333333 3px solid;
+        background-color: #FAFAFA;
+        color: #000000;
+        display:none;
+    }
+
+
+
+.container-datos p{
+    text-align: center;
+}
+
+.pie{
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+
+.pie button{
+    float: right;
+    right: 10px;
+}
+
+.tableContainer{
+    width: 78%;
+    height: 100%;
+    margin-left: 15px;
+}
+
+
+
+
+
+
+
+.Tabladetalle{
+    margin-left: 35%;
+    margin-right: 35%;
+    text-align:left;
+    width:30%;
+    height: 350px;
+    max-width: 100%;
+    overflow-Y:  scroll;
+    border: 5px solid #000;
+
+
+}
+
+.Tabladetalle2{
+    margin-left: 20%;
+    margin-right: 20%;
+    width:60%;
+    max-width: 100%;
+
+}
+
+
+.inforecord
+{
+    position: relative;
+    width: 50%;
+    float: left;
+}
+
+
+/*
+  =======================================
+   Estilo para la pantalla de Acceso
+  =======================================
+*/
+
+
+.login{
+    background-color: white;
+    max-width: 80%;
+    width:450px;
+    min-width: 30%;        
+    margin: 0 auto;
+    position: relative;
+    top:40px;
+    padding-bottom: 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+    text-align: center;  
+    margin-bottom: 100px;
+
+}
+
+.login .login-header{   
+    background-color: #3658A3;
+    margin-top: 0;
+    border-radius: 5px 5px 0 0;
+}
+
+.login h3{
+    color:#fff;
+    font-size: 1.5em;    
+}
+
+.login label {
+    font-weight: 700;
+    font-size: 1em;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 2em;
+}
+.login input[type="text"],
+.login input[type="password"]{	
+    width: 60%;
+    margin-bottom: 15px;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    font-size:1em;
+    color: #000;
+    background: #fff;
+    border: 2px solid #15243b;
+    border-top-color: #0d1827;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.Tabla{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom:80px;
+}
+
+
+
+
+.login input[type="text"],
+.login input[type="password"]:focus {
+    outline: none;
+    border-color: #665851;
+    transition: 0.5s;
+    color: #000;
+    background-color: #FFF09E;
+}
+
+
+
+/*
+===============================
+       devices
+===============================
+*/
+
+@media screen and (min-width: 500px) and (max-width: 800px){
+
+
+    body{
+        padding-top: 0px;       
+        margin: auto;
+        height: 100%;
+        width: 100%;
+        
+    }
+    header{
+        background-color:#3658A3;
+        font-weight: bold;
+        border: 1px solid #D5D5D5;
+        margin: 0 auto;
+        text-align: center;
+        color:#fff;
+        font-size: .5em;
+
+    }
+
+    .img-back{
+        width:2.5%;
+        margin-top: 2px;
+        margin: 1.5px;
+        padding:0;
+        height: auto;
+
+    }
+    .container-datos{
+        width: 100%;
+        max-width: 100%;
+        margin-top:40px;
+        margin:0 auto;
+        top: 10px;
+
+    }
+    .container-datos h1{
+
+        text-align:center;
+        font-size: 1em;
+
+    }
+    .container-datos h3, h4{
+
+        text-align:center;
+        font-size: .6em;
+
+    }
+
+    .container-datos input{
+
+        border: 1px solid #3658A3;
+
+    }
+    footer
+    {
+        bottom: 0;
+    }
+
+    .logo{
+        width:60%;
+        max-width: 90%;
+        position:static;
+        margin:0 auto;
+        margin-top: 60px;
+        margin-bottom: 10px;
+    }
+
+    .logo img{
+        border:none;
+        width: 100%;
+        margin: 0;
+        padding:0;
+        height: auto;
+    }
+
+    .btn{
+        font-size: .7em;
+    }
+
+    .login
+    {
+        width: 70%;
+
+    }
+
+    .menu-bar{
+        display: block;
+        width: 100%;
+        position: relative;
+        margin: 0 auto;
+        color:#000;
+        background: #CFDDE8;
+
+    }
+    .menu-bar .bt-menu{
+        display: block;
+        padding: 20px;
+        color:#000;
+        text-decoration: none;
+
+    }
+    .nav{
+        width: 50%;
+        right: 100%;
+        position: absolute;
+        margin: 0;
+        background: #CFDDE8;
+    }
+    .nav > li {
+        display: block;
+        border-bottom: 1px solid rgba(255,255,255,.5);
+
+    }
+
+    .nav li a{
+        display: block;
+    }
+
+    .nav ul li:hover ul{
+        display: inline-block;
+    }
+
+    .nav li ul{
+        width: 100%;
+        position: relative;
+        display: none;
+    }
+
+    .nav li ul li ul {
+        right:-0px;
+        top:10px;	
+    }
+
+
+    .pie{
+        margin-bottom: 40px;
+    }
+    .Tabla{
+        width: 80%;
+        margin: 0 auto;
+    }
+    .logo2{
+
+        width: 20%;
+    }
+
+    .datetime
+    {
+
+        margin-top: 10px;
+        margin-right: 10px;
+        font-size: .6em;
+    }
+    .Tabladetalle
+    { 
+        margin-left: 2.5%;
+        width: 90%;
+        margin-right: 2.5%;
+    }
+
+
+    fourcolum  th{ 
+        font-size: .9em;
+
+    }
+    fourcolum td, tr{ 
+        font-size: .7em;
+
+    }
+
+
+    .VentanaModal{
+        position: fixed; 
+        width: 50%; 
+        overflow: scroll; 
+        left: 100%; 
+        margin-top: 100px;
+        font-family:Verdana, Arial, Helvetica, sans-serif; 
+        font-size: 12px; 
+        font-weight: normal; 
+        border: #333333 3px solid; 
+        background-color: #FAFAFA; 
+        color: #000000;
+        display:none;
+    }
+
+
+
+}
+@media screen and (min-width: 200px) and (max-width: 500px) {
+    
+    .busqueda{
+    background:rgb(255,255,255) ;
+    width:95%;
+    margin: 10px;
+    padding: 5px;  
+   display: block;
+    text-align: left;
+    overflow: hidden;
+    
+}
+.busquedaInterior{
+   background:rgb(255,255,255) ;
+   display: block;
+ 
+   margin-right: 0px;
+    
+ 
+   display: block;
+   float: left;
+}
+.busquedaInterior label{
+    
+    display: block;
+    width: 100%;
+    margin: 15px;
+    border-bottom: solid 1px #b2abab;
+    
+
+}
+.busqueda2{
+   margin-top: 8px;
+   float:left;    
+   width: 80%;
+   
+}
+
+.busqueda2 #boton1{
+   clear:both;
+   float:left;
+   margin: 7.5px;
+}
+.busqueda2 #lm1{
+    width: 20%;
+}
+
+.busqueda2 #lm2{
+    width: 10%;
+}
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    header{
+        background-color:#3658A3;
+        font-weight: bold;
+        border: 1px solid #D5D5D5;
+        margin: 0 auto;
+        text-align: center;
+        color:#fff;
+        font-size: .5em;
+
+    }
+    .logo{
+        width:60%;
+        max-width: 90%;
+        position:static;
+        margin:0 auto;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .logo img{
+        border:none;
+        width: 100%;
+        margin: 0;
+        padding:0;
+        height: auto;
+    }
+
+
+    .login{
+        background-color: white;
+        width:450px;
+        min-width: 30%;        
+        margin: 0 auto;
+        position: relative;
+        top:30px;
+        padding-bottom: 30px;
+        border-radius: 5px;
+        box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+        text-align: center;  
+        margin-bottom: 80px;
+
+    }
+
+    .login .login-header{   
+        background-color: #3658A3;
+        margin-top: 0;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .login h3{
+        color:#fff;
+        font-size: 1.5em;    
+    }
+
+    .login label {
+        font-weight: 700;
+        font-size: 1em;
+        color: #888;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        line-height: 2em;
+    }
+    .login input[type="text"],
+    .login input[type="password"]{	
+        width: 60%;
+        margin-bottom: 15px;
+        border: 1px solid #fff;
+        border-radius: 2px;
+        font-size:1em;
+        color: #000;
+        background: #fff;
+        border: 2px solid #15243b;
+        border-top-color: #0d1827;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    .img-back{
+        width:3.5%;
+        margin-top: 2px;
+        margin: 1.5px;
+        height: auto;
+
+    }
+
+    .contenido{
+        width: 100%;
+        max-width: 100%;
+        margin-top:60px;
+        margin-bottom: 150px; 
+        text-align: center;
+    }
+
+    .contenido h1{
+        text-align: center;
+        font-size: 2.5em;
+        margin-top: 50px;
+    }
+    .div1{
+        width: 100%;
+        margin-left:  0;
+    }
+    .div1 label{
+        width: 40%;
+    }
+    
+     .div1 input{
+        width: 40%;
+    }
+
+    .div2{
+
+        width: 100%;
+    }
+    .div2 label {
+
+        width: 40%;
+
+    }
+    .div2 input{
+        width: 40%;
+
+    }
+    .divcenter
+    {
+        margin-top: 30px;
+        margin-left: 20%;
+        width: 60%;
+        padding:auto;
+        margin-right: 20%;
+        text-align: center;
+    }
+    .divcenter label
+    {
+        display: inline-block;
+        width: 10%;
+    }
+    .divcenter input[type="text"]         
+    {
+        display: inline-block;             
+        border: 1px solid #fff;
+        border-radius: 2px;
+        font-size:1em;
+        color: #000;
+        text-align: center;
+        width: 35%;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #15243b;
+        border-top-color: #0d1827;
+        border-radius: 4px;
+
+    }
+
+    .btn {
+
+        font-size: .5em;
+    }
+
+    
+    .pie{
+        padding-top: 2%;
+    }
+
+    .menu-bar{
+        display: block;
+        width: 100%;
+        position: relative;
+        margin: 0 auto;
+        color:#000;
+        background: #CFDDE8;
+
+    }
+    .menu-bar .bt-menu{
+        display: block;
+        padding: 20px;
+        color:#000;
+        text-decoration: none;
+
+    }
+    .nav{
+        width: 50%;
+        right: 100%;
+        position: absolute;
+        margin: 0;
+        background: #CFDDE8;
+    }
+    .nav > li {
+        display: block;
+        border-bottom: 1px solid rgba(255,255,255,.5);
+
+    }
+
+    .nav li a{
+        display: block;
+    }
+
+    .nav ul li:hover ul{
+        display: inline-block;
+    }
+
+    .nav li ul{
+        width: 100%;
+        position: relative;
+        display: none;
+    }
+
+    .nav li ul li ul {
+        right:-0px;
+        top:10px;	
+    }
+    .logo2{
+
+        width: 20%;
+    }
+
+    .datetime
+    {
+
+        margin-top: 10px;
+        margin-right: 10px;
+        font-size: .6em;
+    }
+
+    .container-datos{
+        width: 100%;
+        max-width: 100%;
+        margin-top:40px;
+        margin:0 auto;
+        top: 10px;
+
+    }
+    .container-datos h1{
+
+        text-align:center;
+        font-size: 1em;
+
+    }
+    .container-datos h3, h4{
+
+        text-align:center;
+        font-size: .6em;
+
+    }
+    .container-datos p{
+
+        text-align:center;
+        font-size: .9em;
+
+    }
+
+
+
+    .divcenter input {
+
+        text-align: center;
+        width: 100%;
+        padding-right:  50px;
+
+
+    }
+    .divcenter label {
+
+        text-align: center;
+        width: 40%;
+        padding-right:  50px;
+
+
+    }
+
+
+    .container-datos input [type=text]{
+
+        border: 1px solid #3658A3;
+        width: 80%;
+
+    }
+
+    .datetime
+    {
+
+        margin-top: 10px;
+        margin-right: 10px;
+        font-size: .6em;
+    }
+    .Tabladetalle
+    { 
+        margin-left: 2.5%;
+        width: 90%;
+        margin-right: 2.5%;
+    }
+
+
+
+
+    .VentanaModal{
+        position: fixed; 
+        width: 80%; 
+        overflow: scroll; 
+        margin-top: 100px; 
+        margin-left:10%; 
+        margin-right: 10%; 
+        height: 400px;
+        left: 80%; 
+        font-family:Verdana, Arial, Helvetica, sans-serif; 
+        font-size: 12px; 
+        font-weight: normal; 
+        border: #333333 3px solid; 
+        background-color: #FAFAFA; 
+        color: #000000;
+        display:none;
+    }
+    .miVentana{
+        position:fixed !important; 
+        right:0px;
+        top:0px;
+        z-index:10 !important;
+        width: 70%;
+        height: 420px; 
+        top: 0; left: 0;
+        font-family:serif;
+        font-size: 8px; 
+        font-weight: normal; 
+        border: #333333 3px solid;
+        background-color: #FAFAFA;
+        color: #000000;
+        display:none;
+    }
+
+
+    .permisos
+    {
+        text-align:left;
+        width:80%;
+        height: 350px;   
+        overflow: scroll;
+        box-shadow: 10px 10px 5px #888888;
+        border:1px solid #b2abab;
+        -moz-border-radius-bottomleft:0px;
+        -webkit-border-bottom-left-radius:0px;
+        border-bottom-left-radius:0px;
+        -moz-border-radius-bottomright:0px;
+        -webkit-border-bottom-right-radius:0px;
+        border-bottom-right-radius:0px;
+        -moz-border-radius-topright:0px;
+        -webkit-border-top-right-radius:0px;
+        border-top-right-radius:0px;
+        -moz-border-radius-topleft:0px;
+        -webkit-border-top-left-radius:0px;
+        border-top-left-radius:0px;
+    }
+
+    fourcolum  th{ 
+        font-size: .6em;
+
+    }
+    fourcolum td, tr{ 
+        font-size: .4em;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+

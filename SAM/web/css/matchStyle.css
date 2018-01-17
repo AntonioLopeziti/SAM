@@ -1,0 +1,109 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13/05/2016, 11:13:08 PM
+    Author     : AREConsulting
+*/
+
+html{
+    background: #F7FAFE;
+    font-family: "Courier New";
+    box-sizing: border-box;
+}
+form
+{
+    text-align: center;
+}
+
+
+
+.Tabla table{
+
+    max-width: 100%;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #15243b;
+}
+
+.Tabla table tr:first-child td{
+    background-color:#3658A3;
+    font-weight:bold;
+    color:#fff;
+} 
+
+tr:nth-of-type(odd) { 
+    background: #eee; 
+
+}
+th { 
+    background: #B0C7DD; 
+    color: white; 
+    font-weight: bold; 
+    vertical-align:middle;
+}
+td, th { 
+    padding: 3px; 
+    border: 1px solid #ccc; 
+}
+
+.logom{
+    float: right;
+    width:12%;
+    margin:0 auto;
+    margin-top: 5px;
+}
+.logom img{
+    border:none;
+    width: 100%;
+    margin: 0;
+    padding:0;
+    height: auto;
+}
+
+.container-datos{
+    width: 100%;
+    max-width: 100%;
+    margin-top:40px;
+    margin:0 auto;
+    top: 10px;
+
+}
+.container-datos h1, h3{
+    padding-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align:center;
+
+}
+
+@media screen and (min-width: 200px) and (max-width: 500px) {
+    .Tabla table{
+
+        max-width: 100%;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    tr:nth-of-type(odd) { 
+        background: #eee; 
+
+    }
+    th { 
+        background: #B0C7DD; 
+        color: white; 
+        font-weight: bold; 
+        vertical-align:middle;
+    }
+    td, th { 
+        padding: 3px; 
+        border: 1px solid #ccc; 
+    }
+    tr:first-child td{
+        background-color:#3658A3;
+        border:0px solid #000000;
+        font-weight:bold;
+        color:#fff;
+    }
+}

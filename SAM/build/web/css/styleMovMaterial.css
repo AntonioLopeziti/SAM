@@ -1,0 +1,1300 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 31/08/2016, 12:04:41 PM
+    Author     : Panda
+*/
+ 
+.bkcontainer
+{
+    width: 68%;
+}
+.VentanaFecha{
+    position: fixed; 
+    width: 330px; 
+    height: 310px;
+    margin-top: 10px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 17.2px; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002; 
+}
+#handlecalendar{
+    padding-top: .5%;
+    height: 7%;
+    width: 100%;
+    font-family: "TAHOMA";
+    font-size: 14px;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+.btnCalendar{
+    float: right;
+    margin-right: 1%;
+    margin-top: 3%;
+}
+.scrolCale{
+    width: 320px;
+    height: 250px;
+    overflow: scroll;
+}
+.bkn1
+{
+    background-color: white;
+    width: 95%;
+    padding-bottom: 1em;
+    display: inline-block;
+    padding-bottom: 0.5em;
+}
+.bkn1 > label { margin-left: 1em; }
+.lnMov
+{
+    border-top: 2px solid #3892E0;
+    margin-left: 4px;
+    margin-top: 0;
+}
+.bknn1
+{
+    float: left;
+    margin-left: 1em;
+    width: 20%;
+}
+.bknn2
+{
+    float: left;
+    margin-left: 1em;
+    width: 30%;
+}
+.bknn3
+{
+    float: left;
+    margin-left: 1em;
+    width: 42%;
+}
+.bknn1 > label
+{
+    width: 35%;
+    float: left;
+    margin-top: 2px;
+}
+.bknn2 > label
+{
+    width: 45%;
+    float: left;
+    margin-top: 4px;
+}
+.bknn3 > label
+{
+    width: 31%;
+    float: left;
+    margin-top: 4px;
+}
+.bxsmall 
+{ 
+    background-repeat: no-repeat;
+    width: 25%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxmiddle 
+{
+    background-repeat: no-repeat;
+    width:35%;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxmiddles 
+{
+    background-repeat: no-repeat;
+    width: 15%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxlong
+{
+    background-repeat: no-repeat;
+    width: 67%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxlongs
+{
+    background-repeat: no-repeat;
+    width: 40%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bknn1 hr
+{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 35%;
+    margin-bottom: 0;
+}
+.bknn3 hr
+{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 31%;
+    margin-bottom: 0;
+}
+#btnAdd { margin-top: 3px;}
+#btnTomar { margin-top: 3px; width: 25%;}
+.btnImg > img 
+{
+    vertical-align:middle;
+    cursor:pointer;
+    display: inline-block;
+    margin-bottom: -4%;
+    float: left;
+}
+.btnImg > label 
+{
+    vertical-align:middle;
+    cursor:pointer;
+    display: inline-block;
+    margin-bottom: -3%;
+    font-size: 0.9em;
+}
+/*-----------Inicio Tabla --------*/
+#TablaStatus
+{
+    margin-top: 5px;
+    width: 95%;
+    height: 330px;
+    float: left;
+}
+#TablaStatusRG
+{
+    width: 100%;
+    height: 330px;
+}
+#TablaStatus101
+{
+    width: 91%;
+    height: 435px;
+}
+#TablaMov, #TablaRG { height: 330px; }
+#TablaPedido { height: 435px; }
+.TablaStatusC table
+{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+}
+.TablaStatusC303 table
+{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+}
+.TablaCont table tr:first-child td
+{    
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+}
+.TablaStatusC table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;   
+}
+.TablaStatusC303 table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;   
+}
+.TablaStatusC table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+.TablaStatusC303 table #CabeceraTabla303
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+.TablaStatusC tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+.TablaStatusC303 tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+.TablaStatusC tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.TablaStatusC303 tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.TablaStatusC303 tbody
+{
+    white-space: nowrap;
+}
+.ajustar
+{
+    width: 320px;
+    float: left;
+    white-space: pre-line;
+    height: 21px;
+    padding: 0;
+    margin-bottom: -1px;
+    margin-left: -1px;
+    margin-right: -1px;
+}
+.ocultar
+{
+    visibility: hidden;
+}
+#bxAlmacenIvend{
+    display: none;
+}
+#BorrarFila { margin-top: 4px; }
+
+
+
+#dfCld{ margin-top: -5px;}
+.scrollDoble { display: inline-block; } 
+.TableContainer
+{
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.SecHead thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #E6EBEB;
+}
+#SecCuerpo { height: 280px; }
+#SecCuerpoCld { height: 60px; }
+#SecCuerpoCld2 { height: 90px; }
+.nbTD { border-left-style: none; }
+.nbTDr { border-right-style: none; }
+
+.DobleScroll {
+    width: 17px;
+    display: block;
+    margin-top: 20px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+    float: right;
+    z-index: 1; position:relative;
+}
+#DobleSection { height: 60px; }
+#DobleSectionN { height: 90px; margin-top: 50px;}
+
+/*-----fin-----*/
+/*---Ventana 101-102---*/
+.VentanaModal101
+{    
+    position: fixed; 
+    width: 800px; 
+    height: 600px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.VentanaModalRG
+{    
+    position: fixed;
+    width: 720px;
+    height: 420px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.VentanaModalCld
+{    
+    position: fixed;
+    width: 800px;
+    height: 570px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.fondo_Match101
+{
+    background-color: #E5E5E5;
+    width: 98.5%;
+    height: 88%;
+    margin-top: -1%;
+    margin-bottom: 4%;
+    margin-left: .5%;
+    margin-right: -1%;
+}
+.fondo_MatchRG
+{
+    background-color: #E5E5E5;
+    width: 98.5%;
+    height: 85%;
+    margin-top: -1%;
+    margin-bottom: 4%;
+    margin-left: .5%;
+    margin-right: -1%;
+}
+.PedidoCompra
+{
+    width: 70%;
+    padding-bottom: 1em;
+    background-color: white;
+}
+.PedidoCompra > label{ font-size: 1em; }
+.PedidoCompra input 
+{ 
+    background-repeat: no-repeat;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.CldMov
+{
+    width: 100%;
+    padding-bottom: 0.4em;
+    background-color: white;
+}
+.CldMov > label{ font-size: 1em; }
+.CldMov input 
+{ 
+    background-repeat: no-repeat;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.bkCld{
+    margin-left: 20px;
+}
+.bkCld input 
+{ 
+    background-repeat: no-repeat;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.cldLeft{
+    display: inline-block;
+    width: 10%;
+}
+.bkCld label{ font-size: 1em; }
+.bkCld hr{
+    margin-top: -1px;
+    width: 11%;
+    margin-left: 0;
+}
+.cldLeft2{
+    display: inline-block;
+    width: 17%;
+}
+
+
+
+
+.bx101 { width: 15%; }
+.bx101N, .bx101NL
+{ 
+    width: 103%;
+    height: 115%;
+    padding: 0;
+    margin-top: 0;
+    text-align: left;
+    font-family:  Courier New;
+    font-weight: bold;
+}
+.bxcRG{
+    width: 103%;
+    height: 16px;
+    padding: 0;
+    margin-top: -2px;
+    margin-left: -1px;
+    text-align: left;
+    font-family:  Courier New;
+    font-weight: bold;
+}
+.bxcLRG{
+    width: 101%;
+    height: 16px;
+    padding: 0;
+    margin-top: -2px;
+    margin-left: -1px;
+    text-align: left;
+    font-family:  Courier New;
+    font-weight: bold;
+}
+.bxlRG{
+
+}
+.tdcRG
+{
+    width: 35px;
+}
+.bx101NL
+{
+    width: 100px;
+    margin-left: 0;
+}
+/*---Fin---*/
+/*---Ventana 201-202---*/
+.VentanaModal201
+{    
+    position: fixed; 
+    width: 550px; 
+    height: 270px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.fondo_Match201
+{
+    width: 98.5%;
+    height: 82%;
+    margin-top: -1%;
+    margin-bottom: 4%;
+    margin-left: .5%;
+    margin-right: -1%;
+}
+.content200
+{
+    margin-left: 2px;
+    width: 97%;
+    background-color: white;
+    padding-bottom: 20px;
+}
+.content200 > label{ font-size: 12px; }
+.cnt200 > label{ font-size: 12px;float: left; width: 35%;}
+.lb311 > label:first-child{ font-size: 12px; width: 34%; display: inline-block;}
+.lbl3111 > label{ font-size: 12px; width: 25%; display: inline-block; margin-left: 6%;}
+/*.lb311  label:last-child{ font-size: 12px; width: 25%; display: inline-block; background-color: #000;}*/
+
+.cnt200
+{
+    margin-left: 5px;
+    width: 80%;
+}
+.cnt200 input 
+{ 
+    background-repeat: no-repeat;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1em;
+    font-weight: bold;
+}
+.cnt200 hr
+{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 35%;
+    margin-bottom: 0;
+}
+.bx200
+{
+    background-repeat: no-repeat;
+    width: 58%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxMD200
+{
+    background-repeat: no-repeat;
+    width: 30%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxUM200
+{
+    background-repeat: no-repeat;
+    width: 6%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxMMD200
+{
+    background-repeat: no-repeat;
+    width: 20%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxMSD200
+{
+    background-repeat: no-repeat;
+    width: 4%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+/*---Fin---*/
+/*------Ventana Avisos------*/
+.VentanaModalAv
+{
+    position: fixed; 
+    width: 420px; 
+    height: 130px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.fondo_MatchAv > img 
+{
+    margin-left: 10px;
+    margin-top: 7px;
+    vertical-align:middle;
+    cursor:pointer;
+    display: inline-block;
+    margin-bottom: -4%;
+    float: left;
+}
+.fondo_MatchAv > label 
+{
+    margin-left: 7px;
+    margin-top: 15px;
+    float: left;
+}
+.fondo_MatchAv
+{
+    background-color: #E5E5E5;
+    width: 100%;
+    height: 83%;
+}
+#handleAV
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#handleFile
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#handleFileAdd
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 5%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#addFile{
+    font-size: 18px;
+    text-align: center;
+    margin-left:-15%;
+    margin-top: 12%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    width: 15%;
+    float:left;
+}
+#btnCancelar{
+    font-size: 18px;
+    text-align: center;
+    margin-left:-5%;
+    margin-top: 12%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    width: 15%;
+    float:left;   
+}
+
+/*Ventana agregar archivos*/
+.VentanaModalFiles
+{
+    position: fixed; 
+    width: 450px; 
+    height: 400px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.Botones_MatchFile{
+    float: right;
+    margin-right: 2%;
+    margin-top: -10%;
+}
+/*------------------------*/
+/*--------Match Lote------*/
+.fixedYL{
+    position: relative;
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+}
+.fixedYL table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.fixedYL table th, #fixedYL table td, #fixedYCC table td {
+    width: 20%;
+}
+.fixedYL table th {
+    background-color: #ddd;
+    font: 11% 1em Tahoma;
+    color:#000;
+}
+#cuerpoDatos > div.nofixedXL table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#cuerpoDatos > div.nofixedXL table td {
+    width: 20%;
+}
+.VentanaModalLoteL
+{    
+    position: fixed; 
+    width: 750px;
+    height: 370px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.VentanaModalCC
+{    
+    position: fixed; 
+    width: 550px;
+    height: 370px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+/*----Fin-----*/
+.material200G
+{
+    margin-left: 35%;
+    width: 100%;
+    margin-top: 3px;
+    margin-bottom: -3px;
+    font-family: 'Courier New';
+    font-weight: bold;
+}
+
+/* Ventana 261*/
+.VentanaModal261
+{    
+    position: fixed; 
+    width: 550px; 
+    height: 270px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+
+.btnImgreserva{
+    background-image: url(..//images/ADD.PNG); 
+    background-repeat: no-repeat;
+    width: 125px;
+    height: 25px;
+    padding-right: 1%; 
+    padding-left: 5%;
+    padding-bottom: .6%;
+    margin-left: -10px;
+}
+.btnCalidad{
+    background-image: url(..//images/men.png); 
+    background-repeat: no-repeat;
+    width: 175px;
+    height: 25px;
+    padding-right: 1%; 
+    padding-left: 5%;
+    padding-bottom: .6%;
+    margin-top: 5px;
+    margin-left: 75%;
+}
+.btnCalidad2{
+    background-image: url(..//images/guarda.PNG);
+    background-size: 20px 22px;
+    background-repeat: no-repeat;
+    width: 175px;
+    height: 25px;
+    padding-right: 1%; 
+    padding-left: 5%;
+    padding-bottom: .6%;
+    margin-left: 7%;
+}
+.btnCalidad3{
+    background-image: url(../images/DELETEADD.PNG); 
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 25px;
+    padding-right: 1%; 
+    padding-left: 2%;
+    padding-bottom: .6%;
+}
+.btnCalidad4{
+    background-image: url(../images/ADD.PNG); 
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 25px;
+    padding-right: 1%; 
+    padding-left: 2%;
+    padding-bottom: .6%;
+}
+#bkCld{ margin-top: 10px;
+        padding-bottom: 10px;}
+
+#bxReserva{
+    width: 40%;
+}
+
+
+/*VENTANA MODAL RESERVAS MATCH*/
+.VentanaModalReservasL
+{    
+    position: fixed; 
+    width: 1100px;
+    height: 380px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.fixedYR{
+    position: relative;
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+}
+.fixedYR table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.fixedYR table th, #fixedYR table td {
+    width: 11.11%;
+}
+.fixedYR table th {
+    background-color: #ddd;
+    font: 11% 1em Tahoma;
+    color:#000;
+}
+#cuerpoDatos > div.nofixedXR table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#cuerpoDatos > div.nofixedXR table td {
+    width: 11.11%;
+}
+
+.busquedaMatchRes {
+    padding-top: 4%;
+    padding-left: 2%;
+    width: 100%;
+}
+.busquedaMatchRes label{
+    font-family: "Tahoma";
+    font-size: 1em;
+    width: 25%;
+    display: inline-block;
+}
+.busquedaMatchRes hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 25%;
+}
+
+
+/*Gestion Lote Inspeccion*/ 
+/*Ventana Modal Lote Inpeccio*/  
+.VentanaModalLoteiInpe
+{     
+    position: fixed; 
+    width: 950px; 
+    height: 570px;
+    margin-top: 20px;
+    left: 100%; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+#TituloMloins{
+    font-family: "Tahoma";
+    font-size: 1em;
+    margin-top: .5%;
+    margin-left: 1.5%;
+}
+.CabecesLI{
+    width: 97%;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 2%;
+    background: #fff;
+    height: 95px;
+
+}
+.CabecesLI label{
+    margin-left: 1%;
+}
+.subcabLI label{
+    width: 12%;
+    display: inline-block;
+    padding-left: 2%;
+    font-size: .8em;
+    font-family: "Tahoma";
+}
+.subcabLI hr{
+    margin-left: 3%;
+    margin-top: -1px;
+    width: 12%;
+}
+.NuevosResil{
+    width: 97%;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 2%;
+    background: #fff;
+    height: 130px;
+
+}
+.NuevosResil label{
+    margin-left: 1%;
+}
+.Divdefectos{
+    width: 97%;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 2%;
+    background: #fff;
+    height: 140px;
+}
+.Divdefectos label{
+    margin-left: 1%;
+}
+.sub1def{
+    padding-left: 2%;
+    float:left;
+    width: 25%;
+    height: auto;
+}
+.sub1def label{
+    width: 50%;
+    display: inline-block;
+}
+.sub1def hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 50%;
+}
+.sub2def{
+    padding-left: 2%;
+    float:left;
+    width: 40%;
+    height: auto;
+}
+.sub2def label{
+    width: 25%;
+    display: inline-block;
+}
+.sub2def hr{
+    width: 25%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.DivDesiciónEmpleo{
+    width: 97%;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 2%;
+    background: #fff;
+    height: 100px;
+}
+.DivDesiciónEmpleo label{
+    margin-left: 1%;
+}
+
+.subem{
+    padding-left: 2%;
+}
+.subem label{
+    width: 15%;
+    display: inline-block;    
+}
+.subem hr{
+    margin-left: 1%;
+    margin-top: -1px;
+    width: 15%;
+}
+.Botones_GestionInpeccion{
+    float: right;
+    margin-top: 1%;
+}
+.TablaCont{
+    width: 98%;
+    height: 300px;
+}
+.TablaCont input{
+    display: inline-block;
+}
+.TablaCont table tr:first-child td
+{    
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+}
+#handleMat303,#handleLot303,#handleCent303{
+    margin-left: -2px;
+    height: 6%;
+    width: 101%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+
+
+@media screen and (min-width: 1280px) and (max-width: 1350px){
+    .bkcontainer
+    {
+        width: 80%;
+    }
+}
+@media screen and (min-width: 1040px) and (max-width: 1280px){  
+    .bkcontainer
+    {
+        width: 88%;
+    }
+    .bknn1
+    {
+        margin-left: 1em;
+        width: 16%;
+    }
+    .bknn1 > label
+    {
+        width: 42%;
+        float: left;
+        margin-top: 2px;
+    }
+    .bknn1 hr
+    {
+        margin-left: 0;
+        margin-top: -1px;
+        width: 42%;
+        margin-bottom: 0;
+    }
+}
+@media screen and (min-width: 800px) and (max-width: 1040px){  
+    .bkcontainer
+    {
+        width: 105%;
+    }
+    .bknn1
+    {
+        margin-left: 1em;
+        width: 16%;
+    }
+    .bknn1 > label
+    {
+        width: 43%;
+        float: left;
+        margin-top: 2px;
+    }
+    .bknn1 hr
+    {
+        margin-left: 0;
+        margin-top: -1px;
+        width: 43%;
+        margin-bottom: 0;
+    }
+    .bknn2
+    {
+        float: left;
+        margin-left: 1em;
+        width: 35%;
+    }
+    .bxmiddles 
+    {
+        background-repeat: no-repeat;
+        width: 20%; 
+        text-align: left;
+        font-family:  Courier New;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    .bxsmall 
+    { 
+        background-repeat: no-repeat;
+        width: 30%; 
+        text-align: left;
+        font-family:  Courier New;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+}
+@media screen and (min-width: 500px) and (max-width: 799px){  
+    .bkcontainer
+    {
+        width: 100%;
+        display: block;
+    }
+    .bknn1
+    {
+        margin-left: 1em;
+        width: 100%;
+        height: 90px;
+    }
+    #btnAdd { width: 140px; }
+    #btnReserva { width: 140px; }
+    .bknn2
+    {
+        margin-left: 1em;
+        width: 100%;
+        height: 90px;
+    }
+    .bknn3
+    {
+        margin-left: 1em;
+        width: 100%;
+    }
+    .bknn1 hr
+    {
+        margin-left: 0;
+        margin-top: -1px;
+        width: 26%;
+        margin-bottom: 0;
+    }
+    .bknn1 > label
+    {
+        width: 26%;
+        float: left;
+        margin-top: 2px;
+    }
+    .bknn2 > label
+    {
+        width: 26%;
+        float: left;
+        margin-top: 2px;
+    }
+    .bknn3 > label
+    {
+        width: 26%;
+        float: left;
+        margin-top: 2px;
+    }
+    #bxReserva{ width: 20%; }
+    .bxmiddle 
+    {
+        background-repeat: no-repeat;
+        width: 30%; 
+        text-align: left;
+        font-family:  Courier New;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    .bxlong
+    {
+        background-repeat: no-repeat;
+        width: 40%; 
+        text-align: left;
+        font-family:  Courier New;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    .bxlongs
+    {
+        background-repeat: no-repeat;
+        width: 25%; 
+        text-align: left;
+        font-family:  Courier New;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    .bxsmall 
+    { 
+        background-repeat: no-repeat;
+        width: 15%; 
+        text-align: left;
+        font-family:  Courier New;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+}
+#VentanaModalClsInf{
+    z-index: 1;
+}
+#VentanaModalCalidad{
+    z-index: 0;
+
+}
+.dataCab {
+    background-repeat: no-repeat;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1.1em;
+    margin-left: .5em;
+    margin-top:  -.8em;
+    padding-top: 0;
+}
+.txtArL{
+    width: 95%;
+    height: 230px;
+}

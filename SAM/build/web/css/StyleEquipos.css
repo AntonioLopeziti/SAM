@@ -1,0 +1,217 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22-ago-2016, 1:14:39
+    Author     : AREConsulting
+*/
+.VentanaModalAvvv
+{
+    position: fixed; 
+    width: 250px; 
+    height: 130px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+#handleAvvv{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+.ContentEquipos{
+    margin-bottom: 60px;
+    width: 70%;
+}
+input{
+    font-family: "Courier New";
+}
+.ContentEquipos input{
+    font-family: "Courier New";
+}
+.divmatchequipo{
+    background: #fff;
+    padding-left: 2%;
+    height: 80px;
+}
+.lineaazul{
+    margin-left: -2%;
+    margin-top: 0;
+    width: 100%;
+    border: 1px solid #3892E0;
+}
+.divdatosgralEquipos{
+    padding-left: 2%;
+    margin-top: 10px;
+    background: #FFFFFF;
+    height: 180px;
+}
+.divizqequipoo{
+    float:left;
+    width:25%; 
+    text-transform: uppercase;    
+}
+.dividerequipoo{
+    float:right;
+    width: 50%;
+}
+.dividerequipoo input{
+    font-family: Tahoma;
+}
+.divizqequipo{
+    float:left;
+    width: 45%;
+}
+.divizqequipo label{   
+    display: inline-block;
+    width: 40%;
+}
+.divizqequipo hr{   
+    width: 40%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.dividerequipo{
+    margin-top:5%;
+    float:left;
+    width: 45%;
+}
+.dividerequipo label{
+    display: inline-block;
+    width: 44%;
+}
+.dividerequipo hr{
+    margin-top: -1px;
+    margin-left: 0;
+    width: 44%;
+}
+.divdatosFabricacionEquipos{
+    padding-left: 2%;
+    margin-top: 10px;
+    background: #FFFFFF;
+    height: 180px;
+}
+.divdatosEmplazamiento{
+    padding-left: 2%;
+    margin-top: 10px;
+    background: #FFFFFF;
+    height: 200px;
+}
+.divcomequipo{
+    float: left;
+    width: 45%;
+}
+.divcomequipo label{
+    display: inline-block;
+    width: 40%;
+}
+.divcomequipo hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 40%;
+}
+.divimputacion{
+    padding-left: 2%;
+    margin-top: 10px;
+    background: #FFFFFF;
+    height: 120px;
+}
+.divresponabilidades{
+    padding-left: 2%;
+    margin-top: 10px;
+    background: #FFFFFF;
+    height: 130px;
+}
+.divestructura{
+    padding-left: 2%;
+    margin-top: 10px;
+    background: #FFFFFF;
+    height: 100px;
+}
+.divgeneralidades{
+    padding-left: 2%;
+    margin-top: 10px;
+    background: #FFFFFF;
+    height: 100px;
+}
+.divdatosInfoStockEquipos{
+    padding-left: 2%;
+    margin-top: 10px;
+    background: #FFFFFF;
+    height: 230px;
+}
+#TableNotfi
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainer
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.SecHead thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo { height: 200px; }
+#SecCuerpoN { height: 200px; }
+.ocultar
+{
+    visibility: hidden;
+}
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    .ContentEquipos{
+        width: 100%;
+    }
+
+}
+
+#VentanaModalCentroP{
+    width:75%; 
+    height: 350px;
+ }   

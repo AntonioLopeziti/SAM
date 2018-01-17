@@ -1,0 +1,192 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-ago-2016, 21:28:26
+    Author     : Antonio
+*/
+
+.MonitorStatus
+{
+    height: 110%;
+    width: 45%;
+    display: inline-block;
+    float: left;
+    margin-right: 2em;
+}
+.MonitorSection
+{    
+    background-color: white;
+    height: auto;
+    padding-bottom: 2%;
+    width: 100%;
+}
+.SecBusqueda
+{
+    padding-left: 2%;
+    height: auto;
+    margin: 0;
+    width: 80%;
+}
+.SecBusqueda label
+{
+    width: 46%;  
+    display: inline-block;
+}
+.SecBusqueda img
+{
+    vertical-align:middle;
+    cursor:pointer;
+    display: inline-block;
+}
+.BusquedaBx
+{ 
+    width: 40%;
+    text-align: left;
+    font-family:  "Courier New";
+    font-size: .8em;
+
+}
+.LineasBusqueda
+{
+    margin-top: -2px;
+    margin-left: 0;
+    width: 85%;
+}
+.LineasMonitor
+{
+    border-top: 2px solid #3892E0;
+    margin-left: 4px;
+    margin-top: 0;
+}
+.LbMonitor
+{
+    margin-left: 1%;
+}
+.MonitorStatusCont
+{
+    width: 100%;  
+}
+.MonitorStatusCont > section
+{
+    display: inline-block;
+    height: auto;
+    margin-top: 0;
+}
+#TablaStatus
+{
+    width: 94%;
+}
+.thRD
+{
+    text-align: center;
+    width: 24px;
+}
+.thCen
+{
+    text-align: center;
+    width: 188px;
+}
+.thDes
+{
+    text-align: center;
+    width: 328px;
+}
+
+.tdRD
+{
+    text-align: center;
+    width: 24px;
+}
+.tdCen
+{
+    text-align: center;
+    width: 188px;
+}
+.tdDes
+{
+    text-align: center;
+    width: 328px;
+}
+.TablaCont table tr:first-child td
+{    
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+}
+table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: 0.5em;   
+}
+table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+#SecTab > table
+{
+    height: 268px;
+}
+#SecTab303 > table
+{
+    height: 268px;
+}
+table
+{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: auto;
+    height: auto;
+}
+#BusquedaStatus
+{
+    width: 5%;
+    float: right;
+    height: auto;
+    padding-bottom: 2%;
+    font-size:small;
+    font-family: Tahoma;
+}
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    .MonitorStatus
+    {
+        width: 100%;
+    }
+    .last
+    {
+        margin-top: 60px;
+    }
+}
+@media screen and (min-width: 200px) and (max-width: 500px){ 
+    .MonitorStatus
+    {
+        width: 100%;
+    }
+    .last
+    {
+        margin-top: 60px;
+    }
+}

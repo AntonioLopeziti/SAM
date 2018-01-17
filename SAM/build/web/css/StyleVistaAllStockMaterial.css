@@ -1,0 +1,95 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+
+ 
+    Created on : 23/07/2016, 12:50:30 PM
+    Author     : AREConsulting
+*/
+
+.ContentSt{
+    width: 98%;
+}
+.gen{
+    margin-left: .3%;
+    width: 100%; 
+    height: 140px; 
+    margin-top: 5px;
+    background-color: #F2F2F2;
+    border: 1px #000 solid; 
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.labelTitulo{
+    font-family: Verdana;
+    font-size: 22px; 
+}
+.period{
+    margin-top: 10px;
+    width: 100%;
+}
+.period label{
+    font-family: Verdana;
+    font-size: 12px;
+    font-style: italic;
+}
+.general{
+    align-content: center;
+    margin-left: .2%;
+    width: 101%; 
+    height: 330px; 
+    margin-top: 5px;
+    border: 1px solid #000;
+}
+
+#TableNotfi
+{
+    width: 100%;
+}
+.TableContainer
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size: small;
+    font-family: sans-serif;
+    text-align: center;
+}
+.SecHead thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    text-align: center;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo { height: 290px;; }
+.ocultar
+{
+    visibility: hidden;
+}

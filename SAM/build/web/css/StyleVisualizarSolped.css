@@ -1,0 +1,452 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-ago-2016, 16:28:43
+    Author     : ARECosnulting
+*/
+
+.ContentSolped{
+    width: 70%; 
+}
+.divCab{
+    padding-left: 2%;
+    margin-top: 10px;    
+    width: 100%;
+    height: 165px;
+}
+.SecI{
+    float: left;
+    width: 45%;
+}
+.SecI label{
+    width: 42%;
+    display: inline-block;
+}
+.SecI hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 44%;
+}
+.SecD{
+    width: 55%;
+    float: left;
+    margin-top: 20px;
+}
+#ICONAD{
+    vertical-align: middle;
+    margin-left: 2%;
+}
+#mensgesolped{
+    width: 100%;
+}
+.SecD textArea{
+    margin-top: 2%;
+    margin-left: 5%;
+    height: 120px; 
+    overflow-x: scroll; 
+    width: 90%;
+    border: double #000;
+}
+.divTabla{
+    width: 100%;
+    padding-left: 2%;
+}
+.divTabla hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 10%;
+}
+#TablaStatus
+{
+    margin-top: 15px;
+    width: 100%;
+    height: 180px;
+}
+.TablaCont
+{
+    height: 180px;
+}
+#TablaStatus table
+{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    height: 180px;;
+}
+.TablaCont table tr:first-child td
+{    
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+}
+#TablaStatus table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: 0.5em;   
+}
+#TablaStatus table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+#TablaStatus tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+#TablaStatus tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.DivDetallePos{
+    margin-top: 15px;
+    width: 100%;
+    padding-left: 2%;
+}
+.DivDetallePos select{
+    width: 45%;
+    margin-left: 5%;
+    height: 25px;
+    margin-top: 9px;
+}
+#btnAddPos{
+    background-image: url(..//images/ADD.PNG); 
+    background-repeat: no-repeat;
+    padding-right: 1%; 
+    padding-left: 3.5%;
+    padding-bottom: .6%;
+    margin-left: 12px;
+
+}
+#LineSC{
+    margin-top: -1px;
+    margin-left: -2%;
+    border: 1px solid #3892E0;
+}
+.divImputacion{
+    width: 100%;
+    padding-left: 2%;
+    background: #fff;
+    height: 315px;
+    margin-top: 5px;
+}
+.divTipos{
+    width: 100%;
+    height: 30px;
+}
+.tip1{
+    width: 30%;
+    float: left;
+    height: 100%;
+}
+.tip1 label{
+    display: inline-block;
+    width: 60%;
+}
+.tip1 hr{
+    width: 60%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.tip2{
+    width: 25%;
+    float: left;
+    height: 100%;
+}
+.tip2 label{
+    width: 60%;
+    display: inline-block;
+}
+.tip2 hr{
+    width: 60%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.tip3{
+    float: left;
+    width: 40%;
+    height: 100%;
+}
+.divimpsol{    
+    width: 100%;
+    height: 150px;    
+}
+.inp1{
+    float: left;
+    width: 50%;
+}
+.inp1 label{
+    display: inline-block;
+    width: 30%;
+}
+.inp1 hr{
+    margin-left: 0;
+    width: 30%;
+    margin-top: -1PX;
+}
+.inp2{
+    width: 48%;
+    float: left;
+}
+.inp2 label{
+    width: 30%;
+    display: inline-block;
+}
+.inp2 hr{
+    width: 30%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.subimputacion{
+    margin-left: -1%;
+    padding-left: 1%;
+    border: 1px solid #DDD;
+    width: 96%;
+    height: 60px;
+}
+#LineSubIm{
+    margin-top: -1px;
+    margin-left: -1%;
+    border: 1px solid #3892E0;
+}
+.subinn1{
+    height: 100%;
+    width: 30%;
+    float: left;
+}
+.subinn1 label{
+    width: 45%;
+    display: inline-block;
+}
+.subinn1 hr{
+    width: 45%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.subinn2{
+    float: left;
+    width: 35%;
+    height: 100%;
+}
+.subinn2 label{
+    width: 45%;
+    display: inline-block;
+}
+.subinn2 hr{
+    width: 45%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.subinn3{
+    width: 30%;
+    float: left;
+    height: 100%;
+}
+.subinn3 label{
+    width: 40%;
+    display: inline-block;
+}
+.subinn3 hr{
+    width: 40%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.Divtextposicion{
+    margin-top: 10px;
+    padding-left: 2%;
+    width: 100%;
+    height: 150px;
+}
+.Divtextposicion textArea{
+    margin-top: -.5%;
+    margin-left: 1%;
+    height: 90px; 
+    overflow-x: scroll; 
+    width: 95%;
+    border: double #000;
+    margin-bottom: 5%;
+}
+.subParametrosBusquedaSolped{
+    background: #fff;
+    height: 100px;
+    width: 60%;
+    padding-left: 2%;
+}
+#lineaPaSAPSA{
+    margin-top: -1px;
+    margin-left: -2%;
+     border: 1px solid #3892E0;
+    
+}
+#lineaBusqueda{
+    margin-top: -1px;
+    width: 30%;
+    margin-left: -1%;
+}
+.paramSAMSAP{
+    width: 100%;    
+}
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    .ContentSolped{
+        width: 100%; 
+    }
+}
+/*.div1SolPed{
+    width: 80%;
+    height: 160px;
+    padding-left: 1%;
+    margin-top: 15px;
+}
+.div1SolPed textArea{
+    margin-top: 2%;
+    margin-left: 10%;
+    height: 70px; 
+    overflow-x: scroll; 
+    width: 55%;
+    border: double #000;
+}
+.subdiv2{
+    margin-top: 2%;
+    width: 60%;
+    height: 90px;
+}
+.tablaSolicitud table
+{
+    width: 100%;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    height: 200px;
+}
+
+.tablaSolicitud table tr:first-child td
+{    
+    color:#000;
+    font-family: Tahoma;
+}
+.tablaSolicitud table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: 0.5em;   
+}
+.tablaSolicitud table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+.tablaSolicitud tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+.tablaSolicitud tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.divmputacion{
+    padding-left: 2%;
+    margin-top: 300px;
+    height: 500px;
+    width:80%;
+    background: #fff;
+}
+#TituloImputacionLinea{
+    margin-left: -2%;
+    width: 102%;
+    margin-top: 0;
+    border: 1px solid #3892E0;
+}
+.divizqimpu_CSP{
+    width: 50%;
+    float: left;
+}
+.divizqimpu_CSP label{
+    display: inline-block;
+    width: 30%;
+}
+.divizqimpu_CSP hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 30%;
+}
+.textopos{
+    margin-top: 15px;
+    height: 90pz;
+    width: 100%;
+    margin-bottom: 50px;}
+.textopos textArea{
+    margin-top: 2%;
+    margin-left: 10%;
+    height: 70px; 
+    overflow-x: scroll; 
+    width: 55%;
+    border: double #000;
+}
+.subParametrosBusquedaSolped{
+    background: #fff;
+    height: 100px;
+    width: 80%;
+    padding-left: 2%;
+}
+#lineaPaSAPSA{
+    margin-top: -1px;
+    margin-left: -2%;
+    border: 1px solid #3892E0;
+
+}
+.paramSAMSAP{
+    width: 100%;    
+}
+.paramSAMSAP label{
+    display: inline-block;
+    width: 15%;    
+}
+.paramSAMSAP hr{
+    margin-top: -1px;
+    margin-left: 0;
+    width: 15%;    
+}*/
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    /*    .ContentSolped{
+            width: 100%; 
+        }
+        .tablaSolicitud table
+        {
+            width: 115%;
+            display: block;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            overflow: scroll;
+            height: 200px;
+        }
+        .divmputacion{
+            width: 95%;
+        }*/
+}
+
+

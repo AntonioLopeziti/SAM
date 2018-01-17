@@ -1,0 +1,277 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 9/12/2016, 03:49:05 PM
+    Author     : Panda
+*/
+.VentanaModalAvvv
+{
+    position: fixed; 
+    width: 250px; 
+    height: 130px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+#handleAvvv{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+
+.bkcontainer
+{
+    width: 97%;
+}
+.bkn1
+{
+    background-color: white;
+    width: 80%;
+    padding-bottom: 1em;
+    display: inline-block;
+    padding-bottom: 0.5em;
+}
+.bkn2
+{
+    background-color: white;
+    width: 85%;
+    padding-bottom: 1em;
+    display: inline-block;
+    padding-bottom: 1em;
+}
+.bkn3
+{
+    background-color: white;
+    width: 90%;
+    padding-bottom: 1em;
+    display: inline-block;
+    padding-bottom: 1em;
+    margin-top: 10px;
+}
+.bkn1 > label { margin-left: 1em; }
+.bkn2 > label { margin-left: 1em; }
+.bkn3 > label { margin-left: 1em; }
+.lnMov
+{
+    border-top: 2px solid #3892E0;
+    margin-left: 4px;
+    margin-top: 0;
+}
+.bknn1
+{
+    /*float: left;*/
+    margin-left: 1em;
+    width: 90%;
+}
+.bknn2
+{
+    float: left;
+    margin-left: 1em;
+    width: 20%;
+}
+.bknn3
+{
+    float: left;
+    margin-left: 1em;
+    width: 20%;
+}
+.bknn1 > label
+{
+    width: 20%;
+    /*float: left;*/
+    display: inline-block;
+    margin-top: 2px;
+}
+.bknn2 > label
+{
+    width: 50%;
+    float: left;
+    margin-top: 4px;
+}
+.bknn3 > label
+{
+    width: 50%;
+    float: left;
+    margin-top: 4px;
+}
+.bknn4
+{
+    float: left;
+    margin-left: 1em;
+    width: 90%;
+}
+.bknn4 > label
+{
+    width: 20%;
+    margin-top: 2px;
+    display: inline-block;
+}
+#lbResponsable
+{
+    width: 55%;
+    margin-top: 2px;
+    display: inline-block;
+}
+.hrContainer
+{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 40%;
+    margin-bottom: 0;
+}
+.hrContainerr
+{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 100%;
+    margin-bottom: 0;
+}
+.bxsmall
+{
+    background-repeat: no-repeat;
+    width: 25%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxlarge
+{
+    background-repeat: no-repeat;
+    width: 30%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxXlarge
+{
+    background-repeat: no-repeat;
+    width: 70%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.bxXmiddle
+{
+    background-repeat: no-repeat;
+    width: 20%; 
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.PanelBnt{
+    margin-top: 0;
+    margin-left: 1%;
+    padding: 0.5%;
+}
+
+.PanelBnt button{
+    color: #000;
+    background-color: #fff;
+    font-family: "Tahoma";
+}
+.PanelBnt hr{
+    border: 1px solid #007CC0;
+    margin-left: -1%;
+    margin-top: 0;
+}
+#FrameContainer
+{
+    height: 480px;
+    width: 100%;
+}
+#FrameContainer iframe
+{
+    background-color: white;
+    width: 100%;
+    height: 110%;
+}
+#LastSec
+{
+    width: 100%;
+    height: 25px;
+}
+/*--------Tabla--------------*/
+#TableNotfi
+{
+    width: 57%;
+    background-color: #fff;
+}
+.TableContainer
+{
+    margin-left: 1%;
+    width: 98%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.SecHead thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo { height: 220px; }
+#SecCuerpoN { height: 200px; }
+.ocultar
+{
+    visibility: hidden;
+}
+#DobleSection { height: 200px; }
+#DobleObj { height: 220px; }
+#DobleContainerObj { height: 342px; }
+
+
+.DobleScroll {
+    width: 17px;
+    display: inline-block;
+    margin-bottom: 17px;
+    margin-left: -33px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+}

@@ -1,0 +1,127 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-ago-2016, 21:28:26
+    Author     : Lel
+*/
+
+
+#VentanaModalCentroP{
+    width:75%; 
+    height: 350px;
+ }  
+ .TableContainer
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.VentanaModalAvvv
+{
+    position: fixed; 
+    width: 250px; 
+    height: 130px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+#handleAvvv{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+
+#VentanaModalArch{
+    width: 600px;
+}
+#table-scrollArch{
+    width: 100%;
+}
+.tddescr{
+    width: 500px;
+}
+.tdte{
+    width: 10px;
+    text-align: center;
+    padding-top: 1px;
+    padding-left: 10px;
+}
+#BuscarTxtD {
+    padding-top: 0;
+    padding-left: 2%;
+    width: 100%;
+}
+#BuscarTxtD label{
+    font-family: "Tahoma";
+    font-size: 1em;
+    width: 40%;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+#BuscarTxtD textarea{
+    width: 90%;
+    padding-left: auto;
+    padding-right: auto;
+    height: 250px;
+    margin-bottom: 0;
+}
+#BuscarTxtD hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 40%;
+}
+#BuscarTxtD .Botones_Match{     
+    position: relative;
+    padding-right: 20px;
+    text-align:right;
+    margin-top: 10px;
+    width: 40%;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.SecHead thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}

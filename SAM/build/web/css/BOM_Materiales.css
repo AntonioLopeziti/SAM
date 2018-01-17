@@ -1,0 +1,417 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24/06/2016, 11:32:35 AM
+    Author     : AreConsulting
+*/
+ #lm {
+    border: solid 1px rgb(163,163,163);
+    background-repeat: no-repeat;
+ }
+
+    
+    
+ #lm1 {
+    border: solid 1px rgb(163,163,163);
+    background-repeat: no-repeat;
+}
+
+#boton{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/match.png');
+    background-position: center;
+    background-repeat:no-repeat;
+    height: 18px;
+    width: 18px;
+    display:  inline;
+    clear: both;
+
+ }
+
+ #boton2{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/busqueda.png');
+    background-repeat:no-repeat;
+    height: 18px;
+    width: 18px;   
+ }
+
+ /*****CSS Ventana Modal */
+ .cajaexterna{
+  
+  bottom: 0;
+  display: none;
+  left: 0;
+  width: 100%;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.cajainterna {
+  background: rgb(242,242,242);
+  margin: 6em auto 0;
+  position: relative;
+  width: 50%;
+  height: 50%;
+  border: solid #888 1px;
+  border-radius: 5px;
+  -webkit-box-shadow: 5px 5px 14px -2px rgba(0,0,0,0.67);
+-moz-box-shadow: 5px 5px 14px -2px rgba(0,0,0,0.67);
+box-shadow: 5px 5px 14px -2px rgba(0,0,0,0.67);
+}
+
+.cajacentrada {
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.cajacentrada h2 {
+  background: none repeat scroll 0 0 black;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom, rgb(61,61,61) 50%,rgb(51,51,51) 50%);
+  color: #888888;
+  font-size: 13px;
+  left: 0;
+  margin: 0;
+  padding: 5px;
+  position: absolute;
+  text-align: left;
+  top: 0;
+  width: 100%;
+  font-family: "Tahoma";
+  
+}
+.cajainterna #cerrarModal{    
+    background-image: url('../images/tache.PNG');
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    float: right;  
+    height: 15px;
+    width: 15px;    
+}
+
+
+.Contenedor{
+    margin-top: 10px;
+    width: 90%;
+    height: 70%;
+    margin-left: -2px;
+}
+.Contenedor #tituloAzul{
+    background: rgb(0,124,192);
+    color:white;
+    margin: 2px;
+    
+    
+}
+.ParaBusq_Equios{
+    margin-top: 10px;
+    padding-left: 2%;
+    background: rgb(229,229,229);
+    height: 250px;
+}
+#lineaTitulo_HR{
+    margin-left: -2%;
+    margin-top: 0;
+    border: 1px solid #3892E0;
+}
+.buscarEquipo label{
+    width: 30%;
+    display:inline-block;
+}
+.buscarEquipo hr{
+    width: 20%;
+    margin-top: -1px;
+    margin-left: 0;
+    
+}
+
+#aceptarVentana{
+    margin-top: 2px;
+    height: 18px;
+    width: 18px;
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/palomal.png');
+    float: right;
+    background-repeat: no-repeat;
+    background-position: center;
+} 
+ 
+ /* fin ventaba modal1*/
+ 
+ /*****CSS Ventana Modal Tabla Equipos */
+ .ventanaTablaEquipos{
+  
+  bottom: 0;
+  display: none;
+  left: 0;
+  width: 100%;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.cajainterna {
+  background: rgb(242,242,242);
+  margin: 6em auto 0;
+  position: relative;
+  width: 50%;
+  height: 50%;
+  border: solid #888 1px;
+  border-radius: 5px;
+  -webkit-box-shadow: 5px 5px 14px -2px rgba(0,0,0,0.67);
+-moz-box-shadow: 5px 5px 14px -2px rgba(0,0,0,0.67);
+box-shadow: 5px 5px 14px -2px rgba(0,0,0,0.67);
+}
+
+.cajacentrada {
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.cajacentrada h2 {
+  background: none repeat scroll 0 0 black;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom, rgb(61,61,61) 50%,rgb(51,51,51) 50%);
+  color: #888888;
+  font-size: 13px;
+  left: 0;
+  margin: 0;
+  padding: 5px;
+  position: absolute;
+  text-align: left;
+  top: 0;
+  width: 100%;
+  font-family: "Tahoma";
+  
+}
+.cajainterna #cerrarModalEquipo{    
+    background-image: url('../images/tache.PNG');
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    float: right;  
+    height: 15px;
+    width: 15px;    
+}
+
+
+.Contenedor{
+    margin-top: 10px;
+    width: 90%;
+    height: 70%;
+    margin-left: -2px;
+}
+.Contenedor #tituloAzul{
+    background: rgb(0,124,192);
+    color:white;
+    margin: 2px;
+    
+    
+}
+.ParaBusq_Equios{
+    margin-top: 10px;
+    padding-left: 2%;
+    background: rgb(229,229,229);
+    height: 250px;
+}
+#lineaTitulo_HR{
+    margin-left: -2%;
+    margin-top: 0;
+    border: 1px solid #3892E0;
+}
+.buscarEquipo label{
+    width: 30%;
+    display:inline-block;
+}
+.buscarEquipo hr{
+    width: 20%;
+    margin-top: -1px;
+    margin-left: 0;
+    
+}
+#sectionBoton{
+   width: 100%;
+   
+}
+
+#aceptarVentanaEquipo{
+    clear:both;
+    margin-top: 0px;
+    height: 18px;
+    width: 18px;
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/palomal.png');
+    float: left;
+    background-repeat: no-repeat;
+    background-position: center;
+} 
+ 
+
+
+ /* fin ventaba modal TABALEquipo*/
+ 
+ 
+ /*****CSS Ventana Modal Tabla CENTROs */
+ .ventanaTablaCentro{
+  
+  bottom: 0;
+  display: none;
+  left: 0;
+  width: 100%;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.cajainterna {
+  background: rgb(242,242,242);
+  margin: 6em auto 0;
+  position: relative;
+  width: 50%;
+  height: 50%;
+  border: solid #888 1px;
+  border-radius: 5px;
+  -webkit-box-shadow: 5px 5px 14px -2px rgba(0,0,0,0.67);
+-moz-box-shadow: 5px 5px 14px -2px rgba(0,0,0,0.67);
+box-shadow: 5px 5px 14px -2px rgba(0,0,0,0.67);
+}
+
+.cajacentrada {
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.cajacentrada h2 {
+  background: none repeat scroll 0 0 black;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom, rgb(61,61,61) 50%,rgb(51,51,51) 50%);
+  color: #888888;
+  font-size: 13px;
+  left: 0;
+  margin: 0;
+  padding: 5px;
+  position: absolute;
+  text-align: left;
+  top: 0;
+  width: 100%;
+  font-family: "Tahoma";
+  
+}
+.cajainterna #cerrarModalCentro{    
+    background-image: url('../images/tache.PNG');
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    float: right;  
+    height: 15px;
+    width: 15px;    
+}
+
+
+.Contenedor{
+    margin-top: 10px;
+    width: 90%;
+    height: 70%;
+    margin-left: -2px;
+}
+.Contenedor #tituloAzul{
+    background: rgb(0,124,192);
+    color:white;
+    margin: 2px;
+    
+    
+}
+.ParaBusq_Equios{
+    margin-top: 10px;
+    padding-left: 2%;
+    background: rgb(229,229,229);
+    height: 70%;
+}
+#lineaTitulo_HR{
+    margin-left: -2%;
+    margin-top: 0;
+    border: 1px solid #3892E0;
+}
+.buscarEquipo label{
+    width: 30%;
+    display:inline-block;
+}
+.buscarEquipo hr{
+    width: 20%;
+    margin-top: -1px;
+    margin-left: 0;
+    
+}
+#sectionBoton{
+   width: 100%;
+   
+}
+
+#aceptarVentanaEquipo{
+    clear:both;
+    margin-top: 0px;
+    height: 18px;
+    width: 18px;
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/palomal.png');
+    float: left;
+    background-repeat: no-repeat;
+    background-position: center;
+} 
+  /* fin ventaba modal Equipo*/
+
+ table{
+  border-collapse:collapse;
+  width:100%;
+  
+}
+tbody{
+  
+}
+
+.Tabla{
+ border: rgba(193, 193, 193, 0.48) 1px solid;
+}
+
+.Tabla thead{
+  background:rgb(229,229,229);
+}
+
+
+
+thead{
+  color:black;
+}
+
+th,td{
+  text-align:center;
+  padding:5px 0;
+}
+
+tbody tr:nth-child(even){
+  background:#ECF0F1;
+}
+
+tbody tr:hover{
+background:#BDC3C7;
+  color:#FFFFFF;
+}
+
+
