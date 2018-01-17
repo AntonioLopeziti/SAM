@@ -11,7 +11,7 @@ import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_Pedidos;
 import AccesoDatos.ACC_Proveedor;
 import AccesoDatos.ACC_Stock;
-import AccesoDatos.CallWS;
+//import AccesoDatos.CallWS;
 import AccesoDatos.Consultas;
 import Entidades.DatosMaterialLista;
 import Entidades.cabecera_doc_materiales;
@@ -530,15 +530,15 @@ public class peticionVisualizarDirecto extends HttpServlet {
                     ACC_Stock.ObtenerInstancia().Actualizarstock311(Mate, AlmD, Cent, lote, Num(String.valueOf(fstc)));
                     ACC_Stock.ObtenerInstancia().Actualizarstock311(Mate, "TR01", Cent, lote, Num(String.valueOf(fst2)));
                     break;
-                case "ConsumirWS311":
-                    ArrayList<reporte_ivent> re = Consultas.ObtenerInstancia().CargarReportesIvent(Folio);
-                    if (re.size() > 0) {
-                        for (int i = 0; i < re.size(); i++) {
-                            String msg = CallWS.ObtenerInstancia().ConsumirWS311(Folio, re.get(i).getMaterial(), re.get(i).getDescripcion(), re.get(i).getAlmacen(), Cent, re.get(i).getCantidad());
-                            Consultas.ObtenerInstancia().ActualizarRpoIvent(Folio, re.get(i).getPosicion(), re.get(i).getMaterial(), re.get(i).getAlmacen(), msg);
-                        }
-                    }
-                    break;
+//                case "ConsumirWS311":
+//                    ArrayList<reporte_ivent> re = Consultas.ObtenerInstancia().CargarReportesIvent(Folio);
+//                    if (re.size() > 0) {
+//                        for (int i = 0; i < re.size(); i++) {
+//                            String msg = CallWS.ObtenerInstancia().ConsumirWS311(Folio, re.get(i).getMaterial(), re.get(i).getDescripcion(), re.get(i).getAlmacen(), Cent, re.get(i).getCantidad());
+//                            Consultas.ObtenerInstancia().ActualizarRpoIvent(Folio, re.get(i).getPosicion(), re.get(i).getMaterial(), re.get(i).getAlmacen(), msg);
+//                        }
+//                    }
+//                    break;
                 case "ChecarPosiWS":
                     ArrayList<reporte_ivent> rew = Consultas.ObtenerInstancia().CargarReportesIvent(Folio);
                     if (rew.size() > 0) {

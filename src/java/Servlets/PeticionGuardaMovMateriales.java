@@ -4,7 +4,7 @@ import AccesoDatos.ACC_Almacenes;
 import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_Pedidos;
 import AccesoDatos.ACC_Stock;
-import AccesoDatos.CallWS;
+//import AccesoDatos.CallWS;
 import AccesoDatos.Conexion;
 import AccesoDatos.Consultas;
 //import AccesoDatos.CallWS;
@@ -778,118 +778,118 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                         System.err.println("Error: " + e);
                     }
                     break;
-                case "Movimiento305":
-                    int cc3nn = Integer.parseInt(v2);
-                    int ppr3nn = 0;
-                    String[][] M305 = new String[cc3nn][6];
-                    String[] parts3nn = v1.split(",");
-                    try {
-                        for (int f = 0; f < cc3nn; f++) {
-                            for (c = 0; c < 6; c++) {
-                                M305[f][c] = parts3nn[ppr3nn];
-                                ppr3nn++;
-                            }
-                        }
-                        int rtn = ACC_Stock.ObtenerInstancia().VerificarExistentesNT(M305, cc3nn);
-                        if (rtn == 1) {
-                            for (int f = 0; f < cc3nn; f++) {
-                                Double rt = ACC_Stock.ObtenerInstancia().LbreST(M305[f][2], M305[f][3]);
-                                ACC_Stock.ObtenerInstancia().UpdateMovimiento305UltimoStock(Num(String.valueOf(rt)), M305[f][2], M305[f][3]);
-                            }
-                        }
-                        if (rtn == 2) {
-                            for (int f = 0; f < cc3nn; f++) {
-                                Double rt = ACC_Stock.ObtenerInstancia().UltimoST(M305[f][2], M305[f][3]);
-                                ACC_Stock.ObtenerInstancia().UpdateMovimiento305StockTraslado(Num(String.valueOf(rt)), M305[f][2], M305[f][3]);
-                                ACC_Stock.ObtenerInstancia().ActualizaInventario(M305[f][2], M305[f][5], M305[f][1], M305[f][0], M305[f][4]);
-                            }
-                        }
-                        out.println(rtn);
-                    } catch (Exception e) {
-                        System.err.println("Error: " + e);
-                    }
-                    break;
-                case "Movimiento311":
-                    String rtnn = "";
-                    int cc3 = Integer.parseInt(v2);
-                    int ppr3 = 0;
-                    String[][] M311 = new String[cc3][6];
-                    String[] parts3 = v1.split(",");
-                    try {
-                        for (int f = 0; f < cc3; f++) {
-                            for (c = 0; c < 6; c++) {
-                                M311[f][c] = parts3[ppr3];
-                                ppr3++;
-                            }
-                        }
-                        int rtn = ACC_Stock.ObtenerInstancia().VerificarExistentes300(M311, cc3);
-                        if (rtn == 1) {
-                            for (int f = 0; f < cc3; f++) {
-                                try {
-                                    int mm = Integer.parseInt(M311[f][2]);
-                                    n2 = "";
-//                                    for (int i = M311[f][2].length(); i < 18; i++) {
-//                                        n2 += "0";
-//                                    }
-                                    n2 += mm;
-                                } catch (Exception e) {
-                                    n2 = M311[f][2];
-                                }
-                                String ck = ACC_Almacenes.ObtenerInstancia().verificaAlmacenDes(M311[f][5], M311[f][3]);
-                                String al;
-                                if(!ck.trim().equals("")){
-                                    al = "TR01";
-                                }else{
-                                    al = M311[f][5];
-                                }
-                                Double ul = ACC_Stock.ObtenerInstancia().UltimoLU(n2, M311[f][3], M311[f][0], M311[f][4]);
-                                ACC_Stock.ObtenerInstancia().UpdateMovimiento201UltimoStock(Num(String.valueOf(ul)), n2, M311[f][3], M311[f][0], M311[f][4]);
-                                Double uld = ACC_Stock.ObtenerInstancia().UltimoLUD(n2, M311[f][3], M311[f][0], al);
-                                ACC_Stock.ObtenerInstancia().UpdateInventarioUltCentroD(Num(String.valueOf(uld)), n2, M311[f][3], M311[f][0], al);
-                                Double uln = ACC_Stock.ObtenerInstancia().UltimoLU(n2, M311[f][3], M311[f][0], al);
-                                ACC_Stock.ObtenerInstancia().UpdateMovimiento201UltimoStock(Num(String.valueOf(uln)), n2, M311[f][3], M311[f][0], al);
-                            }
-                        }
-                        if (rtn == 2) {
-                            fl = "MO" + fo.getFolioActual();
-                            if (v3.equals("311")) {
-                                rtnn = CallWS.ObtenerInstancia().EnviaWS311(M311, fl, v4, v3, fechaActual, horaActual);
-                            }
-                            if (v3.equals("312")) {
-                                rtnn = CallWS.ObtenerInstancia().EnviaWS312(M311, fl, v4, v3, fechaActual, horaActual);
-                            }
-
-                            for (int f = 0; f < cc3; f++) {
-                                try {
-                                    int mm = Integer.parseInt(M311[f][2]);
-                                    n2 = "";
-//                                    for (int i = M311[f][2].length(); i < 18; i++) {
-//                                        n2 += "0";
-//                                    }
-                                    n2 += mm;
-                                } catch (Exception e) {
-                                    n2 = M311[f][2];
-                                }
-                                String ck = ACC_Almacenes.ObtenerInstancia().verificaAlmacenDes(M311[f][5], M311[f][3]);
-                                String al;
-                                if(!ck.trim().equals("")){
-                                    al = "TR01";
-                                }else{
-                                    al = M311[f][5];
-                                }
-                                Double ul = ACC_Stock.ObtenerInstancia().LibreLU(n2, M311[f][3], M311[f][0], M311[f][4]);
-                                ACC_Stock.ObtenerInstancia().UpdateMovimiento201StockLibre(Num(String.valueOf(ul)), n2, M311[f][3], M311[f][0], M311[f][4]);
-                                Double uld = ACC_Stock.ObtenerInstancia().LibreLUD(n2, M311[f][3], M311[f][0], al);
-                                ACC_Stock.ObtenerInstancia().UpdateInventarioCtdCentroD(Num(String.valueOf(uld)), n2, M311[f][3], M311[f][0], al);
-                                Double uln = ACC_Stock.ObtenerInstancia().LibreLU(n2, M311[f][3], M311[f][0], al);
-                                ACC_Stock.ObtenerInstancia().UpdateMovimiento201StockLibre(Num(String.valueOf(uln)), n2, M311[f][3], M311[f][0], al);
-                            }
-                        }
-                        out.println(rtn + "," + rtnn);
-                    } catch (Exception e) {
-                        System.err.println("Error: " + e);
-                    }
-                    break;
+//                case "Movimiento305":
+//                    int cc3nn = Integer.parseInt(v2);
+//                    int ppr3nn = 0;
+//                    String[][] M305 = new String[cc3nn][6];
+//                    String[] parts3nn = v1.split(",");
+//                    try {
+//                        for (int f = 0; f < cc3nn; f++) {
+//                            for (c = 0; c < 6; c++) {
+//                                M305[f][c] = parts3nn[ppr3nn];
+//                                ppr3nn++;
+//                            }
+//                        }
+//                        int rtn = ACC_Stock.ObtenerInstancia().VerificarExistentesNT(M305, cc3nn);
+//                        if (rtn == 1) {
+//                            for (int f = 0; f < cc3nn; f++) {
+//                                Double rt = ACC_Stock.ObtenerInstancia().LbreST(M305[f][2], M305[f][3]);
+//                                ACC_Stock.ObtenerInstancia().UpdateMovimiento305UltimoStock(Num(String.valueOf(rt)), M305[f][2], M305[f][3]);
+//                            }
+//                        }
+//                        if (rtn == 2) {
+//                            for (int f = 0; f < cc3nn; f++) {
+//                                Double rt = ACC_Stock.ObtenerInstancia().UltimoST(M305[f][2], M305[f][3]);
+//                                ACC_Stock.ObtenerInstancia().UpdateMovimiento305StockTraslado(Num(String.valueOf(rt)), M305[f][2], M305[f][3]);
+//                                ACC_Stock.ObtenerInstancia().ActualizaInventario(M305[f][2], M305[f][5], M305[f][1], M305[f][0], M305[f][4]);
+//                            }
+//                        }
+//                        out.println(rtn);
+//                    } catch (Exception e) {
+//                        System.err.println("Error: " + e);
+//                    }
+//                    break;
+//                case "Movimiento311":
+//                    String rtnn = "";
+//                    int cc3 = Integer.parseInt(v2);
+//                    int ppr3 = 0;
+//                    String[][] M311 = new String[cc3][6];
+//                    String[] parts3 = v1.split(",");
+//                    try {
+//                        for (int f = 0; f < cc3; f++) {
+//                            for (c = 0; c < 6; c++) {
+//                                M311[f][c] = parts3[ppr3];
+//                                ppr3++;
+//                            }
+//                        }
+//                        int rtn = ACC_Stock.ObtenerInstancia().VerificarExistentes300(M311, cc3);
+//                        if (rtn == 1) {
+//                            for (int f = 0; f < cc3; f++) {
+//                                try {
+//                                    int mm = Integer.parseInt(M311[f][2]);
+//                                    n2 = "";
+////                                    for (int i = M311[f][2].length(); i < 18; i++) {
+////                                        n2 += "0";
+////                                    }
+//                                    n2 += mm;
+//                                } catch (Exception e) {
+//                                    n2 = M311[f][2];
+//                                }
+//                                String ck = ACC_Almacenes.ObtenerInstancia().verificaAlmacenDes(M311[f][5], M311[f][3]);
+//                                String al;
+//                                if(!ck.trim().equals("")){
+//                                    al = "TR01";
+//                                }else{
+//                                    al = M311[f][5];
+//                                }
+//                                Double ul = ACC_Stock.ObtenerInstancia().UltimoLU(n2, M311[f][3], M311[f][0], M311[f][4]);
+//                                ACC_Stock.ObtenerInstancia().UpdateMovimiento201UltimoStock(Num(String.valueOf(ul)), n2, M311[f][3], M311[f][0], M311[f][4]);
+//                                Double uld = ACC_Stock.ObtenerInstancia().UltimoLUD(n2, M311[f][3], M311[f][0], al);
+//                                ACC_Stock.ObtenerInstancia().UpdateInventarioUltCentroD(Num(String.valueOf(uld)), n2, M311[f][3], M311[f][0], al);
+//                                Double uln = ACC_Stock.ObtenerInstancia().UltimoLU(n2, M311[f][3], M311[f][0], al);
+//                                ACC_Stock.ObtenerInstancia().UpdateMovimiento201UltimoStock(Num(String.valueOf(uln)), n2, M311[f][3], M311[f][0], al);
+//                            }
+//                        }
+//                        if (rtn == 2) {
+//                            fl = "MO" + fo.getFolioActual();
+//                            if (v3.equals("311")) {
+//                                rtnn = CallWS.ObtenerInstancia().EnviaWS311(M311, fl, v4, v3, fechaActual, horaActual);
+//                            }
+//                            if (v3.equals("312")) {
+//                                rtnn = CallWS.ObtenerInstancia().EnviaWS312(M311, fl, v4, v3, fechaActual, horaActual);
+//                            }
+//
+//                            for (int f = 0; f < cc3; f++) {
+//                                try {
+//                                    int mm = Integer.parseInt(M311[f][2]);
+//                                    n2 = "";
+////                                    for (int i = M311[f][2].length(); i < 18; i++) {
+////                                        n2 += "0";
+////                                    }
+//                                    n2 += mm;
+//                                } catch (Exception e) {
+//                                    n2 = M311[f][2];
+//                                }
+//                                String ck = ACC_Almacenes.ObtenerInstancia().verificaAlmacenDes(M311[f][5], M311[f][3]);
+//                                String al;
+//                                if(!ck.trim().equals("")){
+//                                    al = "TR01";
+//                                }else{
+//                                    al = M311[f][5];
+//                                }
+//                                Double ul = ACC_Stock.ObtenerInstancia().LibreLU(n2, M311[f][3], M311[f][0], M311[f][4]);
+//                                ACC_Stock.ObtenerInstancia().UpdateMovimiento201StockLibre(Num(String.valueOf(ul)), n2, M311[f][3], M311[f][0], M311[f][4]);
+//                                Double uld = ACC_Stock.ObtenerInstancia().LibreLUD(n2, M311[f][3], M311[f][0], al);
+//                                ACC_Stock.ObtenerInstancia().UpdateInventarioCtdCentroD(Num(String.valueOf(uld)), n2, M311[f][3], M311[f][0], al);
+//                                Double uln = ACC_Stock.ObtenerInstancia().LibreLU(n2, M311[f][3], M311[f][0], al);
+//                                ACC_Stock.ObtenerInstancia().UpdateMovimiento201StockLibre(Num(String.valueOf(uln)), n2, M311[f][3], M311[f][0], al);
+//                            }
+//                        }
+//                        out.println(rtn + "," + rtnn);
+//                    } catch (Exception e) {
+//                        System.err.println("Error: " + e);
+//                    }
+//                    break;
                 case "Movimiento261":
                     int cc2 = Integer.parseInt(v2);
                     int ppr2 = 0;
