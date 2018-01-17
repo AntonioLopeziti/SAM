@@ -1,0 +1,135 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-ago-2016, 17:12:37
+*/
+.ContentFolios{
+    width: 70%;   
+}
+input{
+    font-family: "Courier New";
+}
+.SecFolios{
+    width: 100%;
+    height: 180px;
+    padding-left: 2%;
+    background: #fff;
+}
+#lineapFolio{
+    border: 1px solid #3892E0;
+    margin-left: -2%;
+    margin-top: 0;
+}
+.SectcompFolios{
+    width: 100%;
+}
+.SectcompFolios label{
+    width:20%;
+    display: inline-block;
+}
+.SectcompFolios hr{
+    width: 20%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.SecFolios input{
+    font-size: .8em;
+    font-family: "Courier New";
+}
+
+
+
+.ContTablaFolio
+{
+    width: 100%;  
+    margin-top: 10px;
+}
+.ContTablaFolio > section
+{
+    display: inline-block;
+    margin-top: 0;
+}
+#TablaStatus
+{
+    width: 100%;
+    text-align: center;
+}
+.TablaCont table tr:first-child td
+{    
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+}
+.ContTablaFolio table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    
+}
+.ContTablaFolio th, td{
+    width:110px;
+}
+
+.ContTablaFolio table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+
+.ContTablaFolio tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.ContTablaFolio #SecTab > table
+{
+    height: 181px;
+}
+.ContTablaFolio table
+{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: auto;
+    height: auto;
+}
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    .ContentFolios{
+        width: 100%;   
+    }
+    .SectcompFolios label{
+        width:20%;
+        display: inline-block;
+    }
+    .SectcompFolios hr{
+        width: 20%;
+        margin-left: 0;
+        margin-top: -1px;
+    }
+}
+@media screen and (min-width: 200px) and (max-width: 500px){  
+    .ContentFolios{
+        width: 100%;   
+    }
+    .SectcompFolios label{
+        width:30%;
+        display: inline-block;
+    }
+    .SectcompFolios hr{
+        width: 30%;
+        margin-left: 0;
+        margin-top: -1px;
+    }
+}
+

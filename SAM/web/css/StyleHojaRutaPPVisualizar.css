@@ -1,0 +1,107 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22-ago-2016, 14:42:55
+    Author     : AREConsulting
+*/
+input{
+    font-family: "Courier New";
+}
+.ContentHojaRuta{
+    width: 70%;
+}
+.BuscarPra{
+    margin-top: 10px;
+    padding-left: 2%;
+    width: 100%;
+    background: #fff;
+    height: 120px;
+}
+#lineaBomtitu{
+    border: 1px solid #3892E0;
+    margin-left: -2%;
+    margin-top: 0;
+}
+.div1pa{
+    width: 100%;
+}
+.div1pa label {
+    width: 15%;
+    display: inline-block;
+}
+.div1pa hr {
+    width: 15%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.versx{
+    width: 102%;
+    margin-top: 20px;
+    height: 300px;
+}
+#TableNotfi
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainer
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size: small;
+    font-family: sans-serif;
+    text-align: center;
+}
+.SecHead thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    text-align: center;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo { height: 250px; }
+.ocultar
+{
+    visibility: hidden;
+}
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    .ContentHojaRuta{
+        width: 100%;
+    }   
+
+}
+@media screen and (min-width: 200px) and (max-width: 500px){  
+    .ContentHojaRuta{
+        width: 100%;
+    }
+
+}
+

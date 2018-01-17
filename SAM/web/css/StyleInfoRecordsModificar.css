@@ -1,0 +1,165 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-ago-2016, 12:29:35
+    Author     : AREConsulting
+*/
+
+.VisualInfoRecord_info{
+    width:70%; 
+    padding-bottom: 5%;
+}
+.ParametrosBusqueda_info{
+    height: 240px;
+    padding-left: 2%;
+    margin-top: 10px;
+    background: #fff;    
+}
+#LineaTituloInfo{
+    margin-left: -2%;
+    margin-top: 0;
+    border: 1px solid #3892E0;
+}
+.ParamIzq_info{
+    border: 1px solid #ddd;
+    width: 40%;
+    padding-left: 2%;
+    float: left;
+    height: 190px;
+}
+.ParamIzq_info label{
+    display: inline-block;
+    width: 35%;
+}
+#LineaRegInfo_inf{
+    margin-top: -1px;
+    margin-left: 0;
+    width: 35%;
+}
+.ParamDer_info{
+    float:left;
+    border: 1px solid #ddd;
+    width: 55%;
+    height: 190px;
+    padding-left: 2%;
+}
+.ParamDer_info label{
+    display: inline-block;
+    width: 25%;
+}
+#lineaParamDer_info{
+    margin-top:-1px;
+    margin-left: 0;
+    width: 25%;
+}
+.DatosBasicComp_info{
+    margin-top: 10px;
+    background: #fff;
+    height: 178px;
+    padding-left: 2%;
+}
+.BasicoComp1_info{
+    float: left;
+    width: 35%;   
+}
+.BasicoComp1_info label{
+    width: 45%;
+    display: inline-block;
+}
+.BasicoComp1_info hr{
+    margin-top: -1px;
+    margin-left: 0;
+    width: 45%;
+}
+.BasicoComp2_info{
+    width: 30%;
+    float:left;
+}
+.BasicoComp2_info label{
+    width: 46%;
+    display:inline-block;
+}
+.BasicoComp2_info hr{
+    width: 46%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.BasicoComp3_info{
+    width: 35%;
+    float: left;
+}
+.BasicoComp3_info label{
+    width: 52%;
+    display: inline-block;
+}
+.BasicoComp3_info hr{
+    width: 52%;
+    margin-top: -1px;
+    margin-left: 0;
+}
+.Convers_info{
+    height: 80px;
+    padding-left: 2%;
+    background: #fff;
+    margin-top: 10px;
+
+}
+.ConverCompl_info{
+    width: 45%;
+    float: left;
+}
+.ConverCompl_info label{
+    width: 70%;
+    display: inline-block;
+}
+.ConverCompl_info hr{
+    width: 70%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.ConverCompl2_info{
+    width: 50%;
+    float: left;
+}
+.ConverCompl2_info label{
+    width: 55%;
+    display: inline-block;
+}
+.SecPrecio_info{
+    height: 80px;
+    background: #fff;
+    margin-top: 10px;
+    padding-left: 2%;
+}
+.PreciDer_info{
+    width: 60%;
+    float: left;
+}
+.PreciDer1_info{
+    width: 40%;
+    float: left; 
+}
+.PreciDer1_info label{
+    width: 35%;
+    display: inline-block;
+}
+.PreciDer1_info hr{
+    margin-top: -1px;
+    margin-left: 0;
+    width: 40%;
+}
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    .VisualInfoRecord_info{
+        width:100%; 
+        margin-bottom: 5%;
+    }
+}
+@media screen and (min-width: 200px) and (max-width: 500px){  
+    .VisualInfoRecord_info{
+        width:100%; 
+       margin-bottom: 5%;
+    }
+}

@@ -1,0 +1,337 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-sep-2016, 10:05:09
+*/
+.Botones_MatchTEX{
+    float: right;
+    margin-right: 2%;
+    margin-top: 18%;
+}
+.ContentOrden{
+    width: 60%;
+    background-color: white;
+    height: auto;
+}
+.ContentOrden input{
+    font-family: "Courier New";
+}
+.buqueOr{
+    padding-left: 2%;
+    width: 100%;
+    height: 150%;
+}
+.ocultar
+{
+    visibility: hidden;
+}
+.buqueOr label {
+    width: 20%;
+    display: inline-block;    
+}
+.buqueOr hr {
+    width: 20%; 
+    margin-left: 0;
+    margin-top: -1px;    
+}
+
+#hrblue{
+    border: 1px solid #3892E0;
+    margin-top: 0;
+    width: 100%;
+}
+
+.divTable{
+    width: 61%;
+    height: 70%;
+    margin-top: 30px;
+
+}
+#tablslc{
+    width: 99%;
+    display: inline-block;
+}
+#TableNotfi
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainer
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+    text-align: center;
+}
+.SecHead thead > tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    text-align: center;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo { height: 300px; }
+.BtnIconLeer{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/men.png');
+    background-position: center;
+    background-repeat:no-repeat;
+    background-position: left;
+    vertical-align:middle;
+    margin-top: -2.5px;
+    height: 22px;
+    width: 150px;
+    cursor: pointer;
+}
+.BtnIcontelib{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-position: center;
+    background-repeat:no-repeat;
+    background-position: left;
+    vertical-align:middle;
+    margin-top: -2.5px;
+    margin-left: 5px;
+    height: 22px;
+    width: 100px;
+    cursor: pointer;
+}
+textArea{
+    margin-top: 6%;
+    margin-left: 1%;
+    height: 160px; 
+    overflow-x: scroll; 
+    width: 92%;
+    border: double #000;
+}
+
+.divTable input[type="radio"].che{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #c8c6c6;
+    width: 20px;
+    height: 30px;
+    border-radius: 2px;
+    margin: -1px -5px -5px -1px;
+}
+
+.divTable input[type="radio"].che:checked{
+    background: #1E90FF;
+}
+.divTable input[type="radio"].che:focus{
+    outline: none;
+}
+.VentanaModalAv
+{
+    position: fixed; 
+    width: 420px; 
+    height: 130px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.fondo_MatchAv > img 
+{
+    margin-left: 10px;
+    margin-top: 7px;
+    vertical-align:middle;
+    cursor:pointer;
+    display: inline-block;
+    margin-bottom: -4%;
+    float: left;
+}
+.fondo_MatchAv > label 
+{
+    margin-left: 7px;
+    margin-top: 15px;
+    float: left;
+}
+.fondo_MatchAv
+{
+    background-color: #E5E5E5;
+    width: 100%;
+    height: 83%;
+}
+#handleAV
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#handleFile
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 13%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#handleFileAdd
+{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 5%;
+    width: 101%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: .8em;
+    background: #333  top repeat-x;
+}
+#addFile{
+    font-size: 18px;
+    text-align: center;
+    margin-left:-15%;
+    margin-top: 12%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    width: 15%;
+    float:left;
+}
+#btnCancelar{
+    font-size: 18px;
+    text-align: center;
+    margin-left:-5%;
+    margin-top: 12%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    width: 15%;
+    float:left;   
+}
+
+/*Ventana agregar archivos*/
+.VentanaModalFiles
+{
+    position: fixed; 
+    width: 450px; 
+    height: 400px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 15px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.Botones_MatchFile{
+    float: right;
+    margin-right: 2%;
+    margin-top: -10%;
+}
+.TablaCont table tr:first-child td
+{    
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+}
+.TablaStatusC table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+.TablaStatusC tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+.TablaStatusC tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.TablaCont{
+    width: 98%;
+    height: 300px;
+}
+.TablaStatusC table
+{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+}
+.DobleScroll { 
+    height: 300px; 
+    width: 17px; 
+    background-color: #007CC0;
+    display: inline-block;
+    margin-bottom: 17px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+}
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    .ContentOrden{
+        width: 100%;
+    }
+    .divTable{
+        width: 100%;
+    }
+
+}
+@media screen and (min-width: 200px) and (max-width: 500px){  
+    .ContentOrden{
+        width: 100%;
+    }
+    .divTable{
+        width: 100%;
+    }
+}

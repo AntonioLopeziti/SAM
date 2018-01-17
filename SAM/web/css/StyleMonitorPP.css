@@ -1,0 +1,304 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-ago-2016, 17:06:39
+    Author     : AREConsulting
+*/
+.ContentMonitor{
+    width: 60%;
+}
+.SecTabClass{
+   width: 975px; 
+}
+.BusqSecc{
+    margin-top: 5%;
+    margin-left:  100px;
+    width: 250px;
+}
+.MonitorSect1{
+    width: 100%;
+    background: #fff;
+    padding-left: 2%;
+    height: 80px;
+}
+.LineasMonitor{    
+    border: 1px solid #3892E0;
+    margin-left: -2%;
+    margin-top: 0;
+}
+.parametroBus{
+    width: 100%;
+    background: #fff;
+    padding-left: 2%;
+    margin-top: 10px;
+    height: 170px;
+}
+.subparametoBu{
+    width: 100%;
+}
+.subparametoBu label{
+    width: 35%;
+    display: inline-block;
+}
+.subparametoBu hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 35%;
+}
+.divmodovis{
+    width: 100%;
+    background: #fff;
+    padding-left: 2%;
+    margin-top: 10px;
+    height: 80px;
+}
+.divmensajes{
+    width: 100%;
+    background: #fff;
+    padding-left: 2%;
+    margin-top: 10px;
+    height: 160px;
+}
+/*#tablauno{
+    width: 85%;
+}*/
+.MonitorStatusCont
+{
+    width: 90%;
+    margin-top: 0.8em;    
+}
+.MonitorStatusCont > section
+{
+    display: inline-block;
+    height: auto;
+    margin-top: 0;
+}
+.last
+{
+    margin-bottom: 3.8em;
+}
+#TablaStatus
+{
+    width: 78%;
+}
+#TablaStatus2
+{
+    width: 78%;
+}
+
+.TablaCont table tr:first-child td
+{    
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+}
+#TablaStatus table
+{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    height: 370px;
+}
+#TablaStatus2 table
+{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    height: 233px;
+}
+#TablaStatus table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: 0.5em;   
+}
+#TablaStatus2 table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: 0.5em;   
+}
+#TablaStatus table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+#TablaStatus2 table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+#TablaStatus tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+#TablaStatus2 tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+#TablaStatus tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+#TablaStatus2 tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+
+
+
+#BusquedaStatus
+{
+    width: 22%;
+    float: right;
+    height: auto;
+    padding-bottom: 2%;
+}
+#BusquedaSec
+{
+    background-color: white;
+    padding-bottom: 10px; 
+}
+.LbMonitor
+{
+    margin-left: 0.5em;
+}
+.LineasMonitor
+{
+    border-top: 2px solid #3892E0;
+    margin-top: 0;
+}
+.Radio_Ajuste
+{
+    margin-left: 1.5em;
+    width: 100%;
+}
+
+.TablaCont table
+{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    height: auto;
+}
+.LbAjuste
+{
+    width: 65%;  
+    display: inline-block;
+}
+.BxJerarquia
+{
+    width: 15%;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1em;
+    font-weight: bold;
+}
+.BxDiferencia
+{
+    margin-top: 5px;
+    width: 75%;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1em;
+    font-weight: bold;
+}
+#BtnDif
+{
+    margin-left: -10px;
+    margin-top: 3px;
+    width: 90%;
+}
+#BtnDif img
+{
+    float: left;
+    vertical-align:middle;
+    cursor:pointer;
+    display: inline-block;
+}
+.LineasAjuste
+{
+    margin-top: -1px;
+    margin-left: 0;
+    width: 80%;
+}
+#BtnAplica img
+{
+    vertical-align:middle;
+    cursor:pointer;
+    display: inline-block;
+}
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    .ContentMonitor{
+        width: 100%;   
+    }
+    .MonitorStatusCont
+    {
+        width: 92%;
+        margin-top: 0.8em;    
+    }
+    #BusquedaStatus
+    {
+        width: 32%;
+        float: right;
+        background-color: white;
+        height: auto;
+        padding-bottom: 2%;
+        font-size:small;
+        font-family: Tahoma;
+    }
+    #TablaStatus
+    {
+        width: 68%;
+    }
+}
+@media screen and (min-width: 200px) and (max-width: 500px){  
+    .ContentMonitor{
+        width: 100%;   
+    }
+    .MonitorStatusCont
+    {
+        width: 92%;
+        margin-top: 0.8em;    
+    }
+    #BusquedaStatus
+    {
+        width: 32%;
+        float: right;
+        background-color: white;
+        height: auto;
+        padding-bottom: 2%;
+        font-size:small;
+        font-family: Tahoma;
+    }
+    #TablaStatus
+    {
+        width: 68%;
+    }
+}

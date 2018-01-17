@@ -1,0 +1,127 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22/07/2016, 02:14:39 PM
+    Author     : AREConsulting
+*/
+
+.ContentStock{
+    width: 80%;
+}
+
+.Datos_info{
+    width: 100%;
+    margin-top: 10px;
+    background: #fff;
+    height: 300px;
+}
+.BasicoComp11_info{
+    padding-top: 1%;
+    padding-left: 2%;
+    width: 50%;
+    float: left;
+}
+.BasicoComp11_info input{
+    font-family: "Courier New";
+}
+.VentanaModalGArticulos{    
+    position: fixed; 
+    width: 600px; 
+    height: 400px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.VentanaModallot{    
+    position: fixed; 
+    width: 700px; 
+    height: 400px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+
+.fixedYLO{
+    position: relative;
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+}
+
+
+.fixedYLO table{
+    border-collapse: collapse;
+    width: 100%;;
+}
+
+
+.fixedYLO table th, #fixedYLO table td {
+    width: 20%;
+}
+
+
+.fixedYLO table th {
+    background-color: #ddd;
+    font: 11% 1em Tahoma;
+    color:#000;
+}
+
+#cuerpoDatos {
+    width: 100%;   
+}
+
+#cuerpoDatos > div{
+    text-align: center;
+}
+
+#cuerpoDatos > div.nofixedXLO table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+#cuerpoDatos > div.nofixedXLO table td {
+    width: 20%;
+}
+.BasicoComp11_info label{
+    width: 50%;
+    display: inline-block;
+}
+.BasicoComp11_info hr{
+    width: 50%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.BasicoComp12_info{
+    padding-top: 1%;
+    padding-left: 2%;
+    width: 45%;
+    float: left;
+}
+.BasicoComp12_info label{
+    width: 20%;
+    display: inline-block;
+}
+.BasicoComp12_info hr{
+    width: 20%;
+    margin-left: 0;
+    margin-top: -1px;
+}

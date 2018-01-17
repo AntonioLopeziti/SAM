@@ -1,0 +1,438 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 7/06/2016, 01:00:30 PM
+    Author     : AREConsulting
+*/
+
+
+.ContentAvisos{
+    width: 100%;
+    margin-bottom: 5%;
+}
+#tabscrll{
+    width: 98%;
+}
+
+.VentanaModalNot{    
+    position: fixed; 
+    width: 550px; 
+    height: 400px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+
+
+.fixedYN{
+    position: relative;
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+}
+
+
+.fixedYN table{
+    border-collapse: collapse;
+    width: 100%;;
+}
+
+
+.fixedYN table th, #fixedY table td {
+    width: 20%;
+}
+
+
+.fixedY table th {
+    background-color: #ddd;
+    font: 1em Tahoma;
+    color:#000;
+}
+
+#cuerpoDatosN {
+    width: 100%;   
+}
+
+#cuerpoDatosN > div{
+    text-align: center;
+}
+
+#cuerpoDatosN > div.nofixedX table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+#cuerpoDatosN > div.nofixedX table td {
+    width: 20%;
+}
+.divconOrden{
+    width: 60%;
+    margin-top: 20px;
+}
+.divconOrden label{
+    width: 30%;
+    display: inline-block;
+}
+.divconOrden hr{
+    margin-top: -1px;
+    margin-left: 0;
+    width: 30%;
+}
+.divconOrden2{
+    width: 100%;
+}
+
+.divconOrden3{
+    width: 50%;
+}
+.DivParametrosOrden{
+    width: 100%;
+    margin-top: 10px;
+    padding-left: 1%
+
+}
+.DivParametrosOrden label{
+    display: inline-block;
+    width: 20%;
+    text-align: justify;
+}
+.DivParametrosOrden hr{
+    width: 20%;
+    margin-left: 0;
+    margin-top: -1px
+}
+.SeccionPestañas_orden{
+    width: 100%; 
+}
+.tabsorden{
+    width: 70%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.tabsorden input[type="button"]{
+    background: #FFFFFF;
+
+}
+.tabsorden input[type="button"]:hover{
+    background: #E5F2F9;
+
+}
+#lineatabs{
+    width:99%;
+    margin-left: 0;
+    margin-top: 1px;
+    border: 1px solid #3892E0;
+}
+.ContenidoTabsOrden{
+    width: 90%;
+    background: #DDDDDD;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+}
+#tabcabec{
+    background: #3892E0;
+    color: #fff;
+    border: #3892E0;
+}
+
+.TabCabecOrden{
+    width:60%;
+
+}
+.SecRespo_ord{
+    width: 100%;   
+    height: 135px;
+    background: #fff;
+    padding-left: 2%;
+}
+.SecRespo1_ord{
+    width: 100%;
+}
+.SecRespo1_ord label{
+    width: 20%;
+    display: inline-block;
+}
+.SecRespo1_ord hr{
+    width: 20%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+#lineatitulo_orde{
+    width: 102%;
+    margin-top: 0;
+    margin-left: -2%;
+    border: 1px solid #3892E0;
+}
+.Secbobj_ord{
+    width: 100%;
+    height: 150px;
+    background: #fff;
+    padding-left: 2%;
+    margin-top: 10px;
+}
+.divcomorden{
+    width: 100%;
+}
+.divcomorden label{
+    width: 20%;
+    display: inline-block;
+}
+.divcomorden hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 20%;
+}
+.divfecha_ord{
+    width: 100%;
+    margin-top: 10px;
+    padding-left: 2%;
+    background: #fff;
+    height: 200px;
+}
+.divfecha_ord label{
+    width: 20%;
+    display: inline-block;
+}
+.divfecha_ord hr{
+    width: 20%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.actividades{
+    width: 140%;
+    height: 200px;
+    background: #fff;
+    margin-top: 20px;
+    padding-left: 3%;
+}
+.tablaSolicitud table
+{
+    width: 84%;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    height: 140px;
+}
+
+.tablaSolicitud table tr:first-child td
+{    
+    color:#000;
+    font-family: Tahoma;
+}
+.tablaSolicitud table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: 0.5em;   
+}
+.tablaSolicitud table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+.tablaSolicitud tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+.tablaSolicitud tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.VentanaModalAvi{    
+    position: fixed; 
+    width: 550px; 
+    height: 400px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+}
+.fixedYca{
+    position: relative;
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+}
+#TableNotfi
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainer
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+    text-align: center;
+}
+.SecHead thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    text-align: center;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo {
+    height: 110px;
+}
+.ocultar
+{
+    visibility: hidden;
+}
+
+
+
+.fixedYca table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+.fixedYca table th, #fixedYca table td {
+    width: 50%;
+}
+
+
+.fixedYca table th {
+    background-color: #ddd;
+    font: 11% 1em Tahoma;
+    color:#000;
+
+}
+
+#cuerpoDatos {
+    width: 100%;
+
+}
+
+#cuerpoDatos > div{
+    text-align: center;
+}
+
+#cuerpoDatos > div.nofixedXca table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+#cuerpoDatos > div.nofixedXca table td {
+    width: 50%;
+}
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    .divconOrden{
+        width: 100%;   
+    }
+    .divconOrden3{
+        width:100%;
+    }
+    .TabCabecOrden{
+        width: 100%;
+    }
+    .actividades{
+        width: 100%;
+    }
+    .TabCabecOrden{
+        width:100%;
+
+    }
+}
+@media screen and (min-width: 500px) and (max-width: 1000px){  
+    footer
+    {
+        font-size: .8em;
+    }
+    .ContenidoScrollbar{
+        height: 700px; 
+    }
+    .VentanaModalAV{    
+        position: fixed; 
+        width: 350px; 
+        height: 400px;
+        margin-top: 20px;       
+    }
+
+}
+@media screen and (min-width: 200px) and (max-width: 500px){  
+    footer
+    {   font-size: .7em;   
+
+    }
+    .VentanaModalAV{    
+        position: fixed; 
+        width: 300px; 
+        height: 300px;
+        margin-top: 20px;       
+    }
+}
+.VentanaModalAV{    
+    position: fixed; 
+    width: 60%; 
+    height: 400px;
+    margin-top: 20px;
+    margin-left: -15%;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}

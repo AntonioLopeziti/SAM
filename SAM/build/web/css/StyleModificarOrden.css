@@ -1,0 +1,430 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-ago-2016, 17:34:10
+    Author     : Zilarck
+*/
+body{
+  
+    padding-top: 0;
+}
+.ContentOrden{
+    width: 100%;
+}
+.ContentOrden input{
+    font-family: "Courier New";
+}
+.DivDatosCrearOrden{
+    width: 97.7%;
+    height: 22em;
+    padding-left: 2%;
+    background: #fff;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #DDDDDD;   
+    margin-left: 0;margin-right: 0;
+    margin-bottom: 1%;
+}
+#lineaAzul{
+    border: 1px solid #3892E0;
+    margin-left: -2%;
+    margin-top: 0;
+}
+#lineaAzulSub{
+    border: 1px solid #3892E0;
+    margin-left: -6%;
+    margin-top: 0;
+}
+.subTitle{
+    margin-left: -.9em;
+}
+hr{
+    margin-top: -.2%;
+}
+.DivDatosBasicos{
+    width: 35%;
+    height: 18em;
+    padding-left: 2%;
+    background: #fff;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #DDDDDD; 
+    position: relative;
+    display: inline-block;
+    float: left;
+}
+.DivDatosBasicos label{
+    display: inline-block;
+}
+.DivDatosBasicos input{
+    display: inline-block;
+}
+.DivDatosBasicos input:nth-of-type(1){
+    margin-left: 7%;
+    width: 10%;
+}
+.DivDatosBasicos hr:nth-of-type(2){
+    margin-left: 0;
+    width: 30%;
+}
+.DivDatosBasicos input:nth-of-type(2){
+    margin-left: 11.3%;
+    width: 65%;
+}
+.DivDatosBasicos hr:nth-of-type(3){
+    margin-left: 0;
+    width: 30%;
+    margin-top: -.3%;
+}
+.DivDatosBasicos input:nth-of-type(3){
+    margin-left: 17.4%;
+    width: 32.5%;
+}
+.DivDatosBasicos hr:nth-of-type(4){
+    margin-left: 0;
+    width: 30%;
+    margin-top: -.3%;
+}
+.DivDatosBasicos input:nth-of-type(4){
+    margin-left: 13.6%;
+    width: 65%;
+}
+.DivDatosBasicos hr:nth-of-type(5){
+    margin-left: 0;
+    width: 30%;
+    margin-top: -.2%;
+}
+.halfHoriz1{
+    width: 50%;
+    display: inline-block;
+}
+.halfHoriz2{
+    width: 48%;
+    display: inline-block;
+}
+.halfHoriz1 input:nth-of-type(1){
+    margin-left: 18%;
+    width: 25%;
+}
+.halfHoriz1 hr:nth-of-type(1){
+    margin-left: 0;
+    width: 55%;
+}
+.halfHoriz2 hr:nth-of-type(1){
+    margin-left: 0;
+    width: 55%;
+}
+.halfHoriz2 input:nth-of-type(1){
+    margin-left: 5%;
+    width: 35%;
+}
+
+.DivFecha{
+    width: 95%;
+    height: 3.3em;
+    padding-left: 2%;
+    background: #fff;
+    margin-top: 5%;
+    padding-bottom: 10px;
+    border: 1px solid #DDDDDD; 
+    margin-left: -1%;
+}
+#lineaAzulSub2{
+    border: 1px solid #3892E0;
+    margin-left: -2.2%;
+    margin-top: 0;
+}
+.DivFecha .subTitle{
+    margin-left: 1%;
+}
+.DivFecha input{
+    display: inline-block;
+}
+.DivFecha label{
+    display: inline-block;
+    margin-left: 1%;
+}
+.DivFecha input:nth-of-type(1){
+    width: 35%;
+    margin-right: 0%;
+    margin-left: -1%;
+}
+.DivFecha hr:nth-of-type(2){
+    width: 29%;
+    position: absolute;
+    margin-top:-.3%;
+    margin-left: 1%;
+}
+.DivFecha hr:nth-of-type(3){
+    width: 35%;
+    margin-left: 51.5%;
+    margin-top:-.3%;
+}
+.DivFecha input:nth-of-type(2){
+    width: 35%;
+    margin-left: -1%;
+}
+.DivDatosBasicos2{
+    display: inline-block;
+    width: 20%;
+    /*border: solid 1px #000;*/
+    position: relative;
+    height: 20em;
+}
+#DivDatosBasicos3{
+    display: inline-block;
+    width: 25%;
+    /*border: solid 1px #000;*/
+    float: right;
+    height: 19em;
+    border: 1px solid #DDDDDD; 
+    margin-right: 10px;
+    padding-top: 5px;
+    padding-left: 5px;
+   word-wrap: break-word;
+}
+
+
+
+
+.DivHRM{
+    width: 90%;
+    height: 7em;
+    background: #fff;
+    padding-bottom: 10px;
+    border: 1px solid #DDDDDD; 
+    margin-left: 5%;
+    display: block;
+    margin-top: 3.8%;
+}
+
+.DivHRM #lineaAzulSub{
+    margin-left:.1%;
+}
+.DivHRM label{
+    margin-left: 5%;
+}
+.DivHRM label:nth-of-type(1){
+    margin-left: 2%;
+}
+.DivHRM input:nth-of-type(1){
+    width: 30%;
+    margin-left: 12%;
+}
+.DivHRM hr:nth-of-type(2){
+    width: 80%;
+    margin-left: 5%;
+    margin-top: -.5%;
+}
+.DivHRM hr:nth-of-type(3){
+    width: 70%;
+    margin-left: 5%;
+    margin-top: -.4%;   
+}
+.DivHRM input:nth-of-type(2){
+    width: 10%; 
+    margin-left: 13.5%;
+}
+.DivHRM input[type="button"]{
+    width: 25%;
+    margin-top: 0;
+    float: right;
+    margin-right: 7.3%;
+}
+
+.DivLstM{
+    width: 90%;
+    height: 7em;
+    background: #fff;
+    padding-bottom: 10px;
+    border: 1px solid #DDDDDD; 
+    margin-left: 5%;
+    display: block;
+    margin-top: 20%;
+}
+
+.DivLstM #lineaAzulSub{
+    margin-left:.1%;
+}
+.DivLstM label{
+    margin-left: 5%;
+}
+.DivLstM label:nth-of-type(1){
+    margin-left: 2%;
+}
+.DivLstM input:nth-of-type(1){
+    width: 27%;
+    margin-left: 12%;
+}
+.DivLstM hr:nth-of-type(2){
+    width: 70%;
+    margin-left: 5%;
+    margin-top: -.4%;
+}
+.DivLstM hr:nth-of-type(3){
+    width: 60%;
+    margin-left: 5%;
+    margin-top: -.5%;   
+}
+.DivLstM input:nth-of-type(2){
+    width: 10%; 
+    margin-left: 26.5%;
+}
+.DivLstM input[type="button"]{
+    width: 25%;
+    margin-top: 0;
+    float: right;
+    margin-right: 7.3%;
+}
+.btnTomar{
+    background-image: url('../images/btnTomar.jpg');
+    background-position: center;
+    background-repeat:no-repeat;
+    vertical-align:middle;
+    cursor: pointer;
+}
+
+
+
+.tabsorden{
+    width: 100%;
+    margin-top: 0;
+}
+/*.tabsorden button{
+    background: #FFFFFF;
+margin-bottom: -.1%;
+}*/
+.tabsorden button:nth-of-type(1){
+    margin-left: 1%;
+}
+.tabsorden button:nth-of-type(2){
+    margin-left: -.5%;
+}
+#lineatabs{
+    width: 100%;
+    margin-left: -.2%;
+    margin-top: .7px;
+    border: 1px solid #3892E0;
+}
+.ContenidoTabsOrden{
+    width: 100%;   
+    background: #ddd;
+    height: 100%;
+    margin-top: -5px;
+    padding-top: 1%;
+    height: 15em;
+    margin-bottom: 5%;
+}
+.TabSecOpe{
+    /*border: 1px solid #006;*/
+    width: 97.8%;
+
+    height: 5em;
+}
+.TabSecComp{
+    /*border: 1px solid #600;*/
+    width: 99.8%;
+    height: 90px;
+
+}
+.TablaStatusC table
+{
+    display: inline-block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    margin-top: -1%;
+}
+.TablaCont{
+    width: 98%;
+    height: 200px;
+}
+.TablaCont input{
+    display: inline-block;
+}
+.TablaCont table tr:first-child td
+{    
+    font-weight:bold;
+    color:#000;
+    font-family: Tahoma;
+}
+.TablaStatusC table, th, td
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: fixed;
+    padding-right: et0.5em;   
+}
+.TablaStatusC table #CabeceraTabla
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    position: relative;
+    bottom: 0;
+}
+.TablaStatusC tr:hover 
+{ 
+    background: #C9E1ED;
+    border-top-color: red; border-bottom-color: red;
+}
+.TablaStatusC tbody> tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.TablaStatusC tbody
+{
+    white-space: nowrap;
+}
+.btnAdd{
+    background-image: url(..//images/ADD.PNG); 
+    background-repeat: no-repeat;
+    padding-right: 1%; 
+    padding-left: 0.5%;
+    padding-bottom: 1.5%;
+    margin-left: 2px;
+}
+.btnDelete{
+    background-image: url(..//images/DELETEADD.PNG); 
+    background-repeat: no-repeat;
+    padding-right: 1%; 
+    padding-left: 0.8%;
+    padding-bottom: 1.5%;
+    margin-left: 0.2%;
+}
+#VentanaModalServicios{
+
+    height: 315px;
+    width: 700px;
+}
+#VentanaModalServicios .fondo_Match{
+    background: #fff;
+}
+#VentanaModalServicios .fondo_Match{
+    padding-bottom: 6%;
+}
+#handle12{
+    height: 20px;
+    margin-right: 5px;
+    margin-bottom: 1%;
+}
+
+#datS1{
+    float: left;
+    width: 49%;
+    display: inline-block;
+}
+#datS2{
+    /*border: 1px solid black;*/
+    width: 49%;
+    display: inline-block;
+}
+
