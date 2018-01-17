@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<config>
-    <usuario>sa</usuario>
-    <clave>jhon13</clave>
-    <servidor>ARECONSULTING</servidor>
-    <puerto>1433</puerto>
-    <basedatos>pruebaPP</basedatos>
-    <url_ws>http://192.168.100.57/iVendAPI/iVendAPI.svc?wsdl</url_ws>
-</config>

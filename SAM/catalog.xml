@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://192.168.100.57:8642/iVendAPI/iVendAPI.svc?wsdl" uri="src/conf/xml-resources/web-service-references/iVendAPI_2/wsdl/192.168.100.57_8642/iVendAPI/iVendAPI.svc.wsdl"/>
-</catalog>
