@@ -6,13 +6,14 @@ import AccesoDatos.ACC_CodigosDefecto;
 import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_InspeccionCodigos;
 import AccesoDatos.ACC_Usuarios;
+import AccesoDatos.ACC_Material;
 import AccesoDatos.Consultas;
 import Entidades.ListaMtrl;
 import Entidades.PlanInspeccionC;
 import Entidades.cabecera_lotes_inspeccion_movimientos_crea;
 import Entidades.folios;
 import Entidades.inspeccion_codigos;
-import Entidades.posiciones_consumos_crea;
+import Entidades.materiales_almacen;
 import Entidades.posiciones_lotes_inspeccion_movimientos_crea;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "MovimientosCalidad", urlPatterns = {"/MovimientosCalidad"})
 public class MovimientosCalidad extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -75,16 +77,16 @@ public class MovimientosCalidad extends HttpServlet {
                             + "<tbody>");
                     for (ListaMtrl p : lm) {
                         out.println("<tr>"
-                                + "<td><input type=\"checkbox\" name=\"CKlmNotiC\" value=\""+ v + "\"></td>"
+                                + "<td><input type=\"checkbox\" name=\"CKlmNotiC\" value=\"" + v + "\"></td>"
                                 + "<td name=\"lm1\" id=\"ll1" + v + "\">" + p.getMaterial() + "</td>"
                                 + "<td name=\"lm2\" id=\"ll2" + v + "\">" + p.getPiezaFabricante() + "</td>"
                                 + "<td name=\"lm3\" id=\"ll3" + v + "\">" + p.getDescripcion() + "</td>"
                                 + "<td name=\"lm4\" id=\"ll4" + v + "\">" + p.getLote() + "</td>"
                                 + "<td name=\"lm5\" id=\"ll5" + v + "\">" + p.getStock() + "</td>"
-                                + "<td name=\"lm7\" id=\"ll7" + v + "\" hidden>" + p.getCentro()+ "</td>"
-                                + "<td name=\"lm8\" id=\"ll8" + v + "\" hidden>" + p.getAlmacen()+ "</td>"
+                                + "<td name=\"lm7\" id=\"ll7" + v + "\" hidden>" + p.getCentro() + "</td>"
+                                + "<td name=\"lm8\" id=\"ll8" + v + "\" hidden>" + p.getAlmacen() + "</td>"
                                 + "<td name=\"lm6\" id=\"ll6" + v + "\">" + p.getUm() + "</td>");
-                            v++;
+                        v++;
                     }
                     out.println("<tr class=\"ocultar\">"
                             + "<td>00</td>"
@@ -117,19 +119,20 @@ public class MovimientosCalidad extends HttpServlet {
                                 + "<td name=\"cldrg5\" id=\"cldrg5" + i + "\" hidden></td>"
                                 + "<td name=\"cld4\" id=\"cld4" + i + "\" hidden>" + p.getEntrada_catalogo_conjunto_seleccion() + "</td>"
                                 + "<td name=\"cldn\" id=\"cldn" + i + "\" hidden>" + p.getRenglon() + "</td>"
-//                                + "<td name=\"cld5\" id=\"cld5" + i + "\">" + v2.substring(0, v2.length()-1) + "</td>");
+                                //                                + "<td name=\"cld5\" id=\"cld5" + i + "\">" + v2.substring(0, v2.length()-1) + "</td>");
                                 + "<td name=\"cld5\" id=\"cld5" + i + "\">" + p.getFactor_cantidad_muestra() + "</td>");
-                        
+
                         if (p.getRenglon().equals("01")) {
-                            out.println("<td><input type=\"text\" class=\"bxcRG\" maxlength=\"11\"  name=\"cld6\" id=\"bxcld6" + i + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
-                                    + "<td><input type=\"text\" class=\"bxcRG\" maxlength=\"40\" name=\"cld7\" id=\"bxcld7" + i + "\" onkeyup=\"FlechasDir('cld7','"+ i +"', event)\">"
+                            out.println("<td class=\"tdRGN\"><input type=\"text\" class=\"bxcRGN\" maxlength=\"11\"  name=\"cld6\" id=\"bxcld6" + i + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
+                                    + "<td><input type=\"text\" class=\"bxcRG\" maxlength=\"40\" name=\"cld7\" id=\"bxcld7" + i + "\" onkeyup=\"FlechasDir('cld7','" + i + "', event)\">"
                                     + "<input type=\"text\" id=\"bxcld70" + i + "\" hidden></td>"
                                     + "<td name=\"cld11\"  id=\"cld6" + i + "\">" + p.getUnidad_medida_graban_cuantitativos() + "</td>"
                                     + "<td><input type=\"text\" name=\"cld9\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxCod" + i + "\" onfocus=\"CodBtnShow('" + i + "')\" disabled></td>"
                                     + "<td></td>"
+                                    + "<td></td>"
                                     + "<td name=\"cld8\"></td>"
-                                    + "<td><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + i + "\" onkeyup=\"FlechasDir('cld12','"+ i +"', event)\" onfocus=\"CodBtnShowNota('" + i + "')\"></td>"
-                                    + "<td><button name=\"cld14\" id=\"btCodNota" + i + "\" class='BtnMatchIconDescri' width=\"100%\" onclick=\"MatchTextoV2('" + i + "')\" hidden></button>"
+                                    + "<td hidden><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + i + "\" onkeyup=\"FlechasDir('cld12','" + i + "', event)\" onfocus=\"CodBtnShowNota('" + i + "')\"></td>"
+                                    + "<td><button name=\"cld14\" id=\"btCodNota" + i + "\" class='BtnMatchIconDescriv' width=\"100%\" onclick=\"MatchTextoV2('" + i + "')\"></button>"
                                     + "<textarea style=\"resize:none;\" id=\"TextlibNota" + i + "\" hidden></textarea></td>"
                                     + "<td name=\"cld13\"  id=\"cld13n" + i + "\" class=\"ocultar\">" + p.getCl_catalogo_grupo_codigo() + "</td>"
                                     + "</tr>");
@@ -137,16 +140,17 @@ public class MovimientosCalidad extends HttpServlet {
                         }
                         if (p.getRenglon().equals("02")) {
 
-                            out.println("<td><input type=\"text\" class=\"bxcRG\" maxlength=\"11\"  name=\"cld6\" id=\"bxcld6" + i + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
+                            out.println("<td class=\"tdRGN\"><input type=\"text\" class=\"bxcRGN\" maxlength=\"11\"  name=\"cld6\" id=\"bxcld6" + i + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
                                     + "<td><input type=\"text\" class=\"bxcRG\" maxlength=\"40\" name=\"cld7\" id=\"bxcld7" + i + "\" value=\"0\" hidden>"
                                     + "<input type=\"text\" id=\"bxcld70" + i + "\" hidden></td>"
                                     + "<td name=\"cld11\">" + p.getUnidad_medida_graban_cuantitativos() + "</td>"
-                                    + "<td><input type=\"text\" name=\"cld9\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxCod" + i + "\" onfocus=\"CodBtnShow('" + i + "')\" onkeyup=\"FlechasDir('cld9','"+ i +"', event)\">"
+                                    + "<td><input type=\"text\" name=\"cld9\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxCod" + i + "\" onfocus=\"CodBtnShow('" + i + "')\" onkeyup=\"FlechasDir('cld9','" + i + "', event)\">"
                                     + "<input type=\"text\" name=\"cldn9\" class=\"bxcRG\" id=\"bxCodn" + i + "\" value=\"" + p.getGrupo_codigo_conjunto_seleccion() + "\" hidden></td>"
                                     + "<td><button name=\"cld10\" id=\"btnCod" + i + "\" class='BtnMatchIcon' style=\"display : none;\" width=\"100%\" onclick=\"matchInspCod('" + i + "', '" + p.getGrupo_codigo_conjunto_seleccion() + "', '" + p.getCl_catalogo_grupo_codigo() + "')\"></button></td>"
+                                    + "<td id=\"bxTxtCod" + i + "\"></td>"
                                     + "<td name=\"cld8\"></td>"
-                                    + "<td><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + i + "\" onkeyup=\"FlechasDir('cld12','"+ i +"', event)\" onfocus=\"CodBtnShowNota('" + i + "')\"></td>"
-                                    + "<td><button name=\"cld14\" id=\"btCodNota" + i + "\" class='BtnMatchIconDescri' width=\"100%\" onclick=\"MatchTextoV2('" + i + "')\" hidden></button>"
+                                    + "<td hidden><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + i + "\" onkeyup=\"FlechasDir('cld12','" + i + "', event)\" onfocus=\"CodBtnShowNota('" + i + "')\"></td>"
+                                    + "<td><button name=\"cld14\" id=\"btCodNota" + i + "\" class='BtnMatchIconDescriv' width=\"100%\" onclick=\"MatchTextoV2('" + i + "')\"></button>"
                                     + "<textarea style=\"resize:none;\" id=\"TextlibNota" + i + "\" hidden></textarea></td>"
                                     + "<td name=\"cld13\" id=\"cld13n" + i + "\" class=\"ocultar\">" + p.getCl_catalogo_grupo_codigo() + "</td>"
                                     + "</tr>");
@@ -154,15 +158,16 @@ public class MovimientosCalidad extends HttpServlet {
                         }
                         if (p.getRenglon().equals("03")) {
 
-                            out.println("<td><input type=\"text\" class=\"bxcRG\" maxlength=\"11\" name=\"cld6\" id=\"bxcld6" + i + "\" onkeyup=\"FlechasDir('cld6','"+ i +"', event)\"></td>"
-                                    + "<td><input type=\"text\" class=\"bxcRG\" maxlength=\"40\" name=\"cld7\" id=\"bxcld7" + i + "\" onkeyup=\"FlechasDir('cld7','"+ i +"', event)\">"
+                            out.println("<td class=\"tdRGN\"><input type=\"text\" class=\"bxcRGN\" maxlength=\"11\" name=\"cld6\" id=\"bxcld6" + i + "\" onkeyup=\"FlechasDir('cld6','" + i + "', event)\"></td>"
+                                    + "<td><input type=\"text\" class=\"bxcRG\" maxlength=\"40\" name=\"cld7\" id=\"bxcld7" + i + "\" onkeyup=\"FlechasDir('cld7','" + i + "', event)\">"
                                     + "<input type=\"text\" id=\"bxcld70" + i + "\" hidden></td></td>"
                                     + "<td name=\"cld11\">" + p.getUnidad_medida_graban_cuantitativos() + "</td>"
                                     + "<td><input type=\"text\" name=\"cld9\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxCod" + i + "\" onfocus=\"CodBtnShow('" + i + "')\" disabled></td>"
                                     + "<td></td>"
+                                    + "<td></td>"
                                     + "<td name=\"cld8\"></td>"
-                                    + "<td><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + i + "\" onkeyup=\"FlechasDir('cld12','"+ i +"', event)\" onfocus=\"CodBtnShowNota('" + i + "')\"></td>"
-                                    + "<td><button name=\"cld14\" id=\"btCodNota" + i + "\" class='BtnMatchIconDescri' width=\"100%\" onclick=\"MatchTextoV2('" + i + "')\" hidden></button>"
+                                    + "<td hidden><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + i + "\" onkeyup=\"FlechasDir('cld12','" + i + "', event)\" onfocus=\"CodBtnShowNota('" + i + "')\"></td>"
+                                    + "<td><button name=\"cld14\" id=\"btCodNota" + i + "\" class='BtnMatchIconDescriv' width=\"100%\" onclick=\"MatchTextoV2('" + i + "')\"></button>"
                                     + "<textarea style=\"resize:none;\" id=\"TextlibNota" + i + "\" hidden></textarea></td>"
                                     + "<td name=\"cld13\" id=\"cld13n" + i + "\" class=\"ocultar\">" + p.getCl_catalogo_grupo_codigo() + "</td>"
                                     + "</tr>");
@@ -180,15 +185,16 @@ public class MovimientosCalidad extends HttpServlet {
                             + "<td hidden>000000000000</td>"
                             + "<td hidden>000000000</td>"
                             + "<td hidden>000000000</td>"
-                            + "<td>0000000000000</td>"
-                            + "<td>000000000000</td>"
+                            + "<td>00000000</td>"
+                            + "<td>000000</td>"
                             + "<td>00000000000</td>"
                             + "<td>0000</td>"
                             + "<td>00000000</td>"
                             + "<td>000</td>"
+                            + "<td>0000000000000000000000000</td>"
                             + "<td>000000000</td>"
-                            + "<td>0000000000000000000000000000000000000000000000</td>"
-                            + "<td>000</td>"
+                            + "<td hidden>0000000000000000000000000000000000000000000000</td>"
+                            + "<td>0000</td>"
                             + "<td>00000</td>"
                             + "</tr>"
                             + "</tbody>\n"
@@ -201,11 +207,12 @@ public class MovimientosCalidad extends HttpServlet {
                     out.println("<table id=\"TabBody2\">\n"
                             + "<tbody>");
                     for (PlanInspeccionC p : pin) {
+                        String txt = ACC_CaracteristicasPlanInspeccion.ObtenerInstancia().GetDesIC(v2, p.getNum_caracteristica_inspeccion(), p.getCodigo());
                         String img = "";
-                        if(p.getValoracion_resultado_inspeccion().equals("R")){
+                        if (p.getValoracion_resultado_inspeccion().equals("R")) {
                             img = "<img src=\"images/@02@.gif\" style=\"margin-left:33%; \"/>";
                         }
-                        if(p.getValoracion_resultado_inspeccion().equals("A")){
+                        if (p.getValoracion_resultado_inspeccion().equals("A")) {
                             img = "<img src=\"images/@01@.gif\" style=\"margin-left:30%; \"/>";
                         }
                         out.println("<tr>"
@@ -219,47 +226,50 @@ public class MovimientosCalidad extends HttpServlet {
                                 + "<td name=\"cldrg5\" id=\"cldrg5" + in + "\" hidden></td>"
                                 + "<td name=\"cld4\" id=\"cld4" + in + "\" hidden>" + p.getEntrada_catalogo_conjunto_seleccion() + "</td>"
                                 + "<td name=\"cldn\" id=\"cldn" + in + "\" hidden>" + p.getRenglon() + "</td>"
-//                                + "<td name=\"cld5\" id=\"cld5" + i + "\">" + v2.substring(0, v2.length()-1) + "</td>");
+                                //                                + "<td name=\"cld5\" id=\"cld5" + i + "\">" + v2.substring(0, v2.length()-1) + "</td>");
                                 + "<td name=\"cld5\" id=\"cld5" + in + "\">" + p.getFactor_cantidad_muestra() + "</td>");
-                        
+
                         if (p.getRenglon().equals("01")) {
-                            out.println("<td><input type=\"text\" class=\"bxcRG\" maxlength=\"11\"  name=\"cld6\" id=\"bxcld6" + in + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
+                            out.println("<td class=\"tdRGN\"><input type=\"text\" class=\"bxcRGN\" maxlength=\"11\"  name=\"cld6\" id=\"bxcld6" + in + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
                                     + "<td><input type=\"text\" class=\"bxcRG\" maxlength=\"40\" name=\"cld7\" id=\"bxcld7" + in + "\" value=\"" + p.getValor_original_anterior_tratamiento_entradas() + "\" readonly>"
                                     + "<input type=\"text\" id=\"bxcld70" + in + "\" hidden></td>"
                                     + "<td name=\"cld11\"  id=\"cld6" + in + "\">" + p.getUnidad_medida_graban_cuantitativos() + "</td>"
                                     + "<td><input type=\"text\" name=\"cld9\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxCod" + in + "\" onfocus=\"CodBtnShow('" + in + "')\" disabled value=\"" + p.getCodigo() + "\"></td>"
                                     + "<td></td>"
+                                    + "<td></td>"
                                     + "<td name=\"cld8\">" + img + "</td>"
-                                    + "<td><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + in + "\" value=\"" + p.getTexto_breve() + "\" readonly></td>"
+                                    + "<td><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + in + "\" value=\"" + p.getTexto_breve() + "\" hidden></td>"
                                     + "<td name=\"cld13\"  id=\"cld13" + in + "\" class=\"ocultar\">" + p.getCl_catalogo_grupo_codigo() + "</td>"
                                     + "</tr>");
                             in++;
                         }
                         if (p.getRenglon().equals("02")) {
 
-                            out.println("<td><input type=\"text\" class=\"bxcRG\" maxlength=\"11\"  name=\"cld6\" id=\"bxcld6" + in + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
+                            out.println("<td class=\"tdRGN\"><input type=\"text\" class=\"bxcRGN\" maxlength=\"11\"  name=\"cld6\" id=\"bxcld6" + in + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
                                     + "<td>" + p.getValor_original_anterior_tratamiento_entradas() + "<input type=\"text\" class=\"bxcRG\" maxlength=\"40\" name=\"cld7\" id=\"bxcld7" + in + "\" value=\"0\" hidden>"
                                     + "<input type=\"text\" id=\"bxcld70" + in + "\" hidden></td>"
                                     + "<td name=\"cld11\">" + p.getUnidad_medida_graban_cuantitativos() + "</td>"
                                     + "<td><input type=\"text\" name=\"cld9\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxCod" + in + "\" onfocus=\"CodBtnShow('" + in + "')\" value=\"" + p.getCodigo() + "\">"
                                     + "<input type=\"text\" name=\"cldn9\" class=\"bxcRG\" id=\"bxCodn" + in + "\" value=\"" + p.getGrupo_codigo_conjunto_seleccion() + "\" hidden></td>"
                                     + "<td><button name=\"cld10\" id=\"btnCod" + in + "\" class='BtnMatchIcon' style=\"display : none;\" width=\"100%\" onclick=\"matchInspCod('" + in + "', '" + p.getGrupo_codigo_conjunto_seleccion() + "', '" + p.getCl_catalogo_grupo_codigo() + "')\"></button></td>"
+                                    + "<td>" + txt + "</td>"
                                     + "<td name=\"cld8\">" + img + "</td>"
-                                    + "<td><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + in + "\" value=\"" + p.getTexto_breve() + "\" readonly></td>"
+                                    + "<td><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + in + "\" value=\"" + p.getTexto_breve() + "\" hidden></td>"
                                     + "<td name=\"cld13\" id=\"cld13" + in + "\" class=\"ocultar\">" + p.getCl_catalogo_grupo_codigo() + "</td>"
                                     + "</tr>");
                             in++;
                         }
                         if (p.getRenglon().equals("03")) {
 
-                            out.println("<td><input type=\"text\" class=\"bxcRG\" maxlength=\"11\" name=\"cld6\" id=\"bxcld6" + in + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
+                            out.println("<td class=\"tdRGN\"><input type=\"text\" class=\"bxcRGN\" maxlength=\"11\" name=\"cld6\" id=\"bxcld6" + in + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
                                     + "<td><input type=\"text\" class=\"bxcRG\" maxlength=\"40\" name=\"cld7\" id=\"bxcld7" + in + "\" value=\"" + p.getValor_original_anterior_tratamiento_entradas() + "\" readonly>"
                                     + "<input type=\"text\" id=\"bxcld70" + in + "\" hidden></td></td>"
                                     + "<td name=\"cld11\">" + p.getUnidad_medida_graban_cuantitativos() + "</td>"
                                     + "<td><input type=\"text\" name=\"cld9\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxCod" + in + "\" onfocus=\"CodBtnShow('" + in + "')\" disabled value=\"" + p.getCodigo() + "\"></td>"
                                     + "<td></td>"
+                                    + "<td></td>"
                                     + "<td name=\"cld8\">" + img + "</td>"
-                                    + "<td><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + in + "\" value=\"" + p.getTexto_breve() + "\" readonly></td>"
+                                    + "<td><input type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"cld12\" id=\"cld12" + in + "\" value=\"" + p.getTexto_breve() + "\" hidden></td>"
                                     + "<td name=\"cld13\" id=\"cld13" + in + "\" class=\"ocultar\">" + p.getCl_catalogo_grupo_codigo() + "</td>"
                                     + "</tr>");
                             in++;
@@ -277,14 +287,15 @@ public class MovimientosCalidad extends HttpServlet {
                             + "<td hidden>000000000</td>"
                             + "<td hidden>000000000</td>"
                             + "<td>0000000000000</td>"
-                            + "<td>000000000000</td>"
+                            + "<td>000000</td>"
                             + "<td>00000000000</td>"
                             + "<td>0000</td>"
                             + "<td>00000000</td>"
                             + "<td>000</td>"
+                            + "<td>0000000000000000000000000</td>"
                             + "<td>000000000</td>"
-                            + "<td>0000000000000000000000000000000000000000000000</td>"
-                            + "<td>00000</td>"
+                            + "<td hidden>0000000000000000000000000000000000000000000000</td>"
+                            + "<td>0000</td>"
                             + "</tr>"
                             + "</tbody>\n"
                             + "</table>");
@@ -301,9 +312,9 @@ public class MovimientosCalidad extends HttpServlet {
                                 + "<td name=\"cld3\" id=\"cld3" + ii + "\">" + p.getDescripcion_breve_conjunto_seleccion() + "</td>"
                                 + "<td name=\"cld4\" id=\"cld4" + ii + "\" hidden>" + p.getEntrada_catalogo_conjunto_seleccion() + "</td>"
                                 + "<td name=\"cldn\" id=\"cldn" + ii + "\" hidden>" + p.getRenglon() + "</td>"
-//                                + "<td name=\"cld5\" id=\"cld5" + i + "\">" + v2.substring(0, v2.length()-1) + "</td>");
+                                //                                + "<td name=\"cld5\" id=\"cld5" + i + "\">" + v2.substring(0, v2.length()-1) + "</td>");
                                 + "<td name=\"cld5\" id=\"cld5" + ii + "\">" + p.getFactor_cantidad_muestra() + "</td>");
-                        
+
                         if (p.getRenglon().equals("1")) {
                             out.println("<td><input type=\"text\" class=\"bxcRG\" maxlength=\"11\"  name=\"cld6\" id=\"bxcld6" + ii + "\" value=\"" + p.getTamano_muestra_inspeccion_caracteristicas() + "\" readonly></td>"
                                     + "<td><input type=\"text\" class=\"bxcRG\" maxlength=\"40\" name=\"cld7\" id=\"bxcld7" + ii + "\"></td>"
@@ -374,7 +385,7 @@ public class MovimientosCalidad extends HttpServlet {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (i = 0; i < lstCods.size(); i++) {
-                            out.println("<tr ondblclick=\"selectMatchCod('codInsp','" + pos + "','" + lstCods.get(i).getCodigo() + "','" + lstCods.get(i).getValoracion_codigo() + "');\">");
+                            out.println("<tr ondblclick=\"selectMatchCod('codInsp','" + pos + "','" + lstCods.get(i).getCodigo() + "','" + lstCods.get(i).getValoracion_codigo() + "', '" + lstCods.get(i).getDescripcion() + "');\">");
                             out.println("<td>" + lstCods.get(i).getCodigo() + "</td>");
                             out.println("<td>" + lstCods.get(i).getDescripcion() + "</td>");
                             out.println("</tr>");
@@ -465,7 +476,7 @@ public class MovimientosCalidad extends HttpServlet {
                             + "<td><input id=\"Cod50\" type=\"text\" class=\"bxcRG\" maxlength=\"40\" name=\"df9\" readonly></td>"
                             + "<td><input id=\"Cod60\" type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"df10\" readonly></td>"
                             + "<td><input id=\"Cod70\" type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"df11\" onfocus=\"CodBtGr3Show('0')\">"
-//                            + "<td><input id=\"Cod70\" type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"df11\" >"
+                            //                            + "<td><input id=\"Cod70\" type=\"text\" class=\"bxcLRG\" maxlength=\"40\" name=\"df11\" >"
                             + "<textarea style=\"resize:none;\" name=\"df13\" id=\"Textlib0\" hidden></textarea></td>"
                             + "<td><button name=\"df12\" id=\"btCod30\" class='BtnMatchIconDescri' style=\"display : none;\" width=\"100%\" onclick=\"MatchTexto('0')\"></button></td>"
                             + "</tr>");
@@ -501,6 +512,32 @@ public class MovimientosCalidad extends HttpServlet {
                         e = ACC_CodigosDefecto.ObtenerInstancia().validaGrupoCod(v2);
                     }
                     out.println(n + "|" + e);
+                    break;
+                case "CreaDocInventario":
+                    ArrayList<materiales_almacen> ml = ACC_Material.ObtenerInstancia().listadoMaterialesHabilitado(v1, v2);
+                    out.println("<table id=\"TabBody\">\n"
+                            + "<tbody>");
+                    for (int d = 0; d < ml.size(); d++) {
+                        int x = d + 1;
+                        out.println("<tr>");
+                        out.println("<td><input type=\"checkbox\" name=\"ckCreaDoc\" value=\"" + ml.get(d).getMaterial() + "\"></td>"
+                                + "<td id=\"bxpos" + d + "\">" + x + "</td>"
+                                + "<td id=\"bxmat" + d + "\">" + ml.get(d).getMaterial() + "</td>"
+                                + "<td id=\"bxTmt" + d + "\">" + ml.get(d).getTexto_material() + "</td>"
+                                + "<td id=\"bxCtr" + d + "\">" + ml.get(d).getCentro() + "</td>"
+                                + "<td id=\"bxAlm" + d + "\">" + ml.get(d).getAlmacen() + "</td>"
+                                + "</tr>");
+                    }
+                    out.println("<tr class=\"ocultar\">"
+                            + "<td>000</td>"
+                            + "<td>00000</td>"
+                            + "<td>000000000000000</td>"
+                            + "<td>0000000000000000000000000000000000000000000000000000</td>"
+                            + "<td>000000</td>"
+                            + "<td>000000</td>"
+                            + "</tr>"
+                            + "</tbody>\n"
+                            + "</table>");
                     break;
             }
         }
