@@ -2125,5 +2125,32 @@ public class ACC_Material {
         }
         return mate;
     }
-
+    public int ValidaMaterialHabilitado(String mat, String ctr, String alm) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        ResultSet rs;
+        try {
+            ps = con.prepareCall("{CALL MM.MaterialHabilitado(?,?,?)}");
+            ps.setString(1, mat);
+            ps.setString(2, ctr);
+            ps.setString(3, alm);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return 1;
+            }
+        } catch (Exception e) {
+            System.err.println("Error en ValidaMaterialHabilitado: " + e);
+            return 0;
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+            } catch (Exception e) {
+                System.err.println("Error al cerrar conexion: " + e);
+            }
+        }
+        return 0;
+    }
 }
