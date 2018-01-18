@@ -193,4 +193,24 @@ public class ACC_CaracteristicasPlanInspeccion {
         }
         return pi;
     }
+    public String GetDesIC(String orden, String pos, String codigo){
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String sql = "{CALL pm.qm_getDescripcionInspecCod(?,?,?)}";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, orden);
+            ps.setString(2, pos);
+            ps.setString(3, codigo);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString("descripcion_es");
+            }
+        } catch (Exception e) {
+            System.err.println("Error en ConsultarMCPedidos por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return "";
+    }
 }
