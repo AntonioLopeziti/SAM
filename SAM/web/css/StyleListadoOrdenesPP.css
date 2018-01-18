@@ -1,0 +1,67 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17/01/2018, 01:39:43 PM
+    Author     : Panda
+    Sustituye MonitorPP en antiguo SAM
+*/
+
+.DobleScroll {
+    width: 17px;
+    display: block;
+    margin-top: 20px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+    float: right;
+    z-index: 1; position:relative;
+}
+#DobleSection { height: 440px; }
+#SecCuerpoCld { height: 440px; }
+.TableContainer
+{
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+.SecHead thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #E6EBEB;
+}
+.ocultar
+{
+    visibility: hidden;
+}
