@@ -2097,6 +2097,33 @@ public class ACC_Material {
 
         return sp_mate;
     }
-    
+    public ArrayList<materiales_almacen> listadoMaterialesHabilitado(String centro, String almacen) {
+        ArrayList<materiales_almacen> mate = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{CALL MM.ListadoMaterialesHabilitar(?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, centro);
+            ps.setString(2, almacen);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                materiales_almacen m = new materiales_almacen();
+                m.setMaterial(rs.getString("material"));
+                m.setCentro(rs.getString("centro"));
+                m.setAlmacen(rs.getString("almacen"));
+                m.setTexto_material(rs.getString("texto_material"));
+                m.setHabilitado(rs.getString("habilitado"));
+                mate.add(m);
+            }
+        } catch (Exception e) {
+            System.err.println("Error listadoMaterialesHabilitado por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return mate;
+    }
 
 }
