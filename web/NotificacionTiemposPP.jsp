@@ -156,7 +156,12 @@
                 <div class="divNoOrdFabri">
                     <label>Orden Fabricación</label><input type="text" id="OrdFab" maxlength="30" style="text-transform: uppercase;"/><button id="btnmatchOrdLib"  class="BtnMatchIcon"></button><label type="text" id="DescripOrd" style="margin-left: 4%; width: 50%;">Descripción de Orden</label>
                     <hr>
-                    <label>Operación</label><input type="text" id="NoOpe" maxlength="4" style="text-transform: uppercase; width: 6%;"/>
+                    <label>Operación</label>
+                    <!--<input type="text" id="NoOpe" maxlength="4" style="text-transform: uppercase; width: 6%;"/>-->
+                    <select id="NoOpe">
+                        <option value="0010">0010</option>
+                        <option value="0020">0020</option>
+                    </select>
                     <hr>
                 </div>                
             </div>
@@ -164,10 +169,19 @@
                 <label>Datos Reales</label>
                 <hr id="lineaNotiTiempos">
                 <div class="divCntBuenMal">
-                    <label>Not.ctd.buena</label><input type="text" id="cntBuena" style="text-transform: uppercase;"/>
+                    <label>Not.ctd.buena</label><input type="text" id="cntBuena" style="margin-left: 78px; text-transform: uppercase;"/>
                     <hr>
-                    <label>Rechazo.notif</label><input type="text" id=""cntMala style="text-transform: uppercase;"/>
+                    <label>Rechazo.notif</label><input type="text" id=""cntMala style="margin-left: 80px; text-transform: uppercase;"/>
                     <hr>
+                </div>
+                <div class="divBtnIniFin">
+<!--                    <input id="Ejec1" type="image" src="images/ejecuta.png"/><label>Inicio Actividad</label>    
+                    <br>
+                    <input id="Ejec2" type="image" src="images/ejecuta.png"/><label>Fin Actividad</label>-->
+                    <!--<button style="margin-left: 65%;">Inicio Actividad</button><button style="margin-left: 25px;">Fin Actividad</button>-->
+                    <button><input type="image" src="images/ejecuta.png"/></button><label>Inicio Actividad</label>
+                    <br>
+                    <button><input type="image" src="images/ejecuta.png"></button><label>Fin Actividad</label>
                 </div>
             </div>
         </div>
