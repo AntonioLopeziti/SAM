@@ -855,6 +855,9 @@ public class PeticionMovMateriales extends HttpServlet {
                     check = ACC_Material.ObtenerInstancia().ValidarMtl303(v1);
                     out.println(check);
                     break;
+                case "MaterialHabilitado":
+                    out.println(ACC_Material.ObtenerInstancia().ValidaMaterialHabilitado(v1, v2, v3));
+                    break;
                 case "validarSujLote":
                     check = ACC_Stock.ObtenerInstancia().ValidarSujLotByMat(v1, v2);
                     out.println(check);
