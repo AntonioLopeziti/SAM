@@ -163,7 +163,7 @@
                 </div>
             </div>
             <br>
-            <div class="DivConexion">
+<!--            <div class="DivConexion">
                 <div class="DivSAMConex2">
                     <label><%out.println(po.getProperty("etiqueta.ParWSBD_ConfSer"));%></label>
                     <hr id="lineapri">
@@ -174,7 +174,7 @@
                         <hr>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>            
     </div>      
     <footer>
