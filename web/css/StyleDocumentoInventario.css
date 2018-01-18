@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27/11/2017, 12:20:44 PM
+    Author     : Panda
+*/
+
+.contenido{
+    margin-left: 1%;
+    width: 40%;
+}
+.bkTop{ margin-left: 3%;}
+.bkTop label{
+    display: inline-block;
+    width: 27%;
+}
+.bkTop hr{
+    margin-left: 0;
+    margin-top: -1px;
+    width: 35%;
+}
+.bxxlong{ width: 30%; }
+.bxlong{ width: 25%; }
+.bxmdl{ width: 20%; }
+.bxsmall{ width: 15%;background-repeat: no-repeat; }
+.bxssmall{ width: 7%; }
+.bkSubSec{ background-color: white; padding-bottom: 1px;}
+.lnMov
+{
+    border-top: 2px solid #3892E0;
+    margin-left: 4px;
+    margin-top: 0;
+}
+.bkin{ margin-left: 27%; }
+.bkin label{ width: 40%; }
