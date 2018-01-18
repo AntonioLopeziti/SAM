@@ -1727,6 +1727,7 @@
                             case "VentanaModalLote303":
                                 var ven = document.getElementById(t);
                                 abrirVentana(ven);
+
                                 break;
                             case "VentanaModalCentro303":
                                 var ven = document.getElementById(t);
@@ -2052,6 +2053,13 @@
                     {
                         var ancho = 1300;
                         var alto = 550;
+                        if (screen.width <= 1100) {
+                            ancho = 1000;
+                            alto = 600;
+                        }
+                        if (screen.width <= 650) {
+                            ancho = 550;
+                        }
                         var x = (screen.width / 2) - (ancho / 2);
                         var y = (screen.height / 2) - (alto / 2);
                         ventana.style.left = x + "px";
@@ -2074,6 +2082,12 @@
                     {
                         var ancho = 1050;
                         var alto = 600;
+                        if (screen.width <= 1100) {
+                            ancho = 1000;
+                        }
+                        if (screen.width <= 650) {
+                            ancho = 550;
+                        }
                         var x = (screen.width / 2) - (ancho / 2);
                         var y = (screen.height / 2) - (alto / 2);
                         ventana.style.left = x + "px";
@@ -2104,6 +2118,14 @@
                     {
                         var ancho = 1000;
                         var alto = 800;
+                        if (screen.width <= 1100) {
+                            ancho = 1000;
+                            alto = 600;
+                        }
+                        if (screen.width <= 650) {
+                            ancho = 550;
+                            alto = 750;
+                        }
                         var x = (screen.width / 2) - (ancho / 2);
                         var y = (screen.height / 2) - (alto / 2);
                         ventana.style.left = x + "px";
@@ -2950,6 +2972,17 @@
                                 return;
                             }
                         }
+                        ValidaMaterialHabilitado(r1[c].value);
+                        if (habl === 0) {
+                            var iconm = document.getElementById("iconmsg");
+                            iconm.style.display = "inline";
+                            iconm.style.visibility = "visible";
+                            iconm.src = "images/advertencia.PNG";
+                            var men = document.getElementById("msg");
+                            men.innerHTML = "Material inhabilitado";
+                            r1[c].focus();
+                            return;
+                        }
                         for (var i = 0; i < r1.length; i++)
                         {
                             if (r3[i].value === "")
@@ -3454,6 +3487,21 @@
                         var r8 = document.getElementsByName('reserv8');//Descripcion
 
                         var registros = 0;
+
+                        if (parseInt(r2[cc].value) > 0) {
+                            ValidaMaterialHabilitado(r1[cc].textContent);
+                            if (habl === 0) {
+                                var iconm = document.getElementById("iconmsg");
+                                iconm.style.display = "inline";
+                                iconm.style.visibility = "visible";
+                                iconm.src = "images/advertencia.PNG";
+                                var men = document.getElementById("msg");
+                                men.innerHTML = "Material inhabilitado";
+                                r2[cc].focus();
+                                return;
+                            }
+                        }
+
                         for (tdr = 0; tdr < r1.length; tdr++)
                         {
                             if (r2[tdr].value === "")
@@ -4219,7 +4267,7 @@
                                 for (i = 0; i < porrc.length; i++)
                                 {
                                     n1 = parseFloat(porrc[i].value);
-                                    n2 += n1
+                                    n2 += n1;
                                 }
                                 if (n2 <= 0.000) {
                                     var ven = document.getElementById('VentanaModalAv');
@@ -4244,6 +4292,19 @@
                                     if (uean[i].value == "") {
                                         uean[i].focus();
                                         invalido("Unidad de Medida Obligatorio");
+                                        return;
+                                    }
+                                }
+                                for (i = 0; i < lote.length; i++) {
+                                    ValidaMaterialHabilitado(mat[i].textContent);
+                                    if (habl === 0) {
+                                        var iconm = document.getElementById("iconmsg");
+                                        iconm.style.display = "inline";
+                                        iconm.style.visibility = "visible";
+                                        iconm.src = "images/advertencia.PNG";
+                                        var men = document.getElementById("msg");
+                                        men.innerHTML = "Material inhabilitado";
+                                        porrc[i].focus();
                                         return;
                                     }
                                 }
@@ -4420,7 +4481,7 @@
                         }
                         setTimeout(function () {
                             verificarRegistros101('VerificarRegistros', registros, movimiento);
-                        }, 2000);                        
+                        }, 2000);
                     }
 
                     function verificarRegistrosRG(action, cantidad, movimiento)
@@ -4615,7 +4676,7 @@
                         var y1 = date.getFullYear();
                         var f2 = new Date(y1, m1, d1);
                         if (f2 > f1) {
-                           return false;
+                            return false;
                         } else {
                             return true;
                         }
@@ -6528,6 +6589,29 @@
                                 });
                             }
                         }
+                    }
+                    var habl;
+                    function ValidaMaterialHabilitado(mat) {
+                        var acc = "MaterialHabilitado";
+                        var dataSend = "&v1=" + mat + "&v2=" + $('#bxCentro').val() + "&v3=" + $('#bxAlmacen').val();
+
+                        $.ajax({
+                            async: false,
+                            type: 'GET',
+                            url: 'PeticionMovMateriales',
+                            contentType: "application/x-www-form-urlencoded",
+                            processData: true,
+                            data: "Action=" + acc + dataSend,
+                            success: function (data) {
+                                habl = parseInt(data);
+                                if (parseInt(data) === 0) {
+//                                    return false;
+                                }
+                                if (parseInt(data) === 1) {
+//                                    return true;
+                                }
+                            }
+                        });
                     }
                 </script>
             </div>
