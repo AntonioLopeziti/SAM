@@ -12,11 +12,20 @@ package Entidades;
 public class materiales_almacen {
     
     int id_ma;
-    String material;
-    String centro;
-    String almacen;
-    String texto_material;
+    String material = "";
+    String centro = "";
+    String almacen = "";
+    String texto_material = "";
+    String habilitado = "";
 
+    public String getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(String habilitado) {
+        this.habilitado = habilitado;
+    }
+    
     public int getId_ma() {
         return id_ma;
     }
