@@ -601,7 +601,7 @@
         </script>
         <div class="contenido">
             <div class="logoimage">
-                <IMG SRC="images/Logo_EmpresaAre.png"  ALT="Logo">
+                <IMG SRC="images/Logo_Empresa.png"  ALT="Logo">
             </div>
         </div>            
 
