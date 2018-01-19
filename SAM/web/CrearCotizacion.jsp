@@ -88,16 +88,16 @@
                 if (pag == 0) {
                     window.location.href = "Bienvenido.jsp";
                 }
-            }        
+            }
             checkPermisoPag();
-            
+
             function ShowMsg(m, im, au, va) {
                 var msg;
                 switch (m) {
                     case 0:
                         msg = '<%=funcioninv%>';
                         break;
-             
+
                 }
                 $('#msg').html(msg);
                 var icon = $('#iconmsg');
@@ -110,7 +110,7 @@
 
         </script>
         <link rel="stylesheet" href="css/StyleGeneral.css"> 
-        <link rel="stylesheet" href="css/StyleCrearCotizacionSD.css"> 
+        <link rel="stylesheet" href="css/StyleCotizacionSD.css"> 
         <link rel="stylesheet" href="css/menu.css" media="screen">
         <script src="js/dom-drag.js"></script>
         <link rel="stylesheet" href="css/jquery-ui.css">
@@ -136,6 +136,12 @@
             <div class="titulo"><h1><%out.println(po.getProperty("etiqueta.CotizacionTituloCrear"));%></h1></div> 
         </div>            
         <div class="contenido">    
+            <div class="DivContentPrincipal">
+                    <div class="DivDatosBasicoCabecera">
+                        <label>Datos basicos</label>
+                        <hr id="LineaTitulo">
+                </div>
+            </div>
         </div>
         <footer>
             <hr class="fecha" id="footerline">
@@ -144,22 +150,22 @@
                 <label id="tiempo" name="tiempo"></label><label>|  LAN <%=Idioma%></label>
                 <span><input type="image" style="float:left; margin-top: -2px;" id="iconmsg"></span><label  id="msg" class="msg"></label>
                 <script type="text/javascript">
-                    var meses = new Array("<%=Enero%>", "<%=Febrero%>", "<%=Marzo%>", "<%=Abril%>", "<%=Mayo%>", "<%=Junio%>", "<%=Julio%>", "<%=Agosto%>", "<%=Septiembre%>", "<%=Octubre%>", "<%=Noviembre%>", "<%=Diciembre%>");
-                    var meses2 = new Array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
-                    var diasSemana = new Array("<%=Domingo%>", "<%=Lunes%>", "<%=Martes%>", "<%=Miercoles%>", "<%=Jueves%>", "<%=Viernes%>", "<%=Sabado%>");
-                    var f = new Date();
-                    var idioma = "<%=Idioma%>";
-                    var writefecha = $('#fecha');
-                    if (idioma == "ES") {
-                        var fechaActual = diasSemana[f.getDay()] + " " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
-                        var fre = f.getFullYear() + "-" + meses2[f.getMonth()] + "-" + f.getDate();
-                        writefecha.html(fechaActual);
-                    } else if (idioma == "EN") {
-                        var fechaActual = diasSemana[f.getDay()] + ", " + meses[f.getMonth()] + " " + f.getDate() + ", " + f.getFullYear();
-                        writefecha.html(fechaActual);
-                    } else {
-                        writefecha.html(fechaActual);
-                    }
+            var meses = new Array("<%=Enero%>", "<%=Febrero%>", "<%=Marzo%>", "<%=Abril%>", "<%=Mayo%>", "<%=Junio%>", "<%=Julio%>", "<%=Agosto%>", "<%=Septiembre%>", "<%=Octubre%>", "<%=Noviembre%>", "<%=Diciembre%>");
+            var meses2 = new Array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
+            var diasSemana = new Array("<%=Domingo%>", "<%=Lunes%>", "<%=Martes%>", "<%=Miercoles%>", "<%=Jueves%>", "<%=Viernes%>", "<%=Sabado%>");
+            var f = new Date();
+            var idioma = "<%=Idioma%>";
+            var writefecha = $('#fecha');
+            if (idioma == "ES") {
+                var fechaActual = diasSemana[f.getDay()] + " " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
+                var fre = f.getFullYear() + "-" + meses2[f.getMonth()] + "-" + f.getDate();
+                writefecha.html(fechaActual);
+            } else if (idioma == "EN") {
+                var fechaActual = diasSemana[f.getDay()] + ", " + meses[f.getMonth()] + " " + f.getDate() + ", " + f.getFullYear();
+                writefecha.html(fechaActual);
+            } else {
+                writefecha.html(fechaActual);
+            }
                 </script>
             </div>
         </footer>

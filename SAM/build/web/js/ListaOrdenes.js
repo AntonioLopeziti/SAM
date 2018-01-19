@@ -11,7 +11,7 @@ $(document).ready(function () {
         var ventana = $('#Windowmsg');
         ventana.css('display', 'none');
     });
-    $('#btnVis').click(function () {
+    $('#btnVis').click(function () {        
         var acc = "Checksap";
         var send = $('#numordenmsg').html();
         $.ajax({

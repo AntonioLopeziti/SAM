@@ -23,11 +23,16 @@ $(document).ready(function () {
         SendMod(posit);
         ocultarVenAv('VenAvv');
     });
+    $("#btnDE1").css("background-color","#BFBCBC");
     $("#btnDE1").click(function () {
+        $("#btnDE1").css("background-color","#BFBCBC");
+        $("#btnDE2").css("background-color","white");
         $("#pnlDE1").show();
         $("#pnlDE2").hide();
     });
     $("#btnDE2").click(function () {
+        $("#btnDE2").css("background-color","#BFBCBC");
+        $("#btnDE1").css("background-color","white");
         $("#pnlDE2").show();
         $("#pnlDE1").hide();
     });
@@ -380,7 +385,7 @@ $(document).ready(function () {
             insertarDecisionEmpleoCap();
             actualizaConjunto2();
         }
-        if ($("#Textlib0").val() != "") {
+        if ($("#Textlib0").val() != "" && document.getElementById('bxCodnn2').value != "") {
             dividirTexto132Char();
         }
         if (document.getElementById('bxCod00').disabled === false) {
@@ -978,11 +983,12 @@ function abrirVentanaAv(ventana, msg)
     document.getElementById("lbAv").innerHTML = msg;
 }
 
-function selectMatchCod(type, pos, data, valoracion) {
+function selectMatchCod(type, pos, data, valoracion, desc) {
     switch (type) {
         case 'codInsp':
             $("#bxCod" + pos).val(data);
             $("#cldrg5" + pos).html(valoracion);
+            $("#bxTxtCod" + pos).html(desc);
             ocultarVentana('VentanaModalInspCod', '');
             break;
     }
@@ -2449,6 +2455,7 @@ function mostrarVentanaModalH(id)
     ventana.style.display = 'block';
 
 }
+
 function cerravisos2() {
     $("#ventanaavis2").css("display", "none");
 }

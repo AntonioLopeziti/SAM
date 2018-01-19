@@ -609,7 +609,22 @@ $(document).ready(function () {
         setTimeout("TomarDatosR(0);", 2000);
     });
     $('#ok201').click(function () {
-        TomarDatos200("ValidaUM");
+        if ($('#bxMaterial201').val().length > 0) {
+            ValidaMaterialHabilitado($('#bxMaterial201').val());
+            if (habl === 1) {
+                TomarDatos200("ValidaUM");
+            } else {
+                var iconm = document.getElementById("iconmsg");
+                iconm.style.display = "inline";
+                iconm.style.visibility = "visible";
+                iconm.src = "images/advertencia.PNG";
+                var men = document.getElementById("msg");
+                men.innerHTML = "Material inhabilitado";
+                $('#bxMaterial201').focus();
+            }
+        } else {
+            TomarDatos200("ValidaUM");
+        }
     });
     $('#ok303').click(function () {
         TomarDatos300("ValidaUM");
@@ -624,7 +639,22 @@ $(document).ready(function () {
         setTimeout("TomarDatos305(0, 'ValidaCntST');", 2000);
     });
     $('#ok311').click(function () {
-        TomarDatos310("ValidaUM");
+        if ($('#bxMaterial311').val().length > 0) {
+            ValidaMaterialHabilitado($('#bxMaterial311').val());
+            if (habl === 1) {
+                TomarDatos310("ValidaUM");
+            } else {
+                var iconm = document.getElementById("iconmsg");
+                iconm.style.display = "inline";
+                iconm.style.visibility = "visible";
+                iconm.src = "images/advertencia.PNG";
+                var men = document.getElementById("msg");
+                men.innerHTML = "Material inhabilitado";
+                $('#bxMaterial311').focus();
+            }
+        } else {
+            TomarDatos310("ValidaUM");
+        }
     });
     $('#okMaterial303').click(function () {
         match303MatOk();
@@ -636,6 +666,7 @@ $(document).ready(function () {
         $('#Textlib' + $('#bxTextoL').val()).val($('#Textlib').val());
         ocultarVentana('VentanaModalTexto', '');
     });
+
     $('#guardar').click(function () {
 //        var theHandle = document.getElementById('handle22');
 //        var theRoot = document.getElementById('VentanaModalCalidad');
@@ -1506,7 +1537,22 @@ $(document).ready(function () {
         });
     });
     $('#ok261').click(function () {
-        TomarDatos260('ValidaUM');
+        if ($('#bxMaterial261').val().length > 0) {
+            ValidaMaterialHabilitado($('#bxMaterial261').val());
+            if (habl === 1) {
+                TomarDatos260('ValidaUM');
+            } else {
+                var iconm = document.getElementById("iconmsg");
+                iconm.style.display = "inline";
+                iconm.style.visibility = "visible";
+                iconm.src = "images/advertencia.PNG";
+                var men = document.getElementById("msg");
+                men.innerHTML = "Material inhabilitado";
+                $('#bxMaterial261').focus();
+            }
+        } else {
+            TomarDatos260('ValidaUM');
+        }
     });
 
     function peticionOrden() {
@@ -2181,6 +2227,18 @@ function checkRowDb303(i) {
     var alm = $("#bxAlmacen").val();
     var check = getExisMat303(mat[i].value);
     var sj = getValSujLot(mat[i].value);
+    ValidaMaterialHabilitado(mat[i].value);
+    if (habl === 0) {
+        var iconm = document.getElementById("iconmsg");
+        iconm.style.display = "inline";
+        iconm.style.visibility = "visible";
+        iconm.src = "images/advertencia.PNG";
+        var men = document.getElementById("msg");
+        men.innerHTML = "Material inhabilitado";
+        mat[i].focus();
+        return;
+    }
+
     if (check == 0) {
         return 1;
     }
