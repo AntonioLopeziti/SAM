@@ -13,11 +13,41 @@ and open the template in the editor.
 .DivDatosBasicoCabecera{
     margin-top: .5%;
     padding-left: 2%;
-    width: 100%;
+    width: 50%;
     height: auto;
     background: #ffffff;
-    
+
 }
 #LineaTitulo{
-     border: 1px solid #3892E0;
+    border: 1px solid #3892E0;
+    margin-left: -4%;
+    margin-top: 0;
+}
+.DivClas{
+    margin-top: 10px;
+    padding-left: 2%;
+    width: 100%;
+    padding-bottom: 10px;
+}
+.DivClas label{
+    width: 15%;
+    display: inline-block;
+}
+.DivClas hr{
+    margin-top: -1px;
+    margin-left: 0;
+    width: 15%;
+}
+.divOrg{
+    width: 100%;
+    padding-bottom: 10px;
+}
+.divOrg label{
+    width: 35%;
+    display: inline-block;
+}
+.divOrg hr{
+    margin-top: -1px;
+    margin-left: 0;
+    width: 35%;
 }
