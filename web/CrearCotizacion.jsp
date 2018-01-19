@@ -137,9 +137,25 @@
         </div>            
         <div class="contenido">    
             <div class="DivContentPrincipal">
-                    <div class="DivDatosBasicoCabecera">
-                        <label>Datos basicos</label>
-                        <hr id="LineaTitulo">
+                <div class="DivClas">
+                    <label>Clase de oferta</label><input type="text"/>
+                    <hr>  
+                </div>
+                <div class="DivDatosBasicoCabecera">
+                    <label>Datos organizativos</label>
+                    <hr id="LineaTitulo">
+                    <div class="divOrg">
+                        <label>Organización de ventas</label><input type="text"/>
+                        <hr> 
+                        <label>Canal de distribución</label><input type="text"/>
+                        <hr> 
+                        <label>Sector</label><input type="text"/>
+                        <hr> 
+                        <label>Oficina de ventas</label><input type="text"/>
+                        <hr> 
+                        <label>Oficina de ventas</label><input type="text"/>
+                        <hr> 
+                    </div>
                 </div>
             </div>
         </div>
