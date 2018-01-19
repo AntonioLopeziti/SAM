@@ -47,9 +47,8 @@
         Properties po = new Properties();
         po.load(in);
 
-        String reso = po.getProperty("etiqueta.Resolucio");
-        String TituloVisualizarOrden = po.getProperty("etiqueta.VisualizarOrden");
-        String Orden = po.getProperty("etiqueta.Orden");
+        String reso = po.getProperty("etiqueta.Resolucio");       
+        String funcioninv = po.getProperty("etiqueta.FuncionInval_Menu");
         String Mens = po.getProperty("etiqueta.mensaje");
         String Enero = po.getProperty("etiqueta.Enero");
         String Febrero = po.getProperty("etiqueta.Febrero");
@@ -70,6 +69,7 @@
         String Viernes = po.getProperty("etiqueta.Viernes");
         String Sabado = po.getProperty("etiqueta.Sabado");
         String Domingo = po.getProperty("etiqueta.Domingo");
+        
 
         String titulo = po.getProperty("etiqueta.CU_Titulo");
         String ubicactecnica = po.getProperty("etiqueta.CU_UbicacTecnica");
@@ -112,6 +112,21 @@
                 }
             }
             checkPermisoPag();
+            function msgMatch(mn, im, au, val) {
+                var m = "";
+                switch (mn) {
+                    case 0:
+                        m = '<%=funcioninv%>';
+                        break;
+                }
+                var BE = document.createElement('audio');
+                BE.src = au;
+                BE.play();
+                $('#msg').attr("visibility", true);
+                $('#msg').html(m);
+                $('#iconmsg').show();
+                $('#iconmsg').attr('src', im);
+            }
         </script>
         <link rel="stylesheet" href="css/StyleGeneral.css"> 
         <link rel="stylesheet" href="css/StyleNotificaTiempos.css"> 
@@ -120,7 +135,7 @@
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
         <script src="js/NotificarTiempos.js"></script>
-        <title>Notificación de Tiempos PP</title>    
+        <title>Notificar Tiempos</title>    
     </head>    
     <body>
         <div id="main-header">     
@@ -136,7 +151,7 @@
             <input  id="regresar" type="image" src="images/regresa.PNG"/>
             <input id="finalizar" type="image" style="margin-bottom: -1px;" src="images/canceOFF.png"/>
             <input  id="cancelar" type="image" src="images/cancelaOFF.png"/>
-            <div class="titulo"><h1>Notificar Tiempos</h1></div>      
+            <div class="titulo"><h1>Notificación de Tiempos PP</h1></div>      
         </div>
         <div class="contenido">
             <div class="ContentNotif">
@@ -175,13 +190,35 @@
                     <hr>
                 </div>
                 <div class="divBtnIniFin">
-<!--                    <input id="Ejec1" type="image" src="images/ejecuta.png"/><label>Inicio Actividad</label>    
-                    <br>
-                    <input id="Ejec2" type="image" src="images/ejecuta.png"/><label>Fin Actividad</label>-->
+                    <!--                    <input id="Ejec1" type="image" src="images/ejecuta.png"/><label>Inicio Actividad</label>    
+                                        <br>
+                                        <input id="Ejec2" type="image" src="images/ejecuta.png"/><label>Fin Actividad</label>-->
                     <!--<button style="margin-left: 65%;">Inicio Actividad</button><button style="margin-left: 25px;">Fin Actividad</button>-->
                     <button><input type="image" src="images/ejecuta.png"/></button><label>Inicio Actividad</label>
                     <br>
                     <button><input type="image" src="images/ejecuta.png"></button><label>Fin Actividad</label>
+                </div>
+            </div>
+        </div>
+        <div id="VentanaModalOrdenFab" class="VentanaModal">
+            <div id="handle"> <label id="TituloMatch">Orden Fabricación</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('OrdFab');"><label >X</label></div></div>            
+            <div class="PanelBntMatch"><button>Restricciones</button><hr></div>
+            <div id="ConsultaTablaOrFa">
+                <div id="tabscrll">
+                    <section id="TableOrd">
+                        <section class="TableContainer">
+                            <section class="SecHead">
+                                <table id="TabHead">
+                                    <thead>
+                                        <tr>
+                                            <td>Orden</td>
+                                            <td>Desc</td>
+                                            <td>Op</td>
+                                    </thead>
+                                </table>
+                            </section>
+                        </section>
+                    </section>
                 </div>
             </div>
         </div>
