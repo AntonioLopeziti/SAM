@@ -16,9 +16,10 @@ $(document).ready(function () {
     $('#OrdFab').focus(function () {
         $('#btnmatchOrdLib').show();
     });
-//    $('#OrdFab').blur(function () {
-//        $('#btnmatchOrdLib').hide();
-//    });
+    $('#OrdFab').blur(function () {
+        $('#btnmatchOrdLib').hide();
+    });
+    
     $('#btnmatchOrdLib').click(function () {        
         var theHandle = document.getElementById("handle");
         var theRoot = document.getElementById("VentanaModalOrdenFab");
