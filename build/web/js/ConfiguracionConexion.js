@@ -53,9 +53,9 @@ $(document).ready(function () {
     Save.click(function () {
         GuardarConexion();
     });
-    $('#guardarWS').click(function () {
-        GuardarWS();
-    });
+//    $('#guardarWS').click(function () {
+//        GuardarWS();
+//    });
     end.click(function () {
         SalirConf();
     });

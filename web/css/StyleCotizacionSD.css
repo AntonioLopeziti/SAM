@@ -7,3 +7,17 @@ and open the template in the editor.
     Created on : 19/01/2018, 11:10:34 AM
 */
 
+.DivContentPrincipal{
+    width: 80%;
+}
+.DivDatosBasicoCabecera{
+    margin-top: .5%;
+    padding-left: 2%;
+    width: 100%;
+    height: auto;
+    background: #ffffff;
+    
+}
+#LineaTitulo{
+     border: 1px solid #3892E0;
+}

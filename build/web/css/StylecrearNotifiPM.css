@@ -8,6 +8,19 @@ and open the template in the editor.
     Author     : Erick_Jimenez
 */
 
+.BtnMatchIconDescriv{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/@0KQStatus@.PNG');
+    background-position: center;
+    background-repeat:no-repeat;
+    vertical-align:middle;
+    margin-top: -2.5px;
+    height: 18px;
+    width: 20px;
+    cursor: pointer;
+}
+
 .VentanaModalAvvv
 {
     position: fixed; 
@@ -381,6 +394,19 @@ and open the template in the editor.
     text-align: left;
     font-family:  Courier New;
     font-weight: bold;
+}
+.bxcRGN{
+    width: 105%;
+    height: 16px;
+    padding: 0;
+    margin-top: -2px;
+    margin-left: -1px;
+    text-align: left;
+    font-family:  Courier New;
+    font-weight: bold;
+}
+.tdRGN{
+    width: 60px;
 }
 .bxcLRG{
     width: 101%;
