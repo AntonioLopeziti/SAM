@@ -138,34 +138,113 @@
         <div class="contenido">    
             <div class="DivContentPrincipal">
                 <div class="DivClas">
-                    <label>Clase de oferta</label><input type="text"/>
+                    <label><%out.println(po.getProperty("etiqueta.CotizacionClaseOferta"));%></label><input type="text" id="ClaseOferta"/><button id="MCClaseOferta" class='BtnMatchIcon'></button>
                     <hr>  
                 </div>
                 <div class="DivDatosBasicoCabecera">
-                    <label>Datos organizativos</label>
+                    <label><%out.println(po.getProperty("etiqueta.CotizacionDatosOrgaTi"));%></label>
                     <hr id="LineaTitulo">
                     <div class="divOrg">
-                        <label>Organización de ventas</label><input type="text"/>
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionOrganventas"));%></label><input type="text" id="OrgVentas"  style="width: 15%;" maxlength="4"/><button id="MCOrgVentas" class='BtnMatchIcon'></button>
                         <hr> 
-                        <label>Canal de distribución</label><input type="text"/>
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionCanalDistri"));%></label><input type="text" id="CanalDist"/><button id="MCCanalDis" class='BtnMatchIcon'></button>
                         <hr> 
-                        <label>Sector</label><input type="text"/>
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionSector"));%></label><input type="text" id="Sector"/><button id="MCSector" class='BtnMatchIcon'></button>
                         <hr> 
-                        <label>Oficina de ventas</label><input type="text"/>
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionOficinaVent"));%></label><input type="text" id="OficVentas"/><button id="MCOficinaVentas" class='BtnMatchIcon'></button>
                         <hr> 
-                        <label>Oficina de ventas</label><input type="text"/>
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionGrupoVended"));%></label><input type="text" id="GpoVen"/><button id="MCGpoVen" class='BtnMatchIcon'></button>
                         <hr> 
                     </div>
                 </div>
+                <div class="DivDatosCotiza">
+                    <div class="DivIzq">
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaRepar"));%></label><input type="text" id="OfertaRep" style="width: 30%;"/><button id="MCOferRep" class='BtnMatchIcon'></button>
+                        <hr> 
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionSolicitante"));%></label><input type="text" id="Solicitate" style="width: 30%;" value="<%=Nombre%>" readonly/>
+                        <hr> 
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionDestinMerca"));%></label><input type="text" id="DestMec" style="width: 30%;"/><button id="MCDestMerc" class='BtnMatchIcon'></button>
+                        <hr> 
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionNumPediClie"));%></label><input type="text" id="NmPedCliente" style="width: 48%;"/>
+                        <hr> 
+                        <label>Area de ventas</label><input type="text" id="NmPedCliente" style="width: 48%;"/>
+                        <hr> 
+                        <label>Motivo pedido</label><select></select>
+                        <hr> 
+                        <label>Moneda documento</label><input type="text" style="width: 10%;"/> / <input type="text"  style="width: 25%;    "/>
+                        <hr> 
+                    </div>
+                    <div class="DivDer">
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionValorNeto"));%></label><input type="text" id="ValorNeto" style="width: 30%;"/> <input type="text" id="Moneda" style="width: 15%;"/><button id="MCMoneda" class='BtnMatchIcon'></button>
+                        <hr> 
+                        <input type="text" id="descripcionSolicitante" style="width: 100%;  border: none; background: none;" readonly >
+                        <hr hidden>
+                        <input type="text" id="descripcionDestMe" style="width: 100%; border: none; background: none;" readonly >
+                        <hr hidden>
+                        <br><br>
+                        <label style="margin-top: 5px;"><%out.println(po.getProperty("etiqueta.CotizacionFechaPedido"));%></label><input type="text" id="FechPedi" style="width: 30%;"/><button id="MCFechPed" class='BtnMatchIcon'></button>
+                        <hr> 
+                        <label>Fecha documento</label><input type="text" id="FechPedi" style="width: 30%;"/>
+                        <hr> 
+                        <label>Fecha precio</label><input type="text" id="FechPedi" style="width: 30%;"/>
+                        <hr> 
+                        <label>Fecha entrega</label><input type="text" id="FechPedi" style="width: 30%;"/>
+                        <hr> 
+                    </div>
+                </div>
+                <div class="divitems">
+                    <div id="tabscrll">
+                        <section id="TableNotfi" >
+                            <section class="TableContainer">
+                                <section class="SecHead">
+                                    <table id="TabHead">
+                                        <thead>
+                                            <tr>
+                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPPosicio"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPTImpt"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPTposi"));%></td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPMaterial"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPUM"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPGpoArt"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPCantida"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPFechEnt"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPCentro"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPAlmac"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPSolic"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPOrgCompras"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPGrpoCompras"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPCMayor"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPCCosto"));%>&nbsp;</td>
+                                                <td><%out.println(po.getProperty("etiqueta.CSPOrden"));%>&nbsp;</td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </section>
+                                <section class="SecBody" id="SecCuerpo">
+                                    <table id="TabBody">
+                                        <tbody>                                            
+                                            <tr><td><input type="checkbox"/></td><td><input type="text" style="width: 100%; border: none; text-align: center;"  readonly value="00010"/></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                            <tr class="ocultar"><td>0000</td><td>00000000</td><td>0000000</td><td>0000000</td><td>000000000000000000000000000000000</td><td>00000000000000000000000000000000000000000000000000000000000000000000000</td><td>00000000</td><td>0000000000000000</td><td>0000000000000</td><td>00000000000000000</td><td>0000000000</td><td>000000000000000</td><td>00000000000000</td><td>00000000000000000</td><td>0000000000000000000</td><td>00000000000000000</td><td>00000000000000000</td><td>00000000000000000</td></tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                            </section>
+                        </section>
+                    </div>   
+                    <section class="DobleScroll" id="DobleSection">
+                        <section id="DobleContainer"></section>
+                    </section>  
+                </div>
             </div>
-        </div>
-        <footer>
-            <hr class="fecha" id="footerline">
-            <div  class="fecha">
-                <label id="fecha" name="fecha"></label><label>, </label> 
-                <label id="tiempo" name="tiempo"></label><label>|  LAN <%=Idioma%></label>
-                <span><input type="image" style="float:left; margin-top: -2px;" id="iconmsg"></span><label  id="msg" class="msg"></label>
-                <script type="text/javascript">
+            <footer>
+                <hr class="fecha" id="footerline">
+                <div  class="fecha">
+                    <label id="fecha" name="fecha"></label><label>, </label> 
+                    <label id="tiempo" name="tiempo"></label><label>|  LAN <%=Idioma%></label>
+                    <span><input type="image" style="float:left; margin-top: -2px;" id="iconmsg"></span><label  id="msg" class="msg"></label>
+                    <script type="text/javascript">
             var meses = new Array("<%=Enero%>", "<%=Febrero%>", "<%=Marzo%>", "<%=Abril%>", "<%=Mayo%>", "<%=Junio%>", "<%=Julio%>", "<%=Agosto%>", "<%=Septiembre%>", "<%=Octubre%>", "<%=Noviembre%>", "<%=Diciembre%>");
             var meses2 = new Array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
             var diasSemana = new Array("<%=Domingo%>", "<%=Lunes%>", "<%=Martes%>", "<%=Miercoles%>", "<%=Jueves%>", "<%=Viernes%>", "<%=Sabado%>");
@@ -182,9 +261,9 @@
             } else {
                 writefecha.html(fechaActual);
             }
-                </script>
-            </div>
-        </footer>
+                    </script>
+                </div>
+            </footer>
     </body>
     <%}
         } catch (Exception e) {
