@@ -99,12 +99,12 @@
             checkPermisoPag();
         </script>
         <link rel="stylesheet" href="css/StyleGeneral.css">
-        <link rel="stylesheet" href="css/StyleMonitorPP.css">
+        <link rel="stylesheet" href="css/StyleListadoOrdenesPP.css">
         <link rel="stylesheet" href="css/menu.css" media="screen">
         <script src="js/dom-drag.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
-        <!--<script src="js/DocumentoInventario.js"></script>-->
+        <script src="js/listadoOrd.js"></script>
         <title>Monitor PP</title>
     </head>
     <body>
@@ -121,9 +121,17 @@
             <input  id="regresar" type="image" src="images/regresa.PNG" onclick="back();"/>
             <input id="finalizar" type="image" style="margin-bottom: -1px;" src="images/canceOFF.png" disabled/>
             <input  id="cancelar" type="image" src="images/cancelaOFF.png" disabled/>
-            <div class="titulo"><h1>Lista de órdenes PP Selección de órdenes PP</h1></div>
+            <div class="titulo"><h1>Listado de órdenes de fabricación PP</h1></div>
         </div>
         <div class="contenido">
+            <section class="bkButtons">
+                <!--<button onclick="libbot()"><img src="images/liberar.png"></button>-->
+                <!--<button onclick="canbot()"><img src="images/cierretecnico.png"></button>-->
+                <!--<button onclick="cciebot()"><img src="images/cancelarcierre.png"></button>-->
+                <button id="imgLib" class="bgButtons"></button>
+                <button id="imgCie" class="bgButtons"></button>
+                <button id="imgCan" class="bgButtons"></button>
+            </section>
             <section class="bkSubSec">
                 <div class="CldMov">
                     <section class="DobleScroll" id="DobleSection">
@@ -135,25 +143,47 @@
                                 <thead>
                                     <tr>
                                         <td></td>
-                                        <td>Aviso</td>
-                                        <td>Nro. Correlativo</td>
-                                        <td>Nro. Clasificación</td>
-                                        <td>Texto Breve</td>
-                                        <td>Grupo Códigos</td>
-                                        <td>Código Medidas</td>
-                                        <td>Rol Med.Resp.</td>
-                                        <td>Responsable Medida</td>
+                                        <td>Clase órden</td>
+                                        <td>Nro. Órden</td>
+                                        <td>Material</td>
+                                        <td>Texto material</td>
+                                        <td>Estatus</td>
+                                        <td>Cantidad</td>
                                         <td>Fecha Inicio</td>
-                                        <td>Hora Inicio</td>
-                                        <td>Fecha Fin</td>
-                                        <td>Hora Fin</td>
-                                        <td>Clasificación Pos.</td>
+                                        <td>Notificado</td>
+                                        <td>Habilitar</td>
                                     </tr>
                                 </thead>
                             </table>
                         </section>
-                        <section class="SecBody" id="SecCuerpoCld">
-
+                        <section class="SecBody" id="SecCuerpo">
+<!--                            <table id="TabBody">
+                                <tbody>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003405</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003406</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003407</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003408</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003409</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003410</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003411</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003412</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003413</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003414</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003415</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
+                                    <tr class="ocultar">
+                                        <td>00</td>
+                                        <td>0000000000</td>
+                                        <td>00000000000</td>
+                                        <td>000000000000000000</td>
+                                        <td>0000000000000000000000000000000000</td>
+                                        <td>00000000</td>
+                                        <td>000000000000</td>
+                                        <td>00000000000</td>
+                                        <td>00000000</td>
+                                        <td>00000</td>
+                                    </tr>
+                                </tbody>
+                            </table>-->
                         </section>
                     </section>
                 </div>
@@ -205,40 +235,14 @@
                     window.onload = function () {
                         startTime();
                         bloq();
+                        tablaListadoOrdenesPP();
                     };
 
                     function bloq() {
                         document.getElementById('iconmsg').style.visibility = "hidden";
 //                        document.getElementById('guardar').disabled = true;
                     }
-                    function peticiones(url, id, accion, f, lote)
-                    {
-                        var centro = document.getElementById('bxCentro').value.toUpperCase();
-                        var extras = "";
-
-                        var lang = "<%=Idioma%>";
-                        var xmlhttp = new XMLHttpRequest();
-                        xmlhttp.onreadystatechange = function () {
-                            if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
-                            {
-                                var temp = new Array();
-                                temp = xmlhttp.responseText.split(",");
-                                if (temp[0] == 0) {
-                                    ocultarVentana(temp[1], temp[2]);
-                                    var iconm = document.getElementById("iconmsg");
-                                    iconm.style.visibility = "visible";
-                                    iconm.src = "images/advertencia.PNG";
-                                    var men = document.getElementById("msg");
-                                    men.innerHTML = "No hay valores por mostrar";
-                                } else {
-                                    document.getElementById(id).innerHTML = xmlhttp.responseText;
-                                    fnc(f);
-                                }
-                            }
-                        };
-                        xmlhttp.open("GET", url + "?Action=" + accion + "&lang=" + lang + extras + "&lote=" + lote + "&ctr=" + centro, true);
-                        xmlhttp.send();
-                    }
+                    
                 </script>
             </div>
         </footer>
