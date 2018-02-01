@@ -158,9 +158,10 @@
                                                 <td><%out.println(po.getProperty("etiqueta.Ord_LO"));%></td>
                                                 <td><%out.println(po.getProperty("etiqueta.GralFolioSAM"));%></td>
                                                 <td><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%></td>
-                                                <td><%out.println(po.getProperty("etiqueta.UbicTec_LO"));%></td>
-                                                <td><%out.println(po.getProperty("etiqueta.Equ_Lo"));%></td>
+                                                <td>Material</td>
                                                 <td><%out.println(po.getProperty("etiqueta.GralFecha"));%></td>
+                                                <td>Notificado</td>
+                                                <td>Cantidad</td>
                                                 <td><%out.println(po.getProperty("etiqueta.GralIcono"));%></td>
                                             </tr>
                                         </thead>
