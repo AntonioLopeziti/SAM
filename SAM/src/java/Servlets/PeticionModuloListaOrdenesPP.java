@@ -280,9 +280,10 @@ public class PeticionModuloListaOrdenesPP extends HttpServlet {
                         out.println("<td>" + p1.getNum_orden() + "</td>");
                         out.println("<td>" + p1.getFolio_sam() + "</td>");
                         out.println("<td>" + p1.getTexto_breve() + "</td>");
-                        out.println("<td>" + p1.getUbicacion_tecnica() + "</td>");
                         out.println("<td>" + p1.getNum_equipo() + "</td>");
                         out.println("<td>" + DateFormat(p1.getFecha_inicio_extrema()) + "</td>");
+                        out.println("<td></td>");
+                        out.println("<td></td>");
                         out.println("<td><img src='images/" + SemaforoFecha(p1.getFecha_inicio_extrema()) + ".PNG' /></td>");
                         out.println("</tr>");
                     }
@@ -292,9 +293,10 @@ public class PeticionModuloListaOrdenesPP extends HttpServlet {
                     out.println("<td>00000000000000000</td>");
                     out.println("<td>000000000000000000000000000000000000000000</td>");
                     out.println("<td>000000000000000000000000000</td>");
-                    out.println("<td>000000000000000000000000000</td>");
                     out.println("<td>0000000000000000000</td>");
-                    out.println("<td>0000000000</td>");
+                    out.println("<td>0000000000000</td>");
+                    out.println("<td>0000000000000</td>");
+                    out.println("<td>00000000</td>");
                     out.println("</tr");
                     out.println("</tbody>");
                     out.println("</table>");
