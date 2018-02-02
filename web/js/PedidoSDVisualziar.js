@@ -73,6 +73,9 @@ $(document).ready(function () {
         tecla_final = String.fromCharCode(tecla);
         return patron.test(tecla_final);
     });
+    $('#okPedido').click(function () {
+        BuscarPedMC();
+    });
     $('#numAcMax').keypress(function (e) {
         tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 8) {
@@ -220,9 +223,8 @@ function BuscarPedMC() {
         processData: true,
         data: "Accion=" + acc + "&Documento=" + $('#DocumVenta').val().trim() + "&Clase=" + $('#ClasePedid').val().trim() + "&Ctd=" + $('#numAcMax').val().trim(),
         success: function (data) {
-            alert(data);
             if (data == 0) {
-                ShowMsg(2, "images/aceptar.png", "audio/sapmsg.wav");
+                ShowMsg(1, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
                 $('#cargarDatosPedidos').html(data);
                 $('#BuscarParPedSD').css('display', 'none');
