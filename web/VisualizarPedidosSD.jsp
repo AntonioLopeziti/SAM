@@ -47,6 +47,7 @@
         po.load(in);
         String reso = po.getProperty("etiqueta.Resolucio");
         String funcioninv = po.getProperty("etiqueta.FuncionInval_Menu");
+        String Valoerr = po.getProperty("etiqueta.NoExisteValores_SAM");
         String Enero = po.getProperty("etiqueta.Enero");
         String Febrero = po.getProperty("etiqueta.Febrero");
         String Marzo = po.getProperty("etiqueta.Marzo");
@@ -98,6 +99,9 @@
                     case 0:
                         msg = '<%=funcioninv%>';
                         break;
+                    case 1:
+                        msg = '<%=Valoerr%>';
+                        break;
 
                 }
                 $('#msg').html(msg);
@@ -130,10 +134,10 @@
                 </ul>
             </div>
             <input id="aceptar" type="image" src="images/aceptaOFF.png" disabled/>                
-            <input id="guardar" type="image" src="images/guarda.PNG"/> 
-            <input  id="regresar" type="image" src="images/regresa.PNG"/>
-            <input id="finalizar" type="image" style="margin-bottom: -1px;" src="images/cance.PNG"/>
-            <input  id="cancelar" type="image" src="images/cancela.PNG" />
+            <input id="guardar" type="image" src="images/guardaOFF.png" disabled/> 
+            <input  id="regresar" type="image" style="cursor: pointer;" src="images/regresa.PNG"/>
+            <input id="finalizar" type="image" style="margin-bottom: -1px;"  src="images/canceOFF.png" disabled/>
+            <input  id="cancelar" type="image" src="images/cancelaOFF.png" disabled/>
             <div class="titulo"><h1><%out.println(po.getProperty("etiqueta.PedidosSDTituloVisua"));%></h1></div> 
         </div>            
         <div class="contenido"> 
@@ -143,7 +147,7 @@
                         <label><%out.println(po.getProperty("etiqueta.PedidosSDParamBusque"));%></label>
                         <hr id="lineaTitulo">
                         <div class="divPed">
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido"));%></label><input type="text" style="width: 25%;"/><button id="MCPedidos" class='BtnMatchIcon'></button>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido"));%></label><input type="text" style="width: 25%;" id="txtPedido"/><button id="MCPedidos" class='BtnMatchIcon'></button>
                             <hr>
                         </div>
                     </div>
@@ -193,6 +197,8 @@
                                 <hr>
                                 <label><%out.println(po.getProperty("etiqueta.PedidosSDMonedaDocs"));%></label><input type="text" style="width: 15%;" disabled> / <input type="text" style="width: 25%;" disabled/>
                                 <hr>
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDOrgVentas"));%></label><input type="text" style="width: 15%;" disabled>
+                                <hr>
                             </div>
                             <div class="DetalleCabDer">
                                 <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaDocumento"));%></label><input type="text" style="width: 15%;" disabled/> <input type="text" style="width: 49%; border: none; background:none;" readonly   />
@@ -202,6 +208,10 @@
                                 <label><%out.println(po.getProperty("etiqueta.PedidosSDCreadoPor"));%></label><input type="text" style="width: 15%;" disabled/> <input type="text" style="width: 49%; border: none; background:none;" readonly   />
                                 <hr>
                                 <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaPrecio"));%></label><input type="text" style="width: 15%;" disabled/> <input type="text" style="width: 49%; border: none; background:none;" readonly   />
+                                <hr>
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDCanalDistr"));%></label><input type="text" style="width: 8%;" disabled/>
+                                <hr>
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDSector"));%></label><input type="text" style="width: 8%;" disabled/>
                                 <hr>
                             </div>
                         </div>
@@ -449,13 +459,54 @@
                     </div>
                 </div>
             </div>
-            <footer>
-                <hr class="fecha" id="footerline">
-                <div  class="fecha">
-                    <label id="fecha" name="fecha"></label><label>, </label> 
-                    <label id="tiempo" name="tiempo"></label><label>|  LAN <%=Idioma%></label>
-                    <span><input type="image" style="float:left; margin-top: -2px;" id="iconmsg"></span><label  id="msg" class="msg"></label>
-                    <script type="text/javascript">
+        </div>
+        <div id="VentanaModalPedidosSD" class="VentanaModal">
+            <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.PedidosSDDocumVe"));%></label><div class="BotonCerrar_Matc" id="CerraMCPed"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retPed"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParPedSD" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.PedidosSDDocu"));%></label><input type="text" id="DocumVenta" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></label><input type="text" id="ClasePedid" maxlength="4" style="width:35%; text-transform: uppercase;"/>
+                        <hr>  
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax"   style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okPedido"/>                        
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerraMCPed2"/>
+                </div>
+            </div>            
+            <div id="ConsultaTablaPedidos" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollpedido">
+                        <div class="fixedY" id="fixedYPedidoSd">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.PedidosSDDocu"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedXM" id="cargarDatosPedidos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <footer>
+            <hr class="fecha" id="footerline">
+            <div  class="fecha">
+                <label id="fecha" name="fecha"></label><label>, </label> 
+                <label id="tiempo" name="tiempo"></label><label>|  LAN <%=Idioma%></label>
+                <span><input type="image" style="float:left; margin-top: -2px;" id="iconmsg"></span><label  id="msg" class="msg"></label>
+                <script type="text/javascript">
             var meses = new Array("<%=Enero%>", "<%=Febrero%>", "<%=Marzo%>", "<%=Abril%>", "<%=Mayo%>", "<%=Junio%>", "<%=Julio%>", "<%=Agosto%>", "<%=Septiembre%>", "<%=Octubre%>", "<%=Noviembre%>", "<%=Diciembre%>");
             var meses2 = new Array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
             var diasSemana = new Array("<%=Domingo%>", "<%=Lunes%>", "<%=Martes%>", "<%=Miercoles%>", "<%=Jueves%>", "<%=Viernes%>", "<%=Sabado%>");
@@ -472,9 +523,9 @@
             } else {
                 writefecha.html(fechaActual);
             }
-                    </script>
-                </div>
-            </footer>
+                </script>
+            </div>
+        </footer>
     </body>
     <%}
         } catch (Exception e) {
