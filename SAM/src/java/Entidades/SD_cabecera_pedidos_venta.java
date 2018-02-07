@@ -9,6 +9,7 @@ package Entidades;
  *
  */
 public class SD_cabecera_pedidos_venta {
+
     int id_cab_ped_venta = 0;
     String clase_documento_ventas = "";
     String documento_ventas = "";
@@ -32,6 +33,24 @@ public class SD_cabecera_pedidos_venta {
     String motivo_pedido = "";
     String moneda_documento2 = "";
     String fecha_determinacion_precio_tipo_cam = "";
+    String valor_neto = "";
+    String fecha_pref_entrega = "";
+
+    public String getValor_neto() {
+        return valor_neto;
+    }
+
+    public void setValor_neto(String valor_neto) {
+        this.valor_neto = valor_neto;
+    }
+
+    public String getFecha_pref_entrega() {
+        return fecha_pref_entrega;
+    }
+
+    public void setFecha_pref_entrega(String fecha_pref_entrega) {
+        this.fecha_pref_entrega = fecha_pref_entrega;
+    }
 
     public int getId_cab_ped_venta() {
         return id_cab_ped_venta;
@@ -216,8 +235,5 @@ public class SD_cabecera_pedidos_venta {
     public void setFecha_determinacion_precio_tipo_cam(String fecha_determinacion_precio_tipo_cam) {
         this.fecha_determinacion_precio_tipo_cam = fecha_determinacion_precio_tipo_cam;
     }
-    
-    
-    
-    
+
 }
