@@ -12,6 +12,8 @@ public class SD_posiciones_pedido_venta {
     int id_pos_pedido_ven = 0;
     String numero_documento_comercial = "";
     String posicion_documento_ventas = "";
+    String tipo_fecha = "";
+    String fecha_preferente_entrega = "";
     String numero_material = "";
     String cantidad_pedido = "";
     String unidad_medida_venta = "";
@@ -23,6 +25,15 @@ public class SD_posiciones_pedido_venta {
     String posicion_sup_estra_lis_mat = "";
     String tipo_fecha_pref_entrega = "";
     String fecha_reparto = "";
+    String denominacion_status_trat_global = "";
+    String motivo_rechazo = "";
+    String denominacion_sociedad_co = "";
+    String denominacion_status_entrega = "";
+    String status_global_entrega = "";
+    String cantidad = "";
+    String valor_neto = "";
+    String moneda_documento_comercial = "";
+    String importe_impuesto_moneda_doc = "";
 
     public int getId_pos_pedido_ven() {
         return id_pos_pedido_ven;
@@ -134,6 +145,94 @@ public class SD_posiciones_pedido_venta {
 
     public void setFecha_reparto(String fecha_reparto) {
         this.fecha_reparto = fecha_reparto;
+    }
+
+    public String getTipo_fecha() {
+        return tipo_fecha;
+    }
+
+    public void setTipo_fecha(String tipo_fecha) {
+        this.tipo_fecha = tipo_fecha;
+    }
+
+    public String getFecha_preferente_entrega() {
+        return fecha_preferente_entrega;
+    }
+
+    public void setFecha_preferente_entrega(String fecha_preferente_entrega) {
+        this.fecha_preferente_entrega = fecha_preferente_entrega;
+    }
+
+    public String getDenominacion_status_trat_global() {
+        return denominacion_status_trat_global;
+    }
+
+    public void setDenominacion_status_trat_global(String denominacion_status_trat_global) {
+        this.denominacion_status_trat_global = denominacion_status_trat_global;
+    }
+
+    public String getMotivo_rechazo() {
+        return motivo_rechazo;
+    }
+
+    public void setMotivo_rechazo(String motivo_rechazo) {
+        this.motivo_rechazo = motivo_rechazo;
+    }
+
+    public String getDenominacion_sociedad_co() {
+        return denominacion_sociedad_co;
+    }
+
+    public void setDenominacion_sociedad_co(String denominacion_sociedad_co) {
+        this.denominacion_sociedad_co = denominacion_sociedad_co;
+    }
+
+    public String getDenominacion_status_entrega() {
+        return denominacion_status_entrega;
+    }
+
+    public void setDenominacion_status_entrega(String denominacion_status_entrega) {
+        this.denominacion_status_entrega = denominacion_status_entrega;
+    }
+
+    public String getStatus_global_entrega() {
+        return status_global_entrega;
+    }
+
+    public void setStatus_global_entrega(String status_global_entrega) {
+        this.status_global_entrega = status_global_entrega;
+    }
+
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public String getValor_neto() {
+        return valor_neto;
+    }
+
+    public void setValor_neto(String valor_neto) {
+        this.valor_neto = valor_neto;
+    }
+
+    public String getMoneda_documento_comercial() {
+        return moneda_documento_comercial;
+    }
+
+    public void setMoneda_documento_comercial(String moneda_documento_comercial) {
+        this.moneda_documento_comercial = moneda_documento_comercial;
+    }
+
+    public String getImporte_impuesto_moneda_doc() {
+        return importe_impuesto_moneda_doc;
+    }
+
+    public void setImporte_impuesto_moneda_doc(String importe_impuesto_moneda_doc) {
+        this.importe_impuesto_moneda_doc = importe_impuesto_moneda_doc;
     }
     
     
