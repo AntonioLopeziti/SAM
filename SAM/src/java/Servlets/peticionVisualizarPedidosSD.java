@@ -9,14 +9,12 @@ import AccesoDatos.ACC_VisualizarPedidosSD;
 import AccesoDatos.Consultas;
 import Entidades.SD_cabecera_pedidos_venta;
 import Entidades.SD_posiciones_pedido_condiciones;
+import Entidades.SD_posiciones_pedido_reparto;
 import Entidades.SD_posiciones_pedido_venta;
 import Entidades.SD_posiciones_pedidos_expedicion;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -277,7 +275,65 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                     out.println("<tr class=\"ocultar\"><td>00</td><td>000000</td><td>000000</td><td>0000000000000</td><td>00000000</td><td>00000</td><td>00000</td><td>00000</td><td>00000000000000</td><td>0000000</td><td>000000000</td><td>00000000</td><td>00000000</td><td>000000</td><td>00000000000000</td><td>0000000</td><td>000000</td></tr>");
                     out.println("</tbody>");
                     out.println("</table>");
-
+                    break;
+                case "GetRepartos":
+                    out.println("<table id=\"TabBody4\">");
+                    out.println("<tbody>");
+                    if (TipoCon.equals("1")) {
+                        ArrayList<SD_posiciones_pedido_reparto> rep = ACC_VisualizarPedidosSD.ObtenerInstancia().GetReparto(Documento, Posicion);
+                        if (rep.size() > 0) {
+                            int b;
+                            for (b = 0; b < rep.size(); b++) {
+                                out.println("<tr>");
+                                out.println("<td>&nbsp;</td>");
+                                out.println("<td>" + rep.get(b).getTipo_fehca().trim() + "</td>");
+                                out.println("<td>" + c.DateFormat(rep.get(b).getFecha_reparto().trim()) + "</td>");
+                                out.println("<td>" + rep.get(b).getCant_pedida_cliente_umv().trim() + "</td>");
+                                out.println("<td>" + rep.get(b).getCant_corregida().trim() + "</td>");
+                                out.println("<td>" + rep.get(b).getCant_confirmada().trim() + "</td>");
+                                out.println("<td>" + rep.get(b).getUnidad_med_venta().trim() + "</td>");
+                                out.println("<td>" + rep.get(b).getBloqueo_entrega_prop().trim() + "</td>");
+                                out.println("<td>" + rep.get(b).getCant_entreg_unid_venta().trim() + "</td>");
+                                out.println("<td>" + rep.get(b).getTipo_pos_reparto().trim() + "</td>");
+                                out.println("<td>" + rep.get(b).getNumero_solicitud_ped().trim() + "</td>");
+                                out.println("<td>" + CerosIzqu(rep.get(b).getNum_pos_solc_ped().trim()) + "</td>");
+                                out.println("</tr>");
+                            }
+                            for (int y = b; y < 6; y++) {
+                                out.println("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+                            }
+                        } else {
+                            for (int y = 0; y < 6; y++) {
+                                out.println("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+                            }
+                        }
+                    }
+                    if (TipoCon.equals("0")) {
+                        for (int y = 0; y < 6; y++) {
+                            out.println("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+                        }
+                    }
+                    out.println("<tr class=\"ocultar\"><td>00</td><td>0000000000000</td><td>000000000000000</td><td>0000000000000</td><td>0000000000000000000</td><td>0000000000000000000</td><td>0000000000000000000</td><td>0000000000000000000</td><td>0000000000000000000</td><td>0000000000000000000</td><td>0000000000000000000</td><td>0000000000000000000</td></tr>");
+                    out.println("</tbody>");
+                    out.println("</table>");
+                    break;
+                case "CabRep":
+                    ArrayList<SD_posiciones_pedido_reparto> r = ACC_VisualizarPedidosSD.ObtenerInstancia().GetReparto(Documento, Posicion);
+                    JSONArray j1 = new JSONArray();
+                    if (TipoCon.equals("0")) {
+                        j1.add("");
+                        j1.add("");
+                        j1.add("");
+                        j1.add("");
+                        out.println(j1);
+                    }
+                    if (TipoCon.equals("1")) {
+                        j1.add(r.get(0).getPlazo_entrega_acordado().trim());
+                        j1.add(r.get(0).getCantidad_pedido_acom().trim());
+                        j1.add(r.get(0).getUnidad_medida_venta().trim());
+                        j1.add(r.get(0).getCant_entreg_unid_venta().trim());
+                        out.println(j1);
+                    }
                     break;
             }
         }
@@ -286,7 +342,7 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
     public String CheckR(String r) {
         String ban = "";
         if (r.equals("X")) {
-            ban =  "checked";
+            ban = "checked";
         }
 
         return ban;
