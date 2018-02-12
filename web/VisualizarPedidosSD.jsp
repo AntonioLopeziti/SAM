@@ -48,6 +48,8 @@
         String reso = po.getProperty("etiqueta.Resolucio");
         String funcioninv = po.getProperty("etiqueta.FuncionInval_Menu");
         String Valoerr = po.getProperty("etiqueta.NoExisteValores_SAM");
+        String VacioData = po.getProperty("etiqueta.PedidosSDDocuemntVaci");
+        String ErorPedi = po.getProperty("etiqueta.PedidosSDDocuError");
         String Enero = po.getProperty("etiqueta.Enero");
         String Febrero = po.getProperty("etiqueta.Febrero");
         String Marzo = po.getProperty("etiqueta.Marzo");
@@ -102,6 +104,12 @@
                     case 1:
                         msg = '<%=Valoerr%>';
                         break;
+                    case 2:
+                        msg = '<%=VacioData%>';
+                        break;
+                    case 3:
+                        msg = '<%=ErorPedi%>';
+                        break;
 
                 }
                 $('#msg').html(msg);
@@ -133,7 +141,7 @@
                     </li>
                 </ul>
             </div>
-            <input id="aceptar" type="image" src="images/aceptaOFF.png" disabled/>                
+            <input id="aceptar" type="image" style="cursor: pointer;" src="images/aceptar.png"/>                
             <input id="guardar" type="image" src="images/guardaOFF.png" disabled/> 
             <input  id="regresar" type="image" style="cursor: pointer;" src="images/regresa.PNG"/>
             <input id="finalizar" type="image" style="margin-bottom: -1px;"  src="images/canceOFF.png" disabled/>
@@ -147,31 +155,31 @@
                         <label><%out.println(po.getProperty("etiqueta.PedidosSDParamBusque"));%></label>
                         <hr id="lineaTitulo">
                         <div class="divPed">
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido"));%></label><input type="text" style="width: 25%;" id="txtPedido"/><button id="MCPedidos" class='BtnMatchIcon'></button>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido"));%></label><input type="text" style="width: 25%; text-transform: uppercase;" id="txtPedido" maxlength="10" /><button id="MCPedidos" class='BtnMatchIcon'></button>
                             <hr>
                         </div>
                     </div>
                 </div>
                 <div class="contain-cabecera">
                     <div class="divDer">
-                        <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido2"));%></label><input tye="text" style="width: 35%;" disabled/>
+                        <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido2"));%></label><input tye="text" id="Pedido" style="width: 35%;" disabled/>
                         <hr>
-                        <label><u><%out.println(po.getProperty("etiqueta.PedidosSDSolicitante"));%></u></label><input tye="text" style="width: 35%;" disabled/>
+                        <label><u><%out.println(po.getProperty("etiqueta.PedidosSDSolicitante"));%></u></label><input tye="text" id="Solicitante" style="width: 35%;" disabled/>
                         <hr>
-                        <label><u><%out.println(po.getProperty("etiqueta.PedidosSDDestMecia"));%></u></label><input tye="text" style="width: 35%;" disabled/>
+                        <label><u><%out.println(po.getProperty("etiqueta.PedidosSDDestMecia"));%></u></label><input tye="text" id="DestMcia" style="width: 35%;" disabled/>
                         <hr>
-                        <label><u><%out.println(po.getProperty("etiqueta.PedidosSDNumPedClie"));%></u></label><input tye="text" style="width: 55%;" disabled/>
+                        <label><u><%out.println(po.getProperty("etiqueta.PedidosSDNumPedClie"));%></u></label><input tye="text" id="PedCliente" style="width: 55%;" disabled/>
                         <hr>
 
                     </div>
                     <div class="divIzq">
-                        <label><%out.println(po.getProperty("etiqueta.PedidosSDValorNeto"));%></label><input tye="text" disabled style="width: 38%;"/> <input type="text" style="width: 12%;" disabled/>
+                        <label><%out.println(po.getProperty("etiqueta.PedidosSDValorNeto"));%></label><input tye="text" disabled style="width: 38%;" id="valorNeto"/> <input type="text" style="width: 12%;" disabled id="Moneda1"/>
                         <hr>
-                        <input tye="text" readonly style="width: 100%; border: none; background: none; text-decoration: underline;"/>
+                        <input tye="text" readonly style="width: 100%; border: none; background: none; text-decoration: underline;" id="TextoInter1"/>
                         <hr style="border: #F2F2F2">
-                        <input tye="text" disabled style="width: 100%; border: none; background: none; margin-top: 5px; text-decoration: underline;"/>
+                        <input tye="text" disabled style="width: 100%; border: none; background: none; margin-top: 5px; text-decoration: underline;" id="TextoInter2"/>
                         <hr style="border: #F2F2F2">
-                        <label><u><%out.println(po.getProperty("etiqueta.PedidosSDFechaPedido"));%></u></label><input tye="text" disabled style="width: 20%; margin-top: 5px;" />
+                        <label><u><%out.println(po.getProperty("etiqueta.PedidosSDFechaPedido"));%></u></label><input tye="text" disabled style="width: 20%; margin-top: 5px;" id="fechpedido"/>
                         <hr>
                     </div>
                 </div>
@@ -185,33 +193,27 @@
                         <hr style="width: 100%; margin-top:-1px;   border: 1px solid #3892E0">
                         <div class="contad">
                             <div class="DetalleCabIzq">
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></label><input type="text" style="width: 15%;" disabled/> <input type="text" style="width: 49%; border: none; background:none;" readonly   />
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></label><input type="text" style="width: 15%;" disabled id="clasePedido"/> <input type="text" style="width: 49%; border: none; background:none;" readonly   />
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDAreaVentas"));%></label><input type="text" style="width: 15%;" disabled/>  / <input type="text" style="width: 10%;" disabled/> / <input type="text" style="width: 10%;" disabled/>
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDAreaVentas"));%></label><input type="text" style="width: 15%;" id="OrgVentas" disabled/>  / <input type="text" id="CanalDist" style="width: 10%;" disabled/> / <input type="text" style="width: 10%;" disabled id="Sector"/>
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDOficinaVentas"));%></label><input type="text" style="width: 15%;" disabled/> <input type="text" style="width: 49%; border: none; background: none" readonly>
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDOficinaVentas"));%></label><input type="text" style="width: 15%;" disabled id="OficinaVentas"/> <input type="text" style="width: 49%;  border: none; background: none" readonly id="DOficinaVentas"/>
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDGrupoVendedo"));%></label><input type="text" style="width: 12%" disabled/> <input type="text" style="width: 50%; border: none; background: none;" readonly/>
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDGrupoVendedo"));%></label><input type="text" style="width: 12%" disabled id="GpoVendedores"/> <input type="text" style="width: 50%; border: none; background: none;" readonly id="DGpoVendedores"/>
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDMotivoPedido"));%></label><select style="width: 50%;" disabled ></select>
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDMotivoPedido"));%></label><select style="width: 50%" ID="MotivoPed" disabled ><option id="opcion1"></option></select>
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDMonedaDocs"));%></label><input type="text" style="width: 15%;" disabled> / <input type="text" style="width: 25%;" disabled/>
-                                <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDOrgVentas"));%></label><input type="text" style="width: 15%;" disabled>
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDMonedaDocs"));%></label><input type="text" style="width: 15%;" disabled id="Moneda2">
                                 <hr>
                             </div>
                             <div class="DetalleCabDer">
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaDocumento"));%></label><input type="text" style="width: 15%;" disabled/> <input type="text" style="width: 49%; border: none; background:none;" readonly   />
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaDocumento"));%></label><input type="text" style="width: 15%;" id="fechaDocumento" disabled/>
                                 <hr>
-                                <input type="text" style="width: 100%; background: none; border: none;" readonly/>
+                                <input type="text" style="width: 100%; background: none; border: none;" readonly id="AreVentas" />
                                 <hr style="border: #fff;">
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDCreadoPor"));%></label><input type="text" style="width: 15%;" disabled/> <input type="text" style="width: 49%; border: none; background:none;" readonly   />
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDCreadoPor"));%></label><input type="text" style="width: 15%;" disabled id="NombreResp"/>
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaPrecio"));%></label><input type="text" style="width: 15%;" disabled/> <input type="text" style="width: 49%; border: none; background:none;" readonly   />
-                                <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDCanalDistr"));%></label><input type="text" style="width: 8%;" disabled/>
-                                <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDSector"));%></label><input type="text" style="width: 8%;" disabled/>
+                                <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaPrecio"));%></label><input type="text" style="width: 15%;" disabled id="FechaPrecio"/> 
                                 <hr>
                             </div>
                         </div>
@@ -261,7 +263,7 @@
                         <label style="margin-left: 2%;"><%out.println(po.getProperty("etiqueta.PedidosSDResuPosi"));%></label>
                         <hr style="width: 100%; margin-top:-1px;   border: 1px solid #3892E0">
                         <div class="DivResPosiciones" id="ContResPos">
-                            <label style="width: 15%; display: inline-block;"><%out.println(po.getProperty("etiqueta.PedidosSDFechPreEntr"));%></label><input type="text" style="width: 2%;" disabled/> <input type="text" style="width: 10%;" disabled/>
+                            <label style="width: 15%; display: inline-block;"><%out.println(po.getProperty("etiqueta.PedidosSDFechPreEntr"));%></label> <input type="text" style="width: 10%;" disabled id="fech_prefEnt"/>
                             <hr style="width: 15%; margin-top: -1px; margin-left: 0;">
                             <div class="DivResumenPos">
                                 <div id="tabscrll2">
@@ -314,6 +316,8 @@
                     </div>
                 </div>
                 <div class="DivPos">
+                    <label style="display: inline-block; width: 5%;"><%out.println(po.getProperty("etiqueta.PedidosSDPosicion"));%></label><input type="text" style="background: none; border: none; width: 15% ;" readonly id="posci" />
+                    <hr style="width: 5%; margin-top:-1px; margin-left: 0;">
                     <div class="tabs">
                         <button  id="btnExped"><%out.println(po.getProperty("etiqueta.PedidosSDExpedicion"));%></button>
                         <button  id="btnCondi"><%out.println(po.getProperty("etiqueta.PedidosSDCondiciones"));%></button>                               
@@ -323,27 +327,27 @@
                     <div class="Contenidotabs">
 
                         <div class="DivExpedicion" id="ContExp">
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDCentro"));%></label><input type="text"  style="width: 8%;" disabled/> <input type="text" style="width: 50%; border: none; background: none;" readonly/>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDCentro"));%></label><input type="text"  style="width: 8%;" disabled id="Centro"/> <input type="text" style="width: 50%; border: none; background: none;" readonly id="DenominacionCentro"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDProEntre"));%></label><input type="text" style="width: 3%;" disabled/> <input type="text" style="width: 50%; border: none; background: none;" readonly/>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDProEntre"));%></label><input type="text" style="width: 3%;" disabled id="PrioridadEntrega"/> <input type="text" style="width: 50%; border: none; background: none;" readonly id="DenPrioEntrega"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDAlmacen"));%></label><input type="text" style="width: 8%;" disabled/> <input type="text" style="width: 50%; border: none; background: none;" readonly/>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDAlmacen"));%></label><input type="text" style="width: 8%;" disabled id="Almacen"/> <input type="text" style="width: 50%; border: none; background: none;" readonly id="DenAlma"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDPtoExp"));%></label><input type="text" style="width: 8%;" disabled/> <input type="text" style="width: 50%; border: none; background: none;" readonly/>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDPtoExp"));%></label><input type="text" style="width: 8%;" disabled id="PtoExp"/> <input type="text" style="width: 50%; border: none; background: none;" readonly id="DenPtoExp"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDRuta"));%></label><input type="text" style="width: 10%;"  disabled/> <input type="text" style="width: 50%; border: none; background: none;" readonly/>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDRuta"));%></label><input type="text" style="width: 10%;"  disabled id="Ruta"/> <input type="text" style="width: 50%; border: none; background: none;" readonly id="DenRuta"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDPesoNeto"));%></label><input type="text" style="width: 12%" disabled/> <input type="text" style="width: 5%;" disabled/>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDPesoNeto"));%></label><input type="text" style="width: 12%" disabled id="PesosNeto"/> <input type="text" style="width: 5%;" disabled id="UnidadPeso"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDPesoBruto"));%></label><input type="text" style="width: 12%" disabled/>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDPesoBruto"));%></label><input type="text" style="width: 12%" disabled id="PesoBruto"/>
                             <hr>
                         </div>
                         <div class="DivCondiciones" id="ContCond">
-                            <label style="width: 8%; display: inline-block;"><%out.println(po.getProperty("etiqueta.PedidosSDCondCtd"));%></label><input type="text" style="width: 15%;" disabled/> <input type="text" style="width: 5%;" disabled/>
+                            <label style="width: 8%; display: inline-block;"><%out.println(po.getProperty("etiqueta.PedidosSDCondCtd"));%></label><input type="text" style="width: 15%;" disabled id="Catd1"/> <input type="text" style="width: 5%;" disabled id="UMv1"/>
                             <hr style="width: 8%; margin-left: 0; margin-top: -1px;">
-                            <label style="width: 8%; display: inline-block;"><%out.println(po.getProperty("etiqueta.PedidosSDCondNeto"));%></label><input type="text" style="width: 15%;" disabled/> <input type="text" style="width: 5%;" disabled/>
+                            <label style="width: 8%; display: inline-block;"><%out.println(po.getProperty("etiqueta.PedidosSDCondNeto"));%></label><input type="text" style="width: 15%;" disabled id="Neto"/> <input type="text" style="width: 5%;" disabled id="mone"/>
                             <hr style="width: 8%; margin-left: 0; margin-top: -1px;">
-                            <label style="width: 8%; display: inline-block;"><%out.println(po.getProperty("etiqueta.PedidosSDCondImpues"));%></label><input type="text" style="width: 15%;" disabled/>
+                            <label style="width: 8%; display: inline-block;"><%out.println(po.getProperty("etiqueta.PedidosSDCondImpues"));%></label><input type="text" style="width: 15%;" disabled id="importe"/>
                             <hr style="width: 8%; margin-left: 0; margin-top: -1px;">
                             <br>
                             <div id="tabscrll3">
@@ -363,9 +367,7 @@
                                                         <td><%out.println(po.getProperty("etiqueta.PedidosSDUM"));%></td>
                                                         <td><%out.println(po.getProperty("etiqueta.PedidosSDValorCond"));%></td>
                                                         <td><%out.println(po.getProperty("etiqueta.PedidosSDCondMon"));%></td>
-                                                        <td><%out.println(po.getProperty("etiqueta.PedidosSDEstat"));%></td>
                                                         <td><%out.println(po.getProperty("etiqueta.PedidosSDConco"));%></td>
-                                                        <td><%out.println(po.getProperty("etiqueta.PedidosSDCompATS"));%></td>
                                                         <td><%out.println(po.getProperty("etiqueta.PedidosSDCondUMB"));%></td>
                                                         <td><%out.println(po.getProperty("etiqueta.PedidosSDCondDeCoCo"));%></td>
                                                         <td><%out.println(po.getProperty("etiqueta.PedidosSDUM"));%></td>
@@ -379,18 +381,18 @@
                                         <section class="SecBody3" id="SecCuerpo3">
                                             <table id="TabBody3">
                                                 <tbody>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr class="ocultar"><td>00</td><td>000000</td><td>000000</td><td>0000000000000</td><td>00000000</td><td>00000</td><td>00000</td><td>00000</td><td>00000000000000</td><td>00000</td><td>0000000</td><td>000000000</td><td>00000000000000</td><td>000000</td><td>00000000</td><td>000000</td><td>00000000000000</td><td>0000000</td><td>000000</td></tr>
+                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                    <tr class="ocultar"><td>00</td><td>000000</td><td>000000</td><td>0000000000000</td><td>00000000</td><td>00000</td><td>00000</td><td>00000</td><td>00000000000000</td><td>0000000</td><td>000000000</td><td>00000000</td><td>00000000</td><td>000000</td><td>00000000000000</td><td>0000000</td><td>000000</td></tr>
                                                 </tbody>
                                             </table>
                                         </section>
                                     </section>
-                                </section>
+                                </section> 
                             </div>
                             <section class="DobleScroll3" id="DobleSection3">
                                 <section id="DobleContainer3"></section>
@@ -449,11 +451,11 @@
                             </section>
                         </div>
                         <div class="DivEstatus" id="ContSta">
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDStatStatuGloeb"));%></label><input type='text' style="width: 10%;" disabled/>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDStatStatuGloeb"));%></label><input type='text' style="width: 20%;" disabled id="statusglobal"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDStatMotivo"));%></label><input type='text' style="width: 10%;" disabled/>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDStatMotivo"));%></label><select id="MotivoRech" style="width: 20%" disabled><option id="opcion2"></option></select>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PedidosSDStatMotivoEn"));%></label><input type='text' style="width: 10%;" disabled/>
+                            <label><%out.println(po.getProperty("etiqueta.PedidosSDStatMotivoEn"));%></label><input type='text' style="width: 20%;" disabled id="statusEnt"/>
                             <hr>
                         </div>
                     </div>
@@ -486,14 +488,14 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.PedidosSDDocu"));%></th>
                                         <th><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.PedidosSDDocu"));%></th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
                         <div id="cuerpoDatos">
-                            <div class="nofixedXM" id="cargarDatosPedidos">
+                            <div class="nofixedX" id="cargarDatosPedidos">
                             </div>
                         </div>
                     </div>
