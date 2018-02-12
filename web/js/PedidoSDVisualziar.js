@@ -10,6 +10,8 @@ $(document).ready(function () {
         $('#MCPedidos').show();
     });
     $('#MCPedidos').click(function () {
+        $('#msg').html("");
+        $('#iconmsg').hide();
         $('#DocumVenta').val('');
         $('#ClasePedid').val('');
         $('#numAcMax').val('500');
@@ -29,6 +31,11 @@ $(document).ready(function () {
         Drag.init(theHandle, theRoot);
         $('#DocumVenta').focus();
 
+    });
+    $('#retPed').click(function () {
+        $('#BuscarParPedSD').css('display', 'block');
+        $('#ConsultaTablaPedidos').css('display', 'none');
+        $('#DocumVenta').focus();
     });
     $('#CerraMCPed').click(function () {
         var BE = document.createElement('audio');
@@ -150,6 +157,21 @@ $(document).ready(function () {
             }
         }
     }
+    $('#txtPedido').keypress(function (e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 8) {
+            return true;
+        }
+        if (tecla == 13) {
+            GetData();
+        }
+        patron = /[0-9a-zA-Z]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    });
+    $('#aceptar').click(function () {
+        GetData();
+    });
 });
 
 function loadDoubleScroll(DobleSection, SecCuerpo, DobleContainer, TabBody) {
@@ -236,4 +258,228 @@ function BuscarPedMC() {
             }
         }
     });
+}
+function seleccionar(dato) {
+    var BE = document.createElement('audio');
+    BE.src = "audio/sapsnd05.wav";
+    BE.play();
+    $('#VentanaModalPedidosSD').hide();
+    $('#BuscarParPedSD').css('display', 'block');
+    $('#ConsultaTablaPedidos').css('display', 'none');
+    $('#txtPedido').val(dato);
+    $('#txtPedido').focus();
+}
+function GetData() {
+    cleanDatospos();
+    CargarTablaCaondiciones('', '', '0');
+    var tipo = "0";
+    var ped = $('#txtPedido');
+    if (ped.val().trim() === "") {
+        ShowMsg(2, "images/advertencia.PNG", "audio/saperror.wav");
+        ped.focus();
+    } else {
+        var acc = "ConsultaDocumentoTipo";
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: 'peticionVisualizarPedidosSD',
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: "Accion=" + acc + "&Documento=" + ped.val().trim(),
+            success: function (data) {
+                tipo = data.trim();
+                if (data.trim() === "0") {
+                    ShowMsg(3, "images/advertencia.PNG", "audio/saperror.wav");
+                    var data2 = "";
+                    $('#Pedido').val(data2);
+                    $('#Solicitante').val(data2);
+                    $('#DestMcia').val(data2);
+                    $('#PedCliente').val(data2);
+                    $('#TextoInter1').val(data2);
+                    $('#TextoInter2').val(data2);
+                    $('#fechpedido').val(data2);
+                    $('#clasePedido').val(data2);
+                    $('#OrgVentas').val(data2);
+                    $('#CanalDist').val(data2);
+                    $('#Sector').val(data2);
+                    $('#OficinaVentas').val(data2);
+                    $('#DOficinaVentas').val(data2);
+                    $('#GpoVendedores').val(data2);
+                    $('#DGpoVendedores').val(data2);
+                    $('#fechaDocumento').val(data2);
+                    $('#AreVentas').val(data2);
+                    $('#NombreResp').val(data2);
+                    $('#FechaPrecio').val(data2);
+                    $('#Moneda1').val(data2);
+                    $('#Moneda2').val(data2);
+                    $('#valorNeto').val(data2);
+                    $('#fech_prefEnt').val(data2);
+                } else {
+                    var acc = "ConsultaPedidoCab";
+                    $.ajax({
+                        async: false,
+                        dataType: 'json',
+                        type: 'GET',
+                        url: 'peticionVisualizarPedidosSD',
+                        contentType: "application/x-www-form-urlencoded",
+                        processData: true,
+                        data: "Accion=" + acc + "&Documento=" + ped.val().trim() + "&TipoConsulta=" + data,
+                        success: function (data) {
+                            $('#Pedido').val(data[0]);
+                            $('#Solicitante').val(data[1]);
+                            $('#DestMcia').val(data[2]);
+                            $('#PedCliente').val(data[3]);
+                            $('#TextoInter1').val(data[4]);
+                            $('#TextoInter2').val(data[5]);
+                            $('#fechpedido').val(data[6]);
+                            $('#clasePedido').val(data[7]);
+                            $('#OrgVentas').val(data[8]);
+                            $('#CanalDist').val(data[9]);
+                            $('#Sector').val(data[10]);
+                            $('#OficinaVentas').val(data[11]);
+                            $('#DOficinaVentas').val(data[12]);
+                            $('#GpoVendedores').val(data[13]);
+                            $('#DGpoVendedores').val(data[14]);
+                            $('#MotivoPed').append('<option id=\"opcion1\">' + data[15] + '</option>');
+                            $('#fechaDocumento').val(data[16]);
+                            $('#AreVentas').val(data[17]);
+                            $('#NombreResp').val(data[18]);
+                            $('#FechaPrecio').val(data[19]);
+                            $('#Moneda1').val(data[20]);
+                            $('#Moneda2').val(data[21]);
+                            $('#valorNeto').val(data[22]);
+                            $('#fech_prefEnt').val(data[23]);
+                        }
+                    });
+                }
+            }
+        });
+    }
+//    CargarInterlocutores(ped.val().trim(), tipo);
+    CargarPosiciones(ped.val().trim(), tipo);
+}
+function  CargarInterlocutores(pedido, tipo) {
+
+}
+function CargarPosiciones(pedido, tipo) {
+    var acc = "CargarPosicionesTabla";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionVisualizarPedidosSD',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + "&Documento=" + pedido + "&TipoConsulta=" + tipo,
+        success: function (data) {
+            $('#SecCuerpo2').html(data);
+            AjustarCabecera('TabHead2', 'TabBody2', 3, 'SecCuerpo2');
+            loadDoubleScroll("DobleSection2", "SecCuerpo2", "DobleContainer2", "TabBody2");
+        }
+    });
+
+}
+function GetItemP(pedido, pos, tipo) {
+    $('#posci').val(parseInt(pos));
+    CargarPosExpedicion(pedido, pos, tipo);
+    CargarPosCampos(pedido, pos, tipo);
+    CargarTablaCaondiciones(pedido, pos, tipo);
+    //CargarPosRepartos(pedido, tipo);
+
+}
+function CargarPosExpedicion(pedido, pos, tipo) {
+    var acc = "CargarPosExpedicion";
+    $.ajax({
+        async: false,
+        dataType: 'json',
+        type: 'GET',
+        url: 'peticionVisualizarPedidosSD',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + "&Documento=" + pedido + "&Posicion=" + pos + "&TipoConsulta=" + tipo,
+        success: function (data) {
+            $('#Centro').val(data[0]);
+            $('#DenominacionCentro').val(data[1]);
+            $('#PrioridadEntrega').val(data[2]);
+            $('#DenPrioEntrega').val(data[3]);
+            $('#Almacen').val(data[4]);
+            $('#DenAlma').val(data[5]);
+            $('#PtoExp').val(data[6]);
+            $('#DenPtoExp').val(data[7]);
+            $('#Ruta').val(data[8]);
+            $('#DenRuta').val(data[9]);
+            $('#PesosNeto').val(data[10]);
+            $('#UnidadPeso').val(data[11]);
+            $('#PesoBruto').val(data[12]);
+        }
+    });
+}
+function CargarPosCampos(pedido, pos, tipo) {
+    var acc = "CargarPosCampos";
+    $.ajax({
+        async: false,
+        dataType: 'json',
+        type: 'GET',
+        url: 'peticionVisualizarPedidosSD',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + "&Documento=" + pedido + "&Posicion=" + pos + "&TipoConsulta=" + tipo,
+        success: function (data) {
+            $('#opcion2').remove();
+            $('#Catd1').val(data[0]);
+            $('#UMv1').val(data[1]);
+            $('#Neto').val(data[2]);
+            $('#mone').val(data[3]);
+            $('#importe').val(data[4]);
+            $('#statusglobal').val(data[5]);
+            $('#MotivoRech').append('<option id=\"opcion2\">' + data[6] + '</option>');
+            $('#statusEnt').val(data[7]);
+        }
+    });
+}
+function  CargarTablaCaondiciones(pedido, pos, tipo) {
+    var acc = "CargarTablaCondiciones";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionVisualizarPedidosSD',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + "&Documento=" + pedido + "&Posicion=" + pos + "&TipoConsulta=" + tipo,
+        success: function (data) {
+            $('#SecCuerpo3').html(data);
+            AjustarCabecera('TabHead3', 'TabBody3', 3, 'SecCuerpo3');
+            loadDoubleScroll("DobleSection3", "SecCuerpo3", "DobleContainer3", "TabBody3");
+        }
+    });
+}
+function CargarPosRepartos(pedido, tipo) {
+
+}
+
+function cleanDatospos() {
+    $('#posci').val("");
+    $('#opcion1').remove();
+    $('#opcion2').remove();
+    $('#Centro').val("");
+    $('#DenominacionCentro').val("");
+    $('#PrioridadEntrega').val("");
+    $('#DenPrioEntrega').val("");
+    $('#Almacen').val("");
+    $('#DenAlma').val("");
+    $('#PtoExp').val("");
+    $('#DenPtoExp').val("");
+    $('#Ruta').val("");
+    $('#DenRuta').val("");
+    $('#PesosNeto').val("");
+    $('#UnidadPeso').val("");
+    $('#PesoBruto').val("");
+    $('#Catd1').val("");
+    $('#UMv1').val("");
+    $('#Neto').val("");
+    $('#mone').val("");
+    $('#importe').val("");
+    $('#statusglobal').val("");
+    $('#statusEnt').val("");
+    $('#msg').html("");
+    $('#iconmsg').hide();
 }
