@@ -7,6 +7,7 @@ package AccesoDatos;
 
 import Entidades.SD_cabecera_pedidos_venta;
 import Entidades.SD_posiciones_pedido_condiciones;
+import Entidades.SD_posiciones_pedido_reparto;
 import Entidades.SD_posiciones_pedido_venta;
 import Entidades.SD_posiciones_pedidos_expedicion;
 import java.sql.Connection;
@@ -238,5 +239,43 @@ public class ACC_VisualizarPedidosSD {
             cnx.CerrarConexion(con);
         }
         return cond;
+    }
+
+    public ArrayList<SD_posiciones_pedido_reparto> GetReparto(String doc, String pos) {
+        ArrayList<SD_posiciones_pedido_reparto> rep = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call SD.VisualizarPedidos_GetRepartos(?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, doc);
+            ps.setString(2, pos);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SD_posiciones_pedido_reparto pr = new SD_posiciones_pedido_reparto();
+                pr.setPlazo_entrega_acordado(rs.getString("plazo_entrega_acordado"));
+                pr.setCantidad_pedido_acom(rs.getString("cantidad_pedido_acom"));
+                pr.setUnidad_medida_venta(rs.getString("unidad_medida_venta"));
+                pr.setCant_entreg_unid_venta(rs.getString("cant_entreg_unid_venta"));
+                pr.setTipo_fehca(rs.getString("tipo_fecha"));
+                pr.setFecha_reparto(rs.getString("fecha_reparto"));
+                pr.setCant_pedida_cliente_umv(rs.getString("cant_pedida_cliente_umv"));
+                pr.setCant_corregida(rs.getString("cant_coregida_umv"));
+                pr.setCant_confirmada(rs.getString("cant_confirmada"));
+                pr.setUnidad_med_venta(rs.getString("unidad_med_venta"));
+                pr.setBloqueo_entrega_prop(rs.getString("bloqueo_entrega_prop"));
+                pr.setTipo_pos_reparto(rs.getString("tipo_pos_reparto"));
+                pr.setNumero_solicitud_ped(rs.getString("numero_solicitud_ped"));
+                pr.setNum_pos_solc_ped(rs.getString("num_pos_solic_ped"));
+                rep.add(pr);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return rep;
     }
 }
