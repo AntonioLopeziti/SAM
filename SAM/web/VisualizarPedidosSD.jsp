@@ -400,11 +400,11 @@
                         </div>
                         <div class="DivRepartos" id="ContRep">
                             <input type='checkbox' disabled/><label><%out.println(po.getProperty("etiqueta.PedidosSDRepFechCa"));%></label><br>
-                            <label style='width: 10%; margin-top: 12px; display: inline-block;'><%out.println(po.getProperty("etiqueta.PedidosSDRepPlazoe"));%></label><select style='width: 15%;' disabled></select>
+                            <label style='width: 10%; margin-top: 12px; display: inline-block;'><%out.println(po.getProperty("etiqueta.PedidosSDRepPlazoe"));%></label><input type="text" id="PlazEnt" style="width: 20%;" disabled/>
                             <hr style='width: 10%; margin-left: 0; margin-top: -1px;'>
-                            <label  style='width: 10%; display: inline-block;'><%out.println(po.getProperty("etiqueta.PedidosSDRepCtdPed"));%></label><input type='text' style='width: 15%;' disabled/> <input type='text' style='width: 5%;' disabled/>
+                            <label  style='width: 10%; display: inline-block;'><%out.println(po.getProperty("etiqueta.PedidosSDRepCtdPed"));%></label><input type='text' style='width: 15%;' id="CantPed" disabled/> <input id="UMedi" type='text' style='width: 5%;' disabled/>
                             <hr style='width: 10%; margin-left: 0; margin-top: -1px;'>
-                            <label  style='width: 10%; display: inline-block;'><%out.println(po.getProperty("etiqueta.PedidosSDRepCtdEnt"));%></label><input type='text' style='width: 15%;' disabled/>
+                            <label  style='width: 10%; display: inline-block;'><%out.println(po.getProperty("etiqueta.PedidosSDRepCtdEnt"));%></label><input type='text' style='width: 15%;' disabled id="Cantentrg"/>
                             <hr style='width: 10%; margin-left: 0; margin-top: -1px;'>
                             <br>
                             <div id="tabscrll4">
