@@ -1,0 +1,431 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19/01/2018, 12:56:51 PM
+*/
+
+.DivContentVisPedSD{
+    width: 80%;
+    margin-bottom: 5%;
+}
+.parambus{
+    width: 60%;
+}
+.DivBusquedaPeSD{
+    width: 100%;
+    background: #fff;
+    height: auto;
+    padding-left: 2%;
+    padding-bottom: 2%;
+}
+#lineaTitulo{
+    border: 1px solid #3892E0;
+    margin-left: -2%;
+    margin-top: 0;
+}
+.divPed label{
+    width: 18%;
+    display: inline-block;
+}
+.divPed hr{
+    width: 18%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.contain-cabecera{
+    padding-left: 1%;
+    margin-top: 20px;
+    width: 80%;
+    height: 140px;
+}
+.divDer{width: 40%; float:left;}
+
+.divDer label{
+    width: 35%;
+    display: inline-block;
+}
+.divDer hr{
+    width: 35%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.divIzq{
+    width: 50%;
+    float: left;
+}
+.divIzq label{
+    width: 35%;
+    display: inline-block;
+}
+.divIzq hr{
+    width: 35%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.contain-cabacera-detalle{
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.btn1dinamic{
+    width: 3%;
+    float: left;
+    height: 100%;
+}
+.divCabeceradetalle{
+    width: 96%;
+    height: 50px;
+    float: left;
+    background: #fff;
+
+}
+.DetalleCabIzq{
+    padding-left: 2%;
+    width: 45%;
+    float: left;
+}
+.DetalleCabIzq label{
+    display: inline-block;
+    width: 32%;
+}
+.DetalleCabIzq hr{
+    width: 32%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.DetalleCabDer{
+    float: left;
+    width: 52%;
+}
+.DetalleCabDer label{
+    width: 30%;
+    display: inline-block;
+}
+.DetalleCabDer label{
+    width: 30%;
+    display: inline-block;
+}
+.contad{
+    height: 200px;
+}
+.DetalleCabDer hr{
+    width: 30%;
+    margin-top: -1px;
+    margin-left: 0;
+}
+.DivTablaCli{
+    padding-left: 1%;
+    margin-top: 25px;
+    width: 100%;
+}
+#tabscrll{
+    width: 98%;
+    display: inline-block;
+}
+.DobleScroll { 
+    height: 100px;
+    width: 17px; 
+    background-color: #007CC0;
+    display: inline-block;
+    margin-bottom: 17px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+}
+#TableNotfi
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainer
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+td{
+    text-align: center;
+}
+.SecHead thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead
+{
+    display: block;
+}
+.SecBody
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo { height: 100px; }
+.ocultar
+{
+    visibility: hidden;
+}
+.DivResPos2{
+    background: #fff;
+}
+.DivResPosiciones{
+    padding-left: 2%;
+}
+.DivPos{
+    width: 100%;
+    margin-top: 40px;
+}
+
+.tabs{
+    height: auto;
+    width: 100%;
+}
+.tabs button{
+    margin-left: -6px;
+    background: #FFFFFF;    
+}
+.tabs button:hover{
+    background: #E5F2F9;
+}
+.Contenidotabs{
+    width: 98%;
+    height: 300px;
+    background: #E5E5E5;
+    border-top: 3px solid #3892E0;
+    border-right: 1px solid #3892E0;
+    border-left:  1px solid #3892E0;
+    border-bottom:  1px solid #3892E0;
+    margin-top: 1px;
+    margin-left: -.5%;
+    padding-left: 2%;
+    padding-top: 1%;
+}
+.DivExpedicion label{
+    width: 15%;
+    display: inline-block;
+}
+.DivExpedicion hr{
+    width: 15%;
+    margin-top: -1px;
+    margin-left: 0;
+}
+
+#tabscrll2{
+    margin-left: -1%;
+    width: 99%;
+    display: inline-block;
+}
+.DobleScroll2 { 
+    height: 150px;
+    width: 17px; 
+    background-color: #007CC0;
+    display: inline-block;
+    margin-bottom: 17px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+}
+#TableNotfi2
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainer2
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer2 table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody2 tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+td{
+    text-align: center;
+}
+.SecHead2 thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead2
+{
+    display: block;
+}
+.SecBody2
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo2  { height: 150px; }
+
+#tabscrll3{
+    margin-left: -1%;
+    width: 99%;
+    display: inline-block;
+}
+.DobleScroll3 { 
+    height: 120px;
+    width: 17px; 
+    background-color: #007CC0;
+    display: inline-block;
+    margin-bottom: 17px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+}
+#TableNotfi3
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainer3
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer3 table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody3 tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+td{
+    text-align: center;
+}
+.SecHead3 thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead3
+{
+    display: block;
+}
+.SecBody3
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo3  { height: 120px; }
+#tabscrll4{
+    margin-left: -1%;
+    width: 99%;
+    display: inline-block;
+}
+.DobleScroll4 { 
+    height: 120px;
+    width: 17px; 
+    background-color: #007CC0;
+    display: inline-block;
+    margin-bottom: 17px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+}
+#TableNotfi4
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainer4
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer4 table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody4 tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+td{
+    text-align: center;
+}
+.SecHead4 thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead4
+{
+    display: block;
+}
+.SecBody4
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo4  { height: 120px; }
+
+.DivEstatus label{
+    width: 15%;
+    display: inline-block;
+}
+.DivEstatus hr{
+    width: 15%;
+    margin-left: 0;
+    margin-top: -1px;
+}
