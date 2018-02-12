@@ -28,13 +28,13 @@ public class SD_cabecera_pedidos_venta {
     String grupo_vendedores = "";
     String denominacion_grupo_vendedores = "";
     String fecha_documento = "";
+    String valor_neto = "";
     String moneda_documento = "";
     String nombre_responsable = "";
     String motivo_pedido = "";
-    String moneda_documento2 = "";
     String fecha_determinacion_precio_tipo_cam = "";
-    String valor_neto = "";
     String fecha_pref_entrega = "";
+    String num_condicion_documento = "";
 
     public String getValor_neto() {
         return valor_neto;
@@ -220,14 +220,6 @@ public class SD_cabecera_pedidos_venta {
         this.motivo_pedido = motivo_pedido;
     }
 
-    public String getMoneda_documento2() {
-        return moneda_documento2;
-    }
-
-    public void setMoneda_documento2(String moneda_documento2) {
-        this.moneda_documento2 = moneda_documento2;
-    }
-
     public String getFecha_determinacion_precio_tipo_cam() {
         return fecha_determinacion_precio_tipo_cam;
     }
@@ -235,5 +227,14 @@ public class SD_cabecera_pedidos_venta {
     public void setFecha_determinacion_precio_tipo_cam(String fecha_determinacion_precio_tipo_cam) {
         this.fecha_determinacion_precio_tipo_cam = fecha_determinacion_precio_tipo_cam;
     }
+
+    public String getNum_condicion_documento() {
+        return num_condicion_documento;
+    }
+
+    public void setNum_condicion_documento(String num_condicion_documento) {
+        this.num_condicion_documento = num_condicion_documento;
+    }
+    
 
 }
