@@ -271,7 +271,6 @@ function seleccionar(dato) {
 }
 function GetData() {
     cleanDatospos();
-    CargarTablaCaondiciones('', '', '0');
     var tipo = "0";
     var ped = $('#txtPedido');
     if (ped.val().trim() === "") {
@@ -383,7 +382,7 @@ function GetItemP(pedido, pos, tipo) {
     CargarPosExpedicion(pedido, pos, tipo);
     CargarPosCampos(pedido, pos, tipo);
     CargarTablaCaondiciones(pedido, pos, tipo);
-    //CargarPosRepartos(pedido, tipo);
+    CargarPosRepartos(pedido, pos, tipo);
 
 }
 function CargarPosExpedicion(pedido, pos, tipo) {
@@ -452,10 +451,41 @@ function  CargarTablaCaondiciones(pedido, pos, tipo) {
         }
     });
 }
-function CargarPosRepartos(pedido, tipo) {
-
+function CargarPosRepartos(pedido, pos, tipo) {
+    var acc = "GetRepartos";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionVisualizarPedidosSD',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + "&Documento=" + pedido + "&Posicion=" + pos + "&TipoConsulta=" + tipo,
+        success: function (data) {
+            $('#SecCuerpo4').html(data);
+            AjustarCabecera('TabHead4', 'TabBody4', 3, 'SecCuerpo4');
+            loadDoubleScroll("DobleSection4", "SecCuerpo4", "DobleContainer4", "TabBody4");
+            CargarDatosPosRep(pedido, pos, tipo);
+        }
+    });
 }
-
+function CargarDatosPosRep(pedido, pos, tipo) {
+    var acc = "CabRep";
+    $.ajax({
+        async: false,
+        dataType: 'json',
+        type: 'GET',
+        url: 'peticionVisualizarPedidosSD',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + "&Documento=" + pedido + "&Posicion=" + pos + "&TipoConsulta=" + tipo,
+        success: function (data) {
+            $('#PlazEnt').val(data[0]);
+            $('#CantPed').val(data[1]);
+            $('#UMedi').val(data[2]);
+            $('#Cantentrg').val(data[3]);
+        }
+    });
+}
 function cleanDatospos() {
     $('#posci').val("");
     $('#opcion1').remove();
@@ -482,4 +512,6 @@ function cleanDatospos() {
     $('#statusEnt').val("");
     $('#msg').html("");
     $('#iconmsg').hide();
+    CargarPosRepartos("", "", "0");
+    CargarTablaCaondiciones('', '', '0');
 }
