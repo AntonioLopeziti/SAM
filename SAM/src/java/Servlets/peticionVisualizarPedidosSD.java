@@ -60,8 +60,8 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                             out.println("<td>" + mc1.get(i).getDocumento_ventas() + "</td>");
                             out.println("</tr>");
                         }
-                        out.println("</table>");
                         out.println("</tbody>");
+                        out.println("</table>");
                     } else {
                         out.println(0);
                     }
