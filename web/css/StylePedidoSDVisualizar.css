@@ -80,8 +80,12 @@ and open the template in the editor.
     width: 96%;
     height: 50px;
     float: left;
-    background: #fff;
 
+}
+.Cab133{
+    background: #fff;
+    height: 100%;
+    margin-bottom: 20px;
 }
 .DetalleCabIzq{
     padding-left: 2%;
