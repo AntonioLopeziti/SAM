@@ -189,73 +189,91 @@
                         <input type="image" style="vertical-align:middle;cursor:pointer;" id="btnocultar" src="images/gris.PNG"/>
                     </div>
                     <div class="divCabeceradetalle" id="divDetailCab">
-                        <label style="margin-left: 2%;"><%out.println(po.getProperty("etiqueta.PedidosSDDetallesCab"));%></label>
-                        <hr style="width: 100%; margin-top:-1px;   border: 1px solid #3892E0">
-                        <div class="contad">
-                            <div class="DetalleCabIzq">
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></label><input type="text" style="width: 15%;" disabled id="clasePedido"/> <input type="text" style="width: 49%; border: none; background:none;" readonly   />
-                                <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDAreaVentas"));%></label><input type="text" style="width: 15%;" id="OrgVentas" disabled/>  / <input type="text" id="CanalDist" style="width: 10%;" disabled/> / <input type="text" style="width: 10%;" disabled id="Sector"/>
-                                <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDOficinaVentas"));%></label><input type="text" style="width: 15%;" disabled id="OficinaVentas"/> <input type="text" style="width: 49%;  border: none; background: none" readonly id="DOficinaVentas"/>
-                                <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDGrupoVendedo"));%></label><input type="text" style="width: 12%" disabled id="GpoVendedores"/> <input type="text" style="width: 50%; border: none; background: none;" readonly id="DGpoVendedores"/>
-                                <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDMotivoPedido"));%></label><select style="width: 50%" ID="MotivoPed" disabled ><option id="opcion1"></option></select>
-                                <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDMonedaDocs"));%></label><input type="text" style="width: 15%;" disabled id="Moneda2">
-                                <hr>
-                            </div>
-                            <div class="DetalleCabDer">
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaDocumento"));%></label><input type="text" style="width: 15%;" id="fechaDocumento" disabled/>
-                                <hr>
-                                <input type="text" style="width: 100%; background: none; border: none;" readonly id="AreVentas" />
-                                <hr style="border: #fff;">
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDCreadoPor"));%></label><input type="text" style="width: 15%;" disabled id="NombreResp"/>
-                                <hr>
-                                <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaPrecio"));%></label><input type="text" style="width: 15%;" disabled id="FechaPrecio"/> 
-                                <hr>
-                            </div>
+                        <div class="tabs">
+                            <button  id="btnVent"><%out.println(po.getProperty("etiqueta.CotizacionOfertaVenta"));%></button>
+                            <button  id="btntxts"><%out.println(po.getProperty("etiqueta.TextosPed"));%></button>                               
                         </div>
-                        <div class="DivTablaCli">
-                            <div id="tabscrll">
-                                <section id="TableNotfi" >
-                                    <section class="TableContainer">
-                                        <section class="SecHead">
-                                            <table id="TabHead">
-                                                <thead>
-                                                    <tr>
-                                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                                        <td><%out.println(po.getProperty("etiqueta.PedidosSDFuncionInter"));%></td>
-                                                        <td><%out.println(po.getProperty("etiqueta.PedidosSDInterlocutor"));%></td>
-                                                        <td><%out.println(po.getProperty("etiqueta.PedidosSDNombre"));%></td>
-                                                        <td><%out.println(po.getProperty("etiqueta.PedidosSDCalle"));%></td>
-                                                        <td><%out.println(po.getProperty("etiqueta.PedidosSDCodigoPostal"));%></td>
-                                                        <td><%out.println(po.getProperty("etiqueta.PedidosSDPoblacion"));%></td>
-                                                        <td><%out.println(po.getProperty("etiqueta.PedidosSDDefInterlo"));%></td>
-                                                    </tr>
-                                                </thead>
-                                            </table>
+                        <section class="Cab133">
+                            <div class="DivVents" id="DivVentas">
+                                <label style="margin-left: 2%;"><%out.println(po.getProperty("etiqueta.PedidosSDDetallesCab"));%></label>
+                                <hr style="width: 100%; margin-top:-1px;   border: 1px solid #3892E0">
+                                <div class="contad">
+                                    <div class="DetalleCabIzq">
+                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></label><input type="text" style="width: 15%;" disabled id="clasePedido"/> <input type="text" style="width: 49%; border: none; background:none;" readonly   />
+                                        <hr>
+                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDAreaVentas"));%></label><input type="text" style="width: 15%;" id="OrgVentas" disabled/>  / <input type="text" id="CanalDist" style="width: 10%;" disabled/> / <input type="text" style="width: 10%;" disabled id="Sector"/>
+                                        <hr>
+                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDOficinaVentas"));%></label><input type="text" style="width: 15%;" disabled id="OficinaVentas"/> <input type="text" style="width: 49%;  border: none; background: none" readonly id="DOficinaVentas"/>
+                                        <hr>
+                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDGrupoVendedo"));%></label><input type="text" style="width: 12%" disabled id="GpoVendedores"/> <input type="text" style="width: 50%; border: none; background: none;" readonly id="DGpoVendedores"/>
+                                        <hr>
+                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDMotivoPedido"));%></label><select style="width: 50%" ID="MotivoPed" disabled ><option id="opcion1"></option></select>
+                                        <hr>
+                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDMonedaDocs"));%></label><input type="text" style="width: 15%;" disabled id="Moneda2">
+                                        <hr>
+                                        <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaZonaVenta"));%></label><input type="text" style="width: 12%;" disabled id="Zonaventas"> <input type="text" style="width: 45%; background: none; border: none;" readonly />
+                                        <hr>
+                                    </div>
+                                    <div class="DetalleCabDer">
+                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaDocumento"));%></label><input type="text" style="width: 15%;" id="fechaDocumento" disabled/>
+                                        <hr>
+                                        <input type="text" style="width: 100%; background: none; border: none;" readonly id="AreVentas" />
+                                        <hr style="border: #fff;">
+                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDCreadoPor"));%></label><input type="text" style="width: 15%;" disabled id="NombreResp"/>
+                                        <hr>
+                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaPrecio"));%></label><input type="text" style="width: 15%;" disabled id="FechaPrecio"/> 
+                                        <hr>
+                                        <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaListaPrec"));%></label><input type="text" style="width: 15%;" disabled id="LisPrecio">
+                                        <hr>
+                                        <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaGpoPrecio"));%></label><input type="text" style="width: 15%;" disabled id="GpoPrecio"/> 
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="DivTablaCli">
+                                    <div id="tabscrll">
+                                        <section id="TableNotfi" >
+                                            <section class="TableContainer">
+                                                <section class="SecHead">
+                                                    <table id="TabHead">
+                                                        <thead>
+                                                            <tr>
+                                                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDFuncionInter"));%></td>
+                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDInterlocutor"));%></td>
+                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDNombre"));%></td>
+                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDCalle"));%></td>
+                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDCodigoPostal"));%></td>
+                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDPoblacion"));%></td>
+                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDDefInterlo"));%></td>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </section>
+                                                <section class="SecBody" id="SecCuerpo">
+                                                    <table id="TabBody">
+                                                        <tbody>
+                                                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                            <tr class="ocultar"><td>00</td><td>00000000000000</td><td>0000000000000000</td><td>000000000000000000000</td><td>00000000000000000000000000000</td><td>000000000000000</td><td>000000000000000</td><td>000000000000000</td></tr>
+                                                        </tbody>
+                                                    </table>
+                                                </section>
+                                            </section>
                                         </section>
-                                        <section class="SecBody" id="SecCuerpo">
-                                            <table id="TabBody">
-                                                <tbody>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr class="ocultar"><td>00</td><td>00000000000000</td><td>0000000000000000</td><td>000000000000000000000</td><td>00000000000000000000000000000</td><td>000000000000000</td><td>000000000000000</td><td>000000000000000</td></tr>
-                                                </tbody>
-                                            </table>
-                                        </section>
+                                    </div>
+                                    <section class="DobleScroll" id="DobleSection">
+                                        <section id="DobleContainer"></section>
                                     </section>
-                                </section>
+                                </div>
                             </div>
-                            <section class="DobleScroll" id="DobleSection">
-                                <section id="DobleContainer"></section>
-                            </section>
-                        </div>
+                            <div class="DiTtx" id="textosCabecera">
+                                <label style="margin-left: 2%;"><%out.println(po.getProperty("etiqueta.CotizacionOferttxtCab"));%></label>
+                                <hr style="width: 100%; margin-top:-1px;   border: 1px solid #3892E0">
+                                <textarea rows="18" cols="6"  style="resize:none; width: 97%; height: 100%; margin-top: 1%; border: 1px solid #007CC0; margin-left: 1%;" id="TextCabece"  disabled></textarea></div>
+                        </section>
                     </div>
                 </div>
                 <div>
@@ -322,7 +340,8 @@
                         <button  id="btnExped"><%out.println(po.getProperty("etiqueta.PedidosSDExpedicion"));%></button>
                         <button  id="btnCondi"><%out.println(po.getProperty("etiqueta.PedidosSDCondiciones"));%></button>                               
                         <button  id="btnRep"><%out.println(po.getProperty("etiqueta.PedidosSDRepartos"));%></button>                               
-                        <button  id="btnEstatus"><%out.println(po.getProperty("etiqueta.PedidosSDEstatus"));%></button>                               
+                        <button  id="btnEstatus"><%out.println(po.getProperty("etiqueta.PedidosSDEstatus"));%></button>  
+                        <button  id="btnTextos"><%out.println(po.getProperty("etiqueta.TextosPed"));%></button>   
                     </div>
                     <div class="Contenidotabs">
 
@@ -458,6 +477,7 @@
                             <label><%out.println(po.getProperty("etiqueta.PedidosSDStatMotivoEn"));%></label><input type='text' style="width: 20%;" disabled id="statusEnt"/>
                             <hr>
                         </div>
+                        <div id="divtxts"><textarea rows="18" cols="6"  style="resize:none; width: 98%; margin-top: 1%;" id="TextPosicion_SP"  readonly></textarea></div>
                     </div>
                 </div>
             </div>
