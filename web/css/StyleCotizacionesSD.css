@@ -11,6 +11,10 @@ and open the template in the editor.
     width: 80%;
     margin-bottom: 5%;
 }
+.DivContentCreaPedido{
+    width: 80%;
+    margin-bottom: 5%;
+}
 .parambus{
     width: 60%;
 }
@@ -80,9 +84,10 @@ and open the template in the editor.
     width: 96%;
     height: 50px;
     float: left;
-    background: #fff;
+
 
 }
+
 .DetalleCabIzq{
     padding-left: 2%;
     width: 45%;
@@ -125,6 +130,11 @@ and open the template in the editor.
 #tabscrll{
     width: 98%;
     display: inline-block;
+}
+.Cab133{
+    background: #fff;
+    height: 100%;
+    margin-bottom: 20px;
 }
 .DobleScroll { 
     height: 100px;
@@ -428,4 +438,38 @@ td{
     width: 15%;
     margin-left: 0;
     margin-top: -1px;
+}
+.DivRe1{
+    width: 30%;
+    float: left;
+}
+.DivRe1 label{
+    width: 45%;
+    display: inline-block;
+}
+.DivRe1 hr{
+    width: 45%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.DivRe2{
+    width: 45%;
+    float: left;
+}
+.DivRe2 label{
+    width: 30%;
+    display: inline-block;
+}
+.DivRe2 hr{
+    width: 30%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+@media screen and (min-width: 300px) and (max-width: 800px){ 
+    .DivContentVisPedSD{
+        width: 100%;
+    }
+    .parambus{width: 100%;}
+    .contain-cabecera{width: 100%;}
+
 }
