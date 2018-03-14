@@ -337,6 +337,39 @@ tr:hover
     margin-top: -2.5px;
     vertical-align:middle;
 }
+.VentanaFecha{
+    position: fixed; 
+    width: 330px; 
+    height: 310px;
+    margin-top: 10px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 17.2px; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002; 
+}
+#handlecalendar{
+    padding-top: .5%;
+    height: 7%;
+    width: 100%;
+    font-family: "TAHOMA";
+    font-size: 14px;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+.btnCalendar{
+    float: right;
+    margin-right: 1%;
+    margin-top: 3%;
+}
+.scrolCale{
+    width: 320px;
+    height: 250px;
+    overflow: scroll;
+}
 @media screen and (min-width: 500px) and (max-width: 1000px){  
     footer
     {
