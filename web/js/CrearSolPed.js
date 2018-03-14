@@ -2648,6 +2648,7 @@ function VerificarFolioExcedido() {
         }
     });
 }
+
 function mostrarVentanaModal(id, handle, tipo)
 {
     switch (tipo) {
