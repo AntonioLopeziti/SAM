@@ -112,7 +112,7 @@ $(document).ready(function () {
         $('#contai').css('height', '400px');
         $('#contai').css('margin-bottom', '30px');
         $('#divDetailCab').show();
-        AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+        ventas();
     });
     $('#btnocultar').click(function () {
         $('#btnmostrar').show();
@@ -121,8 +121,24 @@ $(document).ready(function () {
         $('#contai').css('height', '50px');
         $('#contai').css('margin-bottom', '20px');
     });
-    var arrtabs = [$('#btnExped'), $('#btnCondi'), $('#btnRep'), $('#btnEstatus')];
-    $.each([$('#ContExp'), $('#ContCond'), $('#ContRep'), $('#ContSta')], function (i, v) {
+    $('#btntxts').click(function () {
+        $('#btnVent').css({"background": "#fff", "color": "#000"});
+        $('#btntxts').css({"background": "#007CC0", "color": "#fff"});
+        $('#textosCabecera').show();
+        $('#DivVentas').hide();
+    });
+    $('#btnVent').click(function () {
+        ventas();
+    });
+    function ventas() {
+        $('#btntxts').css({"background": "#fff", "color": "#000"});
+        $('#btnVent').css({"background": "#007CC0", "color": "#fff"});
+        $('#DivVentas').show();
+        $('#textosCabecera').hide();
+        AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+    }
+    var arrtabs = [$('#btnExped'), $('#btnCondi'), $('#btnRep'), $('#btnEstatus'), $('#btnTextos')];
+    $.each([$('#ContExp'), $('#ContCond'), $('#ContRep'), $('#ContSta'), $('#divtxts')], function (i, v) {
         if (i != 0) {
             v.hide();
         }
