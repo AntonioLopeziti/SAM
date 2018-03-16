@@ -12,6 +12,7 @@ package Entidades;
 public class ListadoOrdenesPP {
     String num_orden = "";
     String folio_sam = "";
+    String centro = "";
     String clase_documento_ventas = "";
     String status = "";
     String texto_breve = "";
@@ -37,6 +38,23 @@ public class ListadoOrdenesPP {
     String fecha2 = "";
     String contador_notificacion = "";
     String cantidad_total = "";
+    String habilitado = "";
+
+    public String getCentro() {
+        return centro;
+    }
+
+    public void setCentro(String centro) {
+        this.centro = centro;
+    }
+
+    public String getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(String habilitado) {
+        this.habilitado = habilitado;
+    }
 
     public String getNum_orden() {
         return num_orden;
