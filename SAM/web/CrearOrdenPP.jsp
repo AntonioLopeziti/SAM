@@ -91,7 +91,7 @@
         <link rel="stylesheet" href="css/StyleCreaOrdenPP.css"> 
         <link rel="stylesheet" href="css/menu.css" media="screen">  
         <script src="js/dom-drag.js"></script>
-        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>       
+        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script src="js/CreaOrdenPP.js"></script>
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
         <link rel="stylesheet" href="css/jquery-ui.css">
@@ -113,7 +113,7 @@
             %>
             function checkPermisoPag() {
                 var p = '<%=permiso%>';
-                var pag = p.charAt(111);
+                var pag = p.charAt(72);
                 if (pag == 1) {
 
                 } else if (pag == 0) {
@@ -170,40 +170,40 @@
 
                                 <div class="DivDatosBasicos" id="divDatBasicos">
                                     <label class="subTitle"><%out.println(po.getProperty("etiqueta.Reporte_DatosBas"));%></label>
-                                    <hr id="lineaAzulSub">
-                                    <label><%out.println(po.getProperty("etiqueta.ClOrdenOR_PP"));%>  </label>
+                                    <hr id="lineaAzulSub" >
+                                    <label><%out.println(po.getProperty("etiqueta.ClOrdenOR"));%>  </label>
                                     <select id="ClOrden" onblur="">
                                     </select>    
                                     <hr>
-                                    <label><%out.println(po.getProperty("etiqueta.CreOrDesrip_PP"));%></label>
+                                    <label><%out.println(po.getProperty("etiqueta.CreOrDesrip"));%></label>
                                     <input type="text" id="Descri" onblur="" style="width: 220px" maxlength="40"/>
                                     <hr>
                                     <label><%out.println(po.getProperty("etiqueta.CreOrMat_PP"));%></label>
-                                    <input type="text" id="Material" onKeyUp="this.value = this.value.toUpperCase();cargarEqui();" style="width: 135px"  maxlength="18"/><button id="matchMate" class='BtnMatchIcon'></button>
+                                    <input type="text" id="Equipo" onKeyUp="this.value = this.value.toUpperCase();cargarMat();" style="width: 135px"  maxlength="18"/><button id="matchEqui" class='BtnMatchIcon'></button>
                                     <hr>
-<!--                                    <label><%out.println(po.getProperty("etiqueta.CreOrUbTen_PP"));%></label>
+                                    <section style="display: none"><label><%out.println(po.getProperty("etiqueta.CreOrUbTen"));%></label>
                                     <input type="text"id="UbiTec" onKeyUp="this.value = this.value.toUpperCase();" maxlength="30" style="width: 200px"/><button id="matchUbiT" class='BtnMatchIcon'></button>
-                                    <hr>-->
+                                    <hr></section>
                                     <div class="halfHoriz1">
-                                        <label><%out.println(po.getProperty("etiqueta.CreOrCntPla_PP"));%></label>
+                                        <label><%out.println(po.getProperty("etiqueta.CreOrCntPla"));%></label>
                                         <select id="CentPl">
                                         </select>    
                                         <hr>
                                     </div>
                                     <div class="halfHoriz2">
-                                        <label><%out.println(po.getProperty("etiqueta.CreOrPtoTraRes_PP"));%></label>
+                                        <label><%out.println(po.getProperty("etiqueta.CreOrPtoTraRes"));%></label>
                                         <input type="text"id="PtoTjo" onKeyUp="this.value = this.value.toUpperCase();" maxlength="8"/><button id="matchPtoT" class='BtnMatchIcon'></button>
                                         <hr>
                                     </div>
                                     <div class="DivFecha">
-                                        <label class="subTitle"><%out.println(po.getProperty("etiqueta.CreOrFea_PP"));%></label>
+                                        <label class="subTitle"><%out.println(po.getProperty("etiqueta.CreOrFea"));%></label>
                                         <hr id="lineaAzulSub2" style="width: 102%"> 
-                                        <label><%out.println(po.getProperty("etiqueta.CreOrIniExtr_PP"));%></label>
+                                        <label><%out.println(po.getProperty("etiqueta.CreOrIniExtr"));%></label>
                                         <input  maxlength="10" type="text" value="" id="fechIni" readonly style="width:25%; background-repeat: no-repeat;" onpaste="return false;"/><button id="matchF1" class="BtnMatchIcon"></button>
 
                                         <!--<input type="date" id="fechIni">-->
                                         <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.CreOrDFimExtr_PP"));%></label>
+                                        <label><%out.println(po.getProperty("etiqueta.CreOrDFimExtr"));%></label>
                                         <input  maxlength="10" type="text" value="" id="fechFin" readonly style="width:25%; background-repeat: no-repeat;" onpaste="return false;"/><button id="matchF2" class="BtnMatchIcon"></button>
                                         <!--<input type="date"id="fechFin"/>-->
                                         <hr>
@@ -236,8 +236,8 @@
                             </div>   
                         </section>
                         <div class="tabsorden" >
-                            <button id="tabOpe" onclick="tabOpe();" disabled="true"><%out.println(po.getProperty("etiqueta.CreOrOperaciones_PP"));%></button>
-                            <button id="tabComp" onclick="tabComp();" disabled="true"s><%out.println(po.getProperty("etiqueta.CreOrComponentes_PP"));%></button>
+                            <button id="tabOpe" onclick="tabOpe();" disabled="true"><%out.println(po.getProperty("etiqueta.CreOrOperaciones"));%></button>
+                            <button id="tabComp" onclick="tabComp();" disabled="true"s><%out.println(po.getProperty("etiqueta.CreOrComponentes"));%></button>
                         </div>
                         <hr id="lineatabs">
                         <div class="ContenidoTabsOrden2">
@@ -285,8 +285,9 @@
                     </div> 
                 </div>       
             </div>
-
-            <!-- /////////////Ventana Modal Equipo ////////////////--> 
+                        
+            
+            <!--//////////Ventana Modal Materiales/////////////-->
             <div id="VentanaModalEquipo" class="VentanaModal">
                 <div id="handle1"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumdeMatMatch_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Material');"><label >X</label></div></div>
                 <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamEquipo', 'ConsultaTablaEquipo', 'denEqui');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
@@ -330,21 +331,65 @@
                     </div>
                 </div>
             </div>
+            <!-- /////////////Ventana Modal Equipo ////////////////--> 
+<!--            <div id="VentanaModalEquipo" class="VentanaModal">
+                <div id="handle1"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumdeEqMatch_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Equipo');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamEquipo', 'ConsultaTablaEquipo', 'denEqui');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
+                <div id="BuscarParamEquipo" class="BuscarParam_u">
+                    <div class="fondo_Match">
+                        <div class="busquedaMatch">
+                            <label><%out.println(po.getProperty("etiqueta.DenEq_Ordenes"));%></label>
+                            <input type="text" id="denEqui" style="width:35%;" focus/>
+                            <hr>
+                            <label><%out.println(po.getProperty("etiqueta.Num_Ordenes"));%></label>
+                            <input type="text" id="numEqui" style="width:35%;"/>
+                            <hr>
+                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes"));%></label>
+                            <input type="number" min="1"  id="numAcMaxEqui"  value="100" style="width:10%;" onblur="ValidarMaximo('numAcMaxEqui', this.value);"/>
+                            <hr>
+                        </div>        
+                    </div> 
+                    <div class="Botones_Match">
+                        <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okEquipo"/>
+                        <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('Equipo');"/>
+                    </div>
+                </div>
+                <div id="ConsultaTablaEquipo" style="display: none;">
+                    <div class="tablaCab">
+                        <div class="table-scroll" id="table-scrollEquipo">
+                            <div class="fixedY" id="fixedYEquipo">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th><%out.println(po.getProperty("etiqueta.DenEq_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Num_Ordenes"));%></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div id="cuerpoDatos">
+                                <div class="nofixedX" id="cargarDatosEquipo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
 
             <!--///////////Ventana Modal Ubication Tecnica//////////////////////////////////////////////--> 
             <div id="VentanaModalUbiT" class="VentanaModal">
-                <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.UbTecnica_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('UbiT');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamUbiT', 'ConsultaTablaUbiT   ', 'denUbiT');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.UbTecnica_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('UbiT');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamUbiT', 'ConsultaTablaUbiT   ', 'denUbiT');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamUbiT" class="BuscarParam_u">
                     <div class="fondo_Match">
                         <div class="busquedaMatch">
-                            <label><%out.println(po.getProperty("etiqueta.Denominacion_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.Denominacion_Ordenes"));%></label>
                             <input type="text" id="denUbiT" style="width:35%;" focus/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.UbTecnica_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.UbTecnica_Ordenes"));%></label>
                             <input type="text" id="ubiTecM" style="width:35%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes"));%></label>
                             <input type="number" min="1"  id="numAcMaxUbiT" value="100" style="width:10%;" onblur="ValidarMaximo('numAcMaxUbiT', this.value);"/>
                             <hr>
                         </div>        
@@ -361,8 +406,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.UbTecnica_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.DenUbTec_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.UbTecnica_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.DenUbTec_Ordenes"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -379,8 +424,8 @@
             <!--///////////Ventana Modal Centro Planificacion//////////////////////////////////////////////--> 
 
             <div id="VentanaModalCentroP" class="VentanaModal">
-                <div id="handle3"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CntPlanMante_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('CentroP');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle3"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CntPlanMante_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('CentroP');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
 
                 <div id="ConsultaTablaCentP">
                     <div class="tablaCab">
@@ -389,7 +434,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.Nombre_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Nombre_Ordenes"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -405,8 +450,8 @@
             <!--///////////Ventana Modal Clase Orden//////////////////////////////////////////////--> 
 
             <div id="VentanaModalClaseOr" class="VentanaModal">
-                <div id="handle5"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.ClasOrd_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ClaseOr');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle5"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.ClasOrd_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ClaseOr');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="ConsultaTablaClaseOr">
                     <div class="tablaCab">
                         <div class="table-scroll" id="table-scrollClaseOr">
@@ -414,8 +459,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.Cl_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.Denominacion_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Cl_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Denominacion_Ordenes"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -431,8 +476,8 @@
             <!--///////////Ventana Modal Contador Hoja de Ruta//////////////////////////////////////////////--> 
 
             <div id="VentanaModalContaHR" class="VentanaModal">
-                <div id="handle6"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.GrpHRuta_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ContaHR');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle6"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CntGrpHR_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ContaHR');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
 
                 <div id="ConsultaTablaContaHR">
                     <div class="tablaCab">
@@ -441,10 +486,10 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.GrpHRuta_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.CGH_Ordenes_PP"));%></th>
-                                            <!--<th><% //out.println(po.getProperty("etiqueta.TxtBHR_Ordenes_PP"));%></th>-->
-                                            <th><%out.println(po.getProperty("etiqueta.TxtBHR_OrdenesCab_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.GrpHRuta_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.CGH_Ordenes"));%></th>
+                                            <!--<th><% //out.println(po.getProperty("etiqueta.TxtBHR_Ordenes"));%></th>-->
+                                            <th><%out.println(po.getProperty("etiqueta.TxtBHR_OrdenesCab"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -460,24 +505,24 @@
 
             <!--///////////Ventana Modal Puesto Trabajo Resp//////////////////////////////////////////////--> 
             <div id="VentanaModalPtoTr" class="VentanaModal">
-                <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.PstTbRsMM_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('PtoTr');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamPtoTr', 'ConsultaTablaPtoTr', 'clasePto');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.PstTbRsMM_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('PtoTr');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamPtoTr', 'ConsultaTablaPtoTr', 'clasePto');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamPtoTr" class="BuscarParam_u">
                     <div class="fondo_Match">
                         <div class="busquedaMatch">
-                            <label><%out.println(po.getProperty("etiqueta.ClPsTra_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.ClPsTra_Ordenes"));%></label>
                             <input type="text" id="clasePto" style="width:15%;" focus/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.Cnt_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.Cnt_Ordenes"));%></label>
                             <input type="text" id="centroPto" style="width:15%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PstTra_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.PstTra_Ordenes"));%></label>
                             <input type="text" id="ptoTrM" style="width:25%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.Desc_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.Desc_Ordenes"));%></label>
                             <input type="text" id="descriPto" style="width:45%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes"));%></label>
                             <input type="number" min="1"  id="numAcMaxPto"  value="100" style="width:10%;" onblur="ValidarMaximo('numAcMaxPto', this.value);"/>
                             <hr>
                         </div>        
@@ -494,9 +539,9 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.Ce_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.PstoTbjo_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.DenomBreve_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Ce_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.PstoTbjo_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.DenomBreve_Ordenes"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -513,8 +558,8 @@
             <!--///////////Ventana Modal Lista de Materiales//////////////////////////////////////////////--> 
 
             <div id="VentanaModalLstMat" class="VentanaModal">
-                <div id="handle7"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LstDeMat_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('LstMat');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.SelNumLstMat_Ordenes_PP"));%></button><hr></div>
+                <div id="handle7"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LstDeMat_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('LstMat');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.SelNumLstMat_Ordenes"));%></button><hr></div>
 
                 <div id="ConsultaTablaLstMat">
                     <div class="tablaCab">
@@ -524,9 +569,9 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 150px"><input type="checkbox" style="size: 100%;visibility: hidden" ></th>
-                                            <th><%out.println(po.getProperty("etiqueta.OnumMat_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.OnumPz_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.CreOrDesrip_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.OnumMat"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.OnumPz"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.CreOrDesrip"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -547,8 +592,8 @@
             <!--///////////Ventana Modal Unidad de Medida//////////////////////////////////////////////--> 
 
             <div id="VentanaModalUMD" class="VentanaModal">
-                <div id="handle8"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.UniDurNormal_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('UMD');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle8"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.UniDurNormal_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('UMD');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
 
                 <div id="ConsultaTablaUMD">
                     <div class="tablaCab">
@@ -557,8 +602,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.UM_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.TxtUnMed_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.UM_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.TxtUnMed_Ordenes"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -574,8 +619,8 @@
             <!--///////////Ventana Modal Clave Moneda//////////////////////////////////////////////--> 
 
             <div id="VentanaModalClvM" class="VentanaModal">
-                <div id="handle19"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.ClvMoneda_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sClvM');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle19"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.ClvMoneda_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sClvM');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
 
                 <div id="ConsultaTablaClvM">
                     <div class="tablaCab">
@@ -584,8 +629,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.Mon_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.TxtExplic_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Mon_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.TxtExplic_Ordenes"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -601,8 +646,8 @@
             <!--///////////Ventana Modal Clave Lote//////////////////////////////////////////////--> 
 
             <div id="VentanaModalLote" class="VentanaModal">
-                <div id="handle20"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumdeLote_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('lote');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle20"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumdeLote_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('lote');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
 
                 <div id="ConsultaTablaLote">
                     <div class="tablaCab">
@@ -611,7 +656,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.Lote_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Lote_Ordenes"));%></th>
 
                                         </tr>
                                     </thead>
@@ -627,24 +672,24 @@
             </div>
             <!--///////////Ventana Modal Material//////////////////////////////////////////////--> 
             <div id="VentanaModalMat" class="VentanaModal">
-                <div id="handle9"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumMate_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Mat');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamMat', 'ConsultaTablaMat', 'txtMatMatch');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle9"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumMate_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Mat');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamMat', 'ConsultaTablaMat', 'txtMatMatch');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamMat" class="BuscarParam_u">
                     <div class="fondo_Match">
                         <div class="busquedaMatch">
-                            <label><%out.println(po.getProperty("etiqueta.TxrBreMat_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.TxrBreMat_Ordenes"));%></label>
                             <input type="text" id="txtMatMatch" style="width:35%;" focus/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.Material_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.Material_Ordenes"));%></label>
                             <input type="text" id="matMatch" style="width:15%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.Cnt_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.Cnt_Ordenes"));%></label>
                             <input type="text" id="centroMatch" style="width:25%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.OnumPz_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.OnumPz"));%></label>
                             <input type="text" id="numPzFabMatch" style="width:25%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes"));%></label>
                             <input type="number" min="1"  id="numAcMaxMat"  value="100" style="width:10%;" onblur="ValidarMaximo('numAcMaxMat', this.value);"/>
                             <hr>
                         </div>        
@@ -661,10 +706,10 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.TxrBreMat_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.Material_Ordenes_PP"));%></th>
-                                            <!--<th><%out.println(po.getProperty("etiqueta.Ce_Ordenes_PP"));%></th>-->
-                                            <th><%out.println(po.getProperty("etiqueta.NumPzFaab_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.TxrBreMat_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Material_Ordenes"));%></th>
+                                            <!--<th><%out.println(po.getProperty("etiqueta.Ce_Ordenes"));%></th>-->
+                                            <th>Numero de Pza. de Fabricante</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -679,18 +724,18 @@
             </div>
             <!--///////////Ventana Modal Num Cuenta Mayor//////////////////////////////////////////////--> 
             <div id="VentanaModalNumCM" class="VentanaModal">
-                <div id="handle16"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumCuenMay_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumCM');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamNumCM', 'ConsultaTablaNumCM', 'matchClCoste');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle16"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumCuenMay_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumCM');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamNumCM', 'ConsultaTablaNumCM', 'matchClCoste');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamNumCM" class="BuscarParam_u">
                     <div class="fondo_Match">
                         <div class="busquedaMatch">
-                            <label><%out.println(po.getProperty("etiqueta.ClssCoste_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.ClssCoste_Ordenes"));%></label>
                             <input type="text" id="matchClCoste" style="width:35%;" focus/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.ClssCosteTxtBre_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.ClssCosteTxtBre_Ordenes"));%></label>
                             <input type="text" id="matchTxtCl" style="width:45%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes"));%></label>
                             <input type="number" min="1"  id="numAcMaxNumCM"  value="100" style="width:10%;" onblur="ValidarMaximo('numAcMaxMat', this.value);"/>
                             <hr>
                         </div>        
@@ -707,8 +752,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.ClCoste_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.TxtBree_Ordene_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.ClCoste_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.TxtBree_Ordene"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -723,21 +768,21 @@
             </div>
             <!--///////////Ventana Modal Num Cuenta Mayor 2//////////////////////////////////////////////--> 
             <div id="VentanaModalNumCM2" class="VentanaModal">
-                <div id="handle18"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumCuenMay_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumCM2');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamNumCM2', 'ConsultaTablaNumCM2', 'matchClCoste2');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle18"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumCuenMay_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumCM2');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamNumCM2', 'ConsultaTablaNumCM2', 'matchClCoste2');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamNumCM2" class="BuscarParam_u">
                     <div class="fondo_Match">
                         <div class="busquedaMatch">
-                            <label><%out.println(po.getProperty("etiqueta.ClssCoste_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.ClssCoste_Ordenes"));%></label>
                             <input type="text" id="matchClCoste2" style="width:35%;" focus/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PlandeCuentas_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.PlandeCuentas_Ordenes"));%></label>
                             <input type="text" id="matchPlanC2" style="width:15%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.ClssCosteTxtBre_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.ClssCosteTxtBre_Ordenes"));%></label>
                             <input type="text" id="matchTxtCl2" style="width:45%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes"));%></label>
                             <input type="number" min="1"  id="numAcMaxNumCM2"  value="100" style="width:10%;" onblur="ValidarMaximo('numAcMaxMat', this.value);"/>
                             <hr>
                         </div>        
@@ -754,8 +799,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.ClCoste_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.TxtBree_Ordene_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.ClCoste_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.TxtBree_Ordene"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -770,18 +815,18 @@
             </div>
             <!--///////////Ventana Modal Num Servicio//////////////////////////////////////////////--> 
             <div id="VentanaModalNumS" class="VentanaModal">
-                <div id="handle17"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumServ_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumS');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamNumS', 'ConsultaTablaNumS', 'numStxtB');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle17"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumServ_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumS');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamNumS', 'ConsultaTablaNumS', 'numStxtB');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamNumS" class="BuscarParam_u">
                     <div class="fondo_Match">
                         <div class="busquedaMatch">
-                            <label><%out.println(po.getProperty("etiqueta.TxtBreeServ_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.TxtBreeServ_Ordenes"));%></label>
                             <input type="text" id="numStxtB" style="width:35%;" focus/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.NumServ_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.NumServ_Ordenes"));%></label>
                             <input type="text" id="numSnum" style="width:15%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes"));%></label>
                             <input type="number" min="1"  id="numAcMaxNumServicio"  value="100" style="width:10%;" onblur="ValidarMaximo('numAcMaxMat', this.value);"/>
                             <hr>
                         </div>        
@@ -798,8 +843,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.TxtBreeServ_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.Servicio_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.TxtBreeServ_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Servicio_Ordenes"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -814,8 +859,8 @@
             </div>
             <!--/////////////////////////////Ventana Modal Centro--> 
             <div id="VentanaModalCentro" class="VentanaModal">
-                <div id="handle10"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.Centros_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Centro');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle10"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.Centros_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Centro');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
 
                 <div id="ConsultaTablaCentro">
                     <div class="tablaCab">
@@ -824,7 +869,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.Centro_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Centro_Ordenes"));%></th>
                                             <th><%out.println(po.getProperty("etiqueta.DescCentro_Ordenes"));%></th>
                                         </tr>
                                     </thead>
@@ -840,8 +885,8 @@
             </div>
             <!--/////////////////////////////Ventana Modal Almacen--> 
             <div id="VentanaModalAlmacen" class="VentanaModal">
-                <div id="handle11"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.Almacenes_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Almacen');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle11"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.Almacenes_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Almacen');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
 
                 <div id="ConsultaTablaAlmacen">
                     <div class="tablaCab">
@@ -850,9 +895,9 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.Ce_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.Alm_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.DenomAlmacn_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Ce_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Alm_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.DenomAlmacn"));%>   </th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -868,21 +913,21 @@
 
             <!--/////////////////////////////Ventana Modal Grupo Articulos--> 
             <div id="VentanaModalGpoA" class="VentanaModal">
-                <div id="handle13"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.OgpoAr_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('GpoA');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamGpoArt', 'ConsultaTablaGpoA', 'gpoAtxt');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle13"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.OgpoAr"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('GpoA');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamGpoArt', 'ConsultaTablaGpoA', 'gpoAtxt');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamGpoArt" class="BuscarParam_u">  
                     <div class="fondo_Match">
                         <div class="busquedaMatch">
-                            <label><%out.println(po.getProperty("etiqueta.OgpoAr_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.OgpoAr"));%></label>
                             <input type="text" id="gpoAtxt" style="width:20%;" focus/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.OdenGr_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.OdenGr"));%></label>
                             <input type="text" id="gpoAden" style="width:25%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.OdesGr_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.OdesGr"));%></label>
                             <input type="text" id="gpoAdes" style="width:25%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.CtdMaxAc_Ordenes"));%></label>
                             <input type="number" min="1"  id="numAcMaxGpoA"  value="100" style="width:10%;" onblur="ValidarMaximo('numAcMaxPto', this.value);"/>
                             <hr>
                         </div>        
@@ -900,9 +945,9 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.GpAr_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.DenomGrArtic_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.DescDosGpoArt_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.GpAr_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.DenomGrArtic_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.DescDosGpoArt_Ordenes"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -917,8 +962,8 @@
             </div>
             <!--/////////////////////////////Ventana Modal Grupo Compras--> 
             <div id="VentanaModalGpoC" class="VentanaModal">
-                <div id="handle14"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.GrupoDeComp_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('GpoC');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle14"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.GrupoDeComp_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('GpoC');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="ConsultaTablaGpoC">
                     <div class="tablaCab">
                         <div class="table-scroll" id="table-scrollGpoC">
@@ -926,8 +971,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.GCp_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.Denominacion_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.GCp_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.Denominacion_Ordenes"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -942,8 +987,8 @@
             </div>
             <!--/////////////////////////////Ventana Modal Organización Compras--> 
             <div id="VentanaModalGpoC2" class="VentanaModal">
-                <div id="handle15"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.OrgComp_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('GpoC2');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div id="handle15"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.OrgComp_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('GpoC2');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="ConsultaTablaGpoC2">
                     <div class="tablaCab">
                         <div class="table-scroll" id="table-scrollGpoC2">
@@ -951,8 +996,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.OrgC_Ordenes_PP"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.DenominacionOrgComp_Ordenes_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.OrgC_Ordenes"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.DenominacionOrgComp_Ordenes"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -967,26 +1012,26 @@
             </div>
             <!--///////////Ventana Modal Gestion de Servicios//////////--> 
             <div id="VentanaModalServicios" class="VentanaModal">
-                <div id="handle12"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.GestionSerExt_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Servi');"><label >X</label></div></div>
+                <div id="handle12"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.GestionSerExt_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Servi');"><label >X</label></div></div>
                 <div id="ParamServi1" class="BuscarParam_u">
                     <div class="fondo_Match" style="margin-top: 9%;">
                         <div class="busquedaMatch" style="margin-top: -8%;">
                             <div id="datS1">
-                                <label><%out.println(po.getProperty("etiqueta.CtdOperacion_Ordenes_PP"));%></label>
+                                <label><%out.println(po.getProperty("etiqueta.CtdOperacion_Ordenes"));%></label>
                                 <input type="text" id="serCtdOp1" style="width:35%;" onKeyUp="this.value = check99(this.value, '9999999', 7)" maxlength="11"/>
                                 <input type="text" id="serCtdOp2" style="width:9%;"  onKeyUp="this.value = this.value.toUpperCase();" maxlength="3"/>
                                 <button id="matchSctd" class='BtnMatchIcon' onclick="consultaSctd();"></button>
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.Precio_Ordenes_PP"));%></label>
+                                <label><%out.println(po.getProperty("etiqueta.Precio_Ordenes"));%></label>
                                 <input type="text" id="serPrec1" style="width:30%;" maxlength="11" onblur="this.value = checkDec(this.value, 2)"   onKeyUp="this.value = check99(this.value, '99999999', 8)"  />
                                 <input type="text" id="serPrec2" style="width:10%;" onKeyUp="this.value = this.value.toUpperCase();" maxlength="5"/>
                                 <button id="matchSpre" class='BtnMatchIcon2' onclick="consultaSclvM();"></button>
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.GpoArts_Ordenes_PP"));%></label>
+                                <label><%out.println(po.getProperty("etiqueta.GpoArts_Ordenes"));%></label>
                                 <input type="text" id="serGrArt" style="width:25%;" onKeyUp="this.value = this.value.toUpperCase();" maxlength="9"/>
                                 <button id="matchSgpoA" class='BtnMatchIcon2' onKeyUp="this.value = this.value.toUpperCase();"></button>
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.GpoCom_Ordenes_PP"));%></label>
+                                <label><%out.println(po.getProperty("etiqueta.GpoCom_Ordenes"));%></label>
                                 <input type="text" id="serGrCom1" style="width:10%;" onKeyUp="this.value = this.value.toUpperCase();" maxlength="3"/> /
                                 <button id="matchSgpoC1" class='BtnMatchIcon' onclick="consultaSgpoC1();" ></button>
                                 <input type="text" id="serGrCom2" style="width:13%;" onKeyUp="this.value = this.value.toUpperCase();" maxlength="4"/>
@@ -999,7 +1044,7 @@
                                 <!--                                <label>Destinatario</label>
                                                                 <input type="text" id="serDest" style="width:33%;"/>
                                                                 <hr>-->
-                                <label><%out.println(po.getProperty("etiqueta.Solicitante_Ordenes_PP"));%></label>
+                                <label><%out.println(po.getProperty("etiqueta.Solicitante_Ordenes"));%></label>
                                 <input type="text" id="serSoli" style="width:33%;"value="<%=Nombre%>" readonly="true"/>
                                 <hr>
                                 <!--                                <label>Plaz.entr.prev.</label>
@@ -1015,11 +1060,11 @@
                                 <!--                                <label>por</label>
                                                                 <input type="text" id="serPor" style="width:15%;"/>
                                                                 <hr style="visibility: hidden;">-->
-                                <label><%out.println(po.getProperty("etiqueta.ClasedeCostee_Ordenes_PP"));%></label>
+                                <label><%out.println(po.getProperty("etiqueta.ClasedeCostee_Ordenes"));%></label>
                                 <input type="text" id="serClCos" style="width:30%;" onKeyUp="this.value = this.value.toUpperCase();" maxlength="10"/>
                                 <button id="matchSclC" class='BtnMatchIcon2'></button>
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.Acreedor_Ordenes_PP"));%></label>
+                                <label><%out.println(po.getProperty("etiqueta.Acreedor_Ordenes"));%></label>
                                 <input type="text" id="serAcre" style="width:30%;"/>
                                 <button id="matchSacre" class='BtnMatchIcon2' onclick="consultaSacre();"></button>
                                 <hr>
@@ -1049,25 +1094,25 @@
                     <div class="fondo_Match">
                         <div class="busquedaMatch">
                             <div class="PanelBntMatch" style="margin-top: -3%;"><label><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></label><hr style="width: 100%;margin-left: -3%;"></div>
-                            <label><%out.println(po.getProperty("etiqueta.NoServicioo_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.NoServicioo_Ordenes"));%></label>
                             <input type="text" id="serNoSer" style="width:17%;" onKeyUp="this.value = this.value.toUpperCase();" maxlength="18"/> 
                             <button id="matchSnoS" class='BtnMatchIcon2'></button>
                             <input type="text" id="txtServi" hidden>
                             <input type="text" id="umdServi" hidden>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.Cantidad_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.Cantidad_Ordenes"));%></label>
                             <input type="text" id="serCant" style="width:17%;" maxlength="11" onblur="this.value = checkDec(this.value, 3)"   onKeyUp="this.value = check99(this.value, '999999', 7)"/> 
                             <label id="serCant2"></label>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.PrecioEstimado_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.PrecioEstimado_Ordenes"));%></label>
                             <input type="text" id="serPrecEst1" style="width:14%;" maxlength="11" onblur="this.value = checkDec(this.value, 2)"   onKeyUp="this.value = check99(this.value, '99999999', 8)" />     
                             <input type="text" id="serPrecEst2" style="width:6%;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.GrupodeArtículoss_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.GrupodeArtículoss_Ordenes"));%></label>
                             <input type="text" id="serGrpArt2" style="width:10%;" onKeyUp="this.value = this.value.toUpperCase();"/>  
                             <button id="matchSgrAr2" class='BtnMatchIcon2' onclick="consultaSgpoA2();"></button>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.ClasedeCostee_Ordenes_PP"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.ClasedeCostee_Ordenes"));%></label>
                             <input type="text" id="serClCost" style="width:11%;" onKeyUp="this.value = this.value.toUpperCase();"/>  
                             <button id="matchSclCs" class='BtnMatchIcon2'></button>
                             <hr>
@@ -1083,7 +1128,7 @@
 
             <!--///////////Ventana Modal Clave Control//////////////////////////////////////////////--> 
             <div id="VentanaModalClaveCtrl" class="VentanaModal">
-                <div id="handle21"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.ClavOrdee_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ClaveCtrl');"><label >X</label></div></div>
+                <div id="handle21"><label id="TituloMatch">Clave orden</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ClaveCtrl');"><label >X</label></div></div>
                 <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
 
                 <div id="ConsultaTablaClaveCtrl">
@@ -1110,7 +1155,7 @@
 
             <!--///////////Ventana Modal Proveedor//////////////////////////////////////////////--> 
             <div id="VentanaModalAcreedor" class="VentanaModal">
-                <div id="handle22"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.Oacr_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Acreedor');"><label >X</label></div></div>
+                <div id="handle22"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.Oacr"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Acreedor');"><label >X</label></div></div>
                 <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
 
                 <div id="ConsultaTablaClaveCtrl">
@@ -1136,12 +1181,12 @@
             </div>  
 
             <div id="VentanaModalTextli" class="VentanaModal">
-                <div id="handle23"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.OtxtL_PP"));%></label><div class="BotonCerrar_Matc" id="cerrarmodalTL"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button  ><%out.println(po.getProperty("etiqueta.OtxtL_PP"));%></button><hr></div>
+                <div id="handle23"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.OtxtL"));%></label><div class="BotonCerrar_Matc" id="cerrarmodalTL"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button  ><%out.println(po.getProperty("etiqueta.OtxtL"));%></button><hr></div>
                 <div id="BuscarTxtD" class="BuscarParam_uD">
                     <div class="fonhandle3do_Match">
                         <div class="busquedaMatch">
-                            <label><%out.println(po.getProperty("etiqueta.OtxtLo_PP"));%></label><label id="opCurrent"></label>
+                            <label><%out.println(po.getProperty("etiqueta.OtxtLo"));%></label><label id="opCurrent"></label>
                             <textarea style="resize:none;" id="Textlib"></textarea>
                         </div>
                     </div> 
@@ -1168,22 +1213,22 @@
 
 
             <div id="MensajeSalirModulo" class="VenfinalizarDocumentos">
-                <div id="handleDocMod"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.OdelO_PP"));%></label><div class="BotonCerrar_Matc" onclick="CerrarMensajeEliminarOperacion();"><label >X</label></div></div>
+                <div id="handleDocMod"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.OdelO"));%></label><div class="BotonCerrar_Matc" onclick="CerrarMensajeEliminarOperacion();"><label >X</label></div></div>
                 <div class="imgeninfo"><IMG SRC="images/S_M_QUES.png"  ALT="Info"></div>
                 <div class="ContenidoFinalizarDoc">
-                    <label><%out.println(po.getProperty("etiqueta.Odelp1_PP"));%></label>
+                    <label><%out.println(po.getProperty("etiqueta.Odelp1"));%></label>
                     <br>
-                    <label id="lbl2finDoc"><%out.println(po.getProperty("etiqueta.Odelp2_PP"));%></label>
+                    <label id="lbl2finDoc"><%out.println(po.getProperty("etiqueta.Odelp2"));%></label>
                 </div>
                 <div class="BotenesFinalizarDocumento">
                     <button id="EliminarOpeY" style="cursor:pointer;" ><%out.println(po.getProperty("etiqueta.ContenidoEndYesSession"));%></button>
                     <button id="EliminarOpeN" style="cursor: pointer;" ><%out.println(po.getProperty("etiqueta.ContenidoEndNoSession"));%></button>
                 </div>
             </div>
-            <div id="VentanaModalTextoDescripcion" class="VenfinalizarDocumentos"> 
-                <div id="handleDoc"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.TxDescrii_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="CerrarMensajeEliminarOperacion();"><label >X</label></div></div>
+            <div id="VentanaModalTextoDescripcion" class="VenfinalizarDocumentos">
+                <div id="handleDoc"><label id="TituloMatch">Texto Descripcion</label><div class="BotonCerrar_Matc" onclick="CerrarMensajeEliminarOperacion();"><label >X</label></div></div>
                 <div class="imgeninfo"><IMG SRC="images/S_M_QUES.png"  ALT="Info"></div>
-                <label><%out.println(po.getProperty("etiqueta.IngreTxto_Ordenes_PP"));%></label>
+                <label>Ingresar Texto</label>
                 <textarea id="txtAreaDes"></textarea>
             </div>
 
@@ -1247,10 +1292,10 @@
                         bloq();
                         tabOpe();
                         fechaIni();
-                        CargarCentroPPP();
-                        CargarClaseOrPP();
-                        getCentroActualPP();
-//                        CArgarDATavi();
+                        CargarCentroP();
+                        CargarClaseOr();
+                        getCentroActual();
+                        CArgarDATavi();
 
                     };
 
