@@ -188,7 +188,7 @@ function enviarDatos(mate, cent, organ, canl) {
         processData: true,
         data: "Action=" + acc + enviar,
         success: function (data) {
-            var rs = data;
+            var rs = data;            
             if (rs == 0) {
                 limpiar();
                 mensajess(3, "");
