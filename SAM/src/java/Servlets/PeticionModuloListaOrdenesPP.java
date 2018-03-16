@@ -250,8 +250,8 @@ public class PeticionModuloListaOrdenesPP extends HttpServlet {
                     String fec2 = con.DateFormatGuion(fc2);
 //                    String[] data = {cl1, cl2, or1, or2, sa1, sa2, tb1, tb2, ub1, ub2, ep1, ep2, po1, po2, fec1, fec2, abi, lib, cte};
                     String[] data = {cl1, cl2, or1, or2, sa1, sa2, tb1, tb2, ep1, ep2, fec1, fec2, abi, lib, cte};
-                    ArrayList<plan_orden> pa = ACC_PlanOrden.ObtenerInstancia().ConsultaQuerySAPPP(data);
-                    ArrayList<plan_orden> sa = ACC_PlanOrden.ObtenerInstancia().ConsultaQuerySAMPP(data);
+                    ArrayList<plan_orden> pa = ACC_PlanOrden.ObtenerInstancia().ConsultaQuerySAP(data);
+                    ArrayList<plan_orden> sa = ACC_PlanOrden.ObtenerInstancia().ConsultaQuerySAM(data);
                     int p = pa.size();
                     int s = sa.size();
                     int to = p + s;
