@@ -235,7 +235,7 @@ public class ACC_Pp_operaciones_noti {
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         int cont;
-        String query = "{call PM.status_notificaciones_InsertSt_notsap(?,?,?,?,?,?,?)}";
+        String query = "{call PP.status_notificaciones_InsertSt_notsapPP(?,?,?,?,?,?,?)}";
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, fsam);
@@ -265,5 +265,104 @@ public class ACC_Pp_operaciones_noti {
         }
         return false;
     }
+    //Metodo crea Notificaciones PP cambiar status 
+    public boolean InsertStatus_notificacionesPP(String fsam, String fecha, String hora, String stats, String orden, String orpm, String usu) {
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        PreparedStatement pst = null;
+        int cont;
+        String query = "{call PP.status_notificaciones_InsertSt_notPP(?,?,?,?,?,?,?)}";
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, fsam);
+            pst.setString(2, fecha);
+            pst.setString(3, hora);
+            pst.setString(4, stats);
+            pst.setString(5, orden);
+            pst.setString(6, orpm);
+            pst.setString(7, usu);
+            cont = pst.executeUpdate();
+            if (cont > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.err.println("Error : " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e);
+            }
+        }
+        return false;
+    }
+    public boolean updatEStatus_notificacionesPP(String fsam, String stats) {
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        PreparedStatement pst = null;
+        int cont;
+        String query = "{call PP.cabecera_ordenes_creaACTUALNOTPP(?,?)}";
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, fsam);
+            pst.setString(2, stats);
+            cont = pst.executeUpdate();
+            if (cont > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.err.println("Error : " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e);
+            }
+        }
+        return false;
+    }
+    public boolean ValidaQM01PP(String orden) {
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs;
+        String query = "{call PM.ValidaQM01_CT(?)}";
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, orden);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                if(rs.getString("conjunto").equals("X") && rs.getString("conjunto2").equals("X")){
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error : " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e);
+            }
+        }
+        return false;
+    }
+    
+    
     
 }
