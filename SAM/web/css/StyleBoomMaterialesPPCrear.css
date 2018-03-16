@@ -17,7 +17,7 @@ input{
     width: 100%;
     background: #fff;
     margin-top: 10px;
-    height: 140px;
+    height: 270px;
     padding-left: 2%;
 }
 #lineaBomtitu{
@@ -30,12 +30,12 @@ input{
 }
 .Contenidobus label{
     display: inline-block;
-    width: 20%;
+    width: 25%;
 }
 .Contenidobus hr{
     margin-left: 0;
     margin-top: -1px;
-    width: 20%;
+    width: 25%;
 }
 .tablaSolicitud{
     margin-top: 20px;
