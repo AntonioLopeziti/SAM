@@ -2012,12 +2012,13 @@ public class ACC_Material {
             rs = ps.executeQuery();
             rs.next();
             check = rs.getString(1);
-            cnx.CerrarConexion(con);
             while (rs.next()) {
                 check = rs.getString("material");
             }
         } catch (Exception e) {
-            System.err.println("Error en DecimalUnidadMedida" + e);
+            System.err.println("Error en ACC_Material(), getExisNumMatePP" + e);
+        }finally{
+            cnx.CerrarConexion(con);
         }
         return check;
     }
