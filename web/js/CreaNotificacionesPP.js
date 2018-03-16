@@ -56,9 +56,9 @@ function cargar() {
         processData: true,
         data: enviar,
         success: function (data) {
-            var res = data;
+            var res = data;            
             if (res == 0) {
-                alert("no hay datos por mostrar");
+//                alert("no hay datos por mostrar");
 //                mesajess(0, "images/aceptar.png");
 
             } else {
@@ -151,14 +151,15 @@ function mostrar1() {
             processData: true,
             data: "acc=" + acc + enviar,
             success: function (data) {
-                var res = data;            
+                var res = data;
                 if (res == 0) {
                     ordsta();
                     //ordequ();
                     tabmax();
                 } else if (res == 2) {
-                    tabmaxPASAM();
-                    CargaTabEQSAM();
+                    tabmaxPASAMPP();
+//                    Cargar seccion de equipo solo status
+                    CargaTabEQSAMPP();
                 } else {
                     $("#iconmsg").css("visibility", "visible");
                     $("#iconmsg").attr("src", "images/advertencia.PNG");
@@ -168,6 +169,67 @@ function mostrar1() {
             }
         });
     }
+}
+function CargaTabEQSAMPP() {
+    var ord = $("#notor").val();
+    var acc = "CarEQORDPP";
+    var enviar = "&ord=" + ord;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + enviar,
+        success: function (data) {
+            var res = data;            
+            $("#divreq").html(res);
+            colcequ2();
+        }
+
+    });
+
+}
+function colcequ2() {
+    var almno = $("#almno").val();
+    $("#notalm").val(almno);
+    var cenno = $("#cenno").val();
+    $("#notcent").val(cenno);
+    var eqsuno = $("#eqsuno").val();
+    $("#notesp").val(eqsuno);
+    var lotno = $("#lotno").val();
+    $("#notlote").val(lotno);
+    var matno = $("#matno").val();
+    $("#notmat").val(matno);
+    var neqno = $("#neqno").val();
+    $("#nteq").val(neqno);
+    var seno = $("#seno").val();
+    var desne = $("#desne").val();
+    $("#ntdeseq").val(desne);
+    var est = $("#Statusor").val();
+    $("#notsta").val(est);
+    $("#nteqch").prop("checked", false);
+    $("#desmo").attr("disabled", true);
+    $("#desmo2").attr("disabled", true);
+}
+function tabmaxPASAMPP() {
+    var ord = $("#notor").val();
+    var ope = $("#notope").val();
+    var acc = "CarTAbUNPP";
+    var enviar = "&ord=" + ord + "&ope=" + ope;    
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + enviar,
+        success: function (data) {
+            var res = data;            
+            $("#bodyc").html(res);
+        }
+
+    });
 }
 function ordsta() {
     var acc = "ChecarStatusOrdenOpe";
@@ -210,14 +272,13 @@ function tabmax() {
             var res = data;
             $("#bodyc").html(res);
         }
-
     });
 
 }
 
 //ABRIR VENTANAS MODALES NOTIFICACIONES PP
 var cenOpe;
-function selecoftab() {
+function selecoftabPP() {
     var ord = $("#notor").val();
     var ja = document.getElementsByName("checkbo");
     var eja = document.getElementsByName("che");
@@ -260,16 +321,16 @@ function selecoftab() {
                     cenOpe = v3;
                     if (v1 == "PP01") {
                         if (ord.length <= 10) {
-                            pm1prt1FORSAM(ord, v2);
-                            pm1prt3FORSAM(ord, v2);
+                            pp1prt1FORSAMPP(ord, v2);
+                            pp1prt3FORSAMPP(ord, v2);
                             //  $("BODY").append('<div id="overlayve"></div>');
                             mostrarventabs("ventaPM01");
                             var theHandle = document.getElementById("handlePM01");
                             var theRoot = document.getElementById("ventaPM01");
                             Drag.init(theHandle, theRoot);
                         } else {
-                            pm1prt1(ord, v2);
-                            pm1prt3(ord, v2);
+                            pp1prt1PP(ord, v2);
+                            pp1prt3PP(ord, v2);
                             // $("BODY").append('<div id="overlayve"></div>');
                             mostrarventabs("ventaPM01");
                             var theHandle = document.getElementById("handlePM01");
@@ -278,19 +339,19 @@ function selecoftab() {
                         }
                     } else if (v1 == "PP03") {
                         if (ord.length == 10) {
-                            pm3prt1FORSAM(ord, v2);
-                            pm3prt2FORSAM(ord, v2);
-                            pm3prt3FORSAM(ord, v2);
+                            pp3prt1FORSAMPP(ord, v2);
+                            pp3prt2FORSAMPP(ord, v2);
+                            pp3prt3FORSAMPP(ord, v2);
                             //      $("BODY").append('<div id="overlayve"></div>');
                             mostrarventabs("ventatabdes");
                             var theHandle = document.getElementById("handleDes");
                             var theRoot = document.getElementById("ventatabdes");
                             Drag.init(theHandle, theRoot);
                         } else {
-                            pm3prt1(ord, v2);
-                            pm3prt2(ord, v2);
-                            pm3prt3(ord, v2);
-                            pm3prt4(ord, v2);
+                            pp3prt1PP(ord, v2);
+                            pp3prt2PP(ord, v2);
+                            pp3prt3PP(ord, v2);
+                            pp3prt4PP(ord, v2);
                             //     $("BODY").append('<div id="overlayve"></div>');
                             mostrarventabs("ventatabdes");
                             var theHandle = document.getElementById("handleDes");
@@ -300,19 +361,19 @@ function selecoftab() {
                     } else if (v1 == "PP02") {
                         if (ord.length == 10) {
 
-                            pm3prt1FORSAM(ord, v2);
-                            pm3prt2FORSAM(ord, v2);
-                            pm3prt3FORSAM(ord, v2);
+                            pp3prt1FORSAMPP(ord, v2);
+                            pp3prt2FORSAMPP(ord, v2);
+                            pp3prt3FORSAMPP(ord, v2);
                             //     $("BODY").append('<div id="overlayve"></div>');
                             mostrarventabs("ventatabdes");
                             var theHandle = document.getElementById("handleDes");
                             var theRoot = document.getElementById("ventatabdes");
                             Drag.init(theHandle, theRoot);
                         } else {
-                            pm3prt1(ord, v2);
-                            pm3prt2(ord, v2);
-                            pm3prt3(ord, v2);
-                            pm3prt4(ord, v2);
+                            pp3prt1PP(ord, v2);
+                            pp3prt2PP(ord, v2);
+                            pp3prt3PP(ord, v2);
+                            pp3prt4PP(ord, v2);
                             //       $("BODY").append('<div id="overlayve"></div>');
                             mostrarventabs("ventatabdes");
                             var theHandle = document.getElementById("handleDes");
@@ -334,42 +395,24 @@ function selecoftab() {
         }
     }
 }
-
-function pm1prt1(ord, oper) {
-    var enviar = "&orden=" + ord + "&opera=" + oper;
+//TRAER SAM PP01//
+function pp1prt1FORSAMPP(ord, oper) {
+    var acc = "CabePP1";
+    var enviar = "&ord=" + ord + "&ope=" + oper + "&acc=" + acc;
     $.ajax({
         async: false,
         type: 'GET',
-        url: "PeticionCabPP01PP",
+        url: "PeticionNotificacionesOrdenesSAMPP",
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: enviar,
         success: function (data) {
             $("#divpm11").html(data);
-            ponerp1();
+            ponerpp1();
         }
-
-    });
-
-}
-function pm1prt3(ord, ope) {
-    var enviar = "&ord=" + ord + "&ope=" + ope;
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: "peticionTabPM01",
-        contentType: "application/x-www-form-urlencoded",
-        processData: true,
-        data: enviar,
-        success: function (data) {
-            $("#tabp1").html(data);
-            ponerp1();
-        }
-
     });
 }
-
-function ponerp1() {
+function ponerpp1() {
     var ivptp12 = $("#ivptp12").val();
     if (ivptp12 == "X") {
         $("#ivptp11").prop("checked", true);
@@ -401,9 +444,197 @@ function ponerp1() {
     $("#trrep1").val(usea);
 
 }
+function pp1prt3FORSAMPP(ord, oper) {
+    var acc = "TablasPP01MAtPP";
+    var enviar = "&ord=" + ord + "&ope=" + oper + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            $("#tabp1").html(data);
+            ponerpp1();
+        }
 
+    });
+}
+//TRAER SAP PP01//
+function pp1prt1PP(ord, oper) {
+    var acc = "pp1prt1PP";
+    var enviar = "&ord=" + ord + "&oper=" + oper + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            $("#divpm11").html(data);
+            ponerpp1();
+        }
+    });
+}
+function pp1prt3PP(ord, ope) {
+    var acc = "pp1prt3PP";
+    var enviar = "&ord=" + ord + "&ope=" + ope + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            $("#tabp1").html(data);
+            ponerpp1();
+        }
+
+    });
+}
+//TRAER SAM PP03//
+function pp3prt1FORSAMPP(ord, oper) {
+    var acc = "POn1P3SAMPP";
+    var enviar = "&ord=" + ord + "&ope=" + oper + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            $("#divpm13").html(data);
+            pp13();
+        }
+    });
+}
+function pp13() {
+    var nspp32 = $("#nspp32").val();
+    $("#nspp31").val(nspp32);
+    var npspp32 = $("#npspp32").val();
+    $("#npspp31").val(npspp32);
+    var prep32 = $("#prep32").val();
+    $("#prep31").val(prep32);
+    var clmop32 = $("#clmop32").val();
+    $("#clmop31").val(clmop32);
+    var cabap32 = $("#cabap32").val();
+    $("#cabap31").val(cabap32);
+    var grarp32 = $("#grarp32").val();
+    $("#grarp31").val(grarp32);
+    var gcate32 = $("#gcate32").val();
+    $("#gcate31").val(gcate32);
+    var ocop32 = $("#ocop32").val();
+    $("#ocop31").val(ocop32);
+    var provp32 = $("#provp32").val();
+    $("#provp31").val(provp32);
+    var solp32 = $("#solp32").val();
+    $("#solp31").val(solp32);
+}
+function pp3prt2FORSAMPP(ord, oper) {
+    var acc = "POn2P3SAMPP";
+    var enviar = "&ord=" + ord + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            $("#bpmt1").html(data);
+        }
+
+    });
+}
+function pp3prt3FORSAMPP(ord, oper) {
+    var acc = "POn3P3SAMPP";
+    var enviar = "&ord=" + ord + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            $("#bpmt2").html(data);
+//				poner();
+        }
+    });
+}
+//Traer SAP PP03//
+function pp3prt1PP(ord, oper) {
+    var acc = "pp3prt1PP";
+    var enviar = "&ord=" + ord + "&oper=" + oper + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            $("#divpm13").html(data);
+            pm13();
+        }
+    });
+}
+
+function pp3prt2PP(ord, oper) {
+    var acc = "pp3prt2PP";
+    var enviar = "&ord=" + ord + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            $("#bpmt1").html(data);
+        }
+        
+    });
+}
+function pp3prt3PP(ord, oper) {
+    var acc = "pp3prt3PP";
+    var enviar = "&ord=" + ord + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            $("#bpmt2").html(data);
+        }
+
+    });
+}
+function pp3prt4PP(ord, oper) {
+    var acc = "pp3prt4PP"
+    var enviar = "&ord=" + ord + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            $("#bpmt3").html(data);
+//				poner();
+        }
+
+    });
+}
 var folT;
-function valnotiemP01() {
+function valNotTiemPP01() {
     var durp1 = $("#durp1").val();
     var durp2 = $("#durp2").val();
     var trrep1 = $("#trrep1").val();
@@ -416,15 +647,18 @@ function valnotiemP01() {
     var honot = $("#honot").val();
     var resp = new Array();
     var r1, r2;
+    // durp1 - Input duracion
     if (durp1 == "" || durp1 == null) {
         msgMatch('NPMDurReOb');
         mostrarventaavi();
     } else {
+        //trrepl - No Personal
         if (trrep1 == "" || trrep1 == null) {
             msgMatch('nopecaob');
             mostrarventaavi();
         } else {
             var nf;
+            //nfpm1 - Notificacion Final
             if (nfpm1.checked) {
                 nf = "X";
             } else {
@@ -447,15 +681,16 @@ function valnotiemP01() {
                         $("#iconmsg").css("visibility", "visible");
                         $("#iconmsg").attr("src", "images/aceptar.png");
                         msgMatch2(ord, r2.substring(0, 10));
-                        vaciarCAMps();
+                        vaciarCampos();
                         setTimeout(function () {
                             $("#msg").html("");
                             $("#iconmsg").css("visibility", "hidden");
                         }, 8000);
                         tabmax();
-                        LiberarStatus();
-                        cambiarDura(durp1);
-                        abrirVentanaMsgAddFileT('VentanaModalMsgAddFileT', 'handleFileT');
+                        LiberarStatusPP();
+//                        alert(durp1);
+                        cambiarDuracionPP(durp1);
+//                        abrirVentanaMsgAddFileT('VentanaModalMsgAddFileT', 'handleFileT');
                         folT = r2;
                     } else {
 
@@ -466,7 +701,186 @@ function valnotiemP01() {
         }
     }
 }
+function vaciarCampos() {
+    $("#durp1").val("");
+    $("#nofip1").val("");
+    $("#nfpm1").prop("checked", false);
+}
+function LiberarStatusPP() {
+    var usu = $("#usua").val();
+    var sta = $("#notsta").val();
+    var ord = $("#notor").val();
+    var fenot = $("#fenot").val();
+    var honot = $("#honot").val();
+    var ptr = sta.substring(0, 4);
+    var action;
+    if (ord.length == 12) {
+        action = "DatosCab";
+    } else {
+        action = "DatosCabSAM";
+    }
+    if (ptr == 'LIB.') {
 
+        var t1 = sta,
+                patron = /LIB./g,
+                nuevoValor = "LIB.",
+                nuevaCadena1 = t1.replace(patron, nuevoValor);
+        sta = $("#notsta").val(nuevaCadena1);
+
+        var stat = "L";
+        var enviar = "&ord=" + ord + "&ope=" + nuevaCadena1 + "&hora=" + honot + "&fecha=" + fenot + "&acc=" + action + "&stat=" + stat + "&usu=" + usu;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: enviar,
+            success: function (data) {
+            }
+        });
+    }
+}
+function cambiarDuracionPP(dura) {
+    //Min - Hora de sap
+    var durr = $('#udnp11');
+    //Min - Hora que se selecciona
+    var sss = $('#durp2');
+    //Dato notificado hasta el momento 
+    var Dhm = $("#aynp11").val();
+    //No Orden
+    var nuOrd = $("#notor").val();
+    //Accion a realizar 
+    var acc = "ACtuadurTraPP";
+//    alert(dura, durr, sss, Dhm, nuOrd);
+    if (durr.val() == 'MIN' && sss.val() == 'H')
+    {
+        var dhmin = parseFloat(Dhm) + (parseInt(dura * 60));
+//        alert("uno, "+dhmin);
+    } else
+    {
+        var dhmin = parseFloat(Dhm) + parseInt(dura);
+//        alert("dos,"+ dhmin);
+    }
+    var enviar = "&dhm=" + dhmin + "&nuOrd=" + nuOrd;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionNotificacionesOrdenesSAMPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + enviar,
+        success: function (data) {
+            if (data == 1) {
+                $("#aynp11").val(dhmin);
+            }
+        },
+    });
+
+
+}
+function mosboton(ids) {    
+    inpufuncion(ids);
+    for (var i = 0; i < 51; i++) {
+        if (ids != i) {
+            $("#matmat1" + i).css("display", "none");
+        } else {
+            $("#matmat1" + ids).css("display", "inline");
+        }
+    }
+}
+function inpufuncion(ids) {
+    $("#matab1" + ids).blur(function () {
+        solatarMatePP(ids);
+    });
+}
+function solatarMatePP(id) {
+    var mate = document.getElementById("matab1" + id).value; 
+//    var mate = document.getElementById("matab1").value;
+//    alert("mate: "+mate);
+    var arr = new Array();
+    var acc = "CarMatInvPP";
+    var r1, r2, r3, r4, r5;
+    var enviar = "&mate=" + mate.toUpperCase();
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionNotificacionesOrdenesSAMPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + enviar,
+        success: function (data) {
+            arr = data.split(",");
+            r1 = arr[0];
+            r2 = arr[1];
+            r3 = arr[2];
+            r4 = arr[3];
+            r5 = arr[4];
+//               alert(id+" , "+r1+" , "+r2+" , "+r3+" , "+r4+" , "+r5);
+            if (r1 == 1) {
+                $("#cein" + id).html(r2);
+                $("#unmin" + id).html(r3);
+                $("#almin" + id).html('M100');
+                $("#Texde" + id).html(r5);
+                if (r4 === "" || r4 === null) {
+                    $("#lotabp1" + id).prop("disabled", true);
+                } else {
+                    $("#lotabp1" + id).prop("disabled", false);
+                }
+            } else {
+                $("#cein" + id).html("");
+                $("#unmin" + id).html("");
+                $("#almin" + id).html("");
+                $("#lotabp1" + id).prop("disabled", false);
+                $("#Texde" + id).html("");
+
+            }
+        }
+
+    });
+}
+function VentModalmat(esd) {
+    document.getElementById("mmid").value = esd;
+    $(document).ready(function () {
+
+        mostrarVentanaModal("VentModalmat");
+        var theHandle = document.getElementById("handle11");
+        var theRoot = document.getElementById("VentModalmat");
+        Drag.init(theHandle, theRoot);
+    });
+}
+function LoadMaters(url) {
+    var mmmat = $("#mmmat").val();
+    var mmid = $("#mmid").val();
+    var mmtxtbr = $("#mmtxtbr").val();
+    var env5vmat = $("#env5vmat").val();
+    var mmtipMat = $("#mmtipMatt").val();
+    var enviar = "&mmmat=" + mmmat + "&mmid=" + mmid + "&mmtxtbr=" + mmtxtbr + "&env5vmat=" + env5vmat + "&mmtipM=" + mmtipMat;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: url,
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            var res = data;
+            if (res == 0) {
+                mesajess(0, "images/aceptar.png");
+                setTimeout(function () {
+                    $("#msg").html("");
+                    $("#iconmsg").css("visibility", "hidden");
+                }, 8000);
+            } else {
+                $("#BuscarParam_u2").css("display", "none");
+                $("#ConsultaTabla2").css("display", "block");
+                $("#nofixedX2").html(res);
+                fnc();
+            }
+        }
+
+    });
+}
 function seleccionar(we, ids, ven) {
     $("#" + ids).val(we);
     $("#" + ids).focus();
@@ -511,6 +925,56 @@ function TablaLM() {
 //            bloquearCamposResul();
         }
     });
+}
+//Consumir Material
+function ConsMaterial() {
+
+    var cc = 0;
+    for (var o = 0; o < 50; o++)
+    {
+        var nmat = document.getElementById("matab1" + o);
+
+
+        if (nmat.value == "") {
+            cc++;
+        }
+
+        if (o == 49) {
+            if (cc == 50)
+            {
+                $("#matab10").focus();
+                msgMatch('NPMSinMatVaCon');
+                mostrarventaavi();
+            } else {
+                for (var i = 0; i < 50; i++) {
+
+                    var matab = $("#matab1" + i).val();
+                    var lotabp = $("#lotabp1" + i).val();
+                    var cumtabp = $("#cumtabp1" + i).val();
+
+//                                        if (matab != "" && lotabp == "") {
+//                                            document.getElementById("etav").innerHTML = "Lote es Obligatorio para Material - Centro. : " + matab;
+//                                            mostrarventaavi();
+//                                            break;
+//                                        } else {
+                    if (matab != "" && cumtabp == "") {
+                        msgMatch('NPMCantRequi');
+                        mostrarventaavi();
+                        break;
+                    } else {
+                        if (i == 49) {
+                            ValidarMAte(0);
+                            //ValidarLotedeMAte(0);
+                        }
+                    }
+//                                        }
+                }
+            }
+
+        }
+
+    }
+
 }
 function fnc() {
     document.getElementById('table-scroll').onscroll = function () {
@@ -612,6 +1076,58 @@ function libbotPP() {
             action = "DatosCabSAM";
         }
         var stat = "L";
+        var enviar = "&ord=" + ord + "&ope=" + nuevaCadena1 + "&hora=" + honot + "&fecha=" + fenot + "&acc=" + action + "&stat=" + stat + "&usu=" + usu;        
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: enviar,
+            success: function (data) {
+            }
+
+        });
+    }
+}
+function canbotPP() {
+    if ($('#notor').val().length === 0) {
+        var ven = document.getElementById('VentanaModalAv');
+        var msg = "Número de orden obligatorio";
+        abrirVentanaAv(ven, msg);
+        var theHandle = document.getElementById("handleAV");
+        var theRoot = document.getElementById("VentanaModalAv");
+        Drag.init(theHandle, theRoot);
+        return;
+    }
+    var usu = $("#usua").val();
+    var sta = $("#notsta").val();
+    var ord = $("#notor").val();
+    var fenot = $("#fenot").val();
+    var honot = $("#honot").val();
+    var ptr = sta.substring(0, 4);
+    if (ptr == "ABIE" || ptr == "" || ptr == "CTEC" || ptr == "CERR") {
+        $(document).ready(function () {
+//                        $("BODY").append('<div id="overlay"></div>');
+            mostrarventaavi();
+            var theHandle = document.getElementById("handleAv2");
+            var theRoot = document.getElementById("ventanaavis");
+            Drag.init(theHandle, theRoot);
+        });
+    } else if (ptr == 'LIB.') {
+
+        var t1 = sta,
+                patron = /LIB./g,
+                nuevoValor = "CTEC",
+                nuevaCadena1 = t1.replace(patron, nuevoValor);
+        sta = $("#notsta").val(nuevaCadena1);
+        var action;
+        if (ord.length == 12) {
+            action = "DatosCab";
+        } else {
+            action = "DatosCabSAM";
+        }
+        var stat = "C";
         var enviar = "&ord=" + ord + "&ope=" + nuevaCadena1 + "&hora=" + honot + "&fecha=" + fenot + "&acc=" + action + "&stat=" + stat + "&usu=" + usu;
         $.ajax({
             async: false,
@@ -625,7 +1141,59 @@ function libbotPP() {
 
         });
     }
+}
+function cciebotPP() {
+    if ($('#notor').val().length === 0) {
+        var ven = document.getElementById('VentanaModalAv');
+        var msg = "Número de orden obligatorio";
+        abrirVentanaAv(ven, msg);
+        var theHandle = document.getElementById("handleAV");
+        var theRoot = document.getElementById("VentanaModalAv");
+        Drag.init(theHandle, theRoot);
+        return;
+    }
+    var usu = $("#usua").val();
+    var sta = $("#notsta").val();
+    var ptr = sta.substring(0, 4);
+    var ord = $("#notor").val();
+    var fenot = $("#fenot").val();
+    var honot = $("#honot").val();
 
+    if (ptr == "LIB." || ptr == "" || ptr == "ABIE" || ptr == "CERR") {
+        $(document).ready(function () {
+//                         $("BODY").append('<div id="overlay"></div>');
+            mostrarventaavi();
+            var theHandle = document.getElementById("handleAv2");
+            var theRoot = document.getElementById("ventanaavis");
+            Drag.init(theHandle, theRoot);
+        });
+    } else if (ptr == 'CTEC') {
+
+        var t1 = sta,
+                patron = /CTEC/g,
+                nuevoValor = "LIB.",
+                nuevaCadena1 = t1.replace(patron, nuevoValor);
+        sta = $("#notsta").val(nuevaCadena1);
+        var action;
+        if (ord.length == 12) {
+            action = "DatosCab";
+        } else {
+            action = "DatosCabSAM";
+        }
+        var stat = "A";
+        var enviar = "&ord=" + ord + "&ope=" + nuevaCadena1 + "&hora=" + honot + "&fecha=" + fenot + "&acc=" + action + "&stat=" + stat + "&usu=" + usu;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: enviar,
+            success: function (data) {
+            }
+
+        });
+    }
 }
 function startTime() {
     today = new Date();
