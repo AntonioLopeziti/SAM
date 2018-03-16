@@ -2154,4 +2154,222 @@ public class ACC_Material {
         }
         return 0;
     }
+    
+    public LinkedList<materiales> CargarTodoMaterialNotPP(String mater, String descripcion) {
+        LinkedList<materiales> mate = new LinkedList<>();
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        String query = "{call PP.materiales_TABPP01PP(?)}";
+
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, mater);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                materiales ma = new materiales();
+                ma.setMaterial(rs.getString("material"));
+                ma.setCentro(rs.getString("centro"));
+                ma.setUnidad_medida(rs.getString("unidad_medida"));
+                ma.setNum_material_ant(rs.getString("num_material_ant"));
+                ma.setGrupo_articulos(rs.getString("grupo_articulos"));
+                ma.setTipo_material(rs.getString("tipo_material"));
+                ma.setGrupo_transporte(rs.getString("grupo_transporte"));
+                ma.setGrupo_compras(rs.getString("grupo_compras"));
+                ma.setSujeto_lote(rs.getString("sujeto_lote"));
+                ma.setDescripcion(rs.getString(descripcion));
+                ma.setCara_plan_nece(rs.getString("cara_plan_nece"));
+                ma.setPunto_pedido(rs.getString("punto_pedido"));
+                ma.setCiclo_plan_nece(rs.getString("ciclo_plan_nece"));
+                ma.setHoriz_plan_fijo(rs.getString("horiz_plan_fijo"));
+                ma.setPlanificador_necesi(rs.getString("planificador_necesi"));
+                ma.setTam_lote_plan_nece(rs.getString("tam_lote_plan_nece"));
+                ma.setTama_lote_min(rs.getString("tama_lote_min"));
+                ma.setTama_lote_max(rs.getString("tama_lote_max"));
+                ma.setStock_maximo(rs.getString("stock_maximo"));
+                ma.setClase_aprovisionamiento(rs.getString("clase_aprovisionamiento"));
+                ma.setClase_clase_aprov_espe(rs.getString("clase_aprovi_espe"));
+                ma.setTiempo_trata_en_merca_dia(rs.getString("tiempo_trata_en_merca_dia"));
+                ma.setPlazo_entre_previ_dia(rs.getString("plazo_entre_previ_dia"));
+                ma.setStock_seguridad(rs.getString("stock_seguridad"));
+                ma.setStock_seguridad_minimo(rs.getString("stock_seguridad_minimo"));
+                ma.setExiste_para_insp_mate_cen(rs.getString("existe_para_insp_mate_cen"));
+                ma.setQm_activo_apro(rs.getString("qm_activo_apro"));
+                ma.setSector(rs.getString("sector"));
+                ma.setGrupo_tipo_posi_gen(rs.getString("grupo_tipo_posi_gen"));
+                ma.setGrupo_veri_de_dispo(rs.getString("grupo_veri_de_dispo"));
+                ma.setCentro_beneficio(rs.getString("centro_beneficio"));
+                ma.setGrupo_carga(rs.getString("grupo_carga"));
+                ma.setUnidad_medida_venta(rs.getString("unidad_medida_venta"));
+                ma.setGrupo_precios_mate(rs.getString("grupo_precios_mate"));
+                ma.setGrupo_estadi_material(rs.getString("grupo_estadi_material"));
+                ma.setGrupo_imputa_material(rs.getString("grupo_imputa_material"));
+                ma.setGrupo_tipos_posi_ma_mate(rs.getString("grupo_tipos_posi_ma_mate"));
+                ma.setJerarquia_produc(rs.getString("jerarquia_produc"));
+                ma.setOrganizacion_ventas(rs.getString("organizacion_ventas"));
+                ma.setGrupo_vendedores(rs.getString("grupo_vendedores"));
+                ma.setCanal_distribucion(rs.getString("canal_distribucion"));
+                ma.setIndicador_control_precios(rs.getString("indicador_control_precios"));
+                ma.setPrecio_medio_vari_inte_per(rs.getString("precio_medio_vari_inte_per"));
+                ma.setPrecio_estandar(rs.getString("precio_estandar"));
+                ma.setCantidad_base(rs.getString("cantidad_base"));
+                ma.setClase_valoracion(rs.getString("clase_valoracion"));
+                ma.setCategoria_valoracion(rs.getString("categoria_valoracion"));
+                mate.add(ma);
+            }
+        } catch (Exception e) {
+            System.err.println("Error en el CargarTodoMaterial (ACC_Material) por: " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                };
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception a) {
+                System.err.println("Error inesperado al cerrar conexiones");
+            }
+        }
+        return mate;
+    }
+    
+    public materiales CargarMaterialNotPP(String mate) {
+        materiales ma = new materiales();
+        String descripcion = null;
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        String query = "{call PP.materiales_TABPP01PP(?)}";
+//        String query = "{call MM.materiales_TABPM01(?)}";
+
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, mate);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                ma.setMaterial(rs.getString("material"));
+                ma.setCentro(rs.getString("centro"));
+                ma.setOrganizacion_ventas(rs.getString("organizacion_ventas"));
+                ma.setUnidad_medida(rs.getString("unidad_medida"));
+                ma.setNum_material_ant(rs.getString("num_material_ant"));
+                ma.setGrupo_articulos(rs.getString("grupo_articulos"));
+                ma.setTipo_material(rs.getString("tipo_material"));
+                ma.setSector(rs.getString("sector"));
+                ma.setUnidad_medida_venta(rs.getString("unidad_medida_venta"));
+                ma.setGrupo_estadi_material(rs.getString("grupo_estadi_material"));
+                ma.setGrupo_tipos_posi_ma_mate(rs.getString("grupo_tipos_posi_ma_mate"));
+                ma.setJerarquia_produc(rs.getString("jerarquia_produc"));
+                ma.setGrupo_precios_mate(rs.getString("grupo_precios_mate"));
+                ma.setGrupo_imputa_material(rs.getString("grupo_imputa_material"));
+                ma.setGrupo_tipo_posi_gen(rs.getString("grupo_tipo_posi_gen"));
+                ma.setGrupo_veri_de_dispo(rs.getString("grupo_veri_de_dispo"));
+                ma.setGrupo_transporte(rs.getString("grupo_transporte"));
+                ma.setCentro_beneficio(rs.getString("centro_beneficio"));
+                ma.setSujeto_lote(rs.getString("sujeto_lote"));
+                ma.setDescripcion(rs.getString("descripcion_ES"));
+                ma.setGrupo_carga(rs.getString("grupo_carga"));
+                ma.setGrupo_compras(rs.getString("grupo_compras"));
+                ma.setCara_plan_nece(rs.getString("cara_plan_nece"));
+                ma.setPunto_pedido(rs.getString("punto_pedido"));
+                ma.setCiclo_plan_nece(rs.getString("ciclo_plan_nece"));
+                ma.setTam_lote_plan_nece(rs.getString("tam_lote_plan_nece"));
+                ma.setTama_lote_min(rs.getString("tama_lote_min"));
+                ma.setHoriz_plan_fijo(rs.getString("horiz_plan_fijo"));
+                ma.setPlanificador_necesi(rs.getString("planificador_necesi"));
+                ma.setTama_lote_max(rs.getString("tama_lote_max"));
+                ma.setStock_maximo(rs.getString("stock_maximo"));
+                ma.setClase_aprovisionamiento(rs.getString("clase_aprovisionamiento"));
+                ma.setTiempo_trata_en_merca_dia(rs.getString("tiempo_trata_en_merca_dia"));
+                ma.setStock_seguridad(rs.getString("stock_seguridad"));
+                ma.setStock_seguridad_minimo(rs.getString("stock_seguridad_minimo"));
+                ma.setClase_clase_aprov_espe(rs.getString("clase_aprovi_espe"));
+                ma.setPlazo_entre_previ_dia(rs.getString("plazo_entre_previ_dia"));
+                ma.setExiste_para_insp_mate_cen(rs.getString("existe_para_insp_mate_cen"));
+                ma.setQm_activo_apro(rs.getString("qm_activo_apro"));
+                ma.setIndicador_control_precios(rs.getString("indicador_control_precios"));
+                ma.setPrecio_medio_vari_inte_per(rs.getString("precio_medio_vari_inte_per"));
+                ma.setPrecio_estandar(rs.getString("precio_estandar"));
+                ma.setCantidad_base(rs.getString("cantidad_base"));
+                ma.setClase_valoracion(rs.getString("clase_valoracion"));
+                ma.setCategoria_valoracion(rs.getString("categoria_valoracion"));
+            }
+        } catch (Exception e) {
+            System.err.println("Error en el metodoCargarDatosVisualMa (ACC_Material) por: " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                };
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception a) {
+                System.err.println("Error inesperado al cerrar conexiones");
+            }
+        }
+        return ma;
+    }
+    public ArrayList<materiales> ConsultarMaterialHRVis (String Mate, String desc, String DenIdioma, String Ctd){
+        ArrayList<materiales> mt = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String proc = "{CALL PP.MaterialesHR_ConsultarMate(?,?,?,?)}";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            ps = con.prepareStatement(proc);
+            ps.setString(1, Mate);
+            ps.setString(2, desc);
+            ps.setString(3, DenIdioma);
+            ps.setString(4, Ctd);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                materiales m = new materiales();
+                m.setMaterial(rs.getString("material"));
+                m.setDescripcion(rs.getString(DenIdioma));
+                mt.add(m);
+            }
+        }catch (Exception e) {
+            System.out.println("Error en ConsultarMateMC por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return mt;
+    }
+//    public ArrayList<equipos> ConsultarEquipoMCPP(String Mate, String Des, String DenIdioma, String Ctd) {
+//        ArrayList<equipos> eq = new ArrayList<>();
+//        Conexion cnx = new Conexion();
+//        Connection con = cnx.ObtenerConexion();
+//        String pr = "{CALL PP.MaterialesHR_ConsultarMate(?,?,?,?)}";
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        try {
+//            ps = con.prepareStatement(pr);
+//            ps.setString(1, Mate);
+//            ps.setString(2, Des);
+//            ps.setString(3, DenIdioma);
+//            ps.setString(4, Ctd);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                equipos e = new equipos();
+//                e.setNum_equipo(rs.getString("num_equipo"));
+//                e.setDescripcion_equipo(rs.getString(DenIdioma));
+//                eq.add(e);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Error en ConsultarEquipoMC por: " + e);
+//        } finally {
+//            cnx.CerrarConexion(con);
+//        }
+//        return eq;
+//    }
 }
