@@ -5,8 +5,12 @@
  */
 package Servlets;
 
+import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_ListadoOrdenesPP;
+import AccesoDatos.Consultas;
 import Entidades.ListadoOrdenesPP;
+import Entidades.StatusOrdenes;
+import Entidades.folios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -40,6 +44,14 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
             String v1 = request.getParameter("v1");
             String v2 = request.getParameter("v2");
             String v3 = request.getParameter("v3");
+            String v4 = request.getParameter("v4");
+            String v5 = request.getParameter("v5");
+            String v6 = request.getParameter("v6");
+            
+            String fechaActual = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
+            String horaActual = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
+            
+            folios fo = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("LT");
             
             switch(action){
                 case "tablaListado":
@@ -49,29 +61,34 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
 "                                <tbody>");
                     for(ListadoOrdenesPP ll : lo){
                         out.println("	    <tr>\n" +
-                                    "	    <td><input type=\"radio\" name=\"gender\" value=\"male\"></td>\n" +
-                                    "	    <td>" + ll.getClase_documento_ventas() + "</td>\n" +
-                                    "	    <td>" + ll.getNum_orden() + "</td>\n" +
-                                    "	    <td>" + ll.getNum_material() + "</td>\n" +
-                                    "	    <td>" + ll.getTexto_material() + "</td>\n" +
-                                    "	    <td>" + ll.getStatus() + "</td>\n" +
-                                    "	    <td>" + ll.getCantidad_total() + "</td>\n" +
-                                    "	    <td>" + ll.getFecha_inicio_extrema() + "</td>\n" +
-                                    "	    <td>" + ll.getContador_notificacion() + "</td>\n" +
-                                    "	    <td><input type=\"checkbox\" name=\"habilitado\"></td>\n" +
+                                    "	    <td><input type=\"radio\" name=\"gender\" value=\"" + cc + "\"></td>\n" +
+                                    "	    <td id=\"tdPP1" + cc + "\">" + ll.getClase_documento_ventas() + "</td>\n" +
+                                    "	    <td id=\"tdPP2" + cc + "\">" + ll.getNum_orden() + "</td>\n" +
+                                    "	    <td id=\"tdPP3" + cc + "\">" + ll.getFolio_sam() + "</td>\n" + //Folio SAM
+                                    "	    <td id=\"tdPC3" + cc + "\">" + ll.getCentro() + "</td>\n" + //Centro
+                                    "	    <td id=\"tdPP4" + cc + "\">" + ll.getNum_material() + "</td>\n" +
+                                    "	    <td id=\"tdPP5" + cc + "\">" + ll.getTexto_material() + "</td>\n" +
+                                    "	    <td id=\"tdPP6" + cc + "\">" + ll.getStatus() + "</td>\n" +
+                                    "	    <td id=\"tdPP7" + cc + "\">" + ll.getCantidad_total() + "</td>\n" +
+                                    "	    <td id=\"tdPP8" + cc + "\">" + ll.getFecha_inicio_extrema() + "</td>\n" +
+                                    "	    <td id=\"tdPP9" + cc + "\">" + ll.getContador_notificacion() + "</td>\n" +
+//                                    "	    <td><input type=\"checkbox\" name=\"habilitado\"></td>\n" +
+                                    "	    <td>" + ll.getHabilitado() + "</td>\n" +
                                 "	    </tr>");
                         cc++;
                     }
-                    for(int i = cc; i < 22; i++){
-                        out.println("<tr><td>&nbsp</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                    for(int i = cc; i < 19; i++){
+                        out.println("<tr><td>&nbsp</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                     }
                     out.println("<tr class=\"ocultar\">\n" +
                         "        <td>00</td>\n" +
                         "        <td>0000000000</td>\n" +
                         "        <td>00000000000</td>\n" +
-                        "        <td>000000000000000000</td>\n" +
-                        "        <td>0000000000000000000000000000000000</td>\n" +
-                        "        <td>0000000000000000000000000000000000</td>\n" +
+                        "        <td>00000000000</td>\n" +
+                        "        <td>000000000</td>\n" +
+                        "        <td>000000000000000</td>\n" +
+                        "        <td>0000000000000000000000000000000</td>\n" +
+                        "        <td>00000000000000000000000000000000</td>\n" +
                         "        <td>000000000000</td>\n" +
                         "        <td>00000000000</td>\n" +
                         "        <td>00000000</td>\n" +
@@ -79,6 +96,34 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                         "    </tr>\n" +
                         "</tbody>\n" +
                         "</table>");
+                    break;
+                case "guardaStatus":
+                    StatusOrdenes so = new StatusOrdenes();
+                    so.setFolio_sam("LT" + fo.getFolioActual());
+                    so.setFolio_orden(v1);
+                    so.setFecha_serv(fechaActual);
+                    so.setHora_serv(horaActual);
+                    so.setNum_orden(v2);
+                    so.setCentro(v3);
+                    so.setOperacion_sam(v4);
+                    so.setUsuario(v5);
+                    ACC_ListadoOrdenesPP.ObtenerInstancia().guardaStatusOrden(so);
+                    ACC_ListadoOrdenesPP.ObtenerInstancia().CambiaStatusOrden(so, v6);
+                    out.println("LT" + fo.getFolioActual());
+                    ACC_Folios.ObtenerIstancia().ActualizarFolio("LT", fo.getFolioActual());
+                    break;
+                case "guardaHabilitado":
+                    StatusOrdenes ss = new StatusOrdenes();
+                    ss.setNum_orden(v1);
+                    ss.setFolio_sam(v2);
+                    ss.setOperacion_sam(v3);
+                    ss.setStatus(v4);
+                    ss.setCentro(v5);
+                    ss.setNum_lote(v6);//Número de Material
+                    ACC_ListadoOrdenesPP.ObtenerInstancia().GuardaHabilitado(ss);
+                    break;
+                case "truncarControl":
+                    ACC_ListadoOrdenesPP.ObtenerInstancia().truncateControl();
                     break;
             }
         }
