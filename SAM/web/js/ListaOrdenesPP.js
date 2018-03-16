@@ -17,6 +17,8 @@ $(document).ready(function () {
     var equiL2 = $('#equiL2');
     var ptol2 = $('#ptol2');
     var fechaord2 = $('#fechaord2');
+    var iniEx1 = $('#iniEx1');
+    var iniEx2 = $('#iniEx2');
 
     var b1 = $('#btnmat1');
     var b2 = $('#btnmat2');
@@ -32,11 +34,13 @@ $(document).ready(function () {
     var b12 = $('#btnmat12');
     var b13 = $('#btnmat13');
     var b14 = $('#btnmat14');
+    var b15 = $('#btnmat15');
+    var b16 = $('#btnmat16');
     var btn = [
-        b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14
+        b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16
     ];
     var inp = [clOrdL, OrdeL, SAMOrden, txtbrvord, ubitl, equiL, ptol, fechaord,
-        clOrdL2, OrdeL2, SAMOrden2, txtbrvord2, ubitl2, equiL2, ptol2, fechaord2];
+        clOrdL2, OrdeL2, SAMOrden2, txtbrvord2, ubitl2, equiL2, ptol2, fechaord2, iniEx1, iniEx2];
     $('#regresar').click(function () {
         $(location).attr('href', 'Bienvenido.jsp');
     });
@@ -644,6 +648,16 @@ $(document).ready(function () {
                     OpenCalendario("fechaord2");
                 });
                 break;
+            case 14:
+                v.click(function () {
+                    mostrarVentanaModal('Ventana Inicio Extremo 1');
+                });
+                break;
+            case 15:
+                v.click(function () {
+                    mostrarVentanaModal('Ventana Inicio Extremo 2');
+                });
+                break;
         }
     });
 
@@ -707,7 +721,7 @@ $(document).ready(function () {
                     posicionm(3);
                 });
                 break;
-            case 5: //////// Equipo
+            case 5: //////// Material
                 v.focus(function () {
                     posicionm(4);
                 });
@@ -771,6 +785,16 @@ $(document).ready(function () {
             case 15: //// Fecha
                 v.focus(function () {
                     posicionm(13);
+                });
+                break;
+            case 16: //// Inicio Extremo 1
+                v.focus(function () {
+                    posicionm(14);
+                });
+                break;
+            case 17: //// Inicio Extremo 2
+                v.focus(function () {
+                    posicionm(15);
                 });
                 break;
 
