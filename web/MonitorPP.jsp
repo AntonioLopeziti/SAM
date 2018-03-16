@@ -118,6 +118,7 @@
                 </ul>
             </div>
             <input id="aceptar" type="image" src="images/aceptar.png"/>
+            <input id="guardar" type="image" src="images/guarda.PNG"/>
             <input  id="regresar" type="image" src="images/regresa.PNG" onclick="back();"/>
             <input id="finalizar" type="image" style="margin-bottom: -1px;" src="images/canceOFF.png" disabled/>
             <input  id="cancelar" type="image" src="images/cancelaOFF.png" disabled/>
@@ -132,6 +133,14 @@
                 <button id="imgCie" class="bgButtons"></button>
                 <button id="imgCan" class="bgButtons"></button>
             </section>
+<!--            <section class="bkClassNoti">
+                <label style="padding-left: 10px; font-size: 13.5px;">Clase de notificación</label>
+                <hr id="LineaTituloInfo">
+                <input type="radio" name="clnoti" checked> Notif.pacial
+                <input type="radio" name="clnoti" class="rbcln"> Notif.final
+                <input type="radio" name="clnoti" class="rbcln"> Notif.final autom.
+                <input type="checkbox" name="ckreserva" class="rbcln"> Compensar reserva
+            </section>-->
             <section class="bkSubSec">
                 <div class="CldMov">
                     <section class="DobleScroll" id="DobleSection">
@@ -143,8 +152,10 @@
                                 <thead>
                                     <tr>
                                         <td></td>
-                                        <td>Clase órden</td>
-                                        <td>Nro. Órden</td>
+                                        <td>Clase Orden</td>
+                                        <td>Folio SAP</td>
+                                        <td>Folio SAM</td>
+                                        <td>Centro</td>
                                         <td>Material</td>
                                         <td>Texto material</td>
                                         <td>Estatus</td>
@@ -157,33 +168,6 @@
                             </table>
                         </section>
                         <section class="SecBody" id="SecCuerpo">
-<!--                            <table id="TabBody">
-                                <tbody>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003405</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003406</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003407</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003408</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003409</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003410</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003411</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003412</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003413</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003414</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr><td><input type="checkbox"></td><td>PP01</td><td>60003415</td><td>ACT-DCD-07</td><td>CD de demostración</td><td>LIB.</td><td>100.00</td><td>24-01-2018</td><td>10</td><td><input type="checkbox"></td></tr>
-                                    <tr class="ocultar">
-                                        <td>00</td>
-                                        <td>0000000000</td>
-                                        <td>00000000000</td>
-                                        <td>000000000000000000</td>
-                                        <td>0000000000000000000000000000000000</td>
-                                        <td>00000000</td>
-                                        <td>000000000000</td>
-                                        <td>00000000000</td>
-                                        <td>00000000</td>
-                                        <td>00000</td>
-                                    </tr>
-                                </tbody>
-                            </table>-->
                         </section>
                     </section>
                 </div>
@@ -214,6 +198,7 @@
                 </script>
                 <script type="text/javascript">
                     var e;
+                    var usuario = "<%=Nombre%>";
 
                     function startTime() {
                         today = new Date();
@@ -242,7 +227,7 @@
                         document.getElementById('iconmsg').style.visibility = "hidden";
 //                        document.getElementById('guardar').disabled = true;
                     }
-                    
+
                 </script>
             </div>
         </footer>
