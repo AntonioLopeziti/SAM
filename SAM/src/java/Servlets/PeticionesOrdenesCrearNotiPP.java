@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import AccesoDatos.ACC_Ordenes_pp_notificaciones;
 import Entidades.ordenes_pp_notificaciones;
+import Entidades.PlanPP;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,16 +38,16 @@ public class PeticionesOrdenesCrearNotiPP extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String plao = request.getParameter("env1vm");
+            //String plao = request.getParameter("env1vm");
             String orde = request.getParameter("ordmatvm");
             String deso = request.getParameter("txtbrvm");
             String canm = request.getParameter("env5vm");
-            LinkedList<ordenes_pp_notificaciones> pl = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenOrdenNOTIPP(canm, orde, deso, plao);        
+            LinkedList<PlanPP> pl = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerNotificPP(canm, orde, deso);        
                 out.println("<table>");
                 out.println("<tbody>");
                 for (int i = 0; i < pl.size(); i++) {
                     out.println("<tr ondblclick=\"seleccionar('" + pl.get(i).getNum_orden() + "','notor','VentanaModal')\">");
-                    out.println("<td>" + pl.get(i).getSociedad_co() + "</td>");
+//                    out.println("<td>" + pl.get(i).getSociedad_co() + "</td>");
                     out.println("<td>" + pl.get(i).getNum_orden() + "</td>");
                     out.println("<td>" + pl.get(i).getTexto_breve() + "</td>");
                     out.println("</tr>");
