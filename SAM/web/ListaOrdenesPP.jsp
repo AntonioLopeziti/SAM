@@ -230,6 +230,8 @@
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.GralFecha_PP"));%></label><input  maxlength="10" type="text" value="" id="fechaord" style="width:25%; background-repeat: no-repeat;" onpaste="return false;"/><button id="btnmat13" class="BtnMatchIcon"></button>
                         <hr>
+                        <label>Inicio extremo</label><input maxlength="15" type="text" value="" id="iniEx1" style="width:30%; background-repeat: no-repeat;"><button id="btnmat15" class="BtnMatchIcon"></button>
+                        <hr>
                     </section>
                     <section class="SelOrDer_LO">
                         <label><%out.println(po.getProperty("etiqueta.A_LO_PP"));%></label><input type="text" style="width: 12%; text-transform: uppercase;" id="clOrdL2"/><button id="btnmat7" class="BtnMatchIcon"></button>
@@ -247,6 +249,8 @@
                         <!--<label><%out.println(po.getProperty("etiqueta.A_LO_PP"));%></label><input type="text" style="width: 25%; text-transform: uppercase;" id="ptol2"/><button id="btnmat12" class="BtnMatchIcon"></button>-->
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.A_LO_PP"));%></label><input  maxlength="10" type="text" value="" id="fechaord2" style="width:25%;  background-repeat: no-repeat;" onpaste="return false;"/><button id="btnmat14" class="BtnMatchIcon"></button>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.A_LO_PP"));%></label><input maxlength="15" type="text" id="iniEx2" style="width: 30%; background-repeat: no-repeat"><button id="btnmat16" class="BtnMatchIcon"></button>
                         <hr>
                     </section>                      
                 </div>
