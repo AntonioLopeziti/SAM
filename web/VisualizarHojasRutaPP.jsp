@@ -159,9 +159,9 @@
                     <label><%out.println(po.getProperty("etiqueta.ParamBus_PP"));%></label>
                     <hr id="lineaBomtitu">
                     <div class="div1pa">
-                        <label><%out.println(po.getProperty("etiqueta.Equipo_PP"));%></label><input id="EquipoHR" maxlength="18" type="text" style="width:25%; background-repeat: no-repeat; text-transform: uppercase"/><button id="btnmatch"  class="BtnMatchIcon"></button> <input id="DesEquiHR" type="text" readonly="true" style="width: 55%; border: none;  background: none;"/>
+                        <label><%out.println(po.getProperty("etiqueta.MateHR_PP"));%></label><input id="EquipoHR" maxlength="18" type="text" style="width:25%; background-repeat: no-repeat; text-transform: uppercase"/><button id="btnmatch"  class="BtnMatchIcon"></button> <input id="DesEquiHR" type="text" readonly="true" style="width: 55%; border: none;  background: none;"/>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.CentroTrabajo_PP"));%></label><input id="CentroHR" maxlength="4" type="text" style="width: 15%; text-transform: uppercase; background-repeat: no-repeat;"/><button id="btnmatch2"  class="BtnMatchIcon2"></button> 
+                        <label><%out.println(po.getProperty("etiqueta.CentroFabric_PP"));%></label><input id="CentroHR" maxlength="4" type="text" style="width: 15%; text-transform: uppercase; background-repeat: no-repeat;"/><button id="btnmatch2"  class="BtnMatchIcon2"></button> 
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.Alternativa_PP"));%></label><input type="text" style="width: 8%;" maxlength="2" id="AltHR">
                     </div>
@@ -274,9 +274,9 @@
                 <div id="BuscarParam" class="BuscarParam_u">
                     <div class="fondo_Match">
                         <div class="busquedaMatch">
-                            <label><%out.println(po.getProperty("etiqueta.Equipo_PP"));%></label><input type="text" id="equiBus" maxlength="18" style="width:35%; text-transform: uppercase;"/>
+                            <label>Material</label><input type="text" id="equiBus" maxlength="18" style="width:35%; text-transform: uppercase;"/>
                             <hr>
-                            <label><%out.println(po.getProperty("etiqueta.DenominacionEquipo_PP"));%></label><input type="text"  maxlength="40" id="dnEquBus" style="width:35%;"/>
+                            <label>Denominación Material</label><input type="text"  maxlength="40" id="dnEquBus" style="width:35%;"/>
                             <hr>
                             <label><%out.println(po.getProperty("etiqueta.CtdMaximaAciertos_PP"));%></label><input maxlength="3" type="text" id="numAcMax" style="width:10%;"/>
                             <hr>
@@ -294,7 +294,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.Equipo_PP"));%></th><th><%out.println(po.getProperty("etiqueta.DenominacionEquipo_PP"));%></th>
+                                            <th>Material</th><th>Denominación Material</th>
                                         </tr>
                                     </thead>
                                 </table>
