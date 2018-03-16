@@ -19,8 +19,8 @@ and open the template in the editor.
     float: right;
     z-index: 1; position:relative;
 }
-#DobleSection { height: 420px; }
-#SecCuerpo { height: 420px; }
+#DobleSection { height: 380px; }
+#SecCuerpo { height: 380px; }
 .TableContainer
 {
     width: 100%;
@@ -67,7 +67,7 @@ and open the template in the editor.
 }
 .bkSubSec{
     padding-left: 15px;
-    padding-right: 13.5%;
+    padding-right: 6%;
 }
 .bkButtons{
     padding-left: 15px;
@@ -87,3 +87,20 @@ and open the template in the editor.
 #imgLib{ background-image: url('../images/liberar.png'); }
 #imgCie{ background-image: url('../images/cierretecnico.png'); }
 #imgCan{ background-image: url('../images/cancelarcierre.png'); }
+
+.bkClassNoti{
+    background-color: white;
+    margin-left: 15px;
+    margin-right: 55%;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    font-family: Tahoma;
+}
+#LineaTituloInfo{
+    margin-left: -2%;
+    margin-top: 0;
+    border: 1px solid #3892E0;
+    margin-left: 0;
+}
+.rbcln{ margin-left: 5%; }
