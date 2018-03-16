@@ -124,6 +124,34 @@ public class ACC_HojasRuta {
         }
         return hrs;
     }
+    public ArrayList<hojas_de_ruta> ConsultaVisualizarHROrdenesPP(String mat) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        ArrayList hrs = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String ProcOrg = "{call PP.Ordenes_ConsultarHojasDeRuta(?)}";
+
+        try {
+            ps = con.prepareStatement(ProcOrg);
+            ps.setString(1, mat);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                hojas_de_ruta hr = new hojas_de_ruta();
+                hr.setContador_grupo_hojaruta(rs.getString("cont_gpo_hr"));
+                hr.setClave_grupo_hojaruta(rs.getString("clave_gpo_hr"));
+                hr.setTexto_hojaruta(rs.getString("txt_brv_hr"));
+                hr.setTexto_breve_operacion(rs.getString("txt_brv_op"));
+                hrs.add(hr);
+            }
+        } catch (Exception e) {
+            System.err.println("Error en metodo ConsultaVisualizarHROrdenes  por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return hrs;
+    }
 
     public hojas_de_ruta ConsultaHojaRuta(String query) {
         Conexion cnx = new Conexion();
@@ -282,9 +310,84 @@ public class ACC_HojasRuta {
         }
         return hrs;
     }
+    
+    public String[] DataMaterialHR(String mat){
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String[] response = new String[10];
+        PreparedStatement ps;
+        ResultSet rs;
+        String SP = "{CALL PP.getDataMaterialHR(?)}";
+        try {
+            ps = con.prepareStatement(SP);
+            ps.setString(1, mat);
+            rs = ps.executeQuery();
+            rs.next();
+            response[0] = rs.getString("puesto_trab");
+            response[1] = rs.getString("clave_gpo_hr");
+            response[2] = rs.getString("cont_gpo_hr");
+
+        } catch (Exception ex) {
+            System.err.println("Error en el metodo DataMatchEquipoOrdenes(ACC_Equipos por: )" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return response;
+    }
 
     public static void main(String[] args) {
         // System.out.println(ACC_HojasRuta.ObtenerInstancia().ConsultaVisualizarHR("CARI", "CARI651PS002A1002"));
     }
+    
+    public ArrayList ConsultaOperacionesHR_PP(String clsOrd, String contHR, String numHR) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        ArrayList hrs = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet rs = null;
+        hojas_de_ruta hr;
+        String SP = "{CALL PP.Ordenes_ValidarClsOrdOpe(?, ?, ?)}";
+        String check;
+        try {
+            ps = con.prepareStatement(SP);
+            ps.setString(1, clsOrd);
+            ps.setString(2, contHR);
+            ps.setString(3, numHR);
+            rs = ps.executeQuery();
+            rs.next();
+            check = rs.getString(1);
+            if (check.equals("0") || check.equals("1")) {
+                hr = new hojas_de_ruta();
+                hr.setNum_operacion(check);
+                hrs.add(hr);
+            } else {
+                hr = new hojas_de_ruta();
+                hr.setNum_operacion(rs.getString("num_op"));
+                hr.setTexto_breve_operacion(rs.getString("txt_brv_op"));
+                hr.setCantidad_base(rs.getString("cnt_base"));
+                hr.setDuracion_operacion_normal(rs.getString("dura_op"));
+                hr.setUnidad_duracion_normal(rs.getString("unidad_dura"));
+                hr.setPuesto_trabajo(rs.getString("puesto_trab"));
+                hrs.add(hr);
+                while (rs.next()) {
+                    hr = new hojas_de_ruta();
+                    hr.setNum_operacion(rs.getString(1));
+                    hr.setTexto_breve_operacion(rs.getString("txt_brv_op"));
+                    hr.setCantidad_base(rs.getString("cnt_base"));
+                    hr.setDuracion_operacion_normal(rs.getString("dura_op"));
+                    hr.setUnidad_duracion_normal(rs.getString("unidad_dura"));
+                    hr.setPuesto_trabajo(rs.getString("puesto_trab"));
+                    hrs.add(hr);
+                }
+            }
 
+            cnx.CerrarConexion(con);
+        } catch (Exception ex) {
+            System.err.println("Error en el metodo ConsultaOperacionesXhr(ACC_PuestoTrabajo por: )" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return hrs;
+    }
+    
 }
