@@ -498,5 +498,26 @@ public class ACC_Usuarios {
         System.out.println(u.ListaUsuarioMC("ADMIN", 1));
 
     }
-
+    public ArrayList<usuarios> ConsultarUsuarioNotTiemPP(){
+        ArrayList<usuarios> us = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String proc = "{CALL PP.NotTiempo_ConsultarUsuariosPP}";
+        try{
+            ps = con.prepareStatement(proc);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                usuarios u = new usuarios();
+                u.setUsuario(rs.getString("Usuario"));
+                us.add(u);
+            }
+        }catch (Exception e) {
+            System.err.println("Error en ConsultarUsuarios, ACC_Usuarios por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return us;
+    }    
 }
