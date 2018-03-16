@@ -236,14 +236,18 @@
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.NPMSuboperacion_PP"));%></label><input id="notsop" type="text" maxlength="4" style="width:40%;" />
                         <hr>
+                        <label>Cant. a fabricar</label><input id="cntFabricar" type="text" maxlength="8" style="width:30%;"/>
+                        <hr>
+                        <label>Cant. fabricada</label><input id="cntFabricada" type="text" maxlength="8" style="width: 30%;"/>
+                        <hr>
                     </section>
                     <section class="subdiv2">
                         <label><%out.println(po.getProperty("etiqueta.NPMStatus_PP"));%></label><input id="notsta" style="width:80%; background:none; border:none;" type="text" readonly value=""/>
                     </section> 
                     <section class="subdiv3">
                         <button onclick="libbotPP()" > <img src="images/liberar.png"><span>Liberar</span></button>
-                        <button onclick="canbot()" > <img src="images/cierretecnico.png"><span>Cierre Técnico</span></button>
-                        <button  onclick="cciebot()"> <img src="images/cancelarcierre.png"><span>Can. Cierre Téc.</span></button>
+                        <button onclick="canbotPP()" > <img src="images/cierretecnico.png"><span>Cierre Técnico</span></button>
+                        <button  onclick="cciebotPP()"> <img src="images/cancelarcierre.png"><span>Can. Cierre Téc.</span></button>
                     </section>
                 </div>
 
@@ -342,7 +346,7 @@
                             </table>
                         </section>  
                     </div>
-                    <button id="btntab" onclick="selecoftab()"><img src="images/notificaroperacion.png"><%out.println(po.getProperty("etiqueta.NPMUMTNR_PP"));%></button><br><br>                   
+                    <button id="btntab" onclick="selecoftabPP()"><img src="images/notificaroperacion.png"><%out.println(po.getProperty("etiqueta.NPMUMTNR_PP"));%></button><br><br>                   
                     <!--<button id="btntab2" onclick="cldCK()"><img src="images/notificaroperacion.png">N.R</button>-->                      
                     <p class="last1"></p>                   
                 </section>
@@ -390,8 +394,8 @@
             <div id="BuscarParam_u1" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label><%out.println(po.getProperty("etiqueta.CecosteMAV_PP"));%></label><input  id="env1vm"   type="text" style="width: 35%;"  onkeypress="enterMat(event)"  />
-                        <hr>
+<!--                        <label><%out.println(po.getProperty("etiqueta.CecosteMAV_PP"));%></label><input  id="env1vm"   type="text" style="width: 35%;"  onkeypress="enterMat(event)"  />
+                        <hr>-->
                         <label><%out.println(po.getProperty("etiqueta.NPMOrden_PP"));%></label><input id="ordmatvm" aling="center" type="text" style="width: 35%;" onkeypress="enterMat(event)"/>
                         <hr> 
                         <label><%out.println(po.getProperty("etiqueta.NPMTextobreve_PP"));%></label><input type="text" id="txtbrvm" aling="center" style="width: 45%;" onkeypress="enterMat(event)"/>
@@ -412,7 +416,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.CecosteMAV_PP"));%></th><th><%out.println(po.getProperty("etiqueta.NPMOrden_PP"));%></th><th><%out.println(po.getProperty("etiqueta.NPMTextobreve_PP"));%></th>
+                                        <!--<th><%out.println(po.getProperty("etiqueta.CecosteMAV_PP"));%></th>-->
+                                        <th><%out.println(po.getProperty("etiqueta.NPMOrden_PP"));%></th><th><%out.println(po.getProperty("etiqueta.NPMTextobreve_PP"));%></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -1087,7 +1092,7 @@
                     <input id="trrep1" type="text" style="width: 10%; margin-left:3%;" onclick="mostbotmatus()"/><button id="match_Nope" class='BtnMatchIcon2'></button>
                     <input type="checkbox" id="nfpm1" style="margin-left: 7%;" />
                     <label style="width:20%; margin-left: -1%;"><%out.println(po.getProperty("etiqueta.NPMNotificacifinal_PP"));%></label>
-                    <button onclick="valnotiemP01()" id="nttiem" style="margin-left: 10%; width: 20%; height: -5%"><img style="width: 13%;margin-left: -5%;" src="images/guarda.PNG" /><label style="margin-right:20%; "> <%out.println(po.getProperty("etiqueta.NPMNotifictiem"));%></label></button>
+                    <button onclick="valNotTiemPP01()" id="nttiem" style="margin-left: 10%; width: 20%; height: -5%"><img style="width: 13%;margin-left: -5%;" src="images/guarda.PNG" /><label style="margin-right:20%; "> <%out.println(po.getProperty("etiqueta.NPMNotifictiem"));%></label></button>
                     <hr color="white" style="margin-top: -1px; width: 13%; margin-left: 9px;">
                 </section> 
 
@@ -1129,7 +1134,7 @@
             </div>
             <div class="Botpm">
                 <button onclick="ListaMateriales()" ><img style="height:15px;" src="images/hoja.PNG" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%out.println(po.getProperty("etiqueta.NPMListOfMateriales_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                <button style="" onclick="ConsMat();" > <img style="height:15px;" src="images/cosma2.png" /> <%out.println(po.getProperty("etiqueta.NPMConsumoMate_PP"));%></button>
+                <button style="" onclick="ConsMaterial();" > <img style="height:15px;" src="images/cosma2.png" /> <%out.println(po.getProperty("etiqueta.NPMConsumoMate_PP"));%></button>
                 <!--Nope<button onclick="LlamarFunc();" style="height:20px;"> <img src="images/palomal.png" style="margin-left: -5%; margin-right:5%;" /><%out.println(po.getProperty("etiqueta.NPMNotificaOper_PP"));%></button>-->
                 <!--<button onclick="LlamarFunc();" ><img height="15" width="16"  src="images/palomal.png" /><%out.println(po.getProperty("etiqueta.NPMNotificaOper"));%></button>-->
                 <button onclick="cerraventabs('ventaPM01')" ><img  src="images/S_B_CANC.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%out.println(po.getProperty("etiqueta.NPMFinaliproce_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
@@ -1250,7 +1255,7 @@
                     </div>       
                 </div> 
                 <div class="Botones_Match">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%;" onclick="LoadMat('peticionMatMatNotPM');"/>
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%;" onclick="LoadMaters('peticionMatMatNotPM');"/>
                     <img class="BtnMatchIcon" src="images/HR_not.png" onclick="ocultarVentana('VentModalmat');"/>
                 </div>
             </div>
