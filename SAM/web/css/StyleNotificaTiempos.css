@@ -7,14 +7,12 @@ and open the template in the editor.
     Created on : Jan 15, 2018, 4:53:30 PM
     Author     : Jhonatan
 */
-.ContentNotif{
-    width: 60%;
-    margin-bottom: 40px;
-}
 input{
     font-family: "Courier New";
 }
+/*Busqueda General*/
 .ContentNotif{
+    margin-bottom: 30px;
     width: 60%;
     height: 70px;
     background: #fff;
@@ -45,15 +43,41 @@ input{
     width: 35%;
     float: right;
 }
+/*Div Radio Buttons*/
+.bkClassNoti{
+    margin-bottom: 30px;
+    background-color: white;
+    margin-right: 55%;    
+    padding-bottom: 5px;
+    font-size: 13px;
+    font-family: Tahoma;
+    width: 62%;
+    height: 50px;
+}
+#LineaTituloInfo{
+    /*margin-left: -2%;*/
+    /*margin-top: 0;*/
+    margin-top: -1px;
+    border: 1px solid #3892E0;
+    margin-left: 0;
+    width: 100%;
+}
+
+.rbcln{ 
+    margin-left: 5%; 
+}
+
+/*Div Datos Generales*/
 .DatosGeneNotiTiemp{
-    margin-top: 6px;
+    margin-bottom: 30px;
+    /*margin-top: 6px;*/
     width: 60%;
     height: 105px;
     background: #fff;
     padding-left: 2%;
 }
 .divNoOrdFabri hr{
-    width: 25%;
+    width: 20%;
     margin-left: 0;
     margin-top: -1px;
 }
@@ -61,11 +85,18 @@ input{
     width: 20%;
     display: inline-block;
 }
-.divNoOrdFabri select{
+.divNoOrdFabri section{
     margin-left: -5px;
+    width: 20%;
+    display: inline-block;
 }
+/*.divMostarOp select{
+    margin-left: 4%;
+    width: 10%;
+}*/
+/*Div Datos Reales*/
 .DatosReales{
-    margin-top: 40px;
+    /*margin-top: 40px;*/
     width: 60%;
     height: 90px;
     background: #fff;
