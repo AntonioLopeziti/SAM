@@ -140,7 +140,7 @@ $(document).ready(function () {
     });
     function ConsultaEquipos() {        
         var acc = "ConsultaMatchEquipos";
-        var datos = "&Equipo=" + $('#equiBus').val() + "&DEquipo=" + $('#dnEquBus').val() + "&Ctd=" + $('#numAcMax').val();
+        var datos = "&Equipo=" + $('#equiBus').val() + "&DEquipo=" + $('#dnEquBus').val() + "&Ctd=" + $('#numAcMax').val();        
         $.ajax({
             async: false,
             type: "GET",
@@ -148,7 +148,7 @@ $(document).ready(function () {
             contentType: "application/x-www-form-urlencoded",
             processData: true,
             data: "Action=" + acc + datos,
-            success: function (data) {
+            success: function (data) {                
                 if (data == 0) {
                     ShowMsg(1, "images/aceptar.png", "audio/sapmsg.wav");
                 } else {
@@ -244,15 +244,15 @@ $(document).ready(function () {
         cargarData();
     }
     function cargarData() {
-        var acc = "CargarDatosHojaRuta";
+        var acc = "CargarDatosHR";
         $.ajax({
             async: false,
             type: "GET",
             url: "peticionModuloHojaRutaPP",
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Action=" + acc + "&Equipo=" + equ.val() + "&Centro=" + cen.val() + "&Alter=" + alt.val(),
-            success: function (data) {
+            data: "Action=" + acc + "&Mater=" + equ.val() + "&Centro=" + cen.val() + "&Alter=" + alt.val(),
+            success: function (data) {                
                 if (data == 1) {
                     CleanTable();
                     ShowMsg(3, "images/advertencia.PNG", "audio/saperror.wav");
