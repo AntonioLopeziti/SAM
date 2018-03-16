@@ -18,7 +18,7 @@ input{
     padding-left: 2%;
     width: 100%;
     background: #fff;
-    height: 120px;
+    height: 260px;
 }
 #lineaBomtitu{
     border: 1px solid #3892E0;
@@ -29,11 +29,11 @@ input{
     width: 100%;
 }
 .div1pa label {
-    width: 15%;
+    width: 25%;
     display: inline-block;
 }
 .div1pa hr {
-    width: 15%;
+    width: 25%;
     margin-left: 0;
     margin-top: -1px;
 }
