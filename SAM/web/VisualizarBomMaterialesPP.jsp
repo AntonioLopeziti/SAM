@@ -165,6 +165,9 @@
                         <label><%out.println(po.getProperty("etiqueta.centrotrabajoBOOM_PP"));%></label><input type="text" maxlength="4" id="centrotrab" style="width: 10%; text-transform: uppercase; background-repeat: no-repeat;"><button id="btnmatch2"  class="BtnMatchIcon2"></button>
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.AlternativaBOOM_PP"));%></label><input type="text" id="Altern" maxlength="2" style="width: 6%;" />                                
+                        <hr>
+                        <label>Cantidad Base</label><input type="text" id="cantBase" maxlength="10" style="width: 8%; text-transform: uppercase; background-repeat: no-repeat;">
+                        <hr>
                     </div>
                 </div>
 
