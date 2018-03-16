@@ -8,10 +8,14 @@ package Servlets;
 import AccesoDatos.ACC_BOMEquipos;
 import java.io.IOException;
 import java.io.PrintWriter;
+import AccesoDatos.ACC_Boom_Mate;
 import AccesoDatos.ACC_Equipos;
+import AccesoDatos.ACC_Material;
 import AccesoDatos.ACC_Centro;
 import Entidades.bom_equipo;
+import Entidades.boom_material;
 import Entidades.equipos;
+import Entidades.materiales;
 import Entidades.centros;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -51,23 +55,25 @@ public class PeticionModuloVisualizarBoomPP extends HttpServlet {
             String Alterna = request.getParameter("Alter");
             HttpSession session = request.getSession();
             String idioma = (String) session.getAttribute("Idioma");
-            String desEq = "denominacion_" + idioma;
+            String Mate = request.getParameter("Mte");
+            String desEq = "descripcion_" + idioma;
             int l;
+            int p;
             switch (Accion) {
                 case "ConsultaMatchEquipos":
-                    ArrayList<equipos> e = ACC_Equipos.ObtenerInstancia().ConsultarEquipoMCPP(Equipo, DenEquipo, desEq, Ctd);
-                    if (e.size() > 0) {
+                    ArrayList<materiales> ma = ACC_Material.ObtenerInstancia().ConsultarMaterialHRVis(Equipo, DenEquipo, desEq, Ctd);
+                    if(ma.size() > 0){
                         out.println("<table>");
                         out.println("<tbody>");
-                        for (int i = 0; i < e.size(); i++) {
-                            out.println("<tr ondblclick=\"seleccionar('" + e.get(i).getNum_equipo() + "','EquBoom','VentanaModal','BuscarParam','ConsultaTabla')\">");
-                            out.println("<td>" + e.get(i).getNum_equipo() + "</td>");
-                            out.println("<td>" + e.get(i).getDescripcion_equipo() + "</td>");
+                        for(int i = 0; i < ma.size(); i++){
+                            out.println("<tr ondblclick=\"seleccionar('" + ma.get(i).getMaterial() + "','EquBoom','VentanaModal','BuscarParam','ConsultaTabla')\">");
+                            out.println("<td>" + ma.get(i).getMaterial() + "</td>");
+                            out.println("<td>" + ma.get(i).getDescripcion() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
                         out.println("</table>");
-                    } else {
+                    }else{
                         out.println(0);
                     }
                     break;
@@ -92,24 +98,24 @@ public class PeticionModuloVisualizarBoomPP extends HttpServlet {
                         out.println(0);
                     }
                 break;
-                case "CargarDatosBomEquipos":
-                    ArrayList<bom_equipo> cen = ACC_BOMEquipos.ObtenerInstancia().ObtenerDatosBOOMPP(Equipo, Centros, Alterna);
-                    if (cen.size() > 0) {
+                case "CargarDatosBoomMate":
+                    ArrayList<boom_material> re = ACC_Boom_Mate.ObtenerInstancia().ObtenerDatosBOMATEPP(Mate, Centros, Alterna);
+                    if(re.size() > 0){
                         out.println("<table id=\"TabBody\">");
                         out.println("<tbody>");
-                        for (l = 0; l < cen.size(); l++) {
+                        for(p = 0; p < re.size(); p++){
                             out.println("<tr>");
                             out.println("<td></td>");
-                            out.println("<td>" + cen.get(l).getUtilizacion_listamaterial() + "</td>");
-                            out.println("<td>" + cen.get(l).getLista_materiales() + "</td>");
-                            out.println("<td>" + cen.get(l).getCentro_suministrador() + "</td>");
-                            out.println("<td name=\"Tcomp\">" + cen.get(l).getComponente_listamaterial() + "</td>");
-                            out.println("<td name=\"Tdes\"></td>");
-                            out.println("<td>" + cen.get(l).getCantidad_componente() + "</td>");
-                            out.println("<td>" + cen.get(l).getUnidad_medida_componente() + "</td>");
+                            out.println("<td></td>");
+                            out.println("<td>" + re.get(p).getLista_mate() +"</td>");
+                            out.println("<td>" + re.get(p).getCentro_suminist() + "</td>");
+                            out.println("<td>" + re.get(p).getComp_list_mate() + "</td>");
+                            out.println("<td></td>");
+                            out.println("<td>" + re.get(p).getCnt_componente() + "</td>");
+                            out.println("<td>" + re.get(p).getUm_componente() + "</td>");
                             out.println("</tr>");
                         }
-                        for (int j = l; j < 13; j++) {
+                        for(int k = p; k < 13; k++){
                             out.println(""
                                     + "<tr>"
                                     + "<td>&nbsp;</td>"
@@ -122,7 +128,6 @@ public class PeticionModuloVisualizarBoomPP extends HttpServlet {
                                     + "<td>&nbsp;</td>"
                                     + "</tr>");
                         }
-
                         out.println(" <tr class=\"ocultar\">\n"
                                 + "                                            <td>0000</td>\n"
                                 + "                                            <td>00000000000</td>\n"
@@ -134,10 +139,56 @@ public class PeticionModuloVisualizarBoomPP extends HttpServlet {
                                 + "                                            <td>000000000000000</td></tr>");
                         out.println("</tbody>");
                         out.println("</table>");
-                    } else {
-                        out.println(1);
+                    }else{
+                        out.println(0);
                     }
                     break;
+//                case "CargarDatosBomEquipos":
+//                    ArrayList<bom_equipo> cen = ACC_BOMEquipos.ObtenerInstancia().ObtenerDatosBOOMPP(Equipo, Centros, Alterna);
+//                    if (cen.size() > 0) {
+//                        out.println("<table id=\"TabBody\">");
+//                        out.println("<tbody>");
+//                        for (l = 0; l < cen.size(); l++) {
+//                            out.println("<tr>");
+//                            out.println("<td></td>");
+//                            out.println("<td>" + cen.get(l).getUtilizacion_listamaterial() + "</td>");
+//                            out.println("<td>" + cen.get(l).getLista_materiales() + "</td>");
+//                            out.println("<td>" + cen.get(l).getCentro_suministrador() + "</td>");
+//                            out.println("<td name=\"Tcomp\">" + cen.get(l).getComponente_listamaterial() + "</td>");
+//                            out.println("<td name=\"Tdes\"></td>");
+//                            out.println("<td>" + cen.get(l).getCantidad_componente() + "</td>");
+//                            out.println("<td>" + cen.get(l).getUnidad_medida_componente() + "</td>");
+//                            out.println("</tr>");
+//                        }
+//                        for (int j = l; j < 13; j++) {
+//                            out.println(""
+//                                    + "<tr>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "</tr>");
+//                        }
+//
+//                        out.println(" <tr class=\"ocultar\">\n"
+//                                + "                                            <td>0000</td>\n"
+//                                + "                                            <td>00000000000</td>\n"
+//                                + "                                            <td>0000000000000000</td>\n"
+//                                + "                                            <td>0000000000000000</td>\n"
+//                                + "                                            <td>0000000000000000</td>\n"
+//                                + "                                            <td>00000000000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000</td>\n"
+//                                + "                                            <td>000000000000000</td></tr>");
+//                        out.println("</tbody>");
+//                        out.println("</table>");
+//                    } else {
+//                        out.println(1);
+//                    }
+//                    break;
                 case "cleantable":
                     out.println("<table id=\"TabBody\">");
                     out.println("<tbody>");
@@ -167,12 +218,12 @@ public class PeticionModuloVisualizarBoomPP extends HttpServlet {
                     out.println("</tbody>");
                     out.println("</table>");
                     break;
-                case "ObtenerDescripcion":
-                    String d = ACC_Equipos.ObtenerInstancia().ObtenerDesPP(Equipo, desEq);
-                    out.println(d);
-                    break;   
+//                case "ObtenerDescripcion":
+//                    String d = ACC_Equipos.ObtenerInstancia().ObtenerDesPP(Equipo, desEq);
+//                    out.println(d);
+//                    break;   
                 case "ObtenerDescripcionByMat":
-                    String ds = ACC_Equipos.ObtenerInstancia().ObtenerDesByMPP(Equipo, idioma);
+                    String ds = ACC_Boom_Mate.ObtenerInstancia().ObtenerDesByMPP(Mate, idioma);
                     out.println(ds);
                     break;
             }
