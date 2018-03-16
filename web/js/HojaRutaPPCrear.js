@@ -5,7 +5,7 @@
  */
 $(document).ready(function () {
     startTime();
-    AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+//    AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
     $('#iconmsg').hide();
     $('#guardar').prop('disabled', true);
     $('#finalizar').prop('disabled', true);
@@ -357,30 +357,30 @@ function CleanTable() {
     });
 }
 
-function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
-{
-    var myTable = document.getElementById(cuerpo);
-    var arr = new Array();
-    for (i = 0; i < myTable.rows[0].cells.length; i++)
-    {
-        arr[i] = myTable.rows[0].cells[i];
-    }
-    var val = 0;
-    for (i = 0; i < arr.length; i++)
-    {
-        val += arr[i].offsetWidth;
-    }
-    var myTableCb = document.getElementById(cabecera);
-    myTableCb.style.width = val + 7 + "px";
-    var arrCb = new Array();
-    for (i = 0; i < myTableCb.rows[0].cells.length; i++)
-    {
-        arrCb[i] = myTableCb.rows[0].cells[i];
-    }
-    for (i = 0; i < arr.length - 1; i++)
-    {
-        arrCb[i].style.width = (arr[i].offsetWidth - diferiencia) + "px";
-    }
-    document.getElementById(section).style.width = val + 17 + "px";
-}
+//function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
+//{
+//    var myTable = document.getElementById(cuerpo);
+//    var arr = new Array();
+//    for (i = 0; i < myTable.rows[0].cells.length; i++)
+//    {
+//        arr[i] = myTable.rows[0].cells[i];
+//    }
+//    var val = 0;
+//    for (i = 0; i < arr.length; i++)
+//    {
+//        val += arr[i].offsetWidth;
+//    }
+//    var myTableCb = document.getElementById(cabecera);
+//    myTableCb.style.width = val + 7 + "px";
+//    var arrCb = new Array();
+//    for (i = 0; i < myTableCb.rows[0].cells.length; i++)
+//    {
+//        arrCb[i] = myTableCb.rows[0].cells[i];
+//    }
+//    for (i = 0; i < arr.length - 1; i++)
+//    {
+//        arrCb[i].style.width = (arr[i].offsetWidth - diferiencia) + "px";
+//    }
+//    document.getElementById(section).style.width = val + 17 + "px";
+//}
 
