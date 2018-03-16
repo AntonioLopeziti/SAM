@@ -157,18 +157,27 @@
         <div class="contenido">
             <div class="ContentBoom">
                 <div class="divParamBus">
-                    <label><%out.println(po.getProperty("etiqueta.ParametrosBus_PP"));%></label>
+                    <label>Datos Generales</label>
                     <hr id="lineaBomtitu">
                     <div class="Contenidobus">
                         <label><%out.println(po.getProperty("etiqueta.Mteriales_PP"));%></label><input type="text" id="EquBoom" maxlength="18" style="width: 22%; background-repeat: no-repeat; text-transform: uppercase;"/><button id="btnmatch"  class="BtnMatchIcon"></button> <input type="text" id="DesEquBM" style="width: 52%; background: none; border: none;" readonly/>
                         <hr>
+                        <label>Descripción</label><input type="text" id="descMate" maxlength="50" style="width: 30%; background-repeat: no-repeat"/>
+                        <hr>
                         <label><%out.println(po.getProperty("etiqueta.centrotrabajoBOOM_PP"));%></label><input type="text" maxlength="4" id="centrotrab" style="width: 10%; text-transform: uppercase; background-repeat: no-repeat;"><button id="btnmatch2"  class="BtnMatchIcon2"></button>
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.AlternativaBOOM_PP"));%></label><input type="text" id="Altern" maxlength="2" style="width: 6%;" />                                
+                        <hr>
+                        <label>Cantidad</label><input type="text" maxlength="5" id="cntd" style="width: 10%;"/>
+                        <hr>
+                        <label>Unidad Medida</label><input type="text" maxlength="2" id="unMed" style="width: 6;"/>
+                        <hr>
+                        <label>Numero BOM</label><input type="text" maxlength="5" id="numBom" style="width: 6%;"/>
+                        <hr>
                     </div>
                 </div>
 
-                <div class="tablaSolicitud">
+<!--                <div class="tablaSolicitud">
                     <section id="TableNotfi" >
                         <section class="TableContainer">
                             <section class="SecHead">
@@ -212,14 +221,14 @@
                                             <td>00000000000000000000000000000</td>
                                             <td>000000000000000</td>
                                             <td>000000000000000</td>
-                                            <!--<td>000000000000000000000</td>-->
+                                            <td>000000000000000000000</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </section>
                         </section>
                     </section>
-                </div>
+                </div>-->
             </div>
             <div id="VentanaModal" class="VentanaModal">
                 <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitiarAmbitoValores_PP"));%></label><div class="BotonCerrar_Matc" id="CerraMCEqu"><label >X</label></div></div>
