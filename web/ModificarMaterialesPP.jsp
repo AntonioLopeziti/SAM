@@ -1,14 +1,13 @@
 <%-- 
-    Document   : VisualizarEquipos
-    Created on : 10/06/2016, 12:27:39 PM
+    Document   : CreaMate
+    Created on : 31/10/2017, 04:31:16 PM
+    Author     : Are-Consulting
 --%>
 <%@page import="AccesoDatos.ACC_Usuarios"%>
-<%@page import="java.net.URL"%>
-<%@page import="java.util.Properties"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.util.Properties"%>
 <%@page import = "java.io.InputStream"%>
 <%@page import = "java.net.URL"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     response.setHeader("Pragma", "no-cache");
     response.addHeader("Cache-Control", "must-revalidate");
@@ -43,12 +42,8 @@
         InputStream in = url.openStream();
         Properties po = new Properties();
         po.load(in);
-        String reso = po.getProperty("etiqueta.Resolucio");
-        String menValores = po.getProperty("etiqueta.NoExisteValores_SAM");
         String funcioninv = po.getProperty("etiqueta.FuncionInval_Menu");
-        String CampoOb = po.getProperty("etiqueta.CompObligatorios");
-        String existFol = po.getProperty("etiqueta.NoexisteEquipoEQ");
-        String OKconsul = po.getProperty("etiqueta.ConOk_FO");
+        String reso = po.getProperty("etiqueta.Resolucio");
         String Enero = po.getProperty("etiqueta.Enero");
         String Febrero = po.getProperty("etiqueta.Febrero");
         String Marzo = po.getProperty("etiqueta.Marzo");
@@ -68,14 +63,79 @@
         String Viernes = po.getProperty("etiqueta.Viernes");
         String Sabado = po.getProperty("etiqueta.Sabado");
         String Domingo = po.getProperty("etiqueta.Domingo");
-        String NoArchMos = po.getProperty("etiqueta.VisEq_NoArchMos");
-        String CameqVacci = po.getProperty("etiqueta.VisEq_CameqVacci");
+        String menValores = po.getProperty("etiqueta.NoExisteValores_SAM");
+        String MenVal = po.getProperty("etiqueta.MensajeNoExiste");
+        String CampOb = po.getProperty("etiqueta.CompObligatorios");
+        String okcons = po.getProperty("etiqueta.ConOk_FO");
+        String ParametrosV = po.getProperty("etiqueta.parametrosvisu");
+        String material = po.getProperty("etiqueta.materialmatch");
+        String centro = po.getProperty("etiqueta.centromatch");
+        String organizacion = po.getProperty("etiqueta.organizacionmatch");
+        String canald = po.getProperty("etiqueta.canaldistri");
+        String datos = po.getProperty("etiqueta.datosbasicosmat");
+        String umb = po.getProperty("etiqueta.umbase");
+        String nomat = po.getProperty("etiqueta.nomaterial");
+        String tipmat = po.getProperty("etiqueta.tipomaterial");
+        String grupart = po.getProperty("etiqueta.grupoarticulos");
+        String ventas = po.getProperty("etiqueta.ventas");
+        String venta1 = po.getProperty("etiqueta.ventas1");
+        String venta2 = po.getProperty("etiqueta.ventas2");
+        String ventagen = po.getProperty("etiqueta.ventasgral");
+        String sector = po.getProperty("etiqueta.sector");
+        String umventa = po.getProperty("etiqueta.UMventa");
+        String gresta = po.getProperty("etiqueta.gresta");
+        String grtp = po.getProperty("etiqueta.grtp");
+        String jquia = po.getProperty("etiqueta.jquia");
+        String grprecio = po.getProperty("etiqueta.grprecio");
+        String grimput = po.getProperty("etiqueta.grimput");
+        String grtpo = po.getProperty("etiqueta.grtpo");
+        String verif = po.getProperty("etiqueta.verif");
+        String gpotra = po.getProperty("etiqueta.gpotra");
+        String cebe = po.getProperty("etiqueta.cebe");
+        String sujeto = po.getProperty("etiqueta.sujeto");
+        String grupocarga = po.getProperty("etiqueta.grupocarga");
+        String compras = po.getProperty("etiqueta.compras");
+        String grupocompras = po.getProperty("etiqueta.grupocompras");
+        String planinece = po.getProperty("etiqueta.planinece");
+        String plani1 = po.getProperty("etiqueta.plani1");
+        String plani2 = po.getProperty("etiqueta.plani2");
+        String car = po.getProperty("etiqueta.car");
+        String puntod = po.getProperty("etiqueta.puntod");
+        String ciclo = po.getProperty("etiqueta.ciclo");
+        String tamlote = po.getProperty("etiqueta.tamlote");
+        String tamlotemin = po.getProperty("etiqueta.tamlotemin");
+        String horiz = po.getProperty("etiqueta.horiz");
+        String planine = po.getProperty("etiqueta.planine");
+        String tamlotemax = po.getProperty("etiqueta.tamlotemax");
+        String stockmax = po.getProperty("etiqueta.stockmax");
+        String aprovi = po.getProperty("etiqueta.aprovi");
+        String tmpo = po.getProperty("etiqueta.tmpo");
+        String stockseg = po.getProperty("etiqueta.stockseg");
+        String stocksem = po.getProperty("etiqueta.stocksem");
+        String aproespec = po.getProperty("etiqueta.aproespec");
+        String plazen = po.getProperty("etiqueta.plazen");
+        String calidad = po.getProperty("etiqueta.calidad");
+        String paramtr = po.getProperty("etiqueta.paramtr");
+        String aproviqm = po.getProperty("etiqueta.aproviqm");
+        String conta = po.getProperty("etiqueta.conta");
+        String ctrl = po.getProperty("etiqueta.ctrl");
+        String precmed = po.getProperty("etiqueta.precmed");
+        String precioesta = po.getProperty("etiqueta.precioesta");
+        String cantidadba = po.getProperty("etiqueta.cantidadba");
+        String clvalo = po.getProperty("etiqueta.clvalo");
+        String catvalo = po.getProperty("etiqueta.catvalo");
+        String CenNoEnc = po.getProperty("etiqueta.CenNoVal");
+        String Mens = po.getProperty("etiqueta.CompObligatorios");
+        String MatExist = po.getProperty("etiqueta.MatExCrea_MAT");
+        String MatGuardEx = po.getProperty("etiqueta.MatCreadExitCrea_MAT");
+        String MatNoGuard = po.getProperty("etiqueta.MatNoCreadCrea_MAT");
     %>
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="stylesheet" href="css/menu.css" media="screen">
         <script>
             function CheckResolucion() {
                 if (screen.width <= 500) {
@@ -91,7 +151,7 @@
             %>
             function checkPermisoPag() {
                 var p = '<%=permiso%>';
-                var pag = p.charAt(93);
+                var pag = p.charAt(17);
                 if (pag == 0) {
                     window.location.href = "Bienvenido.jsp";
                 }
@@ -104,22 +164,19 @@
                         msg = '<%=funcioninv%>';
                         break;
                     case 1:
-                        msg = '<%=menValores%>';
+                        msg = '<%=CenNoEnc%>';
                         break;
-                    case 3:
-                        msg = "<%=CampoOb%>";
+                    case 2:
+                        msg = '<%=Mens%>';
                         break;
+                    case 3: 
+                        msg = '<%=MatExist%>';
+                        break
                     case 4:
-                        msg = "<%=existFol%>";
+                        msg = '<%=MatGuardEx%>';
                         break;
                     case 5:
-                        msg = "<%=OKconsul%>";
-                        break;
-                    case 6:
-                        msg = "<%=NoArchMos%>";
-                        break;
-                    case 7:
-                        msg = "<%=CameqVacci%>";
+                        msg = '<%=MatNoGuard%>';
                         break;
                 }
                 $('#msg').html(msg);
@@ -130,304 +187,506 @@
                 BE.src = au;
                 BE.play();
             }
-            function seleccionar(eq) {
-                var se = $('#equ');
-                se.val(eq);
-                se.focus();
-                ocultarVentana();
-            }
-//             function validaUsuarioVis() {
-//                    var acc = "validaUsuarioVis";
-//                            var usr = "<%=Nombre%>";
-//                    $.ajax({
-//                        async: false,
-//                        type: 'GET',
-//                        url: 'MovimientosCalidad',
-//                        contentType: "application/x-www-form-urlencoded",
-//                        processData: true,
-//                        data: "action=" + acc + "&v1=" + usr,
-//                        success: function (rs) {
-//                            if (rs == 0) {
-//                                $("#ViGuarAr").prop('disabled', true);
-//                            } else if (rs == 1) {
-//                                $("#ViGuarAr").prop('disabled', false);
-//                            }
-//                        }
-//                    });
-//                }
         </script>
-        <link rel="stylesheet" href="css/StyleGeneral.css"> 
-        <link rel="stylesheet" href="css/StyleCrearEquiposPP.css"> 
-        <link rel="stylesheet" href="css/menu.css" media="screen">
+        <link rel="stylesheet" href="css/StyleGeneral.css">
+        <link rel="stylesheet" href="css/StyleCrearMatePP.css">
         <script src="js/dom-drag.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-        <script src="js/ModificarEquiposPP.js"></script>  
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
-        <title><%out.println(po.getProperty("etiqueta.titVisEq_PP"));%></title>       
-    <body>
-        <div id="main-header">    
-            <hr>                 
-            <div id="header">
-                <ul class="sf-menu">
-                    <li  class="current" style="background: #E2E2E2; padding-left: 0; width: 52px; border:  1px solid #ccc; text-align: left; margin-bottom: 0; margin-right: 20px;"><a href="javascript:inval();" style="margin-left:-0.8em;"><%out.println(po.getProperty("etiqueta.Menu_menu"));%></a><div class="arrowc"></div>
-                    </li>
-                </ul>
-            </div>
-            <input id="aceptar" type="image" src="images/aceptar.png"/>                
-            <input id="guardar" type="image" src="images/guardaOFF.png"/> 
-            <input  id="regresar" type="image" src="images/regresa.PNG"/>
-            <input id="finalizar" type="image" style="margin-bottom: -1px;" src="images/canceOFF.png"/>
-            <input  id="finalizar" type="image" src="images/cancelaOFF.png"/>
-            <div class="titulo"><h1>Modificar Maestro de Materiales PP</h1></div> 
+        <script src="js/ModificarMatePP.js"></script>
+        <title><%out.println(po.getProperty("etiqueta.TituloMaterial_MAT"));%></title>           
+    </head>
+    <div id="main-header">
+        <hr>
+        <div id="header">
+            <ul class="sf-menu">
+                <li class="current" style="background: #E2E2E2; padding-left: 0; width: 52px; border:  1px solid #ccc; text-align: left; margin-bottom: 0; margin-right: 20px;"><a href="javascript:inval();" style="margin-left:-0.8em;"><%out.println(po.getProperty("etiqueta.Menu_menu"));%></a><div class="arrowc"></div>
+                </li>
+            </ul>
+        </div>
+        <input id="aceptar" type="image" src="images/aceptaOFF.png" disabled/>      
+        <input  id="guardar" type="image" src="images/guarda.PNG" />               
+        <input  id="regresar" type="image" src="images/regresa.PNG"/>
+        <input id="finalizar" type="image" src="images/canceOFF.png" disabled/>
+        <input  id="cancelar"type="image" src="images/cancelaOFF.png" disabled/>   
+        <div class="titulo">
+            <h1>Modificar Materiales PP</h1>
         </div>             
-        <div class="contenido">
-            <div class="ContentEquipos">  
-                <div class="divmatchequipo">
-                    <label><%out.println(po.getProperty("etiqueta.materialmatch_MAT_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <div class="divizqequipoo">
-                        <input style="width:80%; text-transform: uppercase;" id="equ" maxlength="18" type="text"/><button id="btnmatch"  class="BtnMatchIcon"></button>                                                
-                    </div>
-                    <div class="dividerequipoo">
-<!--                        <button id="VisDoo" style="width: 40%;margin-right: 15%;">Visualizar Documentos</button>        -->
-                    </div>
-                    <input type="text" id="deq" style="width:90%; border: none; " readonly/>
-                </div>
-                <section class="divdatosgralEquipos">
-                    <label><%out.println(po.getProperty("etiqueta.DatosgeneralesEQ_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <div class="divizqequipo">
-                        <label><%out.println(po.getProperty("etiqueta.ClaseEQ_PP"));%></label><input id="clase" style="width:45%;" type="text" >
-                        <hr>
-                        <label ><%out.println(po.getProperty("etiqueta.GrupoAutorizEQ_PP"));%></label><input id="grupAuto" style="width: 15%;" value="" type="text" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.PesoEQ_PP"));%></label><input id="peso" type="text" style="width:40%;" value="0,000" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.NInventarioEQ_PP"));%></label><input id="inven" style="width:48%;" type="text">
-                        <hr>
-                    </div>
-                    <div class="dividerequipo">
-                        <label><%out.println(po.getProperty("etiqueta.TamanoDimensEQ_PP"));%></label><input id="dim" style="width:40%;" type="text" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.PstaEnServDesdeEQ_PP"));%></label><input id="serv" style="width:25%;" type="text" >
-                        <hr>
-                    </div>
-                </section>
-                <section class="divdatosFabricacionEquipos">
-                    <label><%out.println(po.getProperty("etiqueta.DatosdefabricacionEQ_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <div class="divizqequipo">
-                        <label><%out.println(po.getProperty("etiqueta.FabricanteEQ_PP"));%></label><input id="fab_eq" style="width:50%;" type="text" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.DenomitipoEQ_PP"));%></label><input id="denom_eq" style="width:30%;" type="text">
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.nopiezaEQ_PP"));%></label><input id="pieza_eq"  style="width:45%;" type="text" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.FabrNoSerieEQ_PP"));%></label><input id="serie_eq"  style="width:45%;" type="text" >
-                        <hr>
-                    </div>
-                    <div class="dividerequipo">
-                        <label><%out.println(po.getProperty("etiqueta.PaisproductorEQ_PP"));%></label><input id="pais_eq" type="text" style="width: 10%;" >
-                        <hr>
-                    </div>
-                </section> 
+    </div>            
+    <div class="contenido">
+        <div class="ContentMateriales">
+            <section class="DatosBasicComp_info">
+                <label><%=ParametrosV%></label>
+                <hr id="LineaTituloInfo">
                 <section class="divdatosEmplazamiento">
-                    <label><%out.println(po.getProperty("etiqueta.DatosemplazamientoEQ_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <div class="divcomequipo">
-                        <label><%out.println(po.getProperty("etiqueta.CeemplazamEQ_PP"));%></label><input id="ceemp_eq" style="width:15%;" type="text" >
-                        <hr>
-                        <label ><%out.println(po.getProperty("etiqueta.EmplazamientoEQ_PP"));%></label><input id="emp_eq" style="width:30%;" type="text" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.areadeempresaEQ_PP"));%></label><input id="empre_eq" style="width:12%;"  type="text" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.PuestodeTrabajoEQ_PP"));%></label><input id="puesto_eq" style="width: 25%;" type="text" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.IndicadorABCEQ_PP"));%></label><input id="indica_eq"  style="width: 8%;" type="text">
-                        <hr>
-                    </div>                           
-                </section> 
-                <section class="divimputacion">
-                    <label><%out.println(po.getProperty("etiqueta.ImputacionEQ_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <div class="divcomequipo">
-                        <label><%out.println(po.getProperty("etiqueta.SociedadEQ_PP"));%></label><input id="soc_eq" type="text" style="width:15%;">
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.CentroCosteEQ_PP"));%></label><span><input id="coste_eq" type="text" style="width:35%;" > / <input id="coste2_eq" type="text" style="width:15%;"></span>
-                        <hr>                              
-                    </div>                           
-                </section>  
-                <section class="divresponabilidades">
-                    <label><%out.println(po.getProperty("etiqueta.ResponsabilidadesEQ_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <div class="divcomequipo">
-                        <label><%out.println(po.getProperty("etiqueta.GrupoplanifEQ_PP"));%></label><input id="cenp_eq" style="width:15%;" type="text" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.GrupoplanifEQ_PP"));%></label><input id="grpop_eq" style="width:12%;" type="text" />
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.PtotbjorespEQ_PP"));%></label><span><input id="ptr_eq" style="width:25%;" type="text" /> <input id="ptr2_eq" type="text" style="width:15%;" ></span>
-                        <hr>                              
-                    </div>                           
-                </section>  
-                <section class="divestructura">
-                    <label><%out.println(po.getProperty("etiqueta.EstructuraEQ_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <div class="divcomequipo">
-                        <label><%out.println(po.getProperty("etiqueta.FunctionallocEQ_PP"));%></label><input id="ubc_eq" type="text" style="width:50%;" />
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.EquiposuperiorEQ_PP"));%></label><input id="equs_eq" type="text" style="width:30%;" />
-                        <hr>                                                            
-                    </div>                           
-                </section>  
-                <section class="divgeneralidades">
-                    <label class="tituloequipo"><%out.println(po.getProperty("etiqueta.GeneralidadesEQ_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <div class="divcomequipo">
-                        <label><%out.println(po.getProperty("etiqueta.MateriallEQ_PP"));%></label><input id="mat_eq" type="text" style="width:50%;" />
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.NumSerieEQ_PP"));%></label><span><input id="numser_eq" type="text" style="width:25%;" /> <label style="width:15%;"><%out.println(po.getProperty("etiqueta.TipoEquipoEQ_PP"));%></label><input id="tipo_eq" type="text" style="width:10%;" ></span>
-                        <hr>                                                             
-                    </div>   
-                    <div style="width: 45%; float:left">
-                        <input type="text" style="width:70%; border: none; background: none;" id="desmatequ" readonly/>
-                    </div>
-                </section> 
-                <section class="divdatosInfoStockEquipos">
-                    <label><%out.println(po.getProperty("etiqueta.InfoStockEQ_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <div class="divizqequipo">
-                        <label><%out.println(po.getProperty("etiquetal.TipoStockEQ_PP"));%></label><input id="tipoStock_eq" style="width:8%;" type="text" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.CentroEQ_PP"));%></label><input id="centro_eq" type="text" style="width:14%;" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.alamcenEQ_PP"));%></label><input id="alma_eq" type="text" style="width:14%;" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.LoteStockEQ_PP"));%></label><input id="lote_eq" type="text" style="width:25%;" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.StockEspecialEQ_PP"));%></label><input id="StockEsp_eq" type="text" style="width:6%;">
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.ClienteEQ_PP"));%></label><input id="cliente_eq" type="text" style="width:30%;" >
-                        <hr>
-                    </div>
-                    <div class="dividerequipo">
-                        <label><%out.println(po.getProperty("etiqueta.LoteMaestroEQ_PP"));%></label><input id="lotemaes_eq" style="width:20%;" type="text" >
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.FechaÚltMovMcíaEQ_PP"));%></label><input id="fchaUt_eq" style="width:25%;" year_eqtype="text" > 
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.proveedorEQ_PP"));%></label><input id="prov_eq" style="width:20%;" type="text" >
-                        <hr>
-                    </div>
-                </section> 
+                    <label><%=material%></label><input type="text" id="material" maxlength="40" style="width:20%; background-repeat: no-repeat; background-position-x: -1%; text-transform: uppercase;"/><button id="btnmatchMate"  class="BtnMatchIcon"></button>
+                    <!--<button id="match_C1" class='BtnMatchIcon2'></button><label id="descripcionj" style="width: 55%;"></label>-->
+                    <hr id="lineamaterial">
+                    <label><%=centro%></label><input type="text" id="centro" maxlength="4"  style="width: 10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;"/><button id="btnmatchCentro"  class="BtnMatchIcon"></button>
+                    <!--<button id="match_C2" class='BtnMatchIcon2'></button>-->
+                    <hr id="lineamaterial">
+                    <label><%=organizacion%></label><input id="organizacion" maxlength="4" type="text" style="width: 10%; background-repeat: no-repeat; background-position-x: -2%; text-transform: uppercase;"/>
+                    <!--<button id="match_C3" class='BtnMatchIcon2'></button>-->
+                    <hr id="lineamaterial">
+                    <label><%=canald%></label><input id="canal" maxlength="2" type="text" style="width:5%; background-repeat: no-repeat; background-position-x: -2%;"/>
+                    <!--<button id="match_C4" class='BtnMatchIcon2'></button>-->
+                    <hr id="lineamaterial">
+                </section>
+            </section>
+            <section class="Datos_info">
+                <label style=""><%=datos%></label>
+                <hr id="LineaTituloInfo">
+                <section class="BasicoComp11_info">
+                    <label><%=umb%></label><input id="umb" type="text" style="width: 10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr id="lineadatos">
+                    <label><%=nomat%></label><input id="nomaterial" type="text" style="width: 50%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr id="lineadatos">
+                </section>
+                <section class="BasicoComp12_info">
+                    <label><%=tipmat%></label><input id="tipomaterialj" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr id="lineadatos">
+                    <label><%=grupart%></label><input id="grupoarticulosj" type="text" style="width:40%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr id="lineadatos">
+                </section>
+            </section>
+            <section class="VisualInfoRecord_info">
+                <section class="ParametrosBusqueda_info">
+                    <label style=""><%=ventas%></label>
+                    <hr id="LineaTituloInfo">
+                    <section class="ParamIzq_info">
+                        <label style="width: 80%;"><%=venta1%></label>
+                        <hr id="LineaTituloInfo">
+                        <section class="Basic_info">
+                            <label><%=sector%></label><input id="sectorj" type="text" style="width:16%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaestadi">
+                            <label><%=umventa%></label><input id="umventaj" type="text" style="width:15%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaestadi">
+                        </section>
+                    </section>
+                    <section class="ParamDer_info">
+                        <label style="width: 80%;"><%=venta2%></label>
+                        <hr id="LineaTituloInfo">
+                        <section class="BasicoCo_info">
+                            <label><%=gresta%></label><input id="gematerialj" type="text" style="width:10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr>
+                            <label><%=grtp%></label><input id="gtpmatej" type="text" style="width:10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr>
+                            <label><%=jquia%></label><input id="jeraproj" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr>
+                        </section>
+                        <section class="BasicoComp2_info">
+                            <label><%=grprecio%></label><input id="gpmatej" type="text" style="width:15%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaprecio">
+                            <label><%=grimput%></label><input id="grupoimmatej" type="text" style="width:15%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaprecio">
+                            <label><%=grtpo%></label><input id="gtpgenj" type="text" style="width:15%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaprecio">
+                        </section>
+                    </section>
+                    <section class="Parem_info">
+                        <label style="width: 80%;"><%=ventagen%></label>
+                        <hr id="LineaTituloInfo">
+                        <section class="Bas_info">
+                            <label><%=verif%></label><input id="gvdispoj" type="text" style="width:15%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaventas">
+                            <label><%=gpotra%></label><input id="grupotransportej" type="text" style="width:15%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaventas">
+                            <label><%=cebe%></label><input id="centrobenej" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaventas">
+                        </section>
+                        <section class="Basi_info">
+                            <label><%=sujeto%></label><input id="sujetolotej" type="text" style="width:10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineabasi">
+                            <label><%=grupocarga%></label><input id="grupocargaj" type="text" style="width:10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineabasi">
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="DatosBa_info">
+                <label style=""><%=compras%></label>
+                <hr id="LineaTituloInfo">
+                <section class="BasicoComp11_info">
+                    <label><%=grupocompras%></label><input id="grupocomprasj" type="text" style="width: 10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr id="lineadatos">
+                </section>
+            </section>
+            <section class="VisualInfoRecord2_info">
+                <section class="Parametros_info">
+                    <label style=""><%=planinece%></label>
+                    <hr id="LineaTituloInfo">
+                    <section class="ParamD_info">
+                        <label style="width: 80%;"><%=plani1%></label>
+                        <hr id="LineaTituloInfo">
+                        <section class="BasicoCo_info">
+                            <label><%=car%></label><input id="caraplannj" type="text" style="width:10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineacar">
+                            <label><%=puntod%></label><input id="puntopedidoj" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineacar">
+                            <label><%=ciclo%></label><input id="gpnecej" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineacar">
+                            <label><%=tamlote%></label><input id="tlpnecej" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineacar">
+                            <label><%=tamlotemin%></label><input id="tlminj" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineacar">
+                        </section>
+                        <section class="BasicoComp2_info">
+                            <label><%=horiz%></label><input id="hpfijoj" type="text" style="width:15%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaprecio">
+                            <label><%=planine%></label><input id="pnecesij" type="text" style="width:15%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaprecio">
+                            <label><%=tamlotemax%></label><input id="tlmaxj" type="text" style="width:15%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaprecio">
+                            <label><%=stockmax%></label><input id="stockmaximoj" type="text" style="width:15%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaprecio">
+                        </section>
+                    </section>
+                    <section class="Parem_in">
+                        <label style="width: 80%;"><%=plani2%></label>
+                        <hr id="LineaTituloInfo">
+                        <section class="Bas_info">
+                            <label><%=aprovi%></label><input id="claseaproj" type="text" style="width:10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaestadi">
+                            <label><%=tmpo%></label><input id="ttmdiaj" type="text" style="width:10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaestadi">
+                            <label><%=stockseg%></label><input id="stockseguridadj" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaestadi">
+                            <label><%=stocksem%></label><input id="stockseguridadmj" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaestadi">
+                        </section>
+                        <section class="Bass_info">
+                            <label><%=aproespec%></label><input id="claseaprovij" type="text" style="width:10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaprecio">
+                            <label><%=plazen%></label><input id="pepdiaj" type="text" style="width:10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                            <hr id="lineaprecio">
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="DatosBa_info">
+                <label style=""><%=calidad%></label>
+                <hr id="LineaTituloInfo">
+                <section class="BasicoComp11_info">
+                    <label><%=paramtr%></label><input id="epimcenj" type="text" style="width: 10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr id="lineapara">
+                </section>
+                <section class="BasicoComp12_info">
+                    <label><%=aproviqm%></label><input id="qmaporj" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr id="lineaapro">
+                </section>
+            </section>
+            <section class="Dato2_info">
+                <label style=""><%=conta%></label>
+                <hr id="LineaTituloInfo">
+                <section class="BasicoComp14_info">
+                    <label><%=ctrl%></label><input id="icpreciosj" type="text" style="width: 10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr>
+                    <label><%=precmed%></label><input id="pmviperj" type="text" style="width: 10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr>
+                    <label><%=precioesta%></label><input id="precioestandarj" type="text" style="width: 10%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr>
+                </section>
+                <section class="BasicoComp13_info">
+                    <label><%=cantidadba%></label><input id="cantidadbasej" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr>
+                    <label><%=clvalo%></label><input id="clasevaloracionj" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr>
+                    <label><%=catvalo%></label><input id="categoriavaloracionj" type="text" style="width:20%; text-transform: uppercase; background-repeat: no-repeat; background-position-x: -2%;" />
+                    <hr>
+                </section>
+            </section>
+        </div>
+    </div>
+    <footer>
+        <hr class="fecha" id="footerline">
+        <div  class="fecha">
+            <label id="fecha" name="fecha"></label><label>, </label> 
+            <label id="tiempo" name="tiempo"></label><label>|  LAN <%=Idioma%></label>
+            <span><input type="image" style="float:left; margin-top: -2px;" id="iconmsg"></span><label  id="msg" class="msg"></label>
+            <script type="text/javascript">
+            var meses = new Array("<%=Enero%>", "<%=Febrero%>", "<%=Marzo%>", "<%=Abril%>", "<%=Mayo%>", "<%=Junio%>", "<%=Julio%>", "<%=Agosto%>", "<%=Septiembre%>", "<%=Octubre%>", "<%=Noviembre%>", "<%=Diciembre%>");
+            var diasSemana = new Array("<%=Domingo%>", "<%=Lunes%>", "<%=Martes%>", "<%=Miercoles%>", "<%=Jueves%>", "<%=Viernes%>", "<%=Sabado%>");
+            var f = new Date();
+            var idioma = "<%=Idioma%>";
+            var writefecha = $('#fecha')
+            if (idioma == "ES") {
+                var fechaActual = diasSemana[f.getDay()] + " " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
+                writefecha.html(fechaActual);
+            } else if (idioma == "EN") {
+                var fechaActual = diasSemana[f.getDay()] + ", " + meses[f.getMonth()] + " " + f.getDate() + " th, " + f.getFullYear();
+                writefecha.html(fechaActual);
+            } else {
+                writefecha.html("Fecha Indefinida");
+            }
+            </script>
+        </div>
+    </footer>
+    <div id="VentanaModal" class="VentanaModalMate">
+        <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('material');"><label >X</label></div></div>
+        <div class="PanelBntMatch"><button id="retornfiltro"><%out.println(po.getProperty("etiqueta.BuscarMaterial_MAT"));%></button><hr></div>
+        <div id="BuscarParam_m" class="BuscarParam_u">
+            <div class="fondo_Match">
+                <div class="busquedaMatch">
+                    <label><%=material%></label><input type="text" id="material_ma" style="width:35%; text-transform: uppercase;" maxlength = "40"/>
+                    <hr>
+                    <label><%out.println(po.getProperty("etiqueta.Descripcion_MAT"));%></label><input type="text" maxlength="40" id="texto_mate" style="width:35%;"/>
+                    <hr>
+                    <label><%=centro%></label><input type="text" id="centrito" style="width:10%; text-transform: uppercase;" maxlength="4"/>
+                    <hr>
+                    <label>T.Material</label><input type="text"   id="tipmat"   style="width:10%; text-transform: uppercase;" maxlength="4"/>
+                    <hr>
+                    <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text"   id="numAcMax"   style="width:10%;" maxlength="3"/>
+                    <hr>
+                </div>        
+            </div> 
+            <div class="Botones_Match">
+                <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="OkMaterial"/>
+                <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('material');"/>
             </div>
-
-
-            <div id="VentanaModal" class="VentanaModal">
-                <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" id="CerrarMCEqupos"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button id="retmc"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
-                <div id="BuscarParam" class="BuscarParam_u">
-                    <div class="fondo_Match">
-                        <div class="busquedaMatch">
-                            <label><%out.println(po.getProperty("etiqueta.GralEquipo"));%></label><input type="text" id="equBus" maxlength="18" style="width:35%;"/>
-                            <hr>
-                            <label><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></label><input type="text" maxlength="40" id="denEqBus" style="width:35%;"/>
-                            <hr>
-                            <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input maxlength="3" type="text"  id="numAcMax"  style="width:10%;" />
-                            <hr>
-                        </div>        
-                    </div> 
-                    <div class="Botones_Match">
-                        <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okEquipo"/>
-                        <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor: pointer;" id="CerrarMCEqupos2"/>
+        </div>
+        <div id="ConsultaTabla" style="display: none;">
+            <div class="tablaCab">
+                <div class="table-scroll" id="table-scroll">
+                    <div class="fixedYM" id="fixedY">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><%=material%></th><th><%out.println(po.getProperty("etiqueta.Descripcion_MAT"));%></th><th><%out.println(po.getProperty("etiqueta.centromatch"));%></th><th>T.Material</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
-                </div>
-                <div id="ConsultaTabla" style="display: none;">
-                    <div class="tablaCab">
-                        <div class="table-scroll" id="table-scroll">
-                            <div class="fixedY" id="fixedY">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.GralEquipo"));%></th><th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div id="cuerpoDatos">
-                                <div class="nofixedX" id="cargarDatos">
-                                </div>
-                            </div>
+                    <div id="cuerpoDatos">
+                        <div class="nofixedXM" id="CargarDatosM">
                         </div>
                     </div>
                 </div>
             </div>
-<!--            <div id="VentanaModalCentroP" class="VentanaModal">
-                <div id="handle3"><label id="TituloMatch">Documentos</label><div class="BotonCerrar_Matc" onclick="ocultarVentanaa('CentroP');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
-                <div id="ConsultaTablaCentP">
-                    <div id="tabscrll">
-                        <section id="TableNotfi" >
-                            <section class="TableContainer">
-                                <section class="SecHead">
-                                    <table id="TabHead">
-                                        <thead>
-                                            <tr>
-                                                <td>Apl.</td>
-                                                <td>Nombre</td>
-                                                <td>Aplicación</td>
-                                                <td>Fichero</td>
+        </div>
+    </div>
 
-                                        </thead>
-                                    </table>
-                                </section>
-                                <section class="SecBody" id="SecCuerpo">
-                                </section>
-                            </section>
-                        </section>
+    <div id="VentanaModalCentro" class="VentanaModal">
+        <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('centro');"><label>X</label></div></div>
+        <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Titulo_CC"));%></button><hr></div>
+        <div id="BuscarParam_C" class="BuscarParam_u">
+            <div class="fondo_Match"></div>
+        </div>
+        <div id="ConsultaTablaC" style="display: none;">
+            <div class="tablaCab">
+                <div id="table-scrollC" class="table-scroll">
+                    <div id="fixedYC" class="fixedY">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><%out.println(po.getProperty("etiqueta.Centro_CA"));%></th><th><%out.println(po.getProperty("etiqueta.MFDescripcion"));%></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div id="cuerpoDatos">
+                        <div class="nofixedX" id="CargarDatosC">
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="VentUbTecAvvv" class="VentanaModalAvvv">
-                <div id="handleAvvv"><label id="TituloMatch">¿Qué desea realizar?</label><div class="BotonCerrar_Matc" onclick="ocultarVenAv('VenAvv');"><label>X</label></div></div>
-                <div id="BuscarParamAv" class="BuscarParam_u">
-                    <br><br>
-                    <div class="fondo_MatchAv">
-                        <button id="VisVis" style="width: 40%;margin-left: 5%;">Visualizar</button> <button id="ViGuarAr" style="width: 40%;margin-left: 5%;">Modificar</button>
-                        <input id="ubtecPosOc" hidden></input>
+        </div>
+    </div>
+    <div id="VentanaModalOrganizacion" class="VentanaModal">
+        <div id="handle3"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('organizacion');"><label>X</label></div></div>
+        <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.matchorganizacion"));%></button><hr></div>
+        <div id="BuscarParam_O" class="BuscarParam_u">
+            <div class="fondo_Match"></div>
+        </div>
+        <div id="ConsultaTablaO" style="display: none;">
+            <div class="tablaCab">
+                <div id="table-scrollO" class="table-scroll">
+                    <div id="fixedYO" class="fixedY">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><%out.println(po.getProperty("etiqueta.matchorganizacion"));%></th><th><%out.println(po.getProperty("etiqueta.GralDescripcion"));%></th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
-                    <div class="Botones_Match">
+                    <div id="cuerpoDatos">
+                        <div class="nofixedX" id="CargarDatosO">
+                        </div>
                     </div>
                 </div>
-            </div>-->
-        </div>    
-        <footer>
-            <hr class="fecha" id="footerline">
-            <div  class="fecha">
-                <label id="fecha" name="fecha"></label><label>, </label> 
-                <label id="tiempo" name="tiempo"></label><label>|  LAN <%=Idioma%></label>
-                <span><input type="image" style="float:left; margin-top: -2px;" id="iconmsg"></span><label  id="msg" class="msg"></label>
-                <script type="text/javascript">
-                    var meses = new Array("<%=Enero%>", "<%=Febrero%>", "<%=Marzo%>", "<%=Abril%>", "<%=Mayo%>", "<%=Junio%>", "<%=Julio%>", "<%=Agosto%>", "<%=Septiembre%>", "<%=Octubre%>", "<%=Noviembre%>", "<%=Diciembre%>");
-                    var diasSemana = new Array("<%=Domingo%>", "<%=Lunes%>", "<%=Martes%>", "<%=Miercoles%>", "<%=Jueves%>", "<%=Viernes%>", "<%=Sabado%>");
-                    var f = new Date();
-                    var idioma = "<%=Idioma%>";
-                    var writefecha = $('#fecha')
-                    if (idioma == "ES") {
-                        var fechaActual = diasSemana[f.getDay()] + " " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
-                        writefecha.html(fechaActual);
-                    } else if (idioma == "EN") {
-                        var fechaActual = diasSemana[f.getDay()] + ", " + meses[f.getMonth()] + " " + f.getDate() + " th, " + f.getFullYear();
-                        writefecha.html(fechaActual);
-                    } else {
-                        writefecha.html("Fecha Indefinida");
-                    }
-                </script>
             </div>
-        </footer>
-    </body>
-    <%}
-        } catch (Exception e) {
-            System.err.println("Errr:" + e);
-            session.invalidate();
-            response.sendRedirect("index.jsp");
-        }%>
+        </div>
+    </div>
+    <div id="VentanaModalCanal" class="VentanaModal">
+        <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('canal');"><label>X</label></div></div>
+        <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.matchcanal"));%></button><hr></div>
+        <div id="BuscarParam_CA" class="BuscarParam_u">
+            <div class="fondo_Match"></div>
+        </div>
+        <div id="ConsultaTablaCA" style="display: none;">
+            <div class="tablaCab">
+                <div id="table-scrollCA" class="table-scroll">
+                    <div id="fixedYCA" class="fixedY">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><%out.println(po.getProperty("etiqueta.matchcanal"));%></th><th><%out.println(po.getProperty("etiqueta.GralDescripcion"));%></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div id="cuerpoDatos">
+                        <div class="nofixedX" id="CargarDatosCA">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!--<script>
+    function ocultarVentana(tipo)
+    {
+        $('#overlay').remove();
+        switch (tipo) {
+            case 'material':
+                var ventana = document.getElementById('VentanaModal');
+                ventana.style.display = 'none';
+                document.getElementById("BuscarParam_m").style.display = "block";
+                document.getElementById("ConsultaTabla").style.display = "none";
+                document.getElementById("material").focus();
+                break;
+            case 'centro':
+                var ventanac = document.getElementById('VentanaModalCentro');
+                ventanac.style.display = 'none';
+                document.getElementById("BuscarParam_c").style.display = "block";
+                document.getElementById("ConsultaTablaC").style.display = "none";
+                document.getElementById("centro").focus();
+                break;
+            case 'organizacion':
+                var ventanao = document.getElementById('VentanaModalOrganizacion');
+                ventanao.style.display = 'none';
+                document.getElementById("BuscarParam_O").style.display = "block";
+                document.getElementById("ConsultaTablaO").style.display = "none";
+                break;
+            case 'canal':
+                var ventanaca = document.getElementById('VentanaModalCanal');
+                ventanaca.style.display = 'none';
+                document.getElementById("BuscarParam_CA").style.display = "block";
+                document.getElementById("ConsultaTablaCA").style.display = "none";
+                break;
+            default:
+                break;
+        }
+    }
+
+    function seleccionar(obj, tipo) {
+        switch (tipo) {
+            case 'material':
+                var m = document.getElementById("material");
+                m.focus();
+                m.value = obj;
+                ocultarVentana(tipo);
+                break;
+            case 'centro':
+                var c = document.getElementById("centro");
+                c.focus();
+                c.value = obj;
+                ocultarVentana(tipo);
+                break;
+            case 'organizacion':
+                var o = document.getElementById("organizacion");
+                o.focus();
+                o.value = obj;
+                ocultarVentana(tipo);
+                break;
+            case 'canal':
+                var ca = document.getElementById("canal");
+                ca.focus();
+                ca.value = obj;
+                ocultarVentana(tipo);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    function mensajess(num, id) {
+        switch (num) {
+            case 0:
+                var BE = document.createElement('audio');
+                BE.src = "audio/sapsnd05.wav";
+                BE.play();
+                break;
+            case 1 :
+                var BE = document.createElement('audio');
+                BE.src = "audio/sapmsg.wav";
+                BE.play();
+                var okcon = '<%=menValores%>';
+                var iconm = document.getElementById("iconmsg");
+                iconm.style.visibility = "visible";
+                iconm.src = "images/aceptar.png";
+                var men = document.getElementById("msg");
+                men.innerHTML = okcon;
+                $("#iconmsg").show();
+                break
+            case 2:
+                var BE = document.createElement('audio');
+                BE.src = "audio/saperror.wav";
+                BE.play();
+                var mensj = '<%=CampOb%>';
+                var iconm = document.getElementById("iconmsg");
+                iconm.style.visibility = "visible";
+                iconm.src = "images/advertencia.PNG";
+                var men = document.getElementById("msg");
+                men.innerHTML = mensj;
+                $("#iconmsg").show();
+                break;
+            case 3:
+                var BE = document.createElement('audio');
+                BE.src = "audio/saperror.wav";
+                BE.play();
+                var iconm = document.getElementById("iconmsg");
+                iconm.style.visibility = "visible";
+                iconm.src = "images/advertencia.PNG";
+                var men = document.getElementById("msg");
+                men.innerHTML = '<%=MenVal%>';
+                $("#iconmsg").show();
+                break
+            case 4 :
+                var BE = document.createElement('audio');
+                BE.src = "audio/sapmsg.wav";
+                BE.play();
+                var okcon = '<%=okcons%>';
+                var iconm = document.getElementById("iconmsg");
+                iconm.style.visibility = "visible";
+                iconm.src = "images/aceptar.png";
+                var men = document.getElementById("msg");
+                men.innerHTML = okcon;
+                $("#iconmsg").show();
+                break;
+            case 5 :
+                var BE = document.createElement('audio');
+                BE.src = "audio/saperror.wav";
+                BE.play();
+                var okcon = '<%=funcioninv%>';
+                var iconm = document.getElementById("iconmsg");
+                iconm.style.visibility = "visible";
+                iconm.src = "images/advertencia.PNG";
+                var men = document.getElementById("msg");
+                men.innerHTML = okcon;
+                $("#iconmsg").show();
+                break;
+        }
+    }
+
+</script>-->
+<%}
+    } catch (Exception e) {
+        System.err.println("Errr:" + e);
+        session.invalidate();
+        response.sendRedirect("index.jsp");
+    }%>
 </html>
