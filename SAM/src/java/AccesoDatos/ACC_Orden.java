@@ -1961,4 +1961,211 @@ public class ACC_Orden {
         return check;
     }
     
+    public LinkedList<operaciones_ordenes_crea> cargartablaoperacionescreaNOTIPP(String ord, String ope) {
+        LinkedList<operaciones_ordenes_crea> opc = new LinkedList<>();
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.op_ord_creaPP(?,?)}";
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, ord);
+            pst.setString(2, ope);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                operaciones_ordenes_crea op = new operaciones_ordenes_crea();
+                op.setFolio_sam(rs.getString("folio_sam"));
+                op.setNum_orden(rs.getString("num_orden"));
+                op.setNum_hoja_ruta_operaciones_orden(rs.getString("num_hoja_ruta_operaciones_orden"));
+                op.setContador_general_orden(rs.getString("contador_general_orden"));
+                op.setHora_dia(rs.getString("hora_dia"));
+                op.setFecha(rs.getString("fecha"));
+                op.setIndice_registro_no_valido(rs.getString("indice_registro_no_valido"));
+                op.setContador_grupo_hoja_ruta(rs.getString("contador_grupo_hoja_ruta"));
+                op.setTipo_grupo_hoja_ruta(rs.getString("tipo_grupo_hoja_ruta"));
+                op.setIncremento_operaciones_referenciadas(rs.getString("incremento_operaciones_referenciadas"));
+                op.setClave_grupo_hoja_ruta(rs.getString("clave_grupo_hoja_ruta"));
+                op.setContador_interno(rs.getString("contador_interno"));
+                op.setNum_operacion(rs.getString("num_operacion"));
+                op.setClave_control(rs.getString("clave_control"));
+                op.setId_objeto_recurso(rs.getString("id_objeto_recurso"));
+                op.setCentro(rs.getString("centro"));
+                op.setTexto_breve_operacion(rs.getString("texto_breve_operacion"));
+                op.setCantidad_base(rs.getString("cantidad_base"));
+                op.setDuracion_operacion(rs.getString("duracion_operacion"));
+                op.setUnidad_duracion_normal(rs.getString("unidad_duracion_normal"));
+                op.setTrabajo_operacion(rs.getString("trabajo_operacion"));
+                op.setUnidad_trabajo(rs.getString("unidad_trabajo"));
+                op.setActividad_ya_notificada1(rs.getString("actividad_ya_notificada1"));
+                op.setActividad_ya_notificada2(rs.getString("actividad_ya_notificada2"));
+                op.setActividad_ya_notificada3(rs.getString("actividad_ya_notificada3"));
+                op.setActividad_ya_notificada4(rs.getString("actividad_ya_notificada4"));
+                op.setActividad_ya_notificada5(rs.getString("actividad_ya_notificada5"));
+                op.setActividad_ya_notificada6(rs.getString("actividad_ya_notificada6"));
+                op.setUnidad_medida_actividad_notificar1(rs.getString("unidad_medida_actividad_notificar1"));
+                op.setUnidad_medida_actividad_notificar2(rs.getString("unidad_medida_actividad_notificar2"));
+                op.setUnidad_medida_actividad_notificar3(rs.getString("unidad_medida_actividad_notificar3"));
+                op.setUnidad_medida_actividad_notificar4(rs.getString("unidad_medida_actividad_notificar4"));
+                op.setUnidad_medida_actividad_notificar5(rs.getString("unidad_medida_actividad_notificar5"));
+                op.setUnidad_medida_actividad_notificar6(rs.getString("unidad_medida_actividad_notificar6"));
+                op.setUnidad_medida_operacion(rs.getString("unidad_medida_operacion"));
+                op.setIndicador_valor_predeterminado_trabajo_relevante(rs.getString("indicador_valor_predeterminado_trabajo_relevante"));
+                op.setNum_solped(rs.getString("num_solped"));
+                op.setNum_posicion_solped__orden(rs.getString("num_posicion_solped__orden"));
+                op.setOrganizacion_compras(rs.getString("organizacion_compras"));
+                op.setGrupo_compras_actividad_trabajo_externa(rs.getString("grupo_compras_actividad_trabajo_externa"));
+                op.setGrupo_articulos(rs.getString("grupo_articulos"));
+                op.setNum_cuenta_proveedor(rs.getString("num_cuenta_proveedor"));
+                op.setPrecio(rs.getString("precio"));
+                op.setCantidad_base2(rs.getString("cantidad_base2"));
+                op.setClave_moneda(rs.getString("clave_moneda"));
+                op.setClase_coste(rs.getString("clase_coste"));
+                op.setSolicitante(rs.getString("solicitante"));
+                op.setNum_notificacion_operacion(rs.getString("num_notificacion_operacion"));
+                opc.add(op);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error en Metodo cargaroperacionescrea por " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e);
+            }
+        }
+        return opc;
+    }
+    
+    public operaciones_ordenes_crea ObtFolODenNotPP(String ord) {
+        operaciones_ordenes_crea op = new operaciones_ordenes_crea();
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.op_ord_crea_COMPFOLORdenNOTPP(?)}";
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, ord);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                op.setCentro(rs.getString("centro"));
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e);
+            }
+        }
+        return op;
+    }
+    //Consultar orden - acceso modificar ordenes PP
+    public ArrayList ConsultaMatchOrdenAccesoPP(String plMant, String ord, String txtO, String ctd) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        ArrayList cecos = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet rs;
+        cabecera_ordenes_crea coc;
+        String SP = "{CALL PP.Ordenes_ConsultarOrdenesModifPP(?, ?, ?, ?)}";
+        try {
+            ps = con.prepareStatement(SP);
+            ps.setString(1, plMant);
+            ps.setString(2, ord);
+            ps.setString(3, txtO);
+            ps.setString(4, ctd);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                coc = new cabecera_ordenes_crea();
+                coc.setFolio_sam(rs.getString("folio_sam"));
+                coc.setCentro_planificacion_mantenimiento(rs.getString("centro_planificacion_mantenimiento"));
+                coc.setTexto_breve(rs.getString("texto_breve"));
+                cecos.add(coc);
+            }
+            cnx.CerrarConexion(con);
+        } catch (Exception ex) {
+            System.err.println("Error en el metodo ConsultaMatchOrden(ACC_CabeceraOrdenesCrea por: )" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return cecos;
+    }
+    //Validar que la Orden exista Mod Ordenes PP
+    public String ValidarOrdenModPP(String id) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        ResultSet rs;
+        String SP = "{CALL PP.Ordenes_ValidarOrdenModiAccesoPP(?)}";
+        String check = "";
+        try {
+            ps = con.prepareStatement(SP);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            rs.next();
+            check = rs.getString(1);
+        } catch (Exception ex) {
+            System.err.println("Error en el metodo ValidarOrden(ACC_Orden por: )" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return check;
+    }
+    
+    public cabecera_ordenes_crea CargarDataCabModOrdPP(String ord) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        ResultSet rs;
+        cabecera_ordenes_crea coc = new cabecera_ordenes_crea();
+        String SP = "{CALL PP.Ordenes_CargarCabeceraSAMPP(?)}";
+        try {
+            ps = con.prepareStatement(SP);
+            ps.setString(1, ord);
+            rs = ps.executeQuery();
+            rs.next();
+            coc.setFolio_sam(rs.getString("folio_sam"));
+            coc.setNum_orden(rs.getString("num_orden"));
+            coc.setEstatus(rs.getString("estatus"));
+            coc.setClase_orden(rs.getString("clase_orden"));
+            coc.setTexto_breve(rs.getString("texto_breve"));
+            coc.setPuesto_trabajo_responsable_medidas_mante(rs.getString("puesto_trabajo_responsable_medidas_mante"));
+            coc.setCentro_planificacion_mantenimiento(rs.getString("centro_planificacion_mantenimiento"));
+            coc.setFecha_inicio_extrema(rs.getString("fecha_inicio_extrema"));
+            coc.setFecha_fin_extrema(rs.getString("fecha_fin_extrema"));
+            coc.setUbicacion_tecnica(rs.getString("ubicacion_tecnica"));
+            coc.setNum_equipo(rs.getString("num_equipo"));
+            coc.setRecibido(rs.getString("recibido"));
+            coc.setProcesado(rs.getString("procesado"));
+            coc.setError(rs.getString("error"));
+            coc.setModificado(rs.getString("modificado"));
+            cnx.CerrarConexion(con);
+        } catch (Exception ex) {
+            System.err.println("Error en el metodo CargarDataCab(ACC_CabeceraOrdenesCrea por: )" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return coc;
+    }
+    
 }
