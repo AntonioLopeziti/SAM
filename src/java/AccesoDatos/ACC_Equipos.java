@@ -859,16 +859,16 @@ public class ACC_Equipos {
         
     }
     
-    public ArrayList<equipos> ConsultarEquipoMCPP(String Eq, String Des, String DenIdioma, String Ctd) {
+    public ArrayList<equipos> ConsultarEquipoMCPP(String Mate, String Des, String DenIdioma, String Ctd) {
         ArrayList<equipos> eq = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String pr = "{CALL PP.EquiposDM_ConsultarEquipo(?,?,?,?)}";
+        String pr = "{CALL PP.MaterialesHR_ConsultarMate(?,?,?,?)}";
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             ps = con.prepareStatement(pr);
-            ps.setString(1, Eq);
+            ps.setString(1, Mate);
             ps.setString(2, Des);
             ps.setString(3, DenIdioma);
             ps.setString(4, Ctd);
