@@ -8,7 +8,10 @@ package Servlets;
 import AccesoDatos.ACC_Centro;
 import AccesoDatos.ACC_Equipos;
 import AccesoDatos.ACC_HojasRuta;
+import AccesoDatos.ACC_Material;
 import Entidades.centros;
+import Entidades.materiales;
+import Entidades.HojaDeRutaPP;
 import Entidades.equipos;
 import Entidades.hojas_de_ruta;
 import java.io.IOException;
@@ -51,23 +54,26 @@ public class peticionModuloHojaRutaPP extends HttpServlet {
             String Altern = request.getParameter("Alter");
             HttpSession session = request.getSession();
             String idioma = (String) session.getAttribute("Idioma");
+            String Mater = request.getParameter("Mater");
             String desEq = "denominacion_" + idioma;
+            String des = "descripcion_"+idioma;
+            String al = "";
             int x;
             switch (Accion) {
                 case "ConsultaMatchEquipos":
-                    ArrayList<equipos> e = ACC_Equipos.ObtenerInstancia().ConsultarEquipoMCPP(Equipo, DenEquipo, desEq, Ctd);
-                    if (e.size() > 0) {
+                    ArrayList<materiales> m = ACC_Material.ObtenerInstancia().ConsultarMaterialHRVis(Equipo, DenEquipo, des, Ctd);
+                    if(m.size() > 0){
                         out.println("<table>");
                         out.println("<tbody>");
-                        for (int i = 0; i < e.size(); i++) {
-                            out.println("<tr ondblclick=\"seleccionar('" + e.get(i).getNum_equipo() + "','EquipoHR','VentanaModal','BuscarParam','ConsultaTabla')\">");
-                            out.println("<td>" + e.get(i).getNum_equipo() + "</td>");
-                            out.println("<td>" + e.get(i).getDescripcion_equipo() + "</td>");
+                        for(int i = 0; i < m.size(); i++){
+                            out.println("<tr ondblclick=\"seleccionar('" + m.get(i).getMaterial() + "','EquipoHR','VentanaModal','BuscarParam','ConsultaTabla')\">");
+                            out.println("<td>" + m.get(i).getMaterial() + "</td>");
+                            out.println("<td>" + m.get(i).getDescripcion() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
                         out.println("</table>");
-                    } else {
+                    }else{
                         out.println(0);
                     }
                     break;
@@ -92,48 +98,54 @@ public class peticionModuloHojaRutaPP extends HttpServlet {
                         out.println(0);
                     }
                     break;
-                case "CargarDatosHojaRuta":
-                    ArrayList<hojas_de_ruta> hr = ACC_HojasRuta.ObtenerInstancia().ConsultaVisualizarHRPP(Equipo, Centros, Altern);
-                    if (hr.size() > 0) {
-                        out.println("<table id=\"TabBody\">");
+                case "CargarDatosHR":
+                    if(Altern == ""){
+                        al = "";
+                    }
+                    else{
+                        al = Altern;
+                    }
+                    ArrayList<HojaDeRutaPP> h = ACC_HojasRuta.ObtenerInstancia().VisualizarHRPP(Mater, Centros, al);
+                    if(h.size() > 0){
+                        out.println("<table>");
                         out.println("<tbody>");
-                        for (x = 0; x < hr.size(); x++) {
+                        for(x = 0; x < h.size(); x++){
                             out.println("<tr>");
-                            out.println("<td>" + hr.get(x).getContador_grupo_hojaruta() + "</td>");
-                            out.println("<td>" + hr.get(x).getTexto_hojaruta() + "</td>");
-                            out.println("<td>" + hr.get(x).getNum_operacion() + "</td>");
-                            out.println("<td>" + hr.get(x).getId_objeto() + "</td>");
-                            out.println("<td>" + hr.get(x).getClave_control() + "</td>");
-                            out.println("<td>" + hr.get(x).getCentro() + "</td>");
-                            out.println("<td>" + hr.get(x).getAlternativa_lista_material() + "</td>");
-                            out.println("<td>" + hr.get(x).getTexto_breve_operacion() + "</td>");
-                            out.println("<td>" + hr.get(x).getCantidad_base() + "</td>");
-                            out.println("<td>" + hr.get(x).getDuracion_operacion_normal() + "</td>");
-                            out.println("<td>" + hr.get(x).getUnidad_duracion_normal() + "</td>");
-                            out.println("<td>" + hr.get(x).getTrabajo_operacion() + "</td>");
-                            out.println("<td>" + hr.get(x).getUnidad_trabajo() + "</td>");
-                            out.println("<td>" + hr.get(x).getTipo_hojaruta() + "</td>");
-                            out.println("<td>" + hr.get(x).getClave_grupo_hojaruta() + "</td>");
-                            out.println("<td>" + hr.get(x).getSecuencia() + "</td>");
-                            out.println("<td>" + hr.get(x).getNum_nodo_hojaruta() + "</td>");
-                            out.println("<td>" + hr.get(x).getLista_material() + "</td>");
-                            out.println("<td>" + hr.get(x).getStatus() + "</td>");
-                            out.println("<td>" + hr.get(x).getDescripcion_operacion2() + "</td>");
-                            out.println("<td>" + hr.get(x).getUnidad_medida_operacion() + "</td>");
-                            out.println("<td>" + hr.get(x).getOrganización_compras() + "</td>");
-                            out.println("<td>" + hr.get(x).getNum_cuenta_prove_acreedor() + "</td>");
-                            out.println("<td>" + hr.get(x).getGrupo_articulos() + "</td>");
-                            out.println("<td>" + hr.get(x).getNum_reg_info_compras() + "</td>");
-                            out.println("<td>" + hr.get(x).getClase_coste() + "</td>");
-                            out.println("<td>" + hr.get(x).getClave_moneda() + "</td>");
-                            out.println("<td>" + hr.get(x).getGrupo_compras_activi_traba_extra() + "</td>");
-                            out.println("<td>" + hr.get(x).getTipo_reginfo_compras() + "</td>");
-                            out.println("<td>" + hr.get(x).getIndicador_borrado() + "</td>");
-                            out.println("<td>" + hr.get(x).getNumServicio() + "</td>");
-                            out.println("<td>" + hr.get(x).getDescServicio() + "</td>");
+                            out.println("<td>" + h.get(x).getCont_gpo_hr() + "</td>");
+                            out.println("<td>" + h.get(x).getTxt_brv_hr() + "</td>");
+                            out.println("<td>" + h.get(x).getNum_op() + "</td>");
+                            out.println("<td>" + h.get(x).getId_obj() + "</td>");
+                            out.println("<td>" + h.get(x).getClave_control() + "</td>");
+                            out.println("<td>" + h.get(x).getCentro_hr() + "</td>");
+                            out.println("<td>" + h.get(x).getAlt_lista_mate() + "</td>");
+                            out.println("<td>" + h.get(x).getTxt_brv_op() + "</td>");
+                            out.println("<td>" + h.get(x).getCnt_base() + "</td>");
+                            out.println("<td>" + h.get(x).getDura_op() + "</td>");
+                            out.println("<td>" + h.get(x).getUnidad_dura() + "</td>");
+                            out.println("<td>" + h.get(x).getTbjo_op() + "</td>");
+                            out.println("<td>" + h.get(x).getUnidad_tbjo() + "</td>");
+                            out.println("<td>" + h.get(x).getTipo_hr() + "</td>");
+                            out.println("<td>" + h.get(x).getClave_gpo_hr() + "</td>");
+                            out.println("<td>" + h.get(x).getSecuencia() + "</td>");
+                            out.println("<td>" + h.get(x).getNum_nodo() + "</td>");
+                            out.println("<td>" + h.get(x).getLista_mate() + "</td>");
+                            out.println("<td>" + h.get(x).getStatus_hr() + "</td>");
+                            out.println("<td> Desc Op2</td>");
+                            out.println("<td>" + h.get(x).getUm_ope() + "</td>");
+                            out.println("<td>" + h.get(x).getOrg_compras() + "</td>");
+                            out.println("<td>" + h.get(x).getNum_cuenta_prov() + "</td>");
+                            out.println("<td>" + h.get(x).getGpo_arts() + "</td>");
+                            out.println("<td>" + h.get(x).getNum_registros() + "</td>");
+                            out.println("<td>" + h.get(x).getClase_coste() + "</td>");
+                            out.println("<td>" + h.get(x).getClave_moneda() + "</td>");
+                            out.println("<td>" + h.get(x).getGpo_compras() + "</td>");
+                            out.println("<td>" + h.get(x).getTipo_reg_comp() + "</td>");
+                            out.println("<td>" + h.get(x).getInd_borrado() + "</td>");
+                            out.println("<td>" + h.get(x).getNum_servicio() + "</td>");
+                            out.println("<td>Desc Serv</td>");
                             out.println("</tr>");
                         }
-                        for (int j = x; j < 16; j++) {
+                        for (int z = x; z < 16; z++){
                             out.println(""
                                     + "<tr>"
                                     + "<td>&nbsp;</td>"
@@ -203,12 +215,129 @@ public class peticionModuloHojaRutaPP extends HttpServlet {
                                 + "                                            <td>0000000000000000000000000</td>\n"
                                 + "                                            <td>000000000000000000000000000000000000000000000000000000000000000</td>"
                                 + "                                        </tr>");
-                        out.println("</table>");
                         out.println("</tbody>");
-                    } else {
+                        out.println("</table>");
+                    }else{
                         out.println(1);
                     }
                     break;
+//                case "CargarDatosHojaRuta":
+//                    ArrayList<hojas_de_ruta> hr = ACC_HojasRuta.ObtenerInstancia().ConsultaVisualizarHRPP(Equipo, Centros, Altern);
+//                    if (hr.size() > 0) {
+//                        out.println("<table id=\"TabBody\">");
+//                        out.println("<tbody>");
+//                        for (x = 0; x < hr.size(); x++) {
+//                            out.println("<tr>");
+//                            out.println("<td>" + hr.get(x).getContador_grupo_hojaruta() + "</td>");
+//                            out.println("<td>" + hr.get(x).getTexto_hojaruta() + "</td>");
+//                            out.println("<td>" + hr.get(x).getNum_operacion() + "</td>");
+//                            out.println("<td>" + hr.get(x).getId_objeto() + "</td>");
+//                            out.println("<td>" + hr.get(x).getClave_control() + "</td>");
+//                            out.println("<td>" + hr.get(x).getCentro() + "</td>");
+//                            out.println("<td>" + hr.get(x).getAlternativa_lista_material() + "</td>");
+//                            out.println("<td>" + hr.get(x).getTexto_breve_operacion() + "</td>");
+//                            out.println("<td>" + hr.get(x).getCantidad_base() + "</td>");
+//                            out.println("<td>" + hr.get(x).getDuracion_operacion_normal() + "</td>");
+//                            out.println("<td>" + hr.get(x).getUnidad_duracion_normal() + "</td>");
+//                            out.println("<td>" + hr.get(x).getTrabajo_operacion() + "</td>");
+//                            out.println("<td>" + hr.get(x).getUnidad_trabajo() + "</td>");
+//                            out.println("<td>" + hr.get(x).getTipo_hojaruta() + "</td>");
+//                            out.println("<td>" + hr.get(x).getClave_grupo_hojaruta() + "</td>");
+//                            out.println("<td>" + hr.get(x).getSecuencia() + "</td>");
+//                            out.println("<td>" + hr.get(x).getNum_nodo_hojaruta() + "</td>");
+//                            out.println("<td>" + hr.get(x).getLista_material() + "</td>");
+//                            out.println("<td>" + hr.get(x).getStatus() + "</td>");
+//                            out.println("<td>" + hr.get(x).getDescripcion_operacion2() + "</td>");
+//                            out.println("<td>" + hr.get(x).getUnidad_medida_operacion() + "</td>");
+//                            out.println("<td>" + hr.get(x).getOrganización_compras() + "</td>");
+//                            out.println("<td>" + hr.get(x).getNum_cuenta_prove_acreedor() + "</td>");
+//                            out.println("<td>" + hr.get(x).getGrupo_articulos() + "</td>");
+//                            out.println("<td>" + hr.get(x).getNum_reg_info_compras() + "</td>");
+//                            out.println("<td>" + hr.get(x).getClase_coste() + "</td>");
+//                            out.println("<td>" + hr.get(x).getClave_moneda() + "</td>");
+//                            out.println("<td>" + hr.get(x).getGrupo_compras_activi_traba_extra() + "</td>");
+//                            out.println("<td>" + hr.get(x).getTipo_reginfo_compras() + "</td>");
+//                            out.println("<td>" + hr.get(x).getIndicador_borrado() + "</td>");
+//                            out.println("<td>" + hr.get(x).getNumServicio() + "</td>");
+//                            out.println("<td>" + hr.get(x).getDescServicio() + "</td>");
+//                            out.println("</tr>");
+//                        }
+//                        for (int j = x; j < 16; j++) {
+//                            out.println(""
+//                                    + "<tr>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "<td>&nbsp;</td>"
+//                                    + "</tr>");
+//                        }
+//                        out.println("  <tr class=\"ocultar\">\n"
+//                                + "                                            <td>00000000000</td><td>00000000000000000000000000000000000000000</td>\n"
+//                                + "                                            <td>00000000000000000</td>\n"
+//                                + "                                            <td>00000000000000000</td>\n"
+//                                + "                                            <td>00000000000000000</td>\n"
+//                                + "                                            <td>0000000000000000000</td>\n"
+//                                + "                                            <td>0000000000000000000</td>\n"
+//                                + "                                            <td>00000000000000000000000000000000000000000000000000000000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000</td>\n"
+//                                + "                                            <td>0000000000000000000000000000000000000000000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000</td>\n"
+//                                + "                                            <td>0000000000000</td>\n"
+//                                + "                                            <td>0000000000000</td>\n"
+//                                + "                                            <td>0000000</td>\n"
+//                                + "                                            <td>0000000000</td>\n"
+//                                + "                                            <td>0000000000</td>\n"
+//                                + "                                            <td>0000000000000000000000000</td>\n"
+//                                + "                                            <td>000000000000000000000000000000000000000000000000000000000000000</td>"
+//                                + "                                        </tr>");
+//                        out.println("</table>");
+//                        out.println("</tbody>");
+//                    } else {
+//                        out.println(1);
+//                    }
+//                    break;
             }
         }
     }
