@@ -247,26 +247,35 @@ $(document).ready(function () {
         cargarData();
     }
     function cargarData() {
-        var acc = "CargarDatosBomEquipos";
+
+        var acc = "CargarDatosBoomMate";
         $.ajax({
             async: false,
             type: "GET",
             url: "PeticionModuloVisualizarBoomPP",
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Action=" + acc + "&Equipo=" + equ.val() + "&Centro=" + cen.val().toUpperCase() + "&Alter=" + alt.val(),
-            success: function (data) {
-                if (data == 1) {
-                    CleanTable();
-                    ShowMsg(3, "images/advertencia.PNG", "audio/saperror.wav");
+            data: "Action=" + acc + "&Mte=" + equ.val() + "&Centro=" + cen.val() + "&Alter=" + alt.val(),
+            success: function (data) {                
+                if (data == 0) {
+                    CleanTable();     
+                    $('#msg').html("No hay registros");                    
+                    var icon = $('#iconmsg');
+                    icon.show();
+                    icon.attr('src', 'images/advertencia.PNG');
+                    var BE = document.createElement('audio');
+                    BE.src = 'audio/saperror.wav';
+                    BE.play();
                 } else {
                     GetDesc(equ.val());
-                    $('#SecCuerpo').html(data);
-                    ShowMsg(4, "images/aceptar.png", "audio/sapmsg.wav");
-                    setTimeout(function () {
-                        loadDesComp();
-                    }, 400);
-                    ;
+                    $('#SecCuerpo').html(data);                    
+                    $('#msg').html("Consulta aplicada con éxito");
+                    var icon = $('#iconmsg');
+                    icon.show();
+                    icon.attr('src', 'images/aceptar.png');
+                    var BE = document.createElement('audio');
+                    BE.src = 'audio/sapmsg.wav';
+                    BE.play();
                 }
             }
         });
@@ -278,7 +287,7 @@ function loadDesComp() {
     var desc = document.getElementsByName('Tdes');
     for (var i = 0; i < comp.length; i++) {
         var acc = "ObtenerDescripcionByMat";
-        var dataSend = "&Equipo=" + comp[i].innerHTML + "&Idioma=" + idi;
+        var dataSend = "&Mte=" + comp[i].innerHTML;
         $.ajax({
             async: false,
             type: 'GET',
