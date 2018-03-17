@@ -151,10 +151,11 @@ function mostrar1() {
             processData: true,
             data: "acc=" + acc + enviar,
             success: function (data) {
-                var res = data;
+                var res = data;                
                 if (res == 0) {
-                    ordsta();
-                    //ordequ();
+                    //Funcion para poner el status de la orden
+                    ordsta();                    
+                    //Cargar tabla inferior
                     tabmax();
                 } else if (res == 2) {
                     tabmaxPASAMPP();
@@ -231,7 +232,7 @@ function tabmaxPASAMPP() {
 
     });
 }
-function ordsta() {
+function ordsta() {    
     var acc = "ChecarStatusOrdenOpe";
     var ord = $("#notor").val();
     var oper = $("#notope").val();
@@ -244,7 +245,7 @@ function ordsta() {
         processData: true,
         data: "acc=" + acc + enviar,
         success: function (data) {
-            var res = data;
+            var res = data;            
             $("#divoc").html(res);
             ponerStat();
         }
