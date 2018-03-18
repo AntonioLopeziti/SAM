@@ -227,7 +227,85 @@ public class ACC_Orden {
         }
         return mat;
     }
+    
+    public plan_orden CargarCabeceraPP(String orden) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        plan_orden mat = new plan_orden();
+        PreparedStatement ps;
+        ResultSet rs;
+        String SP = "{CALL PP.Ordenes_ConsultarOrdenesSAP(?)}";
+        try {
+            ps = con.prepareStatement(SP);
+            ps.setString(1, orden);
+            rs = ps.executeQuery();
+            rs.next();
 
+            mat = new plan_orden();
+            mat.setClase_doc_ventas("");
+            mat.setTexto_breve(rs.getString("texto_breve"));
+            mat.setStatus_sistema(rs.getString("status"));
+            mat.setPuesto_trabajo_responsables_medidas_mante(rs.getString("puesto_trabajo"));
+            mat.setCentro_puesto_trabajo_responsable(rs.getString("centro"));
+            mat.setNum_notificacion("");
+            mat.setGastos_general_estimado_orden("");
+            mat.setClase_actividad_mante("");
+            mat.setEstado_instalacion("");
+            mat.setFecha_inicio_extrema(rs.getString("fecha_inicio_extrema"));
+            mat.setFecha_fin_extrema(rs.getString("fecha_fin_extrema"));
+            mat.setPrioridad("");
+            mat.setRevision_mante_servicio_cliente("");
+            mat.setUbicacion_tecnica("");
+            mat.setDenominacion_ubitec("");
+            mat.setNum_equipo("");
+            mat.setDenominacion_objeto_tecnico("");
+            mat.setConjunto("");
+            mat.setNum_orden("num_orden");
+        } catch (Exception ex) {
+            System.err.println("Error en el metodo CargarMaterialOrden(ACC_Equipos por: )" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return mat;
+    }
+
+    public planop CargarFirstOpePP(String orden) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        planop ope = new planop();
+        PreparedStatement ps;
+        ResultSet rs;
+        //Se usa el mismo proc. almacenado ya que el proc. tiene un inner join a las 2 tablas
+        String SP = "{CALL PP.Ordenes_ConsultarOrdenesSAP(?)}";
+        try {
+            ps = con.prepareStatement(SP);
+            ps.setString(1, orden);
+            rs = ps.executeQuery();
+            rs.next();
+
+            ope = new planop();
+            ope.setNum_operacion(rs.getString("num_operacion"));
+            ope.setTexto_breve_operacion(rs.getString("texto_breve_operacion"));
+            ope.setClave_calculo(rs.getString("clave_calculo"));
+            ope.setPuesto_trabajo(rs.getString("puesto_trabajo"));
+            ope.setCentro(rs.getString("centro"));
+            ope.setClave_control(rs.getString("clave_control"));
+            ope.setClase_actividad(rs.getString("clase_actividad"));
+            ope.setIndicador_asignar_medio_auxiliar_fabricacion(rs.getString("indicador_asignar_medio_auxiliar"));
+            ope.setTrabajo_operacion(rs.getString("trabajo_operacion"));
+            ope.setUnidad_trabajo(rs.getString("unidad_trabajo"));
+            ope.setCantidad_capacidad_necesidad(rs.getString("cantidad_capacidad_necesaria"));
+            ope.setDuracion_operacion_normal(rs.getString("duracion_operacion_normal"));
+            ope.setUnidad_duracion_normal(rs.getString("unidad_duracion_normal"));
+            ope.setIndicador_asignar_componentes(rs.getString("indicador_asignar_componentes"));
+            ope.setNum_orden(rs.getString("num_orden"));
+        } catch (Exception ex) {
+            System.err.println("Error en el metodo CargarMaterialOrden(ACC_Equipos por: )" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ope;
+    }
     public planop CargarFirstOpeSAP(String orden) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -340,7 +418,6 @@ public class ACC_Orden {
         }
         return pla;
     }
-
     public ArrayList CargarOperacionesSAP(String ord) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -395,6 +472,60 @@ public class ACC_Orden {
         }
         return pts;
     }
+    public ArrayList CargarOperacionesPP(String ord) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        ArrayList pts = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet rs = null;
+        planop p;
+        String SP = "{CALL PP.Ordenes_ConsultarOperacionesSAP(?)}";
+        try {
+            ps = con.prepareStatement(SP);
+            ps.setString(1, ord);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                p = new planop();
+                p.setNum_operacion(rs.getString("num_operacion"));
+                p.setSuboperacion(rs.getString("suboperacion"));
+                p.setPuesto_trabajo(rs.getString("puesto_trabajo"));
+                p.setCentro(rs.getString("centro"));
+                p.setClave_control(rs.getString("clave_control"));
+                p.setClave_modelo(rs.getString("clave_modelo"));
+                p.setEstado_instalacion(rs.getString("estado_instalacion"));
+                p.setTexto_breve_operacion(rs.getString("texto_breve_operacion"));
+                p.setTrabajo_real(rs.getString("trabajo_real"));
+                p.setTrabajo_operacion(rs.getString("trabajo_operacion"));
+                p.setUnidad_trabajo(rs.getString("unidad_trabajo"));
+                p.setCantidad_capacidad_necesidad(rs.getString("cantidad_capacidad_necesaria"));
+                p.setDuracion_operacion_normal(rs.getString("duracion_operacion_normal"));
+                p.setUnidad_duracion_normal(rs.getString("unidad_duracion_normal"));
+                p.setClave_calculo(rs.getString("clave_calculo"));
+                p.setClase_actividad(rs.getString("clase_actividad"));
+                p.setDestinatario_mercancias(rs.getString("destinatario_mercancias"));
+                p.setPuesto_descarga(rs.getString("puesto_descarga"));
+                p.setFactor_ejecucion(rs.getString("factor_ejecucion"));
+                p.setIndicador_asignar_componentes(rs.getString("indicador_asignar_componentes"));
+                p.setIndicador_asignar_medio_auxiliar_fabricacion(rs.getString("indicador_asignar_medio_auxiliar"));
+                p.setNum_equipo(rs.getString("num_material"));
+                p.setNum_notificacion("");
+                p.setSiguiente_fecha_prevista(rs.getString("siguiente_fecha_prevista"));
+                p.setEfectividad_reserva_creacion_solped(rs.getString("efectividad_reserva"));
+                p.setInicio_temprano_programado_ejecucin_hora(rs.getString("inicio_temprano_hora"));
+                p.setInicio_temprano_programado_ejecucion_fecha(rs.getString("inicio_temprano_fecha"));
+                p.setFin_temprano_programado_ejecucion_fecha(rs.getString("fin_temprano_fecha"));
+                p.setFin_temprano_programado_ejecucion_hora(rs.getString("fin_temprano_hora"));
+                pts.add(p);
+            }
+            cnx.CerrarConexion(con);
+        } catch (Exception ex) {
+            System.err.println("Error en el metodo ConsultaMatchOrdenes(ACC_PuestoTrabajo por: )" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return pts;
+    }
+
 
     public LinkedList<componentes> CargarComponentes(String query) {
         Conexion cnx = new Conexion();
@@ -463,6 +594,48 @@ public class ACC_Orden {
                 c.setIndicador_material_granel(rs.getString("indicador_material_granel"));
                 c.setIndicador_toma_retroactiva(rs.getString("indicador_toma_retroactiva"));
                 c.setEfectividad_reserva_creacion_solped(rs.getString("efectividad_reserva_creacion_solped"));
+                comps.add(c);
+            }
+            cnx.CerrarConexion(con);
+        } catch (Exception ex) {
+            System.err.println("Error en el metodo ConsultarOperacionesSAM(ACC_OperacionesOrdenesCrea por: )" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return comps;
+    }
+    public ArrayList CargarComponentesPP(String ord) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        ArrayList comps = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet rs;
+        componentes c;
+        String SP = "{CALL PP.Ordenes_ConsultarComponentesSAP(?)}";
+        try {
+            ps = con.prepareStatement(SP);
+            ps.setString(1, ord);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                c = new componentes();
+                c.setNum_orden(rs.getString("num_orden"));
+                c.setNum_posicion_lista_material(rs.getString("num_pos_lista_materiales"));
+                c.setNum_material(rs.getString("num_material"));
+                c.setTexto_breve_material(rs.getString("texto_breve"));
+                c.setCantidad_necesaria_componente(rs.getString("cantidad_necesaria_componente"));
+                c.setUnidad_medida_base(rs.getString("unidad_medida"));
+                c.setTipo_posicion_lista_material(rs.getString("tipo_pos"));
+                c.setIndicador_stock_especial_visualizar_dialogo(rs.getString("indicador_stock_especial"));
+                c.setAlmacen(rs.getString("almacen"));
+                c.setCentro(rs.getString("centro"));
+                c.setNum_operacion(rs.getString("num_operacion"));
+                c.setNum_lote(rs.getString("num_lote"));
+                c.setDestinatario_mercancias(rs.getString("destino_mercancias"));
+                c.setPuesto_descarga(rs.getString("puesto_descarga"));
+                c.setPosicion_borrada(rs.getString("pos_borrada"));
+                c.setIndicador_material_granel(rs.getString("indicador_material_granel"));
+                c.setIndicador_toma_retroactiva(rs.getString("indicador_toma_retroactiva"));
+                c.setEfectividad_reserva_creacion_solped(rs.getString("efectividad_reserva"));
                 comps.add(c);
             }
             cnx.CerrarConexion(con);
