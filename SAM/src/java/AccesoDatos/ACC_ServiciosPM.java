@@ -96,5 +96,37 @@ public class ACC_ServiciosPM {
         }
         return serpm;
     }
+    public ArrayList CargarServiciosPP(String ord, String noOpe) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        ArrayList serpm = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet rs;
+        servicios_pm pm;
+        String SP = "{CALL PP.Ordenes_ConsultarSeviciosSAP(?, ?)}";
+        try {
+            ps = con.prepareStatement(SP);
+            ps.setString(1, ord);
+            ps.setString(2, noOpe);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                pm = new servicios_pm();
+                pm.setFolio_sam(rs.getString("folio_sam"));
+                pm.setNum_operacion(rs.getString("num_operacion"));
+                pm.setCant_signo(rs.getString("cant_signo"));
+                pm.setClase_coste(rs.getString("clase_coste"));
+                pm.setNum_servicio(rs.getString("num_servicio"));
+                pm.setUnidad_med_base(rs.getString("unidad_med_base"));
+                pm.setGrupo_articulos(rs.getString("grupo_articulos"));
+                serpm.add(pm);
+            }
+            cnx.CerrarConexion(con);
+        } catch (Exception ex) {
+            System.err.println("Error en el metodo CargarServiciosSAP(ACC_ServiciosPM por: )" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return serpm;
+    }
 
 }
