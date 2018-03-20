@@ -482,7 +482,7 @@ function validarStatusOrden() {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + acc + "&orden=" + orden,
-        success: function (data) {
+        success: function (data) {            
             if (data == 1) {
                 var BE = document.createElement('audio');
                 BE.src = "audio/sapmsg.wav";
