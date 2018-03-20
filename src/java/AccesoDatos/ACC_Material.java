@@ -5,6 +5,7 @@ import Entidades.centros;
 import Entidades.grupoarticulo;
 import Entidades.materiales;
 import Entidades.GrupoArticulos;
+import Entidades.PlanPP;
 import Entidades.materiales_almacen;
 import Entidades.organizacion;
 import Entidades.tipomaterial;
@@ -2051,7 +2052,49 @@ public class ACC_Material {
         return eqs;
     }
     
-    
+    public ArrayList<PlanPP> MatchMaterialesListOrdenPP(String Cant, String Idioma, String Mate, String DenMate){
+        ArrayList<PlanPP> plMa = new ArrayList<>();        
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.MatchMateriales_ListaordenPP(?,?,?,?)}";
+        String denominacion = "denominacion_" + Idioma;
+        try{
+            pst = con.prepareCall(query);
+            pst.setString(1, Cant);
+            pst.setString(2, Idioma);
+            pst.setString(3, Mate);
+            pst.setString(4, DenMate);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                PlanPP py = new PlanPP();
+                py.setNum_material(rs.getString("num_material"));
+                py.setTexto_material(rs.getString("texto_material"));
+                plMa.add(py);
+            }
+        }catch (Exception e) {
+            System.err.println("Error al inesperado al cargar los datos debido a : " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception f) {
+                System.err.println("Error inesperado al cerrar las conexiones debido a: " + f);
+            }
+        }
+        return plMa;
+    }
     public ArrayList<materiales> SP_MatchMateListaordenPP(String Cant, String Idioma, String Mate, String DenMate) {
         ArrayList<materiales> sp_mate = new ArrayList<>();
         Conexion cnx = new Conexion();
