@@ -290,7 +290,7 @@
             <!--//////////Ventana Modal Materiales/////////////-->
             <div id="VentanaModalEquipo" class="VentanaModal">
                 <div id="handle1"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumdeMatMatch_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Material');"><label >X</label></div></div>
-                <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamEquipo', 'ConsultaTablaEquipo', 'denEqui');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
+                <div class="PanelBntMatch"><button onclick="returnRestriPP('BuscarParamEquipo', 'ConsultaTablaEquipo', 'denEqui');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
                 <div id="BuscarParamEquipo" class="BuscarParam_u">
                     <div class="fondo_Match">
                         <div class="busquedaMatch">
@@ -378,6 +378,8 @@
 
             <!--///////////Ventana Modal Ubication Tecnica//////////////////////////////////////////////--> 
             <div id="VentanaModalUbiT" class="VentanaModal">
+                <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.UbTecnica_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('UbiT');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestriPP('BuscarParamUbiT', 'ConsultaTablaUbiT   ', 'denUbiT');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
                 <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.UbTecnica_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('UbiT');"><label >X</label></div></div>
                 <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamUbiT', 'ConsultaTablaUbiT   ', 'denUbiT');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamUbiT" class="BuscarParam_u">
@@ -505,6 +507,8 @@
 
             <!--///////////Ventana Modal Puesto Trabajo Resp//////////////////////////////////////////////--> 
             <div id="VentanaModalPtoTr" class="VentanaModal">
+                <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.PstTbRsMM_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('PtoTr');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestriPP('BuscarParamPtoTr', 'ConsultaTablaPtoTr', 'clasePto');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
                 <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.PstTbRsMM_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('PtoTr');"><label >X</label></div></div>
                 <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamPtoTr', 'ConsultaTablaPtoTr', 'clasePto');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamPtoTr" class="BuscarParam_u">
@@ -672,6 +676,8 @@
             </div>
             <!--///////////Ventana Modal Material//////////////////////////////////////////////--> 
             <div id="VentanaModalMat" class="VentanaModal">
+                <div id="handle9"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumMate_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Mat');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestriPP('BuscarParamMat', 'ConsultaTablaMat', 'txtMatMatch');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
                 <div id="handle9"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumMate_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Mat');"><label >X</label></div></div>
                 <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamMat', 'ConsultaTablaMat', 'txtMatMatch');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamMat" class="BuscarParam_u">
@@ -724,6 +730,8 @@
             </div>
             <!--///////////Ventana Modal Num Cuenta Mayor//////////////////////////////////////////////--> 
             <div id="VentanaModalNumCM" class="VentanaModal">
+                <div id="handle16"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumCuenMay_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumCM');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestriPP('BuscarParamNumCM', 'ConsultaTablaNumCM', 'matchClCoste');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
                 <div id="handle16"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumCuenMay_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumCM');"><label >X</label></div></div>
                 <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamNumCM', 'ConsultaTablaNumCM', 'matchClCoste');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamNumCM" class="BuscarParam_u">
@@ -768,6 +776,8 @@
             </div>
             <!--///////////Ventana Modal Num Cuenta Mayor 2//////////////////////////////////////////////--> 
             <div id="VentanaModalNumCM2" class="VentanaModal">
+                <div id="handle18"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumCuenMay_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumCM2');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestriPP('BuscarParamNumCM2', 'ConsultaTablaNumCM2', 'matchClCoste2');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
                 <div id="handle18"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumCuenMay_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumCM2');"><label >X</label></div></div>
                 <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamNumCM2', 'ConsultaTablaNumCM2', 'matchClCoste2');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamNumCM2" class="BuscarParam_u">
@@ -815,6 +825,8 @@
             </div>
             <!--///////////Ventana Modal Num Servicio//////////////////////////////////////////////--> 
             <div id="VentanaModalNumS" class="VentanaModal">
+                <div id="handle17"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumServ_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumS');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestriPP('BuscarParamNumS', 'ConsultaTablaNumS', 'numStxtB');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
                 <div id="handle17"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NumServ_Ordenes"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('NumS');"><label >X</label></div></div>
                 <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamNumS', 'ConsultaTablaNumS', 'numStxtB');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamNumS" class="BuscarParam_u">
@@ -913,6 +925,8 @@
 
             <!--/////////////////////////////Ventana Modal Grupo Articulos--> 
             <div id="VentanaModalGpoA" class="VentanaModal">
+                <div id="handle13"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.OgpoAr_Ordenes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('GpoA');"><label >X</label></div></div>
+                <div class="PanelBntMatch"><button onclick="returnRestriPP('BuscarParamGpoArt', 'ConsultaTablaGpoA', 'gpoAtxt');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes_PP"));%></button><hr></div>
                 <div id="handle13"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.OgpoAr"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('GpoA');"><label >X</label></div></div>
                 <div class="PanelBntMatch"><button onclick="returnRestri('BuscarParamGpoArt', 'ConsultaTablaGpoA', 'gpoAtxt');"><%out.println(po.getProperty("etiqueta.Resticciones_Ordenes"));%></button><hr></div>
                 <div id="BuscarParamGpoArt" class="BuscarParam_u">  
