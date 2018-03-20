@@ -5,6 +5,7 @@
  */
 package AccesoDatos;
 
+import Entidades.PlanPP;
 import Entidades.clase_orden;
 import Entidades.plan_orden;
 import java.sql.Connection;
@@ -1338,6 +1339,48 @@ public class ACC_PlanOrden {
 
         return sp_claseorden;
     }
+    public ArrayList<PlanPP> MatchListaOrdenPP(String limite, String orden, String texto){
+        ArrayList<PlanPP> al_planPP = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.MatchOrdenListaordenPP(?,?,?)}";
+        try {
+            pst = con.prepareCall(query);
+            pst.setString(1, limite);
+            pst.setString(2, orden);
+            pst.setString(3, texto);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                PlanPP pln = new PlanPP();
+                pln.setNum_orden(rs.getString("num_orden"));
+                pln.setTexto_breve(rs.getString("texto_breve"));
+                al_planPP.add(pln);
+            }  
+        }catch (Exception e) {
+            System.err.println("Error al inesperado al cargar los datos debido a : " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception f) {
+                System.err.println("Error inesperado al cerrar las conexiones debido a: " + f);
+            }
+        }
+
+        return al_planPP;
+    }
     public ArrayList<plan_orden> SP_MatchOrdenListaordenPP(String limite, String orden, String texto) {
         ArrayList<plan_orden> sp_planorden = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -1380,6 +1423,90 @@ public class ACC_PlanOrden {
 
         return sp_planorden;
     }
+    //Traer datos fecha de inicio extrema Lista de Ordenes PP
+    public ArrayList<PlanPP> FechaInicioExtremoPP(String fecha, String cant){
+        ArrayList<PlanPP> pln_folioPP = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.ListaOrdenes_CargarFechaIniExPP(?,?)}";
+        try{
+            pst = con.prepareCall(query);
+            pst.setString(1, fecha);
+            pst.setString(2, cant);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                PlanPP fePP = new PlanPP();
+                fePP.setNum_orden(rs.getString("num_orden"));
+                fePP.setFecha_inicio_extrema(rs.getString("fecha_inicio_extrema"));
+                pln_folioPP.add(fePP);
+            }
+            
+        }catch (Exception e) {
+            System.err.println("Error al inesperado al cargar los datos debido a : " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception f) {
+                System.err.println("Error inesperado al cerrar las conexiones debido a: " + f);
+            }
+        }
+        return pln_folioPP;
+    }
+    public ArrayList<PlanPP> MatchFolioListaOrdenesPP(String orden, String texto){
+        ArrayList<PlanPP> pln_folioPP = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.ListaOrdenes_CargarSAMPP(?,?)}";
+        try {
+            pst = con.prepareCall(query);
+            pst.setString(1, orden);
+            pst.setString(2, texto);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                PlanPP pa = new PlanPP();
+                pa.setFolio_sam(rs.getString("folio_sam"));
+                pa.setTexto_breve(rs.getString("texto_breve"));
+                pln_folioPP.add(pa);
+            }
+            
+        }catch (Exception e) {
+            System.err.println("Error al inesperado al cargar los datos debido a : " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception f) {
+                System.err.println("Error inesperado al cerrar las conexiones debido a: " + f);
+            }
+        }
+
+        return pln_folioPP;
+    }
     public ArrayList<plan_orden> SP_MatchOrdenListaordenSAMPP(String orden, String texto) {
         ArrayList<plan_orden> sp_planorden = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -1420,6 +1547,69 @@ public class ACC_PlanOrden {
         }
 
         return sp_planorden;
+    }
+    
+    //NUEVA VALIDACION QUERY LISTA ORDENES PP
+    public ArrayList<PlanPP> ConsultaTablaPlanPPSAP (String [] data){
+        ArrayList<PlanPP> newPlanPP = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.ListaOrdenes_PlanPPCargaOrdenesSAP(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
+        try {
+            pst = con.prepareCall(query);
+            pst.setString(1, data[0]);
+            pst.setString(2, data[1]);
+            pst.setString(3, data[2]);
+            pst.setString(4, data[3]);
+            pst.setString(5, data[4]);
+            pst.setString(6, data[5]);
+            pst.setString(7, data[6]);
+            pst.setString(8, data[7]);
+            pst.setString(9, data[8]);
+            pst.setString(10, data[9]);
+            pst.setString(11, data[10]);
+            pst.setString(12, data[11]);
+            pst.setString(13, data[12]);
+            pst.setString(14, data[13]);
+            pst.setString(15, data[14]);         
+            pst.setString(16, data[15]);         
+            pst.setString(17, data[16]);    
+            rs = pst.executeQuery();
+            while(rs.next()){
+                PlanPP plan = new PlanPP();
+                plan.setClase_documento_ventas(rs.getString("clase_documento_ventas"));
+                plan.setNum_orden(rs.getString("num_orden"));
+                plan.setFolio_sam(rs.getString("folio_sam"));
+                plan.setTexto_breve(rs.getString("texto_breve"));
+                plan.setNum_material(rs.getString("num_material"));
+                plan.setFecha_inicio_extrema(rs.getString("fecha_inicio_extrema"));
+                plan.setFecha1(rs.getString("fecha1"));
+                newPlanPP.add(plan);
+            }
+        }catch (Exception e) {
+            System.err.println("Error al inesperado al cargar los datos debido a : " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception f) {
+                System.err.println("Error inesperado al cerrar las conexiones debido a: " + f);
+            }
+        }
+
+        return newPlanPP;
     }
     //VALIDACION QUERY LISTA ORDENES PP
     public ArrayList<plan_orden> ConsultaQuerySAPPP(String[] data) {
@@ -1481,6 +1671,7 @@ public class ACC_PlanOrden {
 
         return sp_plan;
     }
+    
     
     public ArrayList<plan_orden> ConsultaQuerySAMPP(String[] data) {
         ArrayList<plan_orden> sp_plan = new ArrayList<>();
