@@ -192,7 +192,7 @@ public class ACC_NotificarTiempos {
         PreparedStatement ps;
         ResultSet rs;
         int ban = 0;
-        String query = "{CALL PP.NotTiempo_BorraRegTablaCont(?)}";
+        String query = "{CALL PP.NotTiempo_ValidarOrdenTablaControl(?)}";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, orden);
