@@ -82,6 +82,8 @@
         String po2 = request.getParameter("po2");
         String fc1 = request.getParameter("fc1");
         String fc2 = request.getParameter("fc2");
+        String f1 = request.getParameter("feEx1");
+        String f2 = request.getParameter("feEx2");
         String abi = request.getParameter("abi");
         String lib = request.getParameter("lib");
         String cte = request.getParameter("cte");
@@ -159,9 +161,10 @@
                                                 <td><%out.println(po.getProperty("etiqueta.GralFolioSAM"));%></td>
                                                 <td><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%></td>
                                                 <td>Material</td>
-                                                <td><%out.println(po.getProperty("etiqueta.GralFecha"));%></td>
-                                                <td>Notificado</td>
-                                                <td>Cantidad</td>
+                                                <td>Fecha Inicio Ext</td>
+                                                <td>Fecha</td>
+<!--                                                <td>Notificado</td>
+                                                <td>Cantidad</td>-->
                                                 <td><%out.println(po.getProperty("etiqueta.GralIcono"));%></td>
                                             </tr>
                                         </thead>
@@ -240,6 +243,8 @@
             var po2 = '<%=po2%>';
             var fc1 = '<%=fc1%>';
             var fc2 = '<%=fc2%>';
+            var f1 = '<%=f1%>';
+            var f2 = '<%=f2%>'
             var abi = '<%=abi%>';
             var lib = '<%=lib%>';
             var cte = '<%=cte%>';
@@ -248,6 +253,7 @@
                     "&sa1=" + sa1 + "&sa2=" + sa2 + "&tb1=" + tb1 + "&tb2=" + tb2 +
                     "&ub1=" + ub1 + "&ub2=" + ub2 + "&ep1=" + ep1 + "&ep2=" + ep2 +
                     "&po1=" + po1 + "&po2=" + po2 + "&fc1=" + fc1 + "&fc2=" + fc2 +
+                    "&feEx1=" + f1 + "&feEx2=" + f2 +
                     "&abi=" + abi + "&lib=" + lib + "&cte=" + cte;
             $.ajax({
                 async: false,
