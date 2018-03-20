@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import AccesoDatos.ACC_Ordenes_pp_notificaciones;
+import Entidades.ControlListaOrdenes;
 import Entidades.ordenes_pp_notificaciones;
 import Entidades.PlanPP;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,18 +44,34 @@ public class PeticionesOrdenesCrearNotiPP extends HttpServlet {
             String orde = request.getParameter("ordmatvm");
             String deso = request.getParameter("txtbrvm");
             String canm = request.getParameter("env5vm");
-            LinkedList<PlanPP> pl = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerNotificPP(canm, orde, deso);        
+            LinkedList<PlanPP> pl = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerNotificPP(canm, orde, deso);
+            int conta = 0;
+            ArrayList<ControlListaOrdenes> lo = new ArrayList<>();
+            if (pl.size() > 0) {
                 out.println("<table>");
                 out.println("<tbody>");
-                for (int i = 0; i < pl.size(); i++) {
-                    out.println("<tr ondblclick=\"seleccionar('" + pl.get(i).getNum_orden() + "','notor','VentanaModal')\">");
+                for (conta = 0; conta < pl.size(); conta++) {
+                    lo = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().FiltroOrdenesLib();
+                    for (ControlListaOrdenes cnt : lo) {
+                        String name = cnt.getNum_orden();
+                        String nameRe = pl.get(conta).getNum_orden();
+                        if (nameRe.equals(name)) {
+
+                        } else {
+                            out.println("<tr ondblclick=\"seleccionar('" + pl.get(conta).getNum_orden() + "','notor','VentanaModal')\">");
 //                    out.println("<td>" + pl.get(i).getSociedad_co() + "</td>");
-                    out.println("<td>" + pl.get(i).getNum_orden() + "</td>");
-                    out.println("<td>" + pl.get(i).getTexto_breve() + "</td>");
-                    out.println("</tr>");
+                            out.println("<td>" + pl.get(conta).getNum_orden() + "</td>");
+                            out.println("<td>" + pl.get(conta).getTexto_breve() + "</td>");
+                            out.println("</tr>");
+                        }
+                    }
                 }
                 out.println("</tbody>");
                 out.println("</table>");
+            } else {
+                out.println(0);
+            }
+
         }
     }
 
