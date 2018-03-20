@@ -71,55 +71,36 @@ function cargar() {
 
     });
 }
-
-function mostrar(e, r) {
+function mostrarPP(e, r) {
     tecla = (document.all) ? e.keyCode : e.which;
     $("#ivreq").html("d");
-    var acc = "checarOrden";
+    var acc = "checarOrdenPP";
     if (tecla == 13) {
         if (r == null || r == "") {
             $("#iconmsg").css("visibility", "visible");
             $("#iconmsg").attr("src", "images/advertencia.PNG");
             msgMatch("NPMCamOrOb");
-
         } else {
             borrarmsg();
-            var enviar = "&ord=" + r;
-            var eq = $('#nteq').val();
+            var enviar = "&ord=" + r;            
             $.ajax({
                 async: false,
                 type: 'GET',
-                url: 'peticionNotificacionesOrdenesSAM',
+                url: 'PeticionNotificacionesOrdenesSAMPP',
                 contentType: "application/x-www-form-urlencoded",
                 processData: true,
                 data: "acc=" + acc + enviar,
                 success: function (data) {
-                    var res = data;
+                    var res = data;                    
                     if (res == 0) {
-                        ordsta();
-                        ordequ();
-                        tabmax();
-                        if (eq == '')
-                        {
-                            $("#VisDoo").prop("disabled", false);
-                            $('#VisDoo').click(function () {
-                                if ($("#nteq").val() != "") {
-                                    VisDoc();
-                                } else {
-                                    var men = document.getElementById("msg");
-                                    men.innerHTML = "Campo equipo vacio";
-                                }
-
-                            });
-                        } else {
-                            $("#VisDoo").prop("disabled", true);
-                        }
-
+                        ordsta();                        
+                        tabmax();                        
                     } else if (res == 2) {
                         tabmaxPASAM();
                         CargaTabEQSAM();
 //                                            CargarEQUI();
                     } else {
+                        $('#notsta').val("");
                         $("#iconmsg").css("visibility", "visible");
                         $("#iconmsg").attr("src", "images/advertencia.PNG");
                         msgMatch("NPMOrNoExx2");
@@ -131,10 +112,10 @@ function mostrar(e, r) {
     }
 }
 
-function mostrar1() {
+function mostrar1PP() {
     $("#divreq").html("d");
     var ord = $("#notor").val();
-    var acc = "checarOrden";
+    var acc = "checarOrdenPP";
     var eq = $('#nteq').val();
     if (ord == "" || ord == null) {
         $("#iconmsg").css("visibility", "visible");
@@ -150,7 +131,7 @@ function mostrar1() {
             contentType: "application/x-www-form-urlencoded",
             processData: true,
             data: "acc=" + acc + enviar,
-            success: function (data) {
+            success: function (data) {                
                 var res = data;                
                 if (res == 0) {
                     //Funcion para poner el status de la orden
@@ -162,6 +143,7 @@ function mostrar1() {
 //                    Cargar seccion de equipo solo status
                     CargaTabEQSAMPP();
                 } else {
+                    $('#notsta').val("");
                     $("#iconmsg").css("visibility", "visible");
                     $("#iconmsg").attr("src", "images/advertencia.PNG");
                     msgMatch("NPMOrNoExx2");
@@ -269,7 +251,7 @@ function tabmax() {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + acc + enviar,
-        success: function (data) {
+        success: function (data) {            
             var res = data;
             $("#bodyc").html(res);
         }
