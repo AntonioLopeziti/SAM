@@ -924,9 +924,9 @@ $(document).ready(function () {
         te = String.fromCharCode(tec);
         return teclanum.test(te);
     });
-    $('#okorden2').click(function () {
-        ConsultaOrden();
-    });
+//    $('#okorden2').click(function () {
+//        ConsultaOrden();
+//    });
 
     //////// FIN
     //
@@ -976,8 +976,11 @@ $(document).ready(function () {
         te = String.fromCharCode(tec);
         return teclanum.test(te);
     });
+//    $('#okSAM2').click(function () {
+//        ConsultaSAM();
+//    });
     $('#okSAM2').click(function () {
-        ConsultaSAM();
+        ConsultaSAM2();
     });
 
     //////// FIN
@@ -1184,9 +1187,9 @@ $(document).ready(function () {
 //        te = String.fromCharCode(tec);
 //        return teclanum.test(te);
 //    });
-//    $('#okorden2').click(function () {
-//        ConsultaOrden2();
-//    });
+    $('#okorden2').click(function () {
+        ConsultaOrden2();
+    });
 
     function ConsultaOrden() {
         var acc = "ConsultarOrdenes";
