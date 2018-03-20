@@ -1,5 +1,7 @@
 $(document).ready(function () {
     startTime();
+    var teclalfanuu = /[-0-9a-zA-ZñÑ]/;
+    var teclalfanu = /[0-9a-zA-ZñÑ]/;
     $('#iconmsg').hide();
     var clOrdL = $('#clOrdL');
     var OrdeL = $('#OrdeL');
@@ -350,7 +352,7 @@ $(document).ready(function () {
         return teclanum.test(te);
     });
     $('#okorden2').click(function () {
-        ConsultaOrden();
+        ConsultaOrden2();
     });
 
     //////// FIN
@@ -402,8 +404,11 @@ $(document).ready(function () {
         return teclanum.test(te);
     });
     $('#okSAM2').click(function () {
-        ConsultaSAM();
+        ConsultaSAM2();
     });
+//    $('#okSAM2').click(function () {
+//        ConsultaSAM();
+//    });
 
     //////// FIN
     //
@@ -457,6 +462,12 @@ $(document).ready(function () {
         ConsultarEquipo2();
     });
     /////// FIN
+    //
+    //
+    ////// INICIO FECHA EXTREMA
+    $('#okIniEx1').click(function(){
+       ConsultarIniExt1();
+    });
 
     $('#ejecutar').click(function () {
         if ($('#clOrdL').val().length < 0) {
@@ -555,9 +566,9 @@ $(document).ready(function () {
             }
             var acc = "ValidarQuery";
             var par = "&cl1=" + clOrdL.val() + "&cl2=" + clOrdL2.val() + "&or1=" + OrdeL.val() + "&or2=" + clOrdL2.val() +
-                      "&sa1=" + SAMOrden.val() + "&sa2=" + SAMOrden2.val() + "&tb1=" + txtbrvord.val() + "&tb2=" + txtbrvord2.val() +
-                      "&ep1=" + equiL.val() + "&ep2=" + equiL2.val() + "&fc1=" + fechaord.val() + "&fc2=" + fechaord2.val() +
-                      "&abi=" + ab + "&lib=" + li + "&cte=" + ct;
+                    "&sa1=" + SAMOrden.val() + "&sa2=" + SAMOrden2.val() + "&tb1=" + txtbrvord.val() + "&tb2=" + txtbrvord2.val() +
+                    "&ep1=" + equiL.val() + "&ep2=" + equiL2.val() + "&fc1=" + fechaord.val() + "&fc2=" + fechaord2.val() +
+                    "&feEx1=" + iniEx1.val() + "&feEx2=" + iniEx2.val() + "&abi=" + ab + "&lib=" + li + "&cte=" + ct;
             $.ajax({
                 async: false,
                 type: 'GET',
@@ -650,12 +661,14 @@ $(document).ready(function () {
                 break;
             case 14:
                 v.click(function () {
-                    mostrarVentanaModal('Ventana Inicio Extremo 1');
+                    OpenCalendario("iniEx1");
+//                    mostrarVentanaModal('VentanaModalInicioExtremo1', 'handle13', 'FiniEx1');
                 });
                 break;
             case 15:
                 v.click(function () {
-                    mostrarVentanaModal('Ventana Inicio Extremo 2');
+                    OpenCalendario("iniEx2");
+//                    mostrarVentanaModal('VentanaModalInicioExtremo2', 'handle14', 'FiniEx2');
                 });
                 break;
         }
@@ -886,7 +899,20 @@ $(document).ready(function () {
 //    });
 //    $('#Cerrapueto222').click(function () {
 //        ocultarVentana('VentanaModalPuesto2', 'BuscarParamPt2', 'ConsultaTablaPuesto2', 'ptol2');
-//    });    
+//    });  
+    $('#CerrarIniEx1').click(function () {
+        ocultarVentana('VentanaModalInicioExtremo1', 'BuscarParamIE2', 'ConsultaIniExt1', 'iniEx1');
+    });
+    $('#CerrarIniEx11').click(function () {
+        ocultarVentana('VentanaModalInicioExtremo1', 'BuscarParamIE2', 'ConsultaIniExt1', 'iniEx1');
+    });
+    
+    $('#CerrarIniEx2').click(function () {
+        ocultarVentana('VentanaModalInicioExtremo2', 'BuscarParamIE22', 'ConsultaIniExt2', 'iniEx2');
+    });
+    $('#CerrarIniEx22').click(function () {
+        ocultarVentana('VentanaModalInicioExtremo2', 'BuscarParamIE22', 'ConsultaIniExt2', 'iniEx2');
+    });
     function ocultarVentana(id, bp, ct, obj)
     {
         var BE = document.createElement('audio');
@@ -1037,6 +1063,7 @@ function ConsultaOrden() {
         processData: true,
         data: "acc=" + acc + enviar,
         success: function (data) {
+            alert(data);
             if (data == 0) {
                 ShowMsg(1, "images/advertencia.PNG", "audio/saperror.wav");
             } else {
@@ -1044,6 +1071,32 @@ function ConsultaOrden() {
                 $('#ConsultaTablaOrden').show();
                 $('#cargarDatosOrden').html(data);
                 fnc('table-scrollord', 'fixedYord');
+                borramsg();
+            }
+        }
+    });
+}
+function ConsultaOrden2() {
+    var acc = "ConsultarOrdenes2";
+    var orden = $('#NumOrden_Bus2').val();
+    var texto = $('#TextoOrden_Bus2').val();
+    var ctd = $('#numAcMax8').val();
+    var enviar = "&ord=" + orden + "&texto=" + texto + "&ctd=" + ctd;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionModuloListaOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + enviar,
+        success: function (data) {
+            if (data == 0) {
+                ShowMsg(1, "images/advertencia.PNG", "audio/saperror.wav");
+            } else {
+                $('#BuscarParam_OR2').hide();
+                $('#ConsultaTablaOrden2').show();
+                $('#cargarDatosOrden2').html(data);
+                fnc('table-scrollord2', 'fixedYord2');
                 borramsg();
             }
         }
@@ -1070,6 +1123,32 @@ function ConsultaSAM() {
                 $('#ConsultaTablaSAM').show();
                 $('#cargarDatosSAM').html(data);
                 fnc('table-scrollordscrollSAM', 'fixedSAM');
+                borramsg();
+            }
+        }
+    });
+}
+function ConsultaSAM2() {
+    var acc = "ConsultarOrdenessam2";
+    var orden = $('#FoliSAM_ord2').val();
+    var texto = $('#TextoSAM_ord2').val();
+    var ctd = $('#numAcMax9').val();
+    var enviar = "&sam=" + orden + "&DSAM=" + texto + "&ctd=" + ctd;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionModuloListaOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + enviar,
+        success: function (data) {
+            if (data == 0) {
+                ShowMsg(1, "images/advertencia.PNG", "audio/saperror.wav");
+            } else {
+                $('#BuscarParam_SAM2').hide();
+                $('#ConsultaTablaSAM2').show();
+                $('#cargarDatosSAM2').html(data);
+                fnc('table-scrollordscrollSAM2', 'fixedSAM2');
                 borramsg();
             }
         }
@@ -1132,32 +1211,61 @@ function ConsultarClaseorden2() {
 }
 //NUEVA PETICION PARA MATCH MATERIAL 2 (ANTES EQUIPO 2)
 function ConsultarEquipo2() {
-        var acc = "ConsultaMatchMate2";
-        var idioma = $('#Idioma').val();
-        var eq = $('#equBus2').val();
-        var Deq = $('#denEqBus2').val();
-        var cant = $('#numAcMax11').val();
-        var datos = "&Equipo=" + eq + "&DEquipo=" + Deq + "&ctd=" + cant + "&Idioma=" + idioma;
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: 'PeticionModuloListaOrdenesPP',
-            contentType: "application/x-www-form-urlencoded",
-            processData: true,
-            data: "acc=" + acc + datos,
-            success: function (data) {
-                if (data == 0) {
-                    ShowMsg(1, "images/advertencia.PNG", "audio/saperror.wav");
-                } else {
-                    $('#BuscarParamE2').hide();
-                    $('#ConsultaTablaEquipo2').show();
-                    $('#cargarDatosEquipo2').html(data);
-                    fnc('table-scrollEquipo2', 'fixedYEquipo2');
-                    borramsg();
-                }
+    var acc = "ConsultaMatchMate2";
+    var idioma = $('#Idioma').val();
+    var eq = $('#equBus2').val();
+    var Deq = $('#denEqBus2').val();
+    var cant = $('#numAcMax11').val();
+    var datos = "&Mate=" + eq + "&DenMate=" + Deq + "&ctd=" + cant + "&Idioma=" + idioma;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionModuloListaOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + datos,
+        success: function (data) {
+            alert(data);
+            if (data == 0) {
+                ShowMsg(1, "images/advertencia.PNG", "audio/saperror.wav");
+            } else {
+                $('#BuscarParamE2').hide();
+                $('#ConsultaTablaEquipo2').show();
+                $('#cargarDatosEquipo2').html(data);
+                fnc('table-scrollEquipo2', 'fixedYEquipo2');
+                borramsg();
             }
-        });
-    }
+        }
+    });
+}
+//NUEVA FUNCTION PARA LA FECHA DE INICIO EXTREMO
+function ConsultarIniExt1(){
+    var acc = "ConsultaIniEx1";
+    var idioma = $('#Idioma').val();
+    var fe = $('#FiniEx1').val();
+//    var Deq = $('#denEqBus2').val();
+    var cant = $('#numAcMax11').val();
+    var datos = "&FeIniEx=" + fe + "&ctd=" + cant + "&Idioma=" + idioma;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionModuloListaOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + datos,
+        success: function (data) {
+            if (data == 0) {
+                ShowMsg(1, "images/advertencia.PNG", "audio/saperror.wav");
+            } else {
+                $('#BuscarParamIE2').hide();
+                $('#ConsultaIniExt1').show();
+                $('#CargarDatosIniExtremo1').html(data);
+                fnc('table-scrollIniEx', 'fixedYIniEx1');
+                borramsg();
+            }
+        }
+    });
+}
 function mostrarVentanaModal(id, handle, tipo)
 {
     switch (tipo) {
@@ -1221,6 +1329,11 @@ function mostrarVentanaModal(id, handle, tipo)
 //            $('#Ptexto_mate2').val('');
 //            $('#' + tipo).val('');
 //            break;
+        case "FiniEx1":
+            $('#numAcMax15').val('500');
+//            $('#denEqBus2').val('');
+            $('#' + tipo).val('');
+            break;
 
     }
     var BE = document.createElement('audio');
@@ -1319,6 +1432,10 @@ function seleccionar(obj, tipo) {
         case "Puesto2":
             $('#ptol2').val(obj);
             ocultarVentana('VentanaModalPuesto2', 'BuscarParamPt2', 'ConsultaTablaPuesto2', 'ptol2');
+            break;
+        case "FechaInEx1":
+            $('#iniEx1').val(obj);
+            ocultarVentana('VentanaModalInicioExtremo1', 'BuscarParamIE2', 'ConsultaIniExt1', 'iniEx1');
             break;
     }
 }
