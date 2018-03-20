@@ -230,7 +230,7 @@
                     <label><%out.println(po.getProperty("etiqueta.NPMOrden_PP"));%></label> 
                     <hr class="lineaazul">
                     <section class="subdiv1">
-                        <label><%out.println(po.getProperty("etiqueta.NPMOrden_PP"));%></label><input  id="notor" type="text" maxlength="12" onkeypress="mostrar(event, this.value)" style="width:40%;"/><button id="match_N1" class='BtnMatchIcon2'></button>
+                        <label><%out.println(po.getProperty("etiqueta.NPMOrden_PP"));%></label><input  id="notor" type="text" maxlength="12" onkeypress="mostrarPP(event, this.value)" style="width:40%;"/><button id="match_N1" class='BtnMatchIcon2'></button>
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.NPMOperacion_PP"));%></label><input id="notope" type="text"  maxlength="4" style="width:40%;" />
                         <hr>
@@ -390,7 +390,7 @@
 
         <div id="VentanaModal" class="VentanaModalCC">
             <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NPMNumeroorden_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModal');"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button onclick= "retornaFiltroBus('BuscarParam_u1', 'ConsultaTabla1')"><%out.println(po.getProperty("etiqueta.NPMOrdenespPlanmat_PP"));%></button><hr></div>
+            <div class="PanelBntMatch"><button onclick= "retornaFiltroBus('BuscarParam_u1', 'ConsultaTabla1')">Ordenes PP</button><hr></div>
             <div id="BuscarParam_u1" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
