@@ -229,23 +229,24 @@
         String gestMant_PPHrut_Vis = verificarP(p.charAt(111));
        ////////////////////// Monitor de Equipos PP //////////////////////////////////////////////////////////////////////////////////////////////////
         String gestMant_MEPP = verificarP(p.charAt(112));                 // GestiÃ³n Mantenimiento Monitor de Equipos PP
-        String gestMant_ME_MCPxEPP = verificarP(p.charAt(113));           // GestiÃ³n Mantenimiento Monitor de Equipos Monitor de Contadores y Plan de Mantenimiento PP
+        String gestMant_MPP = verificarP(p.charAt(113));                    // GestiÃ³n Mantenimiento Monitor PP
+        String gestMant_ME_MCPxEPP = verificarP(p.charAt(114));           // GestiÃ³n Mantenimiento Notificar tiempos PP
         //////////////////////////// Avisos PP /////////////////////////////////////////////////////////////////////////////////////
-        String gestMant_APP = verificarP(p.charAt(114));                // GestiÃ³n Mantenimiento Avisos PP
-        String gestMant_APP_MAP = verificarP(p.charAt(115));           // GestiÃ³n Mantenimiento Avisos PP Monitor de Avisos PM
-        String gestMant_APP_Cre = verificarP(p.charAt(116));            // GestiÃ³n Mantenimiento Avisos PP Crear
-        String gestMant_APP_Mod = verificarP(p.charAt(117));            // GestiÃ³n Mantenimiento Avisos PP Modificar
-        String gestMant_APP_Vis = verificarP(p.charAt(118));            // GestiÃ³n Mantenimiento Avisos PP Visualizar
+        String gestMant_APP = verificarP(p.charAt(115));                // GestiÃ³n Mantenimiento Avisos PP
+        String gestMant_APP_MAP = verificarP(p.charAt(116));           // GestiÃ³n Mantenimiento Avisos PP Monitor de Avisos PM
+        String gestMant_APP_Cre = verificarP(p.charAt(117));            // GestiÃ³n Mantenimiento Avisos PP Crear
+        String gestMant_APP_Mod = verificarP(p.charAt(118));            // GestiÃ³n Mantenimiento Avisos PP Modificar
+        String gestMant_APP_Vis = verificarP(p.charAt(119));            // GestiÃ³n Mantenimiento Avisos PP Visualizar
         ////////////////////////// Ordenes PP //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestMant_OPP = verificarP(p.charAt(119));                // GestiÃ³n Mantenimiento Ordenes PP
-        String gestMant_OPP_Cre = verificarP(p.charAt(120));            // GestiÃ³n Mantenimiento Ordenes PP Crear
-        String gestMant_OPP_Mod = verificarP(p.charAt(121));            // GestiÃ³n Mantenimiento Ordenes PP Modificar 
-        String gestMant_OPP_Vis = verificarP(p.charAt(122));            // GestiÃ³n Mantenimiento Ordenes PP Visualizar
-        String gestMant_OPP_LstO = verificarP(p.charAt(123));           // GestiÃ³n Mantenimiento Ordenes PP Lista de Ordenes
+        String gestMant_OPP = verificarP(p.charAt(120));                // GestiÃ³n Mantenimiento Ordenes PP
+        String gestMant_OPP_Cre = verificarP(p.charAt(121));            // GestiÃ³n Mantenimiento Ordenes PP Crear
+        String gestMant_OPP_Mod = verificarP(p.charAt(122));            // GestiÃ³n Mantenimiento Ordenes PP Modificar 
+        String gestMant_OPP_Vis = verificarP(p.charAt(123));            // GestiÃ³n Mantenimiento Ordenes PP Visualizar
+        String gestMant_OPP_LstO = verificarP(p.charAt(124));           // GestiÃ³n Mantenimiento Ordenes PP Lista de Ordenes
         ////////////////////// Notificaciones PP /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestMant_NPP = verificarP(p.charAt(124));                // GestiÃ³n Mantenimiento Notificaciones PP      
-        String gestMant_NPP_Cre = verificarP(p.charAt(125));            // GestiÃ³n Mantenimiento Notificaciones PP Crear
-        String gestMant_NPP_Vis = verificarP(p.charAt(126));            // GestiÃ³n Mantenimiento Notificaciones PP1 Visualizar
+        String gestMant_NPP = verificarP(p.charAt(125));                // GestiÃ³n Mantenimiento Notificaciones PP      
+        String gestMant_NPP_Cre = verificarP(p.charAt(126));            // GestiÃ³n Mantenimiento Notificaciones PP Crear
+        String gestMant_NPP_Vis = verificarP(p.charAt(127));            // GestiÃ³n Mantenimiento Notificaciones PP1 Visualizar
     %>
 
     <head>
@@ -480,13 +481,13 @@
                                 <ul>
                                     <li class="current" style="display: <%=gestMant_PP%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosPP"));%></a>
                                         <ul>
-                                            <li class="current" style="display: <%=gestMant_PPUbi%>"><a href="#"><%out.println(po.getProperty("etiqueta.PP_DatosMaestrosUbicac_menu"));%></a>
+<!--                                            <li class="current" style="display: <%=gestMant_PPUbi%>"><a href="#"><%out.println(po.getProperty("etiqueta.PP_DatosMaestrosUbicac_menu"));%></a>
                                                 <ul>
                                                     <li style="display: <%=gestMant_PPUbi_Cre%>"><a href="CrearUbicacionesTecnicasPP.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
                                                     <li style="display: <%=gestMant_PPUbi_Mod%>"><a href="ModificarUbicacionesTecnicasPP.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
                                                     <li style="display: <%=gestMant_PPDMUbi_Vis%>"><a href="VisualizarUbicacionesTecnicasPP.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
                                                 </ul>
-                                            </li>
+                                            </li>-->
                                             <li class="current" style="display: <%=gestMant_PPEqui%>"><a href="#"><%out.println(po.getProperty("etiqueta.PP_Materiales_menu"));%></a>
                                                 <ul>
                                                     <li style="display: <%=gestMant_PPEqui_Cre%>"><a href="CrearMaterialesPP.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
@@ -509,10 +510,11 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li>                                    
                                     <!--Monitor Status PP-->
                                     <li class="current" style="display: <%=gestMant_MEPP%>"><a href="#">Notificar Tiempos PP</a>
                                         <ul>
+                                            <li class="current" style="display: <%=gestMant_MPP%>"> <a href="MonitorPP.jsp">Monitor PP</a></li>
                                             <li class="current" style="display: <%=gestMant_ME_MCPxEPP%>"> <a href="NotificacionTiemposPP.jsp">Notificar Tiempos</a></li>
                                         </ul>
                                     </li>
