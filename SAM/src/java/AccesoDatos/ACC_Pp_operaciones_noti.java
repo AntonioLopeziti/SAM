@@ -5,11 +5,13 @@
  */
 package AccesoDatos;
 
+import Entidades.PlanPP;
 import Entidades.pp01_notifi;
 import Entidades.pp_operaciones_noti;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -26,7 +28,37 @@ public class ACC_Pp_operaciones_noti {
         }
         return Instance;
     }
-    
+//    public LinkedList<PlanPP> CargarTablaMaxPP(String ord, String, ope){
+//        
+//    }
+    public ArrayList<PlanPP> TablaCargarNotPP(String orden, String ope){
+        ArrayList<PlanPP> pla = new ArrayList<>();
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        String query = "{call PP.NotificacionesPP_CargaTablaPP(?,?)}";
+        try{
+            
+        }catch (Exception e) {
+            System.err.println("Error: " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e);
+            }
+        }
+        return pla;
+    }
     public LinkedList<pp_operaciones_noti> TABGRNOTPMNotPP(String ord, String ope) {
         LinkedList<pp_operaciones_noti> tpn = new LinkedList<>();
         Conexion con = new Conexion();
