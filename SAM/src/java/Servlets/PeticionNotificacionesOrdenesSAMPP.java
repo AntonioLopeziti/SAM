@@ -13,6 +13,7 @@ import AccesoDatos.ACC_BOMEquipos;
 import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_Material;
 import AccesoDatos.ACC_Pm_operaciones_notificaciones;
+import Entidades.ControlListaOrdenes;
 import Entidades.cabecera_ordenes_crea;
 import Entidades.ordenes_pp_notificaciones;
 import Entidades.pp_operaciones_noti;
@@ -21,6 +22,7 @@ import Entidades.folios;
 import Entidades.materiales;
 import Entidades.materiales_ordenes_crea;
 import Entidades.operaciones_ordenes_crea;
+import Entidades.PlanPP;
 import Entidades.pp01_notifi;
 import Entidades.pm03_1_notificaciones;
 import Entidades.pp03_1_notificaciones;
@@ -88,20 +90,32 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             String ulm = request.getParameter("ulm");
             String fol = "ES";
             switch (acc) {
-                case "checarOrden":
+                case "checarOrdenPP":
                     if (ACC_Ordenes_pp_notificaciones.ObtenerInstancia().COMPORdenNOTPP(ord) == true) {
-                        out.println(0);
-                    } else if (ACC_Ordenes_pp_notificaciones.ObtenerInstancia().COMPFOLORdenNOTPP(ord) == true) {
-                        out.println(2);
+                        //SAP                        
+                        ArrayList<ControlListaOrdenes> lo = new ArrayList<>();
+                        lo = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().FiltroOrdenesLib();
+                        for (ControlListaOrdenes cnt : lo) {
+                            String name = cnt.getNum_orden();
+                            if (name.equals(ord)) {
+                                out.println(1);
+                            } else {
+                                out.println(0);
+                            }
+                        }
+
                     } else {
                         out.println(1);
                     }
                     break;
                 case "ChecarStatusOrdenOpe":
-                    ordenes_pp_notificaciones pl = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenStatusCNPMNOTPP(ord);
-                    out.println("<input type='text' id ='nosta' value='" + pl.getStatus() + "' />");
+                    PlanPP paln = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerStatusOrdenSAPPP(ord);
+                    out.println("<input type='text' id ='nosta' value='" + paln.getStatus() + "' />");
+
+//                    ordenes_pp_notificaciones pl = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenStatusCNPMNOTPP(ord);
                     break;
                 case "LlenarTabMax":
+                    ArrayList<PlanPP> pl = AccesoDatos.ACC_Pp_operaciones_noti.ObtenerInstancia().TablaCargarNotPP(ord, ope);
                     LinkedList<pp_operaciones_noti> tb = ACC_Pp_operaciones_noti.ObtenerInstancia().TABGRNOTPMNotPP(ord, ope);
                     String checa = "";
                     String checa1 = "";
