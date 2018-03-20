@@ -212,7 +212,7 @@
                     </li>
                 </ul>
             </div>
-            <input id="aceptar" type="image" src="images/aceptar.png"  onclick="mostrar1()" />             
+            <input id="aceptar" type="image" src="images/aceptar.png"  onclick="mostrar1PP()" />             
             <!--<input id="aceptar" type="image" src="images/aceptar.png"  onclick="ListaMateriales()" />-->                
             <input  id="guardar" type="image" src="images/guardaOFF.png" disabled />               
             <input  id="regresar" type="image" src="images/regresa.PNG" onclick="backto();"/>
