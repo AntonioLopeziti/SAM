@@ -37,18 +37,19 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return Instance;
     }
-    public LinkedList<PlanPP> ObtenerNotificPP(String cant, String orden, String deso){
+
+    public LinkedList<PlanPP> ObtenerNotificPP(String cant, String orden, String deso) {
         LinkedList<PlanPP> pln = new LinkedList<>();
         String query = "{call PP.NotOrden_TodosMatchNotiPP(?,?,?)}";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         ResultSet rs = null;
         PreparedStatement pst = null;
-        try{
+        try {
             pst = conn.prepareStatement(query);
             pst.setString(1, cant);
             pst.setString(2, orden);
-            pst.setString(3, deso);            
+            pst.setString(3, deso);
             rs = pst.executeQuery();
             while (rs.next()) {
                 PlanPP pa = new PlanPP();
@@ -56,7 +57,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 pa.setTexto_breve(rs.getString("texto_breve"));
                 pln.add(pa);
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Error: " + e);
         } finally {
             try {
@@ -75,6 +76,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return pln;
     }
+
     public LinkedList<ordenes_pp_notificaciones> ObtenOrdenNOTIPP(String cann, String orde, String deso, String plao) {
         LinkedList<ordenes_pp_notificaciones> orn = new LinkedList<>();
         String query = "{call PP.NotOrden_TodosMatchNotiPP(?,?,?,?)}";
@@ -189,6 +191,30 @@ public class ACC_Ordenes_pp_notificaciones {
             }
         }
         return false;
+    }
+
+    public PlanPP ObtenerStatusOrdenSAPPP(String orde) {
+        PlanPP pn = new PlanPP();
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        String query = "{call PP.ord_pp_noti_COMPORdenNOTPP(?)}";
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, orde);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                pn.setNum_orden(rs.getString("num_orden"));
+                pn.setStatus(rs.getString("status"));
+                pn.setTexto_breve(rs.getString("texto_breve"));
+                pn.setCentro(rs.getString("centro"));
+            }
+            con.CerrarConexion(conn);
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        return pn;
     }
 
     public ordenes_pp_notificaciones ObtenStatusCNPMNOTPP(String orde) {
@@ -1376,32 +1402,33 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return tpn;
     }
-    
-    public boolean PONACACNOTPP(String dutr ,String nuOrd){
+
+    public boolean PONACACNOTPP(String dutr, String nuOrd) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         String query = "{call PP.pp_operaciones_notificaciones_ActTiemNotPP(?,?)}";
         int can;
-        try{
-           pst = conn.prepareStatement(query);
-           pst.setString(1, dutr);
-           pst .setString(2, nuOrd);
-           can = pst.executeUpdate();
-           if(can > 0){
-               return true;
-           }
-        }
-        catch(Exception e){
-            System.err.println("Error: "+e);
-        }
-        finally{
-            try{
-            if(conn != null){con.CerrarConexion(conn);}
-            if(pst != null){pst.close();}
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, dutr);
+            pst.setString(2, nuOrd);
+            can = pst.executeUpdate();
+            if (can > 0) {
+                return true;
             }
-            catch(Exception e){
-                System.err.println("Error: "+e);
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e);
             }
         }
         return false;
