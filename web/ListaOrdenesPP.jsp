@@ -225,12 +225,12 @@
 <!--                        <label><%out.println(po.getProperty("etiqueta.UbicTec_LO_PP"));%></label><input type="text" style="width:42%; text-transform: uppercase;" maxlength="30" id="ubitl"/><button id="btnmat4" class="BtnMatchIcon"></button>
                         <hr>-->
                         <label>Material</label><input type="text" style="width:42%; text-transform: uppercase;" maxlength="18" id="equiL"/><button id="btnmat5" class="BtnMatchIcon"></button>
-<!--                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.PtoTbjoRes_LO_PP"));%></label><input type="text" style="width: 25%; text-transform: uppercase;" id="ptol"/><button id="btnmat6" class="BtnMatchIcon2"></button>-->
+                        <!--                        <hr>
+                                                <label><%out.println(po.getProperty("etiqueta.PtoTbjoRes_LO_PP"));%></label><input type="text" style="width: 25%; text-transform: uppercase;" id="ptol"/><button id="btnmat6" class="BtnMatchIcon2"></button>-->
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.GralFecha_PP"));%></label><input  maxlength="10" type="text" value="" id="fechaord" style="width:25%; background-repeat: no-repeat;" onpaste="return false;"/><button id="btnmat13" class="BtnMatchIcon"></button>
+                        <label>Inicio Extremo</label><input  maxlength="10" type="text" value="" id="fechaord" style="width:25%; background-repeat: no-repeat;" onpaste="return false;"/><button id="btnmat13" class="BtnMatchIcon"></button>
                         <hr>
-                        <label>Inicio extremo</label><input maxlength="15" type="text" value="" id="iniEx1" style="width:30%; background-repeat: no-repeat;"><button id="btnmat15" class="BtnMatchIcon"></button>
+                        <label>Fecha</label><input maxlength="15" type="text" value="" id="iniEx1" style="width:30%; background-repeat: no-repeat;"><button id="btnmat15" class="BtnMatchIcon"></button>
                         <hr>
                     </section>
                     <section class="SelOrDer_LO">
@@ -672,7 +672,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.EquipoOR_PP"));%></th><th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
+                                        <th>Material</th><th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -724,6 +724,88 @@
                 </div>
             </div>
         </div> 
+        <!--Ventana Modal Fecha Inicio Extremo-->
+        <div id="VentanaModalInicioExtremo1" class="VentanaModal">
+            <div id="handle13"><label id="TituloMatch">Fecha Inicio Extrema</label><div class="BotonCerrar_Matc" id="CerrarIniEx1"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retiniex1">Inicio Extremo</button><hr></div>
+            <div id="BuscarParamIE2" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label>Fecha Inicio Extrema</label><input type="text" id="FiniEx1" style="width:35%; text-transform: uppercase;" />
+                        <hr>
+<!--                        <label><%out.println(po.getProperty("etiqueta.PTDescripcio_LO_PP"));%></label><input type="text" id="Ptexto_mate2" style="width:35%; text-transform: uppercase;"/>
+                        <hr>-->
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text"   id="numAcMax15"  style="width:10%;"/>
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okIniEx1"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerrarIniEx11" />
+                </div>
+            </div>
+            <div id="ConsultaIniExt1" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollIniEx1">
+                        <div class="fixedY" id="fixedYIniEx1">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Inicio Extremo</th><th>Numero de Orden</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="CargarDatosIniExtremo1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <!--Ventana Modal Fecha Inicio Extremo DOS-->
+        <div id="VentanaModalInicioExtremo2" class="VentanaModal">
+            <div id="handle14"><label id="TituloMatch">Fecha Inicio Extrema</label><div class="BotonCerrar_Matc" id="CerrarIniEx2"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retiniex2">Inicio Extremo</button><hr></div>
+            <div id="BuscarParamIE22" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label>Fecha Inicio Extrema</label><input type="text" id="FiniEx2" style="width:35%; text-transform: uppercase;" />
+                        <hr>
+<!--                        <label><%out.println(po.getProperty("etiqueta.PTDescripcio_LO_PP"));%></label><input type="text" id="Ptexto_mate2" style="width:35%; text-transform: uppercase;"/>
+                        <hr>-->
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text"   id="numAcMax16"  style="width:10%;"/>
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okIniEx2"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerrarIniEx22" />
+                </div>
+            </div>
+            <div id="ConsultaIniExt2" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollIniEx2">
+                        <div class="fixedY" id="fixedYIniEx2">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Inicio Extremo</th><th><%out.println(po.getProperty("etiqueta.PTDescripcio_LO_PP"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="CargarDatosIniExtremo2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+                                    
         <div id="Calenndar" class="VentanaFecha">
             <div id="handlecalendar"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CSPCalen"));%></label><div class="BotonCerrar_Matc" id="CerraCalendar1"><label >X</label></div></div>
             <div class="scrolCale"><div id="datapicker"></div></div>
