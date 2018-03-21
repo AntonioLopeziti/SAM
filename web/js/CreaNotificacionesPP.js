@@ -93,8 +93,7 @@ function mostrarPP(e, r) {
                 success: function (data) {
                     var res = data;                    
                     if (res == 0) {
-//                        ordsta();
-//                        ordequ();
+                        ordsta();
                         tabmax();
                     } else if (res == 2) {
                         tabmaxPASAM();
