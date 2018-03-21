@@ -1138,6 +1138,31 @@ public class ACC_PlanOrden {
         }
         return tes;
     }
+     public ArrayList<plan_orden> CargarTextoPosicionPP(String orden, String pos, String ti) {
+        ArrayList<plan_orden> tes = new ArrayList<>();
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{CALL PP.VisualizarOrden_CargarTextosOperacion(?,?,?)}";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, orden);
+            ps.setString(2, pos);
+            ps.setString(3, ti);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                plan_orden tsp = new plan_orden();
+                tsp.setTexto(rs.getString("linea_texto"));
+                tes.add(tsp);
+            }
+        } catch (Exception e) {
+            System.err.println("Error en CargarTextoPosicion, ACC_PlanOrden por: " + e);
+        } finally {
+            con.CerrarConexion(conn);
+        }
+        return tes;
+    }
     //VALIDACIONES LISTA ORDENES PP
     public boolean PP_ListaOrdenesValidarClasePP(String clase) {
         Conexion cnx = new Conexion();
