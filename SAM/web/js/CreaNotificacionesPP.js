@@ -13,8 +13,7 @@ $(document).ready(function () {
     });
     $('#match_N1').click(function () {
         mostrarVentanaModal("VentanaModal");
-        $('#env1vm').focus();
-        $('#env1vm').val('');
+        $('#ordmatvm').focus();        
         $('#ordmatvm').val('');
         $('#txtbrvm').val('');
         $('#env5vm').val('500');
@@ -59,7 +58,7 @@ function cargar() {
             var res = data;            
             if (res == 0) {
 //                alert("no hay datos por mostrar");
-//                mesajess(0, "images/aceptar.png");
+                mesajess(0, "images/aceptar.png");
 
             } else {
                 $("#BuscarParam_u1").css("display", "none");
@@ -106,7 +105,7 @@ function mostrarPP(e, r) {
                         msgMatch("NPMOrNoExx2");
                     }
                     tabCar();
-                },
+                }
             });
         }
     }
