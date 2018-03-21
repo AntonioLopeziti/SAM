@@ -218,8 +218,7 @@
             <input  id="regresar" type="image" src="images/regresa.PNG" onclick="backto();"/>
             <input id="finalizar" type="image" src="images/cance.PNG" onclick="back();"/>
             <input  id="cancelar"type="image" src="images/cancela.PNG" onclick="back();"/>
-            <div class="titulo"><h1><%out.println(po.getProperty("etiqueta.NPMNotificacionespmbuques_PP"));%></h1></div>      
-            <!--                mostrarventaavi()-->
+            <div class="titulo"><h1><%out.println(po.getProperty("etiqueta.NPMNotificacionespmbuques_PP"));%></h1></div>                  
         </div>
         <div id="Cont" hidden></div> 
         <div class="contenido">
