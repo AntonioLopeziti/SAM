@@ -158,7 +158,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.ordenOr_PP"));%></th><th><%out.println(po.getProperty("etiqueta.FolSAMOr_PP"));%></th><th><%out.println(po.getProperty("etiqueta.textobreve_OR_PP"));%></th>
+                                            <th><%out.println(po.getProperty("etiqueta.ordenOr_PP"));%></th><th><%out.println(po.getProperty("etiqueta.textobreve_OR_PP"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
