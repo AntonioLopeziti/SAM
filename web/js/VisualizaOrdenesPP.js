@@ -109,17 +109,16 @@ function ocultarVentana()
     $('#overlay').remove();
 }
 function ConsultaOrden() {
-    var acc = "ConsultarOrdenes";
     var orden = $('#NumOrden_Bus').val();
     var texto = $('#TextoOrden_Bus').val();
     var ctd = $('#numAcMax').val();
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'peticionVisualizarOrdenes',
+        url: 'PeticionesOrdenesCrearNotiPP',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "acc=" + acc + "&ord=" + orden + "&texto=" + texto + "&ctd=" + ctd,
+        data: "&ordmatvm=" + orden + "&txtbrvm=" + texto + "&env5vm=" + ctd,
         success: function (rs) {
             if (rs == 0) {
                 var BE = document.createElement('audio');
@@ -182,8 +181,7 @@ function validar() {
 }
 function enviarDatos(ord) {
     Acc = "ValidarOrden";
-    petVis = "peticionVisualizarOrdenes";
-    petCre = "peticionVisualizarCreaOrdenes";
+    petVis = "PeticionVisualizaOrdenesPP";
     $.ajax({
         async: false,
         type: 'GET',
@@ -194,9 +192,7 @@ function enviarDatos(ord) {
         success: function (rs) {
             if (rs == 1) {
                 window.location.href = "VisualizarOrdenes2PP.jsp?ord=" + ord + "&peticion=" + petVis + "&tipo=" + rs;
-            } else if (rs == 2) {
-                window.location.href = "VisualizarOrdenes2PP.jsp?ord=" + ord + "&peticion=" + petCre + "&tipo=" + rs;
-            } else {
+            }else {
                 //error
                 var BE = document.createElement('audio');
                 BE.src = "audio/saperror.wav";
