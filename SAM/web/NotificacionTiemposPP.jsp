@@ -231,7 +231,7 @@
                     </div>
                     <div class="Botones_Match">
                         <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okOrden"/>
-                        <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('Orden');"/>
+                        <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentanaMatch('OrdFab');"/>
                     </div>
                 </div>
                 <div id="ConsultaTablaOrFa" style="display: none;">
