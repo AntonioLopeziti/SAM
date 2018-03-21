@@ -82,7 +82,7 @@ function mostrarPP(e, r) {
             msgMatch("NPMCamOrOb");
         } else {
             borrarmsg();
-            var enviar = "&ord=" + r;            
+            var enviar = "&ord=" + r;
             $.ajax({
                 async: false,
                 type: 'GET',
@@ -93,8 +93,9 @@ function mostrarPP(e, r) {
                 success: function (data) {
                     var res = data;                    
                     if (res == 0) {
-                        ordsta();                        
-                        tabmax();                        
+//                        ordsta();
+//                        ordequ();
+                        tabmax();
                     } else if (res == 2) {
                         tabmaxPASAM();
                         CargaTabEQSAM();
@@ -1046,33 +1047,39 @@ function libbotPP() {
             var theRoot = document.getElementById("ventanaavis");
             Drag.init(theHandle, theRoot);
         });
-    } else if (ptr == 'ABIE') {
-        var t1 = sta,
-                patron = /ABIE/g,
-                nuevoValor = "LIB.",
-                nuevaCadena1 = t1.replace(patron, nuevoValor);
-        sta = $("#notsta").val(nuevaCadena1);
-        var action;
-        if (ord.length == 12) {
-            action = "DatosCab";
-        } else {
-            action = "DatosCabSAM";
-        }
-        var stat = "L";
-        var enviar = "&ord=" + ord + "&ope=" + nuevaCadena1 + "&hora=" + honot + "&fecha=" + fenot + "&acc=" + action + "&stat=" + stat + "&usu=" + usu;        
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: "PeticionNotificacionesOrdenesSAMPP",
-            contentType: "application/x-www-form-urlencoded",
-            processData: true,
-            data: enviar,
-            success: function (data) {
-            }
-
-        });
+    } else{
+        EnviaStatusOrden("LIB.", "L");
     }
 }
+
+function EnviaStatusOrden(stat, ope) {
+    var norden = $("#notor").val();
+    var folsam = "";
+
+    var send = "&v1=" + folsam +
+            "&v2=" + norden +
+            "&v3=6000" + //Centro
+            "&v4=" + ope + //Operación
+            "&v5=" + usuario +
+            "&v6=" + stat;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionListadoOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "action=guardaStatus" + send,
+        success: function (data) {
+            var iconm = document.getElementById("iconmsg");
+            iconm.style.display = "inline";
+            iconm.style.visibility = "visible";
+            iconm.src = "images/aceptar.png";
+            var men = document.getElementById("msg");
+            men.innerHTML = "Se ha grabado la orden con el número " + data;
+        }
+    });
+}
+
 function canbotPP() {
     if ($('#notor').val().length === 0) {
         var ven = document.getElementById('VentanaModalAv');
@@ -1097,32 +1104,8 @@ function canbotPP() {
             var theRoot = document.getElementById("ventanaavis");
             Drag.init(theHandle, theRoot);
         });
-    } else if (ptr == 'LIB.') {
-
-        var t1 = sta,
-                patron = /LIB./g,
-                nuevoValor = "CTEC",
-                nuevaCadena1 = t1.replace(patron, nuevoValor);
-        sta = $("#notsta").val(nuevaCadena1);
-        var action;
-        if (ord.length == 12) {
-            action = "DatosCab";
-        } else {
-            action = "DatosCabSAM";
-        }
-        var stat = "C";
-        var enviar = "&ord=" + ord + "&ope=" + nuevaCadena1 + "&hora=" + honot + "&fecha=" + fenot + "&acc=" + action + "&stat=" + stat + "&usu=" + usu;
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: "PeticionNotificacionesOrdenesSAMPP",
-            contentType: "application/x-www-form-urlencoded",
-            processData: true,
-            data: enviar,
-            success: function (data) {
-            }
-
-        });
+    } else {
+        EnviaStatusOrden("CTEC", "C");
     }
 }
 function cciebotPP() {
@@ -1150,32 +1133,8 @@ function cciebotPP() {
             var theRoot = document.getElementById("ventanaavis");
             Drag.init(theHandle, theRoot);
         });
-    } else if (ptr == 'CTEC') {
-
-        var t1 = sta,
-                patron = /CTEC/g,
-                nuevoValor = "LIB.",
-                nuevaCadena1 = t1.replace(patron, nuevoValor);
-        sta = $("#notsta").val(nuevaCadena1);
-        var action;
-        if (ord.length == 12) {
-            action = "DatosCab";
-        } else {
-            action = "DatosCabSAM";
-        }
-        var stat = "A";
-        var enviar = "&ord=" + ord + "&ope=" + nuevaCadena1 + "&hora=" + honot + "&fecha=" + fenot + "&acc=" + action + "&stat=" + stat + "&usu=" + usu;
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: "PeticionNotificacionesOrdenesSAMPP",
-            contentType: "application/x-www-form-urlencoded",
-            processData: true,
-            data: enviar,
-            success: function (data) {
-            }
-
-        });
+    } else{
+        EnviaStatusOrden("LIB.", "A");
     }
 }
 function startTime() {
