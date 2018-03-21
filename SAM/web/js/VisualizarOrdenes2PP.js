@@ -1,7 +1,7 @@
 /* global Drag */
 
 $(document).ready(function () {
-    
+
     $('#VisDoo').click(function () {
         VisDoc();
 //        if ($("#idUbiTec").val() != "") {
@@ -10,8 +10,8 @@ $(document).ready(function () {
 //            ShowMsg(0, "images/advertencia.PNG", "audio/saperror.wav");
 //        }
     });
-    
-    $('#VisVis').click(function () {        
+
+    $('#VisVis').click(function () {
         var position = $('#ubtecPosOc').val();
         SendPath(position);
         ocultarVenAv('VenAvv');
@@ -140,14 +140,14 @@ function EnviarRuta(ruta)
     xmlhttp.send();
 }
 
-function abrVen(c2){
+function abrVen(c2) {
     $("#ubtecPosOc").val(c2);
     $("#VentanaModalCentroP").hide();
     var ventana = document.getElementById('VentUbTecAvvv');
     abrirVentanaAv(ventana);
     blockPropiety('handleAvvv', 'VentUbTecAvvv');
 }
-function abrirVentanaAv(ventana){
+function abrirVentanaAv(ventana) {
     var ancho = 900;
     var alto = 250;
     var x = (screen.width / 2) - (ancho / 2);
@@ -187,7 +187,7 @@ function EnviarModificar(ruta)
     xmlhttp.open("GET", "peticionVisualizarOrden2?acc=EnviarMod&ruta=" + ruta, true);
     xmlhttp.send();
 }
-function ocultarVenAv(tipo){
+function ocultarVenAv(tipo) {
     switch (tipo) {
         case "VenAvv":
             var ventana = $('#VentUbTecAvvv');
@@ -205,7 +205,7 @@ function cargarCabecera() {
             async: false,
             type: 'GET',
             dataType: 'json',
-            url: 'peticionVisualizarOrden2',
+            url: 'PeticionVisualizarOrden2PP',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
             data: "acc=" + Acc + "&ord=" + ord,
@@ -291,12 +291,11 @@ function CargarTablaOperacion() {
     var ord = $('#mjorden').val();
     var ordType = $('#mjtipoOrd').val();
     if (ordType == 1) {
-        url = 'peticionVisualizarOrden2';
         Acc = "CargarTablaOpSAP";
         $.ajax({
             async: false,
             type: 'GET',
-            url: 'peticionVisualizarOrden2',
+            url: 'PeticionVisualizarOrden2PP',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
             data: "acc=" + Acc + "&ord=" + ord,
@@ -321,35 +320,18 @@ function CargarTablaOperacion() {
 }
 function CargarTablaComponentes() {
     var ord = $('#mjorden').val();
-    var ordType = $('#mjtipoOrd').val();
-    if (ordType == 1) {
-        Acc = "CargarTablaCompSAP";
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: 'peticionVisualizarOrden2',
-            contentType: "application/x-www-form-urlencoded",
-            processData: true,
-            data: "acc=" + Acc + "&ord=" + ord,
-            success: function (rs) {
-                $('#CargaComponent').html(rs);
-            }
-        });
-    } else if (ordType == 2) {
-        Acc = "CargarTablaCompSAM";
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: 'peticionVisualizarOrden2',
-            contentType: "application/x-www-form-urlencoded",
-            processData: true,
-            data: "acc=" + Acc + "&ord=" + ord,
-            success: function (rs) {
-                $('#CargaComponent').html(rs);
-            }
-        });
-
-    }
+    Acc = "CargarTablaCompSAP";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionVisualizarOrden2PP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + Acc + "&ord=" + ord,
+        success: function (rs) {
+            $('#CargaComponent').html(rs);
+        }
+    });
 }
 function checkTypeEquiUbi() {
     var equi = $("#equ_ord").val();
@@ -362,40 +344,32 @@ function checkTypeEquiUbi() {
 function CargarPestEmpl() {
     var ord = $('#mjorden').val();
     var ordType = $('#mjtipoOrd').val();
-    if (ordType == 1) {
-        Acc = "CargarEmplzSAP";
-        $.ajax({
-            async: false,
-            type: 'GET',
-            dataType: 'json',
-            url: 'peticionVisualizarOrden2',
-            contentType: "application/x-www-form-urlencoded",
-            processData: true,
-            data: "acc=" + Acc + "&ord=" + ord,
-            success: function (rs) {
+    Acc = "CargarEmplzSAP";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        dataType: 'json',
+        url: 'PeticionVisualizarOrden2PP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + Acc + "&ord=" + ord,
+        success: function (rs) {
 
-                $('#centrempl_ord').val(rs[0]);
-                $('#empl_ord').val(rs[1]);
-                $('#local_ord').val(rs[2]);
-                $('#areempres_ord').val(rs[3]);
-                $('#puesto_ord').val(rs[4]);
-                $('#indicad_ord').val(rs[5]);
-                $('#campoclas_ord').val(rs[6]);
-                $('#socieimp_ord').val(rs[7]);
-                $('#actfijo_ord').val(rs[8]);
-                $('#actfijo2_ord').val(rs[9]);
-                $('#cencoste_ord').val(rs[10]);
-                $('#elementoPep_ord').val(rs[11]);
-            }
-        });
-    } else if (ordType == 2) {
-        var check = checkTypeEquiUbi();
-        if (check == 1) {
-            consultaEmplEqui();
-        } else {
-            consultaEmplUbiT();
+            $('#centrempl_ord').val(rs[0]);
+            $('#empl_ord').val(rs[1]);
+            $('#local_ord').val(rs[2]);
+            $('#areempres_ord').val(rs[3]);
+            $('#puesto_ord').val(rs[4]);
+            $('#indicad_ord').val(rs[5]);
+            $('#campoclas_ord').val(rs[6]);
+            $('#socieimp_ord').val(rs[7]);
+            $('#actfijo_ord').val(rs[8]);
+            $('#actfijo2_ord').val(rs[9]);
+            $('#cencoste_ord').val(rs[10]);
+            $('#elementoPep_ord').val(rs[11]);
         }
-    }
+    });
+
 }
 
 function consultaEmplEqui() {
@@ -457,7 +431,7 @@ function CargarPestPlanific() {
             async: false,
             type: 'GET',
             dataType: 'json',
-            url: 'peticionVisualizarOrden2',
+            url: 'PeticionVisualizarOrden2PP',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
             data: "acc=" + Acc + "&ord=" + ord,
@@ -494,7 +468,7 @@ function CargarPestCtrl() {
             async: false,
             type: 'GET',
             dataType: 'json',
-            url: 'peticionVisualizarOrden2',
+            url: 'PeticionVisualizarOrden2PP',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
             data: "acc=" + Acc + "&ord=" + ord,
@@ -566,7 +540,7 @@ function SelectServices(obj) {
     var obj2 = op[1];
     var ordType = $('#mjtipoOrd').val();
     if (ordType == 1) {
-        if (obj1 == "PM02") {
+        if (obj1 == "PP02") {
 //            alert("q.- " + obj1 + "  f.-" + obj2);
             Abre(obj1, obj2);
 //            Abre2(obj1, obj2);
@@ -577,7 +551,7 @@ function SelectServices(obj) {
             $('#msg').html(menCam);
         }
     } else if (ordType == 2) {
-        if (obj1 == "PM02" || obj1 == "PM03") {
+        if (obj1 == "PP02" || obj1 == "PP03") {
             AbreSAM(obj1, obj2);
 //            Abre2SAM(obj1, obj2);
         } else {
@@ -657,7 +631,7 @@ function Abre(clave, op) {
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'peticionVisualizarOrden2',
+        url: 'PeticionVisualizarOrden2PP',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + acc + "&Clave=" + clave + "&Ope=" + op + "&NumOr=" + ord,
@@ -884,12 +858,12 @@ function AbrirMatchDes(numop, tipo) {
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'peticionVisualizarOrden2',
+        url: 'PeticionVisualizarOrden2PP',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + tipo + "&ord=" + $('#Num_orden').val() + "&Ope=" + numop,
         success: function (rs) {
-             mostrarVentanaModalib(numop, rs);
+            mostrarVentanaModalib(numop, rs);
         }
     });
 }
