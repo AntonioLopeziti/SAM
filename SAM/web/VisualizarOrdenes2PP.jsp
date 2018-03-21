@@ -96,7 +96,7 @@
         <script src="js/dom-drag.js"></script>
         <script src="js/jquery-1.9.1.min.js"></script>
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
-        <script src="js/VisualizarOrdenes2.js"></script> 
+        <script src="js/VisualizarOrdenes2PP.js"></script> 
         <script src="js/dom-drag.js"></script>
 
         <script>
@@ -333,8 +333,7 @@
                                             <td><%out.println(po.getProperty("etiqueta.CntOR"));%></td>
                                             <td><%out.println(po.getProperty("etiqueta.DuraOR"));%></td>
                                             <td><%out.println(po.getProperty("etiqueta.UNOR"));%></td>
-                                            <td><%out.println(po.getProperty("etiqueta.UbiteOR"));%></td>
-                                            <td><%out.println(po.getProperty("etiqueta.EquipoOR"));%></td>
+                                            <td>Material</td>
                                             <td><%out.println(po.getProperty("etiqueta.NotificOR"));%></td>
                                         </tr>
                                         <tbody id="CargarOperaciones">
