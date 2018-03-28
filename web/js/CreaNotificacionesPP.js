@@ -13,7 +13,7 @@ $(document).ready(function () {
     });
     $('#match_N1').click(function () {
         mostrarVentanaModal("VentanaModal");
-        $('#ordmatvm').focus();        
+        $('#ordmatvm').focus();
         $('#ordmatvm').val('');
         $('#txtbrvm').val('');
         $('#env5vm').val('500');
@@ -55,7 +55,7 @@ function cargar() {
         processData: true,
         data: enviar,
         success: function (data) {
-            var res = data;            
+            var res = data;
             if (res == 0) {
 //                alert("no hay datos por mostrar");
                 mesajess(0, "images/aceptar.png");
@@ -70,7 +70,7 @@ function cargar() {
 
     });
 }
-function mostrarPP(e, r) {
+function mostrarPP(e, r) {   
     tecla = (document.all) ? e.keyCode : e.which;
     $("#ivreq").html("d");
     var acc = "checarOrdenPP";
@@ -90,8 +90,9 @@ function mostrarPP(e, r) {
                 processData: true,
                 data: "acc=" + acc + enviar,
                 success: function (data) {
-                    var res = data;                    
+                    var res = data;
                     if (res == 0) {
+                        ponercentro();
                         ordsta();
                         tabmax();
                     } else if (res == 2) {
@@ -110,7 +111,21 @@ function mostrarPP(e, r) {
         }
     }
 }
-
+function ponercentro() {       
+    var ord = $("#notor").val();
+    var acc = "PonerCentro";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionNotificacionesOrdenesSAMPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + "&ord=" + ord,
+        success: function (data) {     
+            $("#cennot").val(data);
+        }
+    });
+}
 function mostrar1PP() {
     $("#divreq").html("d");
     var ord = $("#notor").val();
@@ -130,11 +145,13 @@ function mostrar1PP() {
             contentType: "application/x-www-form-urlencoded",
             processData: true,
             data: "acc=" + acc + enviar,
-            success: function (data) {                
-                var res = data;                
+            success: function (data) {
+                var res = data;
                 if (res == 0) {
+                    //Funcion para oner el centro de la orden
+                    ponercentro();
                     //Funcion para poner el status de la orden
-                    ordsta();                    
+                    ordsta();
                     //Cargar tabla inferior
                     tabmax();
                 } else if (res == 2) {
@@ -164,7 +181,7 @@ function CargaTabEQSAMPP() {
         processData: true,
         data: "acc=" + acc + enviar,
         success: function (data) {
-            var res = data;            
+            var res = data;
             $("#divreq").html(res);
             colcequ2();
         }
@@ -198,7 +215,7 @@ function tabmaxPASAMPP() {
     var ord = $("#notor").val();
     var ope = $("#notope").val();
     var acc = "CarTAbUNPP";
-    var enviar = "&ord=" + ord + "&ope=" + ope;    
+    var enviar = "&ord=" + ord + "&ope=" + ope;
     $.ajax({
         async: false,
         type: 'GET',
@@ -207,13 +224,13 @@ function tabmaxPASAMPP() {
         processData: true,
         data: "acc=" + acc + enviar,
         success: function (data) {
-            var res = data;            
+            var res = data;
             $("#bodyc").html(res);
         }
 
     });
 }
-function ordsta() {    
+function ordsta() {
     var acc = "ChecarStatusOrdenOpe";
     var ord = $("#notor").val();
     var oper = $("#notope").val();
@@ -226,7 +243,7 @@ function ordsta() {
         processData: true,
         data: "acc=" + acc + enviar,
         success: function (data) {
-            var res = data;            
+            var res = data;
             $("#divoc").html(res);
             ponerStat();
         }
@@ -250,7 +267,7 @@ function tabmax() {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + acc + enviar,
-        success: function (data) {            
+        success: function (data) {
             var res = data;
             $("#bodyc").html(res);
         }
@@ -579,7 +596,7 @@ function pp3prt2PP(ord, oper) {
         success: function (data) {
             $("#bpmt1").html(data);
         }
-        
+
     });
 }
 function pp3prt3PP(ord, oper) {
@@ -761,7 +778,7 @@ function cambiarDuracionPP(dura) {
 
 
 }
-function mosboton(ids) {    
+function mosboton(ids) {
     inpufuncion(ids);
     for (var i = 0; i < 51; i++) {
         if (ids != i) {
@@ -777,7 +794,7 @@ function inpufuncion(ids) {
     });
 }
 function solatarMatePP(id) {
-    var mate = document.getElementById("matab1" + id).value; 
+    var mate = document.getElementById("matab1" + id).value;
 //    var mate = document.getElementById("matab1").value;
 //    alert("mate: "+mate);
     var arr = new Array();
@@ -864,6 +881,12 @@ function LoadMaters(url) {
     });
 }
 function seleccionar(we, ids, ven) {
+    $("#" + ids).val(we);
+    $("#" + ids).focus();
+    ocultarVentana(ven);
+}
+function seleccionarMate(we, ids, ven, cent) {
+    $('#cennot').val(cent);
     $("#" + ids).val(we);
     $("#" + ids).focus();
     ocultarVentana(ven);
@@ -1045,7 +1068,7 @@ function libbotPP() {
             var theRoot = document.getElementById("ventanaavis");
             Drag.init(theHandle, theRoot);
         });
-    } else{
+    } else {
         EnviaStatusOrden("LIB.", "L");
     }
 }
@@ -1138,7 +1161,7 @@ function cciebotPP() {
             var theRoot = document.getElementById("ventanaavis");
             Drag.init(theHandle, theRoot);
         });
-    } else{
+    } else {
         EnviaStatusOrden("LIB.", "A");
     }
 }
