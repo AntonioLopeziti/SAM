@@ -58,7 +58,7 @@ public class PeticionesOrdenesCrearNotiPP extends HttpServlet {
                         if (nameRe.equals(name)) {
 
                         } else {
-                            out.println("<tr ondblclick=\"seleccionar('" + pl.get(conta).getNum_orden() + "','notor','VentanaModal')\">");
+                            out.println("<tr ondblclick=\"seleccionarMate('" + pl.get(conta).getNum_orden() + "','notor','VentanaModal', '" + pl.get(conta).getCentro() +"')\">");
 //                    out.println("<td>" + pl.get(i).getSociedad_co() + "</td>");
                             out.println("<td>" + pl.get(conta).getNum_orden() + "</td>");
                             out.println("<td>" + pl.get(conta).getTexto_breve() + "</td>");
