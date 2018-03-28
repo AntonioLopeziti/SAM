@@ -104,7 +104,7 @@ function mostrarPP(e, r) {
                         $("#iconmsg").attr("src", "images/advertencia.PNG");
                         msgMatch("NPMOrNoExx2");
                     }
-                    tabCar();
+//                    tabCar();
                 }
             });
         }
@@ -1052,11 +1052,13 @@ function libbotPP() {
 
 function EnviaStatusOrden(stat, ope) {
     var norden = $("#notor").val();
+//    var centro = $("#cennot").val();
+    var centro = "";
     var folsam = "";
 
     var send = "&v1=" + folsam +
             "&v2=" + norden +
-            "&v3=6000" + //Centro
+            "&v3=" + centro +
             "&v4=" + ope + //Operación
             "&v5=" + usuario +
             "&v6=" + stat;
@@ -1066,7 +1068,7 @@ function EnviaStatusOrden(stat, ope) {
         url: 'PeticionListadoOrdenesPP',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "action=guardaStatus" + send,
+        data: "action=guardaStatusNoti" + send,
         success: function (data) {
             var iconm = document.getElementById("iconmsg");
             iconm.style.display = "inline";
@@ -1074,6 +1076,11 @@ function EnviaStatusOrden(stat, ope) {
             iconm.src = "images/aceptar.png";
             var men = document.getElementById("msg");
             men.innerHTML = "Se ha grabado la orden con el número " + data;
+            var stt = document.getElementById("notsta");
+            var msj = stt.value;
+            var sub = msj.substring(0, 4);
+            var res = msj.replace(sub, stat);
+            stt.value = res;
         }
     });
 }
