@@ -223,13 +223,13 @@ public class PeticionVisualizarOrden2PP extends HttpServlet {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (x = 0; x < hr.size(); x++) {
-                            out.println("<tr ondblclick=\"SelectServices('" + hr.get(x).getClave_control() + "|" + hr.get(x).getNum_operacion() + "')\">");
+                            out.println("<tr>");
                             out.println("<td>" + hr.get(x).getNum_operacion() + "</td>");
                             out.println("<td>" + hr.get(x).getPuesto_trabajo() + "</td>");
                             out.println("<td>" + hr.get(x).getCentro() + "</td>");
                             out.println("<td>" + hr.get(x).getClave_control() + "</td>");
                             out.println("<td class=\"tddescr\">" + hr.get(x).getTexto_breve_operacion() + "</td>");
-                            out.println("<td class=\"tdte\"><button class=\"BtnMatchIconDescri\" onclick=\"AbrirMatchDes('" + hr.get(x).getNum_operacion() + "','CargatTxtSAP')\"></button></td>");
+                            out.println("<td hidden class=\"tdte\"><button class=\"BtnMatchIconDescri\" onclick=\"AbrirMatchDes('" + hr.get(x).getNum_operacion() + "','CargatTxtSAP')\"></button></td>");
                             out.println("<td>" + hr.get(x).getCantidad_capacidad_necesidad() + "</td>");
                             out.println("<td>" + hr.get(x).getDuracion_operacion_normal() + "</td>");
                             out.println("<td>" + hr.get(x).getUnidad_duracion_normal() + "</td>");
@@ -245,7 +245,7 @@ public class PeticionVisualizarOrden2PP extends HttpServlet {
                                     + "<td>&nbsp;</td>"
                                     + "<td>&nbsp;</td>"
                                     + "<td class=\"tddescr\">&nbsp;</td>"
-                                    + "<td class=\"tdte\"></td>"
+                                    + "<td hidden class=\"tdte\"></td>"
                                     + "<td>&nbsp;</td>"
                                     + "<td>&nbsp;</td>"
                                     + "<td>&nbsp;</td>"
