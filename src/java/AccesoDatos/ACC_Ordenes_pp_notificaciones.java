@@ -55,6 +55,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 PlanPP pa = new PlanPP();
                 pa.setNum_orden(rs.getString("num_orden"));
                 pa.setTexto_breve(rs.getString("texto_breve"));
+                pa.setCentro(rs.getString("centro"));
                 pln.add(pa);
             }
         } catch (Exception e) {
@@ -1172,6 +1173,39 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return so;
     }
+    public PlanPP ObtenerCntroOrden(String orden){
+        PlanPP cnt = new PlanPP();
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        String query = "{call PP.pp_operaciones_noti_ObtenerCentroPorOrden(?)}";
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, orden);            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                cnt.setCentro(rs.getString("centro"));
+            }            
+        }catch (Exception e) {
+            System.err.println("Error: " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e);
+            }
+        }
+        return cnt;
+    }
 
     public pp_operaciones_noti INPGRNOTPPNOTPP(String ord, String ope) {
         pp_operaciones_noti pmon = new pp_operaciones_noti();
@@ -1351,7 +1385,7 @@ public class ACC_Ordenes_pp_notificaciones {
             }
         }
         return tpn;
-    }
+    }    
 
     public LinkedList<pp_03_3_notificaciones> TABGRNOTPM_3(String ord) {
         LinkedList<pp_03_3_notificaciones> tpn = new LinkedList<>();
