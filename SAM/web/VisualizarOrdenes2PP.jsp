@@ -210,8 +210,8 @@
                             <!--<input type="button" value="<%=Tab4%>" id="tabcost" onclick="checkTab('tabcost');">-->
                             <!--<input type="button" value="<%=Tab5%>" id="TabObje" onclick="checkTab('TabObje');">-->
                             <!--<input type="button" value="<%=Tab6%>" onclick="checkTab('tabdatA');" id="tabdatA">-->
-                            <input type="button" value="<%=Tab7%>" id="tabEmplz" onclick="checkTab('tabEmplz');">
-                            <input type="button" value="<%=Tab8%>"id="tabplani" onclick="checkTab('tabplani');">
+<!--                            <input type="button" value="<%=Tab7%>" id="tabEmplz" onclick="checkTab('tabEmplz');">
+                            <input type="button" value="<%=Tab8%>"id="tabplani" onclick="checkTab('tabplani');">-->
                             <input type="button" id="tabsctrl" value="<%=Tab9%>" onclick="checkTab('tabsctrl');">
                         </div>
                         <hr id="lineatabs">
@@ -329,7 +329,7 @@
                                             <td><%out.println(po.getProperty("etiquetaCentrotBOMM"));%></td>
                                             <td><%out.println(po.getProperty("etiqueta.ClaveControOR"));%></td>
                                             <td><%out.println(po.getProperty("etiqueta.txtbrvoperOR"));%></td>
-                                            <td><%out.println(po.getProperty("etiqueta.TEOR"));%></td>
+                                            <td hidden><%out.println(po.getProperty("etiqueta.TEOR"));%></td>
                                             <td><%out.println(po.getProperty("etiqueta.CntOR"));%></td>
                                             <td><%out.println(po.getProperty("etiqueta.DuraOR"));%></td>
                                             <td><%out.println(po.getProperty("etiqueta.UNOR"));%></td>
@@ -797,8 +797,8 @@
                         cargarCabecera();
                         CargarTablaOperacion();
                         CargarTablaComponentes();
-                        CargarPestEmpl();
-                        CargarPestPlanific();
+//                        CargarPestEmpl();
+//                        CargarPestPlanific();
                         CargarPestCtrl();
                         bloq();
                         $('#seccioncabecera').show();
