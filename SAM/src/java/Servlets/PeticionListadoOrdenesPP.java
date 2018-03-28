@@ -52,6 +52,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
             String horaActual = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
             
             folios fo = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("LT");
+            folios fn = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("NP");
             
             switch(action){
                 case "tablaListado":
@@ -111,6 +112,21 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                     ACC_ListadoOrdenesPP.ObtenerInstancia().CambiaStatusOrden(so, v6);
                     out.println("LT" + fo.getFolioActual());
                     ACC_Folios.ObtenerIstancia().ActualizarFolio("LT", fo.getFolioActual());
+                    break;
+                case "guardaStatusNoti":
+                    StatusOrdenes sn = new StatusOrdenes();
+                    sn.setFolio_orden(v1);
+                    sn.setFolio_sam("NP" + fn.getFolioActual());
+                    sn.setFecha_serv(fechaActual);
+                    sn.setHora_serv(horaActual);
+                    sn.setNum_orden(v2);
+                    sn.setCentro(v3);
+                    sn.setOperacion_sam(v4);
+                    sn.setUsuario(v5);
+                    ACC_ListadoOrdenesPP.ObtenerInstancia().guardaStatusOrden(sn);
+                    ACC_ListadoOrdenesPP.ObtenerInstancia().CambiaStatusOrden(sn, v6);
+                    out.println("NP" + fn.getFolioActual());
+                    ACC_Folios.ObtenerIstancia().ActualizarFolio("NP", fn.getFolioActual());
                     break;
                 case "guardaHabilitado":
                     StatusOrdenes ss = new StatusOrdenes();
