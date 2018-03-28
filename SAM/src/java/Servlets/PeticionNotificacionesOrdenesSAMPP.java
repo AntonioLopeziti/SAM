@@ -90,6 +90,11 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             String ulm = request.getParameter("ulm");
             String fol = "ES";
             switch (acc) {
+                case "PonerCentro":
+                    PlanPP cent = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerCntroOrden(ord);
+                    String centro = cent.getCentro();
+                    out.println(centro);
+                    break;
                 case "checarOrdenPP":
                     if (ACC_Ordenes_pp_notificaciones.ObtenerInstancia().COMPORdenNOTPP(ord) == true) {
                         //SAP                        
