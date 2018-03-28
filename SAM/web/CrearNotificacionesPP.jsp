@@ -239,6 +239,7 @@
                         <hr>
                         <label>Cant. fabricada</label><input id="cntFabricada" type="text" maxlength="8" style="width: 30%;"/>
                         <hr>
+                        <input id="cennot" hidden/>
                     </section>
                     <section class="subdiv2">
                         <label><%out.println(po.getProperty("etiqueta.NPMStatus_PP"));%></label><input id="notsta" style="width:80%; background:none; border:none;" type="text" readonly value=""/>
