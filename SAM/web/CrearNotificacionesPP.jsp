@@ -235,10 +235,10 @@
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.NPMSuboperacion_PP"));%></label><input id="notsop" type="text" maxlength="4" style="width:40%;" />
                         <hr>
-                        <label>Cant. a fabricar</label><input id="cntFabricar" type="text" maxlength="8" style="width:30%;"/>
+<!--                        <label>Cant. a fabricar</label><input id="cntFabricar" type="text" maxlength="8" style="width:30%;"/>
                         <hr>
                         <label>Cant. fabricada</label><input id="cntFabricada" type="text" maxlength="8" style="width: 30%;"/>
-                        <hr>
+                        <hr>-->
                         <input id="cennot" hidden/>
                     </section>
                     <section class="subdiv2">
@@ -305,6 +305,7 @@
                                         </div>
                                     </div>
                                 </section>-->
+                <br>
                 <section class="tabdiv">
                     <div class="tablaSolicitud">
                         <section id="SecTab">                                     
