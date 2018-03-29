@@ -21,6 +21,7 @@ import Entidades.servicios_ordenes_crea;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -746,8 +747,8 @@ public class ACC_Ordenes_pp_notificaciones {
         return op;
     }
 
-    public LinkedList<materiales_ordenes_crea> MostraTABPM01NOPP(String ord, String ope) {
-        LinkedList<materiales_ordenes_crea> mpm = new LinkedList<>();
+    public ArrayList<materiales_ordenes_crea> MostraTABPM01NOPP(String ord, String ope) {
+        ArrayList<materiales_ordenes_crea> mpm = new ArrayList<>();
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
