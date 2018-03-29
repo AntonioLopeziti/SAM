@@ -326,7 +326,7 @@ function selecoftabPP() {
                         Drag.init(theHandle, theRoot);
                         AjustarCabecera('TabHead', 'TabBody', 8, 'SecCuerpoCld');
                         document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
-                    } 
+                    }
 //                    else if (v1 == "PP03") {
 //                        if (ord.length == 10) {
 //                            pp3prt1FORSAMPP(ord, v2);
@@ -1206,4 +1206,68 @@ function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
         arrCb[i].style.width = (arr[i].offsetWidth - diferiencia) + "px";
     }
     document.getElementById(section).style.width = val + 17 + "px";
+}
+
+function checkDec(num, tam) {
+    var limit;
+    var FINC;
+    if (tam == 3) {
+        limit = 9999999.999;
+        FINC = "Formato Incorecto para Cantidad, Solo permite 7 enteros y 3 decimales. Cantidad no mayor a 9999999.999";
+    } else {
+        limit = 99999999.99;
+        FINC = "Formato Incorecto para Precio, Solo permite 8 enteros y 2 decimales, Precio no mayor a 99999999.99";
+    }
+    if (num.length > 0) {
+        if (parseFloat(limit) >= parseFloat(num)) {
+            va = num.split(".");
+            v01 = va[0];
+            if (v01.length == 0) {
+                v01 = "0";
+            }
+            v0 = parseInt(v01);
+            v1 = va[1];
+            if (num.indexOf(".") != -1) {
+                if (v1.length > tam) {
+                    var da = v1.substr(0, tam);
+                    borrarmsg();
+                    return v0 + "." + da;
+                } else {
+                    for (i = 0; i <= tam; i++) {
+                        v1 += "0";
+                    }
+                    borrarmsg();
+                    return v0 + "." + v1.substr(0, tam);
+                }
+            } else {
+                var nn = "0";
+                for (a = 0; a < tam; a++) {
+                    nn += "0";
+                }
+                borrarmsg();
+                return v0 + "." + nn.substr(0, tam);
+            }
+        } else {
+            mensajesValidacionInco(FINC);
+            return "";
+        }
+    } else {
+        borrarmsg();
+        return "";
+    }
+}
+
+function mensajesValidacionInco(msg) {
+    var BE = document.createElement('audio');
+    BE.src = "audio/saperror.wav";
+    BE.play();
+    var iconm = document.getElementById("iconmsg");
+    iconm.style.visibility = "visible";
+    iconm.src = "images/advertencia.PNG";
+    var men = document.getElementById("msg");
+    men.innerHTML = msg;
+}
+
+function btnloteShow(){
+    document.getElementsByName("");
 }
