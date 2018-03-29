@@ -17,6 +17,7 @@ import Entidades.pp03_1_notificaciones;
 import Entidades.pp03_2_notificaciones;
 import Entidades.pp_03_3_notificaciones;
 import Entidades.PlanPP;
+import Entidades.componentesPP;
 import Entidades.servicios_ordenes_crea;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -747,36 +748,54 @@ public class ACC_Ordenes_pp_notificaciones {
         return op;
     }
 
-    public ArrayList<materiales_ordenes_crea> MostraTABPM01NOPP(String ord, String ope) {
-        ArrayList<materiales_ordenes_crea> mpm = new ArrayList<>();
+    public ArrayList<componentesPP> MostraTABPM01NOPP(String ord, String ope) {
+        ArrayList<componentesPP> mpm = new ArrayList<>();
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
+        PreparedStatement pst2 = null;
         ResultSet rs = null;
-        String query = "{call PP.materiales_ordenes_crea_MostraTABPP01NOPP(?,?)}";
+        ResultSet rs2 = null;
+        String query = "{call PP.not_cargaDatosOpe(?,?)}";
+        String query2 = "{call PP.not_cargaDatosComponente(?)}";
         try {
             pst = conn.prepareStatement(query);
-            pst.setString(1, ord);
-            pst.setString(2, ope);
+            pst.setString(1, ope);
+            pst.setString(2, ord);
             rs = pst.executeQuery();
             while (rs.next()) {
-                materiales_ordenes_crea ma = new materiales_ordenes_crea();
-                ma.setNum_reserva(rs.getString("num_reserva"));
-                ma.setNum_posicion_reserva(rs.getString("num_posicion_reserva"));
-                ma.setNum_material(rs.getString("num_material"));
-                ma.setLote(rs.getString("lote"));
-                ma.setUnidad_medida_componente_pieza_bruto(rs.getString("unidad_medida_componente_pieza_bruto"));
-                ma.setCantidad_necesaria_componente2(rs.getString("cantidad_necesaria_componente2"));
-                ma.setCantidad_base(rs.getString("cantidad_base"));
+                componentesPP ma = new componentesPP();
+                ma.setNum_operacion(rs.getString("num_operacion"));
+                ma.setMaterial(rs.getString("num_material"));
+                ma.setTxt_material(rs.getString("texto_breve_mate"));
+                ma.setUm(rs.getString("unidad_medida_base"));
                 ma.setCentro(rs.getString("centro"));
-                ma.setUnidad_medida_base(rs.getString("unidad_medida_base"));
-                ma.setAlmacen(rs.getString("almacen"));
-                ma.setTexto_posicion_lista_materiales(rs.getString("texto_posicion_lista_materiales"));
+                ma.setAlmacen("1400");
+                ma.setCl_mov("101");
                 mpm.add(ma);
             }
         } catch (Exception e) {
             System.err.println("Error: " + e);
-        } finally {
+        } 
+        try {
+            pst2 = conn.prepareStatement(query2);
+            pst2.setString(1, ord);
+            rs2 = pst2.executeQuery();
+            while (rs2.next()) {
+                componentesPP ma = new componentesPP();
+                ma.setNum_operacion(ope);
+                ma.setMaterial(rs2.getString("num_material"));
+                ma.setTxt_material(rs2.getString("texto_breve"));
+                ma.setUm(rs2.getString("unidad_medida"));
+                ma.setCentro(rs2.getString("centro"));
+                ma.setAlmacen("1400");
+                ma.setCl_mov("261");
+                mpm.add(ma);
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        finally {
             try {
                 if (conn != null) {
                     con.CerrarConexion(conn);
