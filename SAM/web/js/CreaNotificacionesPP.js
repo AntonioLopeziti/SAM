@@ -151,7 +151,7 @@ function mostrar1PP() {
                     //Funcion para oner el centro de la orden
                     ponercentro();
                     //Funcion para poner el status de la orden
-                    ordsta();
+//                    ordsta();
                     //Cargar tabla inferior
                     tabmax();
                 } else if (res == 2) {
@@ -319,23 +319,11 @@ function selecoftabPP() {
                     v3 = fs[2];
                     cenOpe = v3;
                     if (v1 == "PP01") {
-                        if (ord.length <= 10) {
-                            pp1prt1FORSAMPP(ord, v2);
-                            pp1prt3FORSAMPP(ord, v2);
-                            //  $("BODY").append('<div id="overlayve"></div>');
+//                            pp1prt3FORSAMPP(ord, v2);
                             mostrarventabs("ventaPM01");
                             var theHandle = document.getElementById("handlePM01");
                             var theRoot = document.getElementById("ventaPM01");
                             Drag.init(theHandle, theRoot);
-                        } else {
-                            pp1prt1PP(ord, v2);
-                            pp1prt3PP(ord, v2);
-                            // $("BODY").append('<div id="overlayve"></div>');
-                            mostrarventabs("ventaPM01");
-                            var theHandle = document.getElementById("handlePM01");
-                            var theRoot = document.getElementById("ventaPM01");
-                            Drag.init(theHandle, theRoot);
-                        }
                     } else if (v1 == "PP03") {
                         if (ord.length == 10) {
                             pp3prt1FORSAMPP(ord, v2);
