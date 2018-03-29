@@ -11,6 +11,7 @@ import AccesoDatos.ACC_Material;
 import AccesoDatos.Consultas;
 import Entidades.PlanPP;
 import Entidades.clase_orden;
+import Entidades.ClaseOrdenPP;
 import Entidades.plan_orden;
 import Entidades.materiales;
 import java.io.IOException;
@@ -70,6 +71,7 @@ public class PeticionModuloListaOrdenesPP extends HttpServlet {
             String Puesto = request.getParameter("Puesto");
             String DPuesto = request.getParameter("DPuesto");
             String Fecha = request.getParameter("Fecha");
+            String cntroClas = request.getParameter("cntroClas");
 //            Variables Receibidas
             String cl1 = request.getParameter("cl1");
             String cl2 = request.getParameter("cl2");
@@ -135,14 +137,14 @@ public class PeticionModuloListaOrdenesPP extends HttpServlet {
                     if (Cant.length() == 0) {
                         Cant = "999";
                     }
-                    ArrayList<clase_orden> c = ACC_PlanOrden.ObtenerInstancia().SP_MatchClaseOrdenListaordenPP(Cant, Idioma, ClaseOrden, TextoBreve);
+                    ArrayList<ClaseOrdenPP> c = ACC_PlanOrden.ObtenerInstancia().SP_MatchClaseOrdenListaordenPP(Cant, ClaseOrden, cntroClas);
                     if (c.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < c.size(); i++) {
                             out.println("<tr ondblclick=\"seleccionar('" + c.get(i).getClase_orden() + "', 'ClaseOrden')\">");
                             out.println("<td>" + c.get(i).getClase_orden() + "</td>");
-                            out.println("<td>" + c.get(i).getDescripcion() + "</td>");
+                            out.println("<td>" + c.get(i).getCentro() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -268,14 +270,14 @@ public class PeticionModuloListaOrdenesPP extends HttpServlet {
                     if (Cant.length() == 0) {
                         Cant = "999";
                     }
-                    ArrayList<clase_orden> c2 = ACC_PlanOrden.ObtenerInstancia().SP_MatchClaseOrdenListaordenPP(Cant, Idioma, ClaseOrden, TextoBreve);
+                    ArrayList<ClaseOrdenPP> c2 = ACC_PlanOrden.ObtenerInstancia().SP_MatchClaseOrdenListaordenPP(Cant, ClaseOrden, cntroClas);
                     if (c2.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < c2.size(); i++) {
                             out.println("<tr ondblclick=\"seleccionar('" + c2.get(i).getClase_orden() + "', 'ClaseOrden2')\">");
                             out.println("<td>" + c2.get(i).getClase_orden() + "</td>");
-                            out.println("<td>" + c2.get(i).getDescripcion() + "</td>");
+                            out.println("<td>" + c2.get(i).getCentro() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
