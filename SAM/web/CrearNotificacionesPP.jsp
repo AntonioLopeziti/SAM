@@ -1037,17 +1037,16 @@
                             <thead>
                                 <tr>
                                     <td></td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMReserva_PP"));%></td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMPos_PP"));%></td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMMaterial_PP"));%>&nbsp;&nbsp;&nbsp;</td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMLotee_PP"));%></td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMCantCons_PP"));%></td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMCantidaNeces_PP"));%></td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMCanttomada_PP"));%></td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMCentro_PP"));%></td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMUMB_PP"));%></td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMAlmacen_PP"));%></td>
-                                    <td><%out.println(po.getProperty("etiqueta.NPMTextoBreveDelMaterial_PP"));%></td>
+                                    <td>Operación</td>
+                                    <td>Material</td>
+                                    <td>Texto breve</td>
+                                    <td>Cantidad</td>
+                                    <td>UM</td>
+                                    <td>Centro</td>
+                                    <td>Almacen</td>
+                                    <td>Lote</td>
+                                    <td></td>
+                                    <td>Clase Mov.</td>
                                 </tr>
                             </thead>
                         </table>
