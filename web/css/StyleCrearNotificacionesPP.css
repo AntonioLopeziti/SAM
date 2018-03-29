@@ -321,7 +321,7 @@ and open the template in the editor.
     float: right;
     z-index: 1; position:relative;
 }
-#DobleSection { height: 160px; }
+
 #DobleSection3 { height: 150px; }
 #DobleSection2 { height: 100px; }
 .TableContainer
@@ -364,7 +364,12 @@ and open the template in the editor.
     overflow-x: hidden;
     background-color: #E6EBEB;
 }
-#SecCuerpoCld { height: 160px; }
+#SecCuerpoCld { height: 420px; }
+#DobleSection { height: 420px; }
+
+
+
+
 #SecCuerpo3 { height: 150px; }
 #SecCuerpoCld2 { height: 100px; }
 .ocultar { visibility: hidden; }
