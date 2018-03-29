@@ -1028,75 +1028,35 @@
         <div id="ventaPM01" class="Ventabdes" style="margin-top: 20px;">
             <div id="handlePM01"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NPMNotificacionoperor_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ventaPM01', '');"><label >X</label></div></div>
             <div class="Contentabdes">
-                <section class="ve1pm">
-                    <label class="tituloequipo"><%out.println(po.getProperty("etiqueta.NPMDatosoper_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <label style="width:20%; margin-left: 2%;"><%out.println(po.getProperty("etiqueta.NPMOrdenoperacion_PP"));%></label>
-                    <input type="text" style="width: 15%; margin-left: 2%;" id="nspp11" disabled/>  
-                    <input type="text" style="width: 5%; margin-left: 1%;" id="npspp11" disabled/>
-                    <hr style="margin-top: -1px; width: 15%; margin-left: 10px;">
-                    <input type="text" style="width: 35%; margin-left: 1%; border:none; " id="txbp11" readonly/>
-                    <hr style="margin-top: -1px; width: 15%; margin-left: 10px;">
-                    <div class="ve1pm1">
-                        <label style="width:20%; margin-left: 3%;"><%out.println(po.getProperty("etiqueta.NPMCantidad"));%></label>
-                        <input type="text" id="canbap11" style="width: 45%; margin-left: 21%;" disabled/>  
-                        <input type="text" id="umpp11" style="width: 5%; margin-left: 2%;" disabled/> 
-                        <hr style="margin-top: -1px; width: 33%; margin-left: 10px;">
-                        <input type="checkbox" id="ivptp11"  style="margin-left: 45%;" disabled/>
-                        <label style="width:20%; margin-left: -1%;"><%out.println(po.getProperty("etiqueta.NPMNotificacifinal_PP"));%></label>
-
-                    </div>
-
-                    <div class="ve1pm2">
-                        <div class="ve1pm21">
-                            <label class="tituloequipo"><%out.println(po.getProperty("etiqueta.NPMTiempoplante_PP"));%></label> 
-                            <hr class="lineaazul">
-                            <label style="width:20%; margin-left: 3%;"><%out.println(po.getProperty("etiqueta.NPMDuracion_PP"));%></label>
-                            <input type="text" id="donp11" style="width: 25%; margin-left: 2%;border: none;" readonly/> 
-                            <input type="text" id="udnp11" style="width: 25%; margin-left: 2%;border: none;" readonly/> 
-                            <hr style="margin-top: -1px; width: 28%; margin-left: 7px;">
-                            <label style="width:20%; margin-left: 3%;"><%out.println(po.getProperty("etiqueta.NPMTrabajo_PP"));%></label>
-                            <input type="text" id="top11" style="width: 25%; margin-left: 6%; border: none;" readonly/> 
-                            <input type="text" id="utp11" style="width: 25%; margin-left: 2%; border: none;" readonly/> 
-                            <hr style="margin-top: -1px; width: 28%; margin-left: 7px;">
-                        </div>
-
-                        <div class="ve1pm22">
-                            <label class="tituloequipo"><%out.println(po.getProperty("etiqueta.NPMNotificadmomen_PP"));%></label> 
-                            <hr class="lineaazul">
-                            <label style="width:20%; margin-left: 3%;"><%out.println(po.getProperty("etiqueta.NPMDuracion_PP"));%></label>
-                            <input type="text" id="aynp11" style="width: 25%; margin-left: 2%;border: none;" readonly/> 
-                            <input type="text" id="" style="width: 25%; margin-left: 2%;border: none;" readonly/> 
-                            <hr style="margin-top: -1px; width: 28%; margin-left: 7px;">
-                            <label style="width:20%; margin-left: 3%;"><%out.println(po.getProperty("etiqueta.NPMTrabajo_PP"));%></label>
-                            <input type="text" id="aynp21" style="width: 25%; margin-left: 6%; border: none;" readonly/> 
-                            <input type="text" id="" style="width: 25%; margin-left: 2%; border: none;" readonly/> 
-                            <hr style="margin-top: -1px; width: 28%; margin-left: 7px;">
-                        </div>
-                    </div>   
+                <section class="DobleScroll" id="DobleSection">
+                    <section id="DobleContainer"></section>
                 </section>
+                <section class="TableContainer">
+                    <section class="SecHead">
+                        <table id="TabHead">
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMReserva_PP"));%></td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMPos_PP"));%></td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMMaterial_PP"));%>&nbsp;&nbsp;&nbsp;</td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMLotee_PP"));%></td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMCantCons_PP"));%></td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMCantidaNeces_PP"));%></td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMCanttomada_PP"));%></td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMCentro_PP"));%></td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMUMB_PP"));%></td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMAlmacen_PP"));%></td>
+                                    <td><%out.println(po.getProperty("etiqueta.NPMTextoBreveDelMaterial_PP"));%></td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </section>
+                    <section class="SecBody" id="SecCuerpoCld">
 
-                <section class="ve2pm">
-                    <label class="tituloequipo"><%out.println(po.getProperty("etiqueta.NPMNotificacitiem_PP"));%></label> 
-                    <hr class="lineaazul">
-                    <label style="width:20%; margin-left: 1%;"><%out.println(po.getProperty("etiqueta.NPMDuracionReal_PP"));%></label>
-                    <input id="durp1" type="text" style="width: 7%; margin-left: 2%; background: no-repeat" />
-                    <select id="durp2" style="margin-left: 2%;">
-                        <option value="H">H</option>
-                        <option value="MIN">MIN</option>
-                    </select>
-                    <label style="width:20%; margin-left: 5%;"><%out.println(po.getProperty("etiqueta.NPMNotanotific_PP"));%></label>
-                    <input id="nofip1" type="text" style="width: 37%; margin-left: 4%; " />
-                    <hr color="white" style="margin-top: -1px; width: 13%; margin-left: 9px;">
-                    <label style="width:20%; margin-left: 1%;">No. personal</label>
-                    <input id="trrep1" type="text" style="width: 10%; margin-left:3%;" onclick="mostbotmatus()"/><button id="match_Nope" class='BtnMatchIcon2'></button>
-                    <input type="checkbox" id="nfpm1" style="margin-left: 7%;" />
-                    <label style="width:20%; margin-left: -1%;"><%out.println(po.getProperty("etiqueta.NPMNotificacifinal_PP"));%></label>
-                    <button onclick="valNotTiemPP01()" id="nttiem" style="margin-left: 10%; width: 20%; height: -5%"><img style="width: 13%;margin-left: -5%;" src="images/guarda.PNG" /><label style="margin-right:20%; "> <%out.println(po.getProperty("etiqueta.NPMNotifictiem"));%></label></button>
-                    <hr color="white" style="margin-top: -1px; width: 13%; margin-left: 9px;">
-                </section> 
-
-                <section class="tab2">
+                    </section>
+                </section>
+<!--                <section class="tab2">
                     <table class="TablaCont">
                         <thead>
                             <tr id="CabeceraTabla">
@@ -1111,7 +1071,7 @@
                                 <td><%out.println(po.getProperty("etiqueta.NPMCentro_PP"));%></td>
                                 <td><%out.println(po.getProperty("etiqueta.NPMUMB_PP"));%></td>
                                 <td><%out.println(po.getProperty("etiqueta.NPMAlmacen_PP"));%></td>
-                                <!--<td><%out.println(po.getProperty("etiqueta.NPMTextobrvmat_PP"));%></td>-->
+                                <td><%out.println(po.getProperty("etiqueta.NPMTextobrvmat_PP"));%></td>
                                 <td><%out.println(po.getProperty("etiqueta.NPMTextoBreveDelMaterial_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
                             </tr>
@@ -1130,15 +1090,11 @@
 
                     </table>
 
-                </section>
+                </section>-->
             </div>
             <div class="Botpm">
-                <button onclick="ListaMateriales()" ><img style="height:15px;" src="images/hoja.PNG" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%out.println(po.getProperty("etiqueta.NPMListOfMateriales_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
                 <button style="" onclick="ConsMaterial();" > <img style="height:15px;" src="images/cosma2.png" /> <%out.println(po.getProperty("etiqueta.NPMConsumoMate_PP"));%></button>
-                <!--Nope<button onclick="LlamarFunc();" style="height:20px;"> <img src="images/palomal.png" style="margin-left: -5%; margin-right:5%;" /><%out.println(po.getProperty("etiqueta.NPMNotificaOper_PP"));%></button>-->
-                <!--<button onclick="LlamarFunc();" ><img height="15" width="16"  src="images/palomal.png" /><%out.println(po.getProperty("etiqueta.NPMNotificaOper"));%></button>-->
                 <button onclick="cerraventabs('ventaPM01')" ><img  src="images/S_B_CANC.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%out.println(po.getProperty("etiqueta.NPMFinaliproce_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                <!--<button><img  src="images/S_B_CHCK.gif" onclick=""/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%out.println(po.getProperty("etiqueta.NPMValidar_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>-->
             </div> 
         </div>
         <div id="VentanaModalListaMat" class="VentanaModalLM">
