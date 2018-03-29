@@ -1062,8 +1062,7 @@ function ConsultaOrden() {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + acc + enviar,
-        success: function (data) {
-            alert(data);
+        success: function (data) {            
             if (data == 0) {
                 ShowMsg(1, "images/advertencia.PNG", "audio/saperror.wav");
             } else {
