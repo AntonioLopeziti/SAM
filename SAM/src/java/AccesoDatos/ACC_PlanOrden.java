@@ -5,6 +5,7 @@
  */
 package AccesoDatos;
 
+import Entidades.ClaseOrdenPP;
 import Entidades.PlanPP;
 import Entidades.clase_orden;
 import Entidades.plan_orden;
@@ -1320,25 +1321,23 @@ public class ACC_PlanOrden {
         return false;
     }
     //CONSULTAS MATCH LISTA DE ORDENES
-    public ArrayList<clase_orden> SP_MatchClaseOrdenListaordenPP(String limite, String Idioma, String orden, String texto) {
-        ArrayList<clase_orden> sp_claseorden = new ArrayList<>();
+    public ArrayList<ClaseOrdenPP> SP_MatchClaseOrdenListaordenPP(String limite, String orden, String centro) {
+        ArrayList<ClaseOrdenPP> sp_claseorden = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
-        String query = "{call PP.MatchClaseOrdenListaordenPP(?,?,?,?)}";
-        String descripcion = "descripcion_" + Idioma;
+        String query = "{call PP.MatchClaseOrdenListaordenPP(?,?,?)}";        
         try {
             pst = con.prepareCall(query);
-            pst.setString(1, limite);
-            pst.setString(2, Idioma);
-            pst.setString(3, orden);
-            pst.setString(4, texto);
+            pst.setString(1, limite);            
+            pst.setString(2, orden);
+            pst.setString(3, centro);
             rs = pst.executeQuery();
             while (rs.next()) {
-                clase_orden ord = new clase_orden();
+                ClaseOrdenPP ord = new ClaseOrdenPP();
                 ord.setClase_orden(rs.getString("clase_orden"));
-                ord.setDescripcion(rs.getString(descripcion));
+                ord.setCentro(rs.getString("centro"));
                 sp_claseorden.add(ord);
             }
         } catch (Exception e) {
