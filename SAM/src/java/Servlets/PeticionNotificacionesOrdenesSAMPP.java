@@ -23,6 +23,7 @@ import Entidades.materiales;
 import Entidades.materiales_ordenes_crea;
 import Entidades.operaciones_ordenes_crea;
 import Entidades.PlanPP;
+import Entidades.componentesPP;
 import Entidades.pp01_notifi;
 import Entidades.pm03_1_notificaciones;
 import Entidades.pp03_1_notificaciones;
@@ -294,18 +295,31 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     out.println("<input type'text' id='ayn2p12' value='" + equi.getActividad_ya_notificada2() + "' />");
                     break;
                 case "TablasPP01MAtPP":
-                    int con = 0, c3 = 0;
-                    ArrayList<materiales_ordenes_crea> tno = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().MostraTABPM01NOPP(ord, ope);
-                    out.println("<table id=\"TabBodyN\">\n"
-                            + "                                        <tbody>");
-//                    for (con = 0; con < dcs.size(); con++) {
-//                        out.println("<tr ondblclick=\"abrVen('" + c3 + "')\">"
-//                                + "<td>" + dcs.get(con).getNum_documento() + "</td>"
-//                                + "</tr>");
-//                        c3++;
-//                    }
-                    for (int c1 = con; c1 < 12; c1++) {
+                    int con;
+                    ArrayList<componentesPP> tno = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().MostraTABPM01NOPP(ord, ope);
+                    out.println("<table id=\"TabBody\">\n"
+                            + "<tbody>");
+                    for (con = 0; con < tno.size(); con++) {
                         out.println("<tr>"
+                                + "<td></td>"
+                                + "<td>" + tno.get(con).getNum_operacion() + "</td>"
+                                + "<td>" + tno.get(con).getMaterial() + "</td>"
+                                + "<td>" + tno.get(con).getTxt_material() + "</td>"
+                                + "<td>input</td>"
+                                + "<td>" + tno.get(con).getUm() + "</td>"
+                                + "<td>" + tno.get(con).getCentro() + "</td>"
+                                + "<td>" + tno.get(con).getAlmacen() + "</td>"
+                                + "<td>input</td>"
+                                + "<td>bot</td>"
+                                + "<td>" + tno.get(con).getCl_mov() + "</td>"
+                                + "</tr>");
+                    }
+                    for (int c1 = con; c1 < 22; c1++) {
+                        out.println("<tr>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
@@ -316,13 +330,17 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                                 + "</tr>");
                     }
                     out.println("<tr class=\"ocultar\">"
-                            + "<td>0000000000000000000000000000</td>"
-                            + "<td>000000</td>"
-                            + "<td>0000000</td>"
+                            + "<td>000</td>"
                             + "<td>000000000</td>"
-                            + "<td>00000000000000000000000000000000000000000000000000000000000</td>"
-                            + "<td>000000000000000000</td>"
-                            + "<td>000000000000000000000000000</td>"
+                            + "<td>000000000000000000000</td>"
+                            + "<td>00000000000000000000000000000000000000</td>"
+                            + "<td>0000000000000000000000</td>"
+                            + "<td>00000</td>"
+                            + "<td>00000000</td>"
+                            + "<td>00000000</td>"
+                            + "<td>00000000000000000</td>"
+                            + "<td>000</td>"
+                            + "<td>0000000</td>"
                             + "</tr>"
                             + "</tbody>"
                             + "</table>");
