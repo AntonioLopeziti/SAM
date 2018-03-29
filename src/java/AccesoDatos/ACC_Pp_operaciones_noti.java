@@ -97,7 +97,7 @@ public class ACC_Pp_operaciones_noti {
                 pmon.setUnidad_medida_operacion("");
                 pmon.setDuracion_operacion_normal(rs.getString("duracion_operacion_normal"));
                 pmon.setUnidad_duracion_normal(rs.getString("unidad_duracion_normal"));
-                pmon.setTrabajo_operacion(rs.getString("trabajo_operacion"));
+                pmon.setTrabajo_operacion(rs.getString("puesto_trabajo"));
                 pmon.setUnidad_trabajo(rs.getString("unidad_trabajo"));
                 pmon.setUnidad_medida_actividad_notificar01("");
                 pmon.setUnidad_medida_actividad_notificar02("");
