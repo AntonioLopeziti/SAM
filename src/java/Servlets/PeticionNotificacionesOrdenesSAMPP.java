@@ -120,7 +120,6 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
 //                    ordenes_pp_notificaciones pl = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenStatusCNPMNOTPP(ord);
                     break;
                 case "LlenarTabMax":
-                    ArrayList<PlanPP> pl = AccesoDatos.ACC_Pp_operaciones_noti.ObtenerInstancia().TablaCargarNotPP(ord, ope);
                     LinkedList<pp_operaciones_noti> tb = ACC_Pp_operaciones_noti.ObtenerInstancia().TABGRNOTPMNotPP(ord, ope);
                     String checa = "";
                     String checa1 = "";
@@ -142,10 +141,10 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                         out.println("<td><input type=\"checkbox\" id='nf" + i + "'  name=\"che\" " + checa + " disabled  /></td>");
                         out.println("<td>" + tb.get(i).getNum_operacion() + "</td>");
                         out.println("<td>" + tb.get(i).getClave_control() + "</td>");
-                        out.println("<td>" + tb.get(i).getId_objeto_recurso() + "</td>");
+                        out.println("<td>" + tb.get(i).getTrabajo_operacion() + "</td>");
                         out.println("<td name=\"cntx\">" + tb.get(i).getCentro() + "</td>");
                         out.println("<td>" + tb.get(i).getTexto_breve_operacion() + "</td>");
-                        out.println("<td>" + tb.get(i).getCantidad_base() + "</td>");
+                        out.println("<td>1.00</td>");
                         out.println("<td>" + tb.get(i).getDuracion_operacion_normal() + "</td>");
                         out.println("<td>" + tb.get(i).getActividad_ya_notificada01() + "</td>");
                         out.println("<td>" + tb.get(i).getUnidad_duracion_normal() + "</td>");
@@ -295,48 +294,38 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     out.println("<input type'text' id='ayn2p12' value='" + equi.getActividad_ya_notificada2() + "' />");
                     break;
                 case "TablasPP01MAtPP":
-                    LinkedList<materiales_ordenes_crea> tno = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().MostraTABPM01NOPP(ord, ope);
-                    if (tno.size() == 0) {
-                        for (int l = 0; l < 50; l++) {
-                            out.println("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><div style='width:195px;'><input type='text' name='arre' id=\"matab1" + l + "\" onclick=\"mosboton('" + l + "');\"/><button id=\"matmat1" + l + "\" onclick=\"VentModalmat('matab1" + l + "')\" class='BtnMatchIcon2' style='margin-left:1px; display:none;'></button></div></td><td><div style='width:195px;'><input type='text' id=\"lotabp1" + l + "\" onclick=\"mosbotLot('" + l + "');\" /><button id=\"matlot1" + l + "\" onclick=\"VentModalLote('" + l + "')\" class='BtnMatchIcon2' style='margin-left:1px; display:none; '></button></div></td><td><input type='number' min='0' id=\"cumtabp1" + l + "\" name=\"cumtabp1\" /></td><td>&nbsp;</td><td>&nbsp;</td><td id=\"cein" + l + "\">&nbsp;</td><td id=\"unmin" + l + "\">&nbsp;</td><td id=\"almin" + l + "\" >&nbsp;</td><td id=\"Texde" + l + "\">&nbsp;</td></tr>");
-                        }
-                    } else {
-                        for (int i = 0; i < tno.size(); i++) {
-                            out.println("<tr>");
-                            out.println("<td></td>");
-                            out.println("<td>" + tno.get(i).getNum_reserva() + "</td>");
-                            out.println("<td>" + tno.get(i).getNum_posicion_reserva() + "</td>");
-                            out.println("<td><div style='width:195px;'><input type = 'text' id=\"matab1" + i + "\" onclick=\"mosboton('" + i + "');\" value=\"" + tno.get(i).getNum_material() + "\" /><button id=\"matmat1" + i + "\" onclick=\"VentModalmat('matab1" + i + "')\" class='BtnMatchIcon2' style='margin-left:1px; display:none;'></button></div></td>");
-                            out.println("<td><div style='width:195px;'><input type = 'text' id=\"lotabp1" + i + "\"  value=\"" + tno.get(i).getLote() + "\"' onclick=\"mosbotLot('" + i + "');\" /><button id=\"matlot1" + i + "\" onclick=\"VentModalLote('" + i + "')\" class='BtnMatchIcon2' style='margin-left:1px; display:none; '></button></div></td>");
-                            out.println("<td><input type = 'number' id=\"cumtabp1" + i + "\" min='0' value=\"" + tno.get(i).getUnidad_medida_componente_pieza_bruto() + "\" name=\"cumtabp1\" /></td>");
-                            out.println("<td>" + tno.get(i).getCantidad_necesaria_componente2() + "</td>");
-                            out.println("<td>" + tno.get(i).getCantidad_base() + "</td>");
-                            out.println("<td id=\"cein" + i + "\">" + tno.get(i).getCentro() + "</td>");
-                            out.println("<td id=\"unmin" + i + "\" >" + tno.get(i).getUnidad_medida_base() + "</td>");
-                            out.println("<td id=\"almin" + i + "\">" + tno.get(i).getAlmacen() + "</td>");
-                            out.println("<td id=\"Texde" + i + "\">" + tno.get(i).getTexto_posicion_lista_materiales() + "</td>");
-                            out.println("</tr>");
-                        }
-
-                        for (int la = 49; la >= tno.size(); la--) {
-
-                            out.println("<tr>");
-                            out.println("<td>&nbsp;</td>");
-                            out.println("<td>&nbsp;</td>");
-                            out.println("<td>&nbsp;</td>");
-                            out.println("<td><div style='width:195px;'><input type = 'text' id=\"matab1" + la + "\" onclick=\"mosboton('" + la + "');\"  /><button id=\"matmat1" + la + "\" onclick=\"VentModalmat('matab1" + la + "')\" class='BtnMatchIcon2' style='margin-left:1px; display:none;'></button></div></td>");
-                            out.println("<td><div style='width:195px;'><input type='text' id=\"lotabp1" + la + "\" onclick=\"mosbotLot('" + la + "');\" /><button id=\"matlot1" + la + "\" onclick=\"VentModalLote('" + la + "')\" class='BtnMatchIcon2' style='margin-left:1px; display:none; '></button></div></td>");
-                            out.println("<td><input type = 'number' id=\"cumtabp1" + la + "\" min='0' name=\"cumtabp1\" /></td>");
-                            out.println("<td>&nbsp;</td>");
-                            out.println("<td>&nbsp;</td>");
-                            out.println("<td id=\"cein" + la + "\">&nbsp;</td>");
-                            out.println("<td id=\"unmin" + la + "\">&nbsp;</td>");
-                            out.println("<td id=\"almin" + la + "\">&nbsp;</td>");
-                            out.println("<td id=\"Texde" + la + "\">&nbsp;</td>");
-                            out.println("</tr>");
-                        }
-
+                    int con = 0, c3 = 0;
+                    ArrayList<materiales_ordenes_crea> tno = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().MostraTABPM01NOPP(ord, ope);
+                    out.println("<table id=\"TabBodyN\">\n"
+                            + "                                        <tbody>");
+//                    for (con = 0; con < dcs.size(); con++) {
+//                        out.println("<tr ondblclick=\"abrVen('" + c3 + "')\">"
+//                                + "<td>" + dcs.get(con).getNum_documento() + "</td>"
+//                                + "</tr>");
+//                        c3++;
+//                    }
+                    for (int c1 = con; c1 < 12; c1++) {
+                        out.println("<tr>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "</tr>");
                     }
+                    out.println("<tr class=\"ocultar\">"
+                            + "<td>0000000000000000000000000000</td>"
+                            + "<td>000000</td>"
+                            + "<td>0000000</td>"
+                            + "<td>000000000</td>"
+                            + "<td>00000000000000000000000000000000000000000000000000000000000</td>"
+                            + "<td>000000000000000000</td>"
+                            + "<td>000000000000000000000000000</td>"
+                            + "</tr>"
+                            + "</tbody>"
+                            + "</table>");
 
                     break;
                 case "pp1prt1PP":
