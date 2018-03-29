@@ -70,7 +70,7 @@ function cargar() {
 
     });
 }
-function mostrarPP(e, r) {   
+function mostrarPP(e, r) {
     tecla = (document.all) ? e.keyCode : e.which;
     $("#ivreq").html("d");
     var acc = "checarOrdenPP";
@@ -111,7 +111,7 @@ function mostrarPP(e, r) {
         }
     }
 }
-function ponercentro() {       
+function ponercentro() {
     var ord = $("#notor").val();
     var acc = "PonerCentro";
     $.ajax({
@@ -121,7 +121,7 @@ function ponercentro() {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + acc + "&ord=" + ord,
-        success: function (data) {     
+        success: function (data) {
             $("#cennot").val(data);
         }
     });
@@ -318,57 +318,61 @@ function selecoftabPP() {
                     v2 = fs[1];
                     v3 = fs[2];
                     cenOpe = v3;
-                    if (v1 == "PP01") {
-//                            pp1prt3FORSAMPP(ord, v2);
-                            mostrarventabs("ventaPM01");
-                            var theHandle = document.getElementById("handlePM01");
-                            var theRoot = document.getElementById("ventaPM01");
-                            Drag.init(theHandle, theRoot);
-                    } else if (v1 == "PP03") {
-                        if (ord.length == 10) {
-                            pp3prt1FORSAMPP(ord, v2);
-                            pp3prt2FORSAMPP(ord, v2);
-                            pp3prt3FORSAMPP(ord, v2);
-                            //      $("BODY").append('<div id="overlayve"></div>');
-                            mostrarventabs("ventatabdes");
-                            var theHandle = document.getElementById("handleDes");
-                            var theRoot = document.getElementById("ventatabdes");
-                            Drag.init(theHandle, theRoot);
-                        } else {
-                            pp3prt1PP(ord, v2);
-                            pp3prt2PP(ord, v2);
-                            pp3prt3PP(ord, v2);
-                            pp3prt4PP(ord, v2);
-                            //     $("BODY").append('<div id="overlayve"></div>');
-                            mostrarventabs("ventatabdes");
-                            var theHandle = document.getElementById("handleDes");
-                            var theRoot = document.getElementById("ventatabdes");
-                            Drag.init(theHandle, theRoot);
-                        }
-                    } else if (v1 == "PP02") {
-                        if (ord.length == 10) {
-
-                            pp3prt1FORSAMPP(ord, v2);
-                            pp3prt2FORSAMPP(ord, v2);
-                            pp3prt3FORSAMPP(ord, v2);
-                            //     $("BODY").append('<div id="overlayve"></div>');
-                            mostrarventabs("ventatabdes");
-                            var theHandle = document.getElementById("handleDes");
-                            var theRoot = document.getElementById("ventatabdes");
-                            Drag.init(theHandle, theRoot);
-                        } else {
-                            pp3prt1PP(ord, v2);
-                            pp3prt2PP(ord, v2);
-                            pp3prt3PP(ord, v2);
-                            pp3prt4PP(ord, v2);
-                            //       $("BODY").append('<div id="overlayve"></div>');
-                            mostrarventabs("ventatabdes");
-                            var theHandle = document.getElementById("handleDes");
-                            var theRoot = document.getElementById("ventatabdes");
-                            Drag.init(theHandle, theRoot);
-                        }
-
-                    } else {
+                    if (v1 == "PP03") {
+                        pp1prt3FORSAMPP(ord, v2);
+                        mostrarventabs("ventaPM01");
+                        var theHandle = document.getElementById("handlePM01");
+                        var theRoot = document.getElementById("ventaPM01");
+                        Drag.init(theHandle, theRoot);
+                        AjustarCabecera('TabHead', 'TabBody', 8, 'SecCuerpoCld');
+                        document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                    } 
+//                    else if (v1 == "PP03") {
+//                        if (ord.length == 10) {
+//                            pp3prt1FORSAMPP(ord, v2);
+//                            pp3prt2FORSAMPP(ord, v2);
+//                            pp3prt3FORSAMPP(ord, v2);
+//                            //      $("BODY").append('<div id="overlayve"></div>');
+//                            mostrarventabs("ventatabdes");
+//                            var theHandle = document.getElementById("handleDes");
+//                            var theRoot = document.getElementById("ventatabdes");
+//                            Drag.init(theHandle, theRoot);
+//                        } else {
+//                            pp3prt1PP(ord, v2);
+//                            pp3prt2PP(ord, v2);
+//                            pp3prt3PP(ord, v2);
+//                            pp3prt4PP(ord, v2);
+//                            //     $("BODY").append('<div id="overlayve"></div>');
+//                            mostrarventabs("ventatabdes");
+//                            var theHandle = document.getElementById("handleDes");
+//                            var theRoot = document.getElementById("ventatabdes");
+//                            Drag.init(theHandle, theRoot);
+//                        }
+//                    } else if (v1 == "PP02") {
+//                        if (ord.length == 10) {
+//
+//                            pp3prt1FORSAMPP(ord, v2);
+//                            pp3prt2FORSAMPP(ord, v2);
+//                            pp3prt3FORSAMPP(ord, v2);
+//                            //     $("BODY").append('<div id="overlayve"></div>');
+//                            mostrarventabs("ventatabdes");
+//                            var theHandle = document.getElementById("handleDes");
+//                            var theRoot = document.getElementById("ventatabdes");
+//                            Drag.init(theHandle, theRoot);
+//                        } else {
+//                            pp3prt1PP(ord, v2);
+//                            pp3prt2PP(ord, v2);
+//                            pp3prt3PP(ord, v2);
+//                            pp3prt4PP(ord, v2);
+//                            //       $("BODY").append('<div id="overlayve"></div>');
+//                            mostrarventabs("ventatabdes");
+//                            var theHandle = document.getElementById("handleDes");
+//                            var theRoot = document.getElementById("ventatabdes");
+//                            Drag.init(theHandle, theRoot);
+//                        }
+//
+//                    } 
+                    else {
                         $(document).ready(function () {
                             //                        $("BODY").append('<div id="overlay"></div>');
                             mostrarventaavi();
@@ -442,10 +446,8 @@ function pp1prt3FORSAMPP(ord, oper) {
         processData: true,
         data: enviar,
         success: function (data) {
-            $("#tabp1").html(data);
-            ponerpp1();
+            document.getElementById('SecCuerpoCld').innerHTML = data;
         }
-
     });
 }
 //TRAER SAP PP01//
@@ -1191,6 +1193,7 @@ function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
     {
         val += arr[i].offsetWidth;
     }
+
     var myTableCb = document.getElementById(cabecera);
     myTableCb.style.width = val + 17 + "px";
     var arrCb = new Array();
