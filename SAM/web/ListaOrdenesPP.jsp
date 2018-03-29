@@ -264,7 +264,7 @@
                     <div class="busquedaMatch">
                         <label><%out.println(po.getProperty("etiqueta.ClaseOrdenMOR_PP"));%></label><input type="text" id="CClaseOrden" maxlength="8" style="width:35%; text-transform: uppercase;" focus/>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.textobreveOr_PP"));%></label><input type="text" id="Ctextobreve" maxlength="40" style="width:35%; text-transform: uppercase;"/>
+                        <label>Centro</label><input type="text" id="CentroClasOrd" maxlength="4" style="width:15%; text-transform: uppercase;"/>
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3" id="numAcMax" style="width:10%;"/>
                         <hr>
@@ -282,7 +282,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.ClaseOrdenMOR_PP"));%></th><th><%out.println(po.getProperty("etiqueta.textobreveOr_PP"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.ClaseOrdenMOR_PP"));%></th><th>Centro</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -498,7 +498,7 @@
                     <div class="busquedaMatch">
                         <label><%out.println(po.getProperty("etiqueta.ClaseOrdenMOR_PP"));%></label><input type="text" id="CClaseOrden2" maxlength="8" style="width:35%; text-transform: uppercase;" focus/>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.textobreveOr_PP"));%></label><input type="text" id="Ctextobreve2" maxlength="40" style="width:35%; text-transform: uppercase;"/>
+                        <label>Centro</label><input type="text" id="CentroClasOrd2" maxlength="4" style="width:15%; text-transform: uppercase;"/>
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3" id="numAcMax7" style="width:10%;"/>
                         <hr>
@@ -516,7 +516,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.ClaseOrdenMOR_PP"));%></th><th><%out.println(po.getProperty("etiqueta.textobreveOr_PP"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.ClaseOrdenMOR_PP"));%></th><th>Centro</th>
                                     </tr>
                                 </thead>
                             </table>
