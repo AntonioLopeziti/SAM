@@ -366,7 +366,16 @@ and open the template in the editor.
 }
 #SecCuerpoCld { height: 420px; }
 #DobleSection { height: 420px; }
-
+.bxMed
+{
+    background-repeat: no-repeat;
+    width: 101%;
+    height: 14px;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1em;
+    font-weight: bold;
+}
 
 
 
