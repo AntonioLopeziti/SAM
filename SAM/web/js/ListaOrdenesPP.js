@@ -1026,9 +1026,10 @@ function ConsultarClaseorden() {
     var acc = "ConsultaMatchClaseOrden";
     var idioma = $('#Idioma').val();
     var ClaseO = $('#CClaseOrden').val();
-    var texto = $('#Ctextobreve').val();
+    var cntro = $('#CentroClasOrd').val();
+//    var texto = $('#Ctextobreve').val();
     var cant = $('#numAcMax').val();
-    var datos = "&ClaseOrden=" + ClaseO + "&TextoBreve=" + texto + "&ctd=" + cant + "&Idioma=" + idioma;
+    var datos = "&ClaseOrden=" + ClaseO + "&cntroClas=" + cntro + "&ctd=" + cant + "&Idioma=" + idioma;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1185,9 +1186,9 @@ function ConsultarClaseorden2() {
     var acc = "ConsultaMatchClaseOrden2";
     var idioma = $('#Idioma').val();
     var ClaseO = $('#CClaseOrden2').val();
-    var texto = $('#Ctextobreve2').val();
+    var cntro = $('#CentroClasOrd').val();
     var cant = $('#numAcMax7').val();
-    var datos = "&ClaseOrden=" + ClaseO + "&TextoBreve=" + texto + "&ctd=" + cant + "&Idioma=" + idioma;
+    var datos = "&ClaseOrden=" + ClaseO + "&cntroClas=" + cntro + "&ctd=" + cant + "&Idioma=" + idioma;
     $.ajax({
         async: false,
         type: 'GET',
