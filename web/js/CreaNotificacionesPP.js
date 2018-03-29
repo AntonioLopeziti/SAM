@@ -151,7 +151,7 @@ function mostrar1PP() {
                     //Funcion para oner el centro de la orden
                     ponercentro();
                     //Funcion para poner el status de la orden
-//                    ordsta();
+                    ordsta();
                     //Cargar tabla inferior
                     tabmax();
                 } else if (res == 2) {
