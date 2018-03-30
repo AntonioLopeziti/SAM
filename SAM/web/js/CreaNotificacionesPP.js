@@ -1389,24 +1389,8 @@ function ConsMaterial() {
         }
     }
     validacnt101();
-//    for (i = 0; i < mat.length; i++) {
-//
-//        var enviar = "&v1=" + $("#tdCtr" + i).text() + "&v2=" + $("#tdMat" + i).text() + "&acc=" + acc;
-//        $.ajax({
-//            async: false,
-//            type: 'GET',
-//            url: "PeticionNotificacionesOrdenesSAMPP",
-//            contentType: "application/x-www-form-urlencoded",
-//            processData: true,
-//            data: enviar,
-//            success: function (data) {
-//                if (data == 0) {
-//                    $('#bxLote' + i).prop('disabled', true);
-//                }
-//            }
-//        });
-//    }
 }
+
 function validacnt101() {
     var acc = "validaDatos101";
 
@@ -1458,7 +1442,7 @@ function validacnt261() {
                     return;
                 } else {
                     if (i == mat.length - 1) {
-                        alert("bien");
+                        guardaCabecera();
                     }
                 }
             }
@@ -1468,10 +1452,41 @@ function validacnt261() {
 
 function guardaCabecera() {
     var acc = "guardaCabecera";
+
+    var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tdCtr0").text() + "&v4=" + $("#tdCmov0").text() + "&v5=" + usuario;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            guardaPos();
+        }
+    });
+}
+function guardaCabecera2() {
+    var acc = "guardaCabecera";
+
+    var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tdCtr0").text() + "&v4=" + $("#tdCmov0").text() + "&v5=" + usuario;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+        }
+    });
+}
+function guardaPos() {
+    var acc = "guardaPos";
     var mat = document.getElementsByName("btnShowLot");
 
-    for (i = 1; i < mat.length; i++) {
-        var send = "&v1=" + $("#bxcnt").val() + "&acc=" + acc + "&v3=" + $("#tdMat" + i).text() + "&v4=" + $("#bxLote" + i).val() + "&v1=" + $("#tdCtr" + i).text();
+    for (i = 0; i < mat.length; i++) {
+        var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + parseInt(i + 1) + "&v3=" + $("#tdMat" + i).text() + "&v4=" + $("#bxcnt" + i).val() + "&v5=" + $("#tdUM" + i).text() + "&v6=" + $("#bxLote" + i).val() + "&v7=" + $("#tdCtr" + i).text() + "&v8=" + $("#tdCmov" + i).text();
         $.ajax({
             async: false,
             type: 'GET',
@@ -1480,25 +1495,34 @@ function guardaCabecera() {
             processData: true,
             data: send,
             success: function (data) {
-                var temp = new Array();
-                temp = data.split(",");
-
-                if (temp[1] == 0) {
-                    msjError("Material no existe para el lote Almacén-Centro");
-                    $("#bxLote" + i).focus();
-                    $("#bxLote" + i).val("");
-                    return;
-                } else if (temp[0] == 0) {
-                    msjError("Cantidad no valida");
-                    $("#bxcnt" + i).focus();
-                    $("#bxcnt" + i).val("");
-                    return;
-                } else {
-                    if (i == mat.length - 1) {
-                        alert("bien");
-                    }
+                if (i == mat.length - 1) {
+                    guardaCabecera2();
+                    updateFolio();
                 }
             }
         });
     }
+}
+
+function updateFolio() {
+    var acc = "ActualizarFolioPP";
+
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionNotificacionesOrdenesSAMPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc,
+        success: function (data) {
+            var BE = document.createElement('audio');
+            BE.src = "audio/saperror.wav";
+            BE.play();
+            var iconm = document.getElementById("iconmsg");
+            iconm.style.visibility = "visible";
+            iconm.src = "images/advertencia.PNG";
+            var men = document.getElementById("msg");
+            men.innerHTML = "Se ha grabado la notificación con el número de documento " + data;
+        }
+    });
 }
