@@ -4,6 +4,61 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 
+.btnCalidad3{
+    background-image: url(../images/DELETEADD.PNG); 
+    background-repeat: no-repeat;
+    width: 28px;
+    height: 25px;
+    padding-right: 1%; 
+    padding-left: 2%;
+    padding-bottom: .6%;
+}
+
+.VentanaModalLoteL
+{    
+    position: fixed; 
+    width: 750px;
+    height: 370px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.fixedYL{
+    position: relative;
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+}
+.fixedYL table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.fixedYL table th, #fixedYL table td, #fixedYCC table td {
+    width: 20%;
+}
+.fixedYL table th {
+    background-color: #ddd;
+    font: 11% 1em Tahoma;
+    color:#000;
+}
+#cuerpoDatos > div.nofixedXL table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#cuerpoDatos > div.nofixedXL table td {
+    width: 20%;
+}
+
+
+
 .VentanaModalAvvv
 {
     position: fixed; 
@@ -29,6 +84,18 @@ and open the template in the editor.
     color:#E1F0D0;
     font-family: "Tahoma"; 
     font-size: .8em;
+    background: #333  top repeat-x;
+}
+#handle6{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 5%;
+    width: 100%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: 1em;
     background: #333  top repeat-x;
 }
 .PanelBnt{
@@ -1801,7 +1868,7 @@ tr:hover
 
 .Botpm{
     float: right;
-    margin-top: 2%;
+    margin-top: -2%;
     margin-right: 20%;
 }
 /*final de la ventana PM01*/
