@@ -35,6 +35,7 @@ import Entidades.pp_03_3_notificaciones;
 import Entidades.servicios_ordenes_crea;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.servlet.ServletException;
@@ -85,7 +86,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             String v7 = request.getParameter("v7");
             String v8 = request.getParameter("v8");
             String v9 = request.getParameter("v9");
-            String v10 = request.getParameter("v10");                        
+            String v10 = request.getParameter("v10");
             //Liberar Ordenes
             String operacion = request.getParameter("ope");
             String fecha = request.getParameter("fecha");
@@ -103,15 +104,32 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             String fechaActual = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
             String horaActual = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
             folios folioActual = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("PP");
+            double ccnt = 0.00;
             String fol = "ES";
             switch (acc) {
                 case "guardaCabecera":
                     String fl = "PP" + folioActual.getFolioActual();
-                    ArrayList<cab_MovNotificacion> mo = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().CabeceraInsertaMovNot(fol, v1, v2, horaActual, fechaActual, v3, v4, v5);
+                    AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().CabeceraInsertaMovNot(fl, v1, v2, horaActual, fechaActual, v3, v4, v5);
                     break;
                 case "guardaPos":
                     String fll = "PP" + folioActual.getFolioActual();
-                    ArrayList<pos_MovNotificacion> mp = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().PosicionInsertaMovNot(fll, v1, horaActual, fechaActual, v2, v3, v4, v5, v6, v7, v8);
+                    DecimalFormat df = new DecimalFormat("#.000");
+                    String fmt;
+
+                    if (v8.equals("101")) {
+                        ccnt = ACC_Material.ObtenerInstancia().StockLibre(v3, v6, v7) + Double.parseDouble(v4);
+                        fmt = df.format(ccnt);
+                        ACC_Material.ObtenerInstancia().ActualizaInv101(v3, v6, v7, fmt);
+                        ACC_Folios.ObtenerIstancia().ActualizarFolio("PP", folioActual.getFolioActual());
+                        System.out.println(ccnt);
+                    }
+                    if (v8.equals("261")) {
+                        ccnt = ACC_Material.ObtenerInstancia().StockLibre(v3, v6, v7) - Double.parseDouble(v4);
+                        fmt = df.format(ccnt);
+                        ACC_Material.ObtenerInstancia().ActualizaInv261(v3, v6, v7, fmt);
+                        System.out.println(ccnt);
+                    }
+                    AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().PosicionInsertaMovNot(fll, v1, horaActual, fechaActual, v2, v3, v4, v5, v6, v7, v8);
                     break;
                 case "PonerCentro":
                     PlanPP cent = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerCntroOrden(ord);
@@ -328,12 +346,12 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                                 + "<td id=\"tdMat" + con + "\">" + tno.get(con).getMaterial() + "</td>"
                                 + "<td>" + tno.get(con).getTxt_material() + "</td>"
                                 + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDec(this.value, 3)\"></td>"
-                                + "<td>" + tno.get(con).getUm() + "</td>"
+                                + "<td id=\"tdUM" + con + "\">" + tno.get(con).getUm() + "</td>"
                                 + "<td id=\"tdCtr" + con + "\">" + tno.get(con).getCentro() + "</td>"
                                 + "<td>" + tno.get(con).getAlmacen() + "</td>"
                                 + "<td><input type=\"text\" class=\"bxMed\" id=\"bxLote" + con + "\" style=\"text-transform: uppercase;\" maxlength=\"10\" onfocus=\"btnloteShow(" + con + ")\"></td>"
                                 + "<td><button id=\"btnLot" + con + "\" class='BtnMatchIcon' name=\"btnShowLot\" onclick=\"btnLoteMatch(" + con + ")\"  hidden></button></td>"
-                                + "<td>" + tno.get(con).getCl_mov() + "</td>"
+                                + "<td id=\"tdCmov" + con + "\">" + tno.get(con).getCl_mov() + "</td>"
                                 + "</tr>");
                     }
                     for (int c1 = con; c1 < 20; c1++) {
@@ -368,11 +386,13 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                             + "</table>");
 
                     break;
-                    
+
                 case "SujetoLote":
-                    if(ACC_Material.ObtenerInstancia().sujetoLote(v1, v2)){
+                    if (ACC_Material.ObtenerInstancia().sujetoLote(v1, v2)) {
                         out.println(1);
-                    }else{ out.println(0); }
+                    } else {
+                        out.println(0);
+                    }
                     break;
                 case "validaDatos101":
                     int c = ACC_Material.ObtenerInstancia().validaCantidad101(v2, v1);
@@ -381,8 +401,12 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                 case "validaDatos261":
                     int t = ACC_Material.ObtenerInstancia().validaCantidad261(v3, v4, v1, v2);
                     int e = ACC_Material.ObtenerInstancia().validalote261(v3, v4, v1);
-                    
+
                     out.println(t + "," + e);
+                    break;
+                case "ActualizarFolioPP":
+                    out.println("PP" + folioActual.getFolioActual());
+                    ACC_Folios.ObtenerIstancia().ActualizarFolio("PP", folioActual.getFolioActual());
                     break;
                 case "pp1prt1PP":
                     pp_operaciones_noti eqs = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().INPGRNOTPMNOTPP(ord, oper);
