@@ -326,6 +326,7 @@ function selecoftabPP() {
                         Drag.init(theHandle, theRoot);
                         AjustarCabecera('TabHead', 'TabBody', 8, 'SecCuerpoCld');
                         document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                        sujetoLote();
                     }
 //                    else if (v1 == "PP03") {
 //                        if (ord.length == 10) {
@@ -870,11 +871,11 @@ function LoadMaters(url) {
 
     });
 }
-function seleccionar(we, ids, ven) {
-    $("#" + ids).val(we);
-    $("#" + ids).focus();
-    ocultarVentana(ven);
-}
+//function seleccionar(we, ids, ven) {
+//    $("#" + ids).val(we);
+//    $("#" + ids).focus();
+//    ocultarVentana(ven);
+//}
 function seleccionarMate(we, ids, ven, cent) {
     $('#cennot').val(cent);
     $("#" + ids).val(we);
@@ -921,56 +922,7 @@ function TablaLM() {
         }
     });
 }
-//Consumir Material
-function ConsMaterial() {
 
-    var cc = 0;
-    for (var o = 0; o < 50; o++)
-    {
-        var nmat = document.getElementById("matab1" + o);
-
-
-        if (nmat.value == "") {
-            cc++;
-        }
-
-        if (o == 49) {
-            if (cc == 50)
-            {
-                $("#matab10").focus();
-                msgMatch('NPMSinMatVaCon');
-                mostrarventaavi();
-            } else {
-                for (var i = 0; i < 50; i++) {
-
-                    var matab = $("#matab1" + i).val();
-                    var lotabp = $("#lotabp1" + i).val();
-                    var cumtabp = $("#cumtabp1" + i).val();
-
-//                                        if (matab != "" && lotabp == "") {
-//                                            document.getElementById("etav").innerHTML = "Lote es Obligatorio para Material - Centro. : " + matab;
-//                                            mostrarventaavi();
-//                                            break;
-//                                        } else {
-                    if (matab != "" && cumtabp == "") {
-                        msgMatch('NPMCantRequi');
-                        mostrarventaavi();
-                        break;
-                    } else {
-                        if (i == 49) {
-                            ValidarMAte(0);
-                            //ValidarLotedeMAte(0);
-                        }
-                    }
-//                                        }
-                }
-            }
-
-        }
-
-    }
-
-}
 function fnc() {
     document.getElementById('table-scroll').onscroll = function () {
 
@@ -1268,6 +1220,285 @@ function mensajesValidacionInco(msg) {
     men.innerHTML = msg;
 }
 
-function btnloteShow(){
-    document.getElementsByName("");
+function btnloteShow(pos) {
+    var btn = document.getElementsByName("btnShowLot");
+    for (i = 0; i < btn.length; i++) {
+        if (i === pos) {
+            $("#btnLot" + pos).show();
+        } else {
+            $("#btnLot" + i).hide();
+        }
+    }
+}
+function btnloteHide() {
+    var btn = document.getElementsByName("btnShowLot");
+    for (i = 0; i < btn.length; i++) {
+        $("#btnLot" + i).hide();
+    }
+}
+var posit = 0;
+
+function btnLoteMatch(pos) {
+    posit = pos;
+    mostrarVentana('VentanaModalLote');
+    peticiones('PeticionMovMateriales', 'cargarDatosLote', 'VentanaModalLote', 'Lote', '', pos);
+    var theHandle = document.getElementById('handle6');
+    var theRoot = document.getElementById('VentanaModalLote');
+    Drag.init(theHandle, theRoot);
+}
+
+function mostrarVentana(t)
+{
+    switch (t) {
+        case "VentanaModalLote":
+            var ven = document.getElementById(t);
+            abrirVentanaLote(ven);
+            break;
+    }
+}
+
+function abrirVentanaLote(ventana)
+{
+    var ancho = 1050;
+    var alto = 600;
+    if (screen.width <= 1100) {
+        ancho = 1000;
+    }
+    if (screen.width <= 650) {
+        ancho = 550;
+    }
+    var x = (screen.width / 2) - (ancho / 2);
+    var y = (screen.height / 2) - (alto / 2);
+    ventana.style.left = x + "px";
+    ventana.style.top = y + "px";
+    ventana.style.display = 'block';
+}
+
+function peticiones(url, id, accion, f, lote, pos)
+{
+    var centro = $("#tdCtr" + pos).text();
+    var extras = "";
+    var v1;
+
+    switch (accion)
+    {
+        case "VentanaModalLote":
+            v1 = $("#tdMat" + pos).text();
+            extras = "&v1=" + v1 + "&v2=101&v3=1400";
+
+            break;
+    }
+    var lang = "";
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
+        {
+            var temp = new Array();
+            temp = xmlhttp.responseText.split(",");
+            if (temp[0] == 0) {
+                ocultarVentana(temp[1], temp[2]);
+                var iconm = document.getElementById("iconmsg");
+                iconm.style.visibility = "visible";
+                iconm.src = "images/advertencia.PNG";
+                var men = document.getElementById("msg");
+                men.innerHTML = "No hay valores por mostrar";
+            } else {
+                document.getElementById(id).innerHTML = xmlhttp.responseText;
+                fnc(f);
+            }
+        }
+    };
+    xmlhttp.open("GET", url + "?Action=" + accion + "&lang=" + lang + extras + "&lote=" + lote + "&ctr=" + centro, true);
+    xmlhttp.send();
+}
+
+function seleccionar(val, id, ven)
+{
+    document.getElementById("bxLote" + posit).value = val;
+    ocultarVentana(ven, "bxLote" + posit);
+}
+
+function sujetoLote() {
+    var mat = document.getElementsByName("btnShowLot");
+    var acc = "SujetoLote";
+
+    for (i = 0; i < mat.length; i++) {
+
+        var enviar = "&v1=" + $("#tdCtr" + i).text() + "&v2=" + $("#tdMat" + i).text() + "&acc=" + acc;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: enviar,
+            success: function (data) {
+                if (data == 0) {
+                    $('#bxLote' + i).prop('disabled', true);
+                }
+            }
+        });
+    }
+}
+function EliminaFila()
+{
+    var CheckBx = document.getElementsByName('ckMovMer');
+    if (CheckBx.length > 1) {
+        for (var i = 0; i < CheckBx.length; i++)
+        {
+            if (CheckBx[i].checked)
+            {
+                document.getElementById("TabBody").deleteRow(i);
+                EliminaFila();
+            }
+        }
+    }
+}
+function msjError(msg) {
+    var BE = document.createElement('audio');
+    BE.src = "audio/saperror.wav";
+    BE.play();
+    var iconm = document.getElementById("iconmsg");
+    iconm.style.visibility = "visible";
+    iconm.src = "images/advertencia.PNG";
+    var men = document.getElementById("msg");
+    men.innerHTML = msg;
+}
+
+function ConsMaterial() {
+    var mat = document.getElementsByName("btnShowLot");
+
+    for (var i = 0; i < mat.length; i++) {
+        var cant = document.getElementById("bxcnt" + i);
+        var lote = document.getElementById("bxLote" + i);
+        if (cant.value == "") {
+            msjError("Cantidad Obligatoria");
+            cant.focus();
+            return;
+        } else {
+            borrarmsg();
+        }
+        if (lote.value == "") {
+            if (lote.disabled == false) {
+                msjError("Lote es Obligatorio");
+                lote.focus();
+                return;
+            }
+        } else {
+            borrarmsg();
+        }
+    }
+    validacnt101();
+//    for (i = 0; i < mat.length; i++) {
+//
+//        var enviar = "&v1=" + $("#tdCtr" + i).text() + "&v2=" + $("#tdMat" + i).text() + "&acc=" + acc;
+//        $.ajax({
+//            async: false,
+//            type: 'GET',
+//            url: "PeticionNotificacionesOrdenesSAMPP",
+//            contentType: "application/x-www-form-urlencoded",
+//            processData: true,
+//            data: enviar,
+//            success: function (data) {
+//                if (data == 0) {
+//                    $('#bxLote' + i).prop('disabled', true);
+//                }
+//            }
+//        });
+//    }
+}
+function validacnt101() {
+    var acc = "validaDatos101";
+
+    var send = "&v1=" + $("#notor").val() + "&v2=" + $("#bxcnt0").val() + "&acc=" + acc + "&v3=" + $("#tdMat0").text() + "&v4=" + $("#bxLote0").val();
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            if (data == 0) {
+                msjError("Cantidad no valida");
+                $("#bxcnt0").focus();
+                $("#bxcnt0").val("");
+            } else {
+                validacnt261();
+            }
+        }
+    });
+}
+function validacnt261() {
+    var acc = "validaDatos261";
+    var mat = document.getElementsByName("btnShowLot");
+
+    for (i = 1; i < mat.length; i++) {
+        var send = "&v2=" + $("#bxcnt" + i).val() + "&acc=" + acc + "&v3=" + $("#tdMat" + i).text() + "&v4=" + $("#bxLote" + i).val() + "&v1=" + $("#tdCtr" + i).text();
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: send,
+            success: function (data) {
+                var temp = new Array();
+                temp = data.split(",");
+
+                if (temp[1] == 0) {
+                    msjError("Material no existe para el lote Almacén-Centro");
+                    $("#bxLote" + i).focus();
+                    $("#bxLote" + i).val("");
+                    return;
+                } else if (temp[0] == 0) {
+                    msjError("Cantidad no valida");
+                    $("#bxcnt" + i).focus();
+                    $("#bxcnt" + i).val("");
+                    return;
+                } else {
+                    if (i == mat.length - 1) {
+                        alert("bien");
+                    }
+                }
+            }
+        });
+    }
+}
+
+function guardaCabecera() {
+    var acc = "guardaCabecera";
+    var mat = document.getElementsByName("btnShowLot");
+
+    for (i = 1; i < mat.length; i++) {
+        var send = "&v1=" + $("#bxcnt").val() + "&acc=" + acc + "&v3=" + $("#tdMat" + i).text() + "&v4=" + $("#bxLote" + i).val() + "&v1=" + $("#tdCtr" + i).text();
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: send,
+            success: function (data) {
+                var temp = new Array();
+                temp = data.split(",");
+
+                if (temp[1] == 0) {
+                    msjError("Material no existe para el lote Almacén-Centro");
+                    $("#bxLote" + i).focus();
+                    $("#bxLote" + i).val("");
+                    return;
+                } else if (temp[0] == 0) {
+                    msjError("Cantidad no valida");
+                    $("#bxcnt" + i).focus();
+                    $("#bxcnt" + i).val("");
+                    return;
+                } else {
+                    if (i == mat.length - 1) {
+                        alert("bien");
+                    }
+                }
+            }
+        });
+    }
 }
