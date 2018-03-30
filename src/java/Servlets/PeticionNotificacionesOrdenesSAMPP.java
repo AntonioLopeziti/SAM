@@ -75,6 +75,8 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             //Lista de Materiales
             String v1 = request.getParameter("v1");
             String v2 = request.getParameter("v2");
+            String v3 = request.getParameter("v3");
+            String v4 = request.getParameter("v4");
             //Liberar Ordenes
             String operacion = request.getParameter("ope");
             String fecha = request.getParameter("fecha");
@@ -89,6 +91,8 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             String lot = request.getParameter("lot");
             String eq = request.getParameter("eq");
             String ulm = request.getParameter("ulm");
+            
+            
             String fol = "ES";
             switch (acc) {
                 case "PonerCentro":
@@ -303,18 +307,18 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                         out.println("<tr>"
                                 + "<td><input type=\"checkbox\" name=\"ckMovMer\" value=\"" + con + "\"></td>"
                                 + "<td>" + tno.get(con).getNum_operacion() + "</td>"
-                                + "<td>" + tno.get(con).getMaterial() + "</td>"
+                                + "<td id=\"tdMat" + con + "\">" + tno.get(con).getMaterial() + "</td>"
                                 + "<td>" + tno.get(con).getTxt_material() + "</td>"
-                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" maxlength=\"11\" onblur=\"this.value = checkDec(this.value, 3)\"></td>"
+                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDec(this.value, 3)\"></td>"
                                 + "<td>" + tno.get(con).getUm() + "</td>"
-                                + "<td>" + tno.get(con).getCentro() + "</td>"
+                                + "<td id=\"tdCtr" + con + "\">" + tno.get(con).getCentro() + "</td>"
                                 + "<td>" + tno.get(con).getAlmacen() + "</td>"
-                                + "<td>input</td>"
-                                + "<td>bot</td>"
+                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxLote" + con + "\" style=\"text-transform: uppercase;\" maxlength=\"10\" onfocus=\"btnloteShow(" + con + ")\"></td>"
+                                + "<td><button id=\"btnLot" + con + "\" class='BtnMatchIcon' name=\"btnShowLot\" onclick=\"btnLoteMatch(" + con + ")\"  hidden></button></td>"
                                 + "<td>" + tno.get(con).getCl_mov() + "</td>"
                                 + "</tr>");
                     }
-                    for (int c1 = con; c1 < 22; c1++) {
+                    for (int c1 = con; c1 < 20; c1++) {
                         out.println("<tr>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
@@ -338,13 +342,29 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                             + "<td>000</td>"
                             + "<td>000000</td>"
                             + "<td>0000000</td>"
-                            + "<td>00000000000000000</td>"
-                            + "<td>000</td>"
+                            + "<td>00000000000</td>"
+                            + "<td>00</td>"
                             + "<td>0000000</td>"
                             + "</tr>"
                             + "</tbody>"
                             + "</table>");
 
+                    break;
+                    
+                case "SujetoLote":
+                    if(ACC_Material.ObtenerInstancia().sujetoLote(v1, v2)){
+                        out.println(1);
+                    }else{ out.println(0); }
+                    break;
+                case "validaDatos101":
+                    int c = ACC_Material.ObtenerInstancia().validaCantidad101(v2, v1);
+                    out.println(c);
+                    break;
+                case "validaDatos261":
+                    int t = ACC_Material.ObtenerInstancia().validaCantidad261(v3, v4, v1, v2);
+                    int e = ACC_Material.ObtenerInstancia().validalote261(v3, v4, v1);
+                    
+                    out.println(t + "," + e);
                     break;
                 case "pp1prt1PP":
                     pp_operaciones_noti eqs = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().INPGRNOTPMNOTPP(ord, oper);
