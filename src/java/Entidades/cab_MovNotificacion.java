@@ -23,6 +23,8 @@ public class cab_MovNotificacion {
     String cnt_confirmar = "";
     String clase_mov = "";
     String ind_pos = "";
+    String campo_car = "";
+    String campo_car2 = "";
     String ind_pos2 = "";
     String almacen_rec = "";
     String campo_long = "";
@@ -31,6 +33,11 @@ public class cab_MovNotificacion {
     String num_unidad_alm = "";
     String recibido = "";
     String procesado = "";
+    String error = "";
+    String fecha_recibido = "";
+    String hora_recibido = "";
+    String fecha_contable = "";
+    String usuario = "";
 
     public String getFolio_sam() {
         return folio_sam;
@@ -136,6 +143,22 @@ public class cab_MovNotificacion {
         this.ind_pos = ind_pos;
     }
 
+    public String getCampo_car() {
+        return campo_car;
+    }
+
+    public void setCampo_car(String campo_car) {
+        this.campo_car = campo_car;
+    }
+
+    public String getCampo_car2() {
+        return campo_car2;
+    }
+
+    public void setCampo_car2(String campo_car2) {
+        this.campo_car2 = campo_car2;
+    }
+
     public String getInd_pos2() {
         return ind_pos2;
     }
@@ -198,6 +221,46 @@ public class cab_MovNotificacion {
 
     public void setProcesado(String procesado) {
         this.procesado = procesado;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getFecha_recibido() {
+        return fecha_recibido;
+    }
+
+    public void setFecha_recibido(String fecha_recibido) {
+        this.fecha_recibido = fecha_recibido;
+    }
+
+    public String getHora_recibido() {
+        return hora_recibido;
+    }
+
+    public void setHora_recibido(String hora_recibido) {
+        this.hora_recibido = hora_recibido;
+    }
+
+    public String getFecha_contable() {
+        return fecha_contable;
+    }
+
+    public void setFecha_contable(String fecha_contable) {
+        this.fecha_contable = fecha_contable;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
     
     
