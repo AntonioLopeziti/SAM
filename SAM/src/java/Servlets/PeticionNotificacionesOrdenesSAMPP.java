@@ -13,6 +13,7 @@ import AccesoDatos.ACC_BOMEquipos;
 import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_Material;
 import AccesoDatos.ACC_Pm_operaciones_notificaciones;
+import AccesoDatos.Consultas;
 import Entidades.ControlListaOrdenes;
 import Entidades.cabecera_ordenes_crea;
 import Entidades.ordenes_pp_notificaciones;
@@ -23,9 +24,11 @@ import Entidades.materiales;
 import Entidades.materiales_ordenes_crea;
 import Entidades.operaciones_ordenes_crea;
 import Entidades.PlanPP;
+import Entidades.cab_MovNotificacion;
 import Entidades.componentesPP;
 import Entidades.pp01_notifi;
 import Entidades.pm03_1_notificaciones;
+import Entidades.pos_MovNotificacion;
 import Entidades.pp03_1_notificaciones;
 import Entidades.pp03_2_notificaciones;
 import Entidades.pp_03_3_notificaciones;
@@ -77,6 +80,12 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             String v2 = request.getParameter("v2");
             String v3 = request.getParameter("v3");
             String v4 = request.getParameter("v4");
+            String v5 = request.getParameter("v5");
+            String v6 = request.getParameter("v6");
+            String v7 = request.getParameter("v7");
+            String v8 = request.getParameter("v8");
+            String v9 = request.getParameter("v9");
+            String v10 = request.getParameter("v10");                        
             //Liberar Ordenes
             String operacion = request.getParameter("ope");
             String fecha = request.getParameter("fecha");
@@ -91,10 +100,19 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             String lot = request.getParameter("lot");
             String eq = request.getParameter("eq");
             String ulm = request.getParameter("ulm");
-            
-            
+            String fechaActual = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
+            String horaActual = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
+            folios folioActual = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("PP");
             String fol = "ES";
             switch (acc) {
+                case "guardaCabecera":
+                    String fl = "PP" + folioActual.getFolioActual();
+                    ArrayList<cab_MovNotificacion> mo = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().CabeceraInsertaMovNot(fol, v1, v2, horaActual, fechaActual, v3, v4, v5);
+                    break;
+                case "guardaPos":
+                    String fll = "PP" + folioActual.getFolioActual();
+                    ArrayList<pos_MovNotificacion> mp = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().PosicionInsertaMovNot(fll, v1, horaActual, fechaActual, v2, v3, v4, v5, v6, v7, v8);
+                    break;
                 case "PonerCentro":
                     PlanPP cent = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerCntroOrden(ord);
                     String centro = cent.getCentro();
