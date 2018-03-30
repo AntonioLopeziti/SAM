@@ -9,7 +9,6 @@ import Entidades.PlanPP;
 import Entidades.materiales_almacen;
 import Entidades.organizacion;
 import Entidades.tipomaterial;
-import static java.lang.System.out;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -87,6 +86,73 @@ public class ACC_Material {
             cnx.CerrarConexion(con);
         }
         return 0;
+    }
+    
+    public double StockLibre(String material, String lote, String centro) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        double cc = 0.000;
+
+        String query = "{CALL PP.Notif_ConsultarCantidad261(?,?,?)}";
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cc = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error StockLibre(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return cc;
+    }
+    public void ActualizaInv261(String material, String lote, String centro, String cnt) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+
+        String query = "{CALL PP.ActualizaInv261(?,?,?,?)}";
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, cnt);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error ActualizaInv261(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
+    public void ActualizaInv101(String material, String lote, String centro, String cnt) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+
+        String query = "{CALL PP.ActualizaInv101(?,?,?,?)}";
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, cnt);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error ActualizaInv101(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
     }
 
     public int validaCantidad261(String material, String lote, String centro, String cnt) {
