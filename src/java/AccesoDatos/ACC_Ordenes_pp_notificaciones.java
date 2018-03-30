@@ -6,11 +6,9 @@
 package AccesoDatos;
 
 import Entidades.cabecera_ordenes_crea;
-import Entidades.materiales_ordenes_crea;
 import Entidades.notificaciones_cabecera_vis;
 import Entidades.operaciones_ordenes_crea;
 import Entidades.ordenes_pp_notificaciones;
-import Entidades.pm03_3_notificaciones;
 import Entidades.pp_operaciones_noti;
 import Entidades.pp01_notifi;
 import Entidades.pp03_1_notificaciones;
@@ -19,8 +17,6 @@ import Entidades.pp_03_3_notificaciones;
 import Entidades.PlanPP;
 import Entidades.componentesPP;
 import Entidades.servicios_ordenes_crea;
-import Entidades.cab_MovNotificacion;
-import Entidades.pos_MovNotificacion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,12 +38,11 @@ public class ACC_Ordenes_pp_notificaciones {
         return Instance;
     }
 
-    public ArrayList<pos_MovNotificacion> PosicionInsertaMovNot(String folio_sam, String orden, String hora, String fecha, String contador, String material, String cantidad, String um, String lote, String centro, String claseMov) {
-        ArrayList<pos_MovNotificacion> movi = new ArrayList<>();
-        String query = "{CALL PP.Notif_InsertaCabMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+    public void PosicionInsertaMovNot(String folio_sam, String orden, String hora, String fecha, String contador, String material, String cantidad, String um, String lote, String centro, String claseMov) {
+        
+        String query = "{CALL PP.Notif_InsertaPosMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
-        ResultSet rs = null;
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(query);
@@ -60,7 +55,7 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(7, "");
             pst.setString(8, material);
             pst.setString(9, "");
-            pst.setString(10, "0.000");
+            pst.setString(10, cantidad);
             pst.setString(11, um);
             pst.setString(12, lote);
             pst.setString(13, centro);
@@ -103,73 +98,13 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(50, "");
             pst.setString(51, "");
             pst.setString(52, "");
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                pos_MovNotificacion po = new pos_MovNotificacion();
-                po.setFolio_sam(rs.getString("folio_sam"));
-                po.setFolio_sam(rs.getString("folio_sam"));
-                po.setFolio_orden(rs.getString("folio_orden"));
-                po.setNum_orden(rs.getString("num_orden"));
-                po.setHora(rs.getString("hora"));
-                po.setFecha(rs.getString("fecha"));
-                po.setInd_reg_inv(rs.getString("ind_reg_inv"));
-                po.setNum_doc_mate(rs.getString("num_doc_mate"));
-                po.setNum_material(rs.getString("num_material"));
-                po.setTxt_breve_mate(rs.getString("txt_breve_mate"));
-                po.setCantidad(rs.getString("cantidad"));
-                po.setUm_base(rs.getString("um_base"));
-                po.setNum_lote(rs.getString("num_lote"));
-                po.setCentro(rs.getString("centro"));
-                po.setAlmacen(rs.getString("almacen"));
-                po.setClase_mov(rs.getString("clase_mov"));
-                po.setCantidad2(rs.getString("cantidad2"));
-                po.setUm_base2(rs.getString("um_base2"));
-                po.setInd_pos(rs.getString("ind_pos"));
-                po.setCnt_tomada(rs.getString("cnt_tomada"));
-                po.setUm_entrada(rs.getString("um_entrada"));
-                po.setCnt_um_entrada(rs.getString("cnt_um_entrada"));
-                po.setComp_lista_mate(rs.getString("comp_lista_mate"));
-                po.setCantidad3(rs.getString("cantidad3"));
-                po.setUm_base3(rs.getString("um_base3"));
-                po.setCantidad4(rs.getString("cantidad4"));
-                po.setUm_base_4(rs.getString("um_base_4"));
-                po.setCantidad5(rs.getString("cantidad5"));
-                po.setInd_pos2(rs.getString("ind_pos2"));
-                po.setNum_reserva(rs.getString("num_reserva"));
-                po.setNum_posicion_res(rs.getString("num_posicion_res"));
-                po.setUm_base5(rs.getString("um_base5"));
-                po.setCantidad6(rs.getString("cantidad6"));
-                po.setAlmacen_rec(rs.getString("almacen_rec"));
-                po.setNum_reserva2(rs.getString("num_reserva2"));
-                po.setNum_doc_compra(rs.getString("num_doc_compra"));
-                po.setNum_posicion_doc(rs.getString("num_posicion_doc"));
-                po.setInd_stock_esp(rs.getString("ind_stock_esp"));
-                po.setNum_cuenta_prov(rs.getString("num_cuenta_prov"));
-                po.setCentro_emisor(rs.getString("centro_emisor"));
-                po.setCentro_coste(rs.getString("centro_coste"));
-                po.setNum_nota_ent_max(rs.getString("num_nota_ent_max"));
-                po.setNum_carta_porte(rs.getString("num_carta_porte"));
-                po.setNum_arts_europ(rs.getString("num_arts_europ"));
-                po.setControl_num_art(rs.getString("control_num_art"));
-                po.setUm_base6(rs.getString("um_base6"));
-                po.setNum_lote_prov(rs.getString("num_lote_prov"));
-                po.setClase_coste(rs.getString("clase_coste"));
-                po.setRecibido(rs.getString("recibido"));
-                po.setProcesado(rs.getString("procesado"));
-                po.setError(rs.getString("error"));
-                po.setFecha_recibido(rs.getString("fecha_recibido"));
-                po.setHora_recibido(rs.getString("hora_recibido"));
-                movi.add(po);
-            }
+            pst.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error: " + e);
         } finally {
             try {
                 if (conn != null) {
                     con.CerrarConexion(conn);
-                }
-                if (rs != null) {
-                    rs.close();
                 }
                 if (pst != null) {
                     pst.close();
@@ -178,15 +113,12 @@ public class ACC_Ordenes_pp_notificaciones {
                 System.err.println("Error: " + e);
             }
         }
-        return movi;
     }
 
-    public ArrayList<cab_MovNotificacion> CabeceraInsertaMovNot(String folio_sam, String orden, String mate, String hora, String fecha, String centro, String clasMov, String usuario) {
-        ArrayList<cab_MovNotificacion> mov = new ArrayList<>();
+    public void CabeceraInsertaMovNot(String folio_sam, String orden, String mate, String hora, String fecha, String centro, String clasMov, String usuario) {
         String query = "{CALL PP.Notif_InsertaCabMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
-        ResultSet rs = null;
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(query);
@@ -218,48 +150,14 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(26, "");
             pst.setString(27, "");
             pst.setString(28, usuario);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                cab_MovNotificacion cb = new cab_MovNotificacion();
-                cb.setFolio_sam(rs.getString("folio_sam"));
-                cb.setFolio_orden(rs.getString("folio_orden"));
-                cb.setNum_orden(rs.getString("num_orden"));
-                cb.setNum_material(rs.getString("num_material"));
-                cb.setHora(rs.getString("hora"));
-                cb.setFecha(rs.getString("fecha"));
-                cb.setTxt_material(rs.getString("txt_material"));
-                cb.setNum_doc_mate(rs.getString("num_doc_mate"));
-                cb.setCentro(rs.getString("centro"));
-                cb.setAlmacen(rs.getString("almacen"));
-                cb.setCnt_confirmar(rs.getString("cnt_confirmar"));
-                cb.setClase_mov(rs.getString("clase_mov"));
-                cb.setInd_pos(rs.getString("ind_pos"));
-                cb.setCampo_car(rs.getString("campo_car"));
-                cb.setCampo_car2(rs.getString("campo_car2"));
-                cb.setInd_pos2(rs.getString("ind_pos2"));
-                cb.setAlmacen_rec(rs.getString("almacen_rec"));
-                cb.setCampo_long(rs.getString("campo_long"));
-                cb.setCampo_usuario(rs.getString("campo_usuario"));
-                cb.setNum_nota_ent(rs.getString("num_nota_ent"));
-                cb.setNum_unidad_alm(rs.getString("num_unidad_alm"));
-                cb.setRecibido(rs.getString("recibido"));
-                cb.setProcesado(rs.getString("procesado"));
-                cb.setError(rs.getString("error"));
-                cb.setFecha_recibido(rs.getString("fecha_recibido"));
-                cb.setHora_recibido(rs.getString("hora_recibido"));
-                cb.setFecha_contable(rs.getString("fecha_contable"));
-                cb.setUsuario(rs.getString("usuario"));
-                mov.add(cb);
-            }
+            pst.executeUpdate();
+            
         } catch (Exception e) {
             System.err.println("Error: " + e);
         } finally {
             try {
                 if (conn != null) {
                     con.CerrarConexion(conn);
-                }
-                if (rs != null) {
-                    rs.close();
                 }
                 if (pst != null) {
                     pst.close();
@@ -268,7 +166,6 @@ public class ACC_Ordenes_pp_notificaciones {
                 System.err.println("Error: " + e);
             }
         }
-        return mov;
     }
 
     public LinkedList<PlanPP> ObtenerNotificPP(String cant, String orden, String deso) {
