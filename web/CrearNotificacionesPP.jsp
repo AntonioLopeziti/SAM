@@ -1056,47 +1056,39 @@
 
                     </section>
                 </section>
-<!--                <section class="tab2">
-                    <table class="TablaCont">
-                        <thead>
-                            <tr id="CabeceraTabla">
-                                <td></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMReserva_PP"));%></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMPos_PP"));%></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMMaterial_PP"));%>&nbsp;&nbsp;&nbsp;</td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMLotee_PP"));%></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMCantCons_PP"));%></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMCantidaNeces_PP"));%></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMCanttomada_PP"));%></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMCentro_PP"));%></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMUMB_PP"));%></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMAlmacen_PP"));%></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMTextobrvmat_PP"));%></td>
-                                <td><%out.println(po.getProperty("etiqueta.NPMTextoBreveDelMaterial_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-
-                            </tr>
-                        </thead>
-                        <tbody id="tabp1">
-                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-
-                        </tbody>
-
-                    </table>
-
-                </section>-->
+                <button id="btnCld3" class="btnCalidad3" type="submit" onclick="EliminaFila()"></button>
             </div>
             <div class="Botpm">
                 <button style="" onclick="ConsMaterial();" > <img style="height:15px;" src="images/cosma2.png" /> <%out.println(po.getProperty("etiqueta.NPMConsumoMate_PP"));%></button>
                 <button onclick="cerraventabs('ventaPM01')" ><img  src="images/S_B_CANC.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%out.println(po.getProperty("etiqueta.NPMFinaliproce_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
             </div> 
         </div>
+
+        <div id="VentanaModalLote" class="VentanaModalLoteL">
+            <div id="handle6"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LoteMa_Mov"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalLote', '');"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="ConsultaTablaLote">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollLote">
+                        <div class="fixedYL" id="fixedYLote">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa1_Mov"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa2_Mov"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa3_Mov"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa4_Mov"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedXL" id="cargarDatosLote">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div id="VentanaModalListaMat" class="VentanaModalLM">
             <div id="handle23"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NPMListOfMateriales_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalListaMat', '');"><label >X</label></div></div>
             <br><div id="BuscarParamListM" class="BuscarParam_u">
@@ -1236,46 +1228,7 @@
     </div>
 
 
-    <div id="VentanaModalLote" class="VentanaModal">
-        <div id="handle6"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NPMCpnsLotes_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalLote')"><label >X</label></div></div>
-        <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.NPMLlotes_PP"));%></button><hr></div>
-        <div id="BuscarParam_GrupoP" class="BuscarParam_u" style="display: none">
-            <div class="fondo_Match">
-                <div class="busquedaMatch">
-                    <label><%out.println(po.getProperty("etiqueta.NPMGrupoplanif_PP"));%></label><input type="text" id="GrupoPMatch_CA" style="width:20%;"  focus/>
-                    <hr>
-                    <label><%out.println(po.getProperty("etiqueta.NPMCentroPlanificador_PP"));%></label><input type="text" id="CentroPMatch_CA" style="width:15%;"/>
-                    <hr>
-                    <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="number" min="1"  id="numAcMax6" max="100" value="100" style="width:10%;" onblur="ValidarMaximo(this.value);"/>
-                    <hr>
-                </div>        
-            </div> 
-            <div class="Botones_Match">
-                <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor: pointer;" onclick="ConsultaGrupoP();"/>
-                <img class="BtnMatchIcon" src="images/btnSelMulmatch.PNG" style="margin-right:-7%; margin-top: -1%; cursor: pointer;"/>
-                <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor: pointer;" onclick="ocultarVentana('grupop');"/>
-            </div>
-        </div>
-        <div id="ConsultaTabla6" >
-            <div class="tablaCab">
-                <div class="table-scroll" id="table-scroll6">
-                    <div class="fixedY" id="fixedY6">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th><%out.println(po.getProperty("etiqueta.NPMLlote_PP"));%></th><th><%out.println(po.getProperty("etiqueta.NPMSttockLU_PP"));%></th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <div id="cuerpoDatos">
-                        <div class="nofixedX" id="cargarDatos6">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>                        
+
 
 
 
