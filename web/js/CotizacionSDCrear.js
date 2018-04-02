@@ -533,10 +533,36 @@ $(document).ready(function () {
                     break;
                 case 2:
                     mostrarVentanaModal('VentanaModalMoneda', 'handle3', '0');
+                    $('#iddtmon').val("Moneda1");
                     break;
                 case 3:
                     CerrarCalendario();
                     OpenCalendario("fechpedido");
+                    break;
+                case 4:
+                    mostrarVentanaModal('VentanaModalClaseOferta', 'handle4', 'BusClaseof');
+                    break;
+                case 5:
+                    mostrarVentanaModal('VentanaModalOrgVentas', 'handle5', 'BusOrgVe');
+                    break;
+                case 6:
+                    mostrarVentanaModal('VentanaModalCanalDis', 'handle6', 'BusCanalDis');
+                    break;
+                case 7:
+                    mostrarVentanaModal('VentanaModalSector', 'handle7', 'BusSector');
+                    break;
+                case 8:
+                    mostrarVentanaModal('VentanaModalOficinaVentas', 'handle8', 'BusOVentas');
+                    break;
+                case 9:
+                    mostrarVentanaModal('VentanaModalGrupoVendedores', 'handle9', 'BusGpoVendedores');
+                    break;
+                case 10:
+                    mostrarVentanaModal('VentanaModalMoneda', 'handle3', '0');
+                    $('#iddtmon').val("Moneda2");
+                    break;
+                case 11:
+                    mostrarVentanaModal('VentanaModalZonaVentas', 'handle10', 'BusZonaVentas');
                     break;
                 case 12:
                     CerrarCalendario();
@@ -584,6 +610,41 @@ $(document).ready(function () {
                 $('#numAcMax2').val('500');
                 $('#BusDest').val('');
                 break;
+            case "BusClaseof":
+                $('#numAcMax3').val('500');
+                $('#BusClaseof').val('');
+                $('#BusDenomClase').val('');
+                break;
+            case "BusOrgVe":
+                $('#numAcMax4').val('500');
+                $('#BusOrgVe').val('');
+                $('#BusDenomOrgVen').val('');
+                break;
+            case "BusCanalDis":
+                $('#numAcMax5').val('500');
+                $('#BusCanalDis').val('');
+                $('#BusDenomCanalDi').val('');
+                break;
+            case "BusSector":
+                $('#numAcMax6').val('500');
+                $('#BusSector').val('');
+                $('#BusDenomSector').val('');
+                break;
+            case "BusOVentas":
+                $('#numAcMax7').val('500');
+                $('#BusOVentas').val('');
+                $('#BusDenOfVentas').val('');
+                break;
+            case "BusGpoVendedores":
+                $('#numAcMax8').val('500');
+                $('#BusOVentas').val('');
+                $('#BusGpoVendedores').val('');
+                break;
+            case "BusZonaVentas":
+                $('#numAcMax9').val('500');
+                $('#BusDenZonaVentas').val('');
+                $('#BusZonaVentas').val('');
+                break;
         }
         var BE = document.createElement('audio');
         BE.src = "audio/sapsnd05.wav";
@@ -616,13 +677,56 @@ $(document).ready(function () {
         ocultarVentana('VentanaModalDesMer', 'BuscarParDesMcia', 'ConsultaTablaDestMcia', 'DestMcia');
     });
     $('#CerraMCMon').click(function () {
-        ocultarVentana('VentanaModalMoneda', '0', '0', 'Moneda1');
+        var id = $('#iddtmon').val();
+        ocultarVentana('VentanaModalMoneda', '0', '0', id);
     });
     $('#CerraCalendar1').click(function () {
         CerrarCalendario();
     });
     $('#calenimg').click(function () {
         CerrarCalendario();
+    });
+    $('#CerraMCClaOf').click(function () {
+        ocultarVentana('VentanaModalClaseOferta', 'BuscarParClasOf', 'ConsultaTablaClasOf', 'claseOferta');
+    });
+    $('#CerraMCClaOf2').click(function () {
+        ocultarVentana('VentanaModalClaseOferta', 'BuscarParClasOf', 'ConsultaTablaClasOf', 'claseOferta');
+    });
+    $('#CerraMCOrgVentas').click(function () {
+        ocultarVentana('VentanaModalOrgVentas', 'BuscarParOrgVentas', 'ConsultaTablaOrgVen', 'OrgVentas');
+    });
+    $('#CerraMCOrgVentas2').click(function () {
+        ocultarVentana('VentanaModalOrgVentas', 'BuscarParOrgVentas', 'ConsultaTablaOrgVen', 'OrgVentas');
+    });
+    $('#CerraMCCanalDist').click(function () {
+        ocultarVentana('VentanaModalCanalDis', 'BuscarParCanalDist', 'ConsultaTablaCanalDist', 'CanalDist');
+    });
+    $('#CerraMCCanalDist2').click(function () {
+        ocultarVentana('VentanaModalCanalDis', 'BuscarParCanalDist', 'ConsultaTablaCanalDist', 'CanalDist');
+    });
+    $('#CerraMCSector').click(function () {
+        ocultarVentana('VentanaModalSector', 'BuscarParSector', 'ConsultaTablaSector', 'Sector');
+    });
+    $('#CerraMCSector2').click(function () {
+        ocultarVentana('VentanaModalSector', 'BuscarParSector', 'ConsultaTablaSector', 'Sector');
+    });
+    $('#CerraMCOVentas').click(function () {
+        ocultarVentana('VentanaModalOficinaVentas', 'BuscarParOficinaVentas', 'ConsultaTablaOficinaVentas', 'OficinaVentas');
+    });
+    $('#CerraMCOVentas2').click(function () {
+        ocultarVentana('VentanaModalOficinaVentas', 'BuscarParOficinaVentas', 'ConsultaTablaOficinaVentas', 'OficinaVentas');
+    });
+    $('#CerraMCGpoVendedores').click(function () {
+        ocultarVentana('VentanaModalGrupoVendedores', 'BuscarParGpoVendedores', 'ConsultaTablaGrpoV', 'GpoVendedores');
+    });
+    $('#CerraMCGpoVendedores2').click(function () {
+        ocultarVentana('VentanaModalGrupoVendedores', 'BuscarParGpoVendedores', 'ConsultaTablaGrpoV', 'GpoVendedores');
+    });
+    $('#CerraMCZonaVentas').click(function () {
+        ocultarVentana('VentanaModalZonaVentas', 'BuscarParZonaVentas', 'ConsultaTablaZventas', 'Zonaventas');
+    });
+    $('#CerraMCZonaVentas2').click(function () {
+        ocultarVentana('VentanaModalZonaVentas', 'BuscarParZonaVentas', 'ConsultaTablaZventas', 'Zonaventas');
     });
 });
 function inval() {
