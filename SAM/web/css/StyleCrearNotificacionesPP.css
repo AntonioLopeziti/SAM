@@ -1436,7 +1436,7 @@ tr:hover
     color: #000000;
     display:none;
 }
-#handleAv2, #handleAv3{
+#handleAv2, #handleAv3, #handleAv4{
     margin-left: -2px;
     height: 15%;
     width: 101%;
