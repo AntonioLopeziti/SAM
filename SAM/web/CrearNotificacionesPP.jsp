@@ -1157,6 +1157,18 @@
 
             </div>
         </div> 
+        <div id="ventanaavis3" class="VenAvisoss">
+            <div id="handleAv4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NPMInformacion_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ventanaavis3', '');"><label >X</label></div></div>
+            <div class="imgeninfo"><IMG SRC="images/S_B_HINT.gif"  ALT="Info"></div>
+            <div class="ContenidoAv">
+                <br>
+                <label id="">Esta operación no permite registros</label>
+            </div>
+            <div class="BotenAv">
+                <button id="" onclick="ocultarVentana('ventanaavis3', '');"><img src="images/palomal.png"/> </button>
+
+            </div>
+        </div> 
 
         <div id="ventanaavis2" class="VenAvisoss">
             <div id="handleAv3"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NOTSTfincab_PP"));%></label><div class="BotonCerrar_Matc" onclick="cerravisos2();"><label >X</label></div></div>
