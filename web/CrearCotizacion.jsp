@@ -227,7 +227,7 @@
                                         <hr>
                                         <input type="text" style="width: 100%; background: none; border: none;" readonly id="AreVentas" />
                                         <hr style="border: #fff;">
-                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDCreadoPor"));%></label><input type="text" style="width: 15%;"  id="NombreResp"/><button id="matchCreado" class='BtnMatchIcon'></button>
+                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDCreadoPor"));%></label><input type="text" style="width: 15%;"  id="NombreResp" disabled value="<%=Nombre%>"/>
                                         <hr>
                                         <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaPrecio"));%></label><input type="text" style="width: 15%;"  id="FechaPrecio"/><button id="matchFecgPreci" class='BtnMatchIcon'></button>
                                         <hr>
@@ -584,6 +584,7 @@
             </div>            
         </div>
         <div id="VentanaModalMoneda" class="VentanaModal">
+            <input type="text" id="iddtmon" hidden>
             <div id="handle3"><label id="TituloMatch">Moneda documento</label><div class="BotonCerrar_Matc" id="CerraMCMon"><label >X</label></div></div>
             <div class="PanelBntMatch"><button id="retSoli"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
             <div id="ConsultaTablaMoneda" style="display: none;">
@@ -600,6 +601,286 @@
                         </div>
                         <div id="cuerpoDatos">
                             <div class="nofixedX" id="cargarDatosSolic">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div id="VentanaModalClaseOferta" class="VentanaModal">
+            <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CotizacionClaseOferta"));%></label><div class="BotonCerrar_Matc" id="CerraMCClaOf"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retClasOf"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParClasOf" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionClaseOferta"));%></label><input type="text" id="BusClaseof" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></label><input type="text" id="BusDenomClase" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax3"   style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="OkClaOf"/>                        
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerraMCClaOf2"/>
+                </div>
+            </div>            
+            <div id="ConsultaTablaClasOf" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollClasOf">
+                        <div class="fixedY" id="fixedYClasOf">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.CotizacionClaseOferta"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosClasOf">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div id="VentanaModalOrgVentas" class="VentanaModal">
+            <div id="handle5"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.matchorganizacion"));%></label><div class="BotonCerrar_Matc" id="CerraMCOrgVentas"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retOrgVen"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParOrgVentas" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.matchorganizacion"));%></label><input type="text" id="BusOrgVe" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></label><input type="text" id="BusDenomOrgVen" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax4"   style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="OkOrgVentas"/>                        
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerraMCOrgVentas2"/>
+                </div>
+            </div>            
+            <div id="ConsultaTablaOrgVen" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollOrgVentas">
+                        <div class="fixedY" id="fixedYOrgVentas">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.matchorganizacion"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosOrgVentas">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div id="VentanaModalCanalDis" class="VentanaModal">
+            <div id="handle6"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.matchcanal"));%></label><div class="BotonCerrar_Matc" id="CerraMCCanalDist"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retCanalDis"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParCanalDist" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.matchcanal"));%></label><input type="text" id="BusCanalDis" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></label><input type="text" id="BusDenomCanalDi" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax5"   style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="OkCanalDist"/>                        
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerraMCCanalDist2"/>
+                </div>
+            </div>            
+            <div id="ConsultaTablaCanalDist" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollCanalDist">
+                        <div class="fixedY" id="fixedYCanalDist">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.matchcanal"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosCanalDist">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div id="VentanaModalSector" class="VentanaModal">
+            <div id="handle7"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.Sector_clie"));%></label><div class="BotonCerrar_Matc" id="CerraMCSector"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retSector"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParSector" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.Sector_clie"));%></label><input type="text" id="BusSector" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></label><input type="text" id="BusDenomSector" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax6"   style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="OkSector"/>                        
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerraMCSector2"/>
+                </div>
+            </div>            
+            <div id="ConsultaTablaSector" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollSector">
+                        <div class="fixedY" id="fixedYSector">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.Sector_clie"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosSector">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div id="VentanaModalOficinaVentas" class="VentanaModal">
+            <div id="handle8"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CotizacionOficinaVent"));%></label><div class="BotonCerrar_Matc" id="CerraMCOVentas"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retOfVentas"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParOficinaVentas" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionOficinaVent"));%></label><input type="text" id="BusOVentas" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></label><input type="text" id="BusDenOfVentas" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax7"   style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="OkOfVentas"/>                        
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerraMCOVentas2"/>
+                </div>
+            </div>            
+            <div id="ConsultaTablaOficinaVentas" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollOfVentas">
+                        <div class="fixedY" id="fixedYOfVentas">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.CotizacionOficinaVent"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosOfVentas">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div id="VentanaModalGrupoVendedores" class="VentanaModal">
+            <div id="handle9"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CotizacionGrupoVended"));%></label><div class="BotonCerrar_Matc" id="CerraMCGpoVendedores"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retGpoVendedores"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParGpoVendedores" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionGrupoVended"));%></label><input type="text" id="BusGpoVendedores" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></label><input type="text" id="BusDenGpoVendedores" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax8"   style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="OkGpoVendedores"/>                        
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerraMCGpoVendedores2"/>
+                </div>
+            </div>            
+            <div id="ConsultaTablaGrpoV" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollGpoV">
+                        <div class="fixedY" id="fixedYGpoV">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.CotizacionGrupoVended"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosGpoVendedores">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div id="VentanaModalZonaVentas" class="VentanaModal">
+            <div id="handle10"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CotizacionOfertaZonaVenta"));%></label><div class="BotonCerrar_Matc" id="CerraMCZonaVentas"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retZonaVentas"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParZonaVentas" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaZonaVenta"));%></label><input type="text" id="BusZonaVentas" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></label><input type="text" id="BusDenZonaVentas" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax9"   style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="OkZonaVentas"/>                        
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerraMCZonaVentas"/>
+                </div>
+            </div>            
+            <div id="ConsultaTablaZventas" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollZVent">
+                        <div class="fixedY" id="fixedYZVent">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.CotizacionOfertaZonaVenta"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosZonaVentas">
                             </div>
                         </div>
                     </div>
