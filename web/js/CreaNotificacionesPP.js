@@ -376,9 +376,9 @@ function selecoftabPP() {
                     else {
                         $(document).ready(function () {
                             //                        $("BODY").append('<div id="overlay"></div>');
-                            mostrarventaavi();
-                            var theHandle = document.getElementById("handleAv2");
-                            var theRoot = document.getElementById("ventanaavis");
+                            mostrarventaavi4();
+                            var theHandle = document.getElementById("handleAv4");
+                            var theRoot = document.getElementById("ventanaavis3");
                             Drag.init(theHandle, theRoot);
                         });
                     }
@@ -950,6 +950,16 @@ function mostrarventaavi() {
     venaviso.style.top = y + "px";
     venaviso.style.display = 'block';
 }
+function mostrarventaavi4() {
+    var venaviso = document.getElementById("ventanaavis3");
+    var ancho = 20;
+    var alto = 250;
+    var x = (screen.width / 2) - (ancho / 2);
+    var y = (screen.height / 2) - (alto / 2);
+    venaviso.style.left = x + "px";
+    venaviso.style.top = y + "px";
+    venaviso.style.display = 'block';
+}
 function mostrarventabs(ven) {
     var venaviso = document.getElementById(ven);
     var ancho = 1000;
@@ -1469,7 +1479,7 @@ function guardaCabecera() {
 function guardaCabecera2() {
     var acc = "guardaCabecera";
 
-    var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tdCtr0").text() + "&v4=" + $("#tdCmov0").text() + "&v5=" + usuario;
+    var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tdCtr0").text() + "&v4=" + $("#tdCmov1").text() + "&v5=" + usuario;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1498,6 +1508,7 @@ function guardaPos() {
                 if (i == mat.length - 1) {
                     guardaCabecera2();
                     updateFolio();
+                    ocultarVentana('ventaPM01', '');
                 }
             }
         });
@@ -1520,9 +1531,10 @@ function updateFolio() {
             BE.play();
             var iconm = document.getElementById("iconmsg");
             iconm.style.visibility = "visible";
-            iconm.src = "images/advertencia.PNG";
+            iconm.src = "images/aceptar.png";
             var men = document.getElementById("msg");
-            men.innerHTML = "Se ha grabado la notificación con el número de documento " + data;
+//            men.innerHTML = "Se ha grabado la notificación con el número de documento " + data;
+            men.innerHTML = "Notificación grabada, movimientos mercancía ";
         }
     });
 }
