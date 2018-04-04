@@ -632,6 +632,10 @@ function desbloquearCampos() {
     $('#cntMala').prop("disabled", false);
     $('#btnInicio').prop('disabled', false);
     $('#btnFin').prop('disabled', true);
+    $('#NoPers').css('background-image', 'url(images/necesario.PNG)');
+    $('#OrdFab').css('background-image', 'url(images/necesario.PNG)');
+    $('#cntBuena').css('background-image', 'url(images/necesario.PNG)');
+    $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
 }
 
 //FUNCIONES DE VENTANAS MODALES
