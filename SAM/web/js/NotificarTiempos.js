@@ -41,6 +41,39 @@ $(document).ready(function () {
             $('#NoPers').css('background-image', 'url(images/necesario.PNG)');
         }
     });
+    $('#txtOrd').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            CargarContenidoOrdFab();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#txtBrev').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            CargarContenidoOrdFab();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#numAcMaxOrd').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            CargarContenidoOrdFab();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+    });
     $('#cntBuena').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
         patron = /[0-9]/;
@@ -107,7 +140,7 @@ $(document).ready(function () {
         var theHandle = document.getElementById("handle");
         var theRoot = document.getElementById("VentanaModalOrdenFab");
         Drag.init(theHandle, theRoot);
-        MostrarVentanaModal('VentanaModalOrdenFab', 'handle', '', '');
+        MostrarVentanaModal('VentanaModalOrdenFab', 'handle', 'txtOrd', '');
     });
     $('#btnmatchUsuarios').click(function () {
         var theHandle = document.getElementById("handle2");
@@ -119,6 +152,7 @@ $(document).ready(function () {
     $('#LimPantalla').click(function () {
         limpiarCampos();
         desbloquearCampos();
+        borrarmsg();
     });
     $("#okOrden").click(function () {
         CargarContenidoOrdFab();
@@ -228,7 +262,7 @@ function validarDatos() {
         }
     });
 }
-function validarLlenado() {
+function validarLlenado() {    
     var acc = "LlenarTablas";
     var us = $('#NoPers').val();
     var ord = $('#OrdFab').val();
@@ -252,7 +286,6 @@ function validarLlenado() {
             processData: true,
             data: "acc=" + acc + "&usuario=" + us + "&orden=" + ord,
             success: function (data) {
-                alert(data);
                 if (data == 1) {
                     $('#msg').html("La orden se notificó con éxito");
                     var icon = $('#iconmsg');
@@ -264,6 +297,8 @@ function validarLlenado() {
                     limpiarCampos();
                     desbloquearCampos();
                     borrarDatoControl(us);
+                    $('#btnInicio').prop('disabled', false);
+                    $('#btnFin').prop('disabled', true);
                 } else {
                     $('#msg').html("Error al notificar la orden");
                     var icon = $('#iconmsg');
@@ -482,7 +517,7 @@ function validarStatusOrden() {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + acc + "&orden=" + orden,
-        success: function (data) {            
+        success: function (data) {
             if (data == 1) {
                 var BE = document.createElement('audio');
                 BE.src = "audio/sapmsg.wav";
@@ -560,12 +595,9 @@ function ErrorBusquedaMatch() {
     var BE = document.createElement('audio');
     BE.src = "audio/sapmsg.wav";
     BE.play();
-    var okcon = "No hay datos por mostrar";
-    var iconm = document.getElementById("iconmsg");
-    iconm.style.visibility = "visible";
-    iconm.src = "images/aceptar.png";
-    var men = document.getElementById("msg");
-    men.innerHTML = okcon;
+    $('#msg').html("No hay registros por mostrar");
+    $('#iconmsg').show();
+    $('#iconmsg').attr('src', 'images/advertencia.PNG');
 }
 function limpiarCampos() {
     $('#NoPers').val("");
@@ -598,7 +630,10 @@ function desbloquearCampos() {
     $('#CompRes').prop("disabled", false);
     $('#cntBuena').prop("disabled", false);
     $('#cntMala').prop("disabled", false);
+    $('#btnInicio').prop('disabled', false);
+    $('#btnFin').prop('disabled', true);
 }
+
 //FUNCIONES DE VENTANAS MODALES
 function MostrarVentanaModal(id, handle, obj, obj2) {
     var BE = document.createElement('audio');
@@ -625,7 +660,10 @@ function ocultarVentanaMatch(tipo) {
         case "OrdFab":
             var ventana = $('#VentanaModalOrdenFab');
             ventana.hide();
-            $('#overlay').remove();
+            $('#txtOrd').val("");
+            $('#txtBrev').val("");
+            cambiarMath();
+            borrarmsg();
             break;
         case "NoPer":
             var ventana = $('#VentanaModalUsuarios');
