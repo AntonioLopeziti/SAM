@@ -312,7 +312,7 @@ function validarLlenado() {
         });
     }
 }
-//funcion para borrar el registro del usuario una vez que se inserto en cabecera y posicion
+//funcion para borrar el registro del usuario una vez que se inserto en cabecera y posicionn
 function borrarDatoControl(usuario) {
     var acc = "borrarRegControl";
     $.ajax({
