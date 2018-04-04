@@ -219,10 +219,10 @@
                     <div class="fondo_Match">
                         <div class="busquedaMatch">                            
                             <label>Orden</label>
-                            <input type="text" id="txtOrd" style="width:35%;"/>
+                            <input type="text" id="txtOrd" style="width:35%; text-transform: uppercase;"/>
                             <hr>
                             <label>Texto breve</label>
-                            <input type="text" id="txtBrev" style="width:55%;"/>
+                            <input type="text" id="txtBrev" style="width:55%; text-transform: uppercase;"/>
                             <hr>
                             <label>Ctd.máxima aciertos</label>
                             <input type="number" min="1"  id="numAcMaxOrd" max="100" value="100" style="width:10%;" />
