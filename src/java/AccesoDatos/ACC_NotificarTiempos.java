@@ -328,10 +328,10 @@ public class ACC_NotificarTiempos {
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, res.getNo_personal());
-            ps.setString(2, res.getNot_parcial());
-            ps.setString(3, res.getNot_final());
-            ps.setString(4, res.getNot_final_aut());
-            ps.setString(5, res.getComp_reserva());
+            ps.setString(2, "");
+            ps.setString(3, "");
+            ps.setString(4, "X");
+            ps.setString(5, "");
             ps.setString(6, res.getOrden_fab());
             ps.setString(7, res.getNum_op());
             ps.setString(8, res.getCtd_buena());
