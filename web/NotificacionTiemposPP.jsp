@@ -164,13 +164,13 @@
                     <button id="LimPantalla" style="margin-left: 40%;">Limpiar Pantalla</button>  
                 </div>
             </div>            
-            <div class="bkClassNoti">
+            <div class="bkClassNoti" hidden>
                 <label style="padding-left: 25px; font-size: 13px;">Clase de notificación</label>
                 <!--<label style="padding-left: 10px; font-size: 13.5px;">Clase de notificación</label>-->
                 <hr id="LineaTituloInfo">
-                <input type="radio" value="par" name="clnoti" checked id="NotParcial"> Notif.pacial
+                <input type="radio" value="par" name="clnoti" id="NotParcial"> Notif.pacial
                 <input type="radio" value="fin" name="clnoti" class="rbcln" id="NotFinal"> Notif.final
-                <input type="radio" value="aut" name="clnoti" class="rbcln" id="NotFinalAu"> Notif.final autom.
+                <input type="radio" value="aut" name="clnoti" checked class="rbcln" id="NotFinalAu"> Notif.final autom.
                 <input type="checkbox" value="res" name="ckreserva" class="rbcln" id="CompRes"> Compensar reserva
             </div>
             <div class="DatosGeneNotiTiemp">
