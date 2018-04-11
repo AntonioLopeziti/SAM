@@ -528,6 +528,7 @@ function validarStatusOrden() {
                 $('#OrdFab').val("");
             } else {
                 validarOrdFab();
+                TextoLargo();
             }
         }
     });
@@ -695,6 +696,7 @@ function SelectOrd(obj, tipo, des) {
             $('#OrdFab').css('background-image', 'none');
             $('#DescripOrd').html(des);
             MostrarOperaciones(obj);
+            TextoLargo();
             break;
     }
 }
@@ -726,4 +728,20 @@ function checkTime(i)
     return i;
 }
 
+function TextoLargo(){
+    var acc = "TextoLargo";
+
+    var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            $("#lblTextoLargo").text(data.trim());
+        }
+    });
+}
 
