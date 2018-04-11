@@ -118,6 +118,20 @@ input{
 .divBtnIniFin label{
     margin-left: 5px;
 }
+.divmatchEsp{
+    background: #FFFFFF;
+    width: 60%;
+    display: inline-block;
+    padding-left: 2%;
+    padding-bottom: 1%;
+}
+.lineaazul{
+    margin-left: -2%;
+    margin-top: 0;
+    width: 101.5%;
+    border: 1px solid #3892E0;
+}
+
 @media screen and (min-width: 500px) and (max-width: 1000px){  
     .ContentNotif{
         width: 100%;   
