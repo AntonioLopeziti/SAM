@@ -403,7 +403,7 @@
                                     </li>
                                     <li class="current" style="display: <%=gestCome_Pedidos%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionComercial_Pedidos_menu"));%></a>
                                         <ul>
-                                            <li style="display: <%=gestCome_Pedi_Crear%>"><a href="CrearPedidosSD.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
+                                            <li style="display: <%=gestCome_Pedi_Crear%>"><a href="CrearPedidoSD.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
                                             <li style="display: <%=gestCome_Pedi_Modif%>"><a href="#"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
                                             <!--<li style="display: <%=gestCome_Pedi_Modif%>"><a href="ModificarPedidosSD.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>-->
                                             <li style="display: <%=gestCome_Pedi_Visua%>"><a href="VisualizarPedidosSD.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
