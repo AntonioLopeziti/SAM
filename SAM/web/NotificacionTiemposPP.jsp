@@ -161,9 +161,9 @@
                     <hr>
                 </div>
                 <div class="divNoPerso2">
-                    <button id="LimPantalla" style="margin-left: 40%;">Limpiar Pantalla</button>  
+                    <button id="LimPantalla" style="margin-left: 40%;">Limpiar Pantalla</button>
                 </div>
-            </div>            
+            </div>
             <div class="bkClassNoti" hidden>
                 <label style="padding-left: 25px; font-size: 13px;">Clase de notificación</label>
                 <!--<label style="padding-left: 10px; font-size: 13.5px;">Clase de notificación</label>-->
@@ -173,6 +173,11 @@
                 <input type="radio" value="aut" name="clnoti" checked class="rbcln" id="NotFinalAu"> Notif.final autom.
                 <input type="checkbox" value="res" name="ckreserva" class="rbcln" id="CompRes"> Compensar reserva
             </div>
+            <div class="divmatchEsp">
+                <label>Especificaciones</label> 
+                <hr class="lineaazul">
+                <label id="lblTextoLargo"></label>
+            </div><br><br>
             <div class="DatosGeneNotiTiemp">
                 <label>Datos Generales</label>
                 <hr id="lineaNotiTiempos">
