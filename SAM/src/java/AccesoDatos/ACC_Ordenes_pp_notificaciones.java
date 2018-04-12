@@ -875,15 +875,37 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return op;
     }
-
+    
+    public String TextoLargoP(String orden){
+        String rtn = "";
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs;
+        
+        String query = "{call PP.TextoLargo(?)}";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, orden);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rtn = rs.getString("cadena");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        con.CerrarConexion(conn);
+        
+        return rtn;
+    }
+    
     public ArrayList<componentesPP> MostraTABPM01NOPP(String ord, String ope) {
         ArrayList<componentesPP> mpm = new ArrayList<>();
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
-        PreparedStatement pst2 = null;
+        PreparedStatement pst2;
         ResultSet rs = null;
-        ResultSet rs2 = null;
+        ResultSet rs2;
         String query = "{call PP.not_cargaDatosOpe(?,?)}";
         String query2 = "{call PP.not_cargaDatosComponente(?)}";
         try {
@@ -900,6 +922,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setCentro(rs.getString("centro"));
                 ma.setAlmacen("1400");
                 ma.setCl_mov("101");
+                ma.setCantidad(rs.getString("cantidad_total"));
                 mpm.add(ma);
             }
         } catch (Exception e) {
@@ -918,6 +941,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setCentro(rs2.getString("centro"));
                 ma.setAlmacen("1400");
                 ma.setCl_mov("261");
+                ma.setCantidad(rs2.getString("cantidad_necesaria_componente"));
                 mpm.add(ma);
             }
         } catch (Exception e) {
