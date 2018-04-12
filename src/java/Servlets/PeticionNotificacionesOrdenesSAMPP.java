@@ -13,6 +13,7 @@ import AccesoDatos.ACC_BOMEquipos;
 import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_Material;
 import AccesoDatos.ACC_Pm_operaciones_notificaciones;
+import AccesoDatos.ACC_Zebra;
 import AccesoDatos.Consultas;
 import Entidades.ControlListaOrdenes;
 import Entidades.cabecera_ordenes_crea;
@@ -24,6 +25,7 @@ import Entidades.materiales;
 import Entidades.materiales_ordenes_crea;
 import Entidades.operaciones_ordenes_crea;
 import Entidades.PlanPP;
+import Entidades.Zebra_noti_PT;
 import Entidades.cab_MovNotificacion;
 import Entidades.componentesPP;
 import Entidades.pp01_notifi;
@@ -33,9 +35,12 @@ import Entidades.pp03_1_notificaciones;
 import Entidades.pp03_2_notificaciones;
 import Entidades.pp_03_3_notificaciones;
 import Entidades.servicios_ordenes_crea;
+import java.util.Date;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.servlet.ServletException;
@@ -156,7 +161,8 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     break;
                 case "ChecarStatusOrdenOpe":
                     PlanPP paln = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerStatusOrdenSAPPP(ord);
-                    out.println("<input type='text' id ='nosta' value='" + paln.getStatus() + "' />");
+//                    out.println("<input type='text' id ='nosta' value='" + paln.getStatus() + "' />");
+                    out.println(paln.getStatus());
 
 //                    ordenes_pp_notificaciones pl = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenStatusCNPMNOTPP(ord);
                     break;
@@ -342,10 +348,10 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     for (con = 0; con < tno.size(); con++) {
                         out.println("<tr>"
                                 + "<td><input type=\"checkbox\" name=\"ckMovMer\" value=\"" + con + "\"></td>"
-                                + "<td>" + tno.get(con).getNum_operacion() + "</td>"
+                                + "<td id=\"tdOpr" + con + "\">" + tno.get(con).getNum_operacion() + "</td>"
                                 + "<td id=\"tdMat" + con + "\">" + tno.get(con).getMaterial() + "</td>"
-                                + "<td>" + tno.get(con).getTxt_material() + "</td>"
-                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDec(this.value, 3)\"></td>"
+                                + "<td id=\"tddmt" + con + "\">" + tno.get(con).getTxt_material() + "</td>"
+                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDec(this.value, 3)\" value=\"" + tno.get(con).getCantidad() + "\"></td>"
                                 + "<td id=\"tdUM" + con + "\">" + tno.get(con).getUm() + "</td>"
                                 + "<td id=\"tdCtr" + con + "\">" + tno.get(con).getCentro() + "</td>"
                                 + "<td>" + tno.get(con).getAlmacen() + "</td>"
@@ -408,7 +414,31 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     out.println("PP" + folioActual.getFolioActual());
                     ACC_Folios.ObtenerIstancia().ActualizarFolio("PP", folioActual.getFolioActual());
                     break;
-                case "pp1prt1PP":
+                case "TextoLargo":
+                    out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().TextoLargoP(v1));
+                    break;
+                case "imprimePT":
+                    Zebra_noti_PT z1 = ACC_Zebra.ObtenerInstancia().DatosFaltantesCabecera(v1);
+                    Zebra_noti_PT z2 = ACC_Zebra.ObtenerInstancia().DatosFaltantesPosiciones(v1 , v6);
+                    
+                    Zebra_noti_PT zb = new Zebra_noti_PT();
+                    
+                    Date date = new Date();
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    
+                    zb.setPuesto_trabajo(z2.getPuesto_trabajo());
+                    zb.setDescripcion(v3);//Cambiar a nuevo Campo
+                    zb.setFecha(dateFormat.format(date));
+                    zb.setHora(horaActual);
+                    zb.setAncho("1234.000");
+                    zb.setOrden(v1);
+                    zb.setLote(v4);
+                    zb.setCantidad(Double.parseDouble(v5) + "0");
+                    zb.setCliente(z1.getCliente());
+                    zb.setNro_material(v2);
+                    ACC_Zebra.ObtenerInstancia().PrintTargetPT(zb);
+                    break; 
+               case "pp1prt1PP":
                     pp_operaciones_noti eqs = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().INPGRNOTPMNOTPP(ord, oper);
                     out.println("<input type'text' id='nspp12' value='" + ord + "' />");
                     out.println("<input type'text' id='npspp12' value='" + oper + "' />");
