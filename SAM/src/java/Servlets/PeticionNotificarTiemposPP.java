@@ -114,7 +114,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     PlanPP pla = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ObtenerDatosPlan(orden);
                     CabNotTiempo cnta = new CabNotTiempo();
                     String fl = "NT" + folioActual.getFolioActual();
-                    String folAct = ""+folioActual.getFolioActual();
+                    String folAct = "" + folioActual.getFolioActual();
                     cnta.setNum_orden(cnto.getOrden_fab());
                     cnta.setFolio_not_tiem(fl);
                     cnta.setFecha_offline(fechaActual);
@@ -238,10 +238,10 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                             out.println("<option value=\"" + mo.get(i).getNum_operacion() + "\">" + mo.get(i).getNum_operacion() + "</option>");
                         }
                         out.println("</select>");
-                        
+
                         out.println("<select id=\"selClOp\" hidden>");
                         for (int i = 0; i < mo.size(); i++) {
-                            out.println("<option value=\"" + mo.get(i).getClave_control()+ "\">" + mo.get(i).getClave_control() + "</option>");
+                            out.println("<option value=\"" + mo.get(i).getClave_control() + "\">" + mo.get(i).getClave_control() + "</option>");
                         }
                         out.println("</select>");
                     } else {
@@ -258,7 +258,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     }
                     break;
                 case "revDatosUs":
-                    control_tiempos ct = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().CargarDatosPorUs(usuario);
+                    control_tiempos ct = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().CargarDatosPorUs(usuario, orden);
                     if (ct.getNo_personal() == null || ct.getNo_personal().equals("")) {
                         out.println(0);
                     } else {
@@ -276,7 +276,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     }
                     break;
                 case "borrarRegControl":
-                    if (AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().BorraRegTablaCont(usuario)) {
+                    if (AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().BorraRegTablaCont(usuario, orden)) {
                         out.println(1);
                     } else {
                         out.println(0);
@@ -293,6 +293,11 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                 case "validarUsuario":
                     int u = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ValidarUsuario(usuario);
                     out.println(u);
+                    break;
+                case "validarNotifCread":
+                    int p = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ValidarNotifCreada(usuario, orden);
+                    out.println(p);
+                    break;
                 default:
                     break;
             }
