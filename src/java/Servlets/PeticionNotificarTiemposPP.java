@@ -238,6 +238,12 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                             out.println("<option value=\"" + mo.get(i).getNum_operacion() + "\">" + mo.get(i).getNum_operacion() + "</option>");
                         }
                         out.println("</select>");
+                        
+                        out.println("<select id=\"selClOp\" hidden>");
+                        for (int i = 0; i < mo.size(); i++) {
+                            out.println("<option value=\"" + mo.get(i).getClave_control()+ "\">" + mo.get(i).getClave_control() + "</option>");
+                        }
+                        out.println("</select>");
                     } else {
                         out.println(0);
                     }
