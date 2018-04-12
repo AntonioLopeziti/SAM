@@ -103,6 +103,7 @@ $(document).ready(function () {
             $('#OrdFab').css('background-image', 'none');
             $('#msg').html("Complete los campos obligatorios");
             validarStatusOrden();
+            verificarContenidoUs();
         } else {
             $('#OrdFab').css('background-image', 'url(images/necesario.PNG)');
         }
@@ -162,6 +163,26 @@ $(document).ready(function () {
 //       
 //    });
 });
+//Validar si ya existe una notificacion creada con el numero de operacion y el usuario
+function verificarContenidoUs() {    
+    var us = $('#NoPers').val().toUpperCase();
+    var orden = $('#OrdFab').val();
+    var acc = "validarNotifCread";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionNotificarTiemposPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + "&usuario=" + us + "&orden=" + orden,
+        success: function (data) {            
+            if(data==0){                
+            }else{
+                revDatos(us, orden);
+            }
+        }
+    });
+}
 //Validar Cantidades
 function validarCantidades() {
     var us = $('#NoPers').val();
@@ -297,7 +318,7 @@ function validarLlenado() {
                     BE.play();
                     limpiarCampos();
                     desbloquearCampos();
-                    borrarDatoControl(us);
+                    borrarDatoControl(us, ord);
                     $('#btnInicio').prop('disabled', false);
                     $('#btnFin').prop('disabled', true);
                 } else {
@@ -314,7 +335,7 @@ function validarLlenado() {
     }
 }
 //funcion para borrar el registro del usuario una vez que se inserto en cabecera y posicionn
-function borrarDatoControl(usuario) {
+function borrarDatoControl(usuario, ord) {
     var acc = "borrarRegControl";
     $.ajax({
         async: false,
@@ -322,7 +343,7 @@ function borrarDatoControl(usuario) {
         url: 'PeticionNotificarTiemposPP',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "acc=" + acc + "&usuario=" + usuario.toUpperCase(),
+        data: "acc=" + acc + "&usuario=" + usuario.toUpperCase() + "&orden=" + ord,
         success: function (data) {
             if (data == 0) {
                 $('#msg').html("Error borrar el registro del tabla control");
@@ -446,7 +467,7 @@ function revisarExcesoCant(orden) {
         }
     });
 }
-function revDatos(usuario) {
+function revDatos(usuario, orden) {
     var acc = "revDatosUs";
     $.ajax({
         async: false,
@@ -455,7 +476,7 @@ function revDatos(usuario) {
         dataType: "json",
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "acc=" + acc + "&usuario=" + usuario,
+        data: "acc=" + acc + "&usuario=" + usuario + "&orden=" + orden,
         success: function (data) {
             if (data == 0) {
 //                limpiarCampos();  
@@ -585,7 +606,7 @@ function validarUsuario() {
                 desbloquearCampos();
             } else {
                 borrarmsg();
-                revDatos(us);
+                //revDatos(us);
             }
         }
     });
@@ -614,6 +635,8 @@ function limpiarCampos() {
     $('#cntMala').val("");
     $('#sectionMuestraExc').hide();
     $('#sectionVisualExc').show();
+    $('#notsta').html("");
+    $('#lblTextoLargo').html("");
 }
 function bloquearCampos() {
     $('#OrdFab').prop("disabled", true);
@@ -685,7 +708,7 @@ function Select(obj, tipo) {
             ocultarVentanaMatch("NoPer");
             $('#btnmatchUsuarios').hide();
             $('#NoPers').css('background-image', 'none');
-            validarUsuario();
+            validarUsuario();            
             break;
     }
 }
@@ -700,6 +723,7 @@ function SelectOrd(obj, tipo, des) {
             MostrarOperaciones(obj);
             TextoLargo();
             ordsta();
+            verificarContenidoUs();
             break;
     }
 }
@@ -790,9 +814,9 @@ function selecoftabPP() {
     } else {
         var x = document.getElementById("selNoOp").selectedIndex;
         document.getElementById("selClOp").selectedIndex = x;
-        
+
         if ($("#selClOp").val() == "PP03") {
-            
+
             pp1prt3FORSAMPP($("#OrdFab").val(), $("#selClOp").val());
             mostrarventabs("ventaPM01");
             var theHandle = document.getElementById("handlePM01");
@@ -1196,7 +1220,7 @@ function validacnt261() {
             }
         });
     }
-    if(mat.length == 1){
+    if (mat.length == 1) {
         guardaCabecera();
     }
 }
@@ -1239,7 +1263,7 @@ function guardaPos() {
 
     for (i = 0; i < mat.length; i++) {
         tabix = parseInt(i);
-        if(i == 0){
+        if (i == 0) {
             tabix = parseInt(i + 1);
         }
         var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + tabix + "&v3=" + $("#tdMat" + i).text() + "&v4=" + $("#bxcnt" + i).val() + "&v5=" + $("#tdUM" + i).text() + "&v6=" + $("#bxLote" + i).val().toUpperCase() + "&v7=" + $("#tdCtr" + i).text() + "&v8=" + $("#tdCmov" + i).text();
@@ -1252,7 +1276,7 @@ function guardaPos() {
             data: send,
             success: function (data) {
                 if (i == mat.length - 1) {
-                    if(mat.length > 1){
+                    if (mat.length > 1) {
                         guardaCabecera2();
                     }
                     updateFolio();
@@ -1288,7 +1312,7 @@ function updateFolio() {
     });
 }
 
-function Print_PT(){
+function Print_PT() {
     var acc = "imprimePT";
 
     var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tddmt0").text() + "&v4=" + $("#bxLote0").val().toUpperCase() + "&v5=" + $("#bxcnt0").val() + "&v6=" + $("#tdOpr0").text();
