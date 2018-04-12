@@ -93,6 +93,7 @@ function mostrarPP(e, r) {
                     var res = data;
                     if (res == 0) {
                         ponercentro();
+                        TextoLargo();
                         ordsta();
                         tabmax();
                     } else if (res == 2) {
@@ -150,6 +151,7 @@ function mostrar1PP() {
                 if (res == 0) {
                     //Funcion para oner el centro de la orden
                     ponercentro();
+                    TextoLargo();
                     //Funcion para poner el status de la orden
                     ordsta();
                     //Cargar tabla inferior
@@ -244,6 +246,7 @@ function ordsta() {
         data: "acc=" + acc + enviar,
         success: function (data) {
             var res = data;
+            alert(res);
             $("#divoc").html(res);
             ponerStat();
         }
@@ -1027,8 +1030,8 @@ function libbotPP() {
 
 function EnviaStatusOrden(stat, ope) {
     var norden = $("#notor").val();
-//    var centro = $("#cennot").val();
-    var centro = "";
+    var centro = $("#cennot").val();
+//    var centro = "";
     var folsam = "";
 
     var send = "&v1=" + folsam +
@@ -1458,6 +1461,9 @@ function validacnt261() {
             }
         });
     }
+    if(mat.length == 1){
+        guardaCabecera();
+    }
 }
 
 function guardaCabecera() {
@@ -1494,9 +1500,14 @@ function guardaCabecera2() {
 function guardaPos() {
     var acc = "guardaPos";
     var mat = document.getElementsByName("btnShowLot");
+    var tabix = 0;
 
     for (i = 0; i < mat.length; i++) {
-        var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + parseInt(i + 1) + "&v3=" + $("#tdMat" + i).text() + "&v4=" + $("#bxcnt" + i).val() + "&v5=" + $("#tdUM" + i).text() + "&v6=" + $("#bxLote" + i).val() + "&v7=" + $("#tdCtr" + i).text() + "&v8=" + $("#tdCmov" + i).text();
+        tabix = parseInt(i);
+        if(i == 0){
+            tabix = parseInt(i + 1);
+        }
+        var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + tabix + "&v3=" + $("#tdMat" + i).text() + "&v4=" + $("#bxcnt" + i).val() + "&v5=" + $("#tdUM" + i).text() + "&v6=" + $("#bxLote" + i).val().toUpperCase() + "&v7=" + $("#tdCtr" + i).text() + "&v8=" + $("#tdCmov" + i).text();
         $.ajax({
             async: false,
             type: 'GET',
@@ -1506,8 +1517,11 @@ function guardaPos() {
             data: send,
             success: function (data) {
                 if (i == mat.length - 1) {
-                    guardaCabecera2();
+                    if(mat.length > 1){
+                        guardaCabecera2();
+                    }
                     updateFolio();
+                    Print_PT();
                     ocultarVentana('ventaPM01', '');
                 }
             }
@@ -1535,6 +1549,39 @@ function updateFolio() {
             var men = document.getElementById("msg");
 //            men.innerHTML = "Se ha grabado la notificación con el número de documento " + data;
             men.innerHTML = "Notificación grabada, movimientos mercancía ";
+        }
+    });
+}
+
+function Print_PT(){
+    var acc = "imprimePT";
+
+    var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tddmt0").text() + "&v4=" + $("#bxLote0").val().toUpperCase() + "&v5=" + $("#bxcnt0").val() + "&v6=" + $("#tdOpr0").text();
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+        }
+    });
+}
+
+function TextoLargo(){
+    var acc = "TextoLargo";
+
+    var send = "&v1=" + $("#notor").val() + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            $("#lblTextoLargo").text(data.trim());
         }
     });
 }
