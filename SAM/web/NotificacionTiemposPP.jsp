@@ -71,6 +71,7 @@
         String Domingo = po.getProperty("etiqueta.Domingo");
 
         String titulo = po.getProperty("etiqueta.CU_Titulo");
+        String NPMAvisoPant = po.getProperty("etiqueta.NPMAvisoPant");
         String ubicactecnica = po.getProperty("etiqueta.CU_UbicacTecnica");
         String masccodific = po.getProperty("etiqueta.CU_MascCodific");
         String nivjerarquicos = po.getProperty("etiqueta.CU_NivJerarquicos");
@@ -196,9 +197,14 @@
                         <select id="NoOpe">
                             <option>0010</option>                        
                         </select>   
+
                     </section>
-                    <hr>
-                </div>                
+                    <section class="divmatchEsp" style="margin-left: -13%; width: 70%;">
+                        <label><%out.println(po.getProperty("etiqueta.NPMStatus_PP"));%></label>
+                        <label style="display: inline-block; width: 80%; margin-left: -10%;" id="notsta"></label>
+                    </section>
+                    <hr style="margin-top: -1%;">
+                </div>
             </div>
             <div class="DatosReales">
                 <label>Datos Reales</label>
@@ -211,11 +217,37 @@
                 </div>
                 <div class="divBtnIniFin">                   
                     <button id="btnInicio" onclick="validarCantidades();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio Actividad</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio Actividad</label>
                     <br>
                     <button id="btnFin" onclick="validarLlenado();" disabled><input type="image" src="images/ejecuta.png"></button><label>Fin Actividad</label>
                 </div>
             </div>
         </div>
+        <div id="ventanaavis" class="VenAvisoss">
+            <div id="handleAv2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NPMInformacion_PP"));%></label><div class="BotonCerrar_Matc" onclick="cerravisos();"><label >X</label></div></div>
+            <div class="imgeninfo"><IMG SRC="images/S_B_HINT.gif"  ALT="Info"></div>
+            <div class="ContenidoAv">
+                <br>
+                <label id="etav"><%out.println(po.getProperty("etiqueta.NPMAvisoPant_PP"));%></label>
+            </div>
+            <div class="BotenAv">
+                <button id="FinalizarSIDoc" onclick="cerravisos()"><img src="images/palomal.png"/> </button>
+
+            </div>
+        </div>
+
+        <div id="ventanaavis3" class="VenAvisoss">
+            <div id="handleAv4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NPMInformacion_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ventanaavis3', '');"><label >X</label></div></div>
+            <div class="imgeninfo"><IMG SRC="images/S_B_HINT.gif"  ALT="Info"></div>
+            <div class="ContenidoAv">
+                <br>
+                <label id="">Esta operación no permite registros</label>
+            </div>
+            <div class="BotenAv">
+                <button id="" onclick="ocultarVentana('ventanaavis3', '');"><img src="images/palomal.png"/> </button>
+
+            </div>
+        </div> 
         <div id="VentanaModalOrdenFab" class="VentanaModal">
             <div id="handle"><label id="TituloMatch">Orden Fabricación</label><div class="BotonCerrar_Matc" onclick="ocultarVentanaMatch('OrdFab');"><label>X</label></div></div>
             <div class="PanelBntMatch"><button onclick="cambiarMath();">Restricciones</button><hr></div>
@@ -284,9 +316,73 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
+        <div id="ventaPM01" class="Ventabdes" style="margin-top: 20px;">
+            <div id="handlePM01"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NPMNotificacionoperor_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ventaPM01', '');"><label >X</label></div></div>
+            <div class="Contentabdes">
+                <section class="DobleScroll" id="DobleSection">
+                    <section id="DobleContainer"></section>
+                </section>
+                <section class="TableContainer">
+                    <section class="SecHead">
+                        <table id="TabHead">
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>Operación</td>
+                                    <td>Material</td>
+                                    <td>Texto breve</td>
+                                    <td>Cantidad</td>
+                                    <td>UM</td>
+                                    <td>Centro</td>
+                                    <td>Almacen</td>
+                                    <td>Lote</td>
+                                    <td></td>
+                                    <td>Clase Mov.</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </section>
+                    <section class="SecBody" id="SecCuerpoCld">
+
+                    </section>
+                </section>
+                <button id="btnCld3" class="btnCalidad3" type="submit" onclick="EliminaFila()"></button>
+            </div>
+            <div class="Botpm">
+                <button style="" onclick="ConsMaterial();" > <img style="height:15px;" src="images/cosma2.png" /> <%out.println(po.getProperty("etiqueta.NPMConsumoMate_PP"));%></button>
+                <button onclick="cerraventabs('ventaPM01')" ><img  src="images/S_B_CANC.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%out.println(po.getProperty("etiqueta.NPMFinaliproce_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            </div> 
+        </div>
+        <div id="VentanaModalLote" class="VentanaModalLoteL">
+            <div id="handle6"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LoteMa_Mov"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalLote', '');"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="ConsultaTablaLote">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollLote">
+                        <div class="fixedYL" id="fixedYLote">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa1_Mov"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa2_Mov"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa3_Mov"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa4_Mov"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedXL" id="cargarDatosLote">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <footer>
             <script>
+                function cerravisos() {
+                    $("#etav").html("<%=NPMAvisoPant%>");
+                    $("#ventanaavis").css("display", "none");
+                }
                 function checkDec(num, tam) {
                     var limit;
                     var FINC;
