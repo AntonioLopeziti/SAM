@@ -130,6 +130,7 @@ public class ACC_NotificarTiempos {
                 OrdenesOperaciones p = new OrdenesOperaciones();
                 p.setNum_orden(rs.getString("num_orden"));
                 p.setNum_operacion(rs.getString("num_operacion"));
+                p.setClave_control(rs.getString("clave_control"));
                 mo.add(p);
             }
         } catch (Exception e) {
