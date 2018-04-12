@@ -84,16 +84,17 @@ public class ACC_NotificarTiempos {
     }
 
     //Verificar y cargar datos por Usuario
-    public control_tiempos CargarDatosPorUs(String usuario) {
+    public control_tiempos CargarDatosPorUs(String usuario, String orden) {
         control_tiempos ct = new control_tiempos();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "{CALL PP.NotTiempos_CargarDatosPorUsuario(?)}";
+        String query = "{CALL PP.NotTiempos_CargarDatosPorUsuario(?,?)}";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, usuario);
+            ps.setString(2, orden);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ct.setNo_personal(rs.getString("no_personal"));
@@ -186,6 +187,28 @@ public class ACC_NotificarTiempos {
         }
         return ban;
     }
+    public int ValidarNotifCreada(String us, String orden){
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        ResultSet rs;
+        int ban = 0;
+        String query = "{CALL PP.NotTiempo_ValidarNotifCreada(?,?)}";
+        try{
+            ps = con.prepareStatement(query);
+            ps.setString(1, us);
+            ps.setString(2, orden);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                ban = 1;
+            }
+        }catch (Exception e) {
+            System.err.println("Error en validar num de personal, ACC_NotificarTiempos por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ban;
+    }
     //Validar status de ordenes en PP.control_listadoOrdenes
     public int ValidarStatusOrdenTab(String orden) {
         Conexion cnx = new Conexion();
@@ -269,15 +292,16 @@ public class ACC_NotificarTiempos {
         return ban;
     }
     //borra el registro en la tabla control al insertar en cabecera y posicion
-    public boolean BorraRegTablaCont (String usuario){
+    public boolean BorraRegTablaCont (String usuario, String orden){
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         Boolean ban = false;
-        String sql = "{CALL PP.NotTiempo_BorraRegTablaCont(?)}";
+        String sql = "{CALL PP.NotTiempo_BorraRegTablaCont(?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, usuario);
+            ps.setString(2, orden);
             if(ps.executeUpdate() == 1){
                 ban = true;
             }
