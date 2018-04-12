@@ -226,7 +226,7 @@
             <input type="text" id="bt" hidden/>
             <div class="ContentEquipos">
                 <div class="divmatchequipo">
-                    <label><%out.println(po.getProperty("etiqueta.NPMOrden_PP"));%></label> 
+                    <label><%out.println(po.getProperty("etiqueta.NPMOrden_PP"));%></label>
                     <hr class="lineaazul">
                     <section class="subdiv1">
                         <label><%out.println(po.getProperty("etiqueta.NPMOrden_PP"));%></label><input  id="notor" type="text" maxlength="12" onkeypress="mostrarPP(event, this.value)" style="width:40%;"/><button id="match_N1" class='BtnMatchIcon2'></button>
@@ -235,10 +235,10 @@
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.NPMSuboperacion_PP"));%></label><input id="notsop" type="text" maxlength="4" style="width:40%;" />
                         <hr>
-<!--                        <label>Cant. a fabricar</label><input id="cntFabricar" type="text" maxlength="8" style="width:30%;"/>
-                        <hr>
-                        <label>Cant. fabricada</label><input id="cntFabricada" type="text" maxlength="8" style="width: 30%;"/>
-                        <hr>-->
+                        <!--                        <label>Cant. a fabricar</label><input id="cntFabricar" type="text" maxlength="8" style="width:30%;"/>
+                                                <hr>
+                                                <label>Cant. fabricada</label><input id="cntFabricada" type="text" maxlength="8" style="width: 30%;"/>
+                                                <hr>-->
                         <input id="cennot" hidden/>
                     </section>
                     <section class="subdiv2">
@@ -249,62 +249,12 @@
                         <button onclick="canbotPP()" > <img src="images/cierretecnico.png"><span>Cierre Técnico</span></button>
                         <button  onclick="cciebotPP()"> <img src="images/cancelarcierre.png"><span>Can. Cierre Téc.</span></button>
                     </section>
+                </div><br>
+                <div class="divmatchEsp">
+                    <label>Especificaciones</label> 
+                    <hr class="lineaazul">
+                    <label id="lblTextoLargo"></label>
                 </div>
-
-                <!--                <section class="divdatosgralEquipos">
-                                    <label><%out.println(po.getProperty("etiqueta.NPMEquipo_PP"));%></label> 
-                                    <hr class="lineaazul">
-                                    <div class="div1gral">
-                                        <label><%out.println(po.getProperty("etiqueta.NPMEquipo_PP"));%></label><input id="nteq" type="text" style=" width:35%;" disabled/><span style="margin-left: 5%;"><input id="nteqch" Style="vertical-align: middle" type="checkbox"  disabled/><label id="labme" style="color:#ABABA6;"><%out.println(po.getProperty("etiqueta.NPMEquipomontado_PP"));%></label></span>
-                                        <hr> 
-                                        <input id="ntdeseq" type="text" style=" width:55%; border:none;"   value="" readonly />
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.NPEqsuperior_PP"));%></label><input id="notesp"  type="text" disabled>
-                                        <span style="margin-left: 5%;"> <button id="VisDoo" style="width: 35%;" disabled>Visualizar Documentos</button> </span>
-                                        <hr> 
-                                        <input id="notdesesp" type="text" style=" width:55%; border:none;" value="" readonly />
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.NPCentroalma_PP"));%></label><input id="notcent" type="text" disabled style="width: 15%;" /> / <input id="notalm" type="text" disabled style="width: 15%; " />
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.NPMMaterial_PP"));%></label><input id="notmat" type="text" disabled  style="width: 45%;"/>
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.NPMLote_PP"));%></label><input id="notlote" type="text" disabled  style="width: 20%;"/>
-                                        <hr>
-                                    </div>
-                                    <div class="div2gral">
-                                        <button  onclick="HorasT()" id="desmo" style="padding-right: -5%; width: 48%;"><img style="width:15%; " src="images/desmontar.png" ><%out.println(po.getProperty("etiqueta.NPMDesmontEnsa_PP"));%></button> 
-                                        <button  onclick="monta()" id="desmo2" style="width:52%;"><img style="width:13.5%; " src="images/montar.png" ><%out.println(po.getProperty("etiqueta.NPMMontEnsa_PP"));%></button>
-                
-                                        <div id="table-scroll">
-                                            <div id="fixedY">
-                                                <table>
-                                                    <thead style="font-size: 1.2em;">
-                                                        <tr>
-                                                            <td><%out.println(po.getProperty("etiqueta.NPMCaract_PP"));%></td>
-                                                            <td><%out.println(po.getProperty("etiqueta.NPMValo_PP"));%></td>
-                                                        </tr>
-                                                    </thead>
-                                                </table>
-                                            </div>
-                                            <div id="cuerpoDatos">
-                                                <div id="nofixedX">
-                                                    <table>
-                                                        <tbody style="font-size: 0.8em;">
-                                                            <tr><td id="tdl1">&nbsp;</td><td id="tdr1">&nbsp;</td></tr>
-                                                            <tr><td id="tdl2">&nbsp;</td><td id="tdr2">&nbsp;</td></tr>
-                                                            <tr><td id="tdl3">&nbsp;</td><td id="tdr3">&nbsp;</td></tr>
-                                                            <tr><td id="tdl4">&nbsp;</td><td id="tdr4">&nbsp;</td></tr>
-                                                            <tr><td id="tdl5">&nbsp;</td><td id="tdr5">&nbsp;</td></tr>
-                                                            <tr><td id="tdl6">&nbsp;</td><td id="tdr6">&nbsp;</td></tr>
-                                                            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>-->
                 <br>
                 <section class="tabdiv">
                     <div class="tablaSolicitud">
