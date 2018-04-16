@@ -53,6 +53,33 @@ public class ACC_Material {
         }
         return false;
     }
+    public String obtenerLote(String centro, String material, String cantidad) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        double ccn;
+
+        String query = "{CALL PP.obtenerLotePP(?,?)}";
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, centro);
+            ps.setString(2, material);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ccn = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
+                if(Double.parseDouble(cantidad) <= ccn){
+                    return rs.getString("lote");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error obtenerLote(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return "";
+    }
 
     public int validaCantidad101(String cnt, String orden) {
         String exceso = "";
