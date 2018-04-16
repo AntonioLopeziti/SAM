@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 .Ventabdes{    
     position: fixed; 
-    width: 750px; 
+    width: 890px; 
     height: 580px;
     z-index: 1002;
     left: 100%;
@@ -28,7 +28,7 @@ and open the template in the editor.
     width: 100%;
     color:#E1F0D0;
     font-family: "Tahoma"; 
-    font-size: .9em;
+    font-size: .8em;
     background: #333  top repeat-x;   
 }
 .Contentabdes{
@@ -48,6 +48,7 @@ and open the template in the editor.
     z-index: 1; position:relative;
 }
 #DobleSection { height: 420px; }
+#SecCuerpoCld { height: 420px; }
 .TableContainer
 {
     width: 100%;
@@ -89,16 +90,16 @@ and open the template in the editor.
     background-color: #E6EBEB;
 }
 .ocultar { visibility: hidden; }
-/*.bxMed
+.bxMed
 {
     background-repeat: no-repeat;
-    width: 101%;
+    width: 98%;
     height: 14px;
     text-align: left;
     font-family:  Courier New;
     font-size: 1em;
     font-weight: bold;
-}*/
+}
 
 
 .btnCalidad3{
