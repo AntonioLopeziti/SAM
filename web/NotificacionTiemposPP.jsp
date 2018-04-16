@@ -179,6 +179,11 @@
                 <hr class="lineaazul">
                 <label id="lblTextoLargo"></label>
             </div><br><br>
+            <div class="divmatchEsp">
+                <label>Observaciones</label> 
+                <hr class="lineaazul">
+                <label id="lblTextoLargo2"></label>
+            </div><br><br>
             <div class="DatosGeneNotiTiemp">
                 <label>Datos Generales</label>
                 <hr id="lineaNotiTiempos">
@@ -216,10 +221,10 @@
                     <hr>
                 </div>
                 <div class="divBtnIniFin">                   
-                    <button id="btnInicio" onclick="validarCantidades();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio Actividad</label>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio Actividad</label>
+                    <button id="btnInicio" onclick="validarCantidades();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio not. tiempos</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"/></button><label>Mov. mercancias</label>
                     <br>
-                    <button id="btnFin" onclick="validarLlenado();" disabled><input type="image" src="images/ejecuta.png"></button><label>Fin Actividad</label>
+                    <button id="btnFin" onclick="validarLlenado();" disabled><input type="image" src="images/ejecuta.png"></button><label>Fin not. tiempos</label>
                 </div>
             </div>
         </div>
@@ -329,6 +334,7 @@
                             <thead>
                                 <tr>
                                     <td></td>
+                                    <td hidden></td>
                                     <td>Operación</td>
                                     <td>Material</td>
                                     <td>Texto breve</td>
