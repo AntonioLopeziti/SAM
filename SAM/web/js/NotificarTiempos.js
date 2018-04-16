@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 $(document).ready(function () {
+    ponerUsuarioDefault();
     startTime();
-    $('#NoPers').css('background-image', 'url(images/necesario.PNG)');
+//    $('#NoPers').css('background-image', 'url(images/necesario.PNG)');
     $('#OrdFab').css('background-image', 'url(images/necesario.PNG)');
     $('#cntBuena').css('background-image', 'url(images/necesario.PNG)');
     $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
@@ -40,6 +41,20 @@ $(document).ready(function () {
         } else {
             $('#NoPers').css('background-image', 'url(images/necesario.PNG)');
         }
+    });
+    $('#OrdFab').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            validarStatusOrden();
+            verificarContenidoUs();
+            validarOrdenLib();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
     });
     $('#txtOrd').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
@@ -104,6 +119,7 @@ $(document).ready(function () {
             $('#msg').html("Complete los campos obligatorios");
             validarStatusOrden();
             verificarContenidoUs();
+            validarOrdenLib();
         } else {
             $('#OrdFab').css('background-image', 'url(images/necesario.PNG)');
         }
@@ -151,10 +167,11 @@ $(document).ready(function () {
         CargarContenido();
     });
     $('#LimPantalla').click(function () {
-        $("#NoPers").css('background-image', 'url(images/necesario.PNG)');
+//        $("#NoPers").css('background-image', 'url(images/necesario.PNG)');
         limpiarCampos();
         desbloquearCampos();
         borrarmsg();
+        ponerUsuarioDefault();
     });
     $("#okOrden").click(function () {
         CargarContenidoOrdFab();
@@ -523,6 +540,7 @@ function revDatos(usuario, orden) {
                 $('#cntMala').css('background-image', 'none');
                 $('#btnInicio').prop('disabled', true);
                 $('#btnFin').prop('disabled', false);
+                $('#btnmatchOrdLib').hide();
                 bloquearCampos();
             }
         }
@@ -539,7 +557,7 @@ function validarStatusOrden() {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + acc + "&orden=" + orden,
-        success: function (data) {
+        success: function (data) {            
             if (data == 1) {
                 var BE = document.createElement('audio');
                 BE.src = "audio/sapmsg.wav";
@@ -548,7 +566,33 @@ function validarStatusOrden() {
                 $('#iconmsg').show();
                 $('#iconmsg').attr('src', 'images/advertencia.PNG');
                 $('#OrdFab').val("");
-            } else {
+            } else {                
+            }
+        }
+    });
+}
+//Validar al blur que solo acepte ordenes con status LIB.
+function validarOrdenLib(){
+    var acc = "ValidarOrdLibBlur";
+    var orden = $('#OrdFab').val();
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionNotificarTiemposPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + "&orden=" + orden,
+        success: function (data) {
+            if (data == 0) {
+                var BE = document.createElement('audio');
+                BE.src = "audio/sapmsg.wav";
+                BE.play();
+                $('#msg').html("Número de orden incorrecto");
+                $('#iconmsg').show();
+                $('#iconmsg').attr('src', 'images/advertencia.PNG');
+                $('#OrdFab').val("");
+                $('#sectionMostOp').html("<select><option></option></select>");
+            } else {   
                 validarOrdFab();
                 TextoLargo();
                 TextoLargo2();
@@ -663,6 +707,7 @@ function desbloquearCampos() {
     $('#OrdFab').css('background-image', 'url(images/necesario.PNG)');
     $('#cntBuena').css('background-image', 'url(images/necesario.PNG)');
     $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
+    $('#btnmatchOrdLib').show();
 }
 
 //FUNCIONES DE VENTANAS MODALES
