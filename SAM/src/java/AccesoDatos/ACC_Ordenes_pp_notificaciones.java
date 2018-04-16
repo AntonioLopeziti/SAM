@@ -897,6 +897,27 @@ public class ACC_Ordenes_pp_notificaciones {
         
         return rtn;
     }
+    public String TextoLargoP2(String orden){
+        String rtn = "";
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs;
+        
+        String query = "{call PP.TextoLargo(?)}";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, orden);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rtn = rs.getString("observacion");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        con.CerrarConexion(conn);
+        
+        return rtn;
+    }
     
     public ArrayList<componentesPP> MostraTABPM01NOPP(String ord, String ope) {
         ArrayList<componentesPP> mpm = new ArrayList<>();
@@ -923,6 +944,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setAlmacen("1400");
                 ma.setCl_mov("101");
                 ma.setCantidad(rs.getString("cantidad_total"));
+                ma.setDescripcion(rs.getString("cadena"));
                 mpm.add(ma);
             }
         } catch (Exception e) {
