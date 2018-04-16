@@ -20,6 +20,33 @@ public class Zebra_noti_PT {
     String cantidad = "";//v5
     String cliente = "";//???
     String nro_material = "";//v2
+    String fol_sam = "";//v7
+    String um = "";
+    String centro = "";
+
+    public String getCentro() {
+        return centro;
+    }
+
+    public void setCentro(String centro) {
+        this.centro = centro;
+    }
+    
+    public String getUm() {
+        return um;
+    }
+
+    public void setUm(String um) {
+        this.um = um;
+    }
+
+    public String getFol_sam() {
+        return fol_sam;
+    }
+
+    public void setFol_sam(String fol_sam) {
+        this.fol_sam = fol_sam;
+    }
 
     public String getPuesto_trabajo() {
         return puesto_trabajo;
