@@ -209,6 +209,28 @@ public class ACC_NotificarTiempos {
         }
         return ban;
     }
+    //Validar que al blur de la orden solo se acepten ordenes LIB.
+    public int ValidarStatusLibBlur(String orden) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        ResultSet rs;
+        int ban = 0;
+        String query = "{CALL PP.NotTiempo_ValidarOrdenTablaPPSoloLib(?)}";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, orden);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ban = 1;
+            }
+        } catch (Exception e) {
+            System.err.println("Error en borrar el registro de tabla interna en, ACC_NotificarTiempos por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ban;
+    }
     //Validar status de ordenes en PP.control_listadoOrdenes
     public int ValidarStatusOrdenTab(String orden) {
         Conexion cnx = new Conexion();
