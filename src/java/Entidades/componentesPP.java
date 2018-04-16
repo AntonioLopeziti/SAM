@@ -21,6 +21,15 @@ public class componentesPP {
     String almacen = "";
     String lote = "";
     String cl_mov = "";
+    String descripcion = "";
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
     public String getNu_orden() {
         return nu_orden;
