@@ -69,6 +69,7 @@
         String Viernes = po.getProperty("etiqueta.Viernes");
         String Sabado = po.getProperty("etiqueta.Sabado");
         String Domingo = po.getProperty("etiqueta.Domingo");
+        String nomUs = (String) session.getAttribute("Usuario");
 
         String titulo = po.getProperty("etiqueta.CU_Titulo");
         String NPMAvisoPant = po.getProperty("etiqueta.NPMAvisoPant");
@@ -101,6 +102,8 @@
                 }
             }
             CheckResolucion();
+            var usuario = '<%=Nombre%>';
+
             <%
                 String permiso = ACC_Usuarios.ObtenerInstancia().VerificarPermisos(Nombre);
             %>
@@ -126,6 +129,13 @@
                 $('#msg').html(m);
                 $('#iconmsg').show();
                 $('#iconmsg').attr('src', im);
+            }
+        </script>
+        <script>
+            function ponerUsuarioDefault() {
+                var us = usuario;
+                document.getElementById("NoPers").value = us;
+//                $('#NoPers').val(usuario);
             }
         </script>
         <link rel="stylesheet" href="css/StyleGeneral.css"> 
@@ -158,7 +168,7 @@
                 <label>Busqueda General</label>
                 <hr id="lineaNotiTiempos">
                 <div class="divNoPers1">
-                    <label>No Personal</label><input type="text" id="NoPers" maxlength="10" style="text-transform: uppercase; background-repeat: no-repeat;" /><button id="btnmatchUsuarios"  class="BtnMatchIcon"></button>
+                    <label>No Personal</label><input type="text" id="NoPers" value="" maxlength="10" style="text-transform: uppercase; background-repeat: no-repeat;" /><button id="btnmatchUsuarios"  class="BtnMatchIcon"></button>
                     <hr>
                 </div>
                 <div class="divNoPerso2">
