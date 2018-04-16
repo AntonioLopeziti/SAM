@@ -282,6 +282,10 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                         out.println(0);
                     }
                     break;
+                case "ValidarOrdLibBlur":
+                    int b = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ValidarStatusLibBlur(orden);
+                    out.println(b);
+                    break;
                 case "ValidarStatusOrden":
                     int z = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ValidarStatusOrdenTab(orden);
                     out.println(z);
