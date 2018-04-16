@@ -115,6 +115,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                 case "guardaCabecera":
                     String fl = "PP" + folioActual.getFolioActual();
                     AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().CabeceraInsertaMovNot(fl, v1, v2, horaActual, fechaActual, v3, v4, v5);
+                    out.println(fl);
                     break;
                 case "guardaPos":
                     String fll = "PP" + folioActual.getFolioActual();
@@ -124,7 +125,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     if (v8.equals("101")) {
                         ccnt = ACC_Material.ObtenerInstancia().StockLibre(v3, v6, v7) + Double.parseDouble(v4);
                         fmt = df.format(ccnt);
-                        ACC_Material.ObtenerInstancia().ActualizaInv101(v3, v6, v7, fmt);
+                        ACC_Material.ObtenerInstancia().ActualizaInv101(v3, v6, v7, fmt);                        
                         ACC_Folios.ObtenerIstancia().ActualizarFolio("PP", folioActual.getFolioActual());
                         System.out.println(ccnt);
                     }
@@ -348,21 +349,23 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     for (con = 0; con < tno.size(); con++) {
                         out.println("<tr>"
                                 + "<td><input type=\"checkbox\" name=\"ckMovMer\" value=\"" + con + "\"></td>"
+                                + "<td id=\"tdDes" + con + "\" hidden>" + tno.get(con).getDescripcion() + "</td>"
                                 + "<td id=\"tdOpr" + con + "\">" + tno.get(con).getNum_operacion() + "</td>"
-                                + "<td id=\"tdMat" + con + "\">" + tno.get(con).getMaterial() + "</td>"
+                                + "<td name=\"tdMaterial\" id=\"tdMat" + con + "\">" + tno.get(con).getMaterial() + "</td>"
                                 + "<td id=\"tddmt" + con + "\">" + tno.get(con).getTxt_material() + "</td>"
-                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDec(this.value, 3)\" value=\"" + tno.get(con).getCantidad() + "\"></td>"
-                                + "<td id=\"tdUM" + con + "\">" + tno.get(con).getUm() + "</td>"
-                                + "<td id=\"tdCtr" + con + "\">" + tno.get(con).getCentro() + "</td>"
+                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" name=\"bxcantidad\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDec(this.value, 3)\" value=\"" + tno.get(con).getCantidad() + "\"></td>"
+                                + "<td name=\"tdUnM\" id=\"tdUM" + con + "\">" + tno.get(con).getUm() + "</td>"
+                                + "<td name=\"tdCentro\" id=\"tdCtr" + con + "\">" + tno.get(con).getCentro() + "</td>"
                                 + "<td>" + tno.get(con).getAlmacen() + "</td>"
-                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxLote" + con + "\" style=\"text-transform: uppercase;\" maxlength=\"10\" onfocus=\"btnloteShow(" + con + ")\"></td>"
+                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxLote" + con + "\" name=\"bxlote\" style=\"text-transform: uppercase;\" maxlength=\"10\" onfocus=\"btnloteShow(" + con + ")\"></td>"
                                 + "<td><button id=\"btnLot" + con + "\" class='BtnMatchIcon' name=\"btnShowLot\" onclick=\"btnLoteMatch(" + con + ")\"  hidden></button></td>"
-                                + "<td id=\"tdCmov" + con + "\">" + tno.get(con).getCl_mov() + "</td>"
+                                + "<td name=\"tdClaseM\" id=\"tdCmov" + con + "\">" + tno.get(con).getCl_mov() + "</td>"
                                 + "</tr>");
                     }
                     for (int c1 = con; c1 < 20; c1++) {
                         out.println("<tr>"
                                 + "<td>&nbsp;</td>"
+                                + "<td hidden>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
@@ -377,9 +380,10 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     }
                     out.println("<tr class=\"ocultar\">"
                             + "<td>000</td>"
+                            + "<td hidden>000</td>"
                             + "<td>000000000</td>"
                             + "<td>0000000000</td>"
-                            + "<td>00000000000000000000000000000000000000</td>"
+                            + "<td>0000000000000000000000000000000000000000000</td>"
                             + "<td>000000000000</td>"
                             + "<td>000</td>"
                             + "<td>000000</td>"
@@ -400,6 +404,9 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                         out.println(0);
                     }
                     break;
+                case "obtenerLote":
+                    out.println(ACC_Material.ObtenerInstancia().obtenerLote(v1, v2, v3));
+                    break;
                 case "validaDatos101":
                     int c = ACC_Material.ObtenerInstancia().validaCantidad101(v2, v1);
                     out.println(c);
@@ -416,6 +423,9 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     break;
                 case "TextoLargo":
                     out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().TextoLargoP(v1));
+                    break;
+                case "TextoLargo2":
+                    out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().TextoLargoP2(v1));
                     break;
                 case "imprimePT":
                     Zebra_noti_PT z1 = ACC_Zebra.ObtenerInstancia().DatosFaltantesCabecera(v1);
@@ -436,7 +446,11 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     zb.setCantidad(Double.parseDouble(v5) + "0");
                     zb.setCliente(z1.getCliente());
                     zb.setNro_material(v2);
+                    zb.setFol_sam(v7);
+                    zb.setCentro(v8);
+                    zb.setUm(v9);
                     ACC_Zebra.ObtenerInstancia().PrintTargetPT(zb);
+                    ACC_Zebra.ObtenerInstancia().guardaEtiquetaDB(zb);                    
                     break; 
                case "pp1prt1PP":
                     pp_operaciones_noti eqs = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().INPGRNOTPMNOTPP(ord, oper);
