@@ -164,7 +164,7 @@ $(document).ready(function () {
 //    });
 });
 //Validar si ya existe una notificacion creada con el numero de operacion y el usuario
-function verificarContenidoUs() {    
+function verificarContenidoUs() {
     var us = $('#NoPers').val().toUpperCase();
     var orden = $('#OrdFab').val();
     var acc = "validarNotifCread";
@@ -175,9 +175,9 @@ function verificarContenidoUs() {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + acc + "&usuario=" + us + "&orden=" + orden,
-        success: function (data) {            
-            if(data==0){                
-            }else{
+        success: function (data) {
+            if (data == 0) {
+            } else {
                 revDatos(us, orden);
             }
         }
@@ -551,6 +551,7 @@ function validarStatusOrden() {
             } else {
                 validarOrdFab();
                 TextoLargo();
+                TextoLargo2();
                 ordsta();
             }
         }
@@ -708,7 +709,7 @@ function Select(obj, tipo) {
             ocultarVentanaMatch("NoPer");
             $('#btnmatchUsuarios').hide();
             $('#NoPers').css('background-image', 'none');
-            validarUsuario();            
+            validarUsuario();
             break;
     }
 }
@@ -722,6 +723,7 @@ function SelectOrd(obj, tipo, des) {
             $('#DescripOrd').html(des);
             MostrarOperaciones(obj);
             TextoLargo();
+            TextoLargo2();
             ordsta();
             verificarContenidoUs();
             break;
@@ -771,6 +773,22 @@ function TextoLargo() {
         }
     });
 }
+function TextoLargo2() {
+    var acc = "TextoLargo2";
+
+    var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            $("#lblTextoLargo2").text(data.trim());
+        }
+    });
+}
 
 function ordsta() {
     var acc = "ChecarStatusOrdenOpe";
@@ -792,6 +810,8 @@ function ordsta() {
 
 function selecoftabPP() {
     var ptr = $("#notsta").text().substring(0, 4);
+    var ctn = $("#cntBuena").val();
+    var ord = $("#OrdFab").val();
     if (ptr == "CERR" || ptr == "CTEC" || ptr == "ABIE" || ptr == "CERR") {
         $(document).ready(function () {
             mostrarventaavi();
@@ -803,7 +823,7 @@ function selecoftabPP() {
             BE.play();
             borrarmsg();
         });
-    } else if (ptr == "") {
+    } else if (ord == "") {
         $('#msg').html("Ingrese una orden");
         var icon = $('#iconmsg');
         icon.show();
@@ -811,20 +831,34 @@ function selecoftabPP() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
+        $("#OrdFab").focus();
+        $('#OrdFab').css('background-image', 'none');
+    } else if (ctn == "") {
+        $('#msg').html("Cantidad Obligatoria");
+        var icon = $('#iconmsg');
+        icon.show();
+        icon.attr('src', 'images/advertencia.PNG');
+        var BE = document.createElement('audio');
+        BE.src = 'audio/saperror.wav';
+        BE.play();
+        $("#cntBuena").focus();
+        $('#cntBuena').css('background-image', 'none');
     } else {
         var x = document.getElementById("selNoOp").selectedIndex;
         document.getElementById("selClOp").selectedIndex = x;
 
         if ($("#selClOp").val() == "PP03") {
 
-            pp1prt3FORSAMPP($("#OrdFab").val(), $("#selClOp").val());
+            pp1prt3FORSAMPP($("#OrdFab").val(), $("#selNoOp").val());
             mostrarventabs("ventaPM01");
             var theHandle = document.getElementById("handlePM01");
             var theRoot = document.getElementById("ventaPM01");
             Drag.init(theHandle, theRoot);
             AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpoCld');
+            fisrtChild();
             document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
             sujetoLote();
+            obtenerLote();
         } else {
             mostrarventaavi4();
             var theHandle = document.getElementById("handleAv4");
@@ -896,6 +930,11 @@ function cerraventabs(id) {
     var venavisos = document.getElementById(id);
     venavisos.style.display = "none";
 }
+function fisrtChild() {
+    if ($("#tdCmov0").text() == "101") {
+        document.getElementById("TabBody").rows[0].style.backgroundColor = "red";
+    }
+}
 function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
 {
     var myTable = document.getElementById(cuerpo);
@@ -942,6 +981,26 @@ function sujetoLote() {
                 if (data == 0) {
                     $('#bxLote' + i).prop('disabled', true);
                 }
+            }
+        });
+    }
+}
+function obtenerLote() {
+    var mat = document.getElementsByName("btnShowLot");
+    var acc = "obtenerLote";
+
+    for (i = 0; i < mat.length; i++) {
+
+        var enviar = "&v1=" + $("#tdCtr" + i).text() + "&v2=" + $("#tdMat" + i).text() + "&acc=" + acc + "&v3=" + $("#bxcnt" + i).val();
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: enviar,
+            success: function (data) {
+                $("#bxLote" + i).val(data);
             }
         });
     }
@@ -1021,9 +1080,9 @@ function mensajesValidacionInco(msg) {
     var BE = document.createElement('audio');
     BE.src = "audio/saperror.wav";
     BE.play();
-    var iconm = document.getElementById("iconmsg");
-    iconm.style.visibility = "visible";
-    iconm.src = "images/advertencia.PNG";
+    var icon = $('#iconmsg');
+    icon.show();
+    icon.attr('src', 'images/advertencia.PNG');
     var men = document.getElementById("msg");
     men.innerHTML = msg;
 }
@@ -1032,7 +1091,9 @@ function btnloteShow(pos) {
     var btn = document.getElementsByName("btnShowLot");
     for (i = 0; i < btn.length; i++) {
         if (i === pos) {
-            $("#btnLot" + pos).show();
+            if ($("#tdCmov" + pos).text() != "101") {
+                $("#btnLot" + pos).show();
+            }
         } else {
             $("#btnLot" + i).hide();
         }
@@ -1130,30 +1191,30 @@ function msjError(msg) {
     var BE = document.createElement('audio');
     BE.src = "audio/saperror.wav";
     BE.play();
-    var iconm = document.getElementById("iconmsg");
-    iconm.style.visibility = "visible";
-    iconm.src = "images/advertencia.PNG";
+    var icon = $('#iconmsg');
+    icon.show();
+    icon.attr('src', 'images/advertencia.PNG');
     var men = document.getElementById("msg");
     men.innerHTML = msg;
 }
 
 function ConsMaterial() {
-    var mat = document.getElementsByName("btnShowLot");
+    var mat = document.getElementsByName("tdMaterial");
+    var cant = document.getElementsByName("bxcantidad");
+    var lote = document.getElementsByName("bxlote");
 
     for (var i = 0; i < mat.length; i++) {
-        var cant = document.getElementById("bxcnt" + i);
-        var lote = document.getElementById("bxLote" + i);
-        if (cant.value == "") {
+        if (cant[i].value == "") {
             msjError("Cantidad Obligatoria");
-            cant.focus();
+            cant[i].focus();
             return;
         } else {
             borrarmsg();
         }
-        if (lote.value == "") {
-            if (lote.disabled == false) {
+        if (lote[i].value == "") {
+            if (lote[i].disabled == false) {
                 msjError("Lote es Obligatorio");
-                lote.focus();
+                lote[i].focus();
                 return;
             }
         } else {
@@ -1162,35 +1223,15 @@ function ConsMaterial() {
     }
     validacnt101();
 }
-
 function validacnt101() {
     var acc = "validaDatos101";
+    var lote = document.getElementsByName("bxlote");
+    var cant = document.getElementsByName("bxcantidad");
+    var mat = document.getElementsByName("tdMaterial");
+    var cl = document.getElementsByName("tdClaseM");
 
-    var send = "&v1=" + $("#notor").val() + "&v2=" + $("#bxcnt0").val() + "&acc=" + acc + "&v3=" + $("#tdMat0").text() + "&v4=" + $("#bxLote0").val();
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: "PeticionNotificacionesOrdenesSAMPP",
-        contentType: "application/x-www-form-urlencoded",
-        processData: true,
-        data: send,
-        success: function (data) {
-            if (data == 0) {
-                msjError("Cantidad no valida");
-                $("#bxcnt0").focus();
-                $("#bxcnt0").val("");
-            } else {
-                validacnt261();
-            }
-        }
-    });
-}
-function validacnt261() {
-    var acc = "validaDatos261";
-    var mat = document.getElementsByName("btnShowLot");
-
-    for (i = 1; i < mat.length; i++) {
-        var send = "&v2=" + $("#bxcnt" + i).val() + "&acc=" + acc + "&v3=" + $("#tdMat" + i).text() + "&v4=" + $("#bxLote" + i).val() + "&v1=" + $("#tdCtr" + i).text();
+    if (cl[0].textContent == "101") {
+        var send = "&v1=" + $("#OrdFab").val() + "&v2=" + cant[0].value + "&acc=" + acc + "&v3=" + mat[0].textContent + "&v4=" + lote[0].value;
         $.ajax({
             async: false,
             type: 'GET',
@@ -1199,66 +1240,139 @@ function validacnt261() {
             processData: true,
             data: send,
             success: function (data) {
-                var temp = new Array();
-                temp = data.split(",");
-
-                if (temp[1] == 0) {
-                    msjError("Material no existe para el lote Almacén-Centro");
-                    $("#bxLote" + i).focus();
-                    $("#bxLote" + i).val("");
-                    return;
-                } else if (temp[0] == 0) {
+                if (data == 0) {
                     msjError("Cantidad no valida");
-                    $("#bxcnt" + i).focus();
-                    $("#bxcnt" + i).val("");
-                    return;
+                    cant[0].focus();
+                    cant[0].value = "";
                 } else {
-                    if (i == mat.length - 1) {
-                        guardaCabecera();
-                    }
+                    validacnt261();
                 }
             }
         });
+    } else {
+        validacnt261();
     }
-    if (mat.length == 1) {
+
+}
+function validacnt261() {
+    var acc = "validaDatos261";
+    var lote = document.getElementsByName("bxlote");
+    var cant = document.getElementsByName("bxcantidad");
+    var mat = document.getElementsByName("tdMaterial");
+    var centro = document.getElementsByName("tdCentro");
+    var cl = document.getElementsByName("tdClaseM");
+
+    if (cl[0].textContent == "261") {
+        for (i = 1; i < mat.length; i++) {
+            var send = "&v2=" + cant[i].value + "&acc=" + acc + "&v3=" + mat[i].textContent + "&v4=" + lote[i].value + "&v1=" + centro[i].textContent;
+            $.ajax({
+                async: false,
+                type: 'GET',
+                url: "PeticionNotificacionesOrdenesSAMPP",
+                contentType: "application/x-www-form-urlencoded",
+                processData: true,
+                data: send,
+                success: function (data) {
+                    var temp = new Array();
+                    temp = data.split(",");
+
+                    if (temp[1] == 0) {
+                        msjError("Material no existe para el lote Almacén-Centro");
+                        lote[i].focus();
+                        lote[i].value = "";
+                        return;
+                    } else if (temp[0] == 0) {
+                        msjError("Cantidad no valida");
+                        cant[i].focus();
+                        cant[i].value = "";
+                        return;
+                    } else {
+                        if (i == mat.length - 1) {
+                            guardaCabecera();
+                        }
+                    }
+                }
+            });
+        }
+        if (mat.length == 1) {
+            guardaCabecera();
+        }
+    } else {
         guardaCabecera();
     }
 }
 
+var folio101 = "";
 function guardaCabecera() {
-    var acc = "guardaCabecera";
+    var mat = document.getElementsByName("tdMaterial");
+    var centro = document.getElementsByName("tdCentro");
+    var cl = document.getElementsByName("tdClaseM");
 
-    var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tdCtr0").text() + "&v4=" + $("#tdCmov0").text() + "&v5=" + usuario;
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: "PeticionNotificacionesOrdenesSAMPP",
-        contentType: "application/x-www-form-urlencoded",
-        processData: true,
-        data: send,
-        success: function (data) {
-            guardaPos();
-        }
-    });
+    if (cl[0].textContent == "101") {
+        var acc = "guardaCabecera";
+
+        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + mat[0].textContent + "&v3=" + centro[0].textContent + "&v4=" + cl[0].textContent + "&v5=" + $("#NoPers").val();
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: send,
+            success: function (data) {
+                folio101 = data;
+                guardaPos();
+            }
+        });
+    } else {
+        guardaPos();
+    }
 }
 function guardaCabecera2() {
     var acc = "guardaCabecera";
+    var mat = document.getElementsByName("tdMaterial");
+    var centro = document.getElementsByName("tdCentro");
+    var cl = document.getElementsByName("tdClaseM");
 
-    var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tdCtr0").text() + "&v4=" + $("#tdCmov1").text() + "&v5=" + usuario;
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: "PeticionNotificacionesOrdenesSAMPP",
-        contentType: "application/x-www-form-urlencoded",
-        processData: true,
-        data: send,
-        success: function (data) {
+    if (cl[0].textContent == "261") {
+        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + mat[0].textContent + "&v3=" + centro[0].textContent + "&v4=" + cl[0].textContent + "&v5=" + $("#NoPers").val();
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: send,
+            success: function (data) {
+            }
+        });
+    } else {
+        if (mat.length > 1) {
+            var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + mat[0].textContent + "&v3=" + centro[0].textContent + "&v4=" + cl[1].textContent + "&v5=" + $("#NoPers").val();
+            $.ajax({
+                async: false,
+                type: 'GET',
+                url: "PeticionNotificacionesOrdenesSAMPP",
+                contentType: "application/x-www-form-urlencoded",
+                processData: true,
+                data: send,
+                success: function (data) {
+                }
+            });
         }
-    });
+    }
 }
+
 function guardaPos() {
     var acc = "guardaPos";
-    var mat = document.getElementsByName("btnShowLot");
+    var lote = document.getElementsByName("bxlote");
+    var cant = document.getElementsByName("bxcantidad");
+    var mat = document.getElementsByName("tdMaterial");
+    var centro = document.getElementsByName("tdCentro");
+    var cl = document.getElementsByName("tdClaseM");
+    var um = document.getElementsByName("tdUnM");
+
+
     var tabix = 0;
 
     for (i = 0; i < mat.length; i++) {
@@ -1266,7 +1380,7 @@ function guardaPos() {
         if (i == 0) {
             tabix = parseInt(i + 1);
         }
-        var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + tabix + "&v3=" + $("#tdMat" + i).text() + "&v4=" + $("#bxcnt" + i).val() + "&v5=" + $("#tdUM" + i).text() + "&v6=" + $("#bxLote" + i).val().toUpperCase() + "&v7=" + $("#tdCtr" + i).text() + "&v8=" + $("#tdCmov" + i).text();
+        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + tabix + "&v3=" + mat[i].textContent + "&v4=" + cant[i].value + "&v5=" + um[i].textContent + "&v6=" + lote[i].value.toUpperCase() + "&v7=" + centro[i].textContent + "&v8=" + cl[i].textContent;
         $.ajax({
             async: false,
             type: 'GET',
@@ -1276,9 +1390,7 @@ function guardaPos() {
             data: send,
             success: function (data) {
                 if (i == mat.length - 1) {
-                    if (mat.length > 1) {
-                        guardaCabecera2();
-                    }
+                    guardaCabecera2();
                     updateFolio();
                     Print_PT();
                     ocultarVentana('ventaPM01', '');
@@ -1302,9 +1414,9 @@ function updateFolio() {
             var BE = document.createElement('audio');
             BE.src = "audio/saperror.wav";
             BE.play();
-            var iconm = document.getElementById("iconmsg");
-            iconm.style.visibility = "visible";
-            iconm.src = "images/aceptar.png";
+            var icon = $('#iconmsg');
+            icon.show();
+            icon.attr('src', 'images/aceptar.png');
             var men = document.getElementById("msg");
 //            men.innerHTML = "Se ha grabado la notificación con el número de documento " + data;
             men.innerHTML = "Notificación grabada, movimientos mercancía ";
@@ -1315,15 +1427,17 @@ function updateFolio() {
 function Print_PT() {
     var acc = "imprimePT";
 
-    var send = "&v1=" + $("#notor").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tddmt0").text() + "&v4=" + $("#bxLote0").val().toUpperCase() + "&v5=" + $("#bxcnt0").val() + "&v6=" + $("#tdOpr0").text();
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: "PeticionNotificacionesOrdenesSAMPP",
-        contentType: "application/x-www-form-urlencoded",
-        processData: true,
-        data: send,
-        success: function (data) {
-        }
-    });
+    if ($("#tdCmov0").text() == "101") {
+        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tdDes0").text() + "&v4=" + $("#bxLote0").val().toUpperCase() + "&v5=" + $("#bxcnt0").val() + "&v6=" + $("#tdOpr0").text() + "&v7=" + folio101 + "&v8=" + $("#tdCtr0").text() + "&v9=" + $("#tdUM0").text();
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: send,
+            success: function (data) {
+            }
+        });
+    }
 }
