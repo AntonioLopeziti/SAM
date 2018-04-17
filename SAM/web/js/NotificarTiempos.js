@@ -557,7 +557,7 @@ function validarStatusOrden() {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "acc=" + acc + "&orden=" + orden,
-        success: function (data) {            
+        success: function (data) {
             if (data == 1) {
                 var BE = document.createElement('audio');
                 BE.src = "audio/sapmsg.wav";
@@ -566,13 +566,13 @@ function validarStatusOrden() {
                 $('#iconmsg').show();
                 $('#iconmsg').attr('src', 'images/advertencia.PNG');
                 $('#OrdFab').val("");
-            } else {                
+            } else {
             }
         }
     });
 }
 //Validar al blur que solo acepte ordenes con status LIB.
-function validarOrdenLib(){
+function validarOrdenLib() {
     var acc = "ValidarOrdLibBlur";
     var orden = $('#OrdFab').val();
     $.ajax({
@@ -592,7 +592,7 @@ function validarOrdenLib(){
                 $('#iconmsg').attr('src', 'images/advertencia.PNG');
                 $('#OrdFab').val("");
                 $('#sectionMostOp').html("<select><option></option></select>");
-            } else {   
+            } else {
                 validarOrdFab();
                 TextoLargo();
                 TextoLargo2();
@@ -1206,9 +1206,9 @@ function peticiones(url, id, accion, f, lote, pos)
             temp = xmlhttp.responseText.split(",");
             if (temp[0] == 0) {
                 ocultarVentana(temp[1], temp[2]);
-                var iconm = document.getElementById("iconmsg");
-                iconm.style.visibility = "visible";
-                iconm.src = "images/advertencia.PNG";
+                var icon = $('#iconmsg');
+                icon.show();
+                icon.attr('src', 'images/advertencia.PNG');
                 var men = document.getElementById("msg");
                 men.innerHTML = "No hay valores por mostrar";
             } else {
