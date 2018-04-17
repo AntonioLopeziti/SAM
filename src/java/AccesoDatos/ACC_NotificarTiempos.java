@@ -380,7 +380,7 @@ public class ACC_NotificarTiempos {
             ps.setString(4, "X");
             ps.setString(5, "");
             ps.setString(6, res.getOrden_fab());
-            ps.setString(7, res.getNum_op());
+            ps.setString(7, "0010");
             ps.setString(8, res.getCtd_buena());
             ps.setString(9, res.getCtd_mala());
             ps.setString(10, res.getHora());
