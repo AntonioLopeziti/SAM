@@ -207,18 +207,18 @@
 
                     <!--<label type="text" id="DescripOrd" style="margin-left: 4%; width: 50%;"></label>-->
                     <hr>
-                    <label>Operación</label>                                                            
-                    <section id="sectionMostOp">
-                        <select id="NoOpe">
+                    <!--<label>Operación</label>-->                                                            
+                    <section id="sectionMostOp" hidden>
+<!--                        <select id="NoOpe">
                             <option>0010</option>                     
-                        </select>   
+                        </select>   -->
 
                     </section>
                     <section class="divmatchEsp" style="margin-left: -13%; width: 70%;">
                         <label><%out.println(po.getProperty("etiqueta.NPMStatus_PP"));%></label>
                         <label style="display: inline-block; width: 80%; margin-left: -10%;" id="notsta"></label>
                     </section>
-                    <hr style="margin-top: -1%;">
+                    <!--<hr style="margin-top: -1%;">-->
                 </div>
             </div>
             <div class="DatosReales">
