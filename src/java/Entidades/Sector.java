@@ -7,7 +7,6 @@ package Entidades;
 
 /**
  *
- * @author Developer-Antonio
  */
 public class Sector {
     int IdSector;
