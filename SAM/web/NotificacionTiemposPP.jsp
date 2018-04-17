@@ -210,7 +210,7 @@
                     <label>Operación</label>                                                            
                     <section id="sectionMostOp">
                         <select id="NoOpe">
-                            <option>0010</option>                        
+                            <option>0010</option>                     
                         </select>   
 
                     </section>
