@@ -159,7 +159,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     if (ACC_NotificarTiempos.ObtenerInstancia().InsertarCabNotTiempo(cnta)) {
                         if (ACC_NotificarTiempos.ObtenerInstancia().InsertarPosNotTiempo(posno)) {
                             ACC_Folios.ObtenerIstancia().ActualizarFolio("NT", Integer.parseInt(folAct));
-                            out.println(1);
+                            out.println(fl);
                         } else {
                             out.println(0);
                         }
