@@ -207,7 +207,9 @@ function validarCantidades() {
     var buena = $('#cntBuena').val();
     var mala = $('#cntMala').val();
     var orden = $('#OrdFab').val();
-    if (us == "" || ord == "" || buena == "" || mala == "") {
+    if (us == "") {
+        $('#NoPers').focus();
+        $('#NoPers').css('background-image', 'none');
         $('#msg').html("Complete los campos obligatorios");
         var icon = $('#iconmsg');
         icon.show();
@@ -215,7 +217,37 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    } else {
+    }else if (ord == "") {
+        $('#OrdFab').focus();
+        $('#OrdFab').css('background-image', 'none');
+        $('#msg').html("Complete los campos obligatorios");
+        var icon = $('#iconmsg');
+        icon.show();
+        icon.attr('src', 'images/advertencia.PNG');
+        var BE = document.createElement('audio');
+        BE.src = 'audio/saperror.wav';
+        BE.play();
+    }else if (buena == "") {
+        $('#cntBuena').focus();
+        $('#cntBuena').css('background-image', 'none');
+        $('#msg').html("Complete los campos obligatorios");
+        var icon = $('#iconmsg');
+        icon.show();
+        icon.attr('src', 'images/advertencia.PNG');
+        var BE = document.createElement('audio');
+        BE.src = 'audio/saperror.wav';
+        BE.play();
+    }else if (mala == "") {
+        $('#cntMala').focus();
+        $('#cntMala').css('background-image', 'none');
+        $('#msg').html("Complete los campos obligatorios");
+        var icon = $('#iconmsg');
+        icon.show();
+        icon.attr('src', 'images/advertencia.PNG');
+        var BE = document.createElement('audio');
+        BE.src = 'audio/saperror.wav';
+        BE.play();
+    }else {
         if ($('#checkCntExceso').prop('checked')) {
             validarDatos();
         } else {
@@ -289,7 +321,8 @@ function validarDatos() {
                 BE.src = 'audio/saperror.wav';
                 BE.play();
             } else {
-                $('#msg').html("Registro agregado correctamente");
+//                $('#msg').html("Registro agregado correctamente");
+                $('#msg').html("Notificación iniciada correctamente");
                 var icon = $('#iconmsg');
                 icon.show();
                 icon.attr('src', 'images/aceptar.png');
@@ -297,6 +330,7 @@ function validarDatos() {
                 BE.src = 'audio/sapmsg.wav';
                 BE.play();
                 limpiarCampos();
+                ponerUsuarioDefault();
             }
         }
     });
@@ -325,8 +359,8 @@ function validarLlenado() {
             processData: true,
             data: "acc=" + acc + "&usuario=" + us + "&orden=" + ord,
             success: function (data) {
-                if (data == 1) {
-                    $('#msg').html("La orden se notificó con éxito");
+                if (data != 0) {
+                    $('#msg').html("Se ha grabado la orden con el nro. de documento: " + data);
                     var icon = $('#iconmsg');
                     icon.show();
                     icon.attr('src', 'images/aceptar.png');
@@ -336,6 +370,7 @@ function validarLlenado() {
                     limpiarCampos();
                     desbloquearCampos();
                     borrarDatoControl(us, ord);
+                    ponerUsuarioDefault();
                     $('#btnInicio').prop('disabled', false);
                     $('#btnFin').prop('disabled', true);
                 } else {
@@ -363,21 +398,21 @@ function borrarDatoControl(usuario, ord) {
         data: "acc=" + acc + "&usuario=" + usuario.toUpperCase() + "&orden=" + ord,
         success: function (data) {
             if (data == 0) {
-                $('#msg').html("Error borrar el registro del tabla control");
-                var icon = $('#iconmsg');
-                icon.show();
-                icon.attr('src', 'images/advertencia.PNG');
-                var BE = document.createElement('audio');
-                BE.src = 'audio/saperror.wav';
-                BE.play();
+//                $('#msg').html("Error borrar el registro del tabla control");
+//                var icon = $('#iconmsg');
+//                icon.show();
+//                icon.attr('src', 'images/advertencia.PNG');
+//                var BE = document.createElement('audio');
+//                BE.src = 'audio/saperror.wav';
+//                BE.play();
             } else {
-                $('#msg').html("La orden se notificó con éxito");
-                var icon = $('#iconmsg');
-                icon.show();
-                icon.attr('src', 'images/aceptar.png');
-                var BE = document.createElement('audio');
-                BE.src = 'audio/sapmsg.wav';
-                BE.play();
+//                $('#msg').html("La orden se notificó con éxito");
+//                var icon = $('#iconmsg');
+//                icon.show();
+//                icon.attr('src', 'images/aceptar.png');
+//                var BE = document.createElement('audio');
+//                BE.src = 'audio/sapmsg.wav';
+//                BE.play();
             }
         }
     })
@@ -453,9 +488,9 @@ function MostrarOperaciones(orden) {
         success: function (data) {
             if (data == 0) {
 //                ErrorBusquedaMatch();
-                $('#sectionMostOp').html("<select><option></option></select>");
+                //$('#sectionMostOp').html("<select><option></option></select>");
             } else {
-                $('#sectionMostOp').html(data);
+                //$('#sectionMostOp').html(data);
                 $('#NoOpe').css("visibility", false);
                 borrarmsg();
                 revisarExcesoCant(orden);
@@ -530,8 +565,9 @@ function revDatos(usuario, orden) {
                 $('#OrdFab').val(n[5]);
                 $('#OrdFab').css('background-image', 'none');
                 //Select Número de Operacion
-                $('#NoOpe').css("visibility", false);
-                $('#sectionMostOp').html("<select><option>" + n[6] + "</option></select>");
+//                $('#NoOpe').css("visibility", false);
+//                $('#selNoOp').css("visibility", false);
+//                $('#sectionMostOp').html("<select><option>" + n[6] + "</option></select>");
                 //Input Cantidad Buena
                 $('#cntBuena').val(n[7]);
                 $('#cntBuena').css('background-image', 'none');
@@ -591,7 +627,7 @@ function validarOrdenLib() {
                 $('#iconmsg').show();
                 $('#iconmsg').attr('src', 'images/advertencia.PNG');
                 $('#OrdFab').val("");
-                $('#sectionMostOp').html("<select><option></option></select>");
+                //$('#sectionMostOp').html("<select><option></option></select>");
             } else {
                 validarOrdFab();
                 TextoLargo();
@@ -621,9 +657,10 @@ function validarOrdFab() {
                 $('#iconmsg').show();
                 $('#iconmsg').attr('src', 'images/advertencia.PNG');
                 $('#OrdFab').val("");
-                $('#sectionMostOp').html("<select><option></option></select>");
+                //$('#sectionMostOp').html("<select><option></option></select>");
             } else {
-                MostrarOperaciones(orden);
+                revisarExcesoCant(orden);
+//                MostrarOperaciones(orden);
             }
         }
     });
@@ -675,7 +712,7 @@ function limpiarCampos() {
     document.getElementById("NotFinalAu").checked = false;
     document.getElementById("CompRes").checked = false;
     $('#OrdFab').val("");
-    $('#sectionMostOp').html("<select><option>0010</option></select>");
+    //$('#sectionMostOp').html("<select><option>0010</option></select>");
     $('#cntBuena').val("");
     $('#cntMala').val("");
     $('#sectionMuestraExc').hide();
@@ -766,7 +803,8 @@ function SelectOrd(obj, tipo, des) {
             $('#btnmatchOrdLib').hide();
             $('#OrdFab').css('background-image', 'none');
             $('#DescripOrd').html(des);
-            MostrarOperaciones(obj);
+            //MostrarOperaciones(obj);
+            revisarExcesoCant(obj);
             TextoLargo();
             TextoLargo2();
             ordsta();
