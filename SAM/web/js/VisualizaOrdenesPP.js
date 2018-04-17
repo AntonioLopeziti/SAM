@@ -145,7 +145,7 @@ function fnc() {
         $('#fixedY').css({top: $('#table-scroll').scrollTop()});
     });
 }
-function seleccionar(orden, foliosam) {
+function seleccionarMate(orden, foliosam) {
     var nuo = $('#NumOrden_Bus').val("");
     var txtb = $('#TextoOrden_Bus').val("");
     var or = $('#ord');
