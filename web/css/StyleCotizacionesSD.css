@@ -71,27 +71,30 @@ and open the template in the editor.
 }
 .contain-cabacera-detalle{
     width: 100%;
-    height: 50px;
+    height: 30px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 .btn1dinamic{
-    width: 3%;
+    width: 2%;
     float: left;
     height: 100%;
 }
 .divCabeceradetalle{
-    width: 96%;
-    height: 50px;
+    width: 98%;
     float: left;
-
-
+    height: 100%;
+}
+.DivVents{
+    width: 100%;
+    height: 100%;
 }
 
 .DetalleCabIzq{
     padding-left: 2%;
     width: 45%;
     float: left;
+    height: 100%;   
 }
 .DetalleCabIzq label{
     display: inline-block;
@@ -104,7 +107,8 @@ and open the template in the editor.
 }
 .DetalleCabDer{
     float: left;
-    width: 52%;
+    width: 50%;
+    height: auto;
 }
 .DetalleCabDer label{
     width: 30%;
@@ -114,9 +118,8 @@ and open the template in the editor.
     width: 30%;
     display: inline-block;
 }
-.contad{
-    height: 200px;
-}
+
+
 .DetalleCabDer hr{
     width: 30%;
     margin-top: -1px;
@@ -132,9 +135,16 @@ and open the template in the editor.
     display: inline-block;
 }
 .Cab133{
+    width: 100%;
     background: #fff;
-    height: 100%;
-    margin-bottom: 20px;
+    height:100%;
+    
+}
+.Cab122{
+    width: 100%;
+    background: #fff;
+    height:90%;
+    
 }
 .DobleScroll { 
     height: 100px;
@@ -210,11 +220,14 @@ td{
 
 .tabs{
     height: auto;
-    width: 100%;
+    width: 98%;
 }
 .tabs button{
     margin-left: -6px;
     background: #FFFFFF;    
+}
+.tabs button:first-child{
+    margin-left: 0;
 }
 .tabs button:hover{
     background: #E5F2F9;
