@@ -11,6 +11,7 @@ import Entidades.clase_pedido_sd;
 import Entidades.grupo_vendedores;
 import Entidades.oficina_ventas;
 import Entidades.organizacion_ventas;
+import Entidades.unidades_medida;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -176,5 +177,29 @@ public class ACC_CrearPedidoSD {
             cnx.CerrarConexion(con);
         }
         return gpo;
+    }
+
+    public ArrayList<unidades_medida> GetUnidadMedida() {
+        ArrayList<unidades_medida> ume = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call SD.CrearPedidos_ConsultaUMedida}";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                unidades_medida u = new unidades_medida();
+                u.setUnidad_medida(rs.getString("unidad_medida"));
+                u.setDescripcion(rs.getString("denominacion"));
+                ume.add(u);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ume;
     }
 }
