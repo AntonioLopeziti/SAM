@@ -12,6 +12,7 @@ import Entidades.clase_pedido_sd;
 import Entidades.grupo_vendedores;
 import Entidades.oficina_ventas;
 import Entidades.organizacion_ventas;
+import Entidades.unidades_medida;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -141,6 +142,23 @@ public class peticionPedidoSDCrear extends HttpServlet {
                             out.println("<tr ondblclick=\"SelectData('" + gpo.get(i).getGrupo_vendedores() + "','VentanaModalGrpoVend','BuscarParGpovend','ConsultaTablaGpoVend','GpoVendedores')\" >");
                             out.println("<td>" + gpo.get(i).getGrupo_vendedores() + "</td>");
                             out.println("<td>" + gpo.get(i).getDenominacion() + "</td>");
+                            out.println("</tr>");
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println(0);
+                    }
+                    break;
+                case "ConsultarUnidadMedida":
+                      ArrayList<unidades_medida> ume = ACC_CrearPedidoSD.ObtenerInstancia().GetUnidadMedida();
+                    if (ume.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        for (int i = 0; i < ume.size(); i++) {
+                            out.println("<tr ondblclick=\"SeleccionarDataGrid('" + ume.get(i).getUnidad_medida() + "','VentanaModalUMedida','tdUmedi')\" >");
+                            out.println("<td>" + ume.get(i).getUnidad_medida() + "</td>");
+                            out.println("<td>" + ume.get(i).getDescripcion() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
