@@ -18,8 +18,8 @@ $(document).ready(function () {
     $('#btnmostrar').click(function () {
         $('#btnmostrar').hide();
         $('#btnocultar').show();
-        $('#divDetailCab').css('height', '400px');
-        $('#contai').css('height', '400px');
+//        $('#divDetailCab').css('height', '380px');
+        $('#contai').css('height', '300px');
         $('#contai').css('margin-bottom', '30px');
         $('#divDetailCab').show();
         ventas();
