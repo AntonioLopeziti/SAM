@@ -193,7 +193,7 @@
                 <div class="contain-cabacera-detalle" id="contai">
                     <div class="btn1dinamic">
                         <input type="image" style="vertical-align:middle;cursor:pointer;" id="btnmostrar" src="images/cuadro.PNG"/>
-                        <input type="image" style="vertical-align:middle;cursor:pointer;" id="btnocultar" src="images/gris.PNG"/>
+                        <input type="image" style="vertical-align:middle;cursor:pointer; margin-left: -5px;" id="btnocultar" src="images/gris.PNG"/>
                     </div>
 
                     <div class="divCabeceradetalle" id="divDetailCab">
@@ -201,86 +201,42 @@
                             <button  id="btnVent"><%out.println(po.getProperty("etiqueta.CotizacionOfertaVenta"));%></button>
                             <button  id="btntxts"><%out.println(po.getProperty("etiqueta.TextosPed"));%></button>                               
                         </div>
-                        <section class="Cab133">
+                        <section class="Cab122">
                             <div class="DivVents" id="DivVentas">
                                 <label style="margin-left: 2%;"><%out.println(po.getProperty("etiqueta.PedidosSDDetallesCab"));%></label>
-                                <hr style="width: 100%; margin-top:-1px;   border: 1px solid #3892E0">
-                                <div class="contad">
-                                    <div class="DetalleCabIzq">
-                                        <label><%out.println(po.getProperty("etiqueta.CotizacionClaseOferta"));%></label><input type="text" style="width: 12%;"  id="claseOferta"/><button id="matchClaseOferta" class='BtnMatchIcon'></button> <input type="text" id="DenomiacionOfer" style="width: 45%; border: none; background:none;" readonly   />
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDAreaVentas"));%></label><input type="text" style="width: 12%;" id="OrgVentas" /><button id="matchOrgVentas" class='BtnMatchIcon'></button>  / <input type="text" id="CanalDist" style="width: 10%;" /><button id="matchCnalDis" class='BtnMatchIcon'></button> / <input type="text" style="width: 10%;"  id="Sector"/><button id="matchSector" class='BtnMatchIcon'></button>
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDOficinaVentas"));%></label><input type="text" style="width: 12%;"  id="OficinaVentas"/><button id="matchOficina" class='BtnMatchIcon'></button> <input type="text" style="width: 45%;  border: none; background: none" readonly id="DOficinaVentas"/>
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDGrupoVendedo"));%></label><input type="text" style="width: 12%"  id="GpoVendedores"/><button id="matchGpoVend" class='BtnMatchIcon'></button> <input type="text" style="width: 45%; border: none; background: none;" readonly id="DGpoVendedores"/>
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDMotivoPedido"));%></label><select style="width: 20%" ID="MotivoPed" /></select>
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDMonedaDocs"));%></label><input type="text" style="width: 15%;"  id="Moneda2"><button id="matchMn2" class='BtnMatchIcon'></button>
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaZonaVenta"));%></label><input type="text" style="width: 12%;"  id="Zonaventas"><button id="matchZonaVentas" class='BtnMatchIcon'></button> <input id="DenominacionZonaVentas" type="text" style="width: 45%; background: none; border: none;" readonly />
-                                        <hr>
-                                    </div>
-                                    <div class="DetalleCabDer">
-                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaDocumento"));%></label><input type="text" style="width: 15%;" id="fechaDocumento" /><button id="matchFecDoc" class='BtnMatchIcon'></button>
-                                        <hr>
-                                        <input type="text" style="width: 100%; background: none; border: none;" readonly id="AreVentas" />
-                                        <hr style="border: #fff;">
-                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDCreadoPor"));%></label><input type="text" style="width: 15%;"  id="NombreResp" disabled value="<%=Nombre%>"/>
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaPrecio"));%></label><input type="text" style="width: 15%;"  id="FechaPrecio"/><button id="matchFecgPreci" class='BtnMatchIcon'></button>
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaListaPrec"));%></label><select type="text" style="width: 15%;"  id="LisPrecio"></select>
-                                        <hr>
-                                        <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaGpoPrecio"));%></label><select type="text" style="width: 15%;"  id="GpoPrecio"/></select>
-                                        <hr>
-                                    </div>
+                                <hr style="width: 100%; margin-left: 0; margin-top: 0;  border: 1px solid #3892E0">
+                                <div class="DetalleCabIzq">
+                                    <label><%out.println(po.getProperty("etiqueta.CotizacionClaseOferta"));%></label><input type="text" style="width: 12%;"  id="claseOferta"/><button id="matchClaseOferta" class='BtnMatchIcon'></button> <input type="text" id="DenomiacionOfer" style="width: 45%; border: none; background:none;" readonly   />
+                                    <hr>
+                                    <label><%out.println(po.getProperty("etiqueta.PedidosSDAreaVentas"));%></label><input type="text" style="width: 12%;" id="OrgVentas" /><button id="matchOrgVentas" class='BtnMatchIcon'></button>  / <input type="text" id="CanalDist" style="width: 10%;" /><button id="matchCnalDis" class='BtnMatchIcon'></button> / <input type="text" style="width: 10%;"  id="Sector"/><button id="matchSector" class='BtnMatchIcon'></button>
+                                    <hr>
+                                    <label><%out.println(po.getProperty("etiqueta.PedidosSDOficinaVentas"));%></label><input type="text" style="width: 12%;"  id="OficinaVentas"/><button id="matchOficina" class='BtnMatchIcon'></button> <input type="text" style="width: 45%;  border: none; background: none" readonly id="DOficinaVentas"/>
+                                    <hr>
+                                    <label><%out.println(po.getProperty("etiqueta.PedidosSDGrupoVendedo"));%></label><input type="text" style="width: 12%"  id="GpoVendedores"/><button id="matchGpoVend" class='BtnMatchIcon'></button> <input type="text" style="width: 45%; border: none; background: none;" readonly id="DGpoVendedores"/>
+                                    <hr>
+                                    <label><%out.println(po.getProperty("etiqueta.PedidosSDMotivoPedido"));%></label><select style="width: 20%" ID="MotivoPed" /></select>
+                                    <hr>
+                                    <label><%out.println(po.getProperty("etiqueta.PedidosSDMonedaDocs"));%></label><input type="text" style="width: 15%;"  id="Moneda2"><button id="matchMn2" class='BtnMatchIcon'></button>
+                                    <hr>
+                                    <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaZonaVenta"));%></label><input type="text" style="width: 12%;"  id="Zonaventas"><button id="matchZonaVentas" class='BtnMatchIcon'></button> <input id="DenominacionZonaVentas" type="text" style="width: 45%; background: none; border: none;" readonly />
+                                    <hr>
                                 </div>
-                                <div class="DivTablaCli">
-                                    <div id="tabscrll">
-                                        <section id="TableNotfi" >
-                                            <section class="TableContainer">
-                                                <section class="SecHead">
-                                                    <table id="TabHead">
-                                                        <thead>
-                                                            <tr>
-                                                                <td>&nbsp;&nbsp;&nbsp;</td>
-                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDFuncionInter"));%></td>
-                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDInterlocutor"));%></td>
-                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDNombre"));%></td>
-                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDCalle"));%></td>
-                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDCodigoPostal"));%></td>
-                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDPoblacion"));%></td>
-                                                                <td><%out.println(po.getProperty("etiqueta.PedidosSDDefInterlo"));%></td>
-                                                            </tr>
-                                                        </thead>
-                                                    </table>
-                                                </section>
-                                                <section class="SecBody" id="SecCuerpo">
-                                                    <table id="TabBody">
-                                                        <tbody>
-                                                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                            <tr class="ocultar"><td>00</td><td>00000000000000</td><td>0000000000000000</td><td>000000000000000000000</td><td>00000000000000000000000000000</td><td>000000000000000</td><td>000000000000000</td><td>000000000000000</td></tr>
-                                                        </tbody>
-                                                    </table>
-                                                </section>
-                                            </section>
-                                        </section>
-                                    </div>
-                                    <section class="DobleScroll" id="DobleSection">
-                                        <section id="DobleContainer"></section>
-                                    </section>
+                                <div class="DetalleCabDer">
+                                    <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaDocumento"));%></label><input type="text" style="width: 15%;" id="fechaDocumento" /><button id="matchFecDoc" class='BtnMatchIcon'></button>
+                                    <hr>
+                                    <input type="text" style="width: 100%; background: none; border: none;" readonly id="AreVentas" />
+                                    <hr style="border: #fff;">
+                                    <label><%out.println(po.getProperty("etiqueta.PedidosSDCreadoPor"));%></label><input type="text" style="width: 15%;"  id="NombreResp" disabled value="<%=Nombre%>"/>
+                                    <hr>
+                                    <label><%out.println(po.getProperty("etiqueta.PedidosSDFechaPrecio"));%></label><input type="text" style="width: 15%;"  id="FechaPrecio"/><button id="matchFecgPreci" class='BtnMatchIcon'></button>
+                                    <hr>
+                                    <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaListaPrec"));%></label><select type="text" style="width: 15%;"  id="LisPrecio"></select>
+                                    <hr>
+                                    <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaGpoPrecio"));%></label><select type="text" style="width: 15%;"  id="GpoPrecio"/></select>
+                                    <hr>
                                 </div>
+                                <!--</div>-->
                             </div>
-                            <div class="DiTtx" id="textosCabecera">
-                                <label style="margin-left: 2%;"><%out.println(po.getProperty("etiqueta.CotizacionOferttxtCab"));%></label>
-                                <hr style="width: 100%; margin-top:-1px;   border: 1px solid #3892E0">
-                                <textarea rows="18" cols="6"  style="resize:none; width: 97%; height: 100%; margin-top: 1%; border: 1px solid #007CC0; margin-left: 1%;" id="TextCabece"  ></textarea></div>
                         </section>
                     </div>
                 </div>
