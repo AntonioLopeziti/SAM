@@ -152,17 +152,17 @@
                                 <thead>
                                     <tr>
                                         <td></td>
-                                        <td>Clase Orden</td>
+                                        <td>Habilitar</td>
+                                        <td>Cl.Ord</td>
                                         <td>Folio SAP</td>
-                                        <td>Folio SAM</td>
                                         <td>Centro</td>
                                         <td>Material</td>
                                         <td>Texto material</td>
                                         <td>Estatus</td>
                                         <td>Cantidad</td>
+                                        <td>Mensaje</td>
                                         <td>Fecha Inicio</td>
                                         <td>Notificado</td>
-                                        <td>Habilitar</td>
                                     </tr>
                                 </thead>
                             </table>
