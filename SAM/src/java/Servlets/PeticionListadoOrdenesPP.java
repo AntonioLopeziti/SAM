@@ -63,18 +63,18 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                     for(ListadoOrdenesPP ll : lo){
                         out.println("	    <tr>\n" +
                                     "	    <td><input type=\"radio\" name=\"gender\" value=\"" + cc + "\"></td>\n" +
+                                    "	    <td>" + ll.getHabilitado() + "</td>\n" +
                                     "	    <td id=\"tdPP1" + cc + "\">" + ll.getClase_documento_ventas() + "</td>\n" +
                                     "	    <td id=\"tdPP2" + cc + "\">" + ll.getNum_orden() + "</td>\n" +
-                                    "	    <td id=\"tdPP3" + cc + "\">" + ll.getFolio_sam() + "</td>\n" + //Folio SAM
                                     "	    <td id=\"tdPC3" + cc + "\">" + ll.getCentro() + "</td>\n" + //Centro
                                     "	    <td id=\"tdPP4" + cc + "\">" + ll.getNum_material() + "</td>\n" +
                                     "	    <td id=\"tdPP5" + cc + "\">" + ll.getTexto_material() + "</td>\n" +
                                     "	    <td id=\"tdPP6" + cc + "\">" + ll.getStatus() + "</td>\n" +
                                     "	    <td id=\"tdPP7" + cc + "\">" + ll.getCantidad_total() + "</td>\n" +
+                                    "	    <td id=\"tdPPP1" + cc + "\">" + ll.getMensaje()+ "</td>\n" +
                                     "	    <td id=\"tdPP8" + cc + "\">" + ll.getFecha_inicio_extrema() + "</td>\n" +
                                     "	    <td id=\"tdPP9" + cc + "\">" + ll.getContador_notificacion() + "</td>\n" +
 //                                    "	    <td><input type=\"checkbox\" name=\"habilitado\"></td>\n" +
-                                    "	    <td>" + ll.getHabilitado() + "</td>\n" +
                                 "	    </tr>");
                         cc++;
                     }
@@ -83,17 +83,17 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                     }
                     out.println("<tr class=\"ocultar\">\n" +
                         "        <td>00</td>\n" +
-                        "        <td>0000000000</td>\n" +
-                        "        <td>00000000000</td>\n" +
-                        "        <td>00000000000</td>\n" +
+                        "        <td>0000000</td>\n" +
+                        "        <td>000000</td>\n" +
+                        "        <td>00000000</td>\n" +
+                        "        <td>000000</td>\n" +
                         "        <td>000000000</td>\n" +
-                        "        <td>000000000000000</td>\n" +
-                        "        <td>0000000000000000000000000000000</td>\n" +
-                        "        <td>00000000000000000000000000000000</td>\n" +
-                        "        <td>000000000000</td>\n" +
+                        "        <td>0000000000000000000000000000000000000000000</td>\n" +
+                        "        <td>0000000000000000000000000000000000000000000</td>\n" +
+                        "        <td>00000000000</td>\n" +
+                        "        <td>00000000000000000000000000000</td>\n" +
                         "        <td>00000000000</td>\n" +
                         "        <td>00000000</td>\n" +
-                        "        <td>00000</td>\n" +
                         "    </tr>\n" +
                         "</tbody>\n" +
                         "</table>");
