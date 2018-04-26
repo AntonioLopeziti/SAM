@@ -55,6 +55,7 @@ public class ACC_ListadoOrdenesPP {
                 ll.setCantidad_total(rs.getString("cantidad_total"));
                 ll.setFecha_inicio_extrema(rs.getString("fecha_inicio_extrema"));
                 ll.setContador_notificacion(rs.getString("contador_notificacion"));
+                if(rs.getString("txt_mensaje") != null){ ll.setMensaje(rs.getString("txt_mensaje")); }
                 ps2 = con.prepareStatement(sql2);
                 ps2.setString(1, ll.getFolio_sam());
                 ps2.setString(2, ll.getNum_orden());
