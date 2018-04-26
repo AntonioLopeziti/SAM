@@ -147,6 +147,7 @@
                     <button id="botonActAvisosSAP" class="Btn"><%out.println(po.getProperty("etiqueta.ReporteAvisoSAPMod"));%></button>
                     <button id="botonDMS" class="Btn"><%out.println(po.getProperty("etiqueta.ReporteDMS"));%></button>
                     <button id="botonCalidaTxtAv" class="Btn"><%out.println(po.getProperty("etiqueta.ReporteQMCalidatxtAv"));%></button>
+                    <button id="botonMovNot" class="Btn">Mov. Notificaciones</button>
                 </section>
             </div>
         </div>
