@@ -11,6 +11,7 @@ import Entidades.ReporteAvisos;
 import Entidades.ReporteContadorEquipos;
 import Entidades.ReporteMovimientos;
 import Entidades.ReporteMovimientosIvent;
+import Entidades.MovNotificaciones;
 import Entidades.ReporteNotificaciones;
 import Entidades.ReporteOrdenes;
 import Entidades.ReporteSolPed;
@@ -37,6 +38,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.sql.Connection;
+import java.util.HashSet;
 
 /**
  *
@@ -762,6 +764,57 @@ public class ACC_Reportes extends Conexion {
                 or.setIndicador_posicion2(rs.getString("indicador_posicion2"));
                 or.setTexto_mensaje(rs.getString("texto_mensaje"));
                 or.setCentro(rs.getString("centro"));
+                sp_todos.add(or);
+            }
+        } catch (Exception a) {
+            System.err.println("Error al traer los datos por :" + a);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception a) {
+                System.err.println("Error inesperado al cerrar conexiones");
+            }
+        }
+        return sp_todos;
+    }
+    //Consulta Todos Mov Notificaciones
+    public ArrayList<MovNotificaciones> PP_Reporte_StatusTodosMN(String centros, String foliosam, String foliosam2, String foliosap, String foliosap2, String fe1, String fe2) {
+        ArrayList<MovNotificaciones> sp_todos = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareCall("{call PM.Reporte_MovNotTodos(?,?,?,?,?,?,?)}");            
+            pst.setString(1, centros);
+            pst.setString(2, foliosam);
+            pst.setString(3, foliosam2);
+            pst.setString(4, foliosap);
+            pst.setString(5, foliosap2);
+            pst.setString(6, fe1);
+            pst.setString(7, fe2);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                MovNotificaciones or = new MovNotificaciones();
+                or.setFolio_orden(rs.getString("folio_orden"));
+                or.setFolio_sam(rs.getString("folio_sam"));
+                or.setHora(rs.getString("hora"));
+                or.setFecha(rs.getString("fecha"));
+                or.setNum_orden(rs.getString("num_orden"));
+                or.setNum_material(rs.getString("num_material"));
+                or.setCantidad(rs.getString("cantidad"));
+                or.setUm_base(rs.getString("um_base"));                
+                or.setCentro(rs.getString("centro"));
+                or.setAlmacen(rs.getString("almacen"));
+                or.setClase_mov(rs.getString("clase_mov"));                
                 sp_todos.add(or);
             }
         } catch (Exception a) {
@@ -3664,6 +3717,28 @@ public class ACC_Reportes extends Conexion {
         return sam;
     }
 
+    /*[Reportes Mov Not Consulta folio SAM*/
+//    public MovNotificaciones SAMStatusMN() {
+//        MovNotificaciones so = new MovNotificaciones();
+//        Conexion cnx = new Conexion();
+//        Connection con = cnx.ObtenerConexion();
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        String query = "{call PM.ReporteMovNotMatchSam}";
+//        try {
+//            ps = con.prepareStatement(query);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                so.setFolio_sam(rs.getString("folio_sam"));
+//            }
+//        } catch (Exception ex) {
+//            System.err.println("ERROR en el metodo SAMStatus por :" + ex);
+//        } finally {
+//            cnx.CerrarConexion(con);
+//        }
+//        return so;
+//    }
+
     /*[Reportes Estatus Ordenes] Consulta folio SAP*/
     public ArrayList<reportes_estatus_ordenes> SAPStatus() {
         ArrayList<reportes_estatus_ordenes> sap = new ArrayList<>();
@@ -3677,6 +3752,29 @@ public class ACC_Reportes extends Conexion {
             rs = st.executeQuery(query);
             while (rs.next()) {
                 reportes_estatus_ordenes so = new reportes_estatus_ordenes();
+                so.setFolio_orden(rs.getString("folio_orden"));
+                sap.add(so);
+            }
+        } catch (Exception ex) {
+            System.err.println("ERROR en el metodo SAPStatus por :" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return sap;
+    }
+    /*[Reportes Mov Not Consulta folio SAP*/
+    public ArrayList<MovNotificaciones> SAPStatusMN() {
+        ArrayList<MovNotificaciones> sap = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String query = "{call PP.ReporteMovNotMatchSap}";
+        try {
+            Statement st;
+            ResultSet rs;
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            while (rs.next()) {
+                MovNotificaciones so = new MovNotificaciones();
                 so.setFolio_orden(rs.getString("folio_orden"));
                 sap.add(so);
             }
@@ -3722,6 +3820,41 @@ public class ACC_Reportes extends Conexion {
         }
         return ban;
     }
+    
+    /*[ReportesMovNotificaciones] STOREPROCEDURE VALIDAR SAM*/
+    public boolean ValidarSamStatusMN(String dato) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        boolean ban = false;
+        ResultSet rs = null;
+        String query = "{call PM.ReporteMovNot_ValidarStatusSam(?)}";
+        try {
+            pst = con.prepareCall(query);
+            pst.setString(1, dato);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                ban = true;
+            }
+        } catch (Exception ex) {
+            System.err.println("ERROR en metodo ValidarDatos por:" + ex);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception b) {
+                System.err.println("Error inesperado al cerrar las conexiones debido a: " + b);
+            }
+        }
+        return ban;
+    }
 
     /*[ReportesNotificaciones] STOREPROCEDURE VALIDAR SAP*/
     public boolean ValidarSaPStatus(String dato) {
@@ -3731,6 +3864,41 @@ public class ACC_Reportes extends Conexion {
         ResultSet rs = null;
         boolean band = false;
         String query = "{call PM.Reportes_ValidarStatusSap(?)}";
+        try {
+            pst = con.prepareCall(query);
+            pst.setString(1, dato);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                band = true;
+            }
+        } catch (Exception ex) {
+            System.err.println("ERROR en metodo ValidarDatos por:" + ex);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception b) {
+                System.err.println("Error inesperado al cerrar las conexiones debido a: " + b);
+            }
+        }
+
+        return band;
+    }
+    /*[ReportesMovNot] STOREPROCEDURE VALIDAR SAP*/
+    public boolean ValidarSaPStatusMN(String dato) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        boolean band = false;
+        String query = "{call PM.ReporteMovNot_ValidarStatusSap(?)}";
         try {
             pst = con.prepareCall(query);
             pst.setString(1, dato);
@@ -9726,6 +9894,29 @@ public class ACC_Reportes extends Conexion {
             cnx.CerrarConexion(con);
         }
         return rlip;
+    }
+
+    /*[Reportes Mov Notificaciones Consulta folio SAM*/
+    public ArrayList<MovNotificaciones> SAMStatusMN() {
+        ArrayList<MovNotificaciones> sam = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareCall("{call PM.ReporteMovNotMatchSam()}");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                MovNotificaciones so = new MovNotificaciones();
+                so.setFolio_sam(rs.getString("folio_sam"));
+                sam.add(so);
+            }
+        } catch (Exception e) {
+            System.err.println("Error en CentroReservass, ACC_Centro por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return sam;
     }
     /*-----------------------------------------------------*/
 //    public static void main(String[] args) {
