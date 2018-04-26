@@ -39,6 +39,15 @@ public class ListadoOrdenesPP {
     String contador_notificacion = "";
     String cantidad_total = "";
     String habilitado = "";
+    String mensaje = "";
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
 
     public String getCentro() {
         return centro;
