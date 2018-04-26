@@ -38,6 +38,9 @@ $(document).ready(function () {
     $('#botonCalidaTxtAv').click(function () {
         $(location).attr('href', 'ReporteTextoAvisosQM.jsp');
     });
+    $('#botonMovNot').click(function () {        
+        $(location).attr('href', 'ReporteMovNotificaciones.jsp');
+    });
 });
 function startTime() {
     today = new Date();
