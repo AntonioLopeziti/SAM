@@ -41,6 +41,9 @@ $(document).ready(function () {
     $('#botonMovNot').click(function () {        
         $(location).attr('href', 'ReporteMovNotificaciones.jsp');
     });
+    $('#botonStatOrd').click(function () {        
+        $(location).attr('href', 'ReporteStatusOrdenesPP.jsp');
+    });
 });
 function startTime() {
     today = new Date();
