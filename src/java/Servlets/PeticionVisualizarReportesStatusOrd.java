@@ -194,11 +194,11 @@ public class PeticionVisualizarReportesStatusOrd extends HttpServlet {
                     for (StatusOrdPP a : crp.PP_Reporte_StatusTodosSO(centro, sam1, sam2, sap1, sap2, f1, f2)) {
                         out.println("<tr>");                        
                         out.println("<td>" + a.getFolio_sam() + "</td>");
+                        out.println("<td>" + a.getNum_orden() + "</td>");
                         out.println("<td>" + cn.DateFormat(a.getFecha_serv()) + "</td>");
                         out.println("<td>" + a.getHora_serv() + "</td>");
-                        out.println("<td>" + a.getNum_orden() + "</td>");
                         out.println("<td>" + a.getCentro() + "</td>");
-                        out.println("<td>" + a.getOperacion_sam() + "</td>");
+                        out.println("<td>" + a.getTxt_mensaje() + "</td>");
                         out.println("<td>" + a.getUsuario() + "</td>");                                                
                     }
                     out.println("<tr class=\"ocultar\"><td>0000000000000000</td><td>00000000000000000000000000</td><td>00000000000000000000000000</td><td>00000000000000000000000000</td><td>00000000000000000000000000</td><td>0000000000000000000000000000000000</td><td>000000000000000000000000</td></tr>");
