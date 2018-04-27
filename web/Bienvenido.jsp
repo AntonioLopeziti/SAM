@@ -231,6 +231,8 @@
         String gestMant_MEPP = verificarP(p.charAt(112));                 // GestiÃ³n Mantenimiento Monitor de Equipos PP
         String gestMant_MPP = verificarP(p.charAt(113));                    // GestiÃ³n Mantenimiento Monitor PP
         String gestMant_ME_MCPxEPP = verificarP(p.charAt(114));           // GestiÃ³n Mantenimiento Notificar tiempos PP
+        String gestMant_ME_RepNot = verificarP(p.charAt(115));              // GestiÃ³n Mantenimiento Reporte Not
+        String gestMant_ME_RepStatusOrd = verificarP(p.charAt(115));        // GestiÃ³n Mantenimiento Reporte Status
         //////////////////////////// Avisos PP /////////////////////////////////////////////////////////////////////////////////////
         String gestMant_APP = verificarP(p.charAt(115));                // GestiÃ³n Mantenimiento Avisos PP
         String gestMant_APP_MAP = verificarP(p.charAt(116));           // GestiÃ³n Mantenimiento Avisos PP Monitor de Avisos PM
@@ -518,6 +520,8 @@
                                         <ul>
                                             <li class="current" style="display: <%=gestMant_MPP%>"> <a href="MonitorPP.jsp">Monitor PP</a></li>
                                             <li class="current" style="display: <%=gestMant_ME_MCPxEPP%>"> <a href="NotificacionTiemposPP.jsp">Notificar Tiempos</a></li>
+                                            <li class="current" style="display: <%=gestMant_ME_RepNot%>"> <a href="ReporteMovNotificaciones.jsp">Reporte Notificaciones</a></li>
+                                            <li class="current" style="display: <%=gestMant_ME_RepStatusOrd%>"> <a href="ReporteStatusOrdenesPP.jsp">Reporte Estatus</a></li>
                                         </ul>
                                     </li>
                                     <li class="current" style="display: <%=gestMant_OPP%>"><a href="#"><%out.println(po.getProperty("etiqueta.OrdenesPP"));%></a>
