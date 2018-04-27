@@ -208,7 +208,7 @@
                         <hr>
                         <label id="lblFolioSAM"><%out.println(po.getProperty("etiqueta.Reporte_FolioSAM"));%></label><input id="sam1" type="text" style='width: 35%; text-transform: uppercase;' maxlength="10"><button id="match_A2" class='BtnMatchIcon'></button>
                         <hr>
-                        <label id="lblFolioSAP"><%out.println(po.getProperty("etiqueta.Reporte_FolioSAP"));%></label><input id="sap1" type="text" style='width: 35%; text-transform: uppercase;' maxlength="12"><button id="match_A3" class='BtnMatchIcon'></button>
+                        <label id="lblFolioSAP">Número Orden</label><input id="sap1" type="text" style='width: 35%; text-transform: uppercase;' maxlength="12"><button id="match_A3" class='BtnMatchIcon'></button>
                         <hr>
                         <label id="lblFecha"><%out.println(po.getProperty("etiqueta.Reporte_fechap"));%></label><input value="" maxlength="10" type="text" value="" id="fecha_inicio" style="width:20%;"/><button id="match_F1" class='BtnMatchIcon'></button>
                         <hr>
@@ -318,7 +318,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.Reporte_FolioSAP"));%></th>
+                                        <th>Número Orden</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -341,7 +341,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.Reporte_FolioSAP"));%></th>
+                                        <th>Número Orden</th>
                                     </tr>
                                 </thead>
                             </table>
