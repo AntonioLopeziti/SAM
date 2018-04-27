@@ -148,6 +148,7 @@
                     <button id="botonDMS" class="Btn"><%out.println(po.getProperty("etiqueta.ReporteDMS"));%></button>
                     <button id="botonCalidaTxtAv" class="Btn"><%out.println(po.getProperty("etiqueta.ReporteQMCalidatxtAv"));%></button>
                     <button id="botonMovNot" class="Btn">Mov. Notificaciones</button>
+                    <button id="botonStatOrd" class="Btn">Estatus Orden PP</button>
                 </section>
             </div>
         </div>
