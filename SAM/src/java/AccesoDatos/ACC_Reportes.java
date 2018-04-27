@@ -5,6 +5,7 @@
  */
 package AccesoDatos;
 
+import Entidades.CabMovNotificaciones;
 import Entidades.Repo_solped;
 import Entidades.ReporteActividadesAvisos;
 import Entidades.ReporteAvisos;
@@ -787,8 +788,8 @@ public class ACC_Reportes extends Conexion {
         return sp_todos;
     }
     //Consulta Todos Mov Notificaciones
-    public ArrayList<MovNotificaciones> PP_Reporte_StatusTodosMN(String centros, String foliosam, String foliosam2, String foliosap, String foliosap2, String fe1, String fe2) {
-        ArrayList<MovNotificaciones> sp_todos = new ArrayList<>();
+    public ArrayList<CabMovNotificaciones> PP_Reporte_StatusTodosMN(String centros, String foliosam, String foliosam2, String foliosap, String foliosap2, String fe1, String fe2) {
+        ArrayList<CabMovNotificaciones> sp_todos = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
@@ -804,18 +805,16 @@ public class ACC_Reportes extends Conexion {
             pst.setString(7, fe2);
             rs = pst.executeQuery();
             while (rs.next()) {
-                MovNotificaciones or = new MovNotificaciones();
-                or.setFolio_orden(rs.getString("folio_orden"));
+                CabMovNotificaciones or = new CabMovNotificaciones();                
                 or.setFolio_sam(rs.getString("folio_sam"));
                 or.setHora(rs.getString("hora"));
                 or.setFecha(rs.getString("fecha"));
                 or.setNum_orden(rs.getString("num_orden"));
-                or.setNum_material(rs.getString("num_material"));
-                or.setCantidad(rs.getString("cantidad"));
-                or.setUm_base(rs.getString("um_base"));                
+                or.setNum_material(rs.getString("num_material"));                        
                 or.setCentro(rs.getString("centro"));
                 or.setAlmacen(rs.getString("almacen"));
-                or.setClase_mov(rs.getString("clase_mov"));                
+                or.setError(rs.getString("error"));
+                or.setUsuario(rs.getString("usuario"));
                 sp_todos.add(or);
             }
         } catch (Exception a) {
@@ -861,7 +860,7 @@ public class ACC_Reportes extends Conexion {
                 or.setHora_serv(rs.getString("hora_serv"));
                 or.setNum_orden(rs.getString("num_orden"));
                 or.setCentro(rs.getString("centro"));
-                or.setOperacion_sam(rs.getString("operacion_sam"));
+                or.setTxt_mensaje(rs.getString("txt_mensaje"));
                 or.setUsuario(rs.getString("usuario"));                                                            
                 sp_todos.add(or);
             }
@@ -3811,8 +3810,8 @@ public class ACC_Reportes extends Conexion {
         return sap;
     }
     /*[Reportes Mov Not Consulta folio SAP*/
-    public ArrayList<MovNotificaciones> SAPStatusMN() {
-        ArrayList<MovNotificaciones> sap = new ArrayList<>();
+    public ArrayList<CabMovNotificaciones> SAPStatusMN() {
+        ArrayList<CabMovNotificaciones> sap = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         String query = "{call PP.ReporteMovNotMatchSap}";
@@ -3822,8 +3821,9 @@ public class ACC_Reportes extends Conexion {
             st = con.createStatement();
             rs = st.executeQuery(query);
             while (rs.next()) {
-                MovNotificaciones so = new MovNotificaciones();
-                so.setFolio_orden(rs.getString("folio_orden"));
+                CabMovNotificaciones so = new CabMovNotificaciones();
+//                so.setFolio_orden(rs.getString("folio_orden"));
+                so.setNum_orden(rs.getString("num_orden"));
                 sap.add(so);
             }
         } catch (Exception ex) {
@@ -10037,8 +10037,8 @@ public class ACC_Reportes extends Conexion {
     }
 
     /*[Reportes Mov Notificaciones Consulta folio SAM*/
-    public ArrayList<MovNotificaciones> SAMStatusMN() {
-        ArrayList<MovNotificaciones> sam = new ArrayList<>();
+    public ArrayList<CabMovNotificaciones> SAMStatusMN() {
+        ArrayList<CabMovNotificaciones> sam = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
@@ -10047,7 +10047,7 @@ public class ACC_Reportes extends Conexion {
             pst = con.prepareCall("{call PM.ReporteMovNotMatchSam()}");
             rs = pst.executeQuery();
             while (rs.next()) {
-                MovNotificaciones so = new MovNotificaciones();
+                CabMovNotificaciones so = new CabMovNotificaciones();
                 so.setFolio_sam(rs.getString("folio_sam"));
                 sam.add(so);
             }
