@@ -53,7 +53,7 @@
 .DivPosiciones{
     width: 80%;
     padding-left: 2%;
-    height:300px;
+    height:400px;
     background: #fff;  
     margin-top: 2%;
 }
@@ -63,7 +63,7 @@
     display: inline-block;
 }
 .DobleScroll2 { 
-    height: 150px;
+    height: 230px;
     width: 17px; 
     background-color: #007CC0;
     display: inline-block;
@@ -118,16 +118,18 @@ td{
     overflow-y: scroll;
     overflow-x: hidden;    
 }
-#SecCuerpo2  { height: 150px; }
+#SecCuerpo2  { height: 230px; }
 .ocultar
 {
     visibility: hidden;
 }
 .tdSMatch{
+    text-align: center;
     border:none;
     width:100%;
 }
 .tdCMatch{
+    text-align: center;
     border:none;
     width:100%;
 }
@@ -182,7 +184,7 @@ td{
 .Contenttexto2{
     height: 80%;
 }
-#textoCabecera, #textoPos{
+#textoCabecera, #textoPos, #textoEmbarq{
     margin-top: 4%;
     margin-left: 3%;
     margin-right: 2%;
@@ -196,6 +198,48 @@ td{
     padding-right: 1%;
 }
 .Botones_MatchTEX img{
+    margin-top: 2%;
+    float:right;
+}
+
+.VentanaFecha{
+    position: fixed; 
+    width: 330px; 
+    height: 280px;
+    margin-top: 10px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 17.2px; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002; 
+}
+#handlecalendar{
+    padding-top: .5%;
+    height: 7%;
+    width: 100%;
+    font-family: "TAHOMA";
+    font-size: 14px;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+.Selectdatatextpos{
+    height: 8%;
+}
+.Selectdatatextpos select{
+    margin-top: 2%;
+    margin-left: 3%;
+}
+.Contenttextopos{
+    height: 76%;
+}
+.Botones_MatchTEXp{
+    height:  15%;
+    padding-right: 1%;
+}
+.Botones_MatchTEXp img{
     margin-top: 2%;
     float:right;
 }
