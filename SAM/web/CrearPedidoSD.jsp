@@ -23,6 +23,7 @@
         String Nombre = (String) session.getAttribute("Usuario");
         String Idioma = (String) session.getAttribute("Idioma");
         String Centro = (String) session.getAttribute("CentroUsuario");
+        String Folio = request.getParameter("FolioPV");
         try {
             if (Nombre.equals(null) || Nombre.equals("") || Nombre == null || Idioma.equals(null)) {
                 session.invalidate();
@@ -100,7 +101,7 @@
             }
             checkPermisoPag();
 
-            function ShowMsg(m, im, au, va) {
+            function ShowMsg(m, im, au, va, v1, v2, v3) {
                 var msg;
                 switch (m) {
                     case 0:
@@ -109,7 +110,57 @@
                     case 1:
                         msg = '<%=noexisteval%>';
                         break;
-
+                    case 2:
+                        msg = 'No se ha podido determinar el Area de ventas';
+                        break;
+                    case 3:
+                        msg = 'Indicar solicitante';
+                        break;
+                    case 4:
+                        msg = 'Indicar destinatario de mercancias';
+                        break;
+                    case 5:
+                        msg = 'Indicar referencia de cliente';
+                        break;
+                    case 6:
+                        msg = 'Indicar clase de pedido';
+                        break;
+                    case 7:
+                        msg = 'Indicar fecha de entrega';
+                        break;
+                    case 8:
+                        msg = 'La fecha es un perido pasado al actual';
+                        break;
+                    case 9:
+                        msg = 'Definir Area de ventas';
+                        break;
+                    case 10:
+                        msg = 'Material ' + v1 + ' en org.ventas ' + v2 + ', canal distr. ' + v3 + ' no esta previsto';
+                        break;
+                    case 11:
+                        msg = 'Indicar Material, obligatorio';
+                        break;
+                    case 12:
+                        msg = 'Relacion Interlocutor no coinciden';
+                        break;
+                    case 13:
+                        msg = 'Clase de pedido no prevista';
+                        break;
+                    case 14:
+                        msg = 'Grupo de vendedores no prevista';
+                        break;
+                    case 15:
+                        msg = 'Oficina de ventas no prevista';
+                        break;
+                    case 16:
+                        msg = 'Descripción vacia, cargue datos desde material';
+                        break;
+                    case 17:
+                        msg = 'Unidad medida vacia, cargue datos desde material';
+                        break;
+                    case 18:
+                        msg = 'Cantidad vacia, agregue una cantidad';
+                        break;
                 }
                 $('#msg').html(msg);
                 var icon = $('#iconmsg');
@@ -142,10 +193,7 @@
                     dayNames: ['<%=Domingo%>', '<%=Lunes%>', '<%=Martes%>', '<%=Miercoles%>', '<%=Jueves%>', '<%=Viernes%>', '<%=Sabado%>'],
                     dayNamesMin: ['<%=Do%>', '<%=lu%>', '<%=Ma%>', '<%=Mi%>', '<%=Ju%>', '<%=vi%>', '<%=sa%>'],
                     onSelect: function (date) {
-                        var idda = $('#idDataFeee').val();
-                        var fehSet = $('#' + idda);
-                        fehSet.val(date);
-                        fehSet.focus();
+                        validarFecha(date);
                         CerrarCalendario();
                     }
                 });
@@ -153,7 +201,38 @@
             $(function () {
                 $('#datapicker').datepicker().hide();
             });
-
+            function validarFecha(fecha) {
+                var f = fecha.split(".");
+                var d = f[0];
+                var m = f[1];
+                var y = f[2];
+                var f1 = new Date(y, m, d);
+                var date = new Date();
+                var d1 = checkTime(date.getDate());
+                var m1 = checkTime(date.getMonth() + 1);
+                var y1 = date.getFullYear();
+                var f2 = new Date(y1, m1, d1);
+                if (f2 > f1) {
+                    ShowMsg(8, "images/advertencia.PNG", "audio/saperror.wav");
+                    $('#fechaEntrega').focus();
+                    $('#fechaEntrega').val('');
+                } else {
+                    $('#fechaEntrega').val(fecha);
+                    $('#fechaEntrega').focus();
+                    borramsg();
+                }
+            }
+            function MostrarFolio()
+            {
+                var men = document.getElementById("msg");
+                var fol = "<%=Folio%>";
+                if (fol != "null") {
+                    var icon = $('#iconmsg');
+                    icon.attr('src', "images/aceptar.png");
+                    icon.show();
+                    men.innerHTML = "Documento creado: " + "<%=Folio%>";
+                }
+            }
         </script>
         <div id="main-header">    
             <hr>
@@ -165,9 +244,9 @@
             </div>
             <input id="aceptar" type="image" src="images/aceptaOFF.png" disabled/>                
             <input id="guardar" type="image" src="images/guarda.PNG"/> 
-            <input  id="regresar" type="image" src="images/regresa.PNG"/>
+            <input  id="regresar" type="image" src="images/regresaOFF.png" disabled/>
             <input id="finalizar" type="image" style="margin-bottom: -1px;" src="images/cance.PNG"/>
-            <input  id="cancelar" type="image" src="images/cancela.PNG" />
+            <input  id="cancelar" type="image" src="images/cancelaOFF.png" disabled/>
             <div class="titulo"><h1><%out.println(po.getProperty("etiqueta.PedidosSDTituloCrear"));%></h1></div> 
         </div>            
         <div class="contenido">    
@@ -183,7 +262,7 @@
                             <hr>
                             <label>Dest.Mcia.</label><input type="text" id="destinatario" maxlength="10" style="width:35%; background-repeat: no-repeat; text-transform: uppercase;"/><button id="matchDestMecia" class='BtnMatchIcon'></button>
                             <hr>
-                            <label>Area de ventas</label><input type="text" id="orgVentas" maxlength="4" style="width:10%; background-repeat: no-repeat; text-transform: uppercase;"/><button id="matchOrgVentas" class='BtnMatchIcon'></button> / <input type="text" id="CanalDis" maxlength="2"  style="width:8%; background-repeat: no-repeat; text-transform: uppercase;"/><button id="matchcanalDis" class='BtnMatchIcon'></button> / <input type="text" id="Sector" maxlength="2"  style="width:8%; background-repeat: no-repeat; text-transform: uppercase;"/><button id="matchSector" class='BtnMatchIcon'></button>
+                            <label>Area de ventas</label><input type="text" id="orgVentas" maxlength="4" style="width:10%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchOrgVentas" class='BtnMatchIcon'></button> / <input type="text" id="CanalDis" maxlength="2"  style="width:8%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchcanalDis" class='BtnMatchIcon'></button> / <input type="text" id="Sector" maxlength="2"  style="width:8%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchSector" class='BtnMatchIcon'></button>
                             <hr>
                             <label>Ref.Cliente</label><input type="text" id="refcliente" maxlength="35" style="width:55%; background-repeat: no-repeat"/>
                             <hr>
@@ -193,7 +272,7 @@
                             <hr>
                         </section>
                         <section class="SectionFloat2">
-                            <label>Clase de pedido</label><input type="text" id="ClasePedido" maxlength='4' style="width: 8%; background-repeat: no-repeat; text-transform: uppercase;" /><button id="matchClasePedido" class='BtnMatchIcon'></button><input type='text' id='txtClasePedido'style="width: 52%; background: none; border: none;" readonly/>
+                            <label>Clase de pedido</label><input type="text" id="ClasePedido" maxlength='4' style="width: 8%; background-repeat: no-repeat; text-transform: uppercase;" /><button id="matchClasePedido" class='BtnMatchIcon'></button> <input type='text' id='txtClasePedido'style="width: 52%; background: none; border: none;" readonly/>
                             <hr>
                             <input type="text" style="width: 100%; background: none; border:none;" id="txtSolicitante" readonly/>
                             <hr style="border:1.8px solid #fff;">
@@ -201,9 +280,9 @@
                             <hr style="border:1.8px solid #fff;">
                             <input type="text" style="width: 100%; background: none; border: none;" id="txtAreaVentas" readOnly/>
                             <hr style="border:1.8px solid #fff;">
-                            <label>Oficina de ventas</label><input type="text"  style="width: 8%; text-transform: uppercase;" maxlength='4' id="OficinaVentas" /><button id="matchpoficinaVentas" class='BtnMatchIcon'></button><input type='text' id='txtOficinaVentas'style="width: 52%; background: none; border: none;" readonly/>
+                            <label>Oficina de ventas</label><input type="text"  style="width: 8%; text-transform: uppercase;" maxlength='4' id="OficinaVentas" /><button id="matchpoficinaVentas" class='BtnMatchIcon'></button> <input type='text' id='txtOficinaVentas'style="width: 52%; background: none; border: none;" readonly/>
                             <hr>
-                            <label>Gpo. de vendedores</label><input type="text" style="width: 6%; text-transform: uppercase" maxlength="3" id="GpoVendedores" /><button id="matchGpoVendedores" class='BtnMatchIcon'></button><input type='text' id='txtGpoVended'style="width: 55%; background: none; border: none;" readonly/>
+                            <label>Gpo. de vendedores</label><input type="text" style="width: 6%; text-transform: uppercase" maxlength="3" id="GpoVendedores" /><button id="matchGpoVendedores" class='BtnMatchIcon'></button> <input type='text' id='txtGpoVended'style="width: 55%; background: none; border: none;" readonly/>
                             <hr>
                             <label>Fecha precio</label><input type="text" id='fechaPrecio'  style="width: 16%" readonly/><button id="matchDescCabecera" class="BtnMatchIconDescricabe"></button>
                             <hr>
@@ -228,72 +307,104 @@
                                                 <td>Descripción</td>
                                                 <td>Cantidad</td>
                                                 <td>Unidad Medida</td>
-                                                <td>Centro</td>
-                                                <td>Almacén</td>
                                                 <td>Texto pos.</td>
-                                            </tr>
                                         </thead>
                                     </table>
                                 </section>
                                 <section class="SecBody2" id="SecCuerpo2">
                                     <table id="TabBody2">
                                         <tbody>
-                                            <tr>
-                                                <td><input type="checkbox"</td>
+                                            <tr id="tr0">
+                                                <td><input type="checkbox" name="Cehckbx" value="0"/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdPosic0" name="PosicTD" onfocus="QuitarMatch()" readonly/></td>
-                                                <td><input type="text" class='tdCMatch' id="tdMater0" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '0')"/><button id="matchtdmaterial0" onclick="MostrarMatchGrid('VentanaModalMateriales', 'handle8', '0');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
+                                                <td><input type="text" class='tdCMatch' id="tdMater0" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '0')" maxlength="40"/><button id="matchtdmaterial0" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '0');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr0" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
-                                                <td><input type="text" class="tdSMatch" id="tdCanti0" name="CantiTD" onfocus="QuitarMatch()"/></td>
-                                                <td><input type="text" class="tdCMatch" id="tdUmedi0" name="UMediTD" onfocus="MostrarMatch('tdUmedi', 'matchtdUnidadMedida', '0')"/><button id="matchtdUnidadMedida0" onclick="ConsultaUnidadMedida('VentanaModalUMedida', 'handle9', '0');" name="matchUnMedida" class='BtnMatchIconGrid'></button></td>
-                                                <td><input type="text" class="tdCMatch" id="tdCentr0" name="CentrTD" onfocus="MostrarMatch('tdCentr', 'matchtdCentro', '0')"/><button id="matchtdCentro0" onclick="MostrarMatchGrid('VentanaModalCentro', 'handle10', '0');" name="matchcentro" class='BtnMatchIconGrid'></button></td>
-                                                <td><input type="text" class="tdCMatch" id="tdAlmac0" name="AlmacTD" onfocus="MostrarMatch('tdAlmac', 'matchtdAlmacen', '0')"/><button id="matchtdAlmacen0" onclick="MostrarMatchGrid('VentanaModalAlmacen', 'handle11', '0');" name="matchAlamcen" class='BtnMatchIconGrid'></button></td>
-                                                <td><button id="textoPosicion0" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(0)"></button><textarea hidden style="resize: none;" id="textoposTemp0"></textarea></td>
+                                                <td><input type="text" class="tdSMatch" id="tdCanti0" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdUmedi0" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><button id="textoPosicion0" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(0)"></button><textarea hidden style="resize: none;" id="textoposTemp0"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp0"></textarea></td>
                                             </tr>
-                                            <tr>
-                                                <td><input type="checkbox"</td>
+                                            <tr id="tr1">
+                                                <td><input type="checkbox" name="Cehckbx" value="1"/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdPosic1" name="PosicTD" onfocus="QuitarMatch()" readonly/></td>
-                                                <td><input type="text" class='tdCMatch' id="tdMater1" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '1')"/><button id="matchtdmaterial1" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
+                                                <td><input type="text" class='tdCMatch' id="tdMater1" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '1')" maxlength="40"/><button id="matchtdmaterial1" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '1');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr1" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
-                                                <td><input type="text" class="tdSMatch" id="tdCanti1" name="CantiTD" onfocus="QuitarMatch()"/></td>
-                                                <td><input type="text" class="tdCMatch" id="tdUmedi1" name="UMediTD" onfocus="MostrarMatch('tdUmedi', 'matchtdUnidadMedida', '1')"/><button id="matchtdUnidadMedida1" name="matchUnMedida" class='BtnMatchIconGrid'></button></td>
-                                                <td><input type="text" class="tdCMatch" id="tdCentr1" name="CentrTD" onfocus="MostrarMatch('tdCentr', 'matchtdCentro', '1')"/><button id="matchtdCentro1" name="matchcentro" class='BtnMatchIconGrid'></button></td>
-                                                <td><input type="text" class="tdCMatch" id="tdAlmac1" name="AlmacTD" onfocus="MostrarMatch('tdAlmac', 'matchtdAlmacen', '1')"/><button id="matchtdAlmacen1" name="matchAlamcen" class='BtnMatchIconGrid'></button></td>
-                                                <td><button id="textoPosicion1" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(1)"></button><textarea hidden style="resize: none;" id="textoposTemp1"></textarea></td>
+                                                <td><input type="text" class="tdSMatch" id="tdCanti1" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdUmedi1" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><button id="textoPosicion1" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(1)"></button><textarea hidden style="resize: none;" id="textoposTemp1"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp1"></textarea></td>
                                             </tr>
-                                            <tr>
-                                                <td><input type="checkbox"</td>
+                                            <tr id="tr2">
+                                                <td><input type="checkbox" name="Cehckbx" value="2"/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdPosic2" name="PosicTD" onfocus="QuitarMatch()" readonly/></td>
-                                                <td><input type="text" class='tdCMatch' id="tdMater2" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '2')"/><button id="matchtdmaterial2" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
+                                                <td><input type="text" class='tdCMatch' id="tdMater2" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '2')" maxlength="40"/><button id="matchtdmaterial2" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '2');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr2" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
-                                                <td><input type="text" class="tdSMatch" id="tdCanti2" name="CantiTD" onfocus="QuitarMatch()"/></td>
-                                                <td><input type="text" class="tdCMatch" id="tdUmedi2" name="UMediTD" onfocus="MostrarMatch('tdUmedi', 'matchtdUnidadMedida', '2')"/><button id="matchtdUnidadMedida2"  name="matchUnMedida" class='BtnMatchIconGrid'></button></td>
-                                                <td><input type="text" class="tdCMatch" id="tdCentr2" name="CentrTD" onfocus="MostrarMatch('tdCentr', 'matchtdCentro', '2')"/><button id="matchtdCentro2" name="matchcentro" class='BtnMatchIconGrid'></button></td>
-                                                <td><input type="text" class="tdCMatch" id="tdAlmac2" name="AlmacTD" onfocus="MostrarMatch('tdAlmac', 'matchtdAlmacen', '2')"/><button id="matchtdAlmacen2" name="matchAlamcen" class='BtnMatchIconGrid'></button></td>
-                                                <td><button id="textoPosicion2" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(2)"></button><textarea hidden style="resize: none;" id="textoposTemp2"></textarea></td>
+                                                <td><input type="text" class="tdSMatch" id="tdCanti2" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdUmedi2" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><button id="textoPosicion2" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(2)"></button><textarea hidden style="resize: none;" id="textoposTemp2"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp2"></textarea></td>
                                             </tr>
-                                            <tr>
-                                                <td><input type="checkbox"</td>
+                                            <tr id="tr3">
+                                                <td><input type="checkbox" name="Cehckbx" value="3"/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdPosic3" name="PosicTD" onfocus="QuitarMatch()" readonly/></td>
-                                                <td><input type="text" class='tdCMatch' id="tdMater3" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '3')"/><button id="matchtdmaterial3" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
+                                                <td><input type="text" class='tdCMatch' id="tdMater3" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '3')" maxlength="40"/><button id="matchtdmaterial3" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '3');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr3" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
-                                                <td><input type="text" class="tdSMatch" id="tdCanti3" name="CantiTD" onfocus="QuitarMatch()"/></td>
-                                                <td><input type="text" class="tdCMatch" id="tdUmedi3" name="UMediTD" onfocus="MostrarMatch('tdUmedi', 'matchtdUnidadMedida', '3')"/><button id="matchtdUnidadMedida3" id="MatchUME1" name="matchUnMedida" class='BtnMatchIconGrid'></button></td>
-                                                <td><input type="text" class="tdCMatch" id="tdCentr3" name="CentrTD" onfocus="MostrarMatch('tdCentr', 'matchtdCentro', '3')"/><button id="matchtdCentro3" name="matchcentro" class='BtnMatchIconGrid'></button></td>
-                                                <td><input type="text" class="tdCMatch" id="tdAlmac3" name="AlmacTD" onfocus="MostrarMatch('tdAlmac', 'matchtdAlmacen', '3')"/><button id="matchtdAlmacen3" name="matchAlamcen" class='BtnMatchIconGrid'></button></td>
-                                                <td><button id="textoPosicion3" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(3)"></button><textarea hidden style="resize: none;" id="textoposTemp3"></textarea></td>
+                                                <td><input type="text" class="tdSMatch" id="tdCanti3" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdUmedi3" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><button id="textoPosicion3" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(3)"></button><textarea hidden style="resize: none;" id="textoposTemp3"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp3"></textarea></td>
                                             </tr>
-                                            <tr>
-                                                <td><input type="checkbox"</td>
+                                            <tr id="tr4">
+                                                <td><input type="checkbox" name="Cehckbx" value="4"/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdPosic4" name="PosicTD" onfocus="QuitarMatch()" readonly/></td>
-                                                <td><input type="text" class='tdCMatch' id="tdMater4" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '4')"/><button id="matchtdmaterial4" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
+                                                <td><input type="text" class='tdCMatch' id="tdMater4" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '4')" maxlength="40"/><button id="matchtdmaterial4" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '4');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr4" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
-                                                <td><input type="text" class="tdSMatch" id="tdCanti4" name="CantiTD" onfocus="QuitarMatch()"/></td>
-                                                <td><input type="text" class="tdCMatch" id="tdUmedi4" name="UMediTD" onfocus="MostrarMatch('tdUmedi', 'matchtdUnidadMedida', '4')"/><button id="matchtdUnidadMedida4" name="matchUnMedida" class='BtnMatchIconGrid'></button></td>
-                                                <td><input type="text" class="tdCMatch" id="tdCentr4" name="CentrTD" onfocus="MostrarMatch('tdCentr', 'matchtdCentro', '4')"/><button id="matchtdCentro4" name="matchcentro" class='BtnMatchIconGrid'></button></td>
-                                                <td><input type="text" class="tdCMatch" id="tdAlmac4" name="AlmacTD" onfocus="MostrarMatch('tdAlmac', 'matchtdAlmacen', '4')"/><button id="matchtdAlmacen4" name="matchAlamcen" class='BtnMatchIconGrid'></button></td>
-                                                <td><button id="textoPosicion4" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(4)"></button><textarea hidden style="resize: none;" id="textoposTemp4"></textarea></td>
+                                                <td><input type="text" class="tdSMatch" id="tdCanti4" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdUmedi4" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><button id="textoPosicion4" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(4)"></button><textarea hidden style="resize: none;" id="textoposTemp4"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp4"></textarea></td>
                                             </tr>
-                                            <tr class="ocultar"><td>00</td><td>00000000</td><td>0000000000000000000</td><td>000000000000000000000000000000000000000000000000000000</td><td>000000000000000000</td><td>00000000000000</td><td>000000000000000</td><td>000000000000000</td><td>000000000000</td></tr>
+                                            <tr id="tr5">
+                                                <td><input type="checkbox" name="Cehckbx" value="5"/></td>
+                                                <td><input type="text" class="tdSMatch" id="tdPosic5" name="PosicTD" onfocus="QuitarMatch()" readonly/></td>
+                                                <td><input type="text" class='tdCMatch' id="tdMater5" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '5')" maxlength="40"/><button id="matchtdmaterial5" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '5');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
+                                                <td><input type="text" class='tdSMatch' id="tdDescr5" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><input type="text" class="tdSMatch" id="tdCanti5" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdUmedi5" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><button id="textoPosicion5" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(5)"></button><textarea hidden style="resize: none;" id="textoposTemp5"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp5"></textarea></td>
+                                            </tr>
+                                            <tr id="tr6">
+                                                <td><input type="checkbox" name="Cehckbx" value="6"/></td>
+                                                <td><input type="text" class="tdSMatch" id="tdPosic6" name="PosicTD" onfocus="QuitarMatch()" readonly/></td>
+                                                <td><input type="text" class='tdCMatch' id="tdMater6" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '6')" maxlength="40"/><button id="matchtdmaterial6" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '6');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
+                                                <td><input type="text" class='tdSMatch' id="tdDescr6" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><input type="text" class="tdSMatch" id="tdCanti6" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdUmedi6" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><button id="textoPosicion6" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(6)"></button><textarea hidden style="resize: none;" id="textoposTemp6"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp6"></textarea></td>
+                                            </tr>
+                                            <tr id="tr7">
+                                                <td><input type="checkbox" name="Cehckbx" value="7"/></td>
+                                                <td><input type="text" class="tdSMatch" id="tdPosic7" name="PosicTD" onfocus="QuitarMatch()" readonly/></td>
+                                                <td><input type="text" class='tdCMatch' id="tdMater7" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '7')" maxlength="40"/><button id="matchtdmaterial7" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '7');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
+                                                <td><input type="text" class='tdSMatch' id="tdDescr7" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><input type="text" class="tdSMatch" id="tdCanti7" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdUmedi7" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><button id="textoPosicion7" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(7)"></button><textarea hidden style="resize: none;" id="textoposTemp7"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp7"></textarea></td>
+                                            </tr>
+                                            <tr id="tr8">
+                                                <td><input type="checkbox" name="Cehckbx" id="8"/></td>
+                                                <td><input type="text" class="tdSMatch" id="tdPosic8" name="PosicTD" onfocus="QuitarMatch()" readonly/></td>
+                                                <td><input type="text" class='tdCMatch' id="tdMater8" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '8')" maxlength="40"/><button id="matchtdmaterial8" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '8');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
+                                                <td><input type="text" class='tdSMatch' id="tdDescr8" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><input type="text" class="tdSMatch" id="tdCanti8" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdUmedi8" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><button id="textoPosicion8" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(8)"></button><textarea hidden style="resize: none;" id="textoposTemp8"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp8"></textarea></td>
+                                            </tr>
+                                            <tr id="tr9">
+                                                <td><input type="checkbox" name="Cehckbx" value="9"/></td>
+                                                <td><input type="text" class="tdSMatch" id="tdPosic9" name="PosicTD" onfocus="QuitarMatch()" readonly/></td>
+                                                <td><input type="text" class='tdCMatch' id="tdMater9" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '9')" maxlength="40"/><button id="matchtdmaterial9" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '9');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
+                                                <td><input type="text" class='tdSMatch' id="tdDescr9" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><input type="text" class="tdSMatch" id="tdCanti9" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdUmedi9" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
+                                                <td><button id="textoPosicion9" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(9)"></button><textarea hidden style="resize: none;" id="textoposTemp9"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp9"></textarea></td>
+                                            </tr>
+                                            <tr class="ocultar" id="temporalro"><td>00</td><td>00000000</td><td>0000000000000000000</td><td>00000000000000000000000000000000000000000000000000000000</td><td>00000000000000000000000000</td><td>00000000000000</td><td>000000000000</td></tr>
                                         </tbody>
                                     </table>
                                 </section>
@@ -307,34 +418,38 @@
                 </div>
                 <input hidden type="text" id="postextpos">
                 <section id="botonesadddel">
-                    <input id="AgregarFilaServicios" type="image" src="images/ADD.PNG" style="vertical-align: middle"/>
-                    <input id="BorrarFilaServicios" type="image" src="images/DELETEADD.PNG" style="padding-top: 1px; vertical-align: middle; margin-left: -1%;"/>
+                    <input id="AgregarFilas" type="image" src="images/ADD.PNG" style="vertical-align: middle"/>
+                    <input id="BorrarFilas" type="image" src="images/DELETEADD.PNG" style="padding-top: 1px; vertical-align: middle; margin-left: -1%;"/>
                 </section>
             </div>
         </div>
         <div id="VentanaModalTextli" class="VentanaModalTxtCabecera">
             <div id="handleTxtCab"><label id="TituloMatch">Texto Cabecera</label><div class="BotonCerrar_Matc" id="cerrarmodaTxtCab"><label >X</label></div></div>
             <div class="Contenttexto2"><textarea style="resize: none;" id="textoCabecera"></textarea></div>
-             <div class="Botones_MatchTEX">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="cursor:pointer;" id="Cerraok"/>
-                    <img class="BtnMatchIcon" src="images/eliminar.png" style="cursor:pointer;" id="cerrarmodaTxtCab2"/>
-                </div>
+            <div class="Botones_MatchTEX">
+                <img class="BtnMatchIcon" src="images/HR_ok.png" style="cursor:pointer;" id="Cerraok"/>
+                <img class="BtnMatchIcon" src="images/eliminar.png" style="cursor:pointer;" id="cerrarmodaTxtCab2"/>
+            </div>
         </div>
         <div id="VentanaModalTextPos" class="VentanaModalTxtCabecera">
             <div id="handleTxtPos"><label id="TituloMatch">Texto Posioion</label><div class="BotonCerrar_Matc" id="cerrarmodaTxtPos"><label >X</label></div></div>
-            <div class="Contenttexto2"><textarea style="resize: none;" id="textoPos"></textarea></div>
-             <div class="Botones_MatchTEX">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="cursor:pointer;" id="CerraokPos"/>
-                    <img class="BtnMatchIcon" src="images/eliminar.png" style="cursor:pointer;" id="cerrarmodaTxtPos2"/>
-                </div>
+            <div class="Selectdatatextpos">
+                <select id="SelectTipoTexto">
+                    <option value="0" selected="selected">Texto ventas Materiales</option>
+                    <option value="1">Instrucciones de embarque</option>
+                </select>
+            </div>
+            <div class="Contenttextopos" id="textoventasMat"><textarea style="resize: none;" id="textoPos" ></textarea></div>
+            <div class="Contenttextopos" id="textoEmbarqu"><textarea style="resize: none;" id="textoEmbarq" readonly></textarea></div>
+            <div class="Botones_MatchTEXp">
+                <img class="BtnMatchIcon" src="images/HR_ok.png" style="cursor:pointer;" id="CerraokPos"/>
+                <img class="BtnMatchIcon" src="images/eliminar.png" style="cursor:pointer;" id="cerrarmodaTxtPos2"/>
+            </div>
         </div>
         <div id="Calenndar" class="VentanaFecha">
             <div id="handlecalendar"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CSPCalen"));%></label><div class="BotonCerrar_Matc" id="CerraCalendar1"><label >X</label></div></div>
             <div class="scrolCale"><div id="datapicker"></div></div>
-            <div class="btnCalendar">
-                <img class="BtnMatchIconBut" id="calenimg" src="images/S_B_CANC.gif" style="cursor:pointer;"/>
-                <input id="idDataFeee" hidden/>
-            </div>
+            <input id="idDataFeee" hidden/>
         </div>
         <div id="VentanaModalOrgVentas" class="VentanaModal">
             <div id="handle2"><label id="TituloMatch">Organizacion ventas</label><div class="BotonCerrar_Matc" id="CerrarMCOrgVenta"><label >X</label></div></div>
@@ -463,7 +578,7 @@
             <div id="BuscarParGpovend" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label>Grupo vendedor</label><input type="text" id="Busgpovend" maxlength="4" style="width:15%; text-transform: uppercase;"/>
+                        <label>Grupo vendedor</label><input type="text" id="Busgpovend" maxlength="3" style="width:15%; text-transform: uppercase;"/>
                         <hr>
                         <label>Denominación</label><input type="text" id="Busdenomgvend" maxlength="20" style="width:35%; text-transform: uppercase;"/>
                         <hr>  
@@ -499,13 +614,13 @@
         </div>
         <div id="VentanaModalMateriales" class="VentanaModal">
             <div id="handle8"><label id="TituloMatch">Materiales</label><div class="BotonCerrar_Matc" id="CerraMCMateriales"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button id="retGpoVend"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div class="PanelBntMatch"><button id="reMateri"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
             <div id="BuscarParMateriales" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label>Materiales</label><input type="text" id="BusMaterial" maxlength="4" style="width:15%; text-transform: uppercase;"/>
+                        <label>Materiales</label><input type="text" id="BusMaterial" maxlength="40" style="width:35%; text-transform: uppercase;"/>
                         <hr>
-                        <label>Descripción</label><input type="text" id="BusdesMaterial" maxlength="20" style="width:35%; text-transform: uppercase;"/>
+                        <label>Descripción</label><input type="text" id="BusdesMaterial" maxlength="40" style="width:35%; text-transform: uppercase;"/>
                         <hr>  
                         <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax8"   style="width:10%;" />
                         <hr>
@@ -537,6 +652,47 @@
                 </div>
             </div>            
         </div>                        
+        <div id="VentanaModalCliente" class="VentanaModal">
+            <div id="handle9"><label id="TituloMatch">Deudores generales</label><div class="BotonCerrar_Matc" id="CerraMCDeudores"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retClien"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParDeudores" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label>Cliente</label><input type="text" id="BusCliente" maxlength="10" style="width:15%; text-transform: uppercase;"/>
+                        <hr>
+                        <label>Nombre</label><input type="text" id="BusNombre" maxlength="25" style="width:35%; text-transform: uppercase;"/>
+                        <hr>  
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax9"   style="width:10%;" />
+                        <hr>
+                        <input type="text" hidden id="Tipodeudor"/>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="OkDeuudores"/>                        
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerraMCDeudores2"/>
+                </div>
+            </div>            
+            <div id="ConsultaTablaDeudores" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollDeudores">
+                        <div class="fixedY" id="fixedYDeudores">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Nombre</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosDeudodres">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>                        
         <div id="VentanaModalUMedida" class="VentanaModal">
             <div id="handle9"><label id="TituloMatch">Unidad de medida</label><div class="BotonCerrar_Matc" id="CerrarMCUnidadMedida"><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
@@ -548,54 +704,6 @@
                                 <thead>
                                     <tr>
                                         <th>Unidad Medida</th>
-                                        <th>Denominación</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                        <div id="cuerpoDatos">
-                            <div class="nofixedX" id="cargarDatosUnidadMedida">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="VentanaModalCentro" class="VentanaModal">
-            <div id="handle10"><label id="TituloMatch">Centro</label><div class="BotonCerrar_Matc" id="CerrarMCCentro"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
-            <div id="ConsultaTablaCentro">
-                <div class="tablaCab">
-                    <div class="table-scroll" id="table-scrollCentro">
-                        <div class="fixedY" id="fixeYCentro">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Centro</th>
-                                        <th>Denominación</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                        <div id="cuerpoDatos">
-                            <div class="nofixedX" id="cargarDatosUnidadMedida">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="VentanaModalAlmacen" class="VentanaModal">
-            <div id="handle11"><label id="TituloMatch">Almacén</label><div class="BotonCerrar_Matc" id="CerrarMCCentro"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
-            <div id="ConsultaTablaAlmacen">
-                <div class="tablaCab">
-                    <div class="table-scroll" id="table-scrollAlmacen">
-                        <div class="fixedY" id="fixeYAlmacen">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Almacén</th>
                                         <th>Denominación</th>
                                     </tr>
                                 </thead>
