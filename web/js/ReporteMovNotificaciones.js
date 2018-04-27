@@ -32,7 +32,7 @@ function ValidarQuery() {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "Action=" + acc + enviar,
-        success: function (data) {            
+        success: function (data) {                 
             if (data == 0) {
                 ShowMsg(8, "images/advertencia.PNG", "audio/saperror.wav");
             } else {
