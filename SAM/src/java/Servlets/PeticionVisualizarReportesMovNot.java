@@ -9,7 +9,7 @@ import AccesoDatos.ACC_Centro;
 import AccesoDatos.ACC_Reportes;
 import AccesoDatos.Consultas;
 import Entidades.centros;
-import Entidades.MovNotificaciones;
+import Entidades.CabMovNotificaciones;
 import Entidades.reportes_estatus_ordenes;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -83,11 +83,11 @@ public class PeticionVisualizarReportesMovNot extends HttpServlet {
                     }
                     break;
                 case "SamStatuss":
-                    ArrayList<MovNotificaciones> sam = ACC_Reportes.ObtenerInstancia().SAMStatusMN();
+                    ArrayList<CabMovNotificaciones> sam = ACC_Reportes.ObtenerInstancia().SAMStatusMN();
                     if (sam.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
-                        for (MovNotificaciones m : sam) {
+                        for (CabMovNotificaciones m : sam) {
                             out.println("<tr ondblclick=\"Select('" + m.getFolio_sam() + "','" + tipo + "')\">");
                             out.println("<td>" + m.getFolio_sam() + "</td>");
                             out.println("</tr>");
@@ -99,13 +99,13 @@ public class PeticionVisualizarReportesMovNot extends HttpServlet {
                     }
                     break;
                 case "SapStatus":
-                    ArrayList<MovNotificaciones> sap = ACC_Reportes.ObtenerInstancia().SAPStatusMN();
+                    ArrayList<CabMovNotificaciones> sap = ACC_Reportes.ObtenerInstancia().SAPStatusMN();
                     if (sap.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
-                        for (MovNotificaciones n : sap) {
-                            out.println("<tr ondblclick=\"Select('" + n.getFolio_orden() + "','" + tipo + "')\">");
-                            out.println("<td>" + n.getFolio_orden() + "</td>");
+                        for (CabMovNotificaciones n : sap) {
+                            out.println("<tr ondblclick=\"Select('" + n.getNum_orden() + "','" + tipo + "')\">");
+                            out.println("<td>" + n.getNum_orden() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -138,7 +138,7 @@ public class PeticionVisualizarReportesMovNot extends HttpServlet {
                     }
                     String ff = cn.DateFormatGuion(fe1);
                     String fff = cn.DateFormatGuion(fe2);
-                    ArrayList<MovNotificaciones> ord = ACC_Reportes.ObtenerInstancia().PP_Reporte_StatusTodosMN(centros, foliosam, foliosam2, foliosap, foliosap2, ff, fff);
+                    ArrayList<CabMovNotificaciones> ord = ACC_Reportes.ObtenerInstancia().PP_Reporte_StatusTodosMN(centros, foliosam, foliosam2, foliosap, foliosap2, ff, fff);
                     if (ord.size() >= 1) {
                         out.println(1);
                     } else {
@@ -193,24 +193,32 @@ public class PeticionVisualizarReportesMovNot extends HttpServlet {
                     ACC_Reportes crp = new ACC_Reportes();
                     String f1 = cn.DateFormatGuion(fecha1);
                     String f2 = cn.DateFormatGuion(fecha2);
-                    for (MovNotificaciones a : crp.PP_Reporte_StatusTodosMN(centro, sam1, sam2, sap1, sap2, f1, f2)) {
-                        out.println("<tr>");
-                        out.println("<td>" + a.getFolio_orden() + "</td>");
+                    for (CabMovNotificaciones a : crp.PP_Reporte_StatusTodosMN(centro, sam1, sam2, sap1, sap2, f1, f2)) {
+                        out.println("<tr>");                        
                         out.println("<td>" + a.getFolio_sam() + "</td>");
+                        out.println("<td>" + a.getNum_material() + "</td>");                                                
                         out.println("<td>" + cn.DateFormat(a.getFecha()) + "</td>");
                         out.println("<td>" + a.getHora() + "</td>");
                         out.println("<td>" + a.getNum_orden() + "</td>");
-                        out.println("<td>" + a.getNum_material() + "</td>");
-                        out.println("<td>" + a.getCantidad() + "</td>");
-                        out.println("<td>" + a.getUm_base() + "</td>");                        
                         out.println("<td>" + a.getCentro() + "</td>");
                         out.println("<td>" + a.getAlmacen() + "</td>");
-                        out.println("<td>" + a.getClase_mov() + "</td>");
+                        out.println("<td>" + a.getError() + "</td>");
+                        out.println("<td>" + a.getUsuario() + "</td>");
                     }
-                    out.println("<tr class=\"ocultar\"><td>0000000000000000</td><td>0000000000000000</td><td>0000000000000000</td><td>0000000000000000</td><td>0000000000000000</td><td>000000000000000000000000</td><td>00000000000000</td><td>00000000000000</td><td>00000000000000000000</td><td>0000000000000000</td><td>000000000000</td></tr>");
+                    out.println("<tr class=\"ocultar\"><td>0000000000000000</td><td>0000000000000000</td><td>0000000000000000</td><td>0000000000000000</td><td>0000000000000000</td><td>000000000000000000000000</td><td>00000000000000</td><td>00000000000000</td><td>00000000000000000000</td></tr>");
                     out.println("</tbody>");
                     out.println("</table>");
                     break;
+                    
+//                    or.setFolio_sam(rs.getString("folio_sam"));
+//                or.setHora(rs.getString("hora"));
+//                or.setFecha(rs.getString("fecha"));
+//                or.setNum_orden(rs.getString("num_orden"));
+//                or.setNum_material(rs.getString("num_material"));                        
+//                or.setCentro(rs.getString("centro"));
+//                or.setAlmacen(rs.getString("almacen"));
+//                or.setError(rs.getString("error"));
+//                or.setUsuario(rs.getString("usuario"));
             }
         }
     }
