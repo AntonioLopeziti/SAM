@@ -319,7 +319,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.Reporte_FolioSAP"));%></th>
+                                        <th>Número de Orden</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -342,7 +342,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.Reporte_FolioSAP"));%></th>
+                                        <th>Número de Orden</th>
                                     </tr>
                                 </thead>
                             </table>
