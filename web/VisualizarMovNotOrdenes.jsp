@@ -120,7 +120,7 @@
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
         <script type="text/javascript" src="js/jquery-iu-1.12.0.js"></script> 
         <link rel="stylesheet" href="css/menu.css" media="screen">  
-        <title><%out.println(po.getProperty("etiqueta.ReporteEstatusOrden_Title"));%></title>       
+        <title>Reporte Movimientos en Notificaciones</title>       
     </head>
     <body> 
         <div id="main-header"> 
@@ -136,12 +136,12 @@
             <input  id="regresar" type="image" src="images/regresa.PNG" onclick="retorn();"/>
             <input id="finalizar" type="image" style="margin-bottom: -1px;" src="images/cance.PNG" onclick="fin();"/>
             <input  id="cancelar" type="image" src="images/cancelaOFF.png" disabled/>     
-            <div class="titulo"><h1><%out.println(po.getProperty("etiqueta.ReporteEstatusOrden_Title"));%></h1></div>  
+            <div class="titulo"><h1>Reporte Movimientos en Notificaciones</h1></div>  
         </div>            
         <div class="contenido">
             <div class="ContentLista">
                 <div class="gen">
-                    <label class="labelTitulo"> BAJAFERRIES </label>
+                    <label class="labelTitulo"> SANPER </label>
                     <div class="period">
                         <label id="fech" name="fech" class="labelDate"></label> <label class="labelDate"> <%out.println(po.getProperty("etiqueta.Usuario_USCR"));%>:  </label> <label class="labelDate"> <% out.println(Nombre);%> </label>
                         <script type="text/javascript">
@@ -172,18 +172,16 @@
                                 <section class="SecHead">
                                     <table id="TabHead">
                                         <thead>
-                                            <tr>
-                                                <td><%out.println(po.getProperty("etiqueta.ReporteFoLord"));%></td>
+                                            <tr>                                                
                                                 <td><%out.println(po.getProperty("etiqueta.Reporte_FolioSAM"));%></td>
-                                                <td>Hora</td>
-                                                <td>Fecha</td>
                                                 <td><%out.println(po.getProperty("etiqueta.ReportNumord"));%></td>
-                                                <td>Número Material</td>
-                                                <td>Cantidad</td>
-                                                <td>UM Base</td>
+                                                <td>Fecha</td>
+                                                <td>Hora</td>
+                                                <td>Número Material</td>                                                
                                                 <td>Centro</td>
                                                 <td>Almacén</td>
-                                                <td>Clase Mov</td>
+                                                <td>Error</td>
+                                                <td>Usuario</td>
                                             </tr>
                                         </thead>
                                     </table>
