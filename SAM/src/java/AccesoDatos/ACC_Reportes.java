@@ -17,6 +17,7 @@ import Entidades.ReporteOrdenes;
 import Entidades.ReporteSolPed;
 import Entidades.Reportes;
 import Entidades.almacenes;
+import Entidades.StatusOrdPP;
 /*Reportes entradas*/
 import Entidades.reportes_entradas;
 /*----------------*/
@@ -815,6 +816,53 @@ public class ACC_Reportes extends Conexion {
                 or.setCentro(rs.getString("centro"));
                 or.setAlmacen(rs.getString("almacen"));
                 or.setClase_mov(rs.getString("clase_mov"));                
+                sp_todos.add(or);
+            }
+        } catch (Exception a) {
+            System.err.println("Error al traer los datos por :" + a);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception a) {
+                System.err.println("Error inesperado al cerrar conexiones");
+            }
+        }
+        return sp_todos;
+    }
+    //Consulta Todos Status Ordenes PP
+    public ArrayList<StatusOrdPP> PP_Reporte_StatusTodosSO(String centros, String foliosam, String foliosam2, String foliosap, String foliosap2, String fe1, String fe2) {
+        ArrayList<StatusOrdPP> sp_todos = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareCall("{call PM.Reporte_StatusOrdenesPPTodos(?,?,?,?,?,?,?)}");            
+            pst.setString(1, centros);
+            pst.setString(2, foliosam);
+            pst.setString(3, foliosam2);
+            pst.setString(4, foliosap);
+            pst.setString(5, foliosap2);
+            pst.setString(6, fe1);
+            pst.setString(7, fe2);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                StatusOrdPP or = new StatusOrdPP();
+                or.setFolio_sam(rs.getString("folio_sam"));
+                or.setFecha_serv(rs.getString("fecha_serv"));
+                or.setHora_serv(rs.getString("hora_serv"));
+                or.setNum_orden(rs.getString("num_orden"));
+                or.setCentro(rs.getString("centro"));
+                or.setOperacion_sam(rs.getString("operacion_sam"));
+                or.setUsuario(rs.getString("usuario"));                                                            
                 sp_todos.add(or);
             }
         } catch (Exception a) {
@@ -3785,6 +3833,30 @@ public class ACC_Reportes extends Conexion {
         }
         return sap;
     }
+    /*[Reportes Status Ordenes PP Consulta folio SAP*/
+    public ArrayList<StatusOrdPP> SAPStatusOP() {
+        ArrayList<StatusOrdPP> sap = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String query = "{call PP.ReporteStatOrdPPMatchSap}";
+        try {
+            Statement st;
+            ResultSet rs;
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            while (rs.next()) {
+                StatusOrdPP so = new StatusOrdPP();
+                so.setNum_orden(rs.getString("num_orden"));
+//                so.setFolio_orden(rs.getString("folio_orden"));
+                sap.add(so);
+            }
+        } catch (Exception ex) {
+            System.err.println("ERROR en el metodo SAPStatus por :" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return sap;
+    }
 
     /*[ReportesNotificaciones] STOREPROCEDURE VALIDAR SAM*/
     public boolean ValidarSamStatus(String dato) {
@@ -3855,6 +3927,40 @@ public class ACC_Reportes extends Conexion {
         }
         return ban;
     }
+    /*[ReportesStatusOrdenesPP] STOREPROCEDURE VALIDAR SAM*/
+    public boolean ValidarSamStatusSO(String dato) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        boolean ban = false;
+        ResultSet rs = null;
+        String query = "{call PM.ReporteStatusOrdPP_ValidarStatusSam(?)}";
+        try {
+            pst = con.prepareCall(query);
+            pst.setString(1, dato);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                ban = true;
+            }
+        } catch (Exception ex) {
+            System.err.println("ERROR en metodo ValidarDatos por:" + ex);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception b) {
+                System.err.println("Error inesperado al cerrar las conexiones debido a: " + b);
+            }
+        }
+        return ban;
+    }
 
     /*[ReportesNotificaciones] STOREPROCEDURE VALIDAR SAP*/
     public boolean ValidarSaPStatus(String dato) {
@@ -3899,6 +4005,40 @@ public class ACC_Reportes extends Conexion {
         ResultSet rs = null;
         boolean band = false;
         String query = "{call PM.ReporteMovNot_ValidarStatusSap(?)}";
+        try {
+            pst = con.prepareCall(query);
+            pst.setString(1, dato);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                band = true;
+            }
+        } catch (Exception ex) {
+            System.err.println("ERROR en metodo ValidarDatos por:" + ex);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception b) {
+                System.err.println("Error inesperado al cerrar las conexiones debido a: " + b);
+            }
+        }
+
+        return band;
+    }
+    public boolean ValidarSaPStatusSO(String dato) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        boolean band = false;
+        String query = "{call PM.ReporteStatusOrdPP_ValidarStatusSap(?)}";
         try {
             pst = con.prepareCall(query);
             pst.setString(1, dato);
@@ -9908,6 +10048,28 @@ public class ACC_Reportes extends Conexion {
             rs = pst.executeQuery();
             while (rs.next()) {
                 MovNotificaciones so = new MovNotificaciones();
+                so.setFolio_sam(rs.getString("folio_sam"));
+                sam.add(so);
+            }
+        } catch (Exception e) {
+            System.err.println("Error en CentroReservass, ACC_Centro por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return sam;
+    }
+    /*[Reportes Status Ordenes PP Consulta folio SAM*/
+    public ArrayList<StatusOrdPP> SAMStatusSO() {
+        ArrayList<StatusOrdPP> sam = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareCall("{call PP.ReporteStatusOrdPPMatchSam()}");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                StatusOrdPP so = new StatusOrdPP();
                 so.setFolio_sam(rs.getString("folio_sam"));
                 sam.add(so);
             }
