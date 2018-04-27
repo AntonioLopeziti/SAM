@@ -174,11 +174,11 @@
                                         <thead>
                                             <tr>
                                                 <td>Folio SAM</td>                                                
+                                                <td>Num Orden</td>
                                                 <td>Fecha</td>
                                                 <td>Hora</td>
-                                                <td>Num Orden</td>
                                                 <td>Centro</td>
-                                                <td>Oper. SAM</td>
+                                                <td>Error</td>
                                                 <td>Usuario</td>                                                
                                             </tr>
                                         </thead>
