@@ -72,6 +72,11 @@
         String Domingo = po.getProperty("etiqueta.Domingo");
 
     %>
+    <%        String Accion = request.getParameter("Accion");
+        String centro = request.getParameter("centro");
+        String folio = request.getParameter("sam1");
+        String orden = request.getParameter("sap1");
+    %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -133,14 +138,14 @@
                 <button id="imgCie" class="bgButtons"></button>
                 <button id="imgCan" class="bgButtons"></button>
             </section>
-<!--            <section class="bkClassNoti">
-                <label style="padding-left: 10px; font-size: 13.5px;">Clase de notificación</label>
-                <hr id="LineaTituloInfo">
-                <input type="radio" name="clnoti" checked> Notif.pacial
-                <input type="radio" name="clnoti" class="rbcln"> Notif.final
-                <input type="radio" name="clnoti" class="rbcln"> Notif.final autom.
-                <input type="checkbox" name="ckreserva" class="rbcln"> Compensar reserva
-            </section>-->
+            <!--            <section class="bkClassNoti">
+                            <label style="padding-left: 10px; font-size: 13.5px;">Clase de notificación</label>
+                            <hr id="LineaTituloInfo">
+                            <input type="radio" name="clnoti" checked> Notif.pacial
+                            <input type="radio" name="clnoti" class="rbcln"> Notif.final
+                            <input type="radio" name="clnoti" class="rbcln"> Notif.final autom.
+                            <input type="checkbox" name="ckreserva" class="rbcln"> Compensar reserva
+                        </section>-->
             <section class="bkSubSec">
                 <div class="CldMov">
                     <section class="DobleScroll" id="DobleSection">
@@ -220,9 +225,42 @@
                     window.onload = function () {
                         startTime();
                         bloq();
-                        tablaListadoOrdenesPP();
+                        verificarOpCargar();
+//                        tablaListadoOrdenesPP();
                     };
-
+                    function verificarOpCargar() {
+                        var acc = '<%=Accion%>';                        
+                        if (acc == 'CargaTodaTabla') {
+                            tablaListadoOrdenesPP();                            
+                        }            
+                        if (acc == 'CargaTablaCentro') {                            
+                            var cnt = '<%=centro%>';
+                            tablaListadoOrdenesPorCentro(cnt);
+                        }
+                        if (acc == 'CargaTablaFolio'){
+                            var fol = '<%=folio%>';
+                            tablaListadoOrdenesPorFolio(fol)
+                        }
+                        if (acc == 'CargaTablaMaterial'){
+                            var mat = '<%=orden%>';
+                            tablaListadoOrdenesPorMaterial(mat)
+                        }
+                        if(acc == 'CargaTablaCenFol'){
+                            var cnt = '<%=centro%>';
+                            var fol = '<%=folio%>';
+                            tablaListadoOrdenesPorCenFol(cnt,fol);
+                        }
+                        if(acc == 'CargaTablaCenMat'){
+                            var cnt = '<%=centro%>';
+                            var mate = '<%=orden%>';
+                            tablaListadoOrdenesPorCenMate(cnt,mate);
+                        }
+                        if(acc == 'CargaTablaFolMat'){
+                            var fol = '<%=folio%>';
+                            var mate = '<%=orden%>';
+                            tablaListadoOrdenesPorFolMate(fol,mate);
+                        }
+                    }
                     function bloq() {
                         document.getElementById('iconmsg').style.visibility = "hidden";
 //                        document.getElementById('guardar').disabled = true;
@@ -234,7 +272,7 @@
     </body>
     <script language="javascript">
         function back() {
-            window.location.href = "Bienvenido.jsp";
+            window.location.href = "ListadoOrdFab.jsp";
         }
     </script>
 
