@@ -28,7 +28,16 @@ public class StatusOrdenes {
     String hora_recibido = "";
     String usuario = "";
     String status = "";
+    String num_material = "";
 
+    public String getNum_material() {
+        return num_material;
+    }
+
+    public void setNum_material(String num_material) {
+        this.num_material = num_material;
+    }
+         
     public String getStatus() {
         return status;
     }
