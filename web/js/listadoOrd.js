@@ -25,9 +25,9 @@ $(document).ready(function () {
         iconm.src = "images/aceptar.png";
         var men = document.getElementById("msg");
         men.innerHTML = "Se han grabado los cambios";
-        setTimeout(function(){ 
+        setTimeout(function () {
             tablaListadoOrdenesPP();
-        }, 1000);        
+        }, 1000);
     });
 
     $("#imgLib").click(function () {
@@ -170,6 +170,145 @@ function tablaListadoOrdenesPP(pos) {
             try {
                 document.getElementsByName('gender')[pos].checked = true;
             } catch (e) {
+            }
+        }
+    });
+}
+function tablaListadoOrdenesPorCentro(cnt) {
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionListadoOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "action=tablaListadoCentro&centro=" + cnt,
+        success: function (data) {            
+            if (data == 0) {
+                location.href = "ListadoOrdFab.jsp";
+            } else {
+                document.getElementById('SecCuerpo').innerHTML = data;
+                AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                try {
+                    document.getElementsByName('gender')[pos].checked = true;
+                } catch (e) {
+                }
+            }
+        }
+    });
+}
+function tablaListadoOrdenesPorFolio (fol){
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionListadoOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "action=tablaListadoFolio&folio=" + fol,
+        success: function (data) {            
+            if (data == 0) {
+                location.href = "ListadoOrdFab.jsp";
+            } else {
+                document.getElementById('SecCuerpo').innerHTML = data;
+                AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                try {
+                    document.getElementsByName('gender')[pos].checked = true;
+                } catch (e) {
+                }
+            }
+        }
+    });
+}
+function tablaListadoOrdenesPorMaterial (mat){
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionListadoOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "action=tablaListadoMaterial&material=" + mat,
+        success: function (data) {            
+            if (data == 0) {
+                location.href = "ListadoOrdFab.jsp";
+            } else {
+                document.getElementById('SecCuerpo').innerHTML = data;
+                AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                try {
+                    document.getElementsByName('gender')[pos].checked = true;
+                } catch (e) {
+                }
+            }
+        }
+    });
+}
+function tablaListadoOrdenesPorCenFol (centro, folio){
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionListadoOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "action=tablaListadoCenFol&centro=" + centro + "&folio=" + folio,
+        success: function (data) {            
+            if (data == 0) {
+                location.href = "ListadoOrdFab.jsp";
+                ShowMsg(9, "images/advertencia.PNG", "audio/sapmsg.wav", "");
+            } else {
+                document.getElementById('SecCuerpo').innerHTML = data;
+                AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                try {
+                    document.getElementsByName('gender')[pos].checked = true;
+                } catch (e) {
+                }
+            }
+        }
+    });
+}
+function tablaListadoOrdenesPorCenMate (centro, mate){
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionListadoOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "action=tablaListadoCenMat&centro=" + centro + "&material=" + mate,
+        success: function (data) {            
+            if (data == 0) {
+                location.href = "ListadoOrdFab.jsp";
+            } else {
+                document.getElementById('SecCuerpo').innerHTML = data;
+                AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                try {
+                    document.getElementsByName('gender')[pos].checked = true;
+                } catch (e) {
+                }
+            }
+        }
+    });
+}
+function tablaListadoOrdenesPorFolMate (folio, mate){
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionListadoOrdenesPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "action=tablaListadoFolMat&folio=" + folio + "&material=" + mate,
+        success: function (data) {            
+            if (data == 0) {
+                location.href = "ListadoOrdFab.jsp";
+            } else {
+                document.getElementById('SecCuerpo').innerHTML = data;
+                AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                try {
+                    document.getElementsByName('gender')[pos].checked = true;
+                } catch (e) {
+                }
             }
         }
     });
