@@ -114,6 +114,7 @@ public class ACC_Zebra {
         }
 
         PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
+//        PrintService ps = impresora("\\\\192.168.1.12\\ZDesigner GC420t (EPL)");
 
         DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
         DocPrintJob dj = ps.createPrintJob();
@@ -124,6 +125,15 @@ public class ACC_Zebra {
             e.printStackTrace();
         }
     }
+    public PrintService impresora(String nombre){
+    PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null); //Obtenemos los servicios de impresion del sistema 
+    for (PrintService impresora : printServices){ //Recorremos el array de servicios de impresion
+        if(impresora.getName().contentEquals(nombre)){ // Si el nombre del servicio es el mismo que el que buscamos
+            return impresora; // Nos devuelve el servicio 
+        }
+    }
+    return null;    // Si no lo encuentra nos devuelve un null
+}
 
     public Zebra_noti_PT DatosFaltantesCabecera(String orden) {
         Zebra_noti_PT zb = new Zebra_noti_PT();
