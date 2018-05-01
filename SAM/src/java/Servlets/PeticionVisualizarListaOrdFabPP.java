@@ -61,10 +61,22 @@ public class PeticionVisualizarListaOrdFabPP extends HttpServlet {
             String foliosap2 = request.getParameter("sap2");
             String fe1 = request.getParameter("fecha1");
             String fe2 = request.getParameter("fecha2");
+            //Match
+            String Cantid = request.getParameter("Ctd");
+            String Centro = request.getParameter("Centro");
+            String Ncentr = request.getParameter("CentroNom");
+            
+            String folOrd = request.getParameter("folOrd");
+            String CentroOrd = request.getParameter("CentroOrd");
+            String CtdOrd = request.getParameter("CtdOrd"); 
+            
+            String folMate = request.getParameter("folMate");
+            String CentroMate = request.getParameter("CentroMate");
+            String CtdMate = request.getParameter("CtdMate");
             Consultas cn = new Consultas();
             switch (accion) {
                 case "CentroStatus":
-                    ArrayList<centros> pt = ACC_Centro.ObtenerInstancia().CentroReservass();
+                    ArrayList<centros> pt = ACC_Centro.ObtenerInstancia().CentroReservasFiltros(Centro, Ncentr, Cantid);
                     if (pt.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
@@ -81,13 +93,14 @@ public class PeticionVisualizarListaOrdFabPP extends HttpServlet {
                     }
                     break;
                 case "SamStatuss":
-                    ArrayList<StatusOrdenes> sam = ACC_ListadoOrdenesPP.ObtenerInstancia().SAMStatusSO();
+                    ArrayList<StatusOrdenes> sam = ACC_ListadoOrdenesPP.ObtenerInstancia().SAMStatusSO(folOrd, CentroOrd, CtdOrd);
                     if (sam.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (StatusOrdenes m : sam) {
                             out.println("<tr ondblclick=\"Select('" + m.getNum_orden() + "','" + tipo + "')\">");
                             out.println("<td>" + m.getNum_orden() + "</td>");
+                            out.println("<td>" + m.getCentro() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -97,13 +110,14 @@ public class PeticionVisualizarListaOrdFabPP extends HttpServlet {
                     }
                     break;
                 case "SapStatus":
-                    ArrayList<StatusOrdenes> sap = ACC_ListadoOrdenesPP.ObtenerInstancia().SAPStatusOP();
+                    ArrayList<StatusOrdenes> sap = ACC_ListadoOrdenesPP.ObtenerInstancia().SAPStatusOP(folMate, CentroMate, CtdMate);
                     if (sap.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (StatusOrdenes n : sap) {
                             out.println("<tr ondblclick=\"Select('" + n.getNum_material() + "','" + tipo + "')\">");
                             out.println("<td>" + n.getNum_material() + "</td>");
+                            out.println("<td>" + n.getCentro() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -111,6 +125,7 @@ public class PeticionVisualizarListaOrdFabPP extends HttpServlet {
                     } else {
                         out.println(0);
                     }
+                    
                     break;
                 case "ValidarCentroo":
                     if (ACC_ListadoOrdenesPP.ObtenerInstancia().ValidarCentro(centros)) {
