@@ -31,24 +31,27 @@ $(document).ready(function () {
     });
     $('#match_A1').click(function () {
         //Centro
-        mostrarVentanaModal('centro');
+//        mostrarVentanaModal('centro');
         var theHandle = document.getElementById("handle");
         var theRoot = document.getElementById("VentanaModalCentro");
         Drag.init(theHandle, theRoot);
+        mosVenMod('Centro');
     });
     $('#match_A2').click(function () {
         //Folio SAM         
-        mostrarVentanaModal('sam1');       
+//        mostrarVentanaModal('sam1');
         var theHandle = document.getElementById("handle2");
         var theRoot = document.getElementById("VentanaModalSAM1");
         Drag.init(theHandle, theRoot);
+        mosVenMod('sam1');
     });
     $('#match_A3').click(function () {
         //Material        
-        mostrarVentanaModal('sap1');       
+//        mostrarVentanaModal('sap1');
         var theHandle = document.getElementById("handle4");
         var theRoot = document.getElementById("VentanaModalSAP1");
         Drag.init(theHandle, theRoot);
+        mosVenMod('sap1');
     });
     //////VALIDAR CAMPOS
     centro.blur(function () {
@@ -102,6 +105,15 @@ $(document).ready(function () {
         te = String.fromCharCode(tecla);
         return patron.test(te);
     });
+    $('#okCentro').click(function () {
+        ConsultaCentro();
+    });
+    $('#okOrden1').click(function () {
+        ConsultaFolioSAM1();
+    });
+    $('#okMate').click(function () {
+        ConsultaFolioSAP1();
+    });
 });
 function back() {
     window.location.href = "Bienvenido.jsp";
@@ -115,9 +127,9 @@ function ValidarEO() {
 function verificar() {
     var centro = $('#centro').val();
     var folio = $('#sam1').val();
-    var orden = $('#sap1').val();    
+    var orden = $('#sap1').val();
     //Si los 3 input van vacios 
-    if (centro == '' && folio == '' && orden == '') {          
+    if (centro == '' && folio == '' && orden == '') {
         $.ajax({
             async: false,
             type: 'GET',
@@ -131,7 +143,7 @@ function verificar() {
         });
     }
     //Si sólo va lleno el centro
-    if (centro != '' && folio == '' && orden == '') {          
+    if (centro != '' && folio == '' && orden == '') {
         var enviar = "&centro=" + centro + "&sam1=" + folio + "&sap1=" + orden
         $.ajax({
             async: false,
@@ -147,7 +159,7 @@ function verificar() {
         });
     }
     //So sólo va lleno el folio
-    if(centro == '' && folio != '' && orden == ''){
+    if (centro == '' && folio != '' && orden == '') {
         var enviar = "&centro=" + centro + "&sam1=" + folio + "&sap1=" + orden
         $.ajax({
             async: false,
@@ -163,7 +175,7 @@ function verificar() {
         });
     }
     //So sólo va lleno el material
-    if(centro == '' && folio == '' && orden != ''){
+    if (centro == '' && folio == '' && orden != '') {
         var enviar = "&centro=" + centro + "&sam1=" + folio + "&sap1=" + orden
         $.ajax({
             async: false,
@@ -179,7 +191,7 @@ function verificar() {
         });
     }
     //Si se combinan centro y folio
-    if(centro != '' && folio != '' && orden == ''){        
+    if (centro != '' && folio != '' && orden == '') {
         var enviar = "&centro=" + centro + "&sam1=" + folio + "&sap1=" + orden
         $.ajax({
             async: false,
@@ -195,7 +207,7 @@ function verificar() {
         });
     }
     //Si se combinan centro y material
-    if(centro != '' && folio == '' && orden != ''){        
+    if (centro != '' && folio == '' && orden != '') {
         var enviar = "&centro=" + centro + "&sam1=" + folio + "&sap1=" + orden
         $.ajax({
             async: false,
@@ -211,7 +223,7 @@ function verificar() {
         });
     }
     //Si se combinan folio y material
-    if(centro == '' && folio != '' && orden != ''){        
+    if (centro == '' && folio != '' && orden != '') {
         var enviar = "&centro=" + centro + "&sam1=" + folio + "&sap1=" + orden
         $.ajax({
             async: false,
@@ -276,56 +288,41 @@ function enviarDatos(centro, sam1, sam2, sap1, sap2, fecha1, fecha2) {
 }
 function ConsultaCentro() {
     var acc = "CentroStatus";
+    var Cen = $("#BusCentro").val();
+    var Nom = $("#BusDesCentro").val();
+    var ctd = $("#numAcMax").val();
+    var enviar = "&Centro=" + Cen + "&CentroNom=" + Nom + "&Ctd=" + ctd;
     $.ajax({
         async: false,
         type: 'GET',
         url: 'PeticionVisualizarListaOrdFabPP',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Action=" + acc,
+        data: "Action=" + acc + enviar,
         success: function (data) {
             if (data == 0) {
                 ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
-                var ventana1 = $('#VentanaModalCentro');
-                abrirVentana(ventana1);
-                $('#cargarDatosCentro').html(data);
-                fnc("table-scrollCentro", "fixedYCentro");
+                $("#BuscarParamCentro_SP").css("display", "none");
+                $("#ConsultaTablaOCompras").css("display", "block");
+                $("#cargarDatosCentro").html(data);
                 borramsg();
+//                var ventana1 = $('#VentanaModalCentro');
+//                abrirVentana(ventana1);
+//                $('#cargarDatosCentro').html(data);
+//                fnc("table-scrollCentro", "fixedYCentro");
+
             }
         }
     });
 }
 function  ConsultaFolioSAM1() {
     var acc = "SamStatuss";
+    var fol = $("#BusFolio").val();
+    var centro = $("#CenFolio").val();
+    var ctd = $("#numAcMaxFolio").val();
     var tipo = "sam1";
-    var enviar = "&tipo=" + tipo;
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: 'PeticionVisualizarListaOrdFabPP',
-        contentType: "application/x-www-form-urlencoded",
-        processData: true,
-        data: "Action=" + acc + enviar,
-        success: function (data) {            
-            if (data == 0) {
-                ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
-            } else {
-                $('#VentanaModalSAM1').show();
-                $('#VentanaModalSAM1').css({
-                    position: 'absolute', left: 510, top: 60
-                });
-                $("#cargarDatosFolioSAM1").html(data);
-                fnc("table-scrollSAM", "fixedYSAM");
-                borramsg();
-            }
-        }
-    });
-}
-function ConsultaFolioSAP1() {
-    var acc = "SapStatus";
-    var tipo = "sap1";
-    var enviar = "&tipo=" + tipo;
+    var enviar = "&tipo=" + tipo + "&folOrd=" + fol + "&CentroOrd=" + centro + "&CtdOrd=" + ctd;
     $.ajax({
         async: false,
         type: 'GET',
@@ -337,12 +334,42 @@ function ConsultaFolioSAP1() {
             if (data == 0) {
                 ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
-                $('#VentanaModalSAP1').show();
-                $('#VentanaModalSAP1').css({
-                    position: 'absolute', left: 510, top: 60
-                });
+                $("#BuscarParamFolioSAP_SP").css("display", "none");
+                $("#ConsultaTablaFolioSAM1").css("display", "block");
+                $("#cargarDatosFolioSAM1").html(data);
+                borramsg();
+//                $('#VentanaModalSAM1').show();
+//                $('#VentanaModalSAM1').css({
+//                    position: 'absolute', left: 510, top: 60
+//                });
+//                $("#cargarDatosFolioSAM1").html(data);
+//                fnc("table-scrollSAM", "fixedYSAM");
+//                borramsg();
+            }
+        }
+    });
+}
+function ConsultaFolioSAP1() {
+    var acc = "SapStatus";
+    var fol = $("#BusMate").val();
+    var centro = $("#CenMate").val();
+    var ctd = $("#numAcMaxMate").val();
+    var tipo = "sap1";
+    var enviar = "&tipo=" + tipo + "&folMate=" + fol + "&CentroMate=" + centro + "&CtdMate=" + ctd;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionVisualizarListaOrdFabPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Action=" + acc + enviar,
+        success: function (data) {
+            if (data == 0) {
+                ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                $("#BuscarParamMate_SP").css("display", "none");
+                $("#ConsultaTablaFolioSAP1").css("display", "block");
                 $("#cargarDatosFolioSAP1").html(data);
-                fnc("table-scrollSAP", "fixedYSAP");
                 borramsg();
             }
         }
@@ -422,6 +449,55 @@ function validarsap() {
         });
     }
 }
+function mosVenMod(tipo) {
+    switch (tipo) {
+        case "Centro":
+            var ventana = document.getElementById('VentanaModalCentro');
+            abrirVentana(ventana);
+            $("#BusCentro").focus();
+            $("#BusCentro").val('');
+            $("#BusCentro").val('');
+            $("#numAcMax").val('500');
+            $('#ConsultaTablaOCompras').hide();
+            break;
+        case "sam1":
+            var ventana = document.getElementById('VentanaModalSAM1');
+            abrirVentana(ventana);
+            $("#BusFolio").focus();
+            $("#BusFolio").val('');
+            $("#CenFolio").val('');
+            $("#numAcMaxFolio").val('500');
+            $('#ConsultaTablaFolioSAM1').hide();
+            break;
+        case "SAM2":
+            var ventana = document.getElementById('VentanaModalSAM2');
+            abrirVentana(ventana);
+            $("#BusFolio2").focus();
+            $("#BusFolio2").val('');
+            $("#CenFolio2").val('');
+            $("#numAcMaxFolio2").val('500');
+            $('#ConsultaTablaFolioSAM2').hide();
+            break;
+        case "sap1":
+            var ventana = document.getElementById('VentanaModalSAP1');
+            abrirVentana(ventana);
+            $("#BusMate").focus();
+            $("#BusMate").val('');
+            $("#CenMate").val('');
+            $("#numAcMaxMate").val('500');
+            $('#ConsultaTablaFolioSAP1').hide();
+            break;
+        case "SAP2":
+            var ventana = document.getElementById('VentanaModalSAP2');
+            abrirVentana(ventana);
+            $("#BusNumOrd2").focus();
+            $("#BusNumOrd2").val('');
+            $("#CenNumOrd2").val('');
+            $("#numAcMaxNumOrd2").val('500');
+            $('#ConsultaTablaFolioSAP2').hide();
+            break;
+    }
+}
 function mostrarVentanaModal(tipo) {
     var BE = document.createElement('audio');
     BE.src = "audio/sapsnd05.wav";
@@ -478,12 +554,19 @@ function Select(dato, tipo) {
 //    var theRoot = document.getElementById(id);
 //    Drag.init(theHandle, theRoot);
 function abrirVentana(ventana) {
+    ///abrir ventanas
+    var BE = document.createElement('audio');
+    BE.src = "audio/sapsnd05.wav";
+    BE.play();
+
     var ancho = 350;
     var alto = 650;
     var x = (screen.width / 2) - (ancho / 2);
     var y = (screen.height / 2) - (alto / 2);
-    ventana.css({top: y + "px", left: x + "px"});
-    ventana.css('display', 'block');
+    ventana.style.left = x + "px";
+    ventana.style.top = y + "px";
+    ventana.style.display = 'block';
+    borramsg();
 }
 function ocultarVentana(tipo) {
     var BE = document.createElement('audio');
