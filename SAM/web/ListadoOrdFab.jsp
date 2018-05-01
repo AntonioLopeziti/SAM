@@ -143,7 +143,7 @@
                 }
                 $('#msg').html(msg);                
                 var icon = $('#iconmsg');
-                icon.attr('visible', true);
+                icon.attr('visibility', true);
                 icon.show();
                 icon.attr('src', im);
                 var BE = document.createElement('audio');
@@ -245,6 +245,22 @@
         <div id="VentanaModalCentro" class="VentanaModal">
             <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('centro')"><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParamCentro_SP" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.Centro_CC"));%></label><input type="text" id="BusCentro" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.Descripcion_CC"));%></label><input type="text" id="BusDesCentro" style="width:35%;"/>
+                        <hr>                           
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMax" maxlength="3" style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okCentro"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('Centro');"/>
+                </div>
+            </div>
             <div id="ConsultaTablaOCompras">
                 <div class="tablaCab">
                     <div class="table-scroll" id="table-scrollCentro">
@@ -269,6 +285,22 @@
         <div id="VentanaModalSAM1" class="VentanaModal">
             <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sam1')"><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParamFolioSAP_SP" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label>Folio</label><input type="text" id="BusFolio" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label>Centro</label><input type="text" id="CenFolio" style="width:35%;"/>
+                        <hr>                           
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxFolio" maxlength="3" style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okOrden1"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('sap1');"/>
+                </div>
+            </div>
             <div id="ConsultaTablaFolioSAM1">
                 <div class="tablaCab">
                     <div class="table-scroll" id="table-scrollSAM">
@@ -277,6 +309,7 @@
                                 <thead>
                                     <tr>
                                         <th>Folio</th>
+                                        <th>Centro</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -315,6 +348,22 @@
         <div id="VentanaModalSAP1" class="VentanaModal">
             <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sap1')"><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParamMate_SP" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label>Material</label><input type="text" id="BusMate" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label>Centro</label><input type="text" id="CenMate" style="width:35%;"/>
+                        <hr>                           
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxMate" maxlength="3" style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okMate"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('sap1');"/>
+                </div>
+            </div>
             <div id="ConsultaTablaFolioSAP1">
                 <div class="tablaCab">
                     <div class="table-scroll" id="table-scrollSAP">
@@ -323,6 +372,7 @@
                                 <thead>
                                     <tr>
                                         <th>Material</th>
+                                        <th>Centro</th>
                                     </tr>
                                 </thead>
                             </table>
