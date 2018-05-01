@@ -243,3 +243,15 @@ td{
     margin-top: 2%;
     float:right;
 }
+@media screen and (min-width: 300px) and (max-width: 1000px){ 
+    .divCabeceraCrea{
+        width: 100%;
+        height: auto;
+    }
+    .contain-cabeceracrea{
+        width: 100%;
+    }
+    .DivPosiciones{
+        width: 100%;
+    }
+}
