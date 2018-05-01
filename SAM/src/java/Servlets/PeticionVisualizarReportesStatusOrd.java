@@ -60,11 +60,24 @@ public class PeticionVisualizarReportesStatusOrd extends HttpServlet {
             String foliosap = request.getParameter("sap");
             String foliosap2 = request.getParameter("sap2");
             String fe1 = request.getParameter("fecha1");
-            String fe2 = request.getParameter("fecha2");
+            String fe2 = request.getParameter("fecha2");            
+            //Match
+            String Cantid = request.getParameter("Ctd");
+            String Centro = request.getParameter("Centro");
+            String Ncentr = request.getParameter("CentroNom");
+            
+            String folSAM = request.getParameter("folSAM");
+            String CentroFol = request.getParameter("CentroFol");
+            String CtdFol = request.getParameter("CtdFol");   
+            
+            String folOrd = request.getParameter("folOrd");
+            String CentroOrd = request.getParameter("CentroOrd");
+            String CtdOrd = request.getParameter("CtdOrd");                     
+            
             Consultas cn = new Consultas();
             switch (accion) {
                 case "CentroStatus":
-                    ArrayList<centros> pt = ACC_Centro.ObtenerInstancia().CentroReservass();
+                    ArrayList<centros> pt = ACC_Centro.ObtenerInstancia().CentroReservasFiltros(Centro, Ncentr, Cantid);
                     if (pt.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
@@ -81,13 +94,14 @@ public class PeticionVisualizarReportesStatusOrd extends HttpServlet {
                     }
                     break;
                 case "SamStatuss":
-                    ArrayList<StatusOrdPP> sam = ACC_Reportes.ObtenerInstancia().SAMStatusSO();
+                    ArrayList<StatusOrdPP> sam = ACC_Reportes.ObtenerInstancia().SAMStatusSO(folSAM,CentroFol, CtdFol);
                     if (sam.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (StatusOrdPP m : sam) {
                             out.println("<tr ondblclick=\"Select('" + m.getFolio_sam() + "','" + tipo + "')\">");
                             out.println("<td>" + m.getFolio_sam() + "</td>");
+                            out.println("<td>" + m.getCentro() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -97,13 +111,14 @@ public class PeticionVisualizarReportesStatusOrd extends HttpServlet {
                     }
                     break;
                 case "SapStatus":
-                    ArrayList<StatusOrdPP> sap = ACC_Reportes.ObtenerInstancia().SAPStatusOP();
+                    ArrayList<StatusOrdPP> sap = ACC_Reportes.ObtenerInstancia().SAPStatusOP(folOrd, CentroOrd, CtdOrd);
                     if (sap.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (StatusOrdPP n : sap) {
                             out.println("<tr ondblclick=\"Select('" + n.getNum_orden() + "','" + tipo + "')\">");
                             out.println("<td>" + n.getNum_orden() + "</td>");
+                            out.println("<td>" + n.getCentro() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
