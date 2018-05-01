@@ -787,6 +787,7 @@ public class ACC_Reportes extends Conexion {
         }
         return sp_todos;
     }
+
     //Consulta Todos Mov Notificaciones
     public ArrayList<CabMovNotificaciones> PP_Reporte_StatusTodosMN(String centros, String foliosam, String foliosam2, String foliosap, String foliosap2, String fe1, String fe2) {
         ArrayList<CabMovNotificaciones> sp_todos = new ArrayList<>();
@@ -795,7 +796,7 @@ public class ACC_Reportes extends Conexion {
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            pst = con.prepareCall("{call PM.Reporte_MovNotTodos(?,?,?,?,?,?,?)}");            
+            pst = con.prepareCall("{call PM.Reporte_MovNotTodos(?,?,?,?,?,?,?)}");
             pst.setString(1, centros);
             pst.setString(2, foliosam);
             pst.setString(3, foliosam2);
@@ -805,12 +806,12 @@ public class ACC_Reportes extends Conexion {
             pst.setString(7, fe2);
             rs = pst.executeQuery();
             while (rs.next()) {
-                CabMovNotificaciones or = new CabMovNotificaciones();                
+                CabMovNotificaciones or = new CabMovNotificaciones();
                 or.setFolio_sam(rs.getString("folio_sam"));
                 or.setHora(rs.getString("hora"));
                 or.setFecha(rs.getString("fecha"));
                 or.setNum_orden(rs.getString("num_orden"));
-                or.setNum_material(rs.getString("num_material"));                        
+                or.setNum_material(rs.getString("num_material"));
                 or.setCentro(rs.getString("centro"));
                 or.setAlmacen(rs.getString("almacen"));
                 or.setError(rs.getString("error"));
@@ -836,6 +837,7 @@ public class ACC_Reportes extends Conexion {
         }
         return sp_todos;
     }
+
     //Consulta Todos Status Ordenes PP
     public ArrayList<StatusOrdPP> PP_Reporte_StatusTodosSO(String centros, String foliosam, String foliosam2, String foliosap, String foliosap2, String fe1, String fe2) {
         ArrayList<StatusOrdPP> sp_todos = new ArrayList<>();
@@ -844,7 +846,7 @@ public class ACC_Reportes extends Conexion {
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            pst = con.prepareCall("{call PM.Reporte_StatusOrdenesPPTodos(?,?,?,?,?,?,?)}");            
+            pst = con.prepareCall("{call PM.Reporte_StatusOrdenesPPTodos(?,?,?,?,?,?,?)}");
             pst.setString(1, centros);
             pst.setString(2, foliosam);
             pst.setString(3, foliosam2);
@@ -861,7 +863,7 @@ public class ACC_Reportes extends Conexion {
                 or.setNum_orden(rs.getString("num_orden"));
                 or.setCentro(rs.getString("centro"));
                 or.setTxt_mensaje(rs.getString("txt_mensaje"));
-                or.setUsuario(rs.getString("usuario"));                                                            
+                or.setUsuario(rs.getString("usuario"));
                 sp_todos.add(or);
             }
         } catch (Exception a) {
@@ -3809,21 +3811,25 @@ public class ACC_Reportes extends Conexion {
         }
         return sap;
     }
+
     /*[Reportes Mov Not Consulta folio SAP*/
-    public ArrayList<CabMovNotificaciones> SAPStatusMN() {
+    public ArrayList<CabMovNotificaciones> SAPStatusMN(String folOrd, String CentroOrd, String CtdOrd) {
         ArrayList<CabMovNotificaciones> sap = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String query = "{call PP.ReporteMovNotMatchSap}";
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.ReporteMovNotMatchSap(?,?,?)}";
         try {
-            Statement st;
-            ResultSet rs;
-            st = con.createStatement();
-            rs = st.executeQuery(query);
+            pst = con.prepareCall(query);
+            pst.setString(1, folOrd);
+            pst.setString(2, CentroOrd);
+            pst.setString(3, CtdOrd);
+            rs = pst.executeQuery();
             while (rs.next()) {
                 CabMovNotificaciones so = new CabMovNotificaciones();
-//                so.setFolio_orden(rs.getString("folio_orden"));
                 so.setNum_orden(rs.getString("num_orden"));
+                so.setCentro(rs.getString("centro"));
                 sap.add(so);
             }
         } catch (Exception ex) {
@@ -3833,21 +3839,25 @@ public class ACC_Reportes extends Conexion {
         }
         return sap;
     }
+
     /*[Reportes Status Ordenes PP Consulta folio SAP*/
-    public ArrayList<StatusOrdPP> SAPStatusOP() {
+    public ArrayList<StatusOrdPP> SAPStatusOP(String folOrd, String CentroOrd, String CtdOrd) {
         ArrayList<StatusOrdPP> sap = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String query = "{call PP.ReporteStatOrdPPMatchSap}";
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.ReporteStatOrdPPMatchSap(?,?,?)}";
         try {
-            Statement st;
-            ResultSet rs;
-            st = con.createStatement();
-            rs = st.executeQuery(query);
+            pst = con.prepareCall(query);
+            pst.setString(1, folOrd);
+            pst.setString(2, CentroOrd);
+            pst.setString(3, CtdOrd);
+            rs = pst.executeQuery();
             while (rs.next()) {
                 StatusOrdPP so = new StatusOrdPP();
                 so.setNum_orden(rs.getString("num_orden"));
-//                so.setFolio_orden(rs.getString("folio_orden"));
+                so.setCentro(rs.getString("centro"));
                 sap.add(so);
             }
         } catch (Exception ex) {
@@ -3892,7 +3902,7 @@ public class ACC_Reportes extends Conexion {
         }
         return ban;
     }
-    
+
     /*[ReportesMovNotificaciones] STOREPROCEDURE VALIDAR SAM*/
     public boolean ValidarSamStatusMN(String dato) {
         Conexion cnx = new Conexion();
@@ -3927,6 +3937,7 @@ public class ACC_Reportes extends Conexion {
         }
         return ban;
     }
+
     /*[ReportesStatusOrdenesPP] STOREPROCEDURE VALIDAR SAM*/
     public boolean ValidarSamStatusSO(String dato) {
         Conexion cnx = new Conexion();
@@ -3997,6 +4008,7 @@ public class ACC_Reportes extends Conexion {
 
         return band;
     }
+
     /*[ReportesMovNot] STOREPROCEDURE VALIDAR SAP*/
     public boolean ValidarSaPStatusMN(String dato) {
         Conexion cnx = new Conexion();
@@ -4032,6 +4044,7 @@ public class ACC_Reportes extends Conexion {
 
         return band;
     }
+
     public boolean ValidarSaPStatusSO(String dato) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -10037,18 +10050,22 @@ public class ACC_Reportes extends Conexion {
     }
 
     /*[Reportes Mov Notificaciones Consulta folio SAM*/
-    public ArrayList<CabMovNotificaciones> SAMStatusMN() {
+    public ArrayList<CabMovNotificaciones> SAMStatusMN(String folSAM, String CentroFol, String CtdFol) {
         ArrayList<CabMovNotificaciones> sam = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            pst = con.prepareCall("{call PM.ReporteMovNotMatchSam()}");
+            pst = con.prepareCall("{call PM.ReporteMovNotMatchSam(?,?,?)}");
+            pst.setString(1, folSAM);
+            pst.setString(2, CentroFol);
+            pst.setString(3, CtdFol);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CabMovNotificaciones so = new CabMovNotificaciones();
                 so.setFolio_sam(rs.getString("folio_sam"));
+                so.setCentro(rs.getString("centro"));
                 sam.add(so);
             }
         } catch (Exception e) {
@@ -10058,19 +10075,24 @@ public class ACC_Reportes extends Conexion {
         }
         return sam;
     }
+
     /*[Reportes Status Ordenes PP Consulta folio SAM*/
-    public ArrayList<StatusOrdPP> SAMStatusSO() {
+    public ArrayList<StatusOrdPP> SAMStatusSO(String folSAM, String CentroFol, String CtdFol) {
         ArrayList<StatusOrdPP> sam = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            pst = con.prepareCall("{call PP.ReporteStatusOrdPPMatchSam()}");
+            pst = con.prepareCall("{call PP.ReporteStatusOrdPPMatchSam(?,?,?)}");
+            pst.setString(1, folSAM);
+            pst.setString(2, CentroFol);
+            pst.setString(3, CtdFol);
             rs = pst.executeQuery();
             while (rs.next()) {
                 StatusOrdPP so = new StatusOrdPP();
                 so.setFolio_sam(rs.getString("folio_sam"));
+                so.setCentro(rs.getString("centro"));
                 sam.add(so);
             }
         } catch (Exception e) {
