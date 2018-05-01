@@ -92,8 +92,19 @@ $(document).ready(function () {
             }
         }
     });
+    
+    
 });
-
+function PintaFila(pos){
+    var arr = document.getElementsByName("gender");    
+    for (i = 0; i < arr.length; i++) {
+        if (arr[i].checked) {
+            document.getElementById("TabBody").rows[i].style.backgroundColor = "#66ccff";
+        } else {
+            document.getElementById("TabBody").rows[i].style.backgroundColor = "#E6EBEB";
+        }
+    }
+}
 function TruncaControl() {
     $.ajax({
         async: false,
@@ -182,7 +193,7 @@ function tablaListadoOrdenesPorCentro(cnt) {
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "action=tablaListadoCentro&centro=" + cnt,
-        success: function (data) {            
+        success: function (data) {
             if (data == 0) {
                 location.href = "ListadoOrdFab.jsp";
             } else {
@@ -197,7 +208,7 @@ function tablaListadoOrdenesPorCentro(cnt) {
         }
     });
 }
-function tablaListadoOrdenesPorFolio (fol){
+function tablaListadoOrdenesPorFolio(fol) {
     $.ajax({
         async: false,
         type: 'GET',
@@ -205,7 +216,7 @@ function tablaListadoOrdenesPorFolio (fol){
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "action=tablaListadoFolio&folio=" + fol,
-        success: function (data) {            
+        success: function (data) {
             if (data == 0) {
                 location.href = "ListadoOrdFab.jsp";
             } else {
@@ -220,7 +231,7 @@ function tablaListadoOrdenesPorFolio (fol){
         }
     });
 }
-function tablaListadoOrdenesPorMaterial (mat){
+function tablaListadoOrdenesPorMaterial(mat) {
     $.ajax({
         async: false,
         type: 'GET',
@@ -228,7 +239,7 @@ function tablaListadoOrdenesPorMaterial (mat){
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "action=tablaListadoMaterial&material=" + mat,
-        success: function (data) {            
+        success: function (data) {
             if (data == 0) {
                 location.href = "ListadoOrdFab.jsp";
             } else {
@@ -243,7 +254,7 @@ function tablaListadoOrdenesPorMaterial (mat){
         }
     });
 }
-function tablaListadoOrdenesPorCenFol (centro, folio){
+function tablaListadoOrdenesPorCenFol(centro, folio) {
     $.ajax({
         async: false,
         type: 'GET',
@@ -251,7 +262,7 @@ function tablaListadoOrdenesPorCenFol (centro, folio){
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "action=tablaListadoCenFol&centro=" + centro + "&folio=" + folio,
-        success: function (data) {            
+        success: function (data) {
             if (data == 0) {
                 location.href = "ListadoOrdFab.jsp";
                 ShowMsg(9, "images/advertencia.PNG", "audio/sapmsg.wav", "");
@@ -267,7 +278,7 @@ function tablaListadoOrdenesPorCenFol (centro, folio){
         }
     });
 }
-function tablaListadoOrdenesPorCenMate (centro, mate){
+function tablaListadoOrdenesPorCenMate(centro, mate) {
     $.ajax({
         async: false,
         type: 'GET',
@@ -275,7 +286,7 @@ function tablaListadoOrdenesPorCenMate (centro, mate){
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "action=tablaListadoCenMat&centro=" + centro + "&material=" + mate,
-        success: function (data) {            
+        success: function (data) {
             if (data == 0) {
                 location.href = "ListadoOrdFab.jsp";
             } else {
@@ -290,7 +301,7 @@ function tablaListadoOrdenesPorCenMate (centro, mate){
         }
     });
 }
-function tablaListadoOrdenesPorFolMate (folio, mate){
+function tablaListadoOrdenesPorFolMate(folio, mate) {
     $.ajax({
         async: false,
         type: 'GET',
@@ -298,7 +309,7 @@ function tablaListadoOrdenesPorFolMate (folio, mate){
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "action=tablaListadoFolMat&folio=" + folio + "&material=" + mate,
-        success: function (data) {            
+        success: function (data) {
             if (data == 0) {
                 location.href = "ListadoOrdFab.jsp";
             } else {
