@@ -81,164 +81,176 @@
             }
             return x;
         }
+        String verificarP2(char per) {
+            String x = "none";
+            return x;
+        }
 
     %>
     <%
         String p = ACC_Usuarios.ObtenerInstancia().VerificarPermisos(Nombre);
-        //////////////////////////////////////// ConfiguraciÃ³n ///////////////////////////////////////////////////
-        ///////  ObtenciÃ³n de caracteres para permisos por modulo ///////////////////////////////////////////////
-        String conf = verificarP(p.charAt(0));                         // ConfiguraciÃ³n
+        
+        
+        //////////////////////////////////////// Configuración ///////////////////////////////////////////////////
+        String conf = verificarP(p.charAt(0));                         // Configuración
         /////////////////////////////////////// Usuarios ///////////////////////////////////////////////////////
-        String conf_user = verificarP(p.charAt(1));                    // ConfiguracÃ³n Usuario
+        String conf_user = verificarP(p.charAt(1));                    // Configuración Usuario
         String conf_userCrear = verificarP(p.charAt(2));               // Configuracion Usuario Crear
         String conf_userModif = verificarP(p.charAt(3));               // Configuracion Usuario Modificar
         String conf_userVisual = verificarP(p.charAt(4));              // Configuracion Usuario Visualizar
         ////////////////////////////////////// Folios /////////////////////////////////////////////////////////
         String conf_fol = verificarP(p.charAt(5));                     // Configuracion Folio
-        String conf_folCrear = verificarP(p.charAt(6));                // ConfiguraciÃ³n Folio Crear
-        String conf_folModif = verificarP(p.charAt(7));                // ConfiguraciÃ³n Folio Modificar
-        String conf_folVisual = verificarP(p.charAt(8));               // ConfiguraciÃ³n Folio Visualizar
+        String conf_folCrear = verificarP(p.charAt(6));                // Configuracion Folio Crear
+        String conf_folModif = verificarP(p.charAt(7));                // Configuracion Folio Modificar
+        String conf_folVisual = verificarP(p.charAt(8));               // Configuracion Folio Visualizar
         ////////////////////////////////////// Reportes //////////////////////////////////////////////////////
-        String conf_rep = verificarP(p.charAt(9));
-        String conf_repSAM = verificarP(p.charAt(10));
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////        
-        ////////////////////////////////////// GestiÃ³n materiales //////////////////////////////////////////////
-        String gestMat = verificarP(p.charAt(11));                      // Gestion Materiales
-        ////////////////////////////////////// OrganizaciÃ³n ///////////////////////////////////////////////////       
-        String gestMat_org = verificarP(p.charAt(12));                  // Gestion Materiales OrganizaciÃ³n
-        String gestMat_orgCen = verificarP(p.charAt(13));               // Gestion Materiales Organizacion Centro 
+        String conf_rep = verificarP(p.charAt(9));                     // Reportes
+        String conf_repSAM = verificarP(p.charAt(10));                 // Reportes SAM
+        ///////////////////////////////////// Centros  ///////////////////////////////////////////////////////
+        String gestMat_orgCen = verificarP(p.charAt(11));              // Centros
+        
+        
+        ////////////////////////////////////// Gestión materiales ////////////////////////////////////////////
+        String gestMat = verificarP(p.charAt(12));                      // Gestion Materiales
+        ////////////////////////////////////// Organización //////////////////////////////////////////////////       
+        String gestMat_org = verificarP(p.charAt(13));                  // Gestion Materiales Organizacion       
         String gestMat_orgAlmXc = verificarP(p.charAt(14));             // Gestion Materiales Organizacion Alm por Cen
-        //////////////////////////////////// Datos Maestros //////////////////////////////////////////////////////////////
+        ////////////////////////////////////// Datos Maestros ////////////////////////////////////////////////
         String gestMat_datM = verificarP(p.charAt(15));                 // Gestion Materiales Datos Maestros
-        String gestMat_datMmat = verificarP(p.charAt(16));             // Gestion Materiales Datos Maestros Materiales
-        String gestMat_datMmatCrear = verificarP(p.charAt(17));        // Gestion Materiales Datos Maestros Materiales Crear
-        String gestMat_datMmatMod = verificarP(p.charAt(18));          // Gestion Materiales Datos Maestros Materiales Modificar
-        String gestMat_datMmatVis = verificarP(p.charAt(19));          // Gestion Materiales Datos Maestros Materiales Visualizar        
-        String gestMat_datMCC = verificarP(p.charAt(20));              // GestiÃ³n Materiales Datos Maestros Materiales Catalogo Compras
-        String gestMat_datMCCCreaP = verificarP(p.charAt(21));         // GestiÃ³n Materiales Datos Maestros Materiales Catalogo Compras Crea Proveedores
-        String gestMat_datMCCModP = verificarP(p.charAt(22));          // GestiÃ³n Materiales Datos Maestros Materiales Catalogo Compras Modificar Proveedores
-        String gestMat_datMCC_VisP = verificarP(p.charAt(21));         // GestiÃ³n Materiales Datos Maestros Materiales Catalogo Compras Visualizar Proveedores
-        String gestMat_datMCC_VisInR = verificarP(p.charAt(22));       // GestiÃ³n Materiales Datos Matesros Materiales Catalogo Compras Visualizar Info Records
-        String gestMat_datMC = verificarP(p.charAt(23));               // Gestion Materiales Datos Maestros Clientes         
-        String gestMat_datMC_VisC = verificarP(p.charAt(24));          // Gestion Materiales Datos Maestros Clientes Visualizar Clientes
+        String gestMat_datMmat = verificarP(p.charAt(16));              // Gestion Materiales Datos Maestros Materiales
+        String gestMat_datMmatCrear = verificarP(p.charAt(17));         // Gestion Materiales Datos Maestros Materiales Crear
+        String gestMat_datMmatMod = verificarP(p.charAt(18));           // Gestion Materiales Datos Maestros Materiales Modificar
+        String gestMat_datMmatVis = verificarP(p.charAt(19));           // Gestion Materiales Datos Maestros Materiales Visualizar        
+        String gestMat_datMCC = verificarP(p.charAt(20));               // Gestion Materiales Datos Maestros Materiales Catalogo Compras
+        String gestMat_datMCCProv = verificarP(p.charAt(21));           // Gestion Materiales Datos Maestros Materiales Catalogo Compras
+        String gestMat_datMCCProvCrea = verificarP(p.charAt(22));       // Gestion Materiales Datos Maestros Materiales Catalogo Compras Crea Proveedores
+        String gestMat_datMCCProvMod = verificarP(p.charAt(23));        // Gestion Materiales Datos Maestros Materiales Catalogo Compras Modificar Proveedores
+        String gestMat_datMCC_ProvVis = verificarP(p.charAt(24));       // Gestion Materiales Datos Maestros Materiales Catalogo Compras Visualizar Proveedores
+        String gestMat_datMCC_Inf = verificarP(p.charAt(25));           // Gestion Materiales Datos Maestros Materiales Catalogo Compras InfoRecords
+        String gestMat_datMCC_CrearInR = verificarP(p.charAt(26));      // Gestion Materiales Datos Matesros Materiales Catalogo Compras Crear Info Records
+        String gestMat_datMCC_ModInR = verificarP(p.charAt(27));        // Gestion Materiales Datos Matesros Materiales Catalogo Compras Modificar Info Records
+        String gestMat_datMCC_VisInR = verificarP(p.charAt(28));        // Gestion Materiales Datos Matesros Materiales Catalogo Compras Visualizar Info Records
+        String gestMat_datMC_Cli = verificarP(p.charAt(29));            // Gestion Materiales Datos Maestros Clientes         
+        String gestMat_datMC_CliCrear = verificarP(p.charAt(30));       // Gestion Materiales Datos Maestros Clientes Crear Clientes
+        String gestMat_datMC_CliMod = verificarP(p.charAt(31));         // Gestion Materiales Datos Maestros Clientes Modificar Clientes
+        String gestMat_datMC_Clivis = verificarP(p.charAt(32));         // Gestion Materiales Datos Maestros Clientes Visualizar Clientes
         /////////////////////////////////// Compras //////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestMat_C = verificarP(p.charAt(25));                   // GestiÃ³n Materiales Compras
-        String gestMat_CSC = verificarP(p.charAt(26));                 // GestiÃ³n Materiales Compras Solicitud de Compra
-        String gestMat_CSC_Cr = verificarP(p.charAt(27));              // GestiÃ³n Materiales Compras Solicitud de Compra Crear
-        String gestMat_CSC_Mod = verificarP(p.charAt(28));             // GestiÃ³n Materiales Compras Solicitud de Compra Modificar
-        String gestMat_CSC_Vis = verificarP(p.charAt(29));             // GestiÃ³n Materiales Compras Solicitud de Compra Visualizar
-        String gestMatListaSolped = verificarP(p.charAt(30));          // Listas Solped
-        String gestMat_CPD = verificarP(p.charAt(31));                 // GestiÃ³n Materiales Compras Pedido de Compras
-        String gestMat_CPD_Vis = verificarP(p.charAt(32));             // GestiÃ³n Materiales Compras Pedido de Compras Visualizar
-        ////////////////////////////////// GestiÃ³n de Stocks ////////////////////////////////////////////////////////////////////////////////////////
-        String gestMat_GS = verificarP(p.charAt(33));                  // GestiÃ³n Materiales Gestion Stock 
-        String gestMat_GSDoc = verificarP(p.charAt(34));               // GestiÃ³n Materiales GestiÃ³n Stock Documentos Materiales
-        String gestMat_GSDoc_Vis = verificarP(p.charAt(35));           // GestiÃ³n Materiales GestiÃ³n Stock Documentos Materiales Visualizar Doc. Material
-        String gestMat_GSDoc_LstMov = verificarP(p.charAt(36));        // GestiÃ³n Materiales GestiÃ³n stock Documentos Materiales Lista Mov. Materiales
-        String gestMat_GSMov = verificarP(p.charAt(37));               // GestiÃ³n Materiales Gestion Stock Movimientos
-        String gestMat_GSMov_MovM = verificarP(p.charAt(38));          // GestiÃ³n Materiales GestiÃ³n Stock Movimientos Mov. Material
-        String gestMat_GSMov_ResM = verificarP(p.charAt(39));          // GestiÃ³n Materiales GestiÃ³n Stock Reservas
-        String gestMat_GSMov_ResMCr = verificarP(p.charAt(40));        // GestiÃ³n Materiales GestiÃ³n Stock Reservas
-        String gestMat_GSMov_ResMMo = verificarP(p.charAt(41));        // GestiÃ³n Materiales GestiÃ³n Stock Reservas
-        String gestMat_GSMov_ResMVi = verificarP(p.charAt(42));        // GestiÃ³n Materiales GestiÃ³n Stock Reservas
-        String gestMatListReser = verificarP(p.charAt(43));            // Lkstas Reservas
-        String gestMat_GSMov_EntSer = verificarP(p.charAt(44));        // GestiÃ³n Materiales GestiÃ³n Stock Entrada Servicios
-        String gestMat_GSStockM = verificarP(p.charAt(45));            // Gestion Materiales GestiÃ³n Stock Stock Material
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////// Gestion Comerial /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestCome = verificarP(p.charAt(46));
+        String gestMat_C = verificarP(p.charAt(33));                    // Gestion Materiales Compras
+        String gestMat_CSC = verificarP(p.charAt(34));                  // Gestion Materiales Compras Solicitud de Compra
+        String gestMat_CSC_Cr = verificarP(p.charAt(35));               // Gestion Materiales Compras Solicitud de Compra Crear
+        String gestMat_CSC_Mod = verificarP(p.charAt(36));              // Gestion Materiales Compras Solicitud de Compra Modificar
+        String gestMat_CSC_Vis = verificarP(p.charAt(37));              // Gestion Materiales Compras Solicitud de Compra Visualizar
+        String gestMatListaSolped = verificarP(p.charAt(38));           // Listas Solped
+        String gestMat_CPD = verificarP(p.charAt(39));                  // Gestion Materiales Compras Pedido de Compras
+        String gestMat_CPD_Vis = verificarP(p.charAt(40));              // Gestion Materiales Compras Pedido de Compras Visualizar
+        ////////////////////////////////////// Gestion de Stocks ////////////////////////////////////////////////////////////////////////////////////////
+        String gestMat_GS = verificarP(p.charAt(41));                   // Gestion Materiales Gestion Stock 
+        String gestMat_GSDoc = verificarP(p.charAt(42));                // Gestion Materiales Gestion Stock Documentos Materiales
+        String gestMat_GSDoc_Vis = verificarP(p.charAt(43));            // Gestion Materiales Gestion Stock Documentos Materiales Visualizar Doc. Material
+        String gestMat_GSDoc_LstMov = verificarP(p.charAt(44));         // Gestion Materiales Gestion stock Documentos Materiales Lista Mov. Materiales
+        String gestMat_GSMov = verificarP(p.charAt(45));                // Gestion Materiales Gestion Stock Movimientos
+        String gestMat_GSMov_MovM = verificarP(p.charAt(46));           // Gestion Materiales Gestion Stock Movimientos Mov. Material
+        String gestMat_GSMov_ResM = verificarP(p.charAt(47));           // Gestion Materiales Gestion Stock Reservas
+        String gestMat_GSMov_ResMCr = verificarP(p.charAt(48));         // Gestion Materiales Gestion Stock Reservas
+        String gestMat_GSMov_ResMMo = verificarP(p.charAt(49));         // Gestion Materiales Gestion Stock Reservas
+        String gestMat_GSMov_ResMVi = verificarP(p.charAt(50));         // Gestion Materiales Gestion Stock Reservas
+        String gestMatListReser = verificarP(p.charAt(51));             // Listas Reservas
+        String gestMat_GSMov_EntSer = verificarP(p.charAt(52));         // Gestion Materiales Gestion Stock Entrada Servicios
+        String gestMat_GSStockM = verificarP(p.charAt(53));             // Gestion Materiales Gestion Stock Stock Material
+       
+        
+
+        ///////////////////////////////////////////// Gestion Comerial ///////////////////////////////////////////////////
+        String gestCome = verificarP(p.charAt(54));
         //////////////////////// Cotizacion //////////////////////////////////////////////////////////////////////////////
-        String gestCome_Cotizacion = verificarP(p.charAt(47));
-        String gestCome_Cotiz_Crear = verificarP(p.charAt(48));
-        String gestCome_Cotiz_Modif = verificarP(p.charAt(49));
-        String gestCome_Cotiz_Visual = verificarP(p.charAt(50));
+        String gestCome_Cotizacion = verificarP(p.charAt(55));
+        String gestCome_Cotiz_Crear = verificarP(p.charAt(56));
+        String gestCome_Cotiz_Modif = verificarP(p.charAt(57));
+        String gestCome_Cotiz_Visual = verificarP(p.charAt(58));
         /////////////////////// Pedidos ///////////////////////////////////////////////////////////////////////////
-        String gestCome_Pedidos = verificarP(p.charAt(51));
-        String gestCome_Pedi_Crear = verificarP(p.charAt(52));
-        String gestCome_Pedi_Modif = verificarP(p.charAt(53));
-        String gestCome_Pedi_Visua = verificarP(p.charAt(54));       
-        //////////////////////// GestiÃ³n Mantenimiento ////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestMant = verificarP(p.charAt(55));                    // GestiÃ³n Matenimiento
+        String gestCome_Pedidos = verificarP(p.charAt(59));
+        String gestCome_Pedi_Crear = verificarP(p.charAt(60));
+        String gestCome_Pedi_Modif = verificarP(p.charAt(61));
+        String gestCome_Pedi_Visua = verificarP(p.charAt(62));     
+        
+        
+        //////////////////////// Gestion Mantenimiento ////////////////////////////////////////////////////////////////////////////////////////////////
+        String gestMant = verificarP(p.charAt(63));                    // Gestion Matenimiento
         //////////////////////////////// Datos Maestros /////////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestMant_DM = verificarP(p.charAt(56));                 // GestiÃ³n Mantenimiento Datos Maestros
-        String gestMant_DMUbi = verificarP(p.charAt(57));              // GestiÃ³n Mantenimiento Datos Maestros Ubicaciones
-        String gestMant_DMUbi_Cre = verificarP(p.charAt(58));          // GestiÃ³n Mantenimiento Datos Maestros Ubicaciones Crear
-        String gestMant_DMUbi_Mod = verificarP(p.charAt(59));          // GestiÃ³n Mantenimiento Datos Maestros Ubicaciones Modificar
-        String gestMant_DMUbi_Vis = verificarP(p.charAt(60));          // GestiÃ³n Mantenimiento Datos Maestros Ubicaciones Visualizar
-        String gestMant_DMEqui = verificarP(p.charAt(61));             // GestiÃ³n Mantenimiento Datos Maestros Equipos
-        String gestMant_DMEqui_Cre = verificarP(p.charAt(62));         // GestiÃ³n Mantenimiento Datos Maestros Equipos Crear
-        String gestMant_DMEqui_Mod = verificarP(p.charAt(63));         // GestiÃ³n Mantenimiento Datos Maestros Equipos Modificar
-        String gestMant_DMEqui_Vis = verificarP(p.charAt(64));         // GestiÃ³n Mantenimiento Datos Maestros Equipos Visualizar
-        String gestMant_DMBom = verificarP(p.charAt(65));              // GestiÃ³n Mantenimiento Datos Maestros Boom Equipos
-        String gestMant_DMBom_Crea = verificarP(p.charAt(66));         // GestiÃ³n Mantenimiento Datos Maestros Boom Equipos Crear
-        String gestMant_DMBom_Mod = verificarP(p.charAt(67));          // GestiÃ³n Mantenimiento Datos Maestros Boom Equipos Modificar
-        String gestMant_DMBom_Vis = verificarP(p.charAt(68));          // GestiÃ³n Mantenimiento Datos Maestros Boom Equipos Visualizar
-        String gestMant_DMHrut = verificarP(p.charAt(69));             // GestiÃ³n Mantenimiento Datos Maestros Hojas Ruta
-        String gestMant_DMHrut_Cra = verificarP(p.charAt(70));         // GestiÃ³n Mantenimiento Datos Maestros Hojas Ruta Crear 
-        String gestMant_DMHrut_Mod = verificarP(p.charAt(71));         // GestiÃ³n Mantenimiento Datos Maestros Hojas Ruta Modificar
-        String gestMant_DMHrut_Vis = verificarP(p.charAt(72));         // GestiÃ³n Mantenimiento Datos Maestros Hojas Ruta Visualizar
+        String gestMant_DM = verificarP(p.charAt(64));                 // Gestion Mantenimiento Datos Maestros
+        String gestMant_DMUbi = verificarP(p.charAt(65));              // Gestion Mantenimiento Datos Maestros Ubicaciones
+        String gestMant_DMUbi_Cre = verificarP(p.charAt(66));          // Gestion Mantenimiento Datos Maestros Ubicaciones Crear
+        String gestMant_DMUbi_Mod = verificarP(p.charAt(67));          // Gestion Mantenimiento Datos Maestros Ubicaciones Modificar
+        String gestMant_DMUbi_Vis = verificarP(p.charAt(68));          // Gestion Mantenimiento Datos Maestros Ubicaciones Visualizar
+        
+        String gestMant_DMEqui = verificarP(p.charAt(69));             // Gestion Mantenimiento Datos Maestros Equipos
+        String gestMant_DMEqui_Cre = verificarP(p.charAt(70));         // Gestion Mantenimiento Datos Maestros Equipos Crear
+        String gestMant_DMEqui_Mod = verificarP(p.charAt(71));         // Gestion Mantenimiento Datos Maestros Equipos Modificar
+        String gestMant_DMEqui_Vis = verificarP(p.charAt(72));         // Gestion Mantenimiento Datos Maestros Equipos Visualizar
+        String gestMant_DMBom = verificarP(p.charAt(73));              // Gestion Mantenimiento Datos Maestros Boom Equipos
+        String gestMant_DMBom_Crea = verificarP(p.charAt(74));         // Gestion Mantenimiento Datos Maestros Boom Equipos Crear
+        String gestMant_DMBom_Mod = verificarP(p.charAt(75));          // Gestion Mantenimiento Datos Maestros Boom Equipos Modificar
+        String gestMant_DMBom_Vis = verificarP(p.charAt(76));          // Gestion Mantenimiento Datos Maestros Boom Equipos Visualizar
+        String gestMant_DMHrut = verificarP(p.charAt(77));             // Gestion Mantenimiento Datos Maestros Hojas Ruta
+        String gestMant_DMHrut_Cra = verificarP(p.charAt(78));         // Gestion Mantenimiento Datos Maestros Hojas Ruta Crear 
+        String gestMant_DMHrut_Mod = verificarP(p.charAt(79));         // Gestion Mantenimiento Datos Maestros Hojas Ruta Modificar
+        String gestMant_DMHrut_Vis = verificarP(p.charAt(80));         // Gestion Mantenimiento Datos Maestros Hojas Ruta Visualizar
         ///////////////////////////// Monitor de Equipos //////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestMant_ME = verificarP(p.charAt(73));                 // GestiÃ³n Mantenimiento Monitor de Equipos
-        String gestMant_ME_MCPxE = verificarP(p.charAt(74));           // GestiÃ³n Mantenimiento Monitor de Equipos Monitor de Contadores y Plan de Mantenimiento
+        String gestMant_ME = verificarP(p.charAt(81));                 // Gestion Mantenimiento Monitor de Equipos
+        String gestMant_ME_MCPxE = verificarP(p.charAt(82));           // Gestion Mantenimiento Monitor de Equipos Monitor de Contadores y Plan de Mantenimiento
         //////////////////////////// Avisos PM /////////////////////////////////////////////////////////////////////////////////////
-        String gestMant_APM = verificarP(p.charAt(75));                // GestiÃ³n Mantenimiento Avisos PM
-        String gestMant_APM_MAPM = verificarP(p.charAt(76));           // GestiÃ³n Mantenimiento Avisos PM Monitor de Avisos PM
-        String gestMant_APM_Cre = verificarP(p.charAt(77));            // GestiÃ³n Mantenimiento Avisos PM Crear
-        String gestMant_APM_Mod = verificarP(p.charAt(78));            // GestiÃ³n Mantenimiento Avisos PM Modificar
-        String gestMant_APM_Vis = verificarP(p.charAt(79));            // GestiÃ³n Mantenimiento Avisos PM Visualizar
+        String gestMant_APM = verificarP(p.charAt(83));                // Gestion Mantenimiento Avisos PM
+        String gestMant_APM_MAPM = verificarP(p.charAt(84));           // Gestion Mantenimiento Avisos PM Monitor de Avisos PM
+        String gestMant_APM_Cre = verificarP(p.charAt(85));            // Gestion Mantenimiento Avisos PM Crear
+        String gestMant_APM_Mod = verificarP(p.charAt(86));            // Gestion Mantenimiento Avisos PM Modificar
+        String gestMant_APM_Vis = verificarP(p.charAt(87));            // Gestion Mantenimiento Avisos PM Visualizar
         ////////////////////////// Ordenes PM //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestMant_OPM = verificarP(p.charAt(80));                // GestiÃ³n Mantenimiento Ordenes PM
-        String gestMant_OPM_Cre = verificarP(p.charAt(81));            // GestiÃ³n Mantenimiento Ordenes PM Crear
-        String gestMant_OPM_Mod = verificarP(p.charAt(82));            // GestiÃ³n Mantenimiento Ordenes PM Modificar 
-        String gestMant_OPM_Vis = verificarP(p.charAt(83));            // GestiÃ³n Mantenimiento Ordenes PM Visualizar
-        String gestMant_OPM_LstO = verificarP(p.charAt(84));           // GestiÃ³n Mantenimiento Ordenes PM Lista de Ordenes
+        String gestMant_OPM = verificarP(p.charAt(88));                // Gestion Mantenimiento Ordenes PM
+        String gestMant_OPM_Cre = verificarP(p.charAt(89));            // Gestion Mantenimiento Ordenes PM Crear
+        String gestMant_OPM_Mod = verificarP(p.charAt(90));            // Gestion Mantenimiento Ordenes PM Modificar 
+        String gestMant_OPM_Vis = verificarP(p.charAt(91));            // Gestion Mantenimiento Ordenes PM Visualizar
+        String gestMant_OPM_LstO = verificarP(p.charAt(92));           // Gestion Mantenimiento Ordenes PM Lista de Ordenes
         ////////////////////// Notificaciones PM /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestMant_NPM = verificarP(p.charAt(85));                // GestiÃ³n Mantenimiento Notificaciones PM      
-        String gestMant_NPM_Cre = verificarP(p.charAt(86));            // GestiÃ³n Mantenimiento Notificaciones PM Crear
-        String gestMant_NPM_Vis = verificarP(p.charAt(87));            // GestiÃ³n Mantenimiento Notificaciones PM Visualizar
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        String gestMant_NPM = verificarP(p.charAt(93));                // Gestion Mantenimiento Notificaciones PM      
+        String gestMant_NPM_Cre = verificarP(p.charAt(94));            // Gestion Mantenimiento Notificaciones PM Crear
+        String gestMant_NPM_Vis = verificarP(p.charAt(95));            // Gestion Mantenimiento Notificaciones PM Visualizar
+       
+       
         ///////////////////// Gestiòn de Calidad ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestCali = verificarP(p.charAt(88));                    // GestiÃ³n de Calidad
+        String gestCali = verificarP(p.charAt(96));                    // GestiÃ³n de Calidad
         ///////////////////// Plan de Inspecciòn ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestCali_PIM = verificarP(p.charAt(89));                // Plan de inspeccion de calidad para Material
-        String gestCaliMe_PIM = verificarP(p.charAt(90));              // Calidad Medidas
-        String gestListaMLIe_PIM = verificarP(p.charAt(91));           // Listado Lotes de inspección
+        String gestCali_PIM = verificarP(p.charAt(97));                // Plan de inspeccion de calidad para Material
+        String gestCaliMe_PIM = verificarP(p.charAt(98));              // Calidad Medidas
+        String gestListaMLIe_PIM = verificarP(p.charAt(99));           // Listado Lotes de inspección
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////// Gestión de Documentos ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestDocu = verificarP(p.charAt(92));
+        String gestDocu = verificarP(p.charAt(100));
         ///////////////////// Visualizar Documentos ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestDocu_VisDoc = verificarP(p.charAt(93));////////////////7
-        ////////////////////// Gestion produccion
-        String Getion_prod = verificarP(p.charAt(94));
-        String gestMant_PP = verificarP(p.charAt(95));
-        String gestMant_PPUbi = verificarP(p.charAt(96));
-        String gestMant_PPUbi_Cre = verificarP(p.charAt(97));
-        String gestMant_PPUbi_Mod = verificarP(p.charAt(98));
-        String gestMant_PPDMUbi_Vis = verificarP(p.charAt(99));
-        String gestMant_PPEqui = verificarP(p.charAt(100));
-        String gestMant_PPEqui_Cre = verificarP(p.charAt(101));
-        String gestMant_PPEqui_Mod = verificarP(p.charAt(102));
-        String gestMant_PPEqui_Vis = verificarP(p.charAt(103));
-        String gestMant_PPBom = verificarP(p.charAt(104));
-        String gestMant_PPBom_Crea = verificarP(p.charAt(105));
-        String gestMant_PPBom_Mod = verificarP(p.charAt(106));
-        String gestMant_PPBom_Vis = verificarP(p.charAt(107));
-        String gestMant_PPHrut = verificarP(p.charAt(108));
-        String gestMant_PPHrut_Cra = verificarP(p.charAt(109));
-        String gestMant_PPHrut_Mod = verificarP(p.charAt(110));
-        String gestMant_PPHrut_Vis = verificarP(p.charAt(111));
-       ////////////////////// Monitor de Equipos PP //////////////////////////////////////////////////////////////////////////////////////////////////
-        String gestMant_MEPP = verificarP(p.charAt(112));                 // GestiÃ³n Mantenimiento Monitor de Equipos PP
-        String gestMant_MPP = verificarP(p.charAt(113));                    // GestiÃ³n Mantenimiento Monitor PP
-        String gestMant_ME_MCPxEPP = verificarP(p.charAt(114));           // GestiÃ³n Mantenimiento Notificar tiempos PP
-        String gestMant_ME_RepNot = verificarP(p.charAt(115));              // GestiÃ³n Mantenimiento Reporte Not
-        String gestMant_ME_RepStatusOrd = verificarP(p.charAt(116));        // GestiÃ³n Mantenimiento Reporte Status
-        //////////////////////////// Avisos PP /////////////////////////////////////////////////////////////////////////////////////
-        String gestMant_APP = verificarP(p.charAt(117));                // GestiÃ³n Mantenimiento Avisos PP
-        String gestMant_APP_MAP = verificarP(p.charAt(118));           // GestiÃ³n Mantenimiento Avisos PP Monitor de Avisos PM
-        String gestMant_APP_Cre = verificarP(p.charAt(117));            // GestiÃ³n Mantenimiento Avisos PP Crear
-        String gestMant_APP_Mod = verificarP(p.charAt(119));            // GestiÃ³n Mantenimiento Avisos PP Modificar
-        String gestMant_APP_Vis = verificarP(p.charAt(120));            // GestiÃ³n Mantenimiento Avisos PP Visualizar
+        String gestDocu_VisDoc = verificarP(p.charAt(101));
+      
+        
+        ////////////////////// Gestion produccion //////////////////////////////////////////////////////////////
+        String Getion_prod = verificarP(p.charAt(102));
+        /////////////// Datos Maestros /////////////////////////////////////////////////
+        String gestPP_DM = verificarP(p.charAt(103));
+        String gestPP_Mat = verificarP(p.charAt(104));
+        String gestPP_MatCre = verificarP(p.charAt(105));
+        String gestPP_MatMod = verificarP(p.charAt(106));
+        String gestPP_MatVis = verificarP(p.charAt(107));
+        String gestPP_ListMat = verificarP(p.charAt(108));
+        String gestPP_ListMatCr = verificarP(p.charAt(109));
+        String gestPP_ListMatMod = verificarP(p.charAt(110));
+        String gestPP_ListMatVis = verificarP(p.charAt(111));
+        String gestPP_Hrut = verificarP(p.charAt(112));
+        String gestPP_Hrut_Cra = verificarP(p.charAt(113));
+        String gestPP_Hrut_Mod = verificarP(p.charAt(114));
+        String gestPP_Hrut_Vis = verificarP(p.charAt(115));
+       ////////////////////// Notificar Tiempos PP //////////////////////////////////////////////////////////////////////////////////////////////////
+        String gestPP_NotTie = verificarP(p.charAt(116));                 // Gestión Produccion Notificar Tiempos PP
+        String gestPP_MPP = verificarP(p.charAt(117));                    // Gestión Produccion Monitor PP
+        String gestPP_NotTiPP = verificarP(p.charAt(118));                // Gestión Produccion Notificar tiempos PP
+        String gestPP_RepNot = verificarP(p.charAt(119));                 // Gestion Produccion Reporte Not
+        String gestPP_RepStatusOrd = verificarP(p.charAt(120));           // Gestion Mantenimiento Reporte Status
         ////////////////////////// Ordenes PP //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         String gestMant_OPP = verificarP(p.charAt(121));                // GestiÃ³n Mantenimiento Ordenes PP
         String gestMant_OPP_Cre = verificarP(p.charAt(122));            // GestiÃ³n Mantenimiento Ordenes PP Crear
@@ -319,25 +331,25 @@
                                             </li>
                                             <li class="current" style="display:<%=gestMat_datMCC%> "><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatComp_menu"));%></a>
                                                 <ul>
-                                                    <li class="current" style="display:<%=gestMat_datMmat%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatComProveedor_menu"));%></a>
+                                                    <li class="current" style="display:<%=gestMat_datMCCProv%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatComProveedor_menu"));%></a>
                                                         <ul>
-                                                            <li style="display: <%=gestMat_datMCCCreaP%>"><a href="CreaProveedores.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompCrearProv_menu"));%></a></li>
-                                                            <li style="display: <%=gestMat_datMCCModP%>"><a href="ModificaProveedores.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompModificarProv_menu"));%></a></li>
-                                                            <li style="display: <%=gestMat_datMCC_VisP%>"><a href="VisualizarProveedores.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompVisProv_menu"));%></a></li>
+                                                            <li style="display: <%=gestMat_datMCCProvCrea%>"><a href="CreaProveedores.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompCrearProv_menu"));%></a></li>
+                                                            <li style="display: <%=gestMat_datMCCProvMod%>"><a href="ModificaProveedores.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompModificarProv_menu"));%></a></li>
+                                                            <li style="display: <%=gestMat_datMCC_ProvVis%>"><a href="VisualizarProveedores.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompVisProv_menu"));%></a></li>
                                                         </ul> 
-                                                    <li class="current" style="display:<%=gestMat_datMmat%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompInfoRecord_menu"));%></a>
+                                                    <li class="current" style="display:<%=gestMat_datMCC_Inf%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompInfoRecord_menu"));%></a>
                                                         <ul>
-                                                            <li style="display: <%=gestMat_datMCC_VisInR%>"><a href="CrearInfoRecords.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompCrearInfo_menu"));%></a></li>
-                                                            <li style="display: <%=gestMat_datMCC_VisP%>"><a href="ModificarInfoRecords.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompModificarInfo_menu"));%></a></li>
+                                                            <li style="display: <%=gestMat_datMCC_CrearInR%>"><a href="CrearInfoRecords.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompCrearInfo_menu"));%></a></li>
+                                                            <li style="display: <%=gestMat_datMCC_ModInR%>"><a href="ModificarInfoRecords.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompModificarInfo_menu"));%></a></li>
                                                             <li style="display: <%=gestMat_datMCC_VisInR%>"><a href="VisualizarInfoRecords.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompVisInfo_menu"));%></a></li>
                                                         </ul>
                                                  </ul>     
                                             </li>
-                                            <li class="current" style="display: <%=gestMat_datMC%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosClientes_menu"));%></a>
+                                            <li class="current" style="display: <%=gestMat_datMC_Cli%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosClientes_menu"));%></a>
                                                 <ul>
-                                                    <li style="display: <%=gestMat_datMCC_VisP%>"><a href="CrearClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCrearCliente_menu"));%></a></li>
-                                                    <li style="display: <%=gestMat_datMCC_VisInR%>"><a href="ModificarClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosModificarCliente_menu"));%></a></li>
-                                                    <li style="display: <%=gestMat_datMC_VisC%>"><a href="VisualizarClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosVisCliente_menu"));%></a></li>
+                                                    <li style="display: <%=gestMat_datMC_CliCrear%>"><a href="CrearClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCrearCliente_menu"));%></a></li>
+                                                    <li style="display: <%=gestMat_datMC_CliMod%>"><a href="ModificarClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosModificarCliente_menu"));%></a></li>
+                                                    <li style="display: <%=gestMat_datMC_Clivis%>"><a href="VisualizarClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosVisCliente_menu"));%></a></li>
                                                 </ul>
                                             </li>
 
@@ -397,9 +409,8 @@
                                 <ul>
                                    <li class="current" style="display: <%=gestCome_Cotizacion%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionComercial_Cotizacion_menu"));%></a>
                                         <ul>
-                                            <li style="display: <%=gestCome_Cotiz_Crear%>"><a href="CrearCotizacion.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
+                                            <li style="display: <%=gestCome_Cotiz_Crear%>"><a href="#"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
                                             <li style="display: <%=gestCome_Cotiz_Modif%>"><a href="#"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
-<!--                                            <li style="display: <%=gestCome_Cotiz_Modif%>"><a href="ModificarCotizacion.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>-->
                                             <li style="display: <%=gestCome_Cotiz_Visual%>"><a href="VisualizarCotizacion.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
                                         </ul>
                                     </li>
@@ -407,7 +418,6 @@
                                         <ul>
                                             <li style="display: <%=gestCome_Pedi_Crear%>"><a href="CrearPedidoSD.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
                                             <li style="display: <%=gestCome_Pedi_Modif%>"><a href="#"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
-                                            <!--<li style="display: <%=gestCome_Pedi_Modif%>"><a href="ModificarPedidosSD.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>-->
                                             <li style="display: <%=gestCome_Pedi_Visua%>"><a href="VisualizarPedidosSD.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
                                         </ul>
                                     </li>
@@ -483,45 +493,38 @@
                             
                             <li class="current" style="display: <%=Getion_prod%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionProduccion"));%></a>
                                 <ul>
-                                    <li class="current" style="display: <%=gestMant_PP%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosPP"));%></a>
+                                    <li class="current" style="display: <%=gestPP_DM%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosPP"));%></a>
                                         <ul>
-<!--                                            <li class="current" style="display: <%=gestMant_PPUbi%>"><a href="#"><%out.println(po.getProperty("etiqueta.PP_DatosMaestrosUbicac_menu"));%></a>
+                                            <li class="current" style="display: <%=gestPP_Mat%>"><a href="#"><%out.println(po.getProperty("etiqueta.PP_Materiales_menu"));%></a>
                                                 <ul>
-                                                    <li style="display: <%=gestMant_PPUbi_Cre%>"><a href="CrearUbicacionesTecnicasPP.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
-                                                    <li style="display: <%=gestMant_PPUbi_Mod%>"><a href="ModificarUbicacionesTecnicasPP.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
-                                                    <li style="display: <%=gestMant_PPDMUbi_Vis%>"><a href="VisualizarUbicacionesTecnicasPP.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
-                                                </ul>
-                                            </li>-->
-                                            <li class="current" style="display: <%=gestMant_PPEqui%>"><a href="#"><%out.println(po.getProperty("etiqueta.PP_Materiales_menu"));%></a>
-                                                <ul>
-                                                    <li style="display: <%=gestMant_PPEqui_Cre%>"><a href="CrearMaterialesPP.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
-                                                    <li style="display: <%=gestMant_PPEqui_Mod%>"><a href="ModificarMaterialesPP.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
-                                                    <li style="display: <%=gestMant_PPEqui_Vis%>"><a href="VisualizarMaterialesPP.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
+                                                    <li style="display: <%=gestPP_MatCre%>"><a href="CrearMaterialesPP.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
+                                                    <li style="display: <%=gestPP_MatMod%>"><a href="ModificarMaterialesPP.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
+                                                    <li style="display: <%=gestPP_MatVis%>"><a href="VisualizarMaterialesPP.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
                                                 </ul>
                                             </li>
-                                            <li class="current" style="display: <%=gestMant_PPBom%>"><a href="#"><%out.println(po.getProperty("etiqueta.PP_BoomEqui_menu"));%></a>
+                                            <li class="current" style="display: <%=gestPP_ListMat%>"><a href="#"><%out.println(po.getProperty("etiqueta.PP_BoomEqui_menu"));%></a>
                                                 <ul>
-                                                    <li style="display: <%=gestMant_PPBom_Crea%>"><a href="CrearBomMaterialPP.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
-                                                    <li style="display: <%=gestMant_PPBom_Mod%>"><a href="ModificarBomMaterialPP.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
-                                                    <li style="display: <%=gestMant_PPBom_Vis%>"><a href="VisualizarBomMaterialesPP.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
+                                                    <li style="display: <%=gestPP_ListMatCr%>"><a href="CrearBomMaterialPP.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
+                                                    <li style="display: <%=gestPP_ListMatMod%>"><a href="ModificarBomMaterialPP.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
+                                                    <li style="display: <%=gestPP_ListMatVis%>"><a href="VisualizarBomMaterialesPP.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
                                                 </ul>
                                             </li>
-                                            <li class="current" style="display: <%=gestMant_PPHrut%>"><a href="#"><%out.println(po.getProperty("etiqueta.PP_HojaRuta_menu"));%></a>
+                                            <li class="current" style="display: <%=gestPP_Hrut%>"><a href="#"><%out.println(po.getProperty("etiqueta.PP_HojaRuta_menu"));%></a>
                                                 <ul>
-                                                    <li style="display: <%=gestMant_PPHrut_Cra%>"><a href="CrearHojasRutaPP.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
-                                                    <li style="display: <%=gestMant_PPHrut_Mod%>"><a href="ModificarHojasRutaPP.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
-                                                    <li style="display: <%=gestMant_PPHrut_Vis%>"><a href="VisualizarHojasRutaPP.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
+                                                    <li style="display: <%=gestPP_Hrut_Cra%>"><a href="CrearHojasRutaPP.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
+                                                    <li style="display: <%=gestPP_Hrut_Mod%>"><a href="ModificarHojasRutaPP.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
+                                                    <li style="display: <%=gestPP_Hrut_Vis%>"><a href="VisualizarHojasRutaPP.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
                                                 </ul>
                                             </li>
                                         </ul>
                                     </li>                                    
                                     <!--Monitor Status PP-->
-                                    <li class="current" style="display: <%=gestMant_MEPP%>"><a href="#">Notificar Tiempos PP</a>
+                                    <li class="current" style="display: <%=gestPP_NotTie%>"><a href="#">Notificar Tiempos PP</a>
                                         <ul>
-                                            <li class="current" style="display: <%=gestMant_MPP%>"> <a href="ListadoOrdFab.jsp">Monitor PP</a></li>
-                                            <li class="current" style="display: <%=gestMant_ME_MCPxEPP%>"> <a href="NotificacionTiemposPP.jsp">Notificar Tiempos</a></li>
-                                            <li class="current" style="display: <%=gestMant_ME_RepNot%>"> <a href="ReporteMovNotificaciones.jsp">Reporte Notificaciones</a></li>
-                                            <li class="current" style="display: <%=gestMant_ME_RepStatusOrd%>"> <a href="ReporteStatusOrdenesPP.jsp">Reporte Estatus</a></li>
+                                            <li class="current" style="display: <%=gestPP_MPP%>"> <a href="ListadoOrdFab.jsp">Monitor PP</a></li>
+                                            <li class="current" style="display: <%=gestPP_NotTiPP%>"> <a href="NotificacionTiemposPP.jsp">Notificar Tiempos</a></li>
+                                            <li class="current" style="display: <%=gestPP_RepNot%>"> <a href="ReporteMovNotificaciones.jsp">Reporte Notificaciones</a></li>
+                                            <li class="current" style="display: <%=gestPP_RepStatusOrd%>"> <a href="ReporteStatusOrdenesPP.jsp">Reporte Estatus</a></li>
                                         </ul>
                                     </li>
                                     <li class="current" style="display: <%=gestMant_OPP%>"><a href="#"><%out.println(po.getProperty("etiqueta.OrdenesPP"));%></a>
