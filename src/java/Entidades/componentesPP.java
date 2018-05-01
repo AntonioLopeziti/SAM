@@ -22,6 +22,33 @@ public class componentesPP {
     String lote = "";
     String cl_mov = "";
     String descripcion = "";
+    String cantidad2 = "";
+    String hidden = "";
+    String posListaM = "";
+
+    public String getPosListaM() {
+        return posListaM;
+    }
+
+    public void setPosListaM(String posListaM) {
+        this.posListaM = posListaM;
+    }
+
+    public String getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(String hidden) {
+        this.hidden = hidden;
+    }
+
+    public String getCantidad2() {
+        return cantidad2;
+    }
+
+    public void setCantidad2(String cantidad2) {
+        this.cantidad2 = cantidad2;
+    }
 
     public String getDescripcion() {
         return descripcion;
