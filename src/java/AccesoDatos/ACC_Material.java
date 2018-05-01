@@ -6,6 +6,7 @@ import Entidades.grupoarticulo;
 import Entidades.materiales;
 import Entidades.GrupoArticulos;
 import Entidades.PlanPP;
+import Entidades.componentesPP;
 import Entidades.materiales_almacen;
 import Entidades.organizacion;
 import Entidades.tipomaterial;
@@ -236,6 +237,31 @@ public class ACC_Material {
             cnx.CerrarConexion(con);
         }
         return 0;
+    }
+    public componentesPP Cantidades_PT(String orden) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        componentesPP pt = new componentesPP();
+
+        String query = "{CALL PP.CantidadOrden_PT(?)}";
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, orden);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                pt.setCantidad(rs.getString("notificado"));
+                pt.setCantidad2(rs.getString("restante"));
+                pt.setMaterial(rs.getString("cantidad_total"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error Cantidades_PT(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return pt;
     }
 
     public String MMGetUniMed(String um) {
