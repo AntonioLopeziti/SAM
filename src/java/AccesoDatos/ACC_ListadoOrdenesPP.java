@@ -512,18 +512,22 @@ public class ACC_ListadoOrdenesPP {
         }
         cnx.CerrarConexion(con);
     }    
-    public ArrayList<StatusOrdenes> SAMStatusSO() {
+    public ArrayList<StatusOrdenes> SAMStatusSO(String folOrd, String CentroOrd, String CtdOrd) {
         ArrayList<StatusOrdenes> sam = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            pst = con.prepareCall("{call PP.ListaOrdenesFabTodosFolios()}");
+            pst = con.prepareCall("{call PP.ListaOrdenesFabTodosFolios(?,?,?)}");
+            pst.setString(1, folOrd);
+            pst.setString(2, CentroOrd);
+            pst.setString(3, CtdOrd);
             rs = pst.executeQuery();
             while (rs.next()) {
                 StatusOrdenes so = new StatusOrdenes();                
                 so.setNum_orden(rs.getString("num_orden"));
+                so.setCentro(rs.getString("centro"));
                 sam.add(so);
             }
         } catch (Exception e) {
@@ -534,19 +538,23 @@ public class ACC_ListadoOrdenesPP {
         return sam;
     }
        
-    public ArrayList<StatusOrdenes> SAPStatusOP() {
+    public ArrayList<StatusOrdenes> SAPStatusOP(String folMate, String CentroMate, String CtdMate) {
         ArrayList<StatusOrdenes> sap = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String query = "{call PP.ListaOrdenesFabTodosMaterial}";
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.ListaOrdenesFabTodosMaterial(?,?,?)}";
         try {
-            Statement st;
-            ResultSet rs;
-            st = con.createStatement();
-            rs = st.executeQuery(query);
+            pst = con.prepareCall(query);
+            pst.setString(1, folMate);
+            pst.setString(2, CentroMate);
+            pst.setString(3, CtdMate);
+            rs = pst.executeQuery();
             while (rs.next()) {
                 StatusOrdenes so = new StatusOrdenes();                
                 so.setNum_material(rs.getString("num_material"));
+                so.setCentro(rs.getString("centro"));
                 sap.add(so);
             }
         } catch (Exception ex) {
