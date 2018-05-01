@@ -282,7 +282,7 @@ public class ACC_NotificarTiempos {
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         Boolean ban = false;
-        String query = "{CALL PP.NotTiempo_InsertarRegistroPosNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL PP.NotTiempo_InsertarRegistroPosNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, posno.getNum_orden());
@@ -303,6 +303,7 @@ public class ACC_NotificarTiempos {
             ps.setString(16, posno.getHora_notificada_inic_ej());
             ps.setString(17, posno.getFecha_fin_notificada_ej());
             ps.setString(18, posno.getHora_notificada_fin_ej());
+            ps.setString(19, posno.getUnidad_medida());
             if (ps.executeUpdate() == 1) {
                 ban = true;
             }
@@ -480,6 +481,7 @@ public class ACC_NotificarTiempos {
                 plan.setNum_material(rs.getString("num_material"));
                 plan.setCentro(rs.getString("centro"));
                 plan.setContador_notificacion(rs.getString("contador_notificacion"));
+                plan.setUnidad_medida(rs.getString("unidad_medida_base"));
             }
         } catch (Exception e) {
             System.err.println("Error en Consultar Datos Usuario, ACC_NotificarTiempos por: " + e);
