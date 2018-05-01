@@ -38,9 +38,9 @@ public class ACC_Ordenes_pp_notificaciones {
         return Instance;
     }
 
-    public void PosicionInsertaMovNot(String folio_sam, String orden, String hora, String fecha, String contador, String material, String cantidad, String um, String lote, String centro, String claseMov) {
+    public void PosicionInsertaMovNot(String folio_sam, String orden, String hora, String fecha, String contador, String material, String cantidad, String um, String lote, String centro, String claseMov, String posL) {
         
-        String query = "{CALL PP.Notif_InsertaPosMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL PP.Notif_InsertaPosMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
@@ -98,6 +98,7 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(50, "");
             pst.setString(51, "");
             pst.setString(52, "");
+            pst.setString(53, posL);
             pst.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error: " + e);
@@ -919,24 +920,25 @@ public class ACC_Ordenes_pp_notificaciones {
         return rtn;
     }
     
-    public ArrayList<componentesPP> MostraTABPM01NOPP(String ord, String ope) {
+    public ArrayList<componentesPP> MostraTABPM01NOPP(String ord, String cnt, String ll) {
         ArrayList<componentesPP> mpm = new ArrayList<>();
+        String ope = "";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         PreparedStatement pst2;
         ResultSet rs = null;
         ResultSet rs2;
-        String query = "{call PP.not_cargaDatosOpe(?,?)}";
+        String query = "{call PP.not_cargaDatosOpe(?)}";
         String query2 = "{call PP.not_cargaDatosComponente(?)}";
         try {
             pst = conn.prepareStatement(query);
-            pst.setString(1, ope);
-            pst.setString(2, ord);
+            pst.setString(1, ord);
             rs = pst.executeQuery();
             while (rs.next()) {
                 componentesPP ma = new componentesPP();
                 ma.setNum_operacion(rs.getString("num_operacion"));
+                ope = rs.getString("num_operacion");
                 ma.setMaterial(rs.getString("num_material"));
                 ma.setTxt_material(rs.getString("texto_breve_mate"));
                 ma.setUm(rs.getString("unidad_medida_base"));
@@ -944,7 +946,14 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setAlmacen("1400");
                 ma.setCl_mov("101");
                 ma.setCantidad(rs.getString("cantidad_total"));
-                ma.setDescripcion(rs.getString("cadena"));
+                if(rs.getString("cadena").equals("")){
+                    ma.setDescripcion(rs.getString("texto_material"));
+                }else{
+                    ma.setDescripcion(rs.getString("cadena"));
+                }
+                ma.setCantidad2(cnt);
+                ma.setHidden("disabled");
+                ma.setLote("LOTE" + ll.substring(1, ll.length()));
                 mpm.add(ma);
             }
         } catch (Exception e) {
@@ -962,8 +971,9 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setUm(rs2.getString("unidad_medida"));
                 ma.setCentro(rs2.getString("centro"));
                 ma.setAlmacen("1400");
-                ma.setCl_mov("261");
+                ma.setCl_mov(rs2.getString("clase_mov"));
                 ma.setCantidad(rs2.getString("cantidad_necesaria_componente"));
+                ma.setPosListaM(rs2.getString("num_pos_lista_materiales"));
                 mpm.add(ma);
             }
         } catch (Exception e) {
