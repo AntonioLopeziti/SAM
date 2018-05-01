@@ -60,6 +60,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
             switch (action) {
                 case "tablaListado":
                     int cc = 0;
+                    String s = "";
                     ArrayList<ListadoOrdenesPP> lo = ACC_ListadoOrdenesPP.ObtenerInstancia().ObtenerListaOrdenesPP();
                     out.println("<table id=\"TabBody\">\n"
                             + "                                <tbody>");
