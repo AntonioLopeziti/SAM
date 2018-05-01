@@ -14,7 +14,7 @@ $(document).ready(function () {
     $('#guardar').prop('disabled', true);
     $('#finalizar').prop('disabled', true);
     $('#cancelar').prop('disabled', true);
-    $('#btnFin').prop('disabled', true);
+//    $('#btnFin').prop('disabled', true);
     $('#iconmsg').hide();
     $('#btnmatchOrdLib').hide();
     $('#btnmatchUsuarios').hide();
@@ -116,7 +116,6 @@ $(document).ready(function () {
     $('#OrdFab').blur(function () {
         if ($('#OrdFab').val().length > 0) {
             $('#OrdFab').css('background-image', 'none');
-            $('#msg').html("Complete los campos obligatorios");
             validarStatusOrden();
             verificarContenidoUs();
             validarOrdenLib();
@@ -217,7 +216,7 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    }else if (ord == "") {
+    } else if (ord == "") {
         $('#OrdFab').focus();
         $('#OrdFab').css('background-image', 'none');
         $('#msg').html("Complete los campos obligatorios");
@@ -227,7 +226,7 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    }else if (buena == "") {
+    } else if (buena == "") {
         $('#cntBuena').focus();
         $('#cntBuena').css('background-image', 'none');
         $('#msg').html("Complete los campos obligatorios");
@@ -237,7 +236,7 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    }else if (mala == "") {
+    } else if (mala == "") {
         $('#cntMala').focus();
         $('#cntMala').css('background-image', 'none');
         $('#msg').html("Complete los campos obligatorios");
@@ -247,7 +246,7 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    }else {
+    } else {
         if ($('#checkCntExceso').prop('checked')) {
             validarDatos();
         } else {
@@ -372,7 +371,7 @@ function validarLlenado() {
                     borrarDatoControl(us, ord);
                     ponerUsuarioDefault();
                     $('#btnInicio').prop('disabled', false);
-                    $('#btnFin').prop('disabled', true);
+//                    $('#btnFin').prop('disabled', true);
                 } else {
                     $('#msg').html("Error al notificar la orden");
                     var icon = $('#iconmsg');
@@ -575,7 +574,7 @@ function revDatos(usuario, orden) {
                 $('#cntMala').val(n[8]);
                 $('#cntMala').css('background-image', 'none');
                 $('#btnInicio').prop('disabled', true);
-                $('#btnFin').prop('disabled', false);
+//                $('#btnFin').prop('disabled', false);
                 $('#btnmatchOrdLib').hide();
                 bloquearCampos();
             }
@@ -632,6 +631,7 @@ function validarOrdenLib() {
                 validarOrdFab();
                 TextoLargo();
                 TextoLargo2();
+                cantidadPT();
                 ordsta();
             }
         }
@@ -719,6 +719,9 @@ function limpiarCampos() {
     $('#sectionVisualExc').show();
     $('#notsta').html("");
     $('#lblTextoLargo').html("");
+    $('#cntNN').html("");
+    $('#cntRR').html("");
+
 }
 function bloquearCampos() {
     $('#OrdFab').prop("disabled", true);
@@ -739,7 +742,7 @@ function desbloquearCampos() {
     $('#cntBuena').prop("disabled", false);
     $('#cntMala').prop("disabled", false);
     $('#btnInicio').prop('disabled', false);
-    $('#btnFin').prop('disabled', true);
+//    $('#btnFin').prop('disabled', true);
     //$('#NoPers').css('background-image', 'url(images/necesario.PNG)');
     $('#OrdFab').css('background-image', 'url(images/necesario.PNG)');
     $('#cntBuena').css('background-image', 'url(images/necesario.PNG)');
@@ -807,6 +810,7 @@ function SelectOrd(obj, tipo, des) {
             revisarExcesoCant(obj);
             TextoLargo();
             TextoLargo2();
+            cantidadPT();
             ordsta();
             verificarContenidoUs();
             break;
@@ -893,7 +897,6 @@ function ordsta() {
 
 function selecoftabPP() {
     var ptr = $("#notsta").text().substring(0, 4);
-    var ctn = $("#cntBuena").val();
     var ord = $("#OrdFab").val();
     if (ptr == "CERR" || ptr == "CTEC" || ptr == "ABIE" || ptr == "CERR") {
         $(document).ready(function () {
@@ -916,38 +919,27 @@ function selecoftabPP() {
         BE.play();
         $("#OrdFab").focus();
         $('#OrdFab').css('background-image', 'none');
-    } else if (ctn == "") {
-        $('#msg').html("Cantidad Obligatoria");
+    } else if (document.getElementById("OrdFab").disabled == false) {
+        $('#msg').html("No ha iniciado ninguna actividad para esta orden");
         var icon = $('#iconmsg');
         icon.show();
         icon.attr('src', 'images/advertencia.PNG');
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-        $("#cntBuena").focus();
-        $('#cntBuena').css('background-image', 'none');
+        $("#OrdFab").focus();
     } else {
-        var x = document.getElementById("selNoOp").selectedIndex;
-        document.getElementById("selClOp").selectedIndex = x;
-
-        if ($("#selClOp").val() == "PP03") {
-
-            pp1prt3FORSAMPP($("#OrdFab").val(), $("#selNoOp").val());
-            mostrarventabs("ventaPM01");
-            var theHandle = document.getElementById("handlePM01");
-            var theRoot = document.getElementById("ventaPM01");
-            Drag.init(theHandle, theRoot);
-            AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpoCld');
-            fisrtChild();
-            document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
-            sujetoLote();
-            obtenerLote();
-        } else {
-            mostrarventaavi4();
-            var theHandle = document.getElementById("handleAv4");
-            var theRoot = document.getElementById("ventanaavis3");
-            Drag.init(theHandle, theRoot);
-        }
+        pp1prt3FORSAMPP($("#OrdFab").val());
+        mostrarventabs("ventaPM01");
+        var theHandle = document.getElementById("handlePM01");
+        var theRoot = document.getElementById("ventaPM01");
+        Drag.init(theHandle, theRoot);
+        AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpoCld');
+        fisrtChild();
+        ajustaCantidades(0);
+        document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+        sujetoLote();
+        obtenerLote();
     }
 }
 
@@ -983,9 +975,9 @@ function ocultarVentana(ids)
     $("#ConsultaTabla2").css("display", "none");
 }
 
-function pp1prt3FORSAMPP(ord, oper) {
+function pp1prt3FORSAMPP(ord) {
     var acc = "TablasPP01MAtPP";
-    var enviar = "&ord=" + ord + "&ope=" + oper + "&acc=" + acc;
+    var enviar = "&ord=" + ord + "&acc=" + acc + "&v1=" + $("#cntBuena").val();
     $.ajax({
         async: false,
         type: 'GET',
@@ -1072,7 +1064,7 @@ function obtenerLote() {
     var mat = document.getElementsByName("btnShowLot");
     var acc = "obtenerLote";
 
-    for (i = 0; i < mat.length; i++) {
+    for (i = 1; i < mat.length; i++) {
 
         var enviar = "&v1=" + $("#tdCtr" + i).text() + "&v2=" + $("#tdMat" + i).text() + "&acc=" + acc + "&v3=" + $("#bxcnt" + i).val();
         $.ajax({
@@ -1109,16 +1101,41 @@ function btnloteHide() {
         $("#btnLot" + i).hide();
     }
 }
-
-function checkDec(num, tam) {
+function ajustaCantidades(pos) {
+    var cnt = document.getElementById("bxcnt0").value;
+    var cants = document.getElementsByName("bxcantidad");
+    var cants2 = document.getElementsByName("bxcantidadT");
+    if ($("#tdCmov" + pos).text() == "101") {
+        var x = document.getElementById("bxcntT0").value;
+        for (i = 1; i < cants.length; i++) {
+            var y = cants2[i].value;
+            var res = parseFloat(cnt) * parseFloat(y);
+            var tx = res / parseFloat(x) + "";
+            var tx2 = res / parseFloat(x);
+//            var va = tx.split(".");
+//            var vl = va[1];
+//            alert(tx2.toFixed(3));
+//            
+//            for(j = va[1].length; j < 3; j++){
+//                vl+="0";
+//            }
+//            cants[i].value = va[0] + "." + vl;
+            cants[i].value = tx2.toFixed(3);
+            if (cnt == "") {
+                cants[i].value = "";
+            }
+        }
+    }
+}
+function checkDecc(num, tam) {
     var limit;
     var FINC;
     if (tam == 3) {
         limit = 9999999.999;
-        FINC = "Formato Incorecto para Cantidad, Solo permite 7 enteros y 3 decimales. Cantidad no mayor a 9999999.999";
+        FINC = "Formato corecto para Cantidad, Solo permite 7 enteros y 3 decimales. Cantidad no mayor a 9999999.999";
     } else {
         limit = 99999999.99;
-        FINC = "Formato Incorecto para Precio, Solo permite 8 enteros y 2 decimales, Precio no mayor a 99999999.99";
+        FINC = "Formato corecto para Precio, Solo permite 8 enteros y 2 decimales, Precio no mayor a 99999999.99";
     }
     if (num.length > 0) {
         if (parseFloat(limit) >= parseFloat(num)) {
@@ -1345,8 +1362,8 @@ function validacnt261() {
     var centro = document.getElementsByName("tdCentro");
     var cl = document.getElementsByName("tdClaseM");
 
-    if (cl[0].textContent == "261") {
-        for (i = 1; i < mat.length; i++) {
+    for (i = 0; i < mat.length; i++) {
+        if (cl[i].textContent == "261" || cl[i].textContent == "531") {
             var send = "&v2=" + cant[i].value + "&acc=" + acc + "&v3=" + mat[i].textContent + "&v4=" + lote[i].value + "&v1=" + centro[i].textContent;
             $.ajax({
                 async: false,
@@ -1360,7 +1377,7 @@ function validacnt261() {
                     temp = data.split(",");
 
                     if (temp[1] == 0) {
-                        msjError("Material no existe para el lote Almacén-Centro");
+                        msjError("Material " + mat[i].textContent + " no existe para el lote Almacén-Centro");
                         lote[i].focus();
                         lote[i].value = "";
                         return;
@@ -1377,12 +1394,30 @@ function validacnt261() {
                 }
             });
         }
-        if (mat.length == 1) {
-            guardaCabecera();
-        }
-    } else {
-        guardaCabecera();
     }
+}
+function cantidadPT() {
+    var acc = "DatosOrdenCnt";
+
+    var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            var temp = new Array();
+            temp = data.split(",");
+            $("#cntNN").text(temp[0]);
+            $("#cntRR").text(temp[2]);
+            if (document.getElementById("OrdFab").disabled == false) {
+                $("#cntBuena").val(temp[1]);
+                $('#cntBuena').css('background-image', 'none');
+            }
+        }
+    });
 }
 
 var folio101 = "";
@@ -1391,25 +1426,25 @@ function guardaCabecera() {
     var centro = document.getElementsByName("tdCentro");
     var cl = document.getElementsByName("tdClaseM");
 
-    if (cl[0].textContent == "101") {
-        var acc = "guardaCabecera";
+//    if (cl[0].textContent == "101") {
+    var acc = "guardaCabecera";
 
-        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + mat[0].textContent + "&v3=" + centro[0].textContent + "&v4=" + cl[0].textContent + "&v5=" + $("#NoPers").val();
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: "PeticionNotificacionesOrdenesSAMPP",
-            contentType: "application/x-www-form-urlencoded",
-            processData: true,
-            data: send,
-            success: function (data) {
-                folio101 = data;
-                guardaPos();
-            }
-        });
-    } else {
-        guardaPos();
-    }
+    var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + mat[0].textContent + "&v3=" + centro[0].textContent + "&v4=" + cl[0].textContent + "&v5=" + $("#NoPers").val();
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            folio101 = data;
+            guardaPos();
+        }
+    });
+//    } else {
+//        guardaPos();
+//    }
 }
 function guardaCabecera2() {
     var acc = "guardaCabecera";
@@ -1454,16 +1489,16 @@ function guardaPos() {
     var centro = document.getElementsByName("tdCentro");
     var cl = document.getElementsByName("tdClaseM");
     var um = document.getElementsByName("tdUnM");
-
+    var lm = document.getElementsByName("bxlistaM");
 
     var tabix = 0;
 
     for (i = 0; i < mat.length; i++) {
-        tabix = parseInt(i);
-        if (i == 0) {
-            tabix = parseInt(i + 1);
-        }
-        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + tabix + "&v3=" + mat[i].textContent + "&v4=" + cant[i].value + "&v5=" + um[i].textContent + "&v6=" + lote[i].value.toUpperCase() + "&v7=" + centro[i].textContent + "&v8=" + cl[i].textContent;
+//        tabix = parseInt(i);
+//        if (i == 0) {
+        tabix = parseInt(i + 1);
+//        }
+        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + tabix + "&v3=" + mat[i].textContent + "&v4=" + cant[i].value + "&v5=" + um[i].textContent + "&v6=" + lote[i].value.toUpperCase() + "&v7=" + centro[i].textContent + "&v8=" + cl[i].textContent + "&v9=" + lm[i].value;
         $.ajax({
             async: false,
             type: 'GET',
@@ -1473,10 +1508,12 @@ function guardaPos() {
             data: send,
             success: function (data) {
                 if (i == mat.length - 1) {
-                    guardaCabecera2();
-                    updateFolio();
+//                    guardaCabecera2();
                     Print_PT();
                     ocultarVentana('ventaPM01', '');
+//                    $('#LimPantalla').trigger('click');
+//                    updateFolio();
+                    validarLlenado();
                 }
             }
         });
