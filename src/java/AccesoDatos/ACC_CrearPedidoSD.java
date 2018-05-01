@@ -480,4 +480,24 @@ public class ACC_CrearPedidoSD {
         }
         
     }
+     public void InsertTxtCabecera(String folio, String fila, String user, String txt, String Fecha, String hora) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        String sql = "{CALL SD.[CrearPedidos_InsertarTextoCabecera](?,?,?,?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, folio);
+            ps.setString(2, fila);
+            ps.setString(3, txt);
+            ps.setString(4, user);
+            ps.setString(5, Fecha);
+            ps.setString(6, hora);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
 }
