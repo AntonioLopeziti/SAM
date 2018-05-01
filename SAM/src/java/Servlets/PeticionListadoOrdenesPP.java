@@ -66,7 +66,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                             + "                                <tbody>");
                     for (ListadoOrdenesPP ll : lo) {
                         out.println("	    <tr>\n"
-                                + "	    <td><input type=\"radio\" name=\"gender\" value=\"" + cc + "\"></td>\n"
+                                + "	    <td><input id=\"ckhNum\" onclick=\"PintaFila("+cc+")\" type=\"radio\" name=\"gender\" value=\"" + cc + "\"></td>\n"
                                 + "	    <td>" + ll.getHabilitado() + "</td>\n"
                                 + "	    <td id=\"tdPP1" + cc + "\">" + ll.getClase_documento_ventas() + "</td>\n"
                                 + "	    <td id=\"tdPP2" + cc + "\">" + ll.getNum_orden() + "</td>\n"
@@ -111,7 +111,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                                 + "                                <tbody>");
                         for (ListadoOrdenesPP ll : llo) {
                             out.println("	    <tr>\n"
-                                    + "	    <td><input type=\"radio\" name=\"gender\" value=\"" + ccc + "\"></td>\n"
+                                    + "	    <td><input id=\"ckhNum\" type=\"radio\" name=\"gender\" value=\"" + ccc + "\"></td>\n"
                                     + "	    <td>" + ll.getHabilitado() + "</td>\n"
                                     + "	    <td id=\"tdPP1" + ccc + "\">" + ll.getClase_documento_ventas() + "</td>\n"
                                     + "	    <td id=\"tdPP2" + ccc + "\">" + ll.getNum_orden() + "</td>\n"
@@ -159,7 +159,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                                 + "                                <tbody>");
                         for (ListadoOrdenesPP ll : lloo) {
                             out.println("	    <tr>\n"
-                                    + "	    <td><input type=\"radio\" name=\"gender\" value=\"" + f + "\"></td>\n"
+                                    + "	    <td><input id=\"ckhNum\" type=\"radio\" name=\"gender\" value=\"" + f + "\"></td>\n"
                                     + "	    <td>" + ll.getHabilitado() + "</td>\n"
                                     + "	    <td id=\"tdPP1" + f + "\">" + ll.getClase_documento_ventas() + "</td>\n"
                                     + "	    <td id=\"tdPP2" + f + "\">" + ll.getNum_orden() + "</td>\n"
@@ -207,7 +207,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                                 + "                                <tbody>");
                         for (ListadoOrdenesPP ll : lfoo) {
                             out.println("	    <tr>\n"
-                                    + "	    <td><input type=\"radio\" name=\"gender\" value=\"" + m + "\"></td>\n"
+                                    + "	    <td><input id=\"ckhNum\" type=\"radio\" name=\"gender\" value=\"" + m + "\"></td>\n"
                                     + "	    <td>" + ll.getHabilitado() + "</td>\n"
                                     + "	    <td id=\"tdPP1" + m + "\">" + ll.getClase_documento_ventas() + "</td>\n"
                                     + "	    <td id=\"tdPP2" + m + "\">" + ll.getNum_orden() + "</td>\n"
@@ -255,7 +255,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                                 + "                                <tbody>");
                         for (ListadoOrdenesPP ll : lcf) {
                             out.println("	    <tr>\n"
-                                    + "	    <td><input type=\"radio\" name=\"gender\" value=\"" + cf + "\"></td>\n"
+                                    + "	    <td><input id=\"ckhNum\" type=\"radio\" name=\"gender\" value=\"" + cf + "\"></td>\n"
                                     + "	    <td>" + ll.getHabilitado() + "</td>\n"
                                     + "	    <td id=\"tdPP1" + cf + "\">" + ll.getClase_documento_ventas() + "</td>\n"
                                     + "	    <td id=\"tdPP2" + cf + "\">" + ll.getNum_orden() + "</td>\n"
@@ -303,7 +303,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                                 + "                                <tbody>");
                         for (ListadoOrdenesPP ll : lcm) {
                             out.println("	    <tr>\n"
-                                    + "	    <td><input type=\"radio\" name=\"gender\" value=\"" + cm + "\"></td>\n"
+                                    + "	    <td><input id=\"ckhNum\" type=\"radio\" name=\"gender\" value=\"" + cm + "\"></td>\n"
                                     + "	    <td>" + ll.getHabilitado() + "</td>\n"
                                     + "	    <td id=\"tdPP1" + cm + "\">" + ll.getClase_documento_ventas() + "</td>\n"
                                     + "	    <td id=\"tdPP2" + cm + "\">" + ll.getNum_orden() + "</td>\n"
@@ -351,7 +351,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                                 + "                                <tbody>");
                         for (ListadoOrdenesPP ll : lfm) {
                             out.println("	    <tr>\n"
-                                    + "	    <td><input type=\"radio\" name=\"gender\" value=\"" + fm + "\"></td>\n"
+                                    + "	    <td><input id=\"ckhNum\" type=\"radio\" name=\"gender\" value=\"" + fm + "\"></td>\n"
                                     + "	    <td>" + ll.getHabilitado() + "</td>\n"
                                     + "	    <td id=\"tdPP1" + fm + "\">" + ll.getClase_documento_ventas() + "</td>\n"
                                     + "	    <td id=\"tdPP2" + fm + "\">" + ll.getNum_orden() + "</td>\n"
