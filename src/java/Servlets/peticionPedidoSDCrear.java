@@ -80,6 +80,8 @@ public class peticionPedidoSDCrear extends HttpServlet {
             String UNIDA = request.getParameter("UNIDA");
             String CANTI = request.getParameter("CANTI");
             String POSIC = request.getParameter("POSIC");
+            String FILA = request.getParameter("FILA");
+            String TEXTOCAB = request.getParameter("TEXTOCAB");
             String FechaActual = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
             String HoraActual = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
             folios fo = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("PV");
@@ -298,6 +300,9 @@ public class peticionPedidoSDCrear extends HttpServlet {
                 case "ActaulizarFolio":
                      ACC_Folios.ObtenerIstancia().ActualizarFolio("PV", fo.getFolioActual());
                      out.println(folioSAM);
+                    break;
+                case "GuardarTextCab":
+                     ACC_CrearPedidoSD.ObtenerInstancia().InsertTxtCabecera(folioSAM, FILA, USUAR, TEXTOCAB,  FechaActual, HoraActual);
                     break;
 
             }
