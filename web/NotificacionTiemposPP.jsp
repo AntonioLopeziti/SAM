@@ -210,14 +210,21 @@
                     <!--<label>Operación</label>-->                                                            
                     <section id="sectionMostOp" hidden>
 <!--                        <select id="NoOpe">
-                            <option>0010</option>                     
+                            <option>0010</option>               
                         </select>   -->
 
                     </section>
-                    <section class="divmatchEsp" style="margin-left: -13%; width: 70%;">
+                    <section class="divmatchEsp" style="margin-left: -22%; width: 45%;">
                         <label><%out.println(po.getProperty("etiqueta.NPMStatus_PP"));%></label>
-                        <label style="display: inline-block; width: 80%; margin-left: -10%;" id="notsta"></label>
+                        <label style="display: inline-block; width: 80%; margin-left: -5%;" id="notsta"></label>
                     </section>
+                    <section class="divmatchEsp" style="margin-left: -5%; width: 55%;">
+                        <label>Notificado:</label>
+                        <label style="display: inline-block; width: 20%; margin-left: -5%;" id="cntNN"></label>
+                        <label>Total:</label>
+                        <label style="display: inline-block; width: 20%; margin-left: -7%;" id="cntRR"></label>
+                    </section>
+                    
                     <!--<hr style="margin-top: -1%;">-->
                 </div>
             </div>
@@ -225,16 +232,16 @@
                 <label>Datos Reales</label>
                 <hr id="lineaNotiTiempos">
                 <div class="divCntBuenMal">
-                    <label>Not.ctd.buena</label><input type="text" id="cntBuena" style="margin-left: 78px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDec(this.value, 3)"/>
+                    <label>Not.ctd.buena</label><input type="text" id="cntBuena" style="margin-left: 78px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>
                     <hr>
-                    <label>Rechazo.notif</label><input type="text" id="cntMala" style="margin-left: 80px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDec(this.value, 3)"/>
+                    <label>Rechazo.notif</label><input type="text" id="cntMala" style="margin-left: 80px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>
                     <hr>
                 </div>
                 <div class="divBtnIniFin">                   
                     <button id="btnInicio" onclick="validarCantidades();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio not. tiempos</label>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"/></button><label>Mov. mercancias</label>
+<!--                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"/></button><label>Mov. mercancias</label>-->
                     <br>
-                    <button id="btnFin" onclick="validarLlenado();" disabled><input type="image" src="images/ejecuta.png"></button><label>Fin not. tiempos</label>
+                    <button id="btnFin" onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"></button><label>Fin not. tiempos</label>
                 </div>
             </div>
         </div>
