@@ -106,14 +106,12 @@
         ////////////////////////////////////// Reportes //////////////////////////////////////////////////////
         String conf_rep = verificarP(p.charAt(9));                     // Reportes
         String conf_repSAM = verificarP(p.charAt(10));                 // Reportes SAM
-        ///////////////////////////////////// Centros  ///////////////////////////////////////////////////////
-        String gestMat_orgCen = verificarP(p.charAt(11));              // Centros
-        
-        
+                
         ////////////////////////////////////// Gestión materiales ////////////////////////////////////////////
-        String gestMat = verificarP(p.charAt(12));                      // Gestion Materiales
+        String gestMat = verificarP(p.charAt(11));                      // Gestion Materiales
         ////////////////////////////////////// Organización //////////////////////////////////////////////////       
-        String gestMat_org = verificarP(p.charAt(13));                  // Gestion Materiales Organizacion       
+        String gestMat_org = verificarP(p.charAt(12));                  // Gestion Materiales Organizacion    
+        String gestMat_orgCen = verificarP(p.charAt(13));               // Centros
         String gestMat_orgAlmXc = verificarP(p.charAt(14));             // Gestion Materiales Organizacion Alm por Cen
         ////////////////////////////////////// Datos Maestros ////////////////////////////////////////////////
         String gestMat_datM = verificarP(p.charAt(15));                 // Gestion Materiales Datos Maestros
