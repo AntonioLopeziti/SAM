@@ -40,6 +40,15 @@ public class PlanPP {
     String contador_notificacion = "";
     String cantidad_total = "";
     String exceso_suministro = "";
+    String unidad_medida = "";
+
+    public String getUnidad_medida() {
+        return unidad_medida;
+    }
+
+    public void setUnidad_medida(String unidad_medida) {
+        this.unidad_medida = unidad_medida;
+    }
 
     public int getId_pp() {
         return id_pp;
