@@ -64,7 +64,8 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
             String matchCnt = request.getParameter("modAcO");
             String fechaActual = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
             String horaActual = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
-            folios folioActual = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("NT");
+            folios folioActual = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("PP");
+            folios xx = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("XX");
             String par = "";
             String fin = "";
             String aut = "";
@@ -113,7 +114,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     control_tiempos cnto = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ObtenerRegistroOrdenes(usuario, orden);
                     PlanPP pla = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ObtenerDatosPlan(orden);
                     CabNotTiempo cnta = new CabNotTiempo();
-                    String fl = "NT" + folioActual.getFolioActual();
+                    String fl = "PP" + folioActual.getFolioActual();
                     String folAct = "" + folioActual.getFolioActual();
                     cnta.setNum_orden(cnto.getOrden_fab());
                     cnta.setFolio_not_tiem(fl);
@@ -140,7 +141,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     posno.setNot_final(cnto.getNot_final_aut());
                     posno.setComp_reservas(cnto.getComp_reserva());
                     posno.setCant_buena(cnto.getCtd_buena());
-                    //Falta unidad de medida
+                    posno.setUnidad_medida(pla.getUnidad_medida());
                     posno.setRechazo_notif(cnto.getCtd_mala());
                     //Cnt de trabajo repaso actual a notificar
                     //Motivo de la desviacion
@@ -158,7 +159,8 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     //mensaje
                     if (ACC_NotificarTiempos.ObtenerInstancia().InsertarCabNotTiempo(cnta)) {
                         if (ACC_NotificarTiempos.ObtenerInstancia().InsertarPosNotTiempo(posno)) {
-                            ACC_Folios.ObtenerIstancia().ActualizarFolio("NT", Integer.parseInt(folAct));
+                            ACC_Folios.ObtenerIstancia().ActualizarFolio("PP", Integer.parseInt(folAct));
+                            ACC_Folios.ObtenerIstancia().ActualizarFolio("XX", xx.getFolioActual());
                             out.println(fl);
                         } else {
                             out.println(0);
