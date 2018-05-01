@@ -157,7 +157,7 @@
         <script type="text/javascript" src="js/jquery-iu-1.12.0.js"></script>
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
         <script  src="js/dom-drag.js"></script>
-        <script src="js/Reportes.js" type="text/javascript"></script>
+        <!--<script src="js/Reportes.js" type="text/javascript"></script>-->
         <script src="js/ReporteStatOrdenPP.js" type="text/javascript"></script>
         <!--<script src="js/VisualizarReporteStatusOrden.js" type="text/javascript"></scripT>-->
         <title>Reporte Estatus de Ordenes PP</title>  
@@ -240,8 +240,24 @@
             </div>
         </div>
         <div id="VentanaModalCentro" class="VentanaModal">
-            <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('centro')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('centro')"><label >X</label></div></div>            
+            <div class="PanelBntMatch"><button id="vemoce"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParamCentro_SP" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.Centro_CC"));%></label><input type="text" id="BusCentro" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.Descripcion_CC"));%></label><input type="text" id="BusDesCentro" style="width:35%;"/>
+                        <hr>                           
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMax" maxlength="3" style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okCentro"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('Centro');"/>
+                </div>
+            </div>
             <div id="ConsultaTablaOCompras">
                 <div class="tablaCab">
                     <div class="table-scroll" id="table-scrollCentro">
@@ -266,6 +282,22 @@
         <div id="VentanaModalSAM1" class="VentanaModal">
             <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sam1')"><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParamFolio_SP" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label>Folio</label><input type="text" id="BusFolio" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label>Centro</label><input type="text" id="CenFolio" style="width:35%;"/>
+                        <hr>                           
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxFolio" maxlength="3" style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okFolio"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('SAM1');"/>
+                </div>
+            </div>
             <div id="ConsultaTablaFolioSAM1">
                 <div class="tablaCab">
                     <div class="table-scroll" id="table-scrollSAM">
@@ -274,6 +306,7 @@
                                 <thead>
                                     <tr>
                                         <th><%out.println(po.getProperty("etiqueta.Reporte_FolioSAM"));%></th>
+                                        <th>Centro</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -289,6 +322,22 @@
         <div id="VentanaModalSAM2" class="VentanaModal">
             <div id="handle3"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sam2')"><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParamFolio2_SP" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label>Folio</label><input type="text" id="BusFolio2" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label>Centro</label><input type="text" id="CenFolio2" style="width:35%;"/>
+                        <hr>                           
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxFolio2" maxlength="3" style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okFolio2"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('sam2');"/>
+                </div>
+            </div>
             <div id="ConsultaTablaFolioSAM2">
                 <div class="tablaCab">
                     <div class="table-scroll" id="table-scrollSAM2">
@@ -297,6 +346,7 @@
                                 <thead>
                                     <tr>
                                         <th><%out.println(po.getProperty("etiqueta.Reporte_FolioSAM"));%></th>
+                                        <th>Centro</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -312,6 +362,22 @@
         <div id="VentanaModalSAP1" class="VentanaModal">
             <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sap1')"><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParamFolioSAP_SP" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label>Num Orden</label><input type="text" id="BusNumOrd" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label>Centro</label><input type="text" id="CenNumOrd" style="width:35%;"/>
+                        <hr>                           
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxNumOrd" maxlength="3" style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okOrden1"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('sap1');"/>
+                </div>
+            </div>
             <div id="ConsultaTablaFolioSAP1">
                 <div class="tablaCab">
                     <div class="table-scroll" id="table-scrollSAP">
@@ -320,6 +386,7 @@
                                 <thead>
                                     <tr>
                                         <th>Número de Orden</th>
+                                        <th>Centro</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -335,6 +402,22 @@
         <div id="VentanaModalSAP2" class="VentanaModal">
             <div id="handle5"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sap2')"><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarParamFolioSAP2_SP" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label>Num Orden</label><input type="text" id="BusNumOrd2" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label>Centro</label><input type="text" id="CenNumOrd2" style="width:35%;"/>
+                        <hr>                           
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxNumOrd2" maxlength="3" style="width:10%;" />
+                        <hr>
+                    </div>        
+                </div> 
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okOrden2"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('sap2');"/>
+                </div>
+            </div>
             <div id="ConsultaTablaFolioSAP2">
                 <div class="tablaCab">
                     <div class="table-scroll" id="table-scrollSAP2">
@@ -343,6 +426,7 @@
                                 <thead>
                                     <tr>
                                         <th>Número de Orden</th>
+                                        <th>Centro</th>
                                     </tr>
                                 </thead>
                             </table>
