@@ -271,6 +271,31 @@ public class ACC_Centro {
         }
         return ctn;
     }
+    public ArrayList<centros> CentroReservasFiltros(String centro, String Ncent, String cnt) {
+        ArrayList<centros> ctn = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareCall("{call PP.Centros_ConsultarCentrosRepsP(?,?,?)}");            
+            pst.setString(1, centro);
+            pst.setString(2, Ncent);
+            pst.setString(3, cnt);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                centros cn = new centros();
+                cn.setCentro(rs.getString("centro"));
+                cn.setDescripcion(rs.getString("descripcion"));
+                ctn.add(cn);
+            }
+        } catch (Exception e) {
+            System.err.println("Error en CentroRepNot, ACC_Centro por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ctn;
+    }
 
     public ArrayList<centros> MM_MatchCentro() {
         ArrayList<centros> sp_matchCentro = new ArrayList<>();
