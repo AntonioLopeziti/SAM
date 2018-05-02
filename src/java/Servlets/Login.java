@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
             String Password = request.getParameter("Password");
             String Idioma = request.getParameter("Idioma");
             String Usuarioroot = "ADMINISTRADOR";
-            String Pwdroot = "d3d59131f12f97618f4cc26d887619818680238a";
+            String Pwdroot = "321783e29ce5511a28416a84bce3bc48a19d03ba";
             String PwdDefault = "63f10d08837efc789bdf65edb02f440bdb6a35c3";
             ACC_Usuarios consul = new ACC_Usuarios();
             /////////   Contraseña sineti.1
