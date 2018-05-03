@@ -500,4 +500,25 @@ public class ACC_CrearPedidoSD {
             cnx.CerrarConexion(con);
         }
     }
+     public void InsertTxtPosicion(String folio, String pos,  String fila, String user, String txt, String Fecha, String hora) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        String sql = "{CALL SD.[CrearPedidos_InsertarTextoPosicion](?,?,?,?,?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, folio);
+            ps.setString(2, pos);
+            ps.setString(3, fila);
+            ps.setString(4, txt);
+            ps.setString(5, user);
+            ps.setString(6, Fecha);
+            ps.setString(7, hora);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
 }
