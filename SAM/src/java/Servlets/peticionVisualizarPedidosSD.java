@@ -335,6 +335,14 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                         out.println(j1);
                     }
                     break;
+                case "CargarCabeceraTexto":
+                    String txtcab = ACC_VisualizarPedidosSD.ObtenerInstancia().GetTextoCabecera(Documento);
+                    out.println(txtcab);
+                    break;
+                case "CargarPosicionTexto":
+                    String txtpos = ACC_VisualizarPedidosSD.ObtenerInstancia().GetTextoPosicion(Documento, Posicion);
+                    out.println(txtpos);
+                    break;
             }
         }
     }
