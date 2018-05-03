@@ -47,6 +47,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
             String v4 = request.getParameter("v4");
             String v5 = request.getParameter("v5");
             String v6 = request.getParameter("v6");
+            String v7 = request.getParameter("v7");
             String centro = request.getParameter("centro");
             String folio = request.getParameter("folio");
             String material = request.getParameter("material");
@@ -401,6 +402,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                     so.setCentro(v3);
                     so.setOperacion_sam(v4);
                     so.setUsuario(v5);
+                    so.setStatus(v7);
                     ACC_ListadoOrdenesPP.ObtenerInstancia().guardaStatusOrden(so);
                     ACC_ListadoOrdenesPP.ObtenerInstancia().CambiaStatusOrden(so, v6);
                     out.println("LT" + fo.getFolioActual());
