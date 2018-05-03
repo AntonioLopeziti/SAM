@@ -72,7 +72,7 @@ public class ACC_Zebra {
                     + "^FT798,29^A0I,25,24^FB90,1,0^FH\\^FDCLIENTE:^FS\n"
                     + "^FT150,327^A0I,27,26^FB91,1,0^FH\\^FD" + z.getUm() + "^FS\n"
                     + "^XZ";
-            
+
         } else {
             texto = "^XA\n"
                     + "^MMT\n"
@@ -113,8 +113,8 @@ public class ACC_Zebra {
                     + "^XZ";
         }
 
-        PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
-//        PrintService ps = impresora("\\\\192.168.1.12\\ZDesigner GC420t (EPL)");
+//        PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
+        PrintService ps = impresoras(impresora(z.getPuesto_trabajo()));
 
         DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
         DocPrintJob dj = ps.createPrintJob();
@@ -125,15 +125,16 @@ public class ACC_Zebra {
             e.printStackTrace();
         }
     }
-    public PrintService impresora(String nombre){
-    PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null); //Obtenemos los servicios de impresion del sistema 
-    for (PrintService impresora : printServices){ //Recorremos el array de servicios de impresion
-        if(impresora.getName().contentEquals(nombre)){ // Si el nombre del servicio es el mismo que el que buscamos
-            return impresora; // Nos devuelve el servicio 
+
+    public PrintService impresoras(String nombre) {
+        PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null); //Obtenemos los servicios de impresion del sistema 
+        for (PrintService impresora : printServices) { //Recorremos el array de servicios de impresion
+            if (impresora.getName().contentEquals(nombre)) { // Si el nombre del servicio es el mismo que el que buscamos
+                return impresora; // Nos devuelve el servicio 
+            }
         }
+        return null;    // Si no lo encuentra nos devuelve un null
     }
-    return null;    // Si no lo encuentra nos devuelve un null
-}
 
     public Zebra_noti_PT DatosFaltantesCabecera(String orden) {
         Zebra_noti_PT zb = new Zebra_noti_PT();
@@ -148,6 +149,28 @@ public class ACC_Zebra {
             rs = ps.executeQuery();
             while (rs.next()) {
                 zb.setCliente(rs.getString("nombre"));
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        con.CerrarConexion(conn);
+
+        return zb;
+    }
+
+    public String impresora(String puesto) {
+        String zb = "";
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs;
+
+        String query = "{call PP.impresora_etiqueta(?)}";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, puesto);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                zb = rs.getString("dir_ip");
             }
         } catch (Exception e) {
             System.err.println("Error: " + e);
@@ -179,7 +202,7 @@ public class ACC_Zebra {
 
         return zb;
     }
-    
+
     public void guardaEtiquetaDB(Zebra_noti_PT zl) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -209,7 +232,7 @@ public class ACC_Zebra {
 
     public static void main(String[] args) {
 //        Zebra_noti_PT zb = new Zebra_noti_PT();
-//        zb.setPuesto_trabajo("BK03");
+//        zb.setPuesto_trabajo("EP01");
 //        zb.setDescripcion("Material XXXXXXXXXXXXXXXXXXXXXX");
 //        zb.setFecha("09/04/2018");
 //        zb.setHora("18:37:00");
