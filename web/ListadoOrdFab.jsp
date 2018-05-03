@@ -210,7 +210,7 @@
                     <section class='DivLeft'>
                         <label id="lblFolioSAM">Centro</label><input id="centro" type="text" style='width: 10%; text-transform: uppercase;' maxlength="4"><button id="match_A1" class='BtnMatchIcon'></button>
                         <hr>
-                        <label id="lblFolioSAM">Folio</label><input id="sam1" type="text" style='width: 35%; text-transform: uppercase;' maxlength="10"><button id="match_A2" class='BtnMatchIcon'></button>
+                        <label id="lblFolioSAM">Orden</label><input id="sam1" type="text" style='width: 35%; text-transform: uppercase;' maxlength="10"><button id="match_A2" class='BtnMatchIcon'></button>
                         <hr>
                         <label id="lblFolioSAP">Material</label><input id="sap1" type="text" style='width: 35%; text-transform: uppercase;' maxlength="12"><button id="match_A3" class='BtnMatchIcon'></button>
                         <hr>
