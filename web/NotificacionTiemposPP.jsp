@@ -361,6 +361,7 @@
                                     <td>Almacen</td>
                                     <td>Lote</td>
                                     <td></td>
+                                    <td>Ancho</td>
                                     <td>Clase Mov.</td>
                                 </tr>
                             </thead>
