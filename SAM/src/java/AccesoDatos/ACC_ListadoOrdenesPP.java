@@ -448,7 +448,7 @@ public class ACC_ListadoOrdenesPP {
     public void guardaStatusOrden(StatusOrdenes so){
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String query = "{call PP.guardaStatusOrden(?,?,?,?,?,?,?,?)}";
+        String query = "{call PP.guardaStatusOrden(?,?,?,?,?,?,?,?,?)}";
         try {
             PreparedStatement pss = con.prepareStatement(query);
             pss.setString(1, so.getFolio_sam());
@@ -459,6 +459,7 @@ public class ACC_ListadoOrdenesPP {
             pss.setString(6, so.getCentro());
             pss.setString(7, so.getOperacion_sam());
             pss.setString(8, so.getUsuario());
+            pss.setString(9, so.getStatus());
             pss.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error en ACC_ListadoOrdenesPP(), guardaStatusOrden() por: " + e);
