@@ -1302,6 +1302,7 @@ function ConsMaterial() {
     var mat = document.getElementsByName("tdMaterial");
     var cant = document.getElementsByName("bxcantidad");
     var lote = document.getElementsByName("bxlote");
+    var anch = document.getElementsByName("bxancho");
 
     for (var i = 0; i < mat.length; i++) {
         if (cant[i].value == "") {
@@ -1315,6 +1316,15 @@ function ConsMaterial() {
             if (lote[i].disabled == false) {
                 msjError("Lote es Obligatorio");
                 lote[i].focus();
+                return;
+            }
+        } else {
+            borrarmsg();
+        }
+        if (anch[i].value == "") {
+            if (anch[i].disabled == false) {
+                msjError("Ancho es Obligatorio");
+                anch[i].focus();
                 return;
             }
         } else {
@@ -1548,7 +1558,7 @@ function Print_PT() {
     var acc = "imprimePT";
 
     if ($("#tdCmov0").text() == "101") {
-        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tdDes0").text() + "&v4=" + $("#bxLote0").val().toUpperCase() + "&v5=" + $("#bxcnt0").val() + "&v6=" + $("#tdOpr0").text() + "&v7=" + folio101 + "&v8=" + $("#tdCtr0").text() + "&v9=" + $("#tdUM0").text();
+        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + $("#tdDes0").text() + "&v4=" + $("#bxLote0").val().toUpperCase() + "&v5=" + $("#bxcnt0").val() + "&v6=" + $("#tdOpr0").text() + "&v7=" + folio101 + "&v8=" + $("#tdCtr0").text() + "&v9=" + $("#tdUM0").text() + "&v10=" + $("#bxanc0").val();
         $.ajax({
             async: false,
             type: 'GET',
