@@ -954,6 +954,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setCantidad2(cnt);
                 ma.setHidden("disabled");
                 ma.setLote("LOTE" + ll.substring(1, ll.length()));
+                ma.setAncho(rs.getString("ancho"));
                 mpm.add(ma);
             }
         } catch (Exception e) {
@@ -974,6 +975,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setCl_mov(rs2.getString("clase_mov"));
                 ma.setCantidad(rs2.getString("cantidad_necesaria_componente"));
                 ma.setPosListaM(rs2.getString("num_pos_lista_materiales"));
+                ma.setDisabled("disabled");
                 mpm.add(ma);
             }
         } catch (Exception e) {
