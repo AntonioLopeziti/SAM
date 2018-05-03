@@ -1610,6 +1610,7 @@ function GuardarPosiciones() {
                 return;
             }
             savePos(mat[i].value, des[i].value, ume[i].value, can[i].value, pos);
+            GuardarTextoPos(pos, i);
             pos = pos + 1;
         }
     }
@@ -1661,6 +1662,32 @@ function GuardarTextoCab() {
         var acc = "GuardarTextCab";
         var fila = i + 1;
         var enviar = "&FILA=" + fila + "&TEXTOCAB=" + encodeURIComponent(no) + "&USUAR="+usuario;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: 'peticionPedidoSDCrear',
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: "Accion=" + acc + enviar,
+            success: function (data) {
+            }
+
+        });
+    }
+}
+function GuardarTextoPos(pos, a) {
+    var usuario = $('#CreadoPor').val();
+    var txtpos = $('#textoposTemp'+a).val();
+    var txtO = txtpos.replace(/'/g, "´");
+    var tam = txtO.length;
+    var lim = tam / 132;
+    var l = Math.ceil(lim);
+    for (var i = 0; i < l; i++) {
+        var d = i * 132;
+        no = txtO.substr(d, 132);
+        var acc = "GuardarTextPos";
+        var fila = i + 1;
+        var enviar = "&POS=" + pos + "&FILA=" + fila + "&TEXTPOS=" + encodeURIComponent(no) + "&USUAR="+usuario;
         $.ajax({
             async: false,
             type: 'GET',
