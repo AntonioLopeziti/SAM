@@ -140,13 +140,15 @@ function GuardaHabilitado(pos) {
 function EnviaStatusOrden(pos, stat, ope) {
     var norden = $("#tdPP2" + pos).text();
     var folsam = $("#tdPP3" + pos).text();
+    var nnstat = $("#tdPP6" + pos).text().substring(0, 4);
 
     var send = "&v1=" + folsam +
             "&v2=" + norden +
             "&v3=" + $("#tdPC3" + pos).text() + //Centro
             "&v4=" + ope + //Operación
             "&v5=" + usuario +
-            "&v6=" + stat;
+            "&v6=" + stat +
+            "&v7=" + nnstat;
     $.ajax({
         async: false,
         type: 'GET',
