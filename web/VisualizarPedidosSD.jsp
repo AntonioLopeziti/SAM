@@ -338,7 +338,7 @@
                     <hr style="width: 5%; margin-top:-1px; margin-left: 0;">
                     <div class="tabs">
                         <button  id="btnExped"><%out.println(po.getProperty("etiqueta.PedidosSDExpedicion"));%></button>
-                        <button  id="btnCondi"><%out.println(po.getProperty("etiqueta.PedidosSDCondiciones"));%></button>                               
+                        <button  id="btnCondi" hidden><%out.println(po.getProperty("etiqueta.PedidosSDCondiciones"));%></button>                               
                         <button  id="btnRep"><%out.println(po.getProperty("etiqueta.PedidosSDRepartos"));%></button>                               
                         <button  id="btnEstatus"><%out.println(po.getProperty("etiqueta.PedidosSDEstatus"));%></button>  
                         <button  id="btnTextos"><%out.println(po.getProperty("etiqueta.TextosPed"));%></button>   
