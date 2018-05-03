@@ -278,4 +278,48 @@ public class ACC_VisualizarPedidosSD {
         }
         return rep;
     }
+
+    public String GetTextoCabecera(String documento) {
+        String texto = "";
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call SD.VisualizarPedidosSD_CargarTextoCabecera(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, documento);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                texto += rs.getString("texto");
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return texto;
+    }
+    public String GetTextoPosicion(String documento, String Pos) {
+        String texto = "";
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call SD.VisualizarPedidosSD_CargarTextoPosicion(?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, documento);
+            ps.setString(2, Pos);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                texto += rs.getString("texto");
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return texto;
+    }
 }
