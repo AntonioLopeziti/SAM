@@ -159,7 +159,7 @@
                                         <td></td>
                                         <td>Habilitar</td>
                                         <td>Cl.Ord</td>
-                                        <td>Folio SAP</td>
+                                        <td>Orden</td>
                                         <td>Centro</td>
                                         <td>Material</td>
                                         <td>Texto material</td>
