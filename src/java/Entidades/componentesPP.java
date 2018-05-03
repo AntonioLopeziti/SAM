@@ -25,6 +25,24 @@ public class componentesPP {
     String cantidad2 = "";
     String hidden = "";
     String posListaM = "";
+    String ancho = "";
+    String disabled = "";
+
+    public String getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(String disabled) {
+        this.disabled = disabled;
+    }
+
+    public String getAncho() {
+        return ancho;
+    }
+
+    public void setAncho(String ancho) {
+        this.ancho = ancho;
+    }
 
     public String getPosListaM() {
         return posListaM;
