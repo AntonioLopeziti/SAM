@@ -361,6 +361,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                                 + "<td>" + tno.get(con).getAlmacen() + "</td>"
                                 + "<td><input " + tno.get(con).getHidden() + " type=\"text\" class=\"bxMed\" id=\"bxLote" + con + "\" name=\"bxlote\" style=\"text-transform: uppercase;\" maxlength=\"10\" value=\"" + tno.get(con).getLote() + "\" onfocus=\"btnloteShow(" + con + ")\"></td>"
                                 + "<td><button id=\"btnLot" + con + "\" class='BtnMatchIcon' name=\"btnShowLot\" onclick=\"btnLoteMatch(" + con + ")\"  hidden></button></td>"
+                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxanc" + con + "\" " + tno.get(con).getDisabled() + " name=\"bxancho\" maxlength=\"10\" onfocus=\"btnloteHide()\" value=\"" + tno.get(con).getAncho() + "\"></td>"
                                 + "<td name=\"tdClaseM\" id=\"tdCmov" + con + "\">" + tno.get(con).getCl_mov() + "</td>"
                                 + "</tr>");
                     }
@@ -368,6 +369,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                         out.println("<tr>"
                                 + "<td>&nbsp;</td>"
                                 + "<td hidden>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
@@ -392,6 +394,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                             + "<td>0000000</td>"
                             + "<td>00000000000</td>"
                             + "<td>00</td>"
+                            + "<td>000000000000</td>"
                             + "<td>0000000</td>"
                             + "</tr>"
                             + "</tbody>"
@@ -447,7 +450,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     zb.setDescripcion(v3);//Cambiar a nuevo Campo
                     zb.setFecha(dateFormat.format(date));
                     zb.setHora(horaActual);
-                    zb.setAncho("");
+                    zb.setAncho(v10);
                     zb.setOrden(v1);
                     zb.setLote(v4);
                     zb.setCantidad(Double.parseDouble(v5) + "0");
