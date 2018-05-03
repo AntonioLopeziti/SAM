@@ -286,6 +286,7 @@ function seleccionar(dato) {
     $('#txtPedido').focus();
 }
 function GetData() {
+    cleanDatosCab();
     cleanDatospos();
     var tipo = "0";
     var ped = $('#txtPedido');
@@ -355,7 +356,7 @@ function GetData() {
                             $('#DOficinaVentas').val(data[12]);
                             $('#GpoVendedores').val(data[13]);
                             $('#DGpoVendedores').val(data[14]);
-                            $('#MotivoPed').append('<option id=\"opcion1\">' + data[15] + '</option>');
+//                            $('#MotivoPed').append('<option id=\"opcion1\">' + data[15] + '</option>');
                             $('#fechaDocumento').val(data[16]);
                             $('#AreVentas').val(data[17]);
                             $('#NombreResp').val(data[18]);
@@ -371,9 +372,40 @@ function GetData() {
         });
     }
 //    CargarInterlocutores(ped.val().trim(), tipo);
+    CargarTxtCabecera(ped.val().trim());
     CargarPosiciones(ped.val().trim(), tipo);
 }
 function  CargarInterlocutores(pedido, tipo) {
+
+}
+function CargarTxtCabecera(pedido) {
+    var acc = "CargarCabeceraTexto";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionVisualizarPedidosSD',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + "&Documento=" + pedido,
+        success: function (data) {
+            $('#TextCabece').val(data);
+        }
+    });
+
+}
+function CargarPosTextos(pedido, pos) {
+    var acc = "CargarPosicionTexto";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionVisualizarPedidosSD',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + "&Documento=" + pedido + "&Posicion=" + pos ,
+        success: function (data) {
+            $('#TextPosicion_SP').val(data);
+        }
+    });
 
 }
 function CargarPosiciones(pedido, tipo) {
@@ -399,6 +431,7 @@ function GetItemP(pedido, pos, tipo) {
     CargarPosCampos(pedido, pos, tipo);
     CargarTablaCaondiciones(pedido, pos, tipo);
     CargarPosRepartos(pedido, pos, tipo);
+    CargarPosTextos(pedido, pos);
 
 }
 function CargarPosExpedicion(pedido, pos, tipo) {
@@ -502,10 +535,33 @@ function CargarDatosPosRep(pedido, pos, tipo) {
         }
     });
 }
+function cleanDatosCab() {
+    $('#Pedido').val("");
+    $('#Solicitante').val("");
+    $('#DestMcia').val("");
+    $('#PedCliente').val("");
+    $('#TextoInter1').val("");
+    $('#TextoInter2').val("");
+    $('#fechpedido').val("");
+    $('#clasePedido').val("");
+    $('#OrgVentas').val("");
+    $('#CanalDist').val("");
+    $('#Sector').val("");
+    $('#OficinaVentas').val("");
+    $('#DOficinaVentas').val("");
+    $('#GpoVendedores').val("");
+    $('#DGpoVendedores').val("");
+//    $('#MotivoPed').remove();
+    $('#fechaDocumento').val("");
+    $('#AreVentas').val("");
+    $('#NombreResp').val("");
+    $('#FechaPrecio').val("");
+    $('#Moneda1').val("");
+    $('#Moneda2').val("");
+    $('#valorNeto').val("");
+    $('#fech_prefEnt').val("");
+}
 function cleanDatospos() {
-    $('#posci').val("");
-    $('#opcion1').remove();
-    $('#opcion2').remove();
     $('#Centro').val("");
     $('#DenominacionCentro').val("");
     $('#PrioridadEntrega').val("");
@@ -526,8 +582,12 @@ function cleanDatospos() {
     $('#importe').val("");
     $('#statusglobal').val("");
     $('#statusEnt').val("");
+    $('#TextPosicion_SP').val("");
     $('#msg').html("");
     $('#iconmsg').hide();
     CargarPosRepartos("", "", "0");
     CargarTablaCaondiciones('', '', '0');
+    $('#posci').val("");
+    $('#opcion1').remove();
+    $('#opcion2').remove();
 }
