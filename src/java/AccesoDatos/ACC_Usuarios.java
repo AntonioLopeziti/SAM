@@ -315,7 +315,7 @@ public class ACC_Usuarios {
         }
         return us;
     }
-    
+
     public ArrayList<usuarios> ListaUsuarioAvisosQM(String User, String nombre, int ctd) {
         ArrayList<usuarios> us = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -373,6 +373,7 @@ public class ACC_Usuarios {
         }
         return us;
     }
+
     public boolean ValidaUsuarioQM(String User) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -395,6 +396,50 @@ public class ACC_Usuarios {
         return false;
     }
 
+    public ArrayList<usuarios> CargarUsuarioReset() {
+        ArrayList<usuarios> user = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call CNF.CargarUsuarioReseteo}";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                usuarios u = new usuarios();
+                u.setUsuario(rs.getString("Usuario"));
+                u.setNombre(rs.getString("Nombre"));
+                user.add(u);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return user;
+    }
+
+    public int ResetUser(String user, String clave) {
+        int x = 0;
+        PreparedStatement ps = null;
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String sql = "{call CNF.ResetClaveUser(?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, user);
+            ps.setString(2, clave);
+            if (ps.executeUpdate() > 0) {
+                x = 1;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return x;
+    }
 //     public usuarios CargarDatosUsuario(String user) {
 //        Conexion cnx = new Conexion();
 //        Connection con = cnx.ObtenerConexion();
@@ -493,31 +538,33 @@ public class ACC_Usuarios {
 //        return usua;
 //    }
 //
+
     public static void main(String[] args) {
         ACC_Usuarios u = new ACC_Usuarios();
         System.out.println(u.ListaUsuarioMC("ADMIN", 1));
 
     }
-    public ArrayList<usuarios> ConsultarUsuarioNotTiemPP(){
+
+    public ArrayList<usuarios> ConsultarUsuarioNotTiemPP() {
         ArrayList<usuarios> us = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
         String proc = "{CALL PP.NotTiempo_ConsultarUsuariosPP}";
-        try{
+        try {
             ps = con.prepareStatement(proc);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 usuarios u = new usuarios();
                 u.setUsuario(rs.getString("Usuario"));
                 us.add(u);
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Error en ConsultarUsuarios, ACC_Usuarios por: " + e);
         } finally {
             cnx.CerrarConexion(con);
         }
         return us;
-    }    
+    }
 }
