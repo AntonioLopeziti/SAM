@@ -59,4 +59,19 @@ and open the template in the editor.
     margin-left: 0;
     margin-top: -1px;
 }
-
+.ResestUser{
+    padding-left: 2%;
+    background: #fff;
+    width:100%;
+    height: 100px;
+    margin-top: 2%;
+}
+.BusUse label{
+    display: inline-block;
+    width: 15%;
+}
+.BusUse hr{
+    margin-left: 0;
+    margin-top:-1px;
+    width: 15%;
+}
