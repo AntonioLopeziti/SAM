@@ -5,11 +5,14 @@
  */
 package Servlets;
 
+import AccesoDatos.ACC_Usuarios;
 import AccesoDatos.Conexion;
 import Entidades.usuarioRoot;
+import Entidades.usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +42,8 @@ public class Conexiones extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             usuarioRoot u = new usuarioRoot();
             String Action = request.getParameter("Accion");
+            String Usuario = request.getParameter("Usuario");
+            String PwdDefault = "63f10d08837efc789bdf65edb02f440bdb6a35c3";
             //// Conexion Local            
             u.setUsuarioSAM(request.getParameter("User"));
             u.setPasswordSAM(request.getParameter("Pwd"));
@@ -81,7 +86,7 @@ public class Conexiones extends HttpServlet {
                         out.println(0);
                     }
                     break;
-                    
+
                 case "SaveWS":
                     boolean saveWS = cnx.GuardarWS(u);
                     if (saveWS == true) {
@@ -89,6 +94,33 @@ public class Conexiones extends HttpServlet {
                     } else {
                         out.println(0);
                     }
+                    break;
+                case "ConsultarUsuario":
+                    Conexion co = new Conexion();
+                    Connection con = co.ObtenerConexion();
+                    if (con != null) {
+                        ArrayList<usuarios> user = ACC_Usuarios.ObtenerInstancia().CargarUsuarioReset();
+                        if (user.size() > 0) {
+                            out.println("<table>");
+                            out.println("<tbody>");
+                            for (int i = 0; i < user.size(); i++) {
+                                out.println("<tr ondblclick=\"seleccionar('" + user.get(i).getUsuario() + "','" + user.get(i).getNombre() + "')\">");
+                                out.println("<td>" + user.get(i).getUsuario() + "</td>");
+                                out.println("<td>" + user.get(i).getNombre() + "</td>");
+                                out.println("</tr>");
+                            }
+                            out.println("</tbody>");
+                            out.println("</table>");
+                        } else {
+                            out.println(1);
+                        }
+                    } else {
+                        out.println(0);
+                    }
+                    break;
+                case "ResetClave":
+                    int n = ACC_Usuarios.ObtenerInstancia().ResetUser(Usuario, PwdDefault);
+                    out.println(n);
                     break;
 
             }
