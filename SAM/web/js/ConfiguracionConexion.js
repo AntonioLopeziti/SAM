@@ -8,6 +8,33 @@ $(document).ready(function () {
     startTime();
     loadDoc();
     $('#iconmsg').hide();
+    $('#matchusercf').hide();
+    $('#USeCf').focus(function () {
+        $('#matchusercf').show();
+    });
+    $('#USeCf').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 8) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZÑñ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#matchusercf').click(function () {
+        ConsultaUsers();
+    });
+    $('#CerrarMCUsuario').click(function () {
+        var u = $('#USeCf');
+        var BE = document.createElement('audio');
+        BE.src = "audio/sapsnd05.wav";
+        BE.play();
+        $('#VentanaModalUsuario').hide();
+        u.focus();
+    });
+    $('#RestSAM').click(function () {
+        ResetClave();
+    });
     /////Fields SAM
     var Usuario = $("#UserCnx");
     var Password = $("#PwdCnx");
@@ -112,7 +139,7 @@ $(document).ready(function () {
             }
         });
     }
-    
+
     function GuardarConexion() {
         var temp = new Array();
         temp[0] = Server;
@@ -177,7 +204,7 @@ function loadDoc() {
         processData: true,
         data: "Accion=" + acc,
         success: function (data) {
-                if (data != 0) {
+            if (data != 0) {
                 $('#UserCnx').val(data[0]);
                 $('#PwdCnx').val(data[1]);
                 $('#SerCnx').val(data[2]);
@@ -194,11 +221,86 @@ function loadDoc() {
                     $('#DBCnx').css('background-image', 'url(images/necesario.PNG)');
                 }
             } else {
-                ShowMsg(8, "images/advertencia.PNG", "audio/saperror.wav");
+                ShowMsg(18, "images/advertencia.PNG", "audio/saperror.wav");
             }
         }
     });
 }
 function SalirConf() {
     window.location.href = "Logout";
+}
+function ConsultaUsers() {
+    var acc = "ConsultarUsuario";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'Conexiones',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc,
+        success: function (data) {
+            if (data == 0) {
+                ShowMsg(8, "images/advertencia.PNG", "audio/saperror.wav");
+            } else if (data == 1) {
+                ShowMsg(9, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                var ancho = 350;
+                var alto = 650;
+                var x = (screen.width / 2) - (ancho / 2);
+                var y = (screen.height / 2) - (alto / 2);
+                var ventana = $('#VentanaModalUsuario');
+                ventana.css({top: y + "px", left: x + "px"});
+                ventana.css('display', 'block');
+                borramsg();
+                var theHandle = document.getElementById("handle");
+                var theRoot = document.getElementById("VentanaModalUsuario");
+                Drag.init(theHandle, theRoot);
+                $('#cargarDatosUsuario').html(data);
+                document.getElementById("table-scrollUsuario").onscroll = function () {
+                    document.getElementById("fixedYUsuario").style.top = document.getElementById("table-scrollUsuario").scrollTop + 'px';
+                };
+            }
+
+        }
+    });
+}
+function seleccionar(user, nombre) {
+    var u = $('#USeCf');
+    $('#txtdesc').val(nombre);
+    u.val(user);
+    var BE = document.createElement('audio');
+    BE.src = "audio/sapsnd05.wav";
+    BE.play();
+    $('#VentanaModalUsuario').hide();
+    u.focus();
+}
+function borramsg() {
+    $('#iconmsg').hide();
+    $('#msg').html("");
+}
+function ResetClave() {
+    var clave = $('#USeCf');
+    if (clave.val().length > 0) {
+        var acc = "ResetClave";
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: 'Conexiones',
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: "Accion=" + acc + "&Usuario=" + $('#USeCf').val(),
+            success: function (data) {
+                if (data == 1) {
+                    clave.val("");
+                    $('#txtdesc').val("");
+                    ShowMsg(11, "images/aceptar.png", "audio/sapmsg.wav");
+                } else {
+                    ShowMsg(12, "images/advertencia.PNG", "audio/saperror.wav");
+                }
+            }
+        });
+    } else {
+        clave.focus();
+        ShowMsg(10, "images/advertencia.PNG", "audio/saperror.wav");
+    }
 }
