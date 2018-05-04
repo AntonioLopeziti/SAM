@@ -97,6 +97,22 @@
                 case 7:
                     msg = 'Error: No se cargaron los datos de conexion';
                     break;
+                case 8:
+                    msg = 'Error: Conexion nula, verifique y guarde conexion';
+                    break;
+                case 9:
+                    msg = 'No existen valores para esta selección';
+                    break;
+                case 10:
+                    msg = 'Campo usuario vacio, introduce un usuario';
+                    break;
+                case 11:
+                    msg = 'Clave de usuario reseteada con éxito';
+                    break;
+                case 12:
+                    msg = 'Error usuario no valido';
+                    break;
+                
             }
             $('#msg').html(msg);
             var icon = $('#iconmsg');
@@ -115,6 +131,7 @@
         <link rel="stylesheet" href="css/StyleGeneral.css">
         <link rel="stylesheet" href="css/StyleConfiguracion.css">
         <link rel="stylesheet" href="css/menu.css" media="screen">
+        <script src="js/dom-drag.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="js/ConfiguracionConexion.js"></script>
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
@@ -122,7 +139,7 @@
         <script src="js/jquerys.js"></script>   
         <script src="js/hoverIntent.js"></script>
         <script src="js/superfish.js"></script>   
-        <title><%out.println(po.getProperty("etiqueta.Configuracion_ConfSer"));%></title>
+        <title>Configuración</title>
     </head>
     <body>
 
@@ -139,7 +156,7 @@
             <input  id="regresar" type="image" src="images/regresaOFF.png" disabled/>
             <input id="finalizar" type="image" src="images/cance.PNG" />
             <input  id="cancelar" type="image" src="images/cancelaOFF.png" disabled/>
-            <div class="titulo"><h1><%out.println(po.getProperty("etiqueta.ConfiguracionSer_ConfSer"));%></h1></div>
+            <div class="titulo"><h1>Configuración</h1></div>
         </div>
         <div class="contenido">
             <div class="DivConexion">
@@ -161,22 +178,55 @@
                         <button class="pcnx" id="pcnxSAM"><%out.println(po.getProperty("etiqueta.ProbConexion_ConfSer"));%></button>
                     </div>
                 </div>
-            </div>
-            <br>
-<!--            <div class="DivConexion">
-                <div class="DivSAMConex2">
-                    <label><%out.println(po.getProperty("etiqueta.ParWSBD_ConfSer"));%></label>
+                <div class="ResestUser">
+                    <label>Restablecer Usuario SAM</label>
                     <hr id="lineapri">
-                    <div id="demo"></div>
-                    <div class="subdivCone">
-                        <label><%out.println(po.getProperty("etiqueta.URL_ConfSer"));%></label><input type="text" style="width:60%;" maxlength="100" id="URLCnx"/>
-                        <div style="margin-top: -0.2em; float: right; margin-right: 20%;"><input  id="guardarWS" type="image" src="images/guarda.PNG" /></div>
+                    <div class="BusUse">
+                        <label>Usuario</label><input type="text" style="width:15%; text-transform: uppercase;" maxlength="12" id="USeCf"/><button id="matchusercf" class='BtnMatchIcon'></button> <input type="text" id="txtdesc" style="width:60%; background: none; border:none; " readonly/>
                         <hr>
+                        <button class="pcnx" id="RestSAM">Restablecer</button>
                     </div>
                 </div>
-            </div>-->
+            </div>
+
+            <!--            <div class="DivConexion">
+                            <div class="DivSAMConex2">
+                                <label><%out.println(po.getProperty("etiqueta.ParWSBD_ConfSer"));%></label>
+                                <hr id="lineapri">
+                                <div id="demo"></div>
+                                <div class="subdivCone"6
+                                    <label><%out.println(po.getProperty("etiqueta.URL_ConfSer"));%></label><input type="text" style="width:60%;" maxlength="100" id="URLCnx"/>
+                                    <div style="margin-top: -0.2em; float: right; margin-right: 20%;"><input  id="guardarWS" type="image" src="images/guarda.PNG" /></div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>-->
         </div>            
-    </div>      
+    </div>   
+     <div id="VentanaModalUsuario" class="VentanaModal">
+            <div id="handle"><label id="TituloMatch">Usuario</label><div class="BotonCerrar_Matc" id="CerrarMCUsuario"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="ConsultaTablaUsuario">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollUsuario">
+                        <div class="fixedY" id="fixedYUsuario">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Nombre</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosUsuario">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <footer>
         <hr class="fecha" id="footerline">
         <div  class="fecha">
