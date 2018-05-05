@@ -108,18 +108,30 @@ public class peticionPedidoSDCrear extends HttpServlet {
 
                     break;
                 case "ConsultarClientes":
-                    ArrayList<clientes> cli = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, nombre, Canti);
-                    if (cli.size() > 0) {
-                        out.println("<table>");
-                        out.println("<tbody>");
-                        for (int i = 0; i < cli.size(); i++) {
-                            out.println("<tr ondblclick=\"SelectData('" + cli.get(i).getIdCliente() + "','VentanaModalCliente','BuscarParDeudores','ConsultaTablaDeudores','Deudor')\" >");
-                            out.println("<td>" + cli.get(i).getIdCliente() + "</td>");
-                            out.println("<td>" + cli.get(i).getNombre1() + "</td>");
-                            out.println("</tr>");
+                    String pro = "";
+                    if (tipo.equals("solicitante")) {
+                        pro = "{call SD.CrearPedidos_ConsultaClientes(?,?,?)}";
+                    } else if (tipo.equals("destinatario")) {
+                        pro = "{call SD.CrearPedidos_ConsultaDestinatario(?,?,?)}";
+                    } else {
+                        pro = "";
+                    }
+                    if (pro != "") {
+                        ArrayList<clientes> cli = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, nombre, Canti, pro);
+                        if (cli.size() > 0) {
+                            out.println("<table>");
+                            out.println("<tbody>");
+                            for (int i = 0; i < cli.size(); i++) {
+                                out.println("<tr ondblclick=\"SelectDataCli('" + cli.get(i).getIdCliente() + "','VentanaModalCliente','BuscarParDeudores','ConsultaTablaDeudores', '" + tipo + "')\" >");
+                                out.println("<td>" + cli.get(i).getIdCliente() + "</td>");
+                                out.println("<td>" + cli.get(i).getNombre1() + "</td>");
+                                out.println("</tr>");
+                            }
+                            out.println("</tbody>");
+                            out.println("</table>");
+                        } else {
+                            out.println(0);
                         }
-                        out.println("</tbody>");
-                        out.println("</table>");
                     } else {
                         out.println(0);
                     }
@@ -283,8 +295,11 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     break;
 
                 case "ValidarInterlocutor":
-                    int a = ACC_CrearPedidoSD.ObtenerInstancia().ValidarInterlocutor(solic, desti);
-                    out.println(a);
+                    clientes c1 = ACC_CrearPedidoSD.ObtenerInstancia().ValidarInterlocutor(solic, desti);
+                    JSONArray j1 = new JSONArray();
+                    j1.add(c1.getIdCliente());
+                    j1.add(c1.getNombre1());
+                    out.println(j1);
                     break;
                 case "Guardarcabacera":
                     String FECHAENT = Consultas.ObtenerInstancia().DateFormatGuion(FECHE);
@@ -310,6 +325,21 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     int POSTXT = Integer.parseInt(POS) + 1;
                     String POSTF = String.valueOf(POSTXT) + "0";
                     ACC_CrearPedidoSD.ObtenerInstancia().InsertTxtPosicion(folioSAM, POSTF, FILA, USUAR, TEXTPOS, FechaActual, HoraActual);
+                    break;
+                case "CargarDesRelac":
+                    String sql = "{call SD.CrearPedidos_ConsultaDestinatario(?,?,?)}";
+                    ArrayList<clientes> datcl = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, "", "", sql);
+                    JSONArray ci = new JSONArray();
+                    if(datcl.size()>0){
+                        ci.add(datcl.get(0).getIdCliente());
+                        ci.add(datcl.get(0).getNombre1());
+                        out.println(ci);
+                    }else{
+                        ci.add("");
+                        ci.add("");
+                        out.println(ci);
+                    }
+                    
                     break;
 
             }
