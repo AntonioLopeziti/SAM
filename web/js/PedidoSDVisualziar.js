@@ -68,6 +68,19 @@ $(document).ready(function () {
         tecla_final = String.fromCharCode(tecla);
         return patron.test(tecla_final);
     });
+    $('#FSAM').keypress(function (e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 13) {
+            BuscarPedMC();
+        }
+        if (tecla == 8) {
+            return true;
+        }
+
+        patron = /[0-9a-zA-z]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    });
     $('#ClasePedid').keypress(function (e) {
         tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 8) {
@@ -259,7 +272,7 @@ function BuscarPedMC() {
         url: 'peticionVisualizarPedidosSD',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Accion=" + acc + "&Documento=" + $('#DocumVenta').val().trim() + "&Clase=" + $('#ClasePedid').val().trim() + "&Ctd=" + $('#numAcMax').val().trim(),
+        data: "Accion=" + acc + "&Documento=" + $('#DocumVenta').val().trim() + "&FolioSAM=" + $('#FSAM').val().trim() + "&Clase=" + $('#ClasePedid').val().trim() + "&Ctd=" + $('#numAcMax').val().trim(),
         success: function (data) {
             if (data == 0) {
                 ShowMsg(1, "images/aceptar.png", "audio/sapmsg.wav");
@@ -330,6 +343,7 @@ function GetData() {
                     $('#Moneda2').val(data2);
                     $('#valorNeto').val(data2);
                     $('#fech_prefEnt').val(data2);
+                    $('#FolioSAM').val(data2);
                 } else {
                     var acc = "ConsultaPedidoCab";
                     $.ajax({
@@ -342,6 +356,7 @@ function GetData() {
                         data: "Accion=" + acc + "&Documento=" + ped.val().trim() + "&TipoConsulta=" + data,
                         success: function (data) {
                             $('#Pedido').val(data[0]);
+                            $('#txtPedido').val(data[0]);
                             $('#Solicitante').val(data[1]);
                             $('#DestMcia').val(data[2]);
                             $('#PedCliente').val(data[3]);
@@ -365,6 +380,7 @@ function GetData() {
                             $('#Moneda2').val(data[21]);
                             $('#valorNeto').val(data[22]);
                             $('#fech_prefEnt').val(data[23]);
+                            $('#FolioSAM').val(data[24]);
                         }
                     });
                 }
@@ -537,6 +553,7 @@ function CargarDatosPosRep(pedido, pos, tipo) {
 }
 function cleanDatosCab() {
     $('#Pedido').val("");
+    $('#FolioSAM').val("");
     $('#Solicitante').val("");
     $('#DestMcia').val("");
     $('#PedCliente').val("");
