@@ -267,7 +267,8 @@ public class ACC_NotificarTiempos {
             ps.setString(1, orden);
             rs = ps.executeQuery();
             while (rs.next()) {
-                plan.setCantidad_total(rs.getString("cantidad_total"));
+//                plan.setCantidad_total(rs.getString("cantidad_total"));
+                plan.setCantidad_total(rs.getString("restante"));
             }
         } catch (Exception e) {
             System.err.println("Error en Consultar Datos Usuario, ACC_NotificarTiempos por: " + e);
