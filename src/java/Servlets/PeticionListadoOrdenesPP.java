@@ -67,7 +67,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                             + "                                <tbody>");
                     for (ListadoOrdenesPP ll : lo) {
                         out.println("	    <tr>\n"
-                                + "	    <td><input id=\"ckhNum\" onclick=\"PintaFila("+cc+")\" type=\"radio\" name=\"gender\" value=\"" + cc + "\"></td>\n"
+                                + "	    <td><input id=\"ckhNum\" onclick=\"PintaFila(" + cc + ")\" type=\"radio\" name=\"gender\" value=\"" + cc + "\"></td>\n"
                                 + "	    <td>" + ll.getHabilitado() + "</td>\n"
                                 + "	    <td id=\"tdPP1" + cc + "\">" + ll.getClase_documento_ventas() + "</td>\n"
                                 + "	    <td id=\"tdPP2" + cc + "\">" + ll.getNum_orden() + "</td>\n"
@@ -293,7 +293,44 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                                 + "</tbody>\n"
                                 + "</table>");
                     } else {
-                        out.println(0);
+                        out.println("<table id=\"TabBody\">\n"
+                                + "                                <tbody>");
+                        out.println("	    <tr>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + //Centro
+                                "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + //                                    "	    <td><input type=\"checkbox\" name=\"habilitado\"></td>\n" +
+                                "	    </tr>");
+
+                        for (int i = 0; i < 24; i++) {
+                            out.println("<tr><td>&nbsp</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                        }
+                        out.println("<tr class=\"ocultar\">\n"
+                                + "        <td>00</td>\n"
+                                + "        <td>0000000</td>\n"
+                                + "        <td>000000</td>\n"
+                                + "        <td>00000000</td>\n"
+                                + "        <td>000000</td>\n"
+                                + "        <td>000000000</td>\n"
+                                + "        <td>0000000000000000000000000000000000000000000</td>\n"
+                                + "        <td>0000000000000000000000000000000000000000000</td>\n"
+                                + "        <td>00000000000</td>\n"
+                                + "        <td>00000000000000000000000000000</td>\n"
+                                + "        <td>00000000000</td>\n"
+                                + "        <td>00000000</td>\n"
+                                + "    </tr>\n"
+                                + "</tbody>\n"
+                                + "</table>");
                     }
                     break;
                 case "tablaListadoCenMat":
@@ -341,7 +378,44 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                                 + "</tbody>\n"
                                 + "</table>");
                     } else {
-                        out.println(0);
+                        out.println("<table id=\"TabBody\">\n"
+                                + "                                <tbody>");
+                        out.println("	    <tr>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + //Centro
+                                "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + //                                    "	    <td><input type=\"checkbox\" name=\"habilitado\"></td>\n" +
+                                "	    </tr>");
+
+                        for (int i = 0; i < 24; i++) {
+                            out.println("<tr><td>&nbsp</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                        }
+                        out.println("<tr class=\"ocultar\">\n"
+                                + "        <td>00</td>\n"
+                                + "        <td>0000000</td>\n"
+                                + "        <td>000000</td>\n"
+                                + "        <td>00000000</td>\n"
+                                + "        <td>000000</td>\n"
+                                + "        <td>000000000</td>\n"
+                                + "        <td>0000000000000000000000000000000000000000000</td>\n"
+                                + "        <td>0000000000000000000000000000000000000000000</td>\n"
+                                + "        <td>00000000000</td>\n"
+                                + "        <td>00000000000000000000000000000</td>\n"
+                                + "        <td>00000000000</td>\n"
+                                + "        <td>00000000</td>\n"
+                                + "    </tr>\n"
+                                + "</tbody>\n"
+                                + "</table>");
                     }
                     break;
                 case "tablaListadoFolMat":
@@ -389,9 +463,46 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                                 + "</tbody>\n"
                                 + "</table>");
                     } else {
-                        out.println(0);
+                        out.println("<table id=\"TabBody\">\n"
+                                + "                                <tbody>");
+                        out.println("	    <tr>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + //Centro
+                                "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + "	    <td></td>\n"
+                                + //                                    "	    <td><input type=\"checkbox\" name=\"habilitado\"></td>\n" +
+                                "	    </tr>");
+
+                        for (int i = 0; i < 24; i++) {
+                            out.println("<tr><td>&nbsp</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                        }
+                        out.println("<tr class=\"ocultar\">\n"
+                                + "        <td>00</td>\n"
+                                + "        <td>0000000</td>\n"
+                                + "        <td>000000</td>\n"
+                                + "        <td>00000000</td>\n"
+                                + "        <td>000000</td>\n"
+                                + "        <td>000000000</td>\n"
+                                + "        <td>0000000000000000000000000000000000000000000</td>\n"
+                                + "        <td>0000000000000000000000000000000000000000000</td>\n"
+                                + "        <td>00000000000</td>\n"
+                                + "        <td>00000000000000000000000000000</td>\n"
+                                + "        <td>00000000000</td>\n"
+                                + "        <td>00000000</td>\n"
+                                + "    </tr>\n"
+                                + "</tbody>\n"
+                                + "</table>");
                     }
-                    break;
+                    break;                
                 case "guardaStatus":
                     StatusOrdenes so = new StatusOrdenes();
                     so.setFolio_sam("LT" + fo.getFolioActual());
