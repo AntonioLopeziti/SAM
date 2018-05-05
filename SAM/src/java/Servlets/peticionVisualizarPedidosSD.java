@@ -43,6 +43,7 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String Accion = request.getParameter("Accion");
             String Documento = request.getParameter("Documento");
+            String FolioSAM = request.getParameter("FolioSAM");
             String Posicion = request.getParameter("Posicion");
             String Clase = request.getParameter("Clase");
             String Ctd = request.getParameter("Ctd");
@@ -50,7 +51,7 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
             Consultas c = new Consultas();
             switch (Accion) {
                 case "ConsultaMCPedido":
-                    ArrayList<SD_cabecera_pedidos_venta> mc1 = ACC_VisualizarPedidosSD.ObtenerInstancia().ConsultaMCPedidosSD(Documento, Clase, Ctd);
+                    ArrayList<SD_cabecera_pedidos_venta> mc1 = ACC_VisualizarPedidosSD.ObtenerInstancia().ConsultaMCPedidosSD(Documento, Clase, Ctd, FolioSAM);
                     if (mc1.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
@@ -58,6 +59,7 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                             out.println("<tr ondblclick=\"seleccionar('" + mc1.get(i).getDocumento_ventas() + "')\">");
                             out.println("<td>" + mc1.get(i).getClase_documento_ventas() + "</td>");
                             out.println("<td>" + mc1.get(i).getDocumento_ventas() + "</td>");
+                            out.println("<td>" + mc1.get(i).getFolio_sam() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -103,6 +105,7 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                             j.add(pe.getMoneda_documento().trim());
                             j.add(pe.getValor_neto().trim());
                             j.add(c.DateFormat(pe.getFecha_pref_entrega().trim()));
+                            j.add(pe.getFolio_sam());
                             out.println(j);
                             break;
                         case "2":
