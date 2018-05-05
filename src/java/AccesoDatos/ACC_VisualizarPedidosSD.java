@@ -29,22 +29,24 @@ public class ACC_VisualizarPedidosSD {
         return Instance;
     }
 
-    public ArrayList<SD_cabecera_pedidos_venta> ConsultaMCPedidosSD(String doc, String clase, String can) {
+    public ArrayList<SD_cabecera_pedidos_venta> ConsultaMCPedidosSD(String doc, String clase, String can, String folioSAM) {
         ArrayList<SD_cabecera_pedidos_venta> pv = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{call SD.VisualizarPedidosSD_ConsultaDocVentasMC(?,?,?)}";
+        String sql = "{call SD.VisualizarPedidosSD_ConsultaDocVentasMC(?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, doc);
             ps.setString(2, clase);
             ps.setString(3, can);
+            ps.setString(4, folioSAM);
             rs = ps.executeQuery();
             while (rs.next()) {
                 SD_cabecera_pedidos_venta p = new SD_cabecera_pedidos_venta();
                 p.setDocumento_ventas(rs.getString("documento_ventas"));
+                p.setFolio_sam(rs.getString("folio_sam"));
                 p.setClase_documento_ventas(rs.getString("clase_documento_ventas"));
                 pv.add(p);
             }
@@ -69,6 +71,7 @@ public class ACC_VisualizarPedidosSD {
             rs = ps.executeQuery();
             while (rs.next()) {
                 cab.setDocumento_ventas(rs.getString("documento_ventas"));
+                cab.setFolio_sam(rs.getString("folio_sam"));
                 cab.setClase_documento_ventas(rs.getString("clase_documento_ventas"));
                 cab.setSolicitante(rs.getString("solicitante"));
                 cab.setTexto_visual_interlocutor1(rs.getString("texto_visual_interlocutor1"));
