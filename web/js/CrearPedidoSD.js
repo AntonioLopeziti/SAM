@@ -63,6 +63,7 @@ $(document).ready(function () {
                     if (tecla == 13) {
                         if (v.val().length > 0) {
                             CargarCliente(v.val().trim());
+                            CargarDesRelac(v.val());
                         } else {
                             $('#solicitante').val("");
                             $('#solicitante').css('background-image', 'url(images/necesario.PNG)');
@@ -108,8 +109,26 @@ $(document).ready(function () {
                 v.keypress(function (e) {
                     var tecla = (document).all ? e.keyCode : e.which;
                     if (tecla == 13) {
-                        if (v.val().length > 0) {
-                            ObtenerDescripcion(v.val().trim(), 'C', 'destinatario', 'txtDestMcia');
+                          $('#txtDestMcia').val("");
+                        if ($('#solicitante').val().length > 0) {
+                            if (v.val().length > 0) {
+                                var n = new Array();
+                                n = validarInterlocutores();
+                                if (n[0] == null || n[0] == "") {
+                                    $('#destinatario').val("");
+                                    $('#txtDestMcia').val("");
+                                    ShowMsg(20, "images/advertencia.PNG", "audio/saperror.wav");
+                                } else {
+                                    $('#destinatario').val(n[0]);
+                                    $('#txtDestMcia').val(n[1]);
+                                    borramsg();
+                                }
+                                //ObtenerDescripcion(v.val().trim(), 'C', 'destinatario', 'txtDestMcia');
+                            }
+                        } else {
+                            $('#solicitante').focus();
+                            ShowMsg(19, "images/advertencia.PNG", "audio/saperror.wav");
+                            v.val("");
                         }
                     }
                     if (tecla == 8) {
@@ -316,13 +335,22 @@ $(document).ready(function () {
             case 0:
                 v.click(function () {
                     $('#Tipodeudor').val('solicitante');
+                    $('#BusCliente').val("");
                     mostrarVentanaModal('VentanaModalCliente', 'handle9', 'BusCliente');
                 });
                 break;
             case 1:
                 v.click(function () {
-                    $('#Tipodeudor').val('destinatario');
-                    mostrarVentanaModal('VentanaModalCliente', 'handle9', 'BusCliente');
+                    var soli = $('#solicitante');
+                    if (soli.val().trim().length > 0) {
+                        $('#Tipodeudor').val('destinatario');
+                        $('#BusCliente').val(soli.val().trim());
+                        $('#BusCliente').prop('disabled', true);
+                        mostrarVentanaModal('VentanaModalCliente', 'handle9', 'BusCliente');
+                    } else {
+                        ShowMsg(19, "images/advertencia.PNG", "audio/saperror.wav");
+                        soli.focus();
+                    }
                 });
                 break;
             case 2:
@@ -662,13 +690,22 @@ $(document).ready(function () {
             $('#solicitante').focus();
             return;
         }
-
-        var n = validarInterlocutores();
-        if (n == false) {
-            $('#destinatario').focus();
-            ShowMsg(12, "images/advertencia.PNG", "audio/saperror.wav");
+        var n = new Array();
+        n = validarInterlocutores();
+        if (n[0] == null || n[0] == "") {
+            $('#destinatario').val("");
+            $('#txtDestMcia').val("");
+            ShowMsg(20, "images/advertencia.PNG", "audio/saperror.wav");
             return;
         }
+        $('#destinatario').val(n[0]);
+        $('#txtDestMcia').val(n[1]);
+//        var n = validarInterlocutores();
+//        if (n[0] === "") {
+//            $('#destinatario').focus();
+//            ShowMsg(12, "images/advertencia.PNG", "audio/saperror.wav");
+//            return;
+//        }
         if (clase.length > 0) {
             ObtenerDescripcion(clase.trim(), 'P', 'ClasePedido', 'txtClasePedido');
         }
@@ -822,7 +859,6 @@ function mostrarVentanaModal(id, handle, tipo)
         case "BusCliente":
             $('#numAcMax9').val('500');
             $('#BusNombre').val('');
-            $('#BusCliente').val('');
             break;
     }
     var BE = document.createElement('audio');
@@ -906,12 +942,26 @@ function SelectData(dato, idv, bp, ct, obj) {
         var pos = $('#postextpos').val();
         obj = "tdMater" + pos;
     }
-    if (obj == "Deudor") {
-        var deu = $('#Tipodeudor').val();
-        obj = deu
-    }
     borramsg();
     $('#' + obj).val(dato);
+    ocultarVentana(idv, bp, ct, obj);
+}
+function SelectDataCli(dato, idv, bp, ct, obj) {
+    if (obj == "tdMater") {
+        var pos = $('#postextpos').val();
+        obj = "tdMater" + pos;
+    }
+    if (obj == "solicitante") {
+        $('#' + obj).val(dato);
+        CargarCliente(dato);
+        $('#BusCliente').prop('disabled', false);
+
+    }
+    if (obj == "destinatario") {
+        $('#' + obj).val(dato);
+        ObtenerDescripcion(dato, 'C', 'destinatario', 'txtDestMcia');
+        $('#BusCliente').prop('disabled', false);
+    }
     ocultarVentana(idv, bp, ct, obj);
 }
 function ConsultaOrgVentas() {
@@ -1058,8 +1108,9 @@ function ConsultaGpoVendedores() {
     });
 }
 function ConsultaClientes() {
+    var tipodeu = $('#Tipodeudor').val();
     var acc = "ConsultarClientes";
-    var datos = "&Cliente=" + $('#BusCliente').val() + "&Nombre=" + encodeURIComponent($('#BusNombre').val().trim()) + "&Ctd=" + $('#numAcMax9').val();
+    var datos = "&Cliente=" + $('#BusCliente').val() + "&Nombre=" + encodeURIComponent($('#BusNombre').val().trim()) + "&Ctd=" + $('#numAcMax9').val() + "&tipo=" + tipodeu;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1254,17 +1305,13 @@ function CargarCliente(sol) {
                 $('#pedido').focus();
                 ShowMsg(2, "images/advertencia.PNG", "audio/saperror.wav");
             } else {
-                if ($('#destinatario').val().length == 0) {
-                    $('#destinatario').css('background-image', 'none');
-                    $('#destinatario').val(data[0]);
-                    $('#txtDestMcia').val(data[1]);
-                }
                 $('#solicitante').css('background-image', 'none');
                 $('#txtSolicitante').val(data[1]);
                 $('#orgVentas').val(data[2]);
                 $('#CanalDis').val(data[3]);
                 $('#Sector').val(data[4]);
                 $('#txtAreaVentas').val(data[5]);
+                CargarDesRelac(sol);
             }
         }
     });
@@ -1466,6 +1513,25 @@ function CargartextoEmbarque(material, org, sec, pos) {
     });
 
 }
+function CargarDesRelac(soli) {
+    var acc = "CargarDesRelac";
+    var datos = "&Cliente=" + soli;
+    $.ajax({
+        async: false,
+        dataType: 'json',
+        type: 'GET',
+        url: 'peticionPedidoSDCrear',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            $('#destinatario').val(data[0]);
+            $('#destinatario').css('background-image', 'none');
+            $('#txtDestMcia').val(data[1]);
+        }
+    });
+
+}
 
 
 function AgregarFilaTabla() {
@@ -1511,20 +1577,19 @@ function EliminarFilas() {
 }
 
 function validarInterlocutores() {
-    var retu = false;
+    var retu = new Array();
     var acc = "ValidarInterlocutor";
     var datos = "&solicitante=" + $('#solicitante').val() + "&destinatario=" + $('#destinatario').val().trim();
     $.ajax({
         async: false,
         type: 'GET',
+        dataType: 'json',
         url: 'peticionPedidoSDCrear',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "Accion=" + acc + datos,
         success: function (data) {
-            if (data != 0) {
-                retu = true;
-            }
+            retu = data;
         }
     });
     return retu;
@@ -1661,7 +1726,7 @@ function GuardarTextoCab() {
         no = txtO.substr(d, 132);
         var acc = "GuardarTextCab";
         var fila = i + 1;
-        var enviar = "&FILA=" + fila + "&TEXTOCAB=" + encodeURIComponent(no) + "&USUAR="+usuario;
+        var enviar = "&FILA=" + fila + "&TEXTOCAB=" + encodeURIComponent(no) + "&USUAR=" + usuario;
         $.ajax({
             async: false,
             type: 'GET',
@@ -1677,7 +1742,7 @@ function GuardarTextoCab() {
 }
 function GuardarTextoPos(pos, a) {
     var usuario = $('#CreadoPor').val();
-    var txtpos = $('#textoposTemp'+a).val();
+    var txtpos = $('#textoposTemp' + a).val();
     var txtO = txtpos.replace(/'/g, "´");
     var tam = txtO.length;
     var lim = tam / 132;
@@ -1687,7 +1752,7 @@ function GuardarTextoPos(pos, a) {
         no = txtO.substr(d, 132);
         var acc = "GuardarTextPos";
         var fila = i + 1;
-        var enviar = "&POS=" + pos + "&FILA=" + fila + "&TEXTPOS=" + encodeURIComponent(no) + "&USUAR="+usuario;
+        var enviar = "&POS=" + pos + "&FILA=" + fila + "&TEXTPOS=" + encodeURIComponent(no) + "&USUAR=" + usuario;
         $.ajax({
             async: false,
             type: 'GET',
