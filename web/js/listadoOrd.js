@@ -92,11 +92,11 @@ $(document).ready(function () {
             }
         }
     });
-    
-    
+
+
 });
-function PintaFila(pos){
-    var arr = document.getElementsByName("gender");    
+function PintaFila(pos) {
+    var arr = document.getElementsByName("gender");
     for (i = 0; i < arr.length; i++) {
         if (arr[i].checked) {
             document.getElementById("TabBody").rows[i].style.backgroundColor = "#66ccff";
@@ -266,8 +266,10 @@ function tablaListadoOrdenesPorCenFol(centro, folio) {
         data: "action=tablaListadoCenFol&centro=" + centro + "&folio=" + folio,
         success: function (data) {
             if (data == 0) {
-                location.href = "ListadoOrdFab.jsp";
-                ShowMsg(9, "images/advertencia.PNG", "audio/sapmsg.wav", "");
+                document.getElementById('SecCuerpo').innerHTML = data;
+                AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";                
+                ShowMsg(1, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
                 document.getElementById('SecCuerpo').innerHTML = data;
                 AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
@@ -290,7 +292,10 @@ function tablaListadoOrdenesPorCenMate(centro, mate) {
         data: "action=tablaListadoCenMat&centro=" + centro + "&material=" + mate,
         success: function (data) {
             if (data == 0) {
-                location.href = "ListadoOrdFab.jsp";
+                document.getElementById('SecCuerpo').innerHTML = data;
+                AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                ShowMsg(1, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
                 document.getElementById('SecCuerpo').innerHTML = data;
                 AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
@@ -313,7 +318,10 @@ function tablaListadoOrdenesPorFolMate(folio, mate) {
         data: "action=tablaListadoFolMat&folio=" + folio + "&material=" + mate,
         success: function (data) {
             if (data == 0) {
-                location.href = "ListadoOrdFab.jsp";
+                document.getElementById('SecCuerpo').innerHTML = data;
+                AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                ShowMsg(1, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
                 document.getElementById('SecCuerpo').innerHTML = data;
                 AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
@@ -326,7 +334,6 @@ function tablaListadoOrdenesPorFolMate(folio, mate) {
         }
     });
 }
-
 function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
 {
     var myTable = document.getElementById(cuerpo);
