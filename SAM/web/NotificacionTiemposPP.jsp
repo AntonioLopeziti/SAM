@@ -223,6 +223,7 @@
                         <label style="display: inline-block; width: 20%; margin-left: -5%;" id="cntNN"></label>
                         <label>Total:</label>
                         <label style="display: inline-block; width: 20%; margin-left: -7%;" id="cntRR"></label>
+                        <input type="text" id="cntHID" hidden/>
                     </section>
                     
                     <!--<hr style="margin-top: -1%;">-->
