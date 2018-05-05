@@ -439,8 +439,8 @@
                     <option value="1">Instrucciones de embarque</option>
                 </select>
             </div>
-            <div class="Contenttextopos" id="textoventasMat"><textarea style="resize: none;" id="textoPos" ></textarea></div>
-            <div class="Contenttextopos" id="textoEmbarqu"><textarea style="resize: none;" id="textoEmbarq" readonly></textarea></div>
+            <div class="Contenttextopos" id="textoEmbarqu"><textarea style="resize: none;" id="textoPos" ></textarea></div>
+            <div class="Contenttextopos" id="textoventasMat" ><textarea style="resize: none;" id="textoEmbarq" readonly></textarea></div>
             <div class="Botones_MatchTEXp">
                 <img class="BtnMatchIcon" src="images/HR_ok.png" style="cursor:pointer;" id="CerraokPos"/>
                 <img class="BtnMatchIcon" src="images/eliminar.png" style="cursor:pointer;" id="cerrarmodaTxtPos2"/>
