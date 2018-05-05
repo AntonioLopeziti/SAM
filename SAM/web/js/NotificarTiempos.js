@@ -204,6 +204,7 @@ function validarCantidades() {
     var us = $('#NoPers').val();
     var ord = $('#OrdFab').val();
     var buena = $('#cntBuena').val();
+    var restante = $('#cntHID').val();
     var mala = $('#cntMala').val();
     var orden = $('#OrdFab').val();
     if (us == "") {
@@ -246,7 +247,17 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    } else {
+    } else if(parseInt(restante) == 0){
+        $('#cntBuena').focus();
+        $('#cntBuena').css('background-image', 'none');
+        $('#msg').html("Orden notificada");
+        var icon = $('#iconmsg');
+        icon.show();
+        icon.attr('src', 'images/advertencia.PNG');
+        var BE = document.createElement('audio');
+        BE.src = 'audio/saperror.wav';
+        BE.play();
+    }else {
         if ($('#checkCntExceso').prop('checked')) {
             validarDatos();
         } else {
@@ -267,6 +278,7 @@ function validarCantidades() {
                         var BE = document.createElement('audio');
                         BE.src = 'audio/saperror.wav';
                         BE.play();
+                        $("#cntBuena").focus();
                     } else {
                         validarDatos();
                     }
@@ -1422,6 +1434,7 @@ function cantidadPT() {
             temp = data.split(",");
             $("#cntNN").text(temp[0]);
             $("#cntRR").text(temp[2]);
+            $("#cntHID").val(temp[1]);
             if (document.getElementById("OrdFab").disabled == false) {
                 $("#cntBuena").val(temp[1]);
                 $('#cntBuena').css('background-image', 'none');
