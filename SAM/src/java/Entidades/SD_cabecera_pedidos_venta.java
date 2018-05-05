@@ -12,6 +12,7 @@ public class SD_cabecera_pedidos_venta {
 
     int id_cab_ped_venta = 0;
     String clase_documento_ventas = "";
+    String folio_sam = "";
     String documento_ventas = "";
     String solicitante = "";
     String texto_visual_interlocutor1 = "";
@@ -35,6 +36,15 @@ public class SD_cabecera_pedidos_venta {
     String fecha_determinacion_precio_tipo_cam = "";
     String fecha_pref_entrega = "";
     String num_condicion_documento = "";
+
+    public String getFolio_sam() {
+        return folio_sam;
+    }
+
+    public void setFolio_sam(String folio_sam) {
+        this.folio_sam = folio_sam;
+    }
+    
 
     public String getValor_neto() {
         return valor_neto;
