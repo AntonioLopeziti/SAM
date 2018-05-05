@@ -449,7 +449,7 @@
             <div class="Contenttextopos" id="textoventasMat" ><textarea style="resize: none;" id="textoEmbarq" readonly></textarea></div>
             <div class="Botones_MatchTEXp">
                 <img class="BtnMatchIcon" src="images/HR_ok.png" style="cursor:pointer;" id="CerraokPos"/>
-                <img class="BtnMatchIcon" src="images/eliminar.png" style="cursor:pointer;" id="cerrarmodaTxtPos2"/>
+                <img class="BtnMatchIcon" src="images/eliminar.png" style="cursor:pointer; margin-left: 5px" id="cerrarmodaTxtPos2"/>
             </div>
         </div>
         <div id="Calenndar" class="VentanaFecha">
