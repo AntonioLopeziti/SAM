@@ -241,7 +241,7 @@
         </div>
         <div id="VentanaModalCentro" class="VentanaModal">
             <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('centro')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button id="vemoce"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div class="PanelBntMatch"><button onclick="cambiarMatchCentro();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
             <div id="BuscarParamCentro_SP" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
@@ -255,7 +255,7 @@
                 </div> 
                 <div class="Botones_Match">
                     <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okCentro"/>
-                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('Centro');"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('centro');"/>
                 </div>
             </div>
             <div id="ConsultaTablaOCompras">
@@ -281,7 +281,7 @@
         </div>
         <div id="VentanaModalSAM1" class="VentanaModal">
             <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sam1')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div class="PanelBntMatch"><button onclick="cambiarMatchFolio();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
             <div id="BuscarParamFolio_SP" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
@@ -295,7 +295,7 @@
                 </div> 
                 <div class="Botones_Match">
                     <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okFolio"/>
-                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('SAM1');"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('sam1');"/>
                 </div>
             </div>
             <div id="ConsultaTablaFolioSAM1">
@@ -321,7 +321,7 @@
         </div>
         <div id="VentanaModalSAM2" class="VentanaModal">
             <div id="handle3"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sam2')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div class="PanelBntMatch"><button onclick="cambiarMatchFolio2();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
             <div id="BuscarParamFolio2_SP" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
@@ -360,7 +360,7 @@
         </div>
         <div id="VentanaModalSAP1" class="VentanaModal">
             <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sap1')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div class="PanelBntMatch"><button onclick="cambiarMatchNumMate();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
             <div id="BuscarParamFolioSAP_SP" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
@@ -400,7 +400,7 @@
         </div>
         <div id="VentanaModalSAP2" class="VentanaModal">
             <div id="handle5"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sap2')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>   
+            <div class="PanelBntMatch"><button onclick="cambiarMatchNumMate2();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>   
             <div id="BuscarParamFolioSAP2_SP" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
