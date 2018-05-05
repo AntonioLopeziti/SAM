@@ -233,13 +233,13 @@ public class ACC_CrearPedidoSD {
         return mv;
     }
 
-    public ArrayList<clientes> GetClientes(String cliente, String nombre, String cantidad) {
+    public ArrayList<clientes> GetClientes(String cliente, String nombre, String cantidad, String sql) {
         ArrayList<clientes> cl = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{call SD.CrearPedidos_ConsultaClientes(?,?,?)}";
+//        String sql = "{call SD.CrearPedidos_ConsultaClientes(?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, cliente);
@@ -365,8 +365,8 @@ public class ACC_CrearPedidoSD {
         return texto;
     }
 
-    public int ValidarInterlocutor(String sol, String dm) {
-        int n = 0;
+    public clientes ValidarInterlocutor(String sol, String dm) {
+        clientes c = new clientes();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
@@ -378,14 +378,15 @@ public class ACC_CrearPedidoSD {
             ps.setString(2, dm);
             rs = ps.executeQuery();
             while (rs.next()) {
-                n = 1;
+               c.setIdCliente(rs.getString("IdCliente"));
+               c.setNombre1(rs.getString("nombre1"));
             }
         } catch (Exception e) {
             System.err.println(e);
         } finally {
             cnx.CerrarConexion(con);
         }
-        return n;
+        return c;
     }
 
     public void InsertarCabecera1(String folioSAM, String Clase, String Org, String Can, String Sec, String gpo, String ofic, String fe, String fp, String ref, String usu, String fechA, String Hora) {
