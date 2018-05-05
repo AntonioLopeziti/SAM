@@ -162,7 +162,7 @@
                 </div>
                 <div class="contain-cabecera">
                     <div class="divDer">
-                        <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido2"));%></label><input tye="text" id="Pedido" style="width: 35%;" disabled/>
+                        <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido2"));%></label><input tye="text" id="Pedido" style="width: 30%;" disabled/> <input tye="text" id="FolioSAM" style="width: 30%;" disabled/>
                         <hr>
                         <label><u><%out.println(po.getProperty("etiqueta.PedidosSDSolicitante"));%></u></label><input tye="text" id="Solicitante" style="width: 35%;" disabled/>
                         <hr>
@@ -488,7 +488,9 @@
             <div id="BuscarParPedSD" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label><%out.println(po.getProperty("etiqueta.PedidosSDDocu"));%></label><input type="text" id="DocumVenta" maxlength="10" style="width:35%; text-transform: uppercase;"/>
+                        <label><%out.println(po.getProperty("etiqueta.PedidosSDDocu"));%></label><input type="text" id="DocumVenta" maxlength="12" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
+                        <label>Folio SAM</label><input type="text" id="FSAM" maxlength="10" style="width:35%; text-transform: uppercase;"/>
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></label><input type="text" id="ClasePedid" maxlength="4" style="width:35%; text-transform: uppercase;"/>
                         <hr>  
@@ -510,6 +512,7 @@
                                     <tr>
                                         <th><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></th>
                                         <th><%out.println(po.getProperty("etiqueta.PedidosSDDocu"));%></th>
+                                        <th>Folio SAM</th>
                                     </tr>
                                 </thead>
                             </table>
