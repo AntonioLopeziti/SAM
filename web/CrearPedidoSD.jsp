@@ -161,6 +161,12 @@
                     case 18:
                         msg = 'Cantidad vacia, agregue una cantidad';
                         break;
+                    case 19:
+                        msg = 'Introduce solicitante';
+                        break;
+                    case 20:
+                        msg = 'Relación Interlocutor no valida';
+                        break;
                 }
                 $('#msg').html(msg);
                 var icon = $('#iconmsg');
