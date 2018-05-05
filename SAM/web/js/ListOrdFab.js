@@ -114,6 +114,117 @@ $(document).ready(function () {
     $('#okMate').click(function () {
         ConsultaFolioSAP1();
     });
+    //Match centro 
+    $('#BusCentro').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaCentro();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#BusDesCentro').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaCentro();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#numAcMax').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaCentro();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    //Match Folio
+    $('#BusFolio').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAM1();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#CenFolio').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAM1();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#numAcMaxFolio').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAM1();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    //Match Material
+    $('#BusMate').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAP1();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });    
+    $('#CenMate').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAP1();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#numAcMaxMate').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAP1();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
 });
 function back() {
     window.location.href = "Bienvenido.jsp";
@@ -458,6 +569,7 @@ function mosVenMod(tipo) {
             $("#BusCentro").val('');
             $("#BusCentro").val('');
             $("#numAcMax").val('500');
+            $("#BuscarParamCentro_SP").show();
             $('#ConsultaTablaOCompras').hide();
             break;
         case "sam1":
@@ -467,6 +579,7 @@ function mosVenMod(tipo) {
             $("#BusFolio").val('');
             $("#CenFolio").val('');
             $("#numAcMaxFolio").val('500');
+            $('#BuscarParamFolioSAP_SP').show();
             $('#ConsultaTablaFolioSAM1').hide();
             break;
         case "SAM2":
@@ -485,6 +598,7 @@ function mosVenMod(tipo) {
             $("#BusMate").val('');
             $("#CenMate").val('');
             $("#numAcMaxMate").val('500');
+            $('#BuscarParamMate_SP').show();
             $('#ConsultaTablaFolioSAP1').hide();
             break;
         case "SAP2":
@@ -553,6 +667,18 @@ function Select(dato, tipo) {
 //    var theHandle = document.getElementById(handle);
 //    var theRoot = document.getElementById(id);
 //    Drag.init(theHandle, theRoot);
+function cambiarMatchCentro() {
+    $('#BuscarParamCentro_SP').show();
+    $('#ConsultaTablaOCompras').hide();
+}
+function cambiarMatchFolio() {
+    $('#BuscarParamFolioSAP_SP').show();
+    $('#ConsultaTablaFolioSAM1').hide();
+}
+function cambiarMatchMaterial() {
+    $('#BuscarParamMate_SP').show();
+    $('#ConsultaTablaFolioSAP1').hide();
+}
 function abrirVentana(ventana) {
     ///abrir ventanas
     var BE = document.createElement('audio');
