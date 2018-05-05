@@ -78,6 +78,24 @@
         String orden = request.getParameter("sap1");
     %>
     <head>
+        <script>
+            function ShowMsg(m, im, au) {
+                var msg;
+                switch (m) {
+                    case 1:
+                        msg = 'No hay valores para esta sección';
+                        break;
+                }
+                $('#msg').html(msg);                
+                var icon = $('#iconmsg');
+                icon.attr('visibility', true);
+                icon.show();
+                icon.attr('src', im);
+                var BE = document.createElement('audio');
+                BE.src = au;
+                BE.play();
+            }
+        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="shortcut icon" href="images/favicon.ico">
