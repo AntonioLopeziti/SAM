@@ -305,8 +305,8 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     String FECHAENT = Consultas.ObtenerInstancia().DateFormatGuion(FECHE);
                     String FECHAPRE = Consultas.ObtenerInstancia().DateFormatGuion(FECHP);
                     ACC_CrearPedidoSD.ObtenerInstancia().InsertarCabecera1(folioSAM, CLASE, ORGVE, CANAL, SECTO, GRUPV, OFICV, FECHAENT, FECHAPRE, REFCL, USUAR, FechaActual, HoraActual);
-                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(folioSAM, SOLIC, "AG", USUAR, FechaActual, HoraActual);
-                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(folioSAM, DESTI, "WE", USUAR, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(folioSAM, "AG", SOLIC, USUAR, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(folioSAM, "WE", DESTI, USUAR, FechaActual, HoraActual);
                     break;
                 case "GuardarPosiciones":
                     int POSDO = Integer.parseInt(POSIC) + 1;
