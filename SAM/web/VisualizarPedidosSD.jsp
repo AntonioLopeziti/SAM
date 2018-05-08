@@ -156,7 +156,7 @@
                         <hr id="lineaTitulo">
                         <div class="divPed">
                             <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido"));%></label><input type="text" style="width: 25%; text-transform: uppercase;" id="txtPedido" maxlength="10" /><button id="MCPedidos" class='BtnMatchIcon'></button>
-                            <hr>3
+                            <hr>
                         </div>
                     </div>
                 </div>
