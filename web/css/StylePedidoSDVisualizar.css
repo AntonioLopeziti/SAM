@@ -433,3 +433,15 @@ td{
     margin-left: 0;
     margin-top: -1px;
 }
+@media screen and (min-width: 300px) and (max-width: 1000px){ 
+    .DivContentVisPedSD{
+        width: 100%;
+        height: auto;
+    }
+    .parambus{
+        width: 100%;
+    }
+    .contain-cabecera{
+        width: 100%;
+    }
+}
