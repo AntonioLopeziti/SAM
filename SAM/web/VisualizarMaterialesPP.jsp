@@ -67,63 +67,63 @@
         String MenVal = po.getProperty("etiqueta.MensajeNoExiste");
         String CampOb = po.getProperty("etiqueta.CompObligatorios");
         String okcons = po.getProperty("etiqueta.ConOk_FO");
-        String ParametrosV = po.getProperty("etiqueta.parametrosvisu_MAT_PP");
-        String material = po.getProperty("etiqueta.materialmatch_MAT_PP");
-        String centro = po.getProperty("etiqueta.centromatch_MAT_PP");
-        String organizacion = po.getProperty("etiqueta.organizacionmatch_MAT_PP");
-        String canald = po.getProperty("etiqueta.canaldistri_MAT_PP");
-        String datos = po.getProperty("etiqueta.datosbasicosmat_MAT_PP");
-        String umb = po.getProperty("etiqueta.umbase_MAT_PP");
-        String nomat = po.getProperty("etiqueta.nomaterial_MAT_PP");
-        String tipmat = po.getProperty("etiqueta.tipomaterial_MAT_PP");
-        String grupart = po.getProperty("etiqueta.grupoarticulos_MAT_PP");
-        String ventas = po.getProperty("etiqueta.ventas_MAT_PP");
-        String venta1 = po.getProperty("etiqueta.ventas1_MAT_PP");
-        String venta2 = po.getProperty("etiqueta.ventas2_MAT_PP");
-        String ventagen = po.getProperty("etiqueta.ventasgral_MAT_PP");
-        String sector = po.getProperty("etiqueta.sector_MAT_PP");
-        String umventa = po.getProperty("etiqueta.UMventa_MAT_PP");
-        String gresta = po.getProperty("etiqueta.gresta_MAT_PP");
-        String grtp = po.getProperty("etiqueta.grtp_MAT_PP");
-        String jquia = po.getProperty("etiqueta.jquia_MAT_PP");
-        String grprecio = po.getProperty("etiqueta.grprecio_MAT_PP");
-        String grimput = po.getProperty("etiqueta.grimput_MAT_PP");
-        String grtpo = po.getProperty("etiqueta.grtpo_MAT_PP");
-        String verif = po.getProperty("etiqueta.verif_MAT_PP");
-        String gpotra = po.getProperty("etiqueta.gpotra_MAT_PP");
-        String cebe = po.getProperty("etiqueta.cebe_MAT_PP");
-        String sujeto = po.getProperty("etiqueta.sujeto_MAT_PP");
-        String grupocarga = po.getProperty("etiqueta.grupocarga_MAT_PP");
-        String compras = po.getProperty("etiqueta.compras_MAT_PP");
-        String grupocompras = po.getProperty("etiqueta.grupocompras_MAT_PP");
-        String planinece = po.getProperty("etiqueta.planinece_MAT_PP");
-        String plani1 = po.getProperty("etiqueta.plani1_MAT_PP");
-        String plani2 = po.getProperty("etiqueta.plani2_MAT_PP");
-        String car = po.getProperty("etiqueta.car_MAT_PP");
-        String puntod = po.getProperty("etiqueta.puntod_MAT_PP");
-        String ciclo = po.getProperty("etiqueta.ciclo_MA_PP");
-        String tamlote = po.getProperty("etiqueta.tamlote_MAT_PP");
-        String tamlotemin = po.getProperty("etiqueta.tamlotemin_MAT");
-        String horiz = po.getProperty("etiqueta.horiz_MAT_PP");
-        String planine = po.getProperty("etiqueta.planine_MAT_PP");
-        String tamlotemax = po.getProperty("etiqueta.tamlotemax_MAT_PP");
-        String stockmax = po.getProperty("etiqueta.stockmax_MAT_PP");
-        String aprovi = po.getProperty("etiqueta.aprovi_MAT_PP");
-        String tmpo = po.getProperty("etiqueta.tmpo_MAT_PP");
-        String stockseg = po.getProperty("etiqueta.stockseg_MAT_PP");
-        String stocksem = po.getProperty("etiqueta.stocksem_MAT_PP");
-        String aproespec = po.getProperty("etiqueta.aproespec_MAT_PP");
-        String plazen = po.getProperty("etiqueta.plazen_MAT_PP");
-        String calidad = po.getProperty("etiqueta.calidad_MAT_PP");
-        String paramtr = po.getProperty("etiqueta.paramtr_MAT_PP");
-        String aproviqm = po.getProperty("etiqueta.aproviqm_MAT_PP");
-        String conta = po.getProperty("etiqueta.conta_MAT_PP");
-        String ctrl = po.getProperty("etiqueta.ctrl_MAT_PP");
-        String precmed = po.getProperty("etiqueta.precmed_MAT_PP");
-        String precioesta = po.getProperty("etiqueta.precioesta_MAT_PP");
-        String cantidadba = po.getProperty("etiqueta.cantidadba_MAT_PP");
-        String clvalo = po.getProperty("etiqueta.clvalo_MAT_PP");
-        String catvalo = po.getProperty("etiqueta.catvalo_MAT_PP");
+        String ParametrosV = po.getProperty("etiqueta.parametrosvisu");
+        String material = po.getProperty("etiqueta.materialmatch");
+        String centro = po.getProperty("etiqueta.centromatch");
+        String organizacion = po.getProperty("etiqueta.organizacionmatch");
+        String canald = po.getProperty("etiqueta.canaldistri");
+        String datos = po.getProperty("etiqueta.datosbasicosmat");
+        String umb = po.getProperty("etiqueta.umbase");
+        String nomat = po.getProperty("etiqueta.nomaterial");
+        String tipmat = po.getProperty("etiqueta.tipomaterial");
+        String grupart = po.getProperty("etiqueta.grupoarticulos");
+        String ventas = po.getProperty("etiqueta.ventas");
+        String venta1 = po.getProperty("etiqueta.ventas1");
+        String venta2 = po.getProperty("etiqueta.ventas2");
+        String ventagen = po.getProperty("etiqueta.ventasgral");
+        String sector = po.getProperty("etiqueta.sector");
+        String umventa = po.getProperty("etiqueta.UMventa");
+        String gresta = po.getProperty("etiqueta.gresta");
+        String grtp = po.getProperty("etiqueta.grtp");
+        String jquia = po.getProperty("etiqueta.jquia");
+        String grprecio = po.getProperty("etiqueta.grprecio");
+        String grimput = po.getProperty("etiqueta.grimput");
+        String grtpo = po.getProperty("etiqueta.grtpo");
+        String verif = po.getProperty("etiqueta.verif");
+        String gpotra = po.getProperty("etiqueta.gpotra");
+        String cebe = po.getProperty("etiqueta.cebe");
+        String sujeto = po.getProperty("etiqueta.sujeto");
+        String grupocarga = po.getProperty("etiqueta.grupocarga");
+        String compras = po.getProperty("etiqueta.compras");
+        String grupocompras = po.getProperty("etiqueta.grupocompras");
+        String planinece = po.getProperty("etiqueta.planinece");
+        String plani1 = po.getProperty("etiqueta.plani1");
+        String plani2 = po.getProperty("etiqueta.plani2");
+        String car = po.getProperty("etiqueta.car");
+        String puntod = po.getProperty("etiqueta.puntod");
+        String ciclo = po.getProperty("etiqueta.ciclo");
+        String tamlote = po.getProperty("etiqueta.tamlote");
+        String tamlotemin = po.getProperty("etiqueta.tamlotemin");
+        String horiz = po.getProperty("etiqueta.horiz");
+        String planine = po.getProperty("etiqueta.planine");
+        String tamlotemax = po.getProperty("etiqueta.tamlotemax");
+        String stockmax = po.getProperty("etiqueta.stockmax");
+        String aprovi = po.getProperty("etiqueta.aprovi");
+        String tmpo = po.getProperty("etiqueta.tmpo");
+        String stockseg = po.getProperty("etiqueta.stockseg");
+        String stocksem = po.getProperty("etiqueta.stocksem");
+        String aproespec = po.getProperty("etiqueta.aproespec");
+        String plazen = po.getProperty("etiqueta.plazen");
+        String calidad = po.getProperty("etiqueta.calidad");
+        String paramtr = po.getProperty("etiqueta.paramtr");
+        String aproviqm = po.getProperty("etiqueta.aproviqm");
+        String conta = po.getProperty("etiqueta.conta");
+        String ctrl = po.getProperty("etiqueta.ctrl");
+        String precmed = po.getProperty("etiqueta.precmed");
+        String precioesta = po.getProperty("etiqueta.precioesta");
+        String cantidadba = po.getProperty("etiqueta.cantidadba");
+        String clvalo = po.getProperty("etiqueta.clvalo");
+        String catvalo = po.getProperty("etiqueta.catvalo");
     %>
 
     <head>
@@ -154,12 +154,12 @@
             checkPermisoPag();
         </script>
         <link rel="stylesheet" href="css/StyleGeneral.css">
-        <link rel="stylesheet" href="css/StyleVisualizarMatePP.css">
+        <link rel="stylesheet" href="css/StyleMaterial.css">
         <script src="js/dom-drag.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
-        <script src="js/VisualizarMatePP.js"></script>
-        <title><%out.println(po.getProperty("etiqueta.TituloMaterial_MAT_PP"));%></title>           
+        <script src="js/VisualizarMateriales.js"></script>
+        <title>Visualizar Maestro de Materiales PP</title>           
     </head>
     <body>  
         <div id="main-header">
@@ -176,7 +176,7 @@
             <input id="finalizar" type="image" src="images/canceOFF.png" disabled/>
             <input  id="cancelar"type="image" src="images/cancelaOFF.png" disabled/>   
             <div class="titulo">
-                <h1><%out.println(po.getProperty("etiqueta.titulomaestro_MAT_PP"));%></h1>
+                <h1>Visualizar Maestro de Materiales PP</h1>
             </div>             
         </div>            
         <div class="contenido">
@@ -384,20 +384,20 @@
             </div>
         </footer>
         <div id="VentanaModal" class="VentanaModalMate">
-            <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_MAT_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('material');"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button id="retornfiltro"><%out.println(po.getProperty("etiqueta.BuscarMaterial_MAT_PP"));%></button><hr></div>
+            <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('material');"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="retornfiltro"><%out.println(po.getProperty("etiqueta.BuscarMaterial_MAT"));%></button><hr></div>
             <div id="BuscarParam_m" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
                         <label><%=material%></label><input type="text" id="material_ma" style="width:35%; text-transform: uppercase;" maxlength = "40"/>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.Descripcion_MAT_PP"));%></label><input type="text" maxlength="40" id="texto_mate" style="width:35%;"/>
+                        <label><%out.println(po.getProperty("etiqueta.Descripcion_MAT"));%></label><input type="text" maxlength="40" id="texto_mate" style="width:35%;"/>
                         <hr>
                         <label><%=centro%></label><input type="text" id="centrito" style="width:10%; text-transform: uppercase;" maxlength="4"/>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.TMat_MAT_PP"));%></label><input type="text"   id="tipmat"   style="width:10%; text-transform: uppercase;" maxlength="4"/>
+                        <label>T.Material</label><input type="text"   id="tipmat"   style="width:10%; text-transform: uppercase;" maxlength="4"/>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier_MAT_PP"));%></label><input type="text"   id="numAcMax"   style="width:10%;" maxlength="3"/>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text"   id="numAcMax"   style="width:10%;" maxlength="3"/>
                         <hr>
                     </div>        
                 </div> 
@@ -413,7 +413,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%=material%></th><th><%out.println(po.getProperty("etiqueta.Descripcion_MAT_PP"));%></th><th><%out.println(po.getProperty("etiqueta.centromatch_MAT_PP"));%></th><th><%out.println(po.getProperty("etiqueta.TMat_MAT_PP"));%></th>
+                                        <th><%=material%></th><th><%out.println(po.getProperty("etiqueta.Descripcion_MAT"));%></th><th><%out.println(po.getProperty("etiqueta.centromatch"));%></th><th>T.Material</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -428,8 +428,8 @@
         </div>
 
         <div id="VentanaModalCentro" class="VentanaModal">
-            <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_MAT_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('centro');"><label>X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Cntros_MAT_PP"));%></button><hr></div>
+            <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('centro');"><label>X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.Titulo_CC"));%></button><hr></div>
             <div id="BuscarParam_C" class="BuscarParam_u">
                 <div class="fondo_Match"></div>
             </div>
@@ -440,7 +440,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.Cntro_MAT_PP"));%></th><th><%out.println(po.getProperty("etiqueta.MFDescripcion"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.Centro_CA"));%></th><th><%out.println(po.getProperty("etiqueta.MFDescripcion"));%></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -454,8 +454,8 @@
             </div>
         </div>
         <div id="VentanaModalOrganizacion" class="VentanaModal">
-            <div id="handle3"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_MAT_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('organizacion');"><label>X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.matchorganizacion_MAT_PP"));%></button><hr></div>
+            <div id="handle3"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('organizacion');"><label>X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.matchorganizacion"));%></button><hr></div>
             <div id="BuscarParam_O" class="BuscarParam_u">
                 <div class="fondo_Match"></div>
             </div>
@@ -466,7 +466,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.matchorganizacion_MAT_PP"));%></th><th><%out.println(po.getProperty("etiqueta.Descr_MAT_PP"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.matchorganizacion"));%></th><th><%out.println(po.getProperty("etiqueta.GralDescripcion"));%></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -480,8 +480,8 @@
             </div>
         </div>
         <div id="VentanaModalCanal" class="VentanaModal">
-            <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_MAT_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('canal');"><label>X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.matchcanal_MAT_PP"));%></button><hr></div>
+            <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('canal');"><label>X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.matchcanal"));%></button><hr></div>
             <div id="BuscarParam_CA" class="BuscarParam_u">
                 <div class="fondo_Match"></div>
             </div>
@@ -492,7 +492,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.matchcanal_MAT_PP"));%></th><th><%out.println(po.getProperty("etiqueta.Descr_MAT_PP"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.matchcanal"));%></th><th><%out.println(po.getProperty("etiqueta.GralDescripcion"));%></th>
                                     </tr>
                                 </thead>
                             </table>
