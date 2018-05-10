@@ -2508,6 +2508,43 @@ public class ACC_Stock {
         }
         return stockmateriales;
     }
+    public ArrayList<stock> ConsultaInventariosEE(String centro, String mat, String mov, String alm, String ped, String pos) {
+        String query = "{call MM.inventariosEE_MOM(?,?,?,?,?)}";
+        ArrayList<stock> stockmateriales = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        try {
+            PreparedStatement sp = con.prepareStatement(query);
+            sp.setString(1, mat);
+            sp.setString(2, centro);
+            sp.setString(3, alm);
+            sp.setString(4, ped);
+            sp.setString(5, pos);
+            ResultSet rs = sp.executeQuery();
+            while (rs.next()) {
+                stock stockmat = new stock();
+
+                stockmat.setMaterial(rs.getString("material"));
+                stockmat.setCentro(rs.getString("centro"));
+                stockmat.setAlmacen(rs.getString("almacen"));
+                stockmat.setLote(rs.getString("lote"));
+                stockmat.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
+                if (mov.equals("101") || mov.equals("201") || mov.equals("261") || mov.equals("303") || mov.equals("311")) {
+                    if (Double.parseDouble(stockmat.getStocklibre_utilizacion()) >= 1) {
+                        stockmateriales.add(stockmat);
+                    }
+                } else {
+                    stockmateriales.add(stockmat);
+                }
+            }
+            cnx.CerrarConexion(con);
+        } catch (Exception ex) {
+            System.err.println("Error: " + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return stockmateriales;
+    }
 
     public int ConsultaCantidad(String mat, String centro, String almacen, String lote) {
         int rt = 0;
