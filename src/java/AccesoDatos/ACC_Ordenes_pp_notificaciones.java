@@ -38,9 +38,9 @@ public class ACC_Ordenes_pp_notificaciones {
         return Instance;
     }
 
-    public void PosicionInsertaMovNot(String folio_sam, String orden, String hora, String fecha, String contador, String material, String cantidad, String um, String lote, String centro, String claseMov, String posL) {
+    public void PosicionInsertaMovNot(String folio_sam, String orden, String hora, String fecha, String contador, String material, String cantidad, String um, String lote, String centro, String claseMov, String posL, String ancho, String ee) {
         
-        String query = "{CALL PP.Notif_InsertaPosMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL PP.Notif_InsertaPosMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
@@ -99,6 +99,8 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(51, "");
             pst.setString(52, "");
             pst.setString(53, posL);
+            pst.setString(54, ancho);
+            pst.setString(55, ee);
             pst.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error: " + e);
@@ -922,7 +924,7 @@ public class ACC_Ordenes_pp_notificaciones {
     
     public ArrayList<componentesPP> MostraTABPM01NOPP(String ord, String cnt, String ll) {
         ArrayList<componentesPP> mpm = new ArrayList<>();
-        String ope = "";
+        String ope = "", ped = "", pos = "";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
@@ -939,8 +941,10 @@ public class ACC_Ordenes_pp_notificaciones {
                 componentesPP ma = new componentesPP();
                 ma.setNum_operacion(rs.getString("num_operacion"));
                 ope = rs.getString("num_operacion");
+                ped = rs.getString("num_pedido");
+                pos = rs.getString("num_posicion");
                 ma.setMaterial(rs.getString("num_material"));
-                ma.setTxt_material(rs.getString("texto_breve_mate"));
+                ma.setTxt_material(NombreMaterial(rs.getString("num_material")));
                 ma.setUm(rs.getString("unidad_medida_base"));
                 ma.setCentro(rs.getString("centro"));
                 ma.setAlmacen("1400");
@@ -967,8 +971,10 @@ public class ACC_Ordenes_pp_notificaciones {
             while (rs2.next()) {
                 componentesPP ma = new componentesPP();
                 ma.setNum_operacion(ope);
+                ma.setPedido(ped);
+                ma.setPosicion(pos);
                 ma.setMaterial(rs2.getString("num_material"));
-                ma.setTxt_material(rs2.getString("texto_breve"));
+                ma.setTxt_material(NombreMaterial(rs2.getString("num_material")));
                 ma.setUm(rs2.getString("unidad_medida"));
                 ma.setCentro(rs2.getString("centro"));
                 ma.setAlmacen("1400");
@@ -976,6 +982,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setCantidad(rs2.getString("cantidad_necesaria_componente"));
                 ma.setPosListaM(rs2.getString("num_pos_lista_materiales"));
                 ma.setDisabled("disabled");
+                ma.setStock_especial(rs2.getString("stock_especial"));
                 mpm.add(ma);
             }
         } catch (Exception e) {
@@ -1069,6 +1076,40 @@ public class ACC_Ordenes_pp_notificaciones {
             }
         }
         return pmon;
+    }
+    public String NombreMaterial(String mate) {
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        System.out.println(mate);
+        String query = "{call MM.NombreMaterial(?)}";
+        try {
+
+            pst = conn.prepareStatement(query);
+            pst.setString(1, mate);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                return rs.getString("descripcion_ES");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e);
+            }
+        }
+        return "";
     }
 
     public LinkedList<pp01_notifi> ShowDatPP1PP(String ord, String ope) {
