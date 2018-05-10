@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('#iconmsg').hide();
     MostrarFolio();
     $('#fechaPrecio').val(GetfechaActual());
-    $('#textoEmbarqu').hide();
+    $('#textoventasMat').hide();
     startTime();
     $('#finalizar').click(function () {
         $(location).attr('href', 'Bienvenido.jsp');
@@ -1386,7 +1386,8 @@ function ValidarMAterial(material, pos) {
                 $('#tdUmedi' + pos).val("");
                 ShowMsg(10, "images/advertencia.PNG", "audio/saperror.wav", '', material, org, can);
             } else {
-                $('#tdDescr' + pos).val(data[1]);
+                CargartextoEmbarque(material, org, sec, pos);
+//                $('#tdDescr' + pos).val(data[1]);
                 $('#tdUmedi' + pos).val(data[2]);
                 $('#tdCanti' + pos).focus();
                 borramsg();
@@ -1509,6 +1510,7 @@ function CargartextoEmbarque(material, org, sec, pos) {
         success: function (data) {
             $('#textoposEmbaTemp' + pos).val(data);
             $('#textoEmbarq').val(data);
+            $('#tdDescr'+pos).val(data);
         }
     });
 
