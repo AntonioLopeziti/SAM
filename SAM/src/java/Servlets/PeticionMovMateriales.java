@@ -280,6 +280,27 @@ public class PeticionMovMateriales extends HttpServlet {
                         out.println(0 + ",VentanaModalLote,bxLote" + lote + ",");
                     }
                     break;
+                case "VentanaModalLoteE":
+                    ArrayList<stock> se = ACC_Stock.ObtenerInstancia().ConsultaInventariosEE(ctr, v1, v2, v3, v4, v5);
+                    if (se.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        for (int i = 0; i < se.size(); i++) {
+
+                            out.println("<tr ondblclick=\"seleccionar('" + se.get(i).getLote() + "', 'bxLote" + lote + "', 'VentanaModalLote')\">");
+                            out.println("<td>" + se.get(i).getMaterial() + "</td>");
+                            out.println("<td>" + se.get(i).getCentro() + "</td>");
+                            out.println("<td>" + se.get(i).getAlmacen() + "</td>");
+                            out.println("<td>" + se.get(i).getLote() + "</td>");
+                            out.println("<td>" + se.get(i).getStocklibre_utilizacion() + "</td>");
+                            out.println("</tr>");
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println(0 + ",VentanaModalLote,bxLote" + lote + ",");
+                    }
+                    break;
                 case "VentanaModalMaterial":
                     ArrayList<materiales> mm = ACC_Material.ObtenerInstancia().ConsultaMaterial(v1, v2, v3, v4);
                     if (mm.size() > 0) {
