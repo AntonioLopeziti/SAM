@@ -248,8 +248,8 @@ function validarCantidades() {
         BE.src = 'audio/saperror.wav';
         BE.play();
     } else if(parseInt(restante) == 0){
-        $('#cntBuena').focus();
-        $('#cntBuena').css('background-image', 'none');
+        $('#OrdFab').focus();
+        $('#OrdFab').css('background-image', 'none');
         $('#msg').html("Orden notificada");
         var icon = $('#iconmsg');
         icon.show();
@@ -638,6 +638,14 @@ function validarOrdenLib() {
                 $('#iconmsg').show();
                 $('#iconmsg').attr('src', 'images/advertencia.PNG');
                 $('#OrdFab').val("");
+                $('#cntBuena').val("");
+                $('#cntMala').val("");
+                $('#OrdFab').prop("disabled", false);
+                $('#cntBuena').prop("disabled", false);
+                $('#cntMala').prop("disabled", false);
+                $('#OrdFab').focus();
+                $('#cntBuena').css('background-image', 'url(images/necesario.PNG)');
+                $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
                 //$('#sectionMostOp').html("<select><option></option></select>");
             } else {
                 validarOrdFab();
@@ -1074,11 +1082,11 @@ function sujetoLote() {
 }
 function obtenerLote() {
     var mat = document.getElementsByName("btnShowLot");
-    var acc = "obtenerLote";
+    var acc;
 
     for (i = 1; i < mat.length; i++) {
-
-        var enviar = "&v1=" + $("#tdCtr" + i).text() + "&v2=" + $("#tdMat" + i).text() + "&acc=" + acc + "&v3=" + $("#bxcnt" + i).val();
+        acc = ($("#bxEE" + i).val() == "E") ? "obtenerLoteE" : "obtenerLote";
+        var enviar = "&v1=" + $("#tdCtr" + i).text() + "&v2=" + $("#tdMat" + i).text() + "&acc=" + acc + "&v3=" + $("#bxcnt" + i).val() + "&v4=" + $("#bxNped" + i).val() + "&v5=" + $("#bxNpos" + i).val();
         $.ajax({
             async: false,
             type: 'GET',
@@ -1217,7 +1225,7 @@ var posit = 0;
 function btnLoteMatch(pos) {
     posit = pos;
     mostrarVentana('VentanaModalLote');
-    peticiones('PeticionMovMateriales', 'cargarDatosLote', 'VentanaModalLote', 'Lote', '', pos);
+    peticiones('PeticionMovMateriales', 'cargarDatosLote', 'VentanaModalLote', 'Lote', '', pos, $("#bxEE" + pos).val());
     var theHandle = document.getElementById('handle6');
     var theRoot = document.getElementById('VentanaModalLote');
     Drag.init(theHandle, theRoot);
@@ -1250,17 +1258,24 @@ function abrirVentanaLote(ventana)
     ventana.style.display = 'block';
 }
 
-function peticiones(url, id, accion, f, lote, pos)
+function peticiones(url, id, accion, f, lote, pos, ee)
 {
     var centro = $("#tdCtr" + pos).text();
     var extras = "";
-    var v1;
-
-    switch (accion)
+    var v1, v2, v3;
+    var acc = accion + ee;
+    switch (acc)
     {
         case "VentanaModalLote":
             v1 = $("#tdMat" + pos).text();
             extras = "&v1=" + v1 + "&v2=101&v3=1400";
+
+            break;
+        case "VentanaModalLoteE":
+            v1 = $("#tdMat" + pos).text();
+            v2 = $("#bxNped" + pos).val();
+            v3 = $("#bxNpos" + pos).val();
+            extras = "&v1=" + v1 + "&v2=101&v3=1400&v4=" + v2 + "&v5=" + v3;
 
             break;
     }
@@ -1284,7 +1299,7 @@ function peticiones(url, id, accion, f, lote, pos)
             }
         }
     };
-    xmlhttp.open("GET", url + "?Action=" + accion + "&lang=" + lang + extras + "&lote=" + lote + "&ctr=" + centro, true);
+    xmlhttp.open("GET", url + "?Action=" + acc + "&lang=" + lang + extras + "&lote=" + lote + "&ctr=" + centro, true);
     xmlhttp.send();
 }
 //function fnc() {
@@ -1377,16 +1392,23 @@ function validacnt101() {
 
 }
 function validacnt261() {
-    var acc = "validaDatos261";
+    var accion = "validaDatos261";
     var lote = document.getElementsByName("bxlote");
     var cant = document.getElementsByName("bxcantidad");
     var mat = document.getElementsByName("tdMaterial");
     var centro = document.getElementsByName("tdCentro");
     var cl = document.getElementsByName("tdClaseM");
+    var ee = document.getElementsByName("bxinvEE");
+    var ped = document.getElementsByName("bxNped");
+    var pos = document.getElementsByName("bxNpos");
+    
+    var acc = "";
 
     for (i = 0; i < mat.length; i++) {
+        
+        acc = accion + ee[i].value;
         if (cl[i].textContent == "261" || cl[i].textContent == "531") {
-            var send = "&v2=" + cant[i].value + "&acc=" + acc + "&v3=" + mat[i].textContent + "&v4=" + lote[i].value + "&v1=" + centro[i].textContent;
+            var send = "&v2=" + cant[i].value + "&acc=" + acc + "&v3=" + mat[i].textContent + "&v4=" + lote[i].value + "&v1=" + centro[i].textContent + "&v5=" + ped[i].value + "&v6=" + pos[i].value;
             $.ajax({
                 async: false,
                 type: 'GET',
@@ -1513,6 +1535,11 @@ function guardaPos() {
     var cl = document.getElementsByName("tdClaseM");
     var um = document.getElementsByName("tdUnM");
     var lm = document.getElementsByName("bxlistaM");
+    var ancho = document.getElementsByName("bxancho");
+    
+    var ee = document.getElementsByName("bxinvEE");
+    var ped = document.getElementsByName("bxNped");
+    var pos = document.getElementsByName("bxNpos");
 
     var tabix = 0;
 
@@ -1521,7 +1548,7 @@ function guardaPos() {
 //        if (i == 0) {
         tabix = parseInt(i + 1);
 //        }
-        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + tabix + "&v3=" + mat[i].textContent + "&v4=" + cant[i].value + "&v5=" + um[i].textContent + "&v6=" + lote[i].value.toUpperCase() + "&v7=" + centro[i].textContent + "&v8=" + cl[i].textContent + "&v9=" + lm[i].value;
+        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + tabix + "&v3=" + mat[i].textContent + "&v4=" + cant[i].value + "&v5=" + um[i].textContent + "&v6=" + lote[i].value.toUpperCase() + "&v7=" + centro[i].textContent + "&v8=" + cl[i].textContent + "&v9=" + lm[i].value + "&v10=" + ee[i].value + "&v11=" + ped[i].value + "&v12=" + pos[i].value + "&v13=" + ancho[i].value;
         $.ajax({
             async: false,
             type: 'GET',
