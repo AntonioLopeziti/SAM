@@ -247,7 +247,7 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    } else if(parseInt(restante) == 0){
+    } else if (parseInt(restante) == 0) {
         $('#OrdFab').focus();
         $('#OrdFab').css('background-image', 'none');
         $('#msg').html("Orden notificada");
@@ -257,7 +257,7 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    }else {
+    } else {
         if ($('#checkCntExceso').prop('checked')) {
             validarDatos();
         } else {
@@ -1401,13 +1401,13 @@ function validacnt261() {
     var ee = document.getElementsByName("bxinvEE");
     var ped = document.getElementsByName("bxNped");
     var pos = document.getElementsByName("bxNpos");
-    
+
     var acc = "";
 
     for (i = 0; i < mat.length; i++) {
-        
+
         acc = accion + ee[i].value;
-        if (cl[i].textContent == "261" || cl[i].textContent == "531") {
+        if (cl[i].textContent == "261") {
             var send = "&v2=" + cant[i].value + "&acc=" + acc + "&v3=" + mat[i].textContent + "&v4=" + lote[i].value + "&v1=" + centro[i].textContent + "&v5=" + ped[i].value + "&v6=" + pos[i].value;
             $.ajax({
                 async: false,
@@ -1431,12 +1431,13 @@ function validacnt261() {
                         cant[i].value = "";
                         return;
                     } else {
-                        if (i == mat.length - 1) {
-                            guardaCabecera();
-                        }
+
                     }
                 }
             });
+        }
+        if (i == mat.length - 1) {
+            guardaCabecera();
         }
     }
 }
@@ -1536,7 +1537,7 @@ function guardaPos() {
     var um = document.getElementsByName("tdUnM");
     var lm = document.getElementsByName("bxlistaM");
     var ancho = document.getElementsByName("bxancho");
-    
+
     var ee = document.getElementsByName("bxinvEE");
     var ped = document.getElementsByName("bxNped");
     var pos = document.getElementsByName("bxNpos");
@@ -1610,4 +1611,7 @@ function Print_PT() {
             }
         });
     }
+}
+function motivoRechazo() {
+
 }
