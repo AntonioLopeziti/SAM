@@ -92,6 +92,9 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             String v8 = request.getParameter("v8");
             String v9 = request.getParameter("v9");
             String v10 = request.getParameter("v10");
+            String v11 = request.getParameter("v11");
+            String v12 = request.getParameter("v12");
+            String v13 = request.getParameter("v13");
             //Liberar Ordenes
             String operacion = request.getParameter("ope");
             String fecha = request.getParameter("fecha");
@@ -130,12 +133,19 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                         System.out.println(ccnt);
                     }
                     if (v8.equals("261")) {
-                        ccnt = ACC_Material.ObtenerInstancia().StockLibre(v3, v6, v7) - Double.parseDouble(v4);
-                        fmt = df.format(ccnt);
-                        ACC_Material.ObtenerInstancia().ActualizaInv261(v3, v6, v7, fmt);
-                        System.out.println(ccnt);
+                        if(v10.equals("E")){
+                            ccnt = ACC_Material.ObtenerInstancia().StockLibreEE(v3, v6, v7, v11, v12) - Double.parseDouble(v4);
+                            fmt = df.format(ccnt);
+                            ACC_Material.ObtenerInstancia().ActualizaInv261EE(v3, v6, v7, fmt, v11, v12);
+                            System.out.println(ccnt);
+                        }else{
+                            ccnt = ACC_Material.ObtenerInstancia().StockLibre(v3, v6, v7) - Double.parseDouble(v4);
+                            fmt = df.format(ccnt);
+                            ACC_Material.ObtenerInstancia().ActualizaInv261(v3, v6, v7, fmt);
+                            System.out.println(ccnt);
+                        }
                     }
-                    AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().PosicionInsertaMovNot(fll, v1, horaActual, fechaActual, v2, v3, v4, v5, v6, v7, v8, v9);
+                    AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().PosicionInsertaMovNot(fll, v1, horaActual, fechaActual, v2, v3, v4, v5, v6, v7, v8, v9, v10, v13);
                     break;
                 case "PonerCentro":
                     PlanPP cent = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerCntroOrden(ord);
@@ -355,7 +365,10 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                                 + "<td id=\"tddmt" + con + "\">" + tno.get(con).getTxt_material() + "</td>"
                                 + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" name=\"bxcantidad\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDecc(this.value, 3);ajustaCantidades(" + con + ");\" value=\"" + tno.get(con).getCantidad2() + "\">"
                                 + "<input hidden type=\"text\" id=\"bxcntT" + con + "\" name=\"bxcantidadT\" value=\"" + tno.get(con).getCantidad() + "\">"
-                                + "<input hidden type=\"text\" id=\"bxposM" + con + "\" name=\"bxlistaM\" value=\"" + tno.get(con).getPosListaM() + "\"></td>"
+                                + "<input hidden type=\"text\" id=\"bxposM" + con + "\" name=\"bxlistaM\" value=\"" + tno.get(con).getPosListaM() + "\">"
+                                + "<input hidden type=\"text\" id=\"bxEE" + con + "\" name=\"bxinvEE\" value=\"" + tno.get(con).getStock_especial() + "\">"
+                                + "<input hidden type=\"text\" id=\"bxNped" + con + "\" name=\"bxNped\" value=\"" + tno.get(con).getPedido() + "\">"
+                                + "<input hidden type=\"text\" id=\"bxNpos" + con + "\" name=\"bxNpos\" value=\"" + tno.get(con).getPosicion() + "\"></td>"
                                 + "<td name=\"tdUnM\" id=\"tdUM" + con + "\">" + tno.get(con).getUm() + "</td>"
                                 + "<td name=\"tdCentro\" id=\"tdCtr" + con + "\">" + tno.get(con).getCentro() + "</td>"
                                 + "<td>" + tno.get(con).getAlmacen() + "</td>"
@@ -412,6 +425,9 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                 case "obtenerLote":
                     out.println(ACC_Material.ObtenerInstancia().obtenerLote(v1, v2, v3));
                     break;
+                case "obtenerLoteE":
+                    out.println(ACC_Material.ObtenerInstancia().obtenerLoteE(v1, v2, v3, v4, v5));
+                    break;
                 case "validaDatos101":
                     int c = ACC_Material.ObtenerInstancia().validaCantidad101(v2, v1);
                     out.println(c);
@@ -421,6 +437,12 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     int e = ACC_Material.ObtenerInstancia().validalote261(v3, v4, v1);
 
                     out.println(t + "," + e);
+                    break;
+                case "validaDatos261E":
+                    int tnn = ACC_Material.ObtenerInstancia().validaCantidad261E(v3, v4, v1, v2, v5, v6);
+                    int enn = ACC_Material.ObtenerInstancia().validalote261E(v3, v4, v1, v5, v6);
+
+                    out.println(tnn + "," + enn);
                     break;
                 case "DatosOrdenCnt":
                     componentesPP pt = ACC_Material.ObtenerInstancia().Cantidades_PT(v1);
