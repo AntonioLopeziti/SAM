@@ -81,6 +81,35 @@ public class ACC_Material {
         }
         return "";
     }
+    public String obtenerLoteE(String centro, String material, String cantidad, String ped, String pos) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        double ccn;
+
+        String query = "{CALL PP.obtenerLoteEE_PP(?,?,?,?)}";
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, centro);
+            ps.setString(2, material);
+            ps.setString(3, ped);
+            ps.setString(4, pos);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ccn = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
+                if(Double.parseDouble(cantidad) <= ccn){
+                    return rs.getString("lote");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error obtenerLote(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return "";
+    }
 
     public int validaCantidad101(String cnt, String orden) {
         String exceso = "";
@@ -142,6 +171,34 @@ public class ACC_Material {
         }
         return cc;
     }
+    public double StockLibreEE(String material, String lote, String centro, String ped, String pos) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        double cc = 0.000;
+
+        String query = "{CALL PP.Notif_ConsultarCantidad261E(?,?,?,?,?)}";
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, ped);
+            ps.setString(5, pos);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cc = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error StockLibreEE(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return cc;
+    }
     public void ActualizaInv261(String material, String lote, String centro, String cnt) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -158,6 +215,28 @@ public class ACC_Material {
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Error ActualizaInv261(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
+    public void ActualizaInv261EE(String material, String lote, String centro, String cnt, String ped, String pos) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+
+        String query = "{CALL PP.ActualizaInv261E(?,?,?,?,?,?)}";
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, cnt);
+            ps.setString(5, ped);
+            ps.setString(6, pos);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error ActualizaInv261EE(), ACC_Material por " + e);
         } finally {
             cnx.CerrarConexion(con);
         }
@@ -214,6 +293,39 @@ public class ACC_Material {
         }
         return 0;
     }
+    public int validaCantidad261E(String material, String lote, String centro, String cnt, String ped, String pos) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        double cc = 0.000;
+
+        String query = "{CALL PP.Notif_ConsultarCantidad261E(?,?,?,?,?)}";
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, ped);
+            ps.setString(5, pos);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cc = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
+            }
+            if (Double.parseDouble(cnt) <= cc) {
+                return 1;
+            } else {
+                return 0;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error validaCantidad261E(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return 0;
+    }
     public int validalote261(String material, String lote, String centro) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -233,6 +345,32 @@ public class ACC_Material {
             }
         } catch (Exception e) {
             System.out.println("Error validalote261(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return 0;
+    }
+    public int validalote261E(String material, String lote, String centro, String ped, String pos) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+
+        String query = "{CALL PP.Notif_ConsultarCantidad261E(?,?,?,?,?)}";
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, ped);
+            ps.setString(5, pos);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return 1;
+            }
+        } catch (Exception e) {
+            System.out.println("Error validalote261E(), ACC_Material por " + e);
         } finally {
             cnx.CerrarConexion(con);
         }
