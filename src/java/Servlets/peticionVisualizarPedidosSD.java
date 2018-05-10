@@ -130,7 +130,7 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                                 out.println("<td>" + pos.get(n).getCantidad_pedido() + "</td>");
                                 out.println("<td>" + pos.get(n).getUnidad_medida_venta() + "</td>");
                                 out.println("<td><input type=\"checkbox\" disabled " + CheckR(pos.get(n).getExisten_repartos()) + "/></td>");
-                                out.println("<td>" + pos.get(n).getTexto_breve_posicion_pedido_cliente() + "</td>");
+//                                out.println("<td>" + pos.get(n).getTexto_breve_posicion_pedido_cliente() + "</td>");
                                 out.println("<td>" + pos.get(n).getNumero_material_cliente() + "</td>");
                                 out.println("<td>" + pos.get(n).getTipo_pos_doc_com() + "</td>");
                                 out.println("<td>" + pos.get(n).getPerfil_ind_merc_com() + "</td>");
@@ -141,13 +141,13 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                             }
                             for (int a = n; a < 9; a++) {
                                 out.println("<tr>");
-                                out.println("<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>");
+                                out.println("<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>");
                                 out.println("</tr>");
                             }
                         } else {
                             for (int k = 0; k < 9; k++) {
                                 out.println("<tr>");
-                                out.println("<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>");
+                                out.println("<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>");
                                 out.println("</tr>");
                             }
                         }
@@ -156,11 +156,11 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                     if (TipoCon.equals("0")) {
                         for (int k = 0; k < 9; k++) {
                             out.println("<tr>");
-                            out.println("<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>");
+                            out.println("<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>");
                             out.println("</tr>");
                         }
                     }
-                    out.println("<tr class=\"ocultar\"><td>00</td><td>000000</td><td>00000000000</td><td>00000000000000</td><td>0000</td><td>000</td><td>0000000000000000000000</td><td>0000000000000000000000</td><td>0000000</td><td>0000000000000</td><td>00000000</td><td>00000000000000000</td><td>00000000000000</td></tr>");
+                    out.println(" <tr class=\"ocultar\"><td>00</td><td>0000000</td><td>000000000000</td><td>00000000000000000</td><td>00000</td><td>000</td><td>0000000000000000000000</td><td>00000000</td><td>0000000000000</td><td>00000000</td><td>00000000000000000</td><td>0000000000000000</td></tr>");
                     out.println("</tbody>");
                     out.println("</table>");
                     break;
