@@ -441,8 +441,8 @@
             <div id="handleTxtPos"><label id="TituloMatch">Texto Posioion</label><div class="BotonCerrar_Matc" id="cerrarmodaTxtPos"><label >X</label></div></div>
             <div class="Selectdatatextpos">
                 <select id="SelectTipoTexto">
-                    <option value="0" selected="selected">Texto ventas Materiales</option>
-                    <option value="1">Instrucciones de embarque</option>
+                    <option value="1" selected="selected">Instrucciones de embarque</option>
+                    <option value="0">Texto ventas Materiales</option>
                 </select>
             </div>
             <div class="Contenttextopos" id="textoEmbarqu"><textarea style="resize: none;" id="textoPos" ></textarea></div>
