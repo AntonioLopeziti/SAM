@@ -653,8 +653,8 @@
             .logoimage{
                 margin-bottom: 10%;
                 margin-top: 120px;
-                width: 40%;
-                margin-left: 30%;
+                width: 28%;
+                margin-left: 38%;
                 margin-right: 10%;
             }
 
