@@ -27,6 +27,33 @@ public class componentesPP {
     String posListaM = "";
     String ancho = "";
     String disabled = "";
+    String stock_especial = "";
+    String pedido = "";
+    String posicion = "";
+
+    public String getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(String pedido) {
+        this.pedido = pedido;
+    }
+
+    public String getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(String posicion) {
+        this.posicion = posicion;
+    }
+
+    public String getStock_especial() {
+        return stock_especial;
+    }
+
+    public void setStock_especial(String stock_especial) {
+        this.stock_especial = stock_especial;
+    }
 
     public String getDisabled() {
         return disabled;
