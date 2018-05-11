@@ -361,91 +361,135 @@
     <script>
         function test() {
             var key = "";
-            key = key + getPermission("conf");                         //// 0
-            key = key + getPermission("conf_user");                    //// 1
-            key = key + getPermission("conf_userCrear");               //// 2
-            key = key + getPermission("conf_userModif");               //// 3
-            key = key + getPermission("conf_userVisual");              //// 4
-            key = key + getPermission("conf_fol");                     //// 5
-            key = key + getPermission("conf_folCrear");                //// 6
-            key = key + getPermission("conf_folModif");                //// 7
-            key = key + getPermission("conf_folVisual");               //// 8
-            key = key + getPermission("conf_repo");                    //// 9
-            key = key + getPermission("conf_repoSAM");                 //// 10
-            key = key + getPermission("gestMat");                      //// 11
-            key = key + getPermission("gestMat_org");                  //// 12
-            key = key + getPermission("gestMat_orgCen");               //// 13
-            key = key + getPermission("gestMat_orgAlmXc");             //// 14
-            key = key + getPermission("gestMat_datM");                 //// 15
-            key = key + getPermission("gestMat_datMmat");              //// 16
-            key = key + getPermission("gestMat_datMmatCrear");         //// 17
-            key = key + getPermission("gestMat_datMmatMod");           //// 18
-            key = key + getPermission("gestMat_datMmatVis");           //// 19
-            key = key + getPermission("gestMat_datMCC");               //// 20
-            key = key + getPermission("gestMat_datMCC_VisP");          //// 21
-            key = key + getPermission("gestMat_datMCC_VisInR");        //// 22
-            key = key + getPermission("gestMat_datMC");                //// 23
-            key = key + getPermission("gestMat_datMC_VisC");           //// 24
-            key = key + getPermission("gestMat_C");                    //// 25
-            key = key + getPermission("gestMat_CSC");                  //// 26
-            key = key + getPermission("gestMat_CSC_Cr");               //// 27
-            key = key + getPermission("gestMat_CSC_Mod");              //// 28
-            key = key + getPermission("gestMat_CSC_Vis");              //// 29
-            key = key + getPermission("gestMat_CSC_listas");           //// 30
-            key = key + getPermission("gestMat_CPD");                  //// 31
-            key = key + getPermission("gestMat_CPD_Vis");              //// 32
-            key = key + getPermission("gestMat_GS");                   //// 33
-            key = key + getPermission("gestMat_GSDoc");                //// 34
-            key = key + getPermission("gestMat_GSDoc_Vis");            //// 35
-            key = key + getPermission("gestMat_GSDoc_LstMov");         //// 36
-            key = key + getPermission("gestMat_GSMov");                //// 37
-            key = key + getPermission("gestMat_GSMov_MovM");           //// 38
-            key = key + getPermission("gestMat_GSMov_Rese");           //// 39
-            key = key + getPermission("gestMat_GSMov_ReseCr");         //// 40
-            key = key + getPermission("gestMat_GSMov_ReseMo");         //// 41
-            key = key + getPermission("gestMat_GSMov_ReseVi");         //// 42
-            key = key + getPermission("gestMat_GSMov_ReseLis");        //// 43
-            key = key + getPermission("gestMat_GSMov_EntSer");         //// 44
-            key = key + getPermission("gestMat_GSStockM");             //// 45
-            key = key + getPermission("gestMant");                     //// 46
-            key = key + getPermission("gestMant_DM");                  //// 47
-            key = key + getPermission("gestMant_DMUbi");               //// 48
-            key = key + getPermission("gestMant_DMUbi_Cre");           //// 49
-            key = key + getPermission("gestMant_DMUbi_Mod");           //// 50
-            key = key + getPermission("gestMant_DMUbi_Vis");           //// 51
-            key = key + getPermission("gestMant_DMEqui");              //// 52
-            key = key + getPermission("gestMant_DMEqui_Cre");          //// 53
-            key = key + getPermission("gestMant_DMEqui_Mod");          //// 54
-            key = key + getPermission("gestMant_DMEqui_Vis");          //// 55
-            key = key + getPermission("gestMant_DMBom");               //// 56
-            key = key + getPermission("gestMant_DMBom_Crea");          //// 57
-            key = key + getPermission("gestMant_DMBom_Mod");           //// 58
-            key = key + getPermission("gestMant_DMBom_Vis");           //// 59
-            key = key + getPermission("gestMant_DMHrut");              //// 60
-            key = key + getPermission("gestMant_DMHrut_Cra");          //// 61
-            key = key + getPermission("gestMant_DMHrut_Mod");          //// 62
-            key = key + getPermission("gestMant_DMHrut_Vis");          //// 63
-            key = key + getPermission("gestMant_ME");                  //// 64
-            key = key + getPermission("gestMant_ME_MCPxE");            //// 65
-            key = key + getPermission("gestMant_APM");                 //// 66
-            key = key + getPermission("gestMant_APM_MAPM");            //// 67
-            key = key + getPermission("gestMant_APM_Cre");             //// 68
-            key = key + getPermission("gestMant_APM_Mod");             //// 69
-            key = key + getPermission("gestMant_APM_Vis");             //// 70
-            key = key + getPermission("gestMant_OPM");                 //// 71
-            key = key + getPermission("gestMant_OPM_Cre");             //// 72
-            key = key + getPermission("gestMant_OPM_Mod");             //// 73
-            key = key + getPermission("gestMant_OPM_Vis");             //// 74
-            key = key + getPermission("gestMant_OPM_LstO");            //// 75
-            key = key + getPermission("gestMant_NPM");                 //// 76
-            key = key + getPermission("gestMant_NPM_Cre");             //// 77
-            key = key + getPermission("gestMant_NPM_Vis");             //// 78
-            key = key + getPermission("gestCali");                     //// 79
-            key = key + getPermission("gestCali_PIM");                 //// 80
-            key = key + getPermission("gestCaliAvi_PIM");              //// 81
-            key = key + getPermission("gestCalLLIPM_PIM");             //// 82
-            key = key + getPermission("gestDocu");                     //// 83
-            key = key + getPermission("gestDocu_VisDoc");              //// 84
+            key = key + getPermission("conf"); //  0 Configuracion
+            key = key + getPermission("conf_user"); ////  1  Configuracion - Usuario
+            key = key + getPermission("conf_userCrear"); // 2 Configuracion - Usuario - Crear
+            key = key + getPermission("conf_userModif"); // 3 Configuracion - Usuario - Modificar
+            key = key + getPermission("conf_userVisual"); // 4 Configuracion -  Usuario - Visualizar
+            key = key + getPermission("conf_fol"); // 5 Configuracion - Folios 
+            key = key + getPermission("conf_folCrear"); // 6 Configuracion - Folios - Crear
+            key = key + getPermission("conf_folModif"); // 7 Configuracion Folio - Modificar
+            key = key + getPermission("conf_folVisual"); // 8 Configuracion Folio - Visualizar
+            key = key + getPermission("conf_repo"); // 9 Reportes
+            key = key + getPermission("conf_repoSAM"); // 10 Reportes SAM
+            key = key + getPermission("gestMat"); // 11 G. Materiales
+            key = key + getPermission("gestMat_org"); // 12 G. Materiales - Organizacion
+            key = key + getPermission("gestMat_orgCen"); // 13 G. Materiales - Organizacion - Centro
+            key = key + getPermission("gestMat_orgAlmXc"); // 14 G. Materiales - Organizacion - Alm x centro
+            key = key + getPermission("gestMat_datM"); // 15 G. Materiales - Datos Maestros
+            key = key + getPermission("gestMat_datMmat"); // 16 G. Materiales - Datos Maestros - Materiales
+            key = key + getPermission("gestMat_datMmatCrear"); // 17 G. Materiales - Datos Maestros - Materiales - Crear
+            key = key + getPermission("gestMat_datMmatMod"); // 18 G. Materiales - Datos Maestros - Materiales - Modificar
+            key = key + getPermission("gestMat_datMmatVis"); // 19 G. Materiales - Datos Maestros - Materiales - Visualizar
+            key = key + getPermission("gestMat_datMCC"); // 20 G. Materiales - Datos Maestros - Cat. Compras 
+            key = key + getPermission("gestMat_datMCC_Prov"); // 21 G. Materiales - Datos Maestros - Cat. Compras - Proveedor
+            key = key + getPermission("gestMat_datMCC_Prov_cre"); // 22 G. Materiales - Datos Maestros - Cat. Compras - Proveedor - Crear
+            key = key + getPermission("gestMat_datMCC_Prov_mod"); // 23 G. Materiales - Datos Maestros - Cat. Compras - Proveedor - Modificar
+            key = key + getPermission("gestMat_datMCC_Prov_vis"); // 24 G. Materiales - Datos Maestros - Cat. Compras - Proveedor - Visualizar
+            key = key + getPermission("gestMat_datMCC_InfoRec"); // 25 G. Materiales - Datos Maestros - Cat. Compras - Inforecord
+            key = key + getPermission("gestMat_datMCC_InfoRec_cre"); // 26 G. Materiales - Datos Maestros - Cat. Compras - Inforecord - Crea
+            key = key + getPermission("gestMat_datMCC_InfoRec_mod"); // 27 G. Materiales - Datos Maestros - Cat. Compras - Inforecord - Modifica
+            key = key + getPermission("gestMat_datMCC_InfoRec_vis"); // 28 G. Materiales - Datos Maestros - Cat. Compras - Inforecord - Visualiza
+            key = key + getPermission("gestMat_datMCC_Clie"); // 29 G. Materiales - Datos Maestros - Cat. Compras - Clientes 
+            key = key + getPermission("gestMat_datMCC_Clie_cre"); // 30 G. Materiales - Datos Maestros - Cat. Compras - Clientes - Crea
+            key = key + getPermission("gestMat_datMCC_Clie_mod"); // 31 G. Materiales - Datos Maestros - Cat. Compras - Clientes - Modifica
+            key = key + getPermission("gestMat_datMCC_Clie_vis"); // 32 G. Materiales - Datos Maestros - Cat. Compras - Clientes - Visualiza
+            key = key + getPermission("gestMat_Comp"); // 33 G. Materiales - Compras
+            key = key + getPermission("gestMat_Comp_SC"); // 34 G. Materiales - Compras - Solicitud Compras
+            key = key + getPermission("gestMat_Comp_SC_cre"); // 35 G. Materiales - Compras - Solicitud Compras
+            key = key + getPermission("gestMat_Comp_SC_mod"); // 36 G. Materiales - Compras - Solicitud Compras - Crear
+            key = key + getPermission("gestMat_Comp_SC_vis"); // 37 G. Materiales - Compras - Solicitud Compras - Modificar
+            key = key + getPermission("gestMat_Comp_SC_lisSol"); // 38 G. Materiales - Compras - Solicitud Compras - Visualizar
+            key = key + getPermission("gestMat_Comp_PC"); // 39 G. Materiales - Compras - Pedidos de compra
+            key = key + getPermission("gestMat_Comp_PC_vis"); // 40 G. Materiales - Compras - Pedidos de compra - Visualizar
+            key = key + getPermission("gestMat_GesStk"); // 41 G. Materiales - G. Stock
+            key = key + getPermission("gestMat_GesStk_DocMat"); // 42 G. Materiales - G. Stock - Doc Material
+            key = key + getPermission("gestMat_GesStk_DocMat_VisDocMar"); // 43 G. Materiales - G. Stock - Doc Material - Visualizar Doc Mat
+            key = key + getPermission("gestMat_GesStk_DocMat_ListMov"); // 44 G. Materiales - G. Stock - Doc Material - Listas Mov
+            key = key + getPermission("gestMat_GesStk_Movim"); // 45 G. Materiales - G. Stock - Movimientos
+            key = key + getPermission("gestMat_GesStk_Movim_MovMat"); // 46 G. Materiales - G. Stock - Movimientos - Movimientos Materiales
+            key = key + getPermission("gestMat_GesStk_Movim_Reser"); // 47 G. Materiales - G. Stock - Movimientos - Reservas
+            key = key + getPermission("gestMat_GesStk_Movim_Reser_cre"); // 48 G. Materiales - G. Stock - Movimientos - Reservas - Crear
+            key = key + getPermission("gestMat_GesStk_Movim_Reser_mod"); // 49 G. Materiales - G. Stock - Movimientos - Reservas - Modificar
+            key = key + getPermission("gestMat_GesStk_Movim_Reser_vis"); // 50 G. Materiales - G. Stock - Movimientos - Reservas - Visualizar
+            key = key + getPermission("gestMat_GesStk_Movim_Reser_LisRes"); // 51 G. Materiales - G. Stock - Movimientos - Reservas - Listas de reservas
+            key = key + getPermission("gestMat_GesStk_Movim_EntSer"); // 52 G. Materiales - G. Stock - Movimientos - Entradas de Servicio
+            key = key + getPermission("gestMat_GesStk_StkMat"); // 53 G. Materiales - G. Stock - Stock Material
+            key = key + getPermission("gestCom"); // 54 G. Comercial
+            key = key + getPermission("gestCom_Cot"); // 55 G. Comercial - Cotizacion
+            key = key + getPermission("gestCom_Cot_cre"); // 56 G. Comercial - Cotizacion - Crear
+            key = key + getPermission("gestCom_Cot_mod"); // 57 G. Comercial - Cotizacion - Modificar
+            key = key + getPermission("gestCom_Cot_vis"); // 58 G. Comercial - Cotizacion - Visualizar
+            key = key + getPermission("gestCom_Ped"); // 59 G. Comercial - Pedidos
+            key = key + getPermission("gestCom_Ped_cre"); // 60 G. Comercial - Pedidos - Crear
+            key = key + getPermission("gestCom_Ped_mod"); // 61 G. Comercial - Pedidos - Modificar
+            key = key + getPermission("gestCom_Ped_vis"); // 62 G. Comercial - Pedidos - Visualizar
+            key = key + getPermission("gestMant"); // 63 G. Mantenimiento
+            key = key + getPermission("gestMant_DM"); // 64 G. Mantenimiento - Datos Maestros
+            key = key + getPermission("gestMant_DM_UbiTec"); // 65 G. Mantenimiento - Datos Maestros - Ubicaciones tecnicas
+            key = key + getPermission("gestMant_DM_UbiTec_cre"); // 66 G. Mantenimiento - Datos Maestros - Ubicaciones tecnicas - Crear
+            key = key + getPermission("gestMant_DM_UbiTec_mod"); // 67 G. Mantenimiento - Datos Maestros - Ubicaciones tecnicas - Modificar
+            key = key + getPermission("gestMant_DM_UbiTec_vis"); // 68 G. Mantenimiento - Datos Maestros - Ubicaciones tecnicas - Visualizar
+            key = key + getPermission("gestMant_DM_Equi"); // 69 G. Mantenimiento - Datos Maestros - Equipos
+            key = key + getPermission("gestMant_DM_Equi_cre"); // 70 G. Mantenimiento - Datos Maestros - Equipos - Crear
+            key = key + getPermission("gestMant_DM_Equi_mod"); // 71 G. Mantenimiento - Datos Maestros - Equipos - Modificar
+            key = key + getPermission("gestMant_DM_Equi_vis"); // 72 G. Mantenimiento - Datos Maestros - Equipos - Visualizar
+            key = key + getPermission("gestMant_DM_LisMat"); // 73 G. Mantenimiento - Datos Maestros - lista Materiales
+            key = key + getPermission("gestMant_DM_LisMat_cre"); // 74 G. Mantenimiento - Datos Maestros - lista Materiales - Crear
+            key = key + getPermission("gestMant_DM_LisMat_mod"); // 75 G. Mantenimiento - Datos Maestros - lista Materiales - Modificar
+            key = key + getPermission("gestMant_DM_LisMat_vis"); // 76 G. Mantenimiento - Datos Maestros - lista Materiales - Visualizar
+            key = key + getPermission("gestMant_DM_HR"); // 77 G. Mantenimiento - Datos Maestros - Hojas de ruta
+            key = key + getPermission("gestMant_DM_HR_cre"); // 78 G. Mantenimiento - Datos Maestros - Hojas de ruta - Crear
+            key = key + getPermission("gestMant_DM_HR_mod"); // 79 G. Mantenimiento - Datos Maestros - Hojas de ruta - Modificar
+            key = key + getPermission("gestMant_DM_HR_vis"); // 80 G. Mantenimiento - Datos Maestros - Hojas de ruta - Visualizar
+            key = key + getPermission("gestMant_MonEq"); // 81 G. Mantenimiento - Monitor Equipos
+            key = key + getPermission("gestMant_MonEq_MonSta"); // 82 G. Mantenimiento - Monitor Equipos - Monitor Status
+            key = key + getPermission("gestMant_Avi"); // 83 G. Mantenimiento - Avisos
+            key = key + getPermission("gestMant_Avi_MonAv"); // 84 G. Mantenimiento - Avisos - Monito Avisos
+            key = key + getPermission("gestMant_Avi_cre"); // 85 G. Mantenimiento - Avisos - Crear
+            key = key + getPermission("gestMant_Avi_mod"); // 86 G. Mantenimiento - Avisos - Modificar
+            key = key + getPermission("gestMant_Avi_vis"); // 87 G. Mantenimiento - Avisos - Visualizar
+            key = key + getPermission("gestMant_Ord"); // // 88 G. Mantenimiento - Ordenes
+            key = key + getPermission("gestMant_Ord_cre"); // 89 G. Mantenimiento - Ordenes - Crear
+            key = key + getPermission("gestMant_Ord_mod"); // 90 G. Mantenimiento - Ordenes - Modificar
+            key = key + getPermission("gestMant_Ord_vis"); // 91 G. Mantenimiento - Ordenes - Visualizar
+            key = key + getPermission("gestMant_Ord_lisOr"); // 92 G. Mantenimiento - Ordenes - Lista Ordenes
+            key = key + getPermission("gestMant_Not"); // 93 G. Mantenimiento - Notificaciones
+            key = key + getPermission("gestMant_Not_Cre"); // 94 G. Mantenimiento - Notificaciones - Crear
+            key = key + getPermission("gestMant_Not_Vis"); // 95 G. Mantenimiento - Notificaciones - Visualizar
+            key = key + getPermission("gestCali"); // 96 G. Calidad
+            key = key + getPermission("gestCali_PlanInp"); // 97 G. Calidad - Plan de inspeccion 
+            key = key + getPermission("gestCali_MedAvi"); // 98 G. Calidad - Medidas Avisos
+            key = key + getPermission("gestCali_LisLotInp"); // 99 G. Calidad - Listas Lotes Inspeccion
+            key = key + getPermission("gestDocu"); // 100 G. Documentos
+            key = key + getPermission("gestDocu_VisDoc"); // 101 G. Documentos - Visualizar Documentos
+            key = key + getPermission("gestProd"); // 102 G. Produccion
+            key = key + getPermission("gestProd_DM"); // 103 G. Produccion - Datos maestros
+            key = key + getPermission("gestProd_DM_Mat"); // 104 G. Produccion - Datos maestros - Materiales
+            key = key + getPermission("gestProd_DM_Mat_cre"); // 105 G. Produccion - Datos maestros - Materiales -Crea
+            key = key + getPermission("gestProd_DM_Mat_mod"); // 106 G. Produccion - Datos maestros - Materiales - Modifica
+            key = key + getPermission("gestProd_DM_Mat_vis"); // 107 G. Produccion - Datos maestros - Materiales - Visualizar
+            key = key + getPermission("gestProd_DM_LM"); // 108 G. Produccion - Datos maestros - Lista Materiales
+            key = key + getPermission("gestProd_DM_LM_cre"); // 109 G. Produccion - Datos maestros - Lista Materiales - Crea
+            key = key + getPermission("gestProd_DM_LM_mod"); // 110 G. Produccion - Datos maestros - Lista Materiales - Modifica
+            key = key + getPermission("gestProd_DM_LM_vis"); // 111 G. Produccion - Datos maestros - Lista Materiales - Visualiza
+            key = key + getPermission("gestProd_DM_HR"); // 112 G. Produccion - Datos maestros - Hojas de ruta
+            key = key + getPermission("gestProd_DM_HR_cre"); // 113 G. Produccion - Datos maestros - Hojas de ruta - Crea
+            key = key + getPermission("gestProd_DM_HR_mod"); // 114 G. Produccion - Datos maestros - Hojas de ruta - Modifica
+            key = key + getPermission("gestProd_DM_HR_vis"); // 115 G. Produccion - Datos maestros - Hojas de ruta - Visualiza
+            key = key + getPermission("gestProd_NotTi"); // 116 G. Produccion - Notifica Tiempos
+            key = key + getPermission("gestProd_NotTi_MonPP"); // 117 G. Produccion - Notifica Tiempos - Monitor PP
+            key = key + getPermission("gestProd_NotTi_NotTi"); // 118 G. Produccion - Notifica Tiempos - Notificar tiempos
+            key = key + getPermission("gestProd_NotTi_RepBot"); // 119 G. Produccion - Notifica Tiempos - Reporte Notificaciones
+            key = key + getPermission("gestProd_NotTi_RepStat"); // 120 G. Produccion - Notifica Tiempos - Reporte Estatus
+            key = key + getPermission("gestProd_OrdPP"); // 121 G. Produccion - Ordenes PP
+            key = key + getPermission("gestProd_OrdPP_cre"); // 122 G. Produccion - Ordenes PP - Crear
+            key = key + getPermission("gestProd_OrdPP_mod"); // 123 G. Produccion - Ordenes PP - Modificar
+            key = key + getPermission("gestProd_OrdPP_vis"); // 124 G. Produccion - Ordenes PP - Visualizar
+            key = key + getPermission("gestProd_OrdPP_LisOPP"); // 125 G. Produccion - Ordenes PP - Listas de Ordenes PP
+            key = key + getPermission("gestProd_NotPP"); // 126 G. Produccion - Notificaciones PP
+            key = key + getPermission("gestProd_NotPP_cre"); // 127 G. Produccion - Notificaciones PP - Crear
+            key = key + getPermission("gestProd_NotPP_vis"); // 128 G. Produccion - Notificaciones PP - Visualizar                    
             return key;
         }
 
@@ -466,7 +510,7 @@
         }
 
         var treeData = [
-            {title: '<%=menu_m%>', key: "menu", expand: true,
+            {title: '<%=menu_m%>', key: "menu", expand: true, select: true,
                 children: [
                     {title: '<%=conf_m%>', key: "conf", expand: true,
                         children: [
@@ -487,8 +531,7 @@
                                     {title: '<%=reposam_m%>', key: "conf_repoSAM"}
                                 ]},
                             {title: '<%=centr_m%>', key: "gestMat_orgCen"}
-                        ]
-                    },
+                        ]},
                     {title: '<%=gestMat_m%>', key: "gestMat", expand: true,
                         children: [
                             {title: '<%=organi_m%>', key: "gestMat_org", expand: true,
@@ -502,132 +545,195 @@
                                             {title: '<%=CreaMat_m%>', key: "gestMat_datMmatCrear"},
                                             {title: '<%=ModMat_m%>', key: "gestMat_datMmatMod"},
                                             {title: '<%=VisMat_m%>', key: "gestMat_datMmatVis"}
-                                        ]
-                                    },
+                                        ]},
                                     {title: '<%=CatCom_m%>', key: "gestMat_datMCC", expand: true,
                                         children: [
-                                            {title: '<%=provee_m%>', key: "gestMat_datMCC_VisP"},
-                                            {title: '<%=infore_m%>', key: "gestMat_datMCC_VisInR"}
-                                        ]
-                                    },
-                                    {title: '<%=Clien_m%>', key: "gestMat_datMC", expand: true,
-                                        children: [
-                                            {title: '<%=VisuCl_m%>', key: "gestMat_datMC_VisC"}
-                                        ]
-                                    }
-                                ]},
-                            {title: '<%=Compr_m%>', key: "gestMat_C", expand: true,
-                                children: [
-                                    {title: '<%=ComSP%>', key: "gestMat_CSC", expand: true,
-                                        children: [
-                                            {title: '<%=crear_m%>', key: "gestMat_CSC_Cr"},
-                                            {title: '<%=modif_m%>', key: "gestMat_CSC_Mod"},
-                                            {title: '<%=visua_m%>', key: "gestMat_CSC_Vis"},
-                                            {title: '<%=listasolp%>', key: "gestMat_CSC_listas"}
-                                        ]
-                                    },
-                                    {title: '<%=PedCom%>', key: "gestMat_CPD", expand: true,
-                                        children: [
-                                            {title: '<%=VisuPe_m%>', key: "gestMat_CPD_Vis"}
-                                        ]
-                                    }
-                                ]},
-                            {title: '<%=GestSt_m%>', key: "gestMat_GS", expand: true,
-                                children: [
-                                    {title: '<%=DocMat_m%>', key: "gestMat_GSDoc", expand: true,
-                                        children: [
-                                            {title: '<%=DocMatV_m%>', key: "gestMat_GSDoc_Vis"},
-                                            {title: '<%=LiMovMat_m%>', key: "gestMat_GSDoc_LstMov"}
-                                        ]
-                                    },
-                                    {title: '<%=movimi_m%>', key: "gestMat_GSMov", expand: true,
-                                        children: [
-                                            {title: '<%=MovMat_m%>', key: "gestMat_GSMov_MovM"},
-                                            {title: '<%=MovRes_m%>', key: "gestMat_GSMov_Rese", expand: true,
+                                            {title: 'Proveedor', key: "gestMat_datMCC_Prov", expand: true,
                                                 children: [
-                                                    {title: '<%=crear_m%>', key: "gestMat_GSMov_ReseCr"},
-                                                    {title: '<%=modif_m%>', key: "gestMat_GSMov_ReseMo"},
-                                                    {title: '<%=visua_m%>', key: "gestMat_GSMov_ReseVi"},
-                                                    {title: '<%=ListaRes%>', key: "gestMat_GSMov_ReseLis"}
+                                                    {title: '<%=crear_m%>', key: "gestMat_datMCC_Prov_cre"},
+                                                    {title: '<%=modif_m%>', key: "gestMat_datMCC_Prov_mod"},
+                                                    {title: '<%=visua_m%>', key: "gestMat_datMCC_Prov_vis"}
+                                                ]},
+                                            {title: 'InfoRecord', key: "gestMat_datMCC_InfoRec", expand: true,
+                                                children: [
+                                                    {title: '<%=crear_m%>', key: "gestMat_datMCC_InfoRec_cre"},
+                                                    {title: '<%=modif_m%>', key: "gestMat_datMCC_InfoRec_mod"},
+                                                    {title: '<%=visua_m%>', key: "gestMat_datMCC_InfoRec_vis"}
+                                                ]},
+                                            {title: '<%=Clien_m%>', key: "gestMat_datMCC_Clie", expand: true,
+                                                children: [
+                                                    {title: '<%=crear_m%>', key: "gestMat_datMCC_Clie_cre"},
+                                                    {title: '<%=modif_m%>', key: "gestMat_datMCC_Clie_mod"},
+                                                    {title: '<%=visua_m%>', key: "gestMat_datMCC_Clie_vis"}
+                                                ]}
+                                        ]}
+                                ]},
+                            {title: '<%=Compr_m%>', key: "gestMat_Comp", expand: true,
+                                children: [
+                                    {title: '<%=ComSP%>', key: "gestMat_Comp_SC", expand: true,
+                                        children: [
+                                            {title: '<%=crear_m%>', key: "gestMat_Comp_SC_cre"},
+                                            {title: '<%=modif_m%>', key: "gestMat_Comp_SC_mod"},
+                                            {title: '<%=visua_m%>', key: "gestMat_Comp_SC_vis"},
+                                            {title: '<%=listasolp%>', key: "gestMat_Comp_SC_lisSol"}
+                                        ]
+                                    },
+                                    {title: '<%=PedCom%>', key: "gestMat_Comp_PC", expand: true,
+                                        children: [
+                                            {title: '<%=VisuPe_m%>', key: "gestMat_Comp_PC_vis"}
+                                        ]
+                                    }
+                                ]},
+                            {title: '<%=GestSt_m%>', key: "gestMat_GesStk", expand: true,
+                                children: [
+                                    {title: '<%=DocMat_m%>', key: "gestMat_GesStk_DocMat", expand: true,
+                                        children: [
+                                            {title: '<%=DocMatV_m%>', key: "gestMat_GesStk_DocMat_VisDocMar"},
+                                            {title: '<%=LiMovMat_m%>', key: "gestMat_GesStk_DocMat_ListMov"}
+                                        ]
+                                    },
+                                    {title: '<%=movimi_m%>', key: "gestMat_GesStk_Movim", expand: true,
+                                        children: [
+                                            {title: '<%=MovMat_m%>', key: "gestMat_GesStk_Movim_MovMat"},
+                                            {title: '<%=MovRes_m%>', key: "gestMat_GesStk_Movim_Reser", expand: true,
+                                                children: [
+                                                    {title: '<%=crear_m%>', key: "gestMat_GesStk_Movim_Reser_cre"},
+                                                    {title: '<%=modif_m%>', key: "gestMat_GesStk_Movim_Reser_mod"},
+                                                    {title: '<%=visua_m%>', key: "gestMat_GesStk_Movim_Reser_vis"},
+                                                    {title: '<%=ListaRes%>', key: "gestMat_GesStk_Movim_Reser_LisRes"}
                                                 ]
                                             },
-                                            {title: '<%=MovEntSer_m%>', key: "gestMat_GSMov_EntSer"}
+                                            {title: '<%=MovEntSer_m%>', key: "gestMat_GesStk_Movim_EntSer"}
                                         ]
                                     },
-                                    {title: '<%=StkMov_m%>', key: "gestMat_GSStockM"}
-                                ]
-                            }
+                                    {title: '<%=StkMov_m%>', key: "gestMat_GesStk_StkMat"}
+                                ]}
+                        ]},
+                    {title: 'Gest.Comercial', key: "gestCom", expand: true,
+                        children: [
+                            {title: 'Cotizacion', key: "gestCom_Cot", expand: true,
+                                children: [
+                                    {title: '<%=crear_m%>', key: "gestCom_Cot_cre"},
+                                    {title: '<%=modif_m%>', key: "gestCom_Cot_mod"},
+                                    {title: '<%=visua_m%>', key: "gestCom_Cot_vis"}
+                                ]},
+                            {title: 'Pedidos', key: "gestCom_Ped", expand: true,
+                                children: [
+                                    {title: '<%=crear_m%>', key: "gestCom_Ped_cre"},
+                                    {title: '<%=modif_m%>', key: "gestCom_Ped_mod"},
+                                    {title: '<%=visua_m%>', key: "gestCom_Ped_vis"}
+                                ]}
                         ]},
                     {title: '<%=GesMan_m%>', key: "gestMant", expand: true,
                         children: [
                             {title: '<%=GesMaDM_m%>', key: "gestMant_DM", expand: true,
                                 children: [
-                                    {title: '<%=ubicac_m%>', key: "gestMant_DMUbi", expand: true,
+                                    {title: '<%=ubicac_m%>', key: "gestMant_DM_UbiTec", expand: true,
                                         children: [
-                                            {title: '<%=crear_m%>', key: "gestMant_DMUbi_Cre"},
-                                            {title: '<%=modif_m%>', key: "gestMant_DMUbi_Mod"},
-                                            {title: '<%=visua_m%>', key: "gestMant_DMUbi_Vis"}
+                                            {title: '<%=crear_m%>', key: "gestMant_DM_UbiTec_cre"},
+                                            {title: '<%=modif_m%>', key: "gestMant_DM_UbiTec_mod"},
+                                            {title: '<%=visua_m%>', key: "gestMant_DM_UbiTec_vis"}
+                                        ]},
+                                    {title: '<%=equip_m%>', key: "gestMant_DM_Equi", expand: true,
+                                        children: [
+                                            {title: '<%=crear_m%>', key: "gestMant_DM_Equi_cre"},
+                                            {title: '<%=modif_m%>', key: "gestMant_DM_Equi_mod"},
+                                            {title: '<%=visua_m%>', key: "gestMant_DM_Equi_vis"}
+                                        ]},
+                                    {title: '<%=bommeq_m%>', key: "gestMant_DM_LisMat", expand: true,
+                                        children: [
+                                            {title: '<%=crear_m%>', key: "gestMant_DM_LisMat_cre"},
+                                            {title: '<%=modif_m%>', key: "gestMant_DM_LisMat_mod"},
+                                            {title: '<%=visua_m%>', key: "gestMant_DM_LisMat_vis"}
                                         ]
                                     },
-                                    {title: '<%=equip_m%>', key: "gestMant_DMEqui", expand: true,
+                                    {title: '<%=HojRut_m%>', key: "gestMant_DM_HR", expand: true,
                                         children: [
-                                            {title: '<%=crear_m%>', key: "gestMant_DMEqui_Cre"},
-                                            {title: '<%=modif_m%>', key: "gestMant_DMEqui_Mod"},
-                                            {title: '<%=visua_m%>', key: "gestMant_DMEqui_Vis"}
-                                        ]
-                                    },
-                                    {title: '<%=bommeq_m%>', key: "gestMant_DMBom", expand: true,
-                                        children: [
-                                            {title: '<%=crear_m%>', key: "gestMant_DMBom_Crea"},
-                                            {title: '<%=modif_m%>', key: "gestMant_DMBom_Mod"},
-                                            {title: '<%=visua_m%>', key: "gestMant_DMBom_Vis"}
-                                        ]
-                                    },
-                                    {title: '<%=HojRut_m%>', key: "gestMant_DMHrut", expand: true,
-                                        children: [
-                                            {title: '<%=crear_m%>', key: "gestMant_DMHrut_Cra"},
-                                            {title: '<%=modif_m%>', key: "gestMant_DMHrut_Mod"},
-                                            {title: '<%=visua_m%>', key: "gestMant_DMHrut_Vis"}
+                                            {title: '<%=crear_m%>', key: "gestMant_DM_HR_cre"},
+                                            {title: '<%=modif_m%>', key: "gestMant_DM_HR_mod"},
+                                            {title: '<%=visua_m%>', key: "gestMant_DM_HR_vis"}
                                         ]
                                     }
 
                                 ]},
-                            {title: '<%=MonEquip_m%>', key: "gestMant_ME", expand: true,
+                            {title: '<%=MonEquip_m%>', key: "gestMant_MonEq", expand: true,
                                 children: [
-                                    {title: '<%=MonECont_m%>', key: "gestMant_ME_MCPxE"}
+                                    {title: '<%=MonECont_m%>', key: "gestMant_MonEq_MonSta"}
                                 ]},
-                            {title: '<%=AvisoPM_m%>', key: "gestMant_APM", expand: true,
+                            {title: '<%=AvisoPM_m%>', key: "gestMant_Avi", expand: true,
                                 children: [
-                                    {title: '<%=MonitorAvisoPM_m%>', key: "gestMant_APM_MAPM"},
-                                    {title: '<%=crear_m%>', key: "gestMant_APM_Cre"},
-                                    {title: '<%=modif_m%>', key: "gestMant_APM_Mod"},
-                                    {title: '<%=visua_m%>', key: "gestMant_APM_Vis"}
+                                    {title: '<%=MonitorAvisoPM_m%>', key: "gestMant_Avi_MonAv"},
+                                    {title: '<%=crear_m%>', key: "gestMant_Avi_cre"},
+                                    {title: '<%=modif_m%>', key: "gestMant_Avi_mod"},
+                                    {title: '<%=visua_m%>', key: "gestMant_Avi_vis"}
                                 ]},
-                            {title: '<%= OrdenePM_m%>', key: "gestMant_OPM", expand: true,
+                            {title: '<%= OrdenePM_m%>', key: "gestMant_Ord", expand: true,
                                 children: [
-                                    {title: '<%=crear_m%>', key: "gestMant_OPM_Cre"},
-                                    {title: '<%=modif_m%>', key: "gestMant_OPM_Mod"},
-                                    {title: '<%=visua_m%>', key: "gestMant_OPM_Vis"},
-                                    {title: '<%=ListOrden_m%>', key: "gestMant_OPM_LstO"}
+                                    {title: '<%=crear_m%>', key: "gestMant_Ord_cre"},
+                                    {title: '<%=modif_m%>', key: "gestMant_Ord_mod"},
+                                    {title: '<%=visua_m%>', key: "gestMant_Ord_vis"},
+                                    {title: '<%=ListOrden_m%>', key: "gestMant_Ord_lisOr"}
                                 ]},
-                            {title: '<%=Notif_m%>', key: "gestMant_NPM", expand: true,
+                            {title: '<%=Notif_m%>', key: "gestMant_Not", expand: true,
                                 children: [
-                                    {title: '<%=crear_m%>', key: "gestMant_NPM_Cre"},
-                                    {title: '<%=visua_m%>', key: "gestMant_NPM_Vis"}
+                                    {title: '<%=crear_m%>', key: "gestMant_Not_Cre"},
+                                    {title: '<%=visua_m%>', key: "gestMant_Not_Vis"}
                                 ]}
+                        ]},
+                    {title: 'Gestion Produccion', key: "gestProd", expand: true,
+                        children: [
+                            {title: 'Datos Mastros', key: "gestProd_DM", expand: true,
+                                children: [
+                                    {title: 'Materiales', key: "gestProd_DM_Mat", expand: true,
+                                        children: [
+                                            {title: '<%=crear_m%>', key: "gestProd_DM_Mat_cre"},
+                                            {title: '<%=modif_m%>', key: "gestProd_DM_Mat_mod"},
+                                            {title: '<%=visua_m%>', key: "gestProd_DM_Mat_vis"}
+                                        ]},
+                                    {title: 'Lista de Materiales', key: "gestProd_DM_LM", expand: true,
+                                        children: [
+                                            {title: '<%=crear_m%>', key: "gestProd_DM_LM_cre"},
+                                            {title: '<%=modif_m%>', key: "gestProd_DM_LM_mod"},
+                                            {title: '<%=visua_m%>', key: "gestProd_DM_LM_vis"}
+                                        ]},
+                                    {title: 'Hojas de ruta', key: "gestProd_DM_HR", expand: true,
+                                        children: [
+                                            {title: '<%=crear_m%>', key: "gestProd_DM_HR_cre"},
+                                            {title: '<%=modif_m%>', key: "gestProd_DM_HR_mod"},
+                                            {title: '<%=visua_m%>', key: "gestProd_DM_HR_vis"}
+                                        ]}
+                                ]},
+                            {title: 'Notifica Tiempos', key: "gestProd_NotTi", expand: true,
+                                children: [
+                                    {title: 'Monitor PP', key: "gestProd_NotTi_MonPP"},
+                                    {title: 'Notifica Tiempos', key: "gestProd_NotTi_NotTi"},
+                                    {title: 'Reporte de Notificaciones', key: "gestProd_NotTi_RepBot"},
+                                    {title: 'Reporte Estatus', key: "gestProd_NotTi_RepStat"}
+                                ]},
+                            {title: 'Ordenes PP', key: "gestProd_OrdPP", expand: true,
+                                children: [
+                                    {title: '<%=crear_m%>', key: "gestProd_OrdPP_cre"},
+                                    {title: '<%=modif_m%>', key: "gestProd_OrdPP_mod"},
+                                    {title: '<%=visua_m%>', key: "gestProd_OrdPP_vis"},
+                                    {title: 'Listas de ordenes', key: "gestProd_OrdPP_LisOPP"}
+                                ]},
+                            {title: 'Notificaciones PP', key: "gestProd_NotPP", expand: true,
+                                children: [
+                                    {title: '<%=crear_m%>', key: "gestProd_NotPP_cre"},
+                                    {title: '<%=visua_m%>', key: "gestProd_NotPP_vis"}
+                                ]},
                         ]},
                     {title: '<%=GestCal%>', key: "gestCali", expand: true,
                         children: [
-                            {title: '<%=GestCal_PIM%>', key: "gestCali_PIM"},
-                            {title: '<%=GestCalAvi_PIM%>', key: "gestCaliAvi_PIM"},
-                            {title: '<%=GestCalLLI_PIM%>', key: "gestCalLLIPM_PIM"}
+                            {title: '<%=GestCal_PIM%>', key: "gestCali_PlanInp"},
+                            {title: '<%=GestCalAvi_PIM%>', key: "gestCali_MedAvi"},
+                            {title: '<%=GestCalLLI_PIM%>', key: "gestCali_LisLotInp"}
                         ]},
                     {title: '<%=GestDoc%>', key: "gestDocu", expand: true,
                         children: [
                             {title: '<%=GestVisDoc%>', key: "gestDocu_VisDoc"}
                         ]}
-                ]
-            }
+                ]}
         ];
     </script>
     <script>
