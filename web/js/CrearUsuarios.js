@@ -246,7 +246,7 @@ $(document).ready(function () {
                 return;
             }
         }
-        if (PWD1.val().length >= 8) {
+        if (PWD1.val().length >= 6) {
             if (PWD1.val() == PWD2.val()) {
                 validarUsuarioExistente(USER.val());
             } else {
