@@ -238,9 +238,9 @@
                     <label>Rechazo.notif</label><input type="text" id="cntMala" style="margin-left: 80px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>
                     <hr>
                 </div>
-                <div class="divBtnIniFin">                   
+                <div class="divBtnIniFin">
                     <button id="btnInicio" onclick="validarCantidades();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio not. tiempos</label>
-<!--                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"/></button><label>Mov. mercancias</label>-->
+                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="motivoRechazo();"><input type="image" src="images/btnDescri.png"/></button><label>Motivo rechazo</label>-->
                     <br>
                     <button id="btnFin" onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"></button><label>Fin not. tiempos</label>
                 </div>
@@ -369,9 +369,10 @@
                         </table>
                     </section>
                     <section class="SecBody" id="SecCuerpoCld">
-
+                        <label></label>
                     </section>
                 </section>
+                <button id="btnCld4" class="btnCalidad4" type="submit" onclick="addPos()"></button>
                 <button id="btnCld3" class="btnCalidad3" type="submit" onclick="EliminaFila()"></button>
             </div>
             <div class="Botpm">
