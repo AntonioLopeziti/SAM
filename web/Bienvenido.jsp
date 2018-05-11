@@ -1,6 +1,6 @@
- <%-- 
-    Document   : Bienvenido
-    Created on : 11/04/2016, 11:18:58 PM
+<%-- 
+   Document   : Bienvenido
+   Created on : 11/04/2016, 11:18:58 PM
 --%>
 
 <%@page import="AccesoDatos.ACC_Usuarios"%>
@@ -81,6 +81,7 @@
             }
             return x;
         }
+
         String verificarP2(char per) {
             String x = "none";
             return x;
@@ -89,8 +90,7 @@
     %>
     <%
         String p = ACC_Usuarios.ObtenerInstancia().VerificarPermisos(Nombre);
-        
-        
+
         //////////////////////////////////////// Configuración ///////////////////////////////////////////////////
         String conf = verificarP(p.charAt(0));                         // Configuración
         /////////////////////////////////////// Usuarios ///////////////////////////////////////////////////////
@@ -106,7 +106,7 @@
         ////////////////////////////////////// Reportes //////////////////////////////////////////////////////
         String conf_rep = verificarP(p.charAt(9));                     // Reportes
         String conf_repSAM = verificarP(p.charAt(10));                 // Reportes SAM
-                
+
         ////////////////////////////////////// Gestión materiales ////////////////////////////////////////////
         String gestMat = verificarP(p.charAt(11));                      // Gestion Materiales
         ////////////////////////////////////// Organización //////////////////////////////////////////////////       
@@ -155,8 +155,6 @@
         String gestMatListReser = verificarP(p.charAt(51));             // Listas Reservas
         String gestMat_GSMov_EntSer = verificarP(p.charAt(52));         // Gestion Materiales Gestion Stock Entrada Servicios
         String gestMat_GSStockM = verificarP(p.charAt(53));             // Gestion Materiales Gestion Stock Stock Material
-       
-        
 
         ///////////////////////////////////////////// Gestion Comerial ///////////////////////////////////////////////////
         String gestCome = verificarP(p.charAt(54));
@@ -169,9 +167,8 @@
         String gestCome_Pedidos = verificarP(p.charAt(59));
         String gestCome_Pedi_Crear = verificarP(p.charAt(60));
         String gestCome_Pedi_Modif = verificarP(p.charAt(61));
-        String gestCome_Pedi_Visua = verificarP(p.charAt(62));     
-        
-        
+        String gestCome_Pedi_Visua = verificarP(p.charAt(62));
+
         //////////////////////// Gestion Mantenimiento ////////////////////////////////////////////////////////////////////////////////////////////////
         String gestMant = verificarP(p.charAt(63));                    // Gestion Matenimiento
         //////////////////////////////// Datos Maestros /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -180,7 +177,7 @@
         String gestMant_DMUbi_Cre = verificarP(p.charAt(66));          // Gestion Mantenimiento Datos Maestros Ubicaciones Crear
         String gestMant_DMUbi_Mod = verificarP(p.charAt(67));          // Gestion Mantenimiento Datos Maestros Ubicaciones Modificar
         String gestMant_DMUbi_Vis = verificarP(p.charAt(68));          // Gestion Mantenimiento Datos Maestros Ubicaciones Visualizar
-        
+
         String gestMant_DMEqui = verificarP(p.charAt(69));             // Gestion Mantenimiento Datos Maestros Equipos
         String gestMant_DMEqui_Cre = verificarP(p.charAt(70));         // Gestion Mantenimiento Datos Maestros Equipos Crear
         String gestMant_DMEqui_Mod = verificarP(p.charAt(71));         // Gestion Mantenimiento Datos Maestros Equipos Modificar
@@ -212,8 +209,7 @@
         String gestMant_NPM = verificarP(p.charAt(93));                // Gestion Mantenimiento Notificaciones PM      
         String gestMant_NPM_Cre = verificarP(p.charAt(94));            // Gestion Mantenimiento Notificaciones PM Crear
         String gestMant_NPM_Vis = verificarP(p.charAt(95));            // Gestion Mantenimiento Notificaciones PM Visualizar
-       
-       
+
         ///////////////////// Gestiòn de Calidad ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         String gestCali = verificarP(p.charAt(96));                    // GestiÃ³n de Calidad
         ///////////////////// Plan de Inspecciòn ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -225,8 +221,7 @@
         String gestDocu = verificarP(p.charAt(100));
         ///////////////////// Visualizar Documentos ////////////////////////////////////////////////////////////////////////////////////////////////////////
         String gestDocu_VisDoc = verificarP(p.charAt(101));
-      
-        
+
         ////////////////////// Gestion produccion //////////////////////////////////////////////////////////////
         String Getion_prod = verificarP(p.charAt(102));
         /////////////// Datos Maestros /////////////////////////////////////////////////
@@ -243,7 +238,7 @@
         String gestPP_Hrut_Cra = verificarP(p.charAt(113));
         String gestPP_Hrut_Mod = verificarP(p.charAt(114));
         String gestPP_Hrut_Vis = verificarP(p.charAt(115));
-       ////////////////////// Notificar Tiempos PP //////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////// Notificar Tiempos PP //////////////////////////////////////////////////////////////////////////////////////////////////
         String gestPP_NotTie = verificarP(p.charAt(116));                 // Gestión Produccion Notificar Tiempos PP
         String gestPP_MPP = verificarP(p.charAt(117));                    // Gestión Produccion Monitor PP
         String gestPP_NotTiPP = verificarP(p.charAt(118));                // Gestión Produccion Notificar tiempos PP
@@ -335,25 +330,25 @@
                                                             <li style="display: <%=gestMat_datMCCProvMod%>"><a href="ModificaProveedores.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompModificarProv_menu"));%></a></li>
                                                             <li style="display: <%=gestMat_datMCC_ProvVis%>"><a href="VisualizarProveedores.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompVisProv_menu"));%></a></li>
                                                         </ul> 
+                                                    </li>
                                                     <li class="current" style="display:<%=gestMat_datMCC_Inf%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompInfoRecord_menu"));%></a>
                                                         <ul>
                                                             <li style="display: <%=gestMat_datMCC_CrearInR%>"><a href="CrearInfoRecords.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompCrearInfo_menu"));%></a></li>
                                                             <li style="display: <%=gestMat_datMCC_ModInR%>"><a href="ModificarInfoRecords.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompModificarInfo_menu"));%></a></li>
                                                             <li style="display: <%=gestMat_datMCC_VisInR%>"><a href="VisualizarInfoRecords.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCatCompVisInfo_menu"));%></a></li>
                                                         </ul>
-                                                 </ul>     
+                                                    </li>
+                                                    <li class="current" style="display: <%=gestMat_datMC_Cli%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosClientes_menu"));%></a>
+                                                        <ul>
+                                                            <li style="display: <%=gestMat_datMC_CliCrear%>"><a href="CrearClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCrearCliente_menu"));%></a></li>
+                                                            <li style="display: <%=gestMat_datMC_CliMod%>"><a href="ModificarClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosModificarCliente_menu"));%></a></li>
+                                                            <li style="display: <%=gestMat_datMC_Clivis%>"><a href="VisualizarClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosVisCliente_menu"));%></a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>     
                                             </li>
-                                            <li class="current" style="display: <%=gestMat_datMC_Cli%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosClientes_menu"));%></a>
-                                                <ul>
-                                                    <li style="display: <%=gestMat_datMC_CliCrear%>"><a href="CrearClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosCrearCliente_menu"));%></a></li>
-                                                    <li style="display: <%=gestMat_datMC_CliMod%>"><a href="ModificarClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosModificarCliente_menu"));%></a></li>
-                                                    <li style="display: <%=gestMat_datMC_Clivis%>"><a href="VisualizarClientes.jsp"><%out.println(po.getProperty("etiqueta.DatosMaestrosVisCliente_menu"));%></a></li>
-                                                </ul>
-                                            </li>
-
                                         </ul>
                                     </li>
-
                                     <li class="current" style="display: <%=gestMat_C%>"><a href="#"><%out.println(po.getProperty("etiqueta.Compras_menu"));%></a>
                                         <ul>
                                             <li class="current" style="display: <%=gestMat_CSC%>"><a href="#"><%out.println(po.getProperty("etiqueta.ComprasSolCom_menu"));%></a>
@@ -403,9 +398,9 @@
 
                                 </ul>
                             </li>
-                              <li class="current" style="display: <%=gestCome%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionComercial_menu"));%></a>
+                            <li class="current" style="display: <%=gestCome%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionComercial_menu"));%></a>
                                 <ul>
-                                   <li class="current" style="display: <%=gestCome_Cotizacion%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionComercial_Cotizacion_menu"));%></a>
+                                    <li class="current" style="display: <%=gestCome_Cotizacion%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionComercial_Cotizacion_menu"));%></a>
                                         <ul>
                                             <li style="display: <%=gestCome_Cotiz_Crear%>"><a href="#"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
                                             <li style="display: <%=gestCome_Cotiz_Modif%>"><a href="#"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
@@ -487,8 +482,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            
-                            
+
+
                             <li class="current" style="display: <%=Getion_prod%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionProduccion"));%></a>
                                 <ul>
                                     <li class="current" style="display: <%=gestPP_DM%>"><a href="#"><%out.println(po.getProperty("etiqueta.DatosMaestrosPP"));%></a>
@@ -542,7 +537,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            
+
                             <li class="current" style="display: <%=gestCali%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionCalidad"));%></a>
                                 <ul>
                                     <li style="display: <%=gestCali_PIM%>"><a href="PlanesInspeccion.jsp"><%out.println(po.getProperty("etiqueta.PlanInspeccioMaterial"));%></a></li>
