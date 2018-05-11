@@ -278,7 +278,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     out.println(denomi);
                     break;
                 case "ValidarMaterial":
-                    materiales_venta ma = ACC_CrearPedidoSD.ObtenerInstancia().getDMat(Materi, org, canal, sector);
+                    materiales_venta ma = ACC_CrearPedidoSD.ObtenerInstancia().getDMat(Materi, org, canal, client);
                     if (ma.getMaterial() == null || ma.getMaterial() == "") {
                         out.println(0);
                     } else {
