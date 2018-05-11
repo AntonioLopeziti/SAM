@@ -980,7 +980,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setAlmacen("1400");
                 ma.setCl_mov(rs2.getString("clase_mov"));
                 ma.setCantidad(rs2.getString("cantidad_necesaria_componente"));
-                ma.setPosListaM(rs2.getString("num_pos_lista_materiales"));
+//                ma.setPosListaM(rs2.getString("num_pos_lista_materiales"));
                 ma.setDisabled("disabled");
                 ma.setStock_especial(rs2.getString("stock_especial"));
                 mpm.add(ma);
