@@ -69,6 +69,13 @@ and open the template in the editor.
     font-size:small;
     font-family: sans-serif;
 }
+.SecBody label{
+    margin-top: 0;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
 .SecHead thead> tr
 {
     margin-top: 0;
