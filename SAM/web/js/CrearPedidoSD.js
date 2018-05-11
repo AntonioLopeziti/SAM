@@ -1366,11 +1366,12 @@ function ValidarMAterial(material, pos) {
         ShowMsg(9, "images/advertencia.PNG", "audio/saperror.wav");
         return;
     }
+    var clie = $('#solicitante').val();
     var org = $('#orgVentas').val();
     var can = $('#CanalDis').val();
     var sec = $('#Sector').val();
     var acc = "ValidarMaterial";
-    var datos = "&Material=" + material + "&org=" + org + "&canal=" + can + "&sector=" + sec;
+    var datos = "&Material=" + material + "&org=" + org + "&canal=" + can + "&Cliente=" + clie;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1386,8 +1387,8 @@ function ValidarMAterial(material, pos) {
                 $('#tdUmedi' + pos).val("");
                 ShowMsg(10, "images/advertencia.PNG", "audio/saperror.wav", '', material, org, can);
             } else {
-                CargartextoEmbarque(material, org, sec, pos);
-//                $('#tdDescr' + pos).val(data[1]);
+              //  CargartextoEmbarque(material, org, sec, pos);
+                $('#tdDescr' + pos).val(data[1]);
                 $('#tdUmedi' + pos).val(data[2]);
                 $('#tdCanti' + pos).focus();
                 borramsg();
