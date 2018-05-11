@@ -1512,7 +1512,7 @@ function CargartextoEmbarque(material, org, sec, pos) {
         success: function (data) {
             $('#textoposEmbaTemp' + pos).val(data);
             $('#textoEmbarq').val(data);
-            $('#tdDescr' + pos).val(data);
+//            $('#tdDescr' + pos).val(data);
         }
     });
 
