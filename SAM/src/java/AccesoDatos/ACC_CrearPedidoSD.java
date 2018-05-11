@@ -314,7 +314,7 @@ public class ACC_CrearPedidoSD {
         return den;
     }
 
-    public materiales_venta getDMat(String mat, String org, String can, String sec) {
+    public materiales_venta getDMat(String mat, String org, String can, String cliente) {
         materiales_venta m = new materiales_venta();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -326,11 +326,11 @@ public class ACC_CrearPedidoSD {
             ps.setString(1, mat);
             ps.setString(2, org);
             ps.setString(3, can);
-            ps.setString(4, sec);
+            ps.setString(4, cliente);
             rs = ps.executeQuery();
             while (rs.next()) {
                 m.setMaterial(rs.getString("material"));
-                m.setDescripcion(rs.getString("descripcion_es"));
+                m.setDescripcion(rs.getString("descripcion_material_cliente"));
                 m.setUnidad_medida_base(rs.getString("unidad_medida_base"));
             }
         } catch (Exception e) {
