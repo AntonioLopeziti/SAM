@@ -109,7 +109,7 @@ $(document).ready(function () {
                 v.keypress(function (e) {
                     var tecla = (document).all ? e.keyCode : e.which;
                     if (tecla == 13) {
-                          $('#txtDestMcia').val("");
+                        $('#txtDestMcia').val("");
                         if ($('#solicitante').val().length > 0) {
                             if (v.val().length > 0) {
                                 var n = new Array();
@@ -1387,7 +1387,7 @@ function ValidarMAterial(material, pos) {
                 $('#tdUmedi' + pos).val("");
                 ShowMsg(10, "images/advertencia.PNG", "audio/saperror.wav", '', material, org, can);
             } else {
-              //  CargartextoEmbarque(material, org, sec, pos);
+                //  CargartextoEmbarque(material, org, sec, pos);
                 $('#tdDescr' + pos).val(data[1]);
                 $('#tdUmedi' + pos).val(data[2]);
                 $('#tdCanti' + pos).focus();
@@ -1454,11 +1454,12 @@ function soloNumeros(e) {
 }
 function validarMaterial(pos) {
     var material = $('#tdMater' + pos).val();
+    var clie = $('#solicitante').val();
     var org = $('#orgVentas').val();
     var can = $('#CanalDis').val();
     var sec = $('#Sector').val();
     var acc = "ValidarMaterial";
-    var datos = "&Material=" + material + "&org=" + org + "&canal=" + can + "&sector=" + sec;
+    var datos = "&Material=" + material + "&org=" + org + "&canal=" + can + "&Cliente=" + clie;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1511,7 +1512,7 @@ function CargartextoEmbarque(material, org, sec, pos) {
         success: function (data) {
             $('#textoposEmbaTemp' + pos).val(data);
             $('#textoEmbarq').val(data);
-            $('#tdDescr'+pos).val(data);
+            $('#tdDescr' + pos).val(data);
         }
     });
 
@@ -1625,9 +1626,10 @@ function GuardarCabecera() {
     });
 }
 function ValidateMate(material, org, can, sec) {
+    var clie = $('#solicitante').val();
     var ret = "0";
     var acc = "ValidarMaterial";
-    var datos = "&Material=" + material + "&org=" + org + "&canal=" + can + "&sector=" + sec;
+    var datos = "&Material=" + material + "&org=" + org + "&canal=" + can + "&Cliente=" + clie;
     $.ajax({
         async: false,
         type: 'GET',
