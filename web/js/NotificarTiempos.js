@@ -1615,3 +1615,93 @@ function Print_PT() {
 function motivoRechazo() {
 
 }
+
+function addPos() {
+    var CheckBx = document.getElementsByName('ckMovMer');
+    if (CheckBx.length > 1) {
+        for (var i = 0; i < CheckBx.length; i++)
+        {
+            if (CheckBx[i].checked)
+            {
+                AgregaPos(CheckBx[i].value);
+            }
+        }
+    }
+//    var table = document.getElementById("TabBody");
+//
+//    var rowCount = table.rows.length;
+//    var row = table.insertRow(rowCount-1);
+//
+//    var colCount = table.rows[0].cells.length;
+//
+//    for (var i = 0; i < colCount; i++) {
+//
+//        var newcell = row.insertCell(i);
+//
+//        newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+//        
+//    }
+//    table.rows[rowCount-1].cells[1].style.display = "none";
+}
+
+function AgregaPos(pos)
+{
+    var descripcion = document.getElementById("tdDes" + pos).textContent;
+    var numoper = document.getElementById("tdOpr" + pos).textContent;
+    var material = document.getElementById("tdMat" + pos).textContent;
+    var txtmat = document.getElementById("tddmt" + pos).textContent;
+    var cantidad2 = document.getElementById("bxcnt" + pos).value;
+    var cantidad = document.getElementById("bxcntT" + pos).value;
+    var poslista = document.getElementById("bxposM" + pos).value;
+    var stockesp = document.getElementById("bxEE" + pos).value;
+    var pedido = document.getElementById("bxNped" + pos).value;
+    var posicion = document.getElementById("bxNpos" + pos).value;
+    var unidadM = document.getElementById("tdUM" + pos).textContent;
+    var centro = document.getElementById("tdCtr" + pos).textContent;
+    var clmov = document.getElementById("tdCmov" + pos).textContent;
+
+    if (clmov != "101")
+    {
+        var r1 = document.getElementsByName('ckMovMer');
+        var ck = r1.length;
+        var no = parseInt(ck) - 1;
+        var i = parseInt(r1[no].value) + 1;
+
+        var table = document.getElementById("TabBody");
+        var row = table.insertRow(r1.length);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        var cell7 = row.insertCell(6);
+        var cell8 = row.insertCell(7);
+        var cell9 = row.insertCell(8);
+        var cell10 = row.insertCell(9);
+        var cell11 = row.insertCell(10);
+        var cell12 = row.insertCell(11);
+        var cell13 = row.insertCell(12);
+
+        cell1.innerHTML = "<td><input type=\"checkbox\" name=\"ckMovMer\" value=\"" + i + "\"></td>";
+        cell2.innerHTML = "<label id=\"tdDes" + i + "\">" + descripcion + "</label>";
+        cell3.innerHTML = "<label id=\"tdOpr" + i + "\">" + numoper + "</label>";
+        cell4.innerHTML = "<label name=\"tdMaterial\" id=\"tdMat" + i + "\">" + material + "</label>";
+        cell5.innerHTML = "<label id=\"tddmt" + i + "\">" + txtmat + "</label>";
+        cell6.innerHTML = "<input type=\"text\" class=\"bxMed\" id=\"bxcnt" + i + "\" name=\"bxcantidad\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDecc(this.value, 3);ajustaCantidades(" + i + ");\" value=\"" + cantidad2 + "\">"
+                + "<input hidden type=\"text\" id=\"bxcntT" + i + "\" name=\"bxcantidadT\" value=\"" + cantidad + "\">"
+                + "<input hidden type=\"text\" id=\"bxposM" + i + "\" name=\"bxlistaM\" value=\"" + poslista + "\">"
+                + "<input hidden type=\"text\" id=\"bxEE" + i + "\" name=\"bxinvEE\" value=\"" + stockesp + "\">"
+                + "<input hidden type=\"text\" id=\"bxNped" + i + "\" name=\"bxNped\" value=\"" + pedido + "\">"
+                + "<input hidden type=\"text\" id=\"bxNpos" + i + "\" name=\"bxNpos\" value=\"" + posicion + "\"></td>";
+        cell7.innerHTML = "<label name=\"tdUnM\" id=\"tdUM" + i + "\">" + unidadM + "</label>";
+        cell8.innerHTML = "<label name=\"tdCentro\" id=\"tdCtr" + i + "\">" + centro + "</label>";
+        cell9.innerHTML = "1400";
+        cell10.innerHTML = "<input type=\"text\" class=\"bxMed\" id=\"bxLote" + i + "\" name=\"bxlote\" style=\"text-transform: uppercase;\" maxlength=\"10\" onfocus=\"btnloteShow(" + i + ")\">";
+        cell11.innerHTML = "<button id=\"btnLot" + i + "\" class='BtnMatchIcon' name=\"btnShowLot\" onclick=\"btnLoteMatch(" + i + ")\"  hidden></button>";
+        cell12.innerHTML = "<input type=\"text\" class=\"bxMed\" id=\"bxanc" + i + "\" disabled name=\"bxancho\" maxlength=\"10\" onfocus=\"btnloteHide()\">";
+        cell13.innerHTML = "<label name=\"tdClaseM\" id=\"tdCmov" + i + "\">" + clmov + "</label>";
+        table.rows[r1.length - 1].cells[1].style.display = "none";
+        sujetoLote();
+    }
+}
