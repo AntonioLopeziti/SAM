@@ -6,6 +6,8 @@
 package AccesoDatos;
 
 import Entidades.Zebra_noti_PT;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +34,7 @@ public class ACC_Zebra {
         return Instance;
     }
 
-    public void PrintTargetPT(Zebra_noti_PT z) {
+    public void PrintTargetPT(Zebra_noti_PT z) throws IOException {
         String texto;
         if (z.getDescripcion().length() < 74) {
             texto = "^XA\n"
@@ -126,10 +128,19 @@ public class ACC_Zebra {
         }
     }
 
-    public PrintService impresoras(String nombre) {
+    public PrintService impresoras(String nombre) throws IOException {
+        String txt = "IP_dir: " + nombre;
+        System.out.println("IP: " + nombre);
         PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null); //Obtenemos los servicios de impresion del sistema 
         for (PrintService impresora : printServices) { //Recorremos el array de servicios de impresion
+            System.out.println("Printer: " + impresora.getName());
+            txt += "\nPrinter: " + impresora.getName();
             if (impresora.getName().contentEquals(nombre)) { // Si el nombre del servicio es el mismo que el que buscamos
+                try (FileWriter writer = new FileWriter("C:\\Users\\Portal Sap\\Desktop\\foo.txt")) {
+                    writer.write(txt);
+                    writer.flush();
+                    // do more stuff with writer
+                }
                 return impresora; // Nos devuelve el servicio 
             }
         }
@@ -230,7 +241,7 @@ public class ACC_Zebra {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Zebra_noti_PT zb = new Zebra_noti_PT();
         zb.setPuesto_trabajo("BB05");
         zb.setDescripcion("Material XXXXXXXXXXXXXXXXXXXXXX");
