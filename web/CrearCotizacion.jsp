@@ -91,7 +91,7 @@
             %>
             function checkPermisoPag() {
                 var p = '<%=permiso%>';
-                var pag = p.charAt(27);
+                var pag = p.charAt(56);
                 if (pag == 0) {
                     window.location.href = "Bienvenido.jsp";
                 }
@@ -166,7 +166,7 @@
             <div class="titulo"><h1><%out.println(po.getProperty("etiqueta.CotizacionTituloCrear"));%></h1></div> 
         </div>            
         <div class="contenido">    
-            <div class="DivContentCreaPedido">
+<!--            <div class="DivContentCreaPedido">
                 <div class="contain-cabecera">
                     <div class="divDer">
                         <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido2"));%></label><input tye="text" id="oferta" style="width: 35%;" readonly/>
@@ -235,7 +235,7 @@
                                     <label><%out.println(po.getProperty("etiqueta.CotizacionOfertaGpoPrecio"));%></label><select type="text" style="width: 15%;"  id="GpoPrecio"/></select>
                                     <hr>
                                 </div>
-                                <!--</div>-->
+                                </div>
                             </div>
                         </section>
                     </div>
@@ -452,7 +452,7 @@
                         <div id="divtxts"><textarea rows="18" cols="6"  style="resize:none; width: 98%; margin-top: 1%;" id="TextPosicion_SP"  readonly></textarea></div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div id="Calenndar" class="VentanaFecha">
             <div id="handlecalendar"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CSPCalen"));%></label><div class="BotonCerrar_Matc" id="CerraCalendar1"><label >X</label></div></div>
