@@ -85,7 +85,7 @@
             %>
             function checkPermisoPag() {
                 var p = '<%=permiso%>';
-                var pag = p.charAt(113);
+                var pag = p.charAt(124);
                 if (pag == 0) {
                     window.location.href = "Bienvenido.jsp";
                 }
