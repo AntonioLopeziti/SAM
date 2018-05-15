@@ -1698,11 +1698,7 @@ function GuardarPosiciones() {
                 mat[i].focus();
                 return;
             }
-//            if (des[i].value.length == 0) {
-//                ShowMsg(16, "images/advertencia.PNG", "audio/saperror.wav");
-//                mat[i].focus();
-//                return;
-//            }
+//            5
             if (ume[i].value.length == 0) {
                 ShowMsg(17, "images/advertencia.PNG", "audio/saperror.wav");
                 mat[i].focus();
