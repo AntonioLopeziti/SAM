@@ -205,24 +205,27 @@ public class ACC_CrearPedidoSD {
         return ume;
     }
 
-    public ArrayList<materiales_venta> GetMateriales(String material, String denominacion, String cantidad) {
+    public ArrayList<materiales_venta> GetMateriales(String material, String denominacion, String cantidad, String cliente, String org, String canal) {
         ArrayList<materiales_venta> mv = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{call SD.CrearPedidos_ConsultaMateriales(?,?,?)}";
+        String sql = "{call SD.CrearPedidos_ConsultaMateriales(?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, material);
             ps.setString(2, denominacion);
             ps.setString(3, cantidad);
+            ps.setString(4, cliente);
+            ps.setString(5, org);
+            ps.setString(6, canal);
             rs = ps.executeQuery();
             while (rs.next()) {
                 materiales_venta m = new materiales_venta();
                 m.setMaterial(rs.getString("material"));
-                m.setDescripcion(rs.getString("descripcion_es"));
-                m.setCentro(rs.getString("centro"));
+                m.setDescripcion(rs.getString("descripcion_material_cliente"));
+//                m.setCentro(rs.getString("centro"));
                 mv.add(m);
             }
         } catch (Exception e) {
