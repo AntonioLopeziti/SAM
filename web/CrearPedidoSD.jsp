@@ -167,6 +167,9 @@
                     case 20:
                         msg = 'Relación Interlocutor no valida';
                         break;
+                    case 21:
+                        msg = 'Campo solicitante obligaotrio';
+                        break;
                 }
                 $('#msg').html(msg);
                 var icon = $('#iconmsg');
