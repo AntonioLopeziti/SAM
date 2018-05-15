@@ -1134,8 +1134,11 @@ function ConsultaClientes() {
     });
 }
 function ConsultaMateriales() {
+    var cli = $('#solicitante').val();
+    var org = $('#orgVentas').val();
+    var can = $('#CanalDis').val();
     var acc = "ConsultarMateriales";
-    var datos = "&Material=" + $('#BusMaterial').val() + "&DescripcionCPedido=" + encodeURIComponent($('#BusdesMaterial').val().trim()) + "&Ctd=" + $('#numAcMax8').val();
+    var datos = "&Material=" + $('#BusMaterial').val() + "&DescripcionCPedido=" + encodeURIComponent($('#BusdesMaterial').val().trim()) + "&Ctd=" + $('#numAcMax8').val() + "&Cliente=" + cli + "&org=" + org + "&canal=" + can;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1230,6 +1233,37 @@ function mostrarVentanaTextoPos(pos) {
 }
 
 function MostrarMatchGridMateriales(VM, handle, pos) {
+    var clp = $('#ClasePedido');
+    var cli = $('#solicitante');
+    var ref = $('#refcliente');
+    var fec = $('#fechaEntrega');
+    var org = $('#orgVentas');
+    var can = $('#CanalDis');
+    if (clp.val().length == 0) {
+        clp.focus();
+        ShowMsg(6, "images/advertencia.PNG", "audio/saperror.wav");
+        return;
+    }
+    if (cli.val().length == 0) {
+        cli.focus();
+        ShowMsg(21, "images/advertencia.PNG", "audio/saperror.wav");
+        return;
+    }
+    if (org.val().length == 0 && can.val().length == 0) {
+        cli.focus();
+        ShowMsg(2, "images/advertencia.PNG", "audio/saperror.wav");
+        return;
+    }
+    if (ref.val().length == 0) {
+        ref.focus();
+        ShowMsg(5, "images/advertencia.PNG", "audio/saperror.wav");
+        return;
+    }
+    if (fec.val().length == 0) {
+        fec.focus();
+        ShowMsg(7, "images/advertencia.PNG", "audio/saperror.wav");
+        return;
+    }
     var BE = document.createElement('audio');
     BE.src = "audio/sapsnd05.wav";
     BE.play();
@@ -1664,11 +1698,11 @@ function GuardarPosiciones() {
                 mat[i].focus();
                 return;
             }
-            if (des[i].value.length == 0) {
-                ShowMsg(16, "images/advertencia.PNG", "audio/saperror.wav");
-                mat[i].focus();
-                return;
-            }
+//            if (des[i].value.length == 0) {
+//                ShowMsg(16, "images/advertencia.PNG", "audio/saperror.wav");
+//                mat[i].focus();
+//                return;
+//            }
             if (ume[i].value.length == 0) {
                 ShowMsg(17, "images/advertencia.PNG", "audio/saperror.wav");
                 mat[i].focus();
