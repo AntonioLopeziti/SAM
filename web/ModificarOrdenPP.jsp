@@ -91,7 +91,7 @@
             %>
             function checkPermisoPag() {
                 var p = '<%=permiso%>';
-                var pag = p.charAt(112);
+                var pag = p.charAt(123);
                 if (pag == 1) {
 
                 } else if (pag == 0) {
