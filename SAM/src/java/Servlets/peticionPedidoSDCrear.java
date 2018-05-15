@@ -240,7 +240,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     }
                     break;
                 case "ConsultarMateriales":
-                    ArrayList<materiales_venta> mat = ACC_CrearPedidoSD.ObtenerInstancia().GetMateriales(Materi, Denom, Canti);
+                    ArrayList<materiales_venta> mat = ACC_CrearPedidoSD.ObtenerInstancia().GetMateriales(Materi, Denom, Canti, client, org, canal);
                     if (mat.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
