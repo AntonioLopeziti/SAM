@@ -1682,7 +1682,7 @@ function ValidateMate(material, org, can, sec) {
 }
 function GuardarPosiciones() {
     var org = $('#orgVentas').val();
-    var can = $('#CanalDis').val();
+    var cadi = $('#CanalDis').val();
     var sec = $('#Sector').val();
     var ch = document.getElementsByName("Cehckbx");
     var mat = document.getElementsByName("MaterTD");
@@ -1694,11 +1694,10 @@ function GuardarPosiciones() {
         if (mat[i].value.length > 0) {
             var d = ValidateMate(mat[i].value, org, can, sec);
             if (d == "0") {
-                ShowMsg(10, "images/advertencia.PNG", "audio/saperror.wav", '', mat[i].value, org, can);
+                ShowMsg(10, "images/advertencia.PNG", "audio/saperror.wav", '', mat[i].value, org, cadi);
                 mat[i].focus();
                 return;
             }
-//            5
             if (ume[i].value.length == 0) {
                 ShowMsg(17, "images/advertencia.PNG", "audio/saperror.wav");
                 mat[i].focus();
