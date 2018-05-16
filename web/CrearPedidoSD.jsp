@@ -102,6 +102,7 @@
             checkPermisoPag();
 
             function ShowMsg(m, im, au, va, v1, v2, v3) {
+                alert(v3);
                 var msg;
                 switch (m) {
                     case 0:
