@@ -12,6 +12,7 @@ import Entidades.SD_posiciones_pedido_condiciones;
 import Entidades.SD_posiciones_pedido_reparto;
 import Entidades.SD_posiciones_pedido_venta;
 import Entidades.SD_posiciones_pedidos_expedicion;
+import Entidades.clientes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -345,6 +346,32 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                 case "CargarPosicionTexto":
                     String txtpos = ACC_VisualizarPedidosSD.ObtenerInstancia().GetTextoPosicion(Documento, Posicion);
                     out.println(txtpos);
+                    break;
+                case "CargarTablaInterlocutores":
+                    out.println("<table id=\"TabBody\">");
+                    out.println("<tbody>");
+                    ArrayList<clientes> cli = ACC_VisualizarPedidosSD.ObtenerInstancia().GetInterlocutores(Documento);
+                    if (cli.size() > 0) {
+                        for (int l = 0; l < cli.size(); l++) {
+                            out.println("<tr>");
+                            out.println("<td>&nbsp;</td>");
+                            out.println("<td>" + cli.get(l).getFuncion_interlocutor() + "</td>");
+                            out.println("<td>" + cli.get(l).getIdCliente() + "</td>");
+                            out.println("<td>" + cli.get(l).getNombre1() + "</td>");
+                            out.println("<td>" + cli.get(l).getCalle() + "</td>");
+                            out.println("<td>" + cli.get(l).getCodigoPoblacion() + "</td>");
+                            out.println("<td>" + cli.get(l).getPoblacion() + "</td>");
+                            out.println("<td>&nbsp;</td>");
+                            out.println("</tr>");
+                        }
+                    } else {
+                        for (int h = 0; h < 6; h++) {
+                            out.println("<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>");
+                        }
+                    }
+                    out.println("<tr class=\"ocultar\"><td>00</td><td>00000000000000</td><td>0000000000000000</td><td>000000000000000000000</td><td>00000000000000000000000000000</td><td>000000000000000</td><td>000000000000000</td><td>000000000000000</td></tr>");
+                    out.println("</tbody>");
+                    out.println("</table>");
                     break;
             }
         }
