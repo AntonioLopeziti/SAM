@@ -149,6 +149,7 @@ $(document).ready(function () {
         $('#DivVentas').show();
         $('#textosCabecera').hide();
         AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+//          loadDoubleScroll("DobleSection", "SecCuerpo3", "DobleContainer3", "TabBody3");
     }
     var arrtabs = [$('#btnExped'), $('#btnCondi'), $('#btnRep'), $('#btnEstatus'), $('#btnTextos')];
     $.each([$('#ContExp'), $('#ContCond'), $('#ContRep'), $('#ContSta'), $('#divtxts')], function (i, v) {
@@ -387,11 +388,25 @@ function GetData() {
             }
         });
     }
-//    CargarInterlocutores(ped.val().trim(), tipo);
+    CargarInterlocutores(ped.val().trim());
     CargarTxtCabecera(ped.val().trim());
     CargarPosiciones(ped.val().trim(), tipo);
 }
-function  CargarInterlocutores(pedido, tipo) {
+function  CargarInterlocutores(pedido) {
+    var acc = "CargarTablaInterlocutores";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionVisualizarPedidosSD',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + "&Documento=" + pedido,
+        success: function (data) {
+            $('#SecCuerpo').html(data);
+            AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
+            loadDoubleScroll("DobleSection", "SecCuerpo", "DobleContainer", "TabBody");
+        }
+    });
 
 }
 function CargarTxtCabecera(pedido) {
@@ -417,7 +432,7 @@ function CargarPosTextos(pedido, pos) {
         url: 'peticionVisualizarPedidosSD',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Accion=" + acc + "&Documento=" + pedido + "&Posicion=" + pos ,
+        data: "Accion=" + acc + "&Documento=" + pedido + "&Posicion=" + pos,
         success: function (data) {
             $('#TextPosicion_SP').val(data);
         }
