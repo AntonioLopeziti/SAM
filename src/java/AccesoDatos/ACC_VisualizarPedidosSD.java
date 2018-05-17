@@ -10,6 +10,7 @@ import Entidades.SD_posiciones_pedido_condiciones;
 import Entidades.SD_posiciones_pedido_reparto;
 import Entidades.SD_posiciones_pedido_venta;
 import Entidades.SD_posiciones_pedidos_expedicion;
+import Entidades.clientes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -244,6 +245,35 @@ public class ACC_VisualizarPedidosSD {
         return cond;
     }
 
+    public ArrayList<clientes> GetInterlocutores(String doc) {
+        ArrayList<clientes> cl = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call SD.VisualizarPedidosSD_CargarInterlocutores(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, doc);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                clientes c = new clientes();
+                c.setIdCliente(rs.getString("num_deudor"));
+                c.setFuncion_interlocutor(rs.getString("funcion_interlocutor"));
+                c.setNombre1(rs.getString("nombre1"));
+                c.setCalle(rs.getString("calle"));
+                c.setCodigoPoblacion(rs.getString("codigo_poblacion"));
+                c.setPoblacion(rs.getString("poblacion"));
+                cl.add(c);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return cl;
+    }
+
     public ArrayList<SD_posiciones_pedido_reparto> GetReparto(String doc, String pos) {
         ArrayList<SD_posiciones_pedido_reparto> rep = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -303,6 +333,7 @@ public class ACC_VisualizarPedidosSD {
         }
         return texto;
     }
+
     public String GetTextoPosicion(String documento, String Pos) {
         String texto = "";
         Conexion cnx = new Conexion();
