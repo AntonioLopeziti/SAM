@@ -10,39 +10,50 @@ package Entidades;
  * @author AREConsulting
  */
 public class clientes {
-   String IdCliente;
-   String Sociedad;
-   String OrganizacionVentas;
-   String CanalDistribucion;
-   String Sector;
-   String NumDireccion;
-   String FechaValido1;
-   String IndicadoresVersionDirecInter;
-   String FechaValido9;
-   String ClaveTratamiento;
-   String Nombre1;
-   String Nombre2;
-   String Nombre3;
-   String Nombre4;
-   String Poblacion;
-   String Distrito;
-   String CodigoPoblacion;
-   String CodigoDistrito;
-   String LugarResidencia;
-   String Calle;
-   String NumEdificio;
-   String GrupoCuentaDeudor;
-   String Nif;
-   String ClaveCondicionPago;
-   String CuentaAsoConta;
-   String Moneda;
-   String IncoParte1;
-   String IncoParte2;
-   String GrupoVendedores;
-   String ClasificacionCliente;
-   String NivelSociedad;
-   String BloqueoContaSociedad;
-   String PeticionBorraRegistoMaestro;
+   String IdCliente = "";
+   String Sociedad = "";
+   String OrganizacionVentas = "";
+   String CanalDistribucion = "";
+   String Sector = "";
+   String NumDireccion = "";
+   String FechaValido1 = "";
+   String IndicadoresVersionDirecInter = "";
+   String FechaValido9 = "";
+   String ClaveTratamiento = "";
+   String Nombre1 = "";
+   String Nombre2 = "";
+   String Nombre3 = "";
+   String Nombre4 = "";
+   String funcion_interlocutor = "";
+   String Poblacion = "";
+   String Distrito = "";
+   String CodigoPoblacion = "";
+   String CodigoDistrito = "";
+   String LugarResidencia = "";
+   String Calle = "";
+   String NumEdificio = "";
+   String GrupoCuentaDeudor = "";
+   String Nif = "";
+   String ClaveCondicionPago  = "";
+   String CuentaAsoConta = "";
+   String Moneda = "";
+   String IncoParte1 = "";
+   String IncoParte2 = "";
+   String GrupoVendedores = "";
+   String ClasificacionCliente = "";
+   String NivelSociedad = "";
+   String BloqueoContaSociedad = "";
+   String PeticionBorraRegistoMaestro = "";
+
+    public String getFuncion_interlocutor() {
+        return funcion_interlocutor;
+    }
+
+    public void setFuncion_interlocutor(String funcion_interlocutor) {
+        this.funcion_interlocutor = funcion_interlocutor;
+    }
+   
+   
 
     public String getIdCliente() {
         return IdCliente;
