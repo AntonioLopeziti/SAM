@@ -44,6 +44,9 @@ $(document).ready(function () {
     $('#botonStatOrd').click(function () {        
         $(location).attr('href', 'ReporteStatusOrdenesPP.jsp');
     });
+    $('#botonPedidosSD').click(function () {        
+        $(location).attr('href', 'ReportePedidosSD.jsp');
+    });
 });
 function startTime() {
     today = new Date();
