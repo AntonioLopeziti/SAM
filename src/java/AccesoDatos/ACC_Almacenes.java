@@ -184,6 +184,7 @@ public class ACC_Almacenes {
         }
         return almacen;
     }
+   
 
     public LinkedList<Almacen> MatchAlmacen(String deno) {
         LinkedList<Almacen> alm = new LinkedList<>();
@@ -233,5 +234,28 @@ public class ACC_Almacenes {
             cnx.CerrarConexion(con);
         }
         return false;
+    }
+     public ArrayList<almacenes> ConsultaAllAlmacene(String Centro) {
+        ArrayList<almacenes> almacen = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String query = "{call MM.MovimientosMateriales_ConsultaalanmcneNu(?)}";
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,Centro);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                almacenes a = new almacenes();
+                a.setId_almacen(rs.getString("id_almacen"));
+                a.setNombre_alamcen(rs.getString("descripcion_ES"));
+                a.setCentro(rs.getString("centro"));
+                almacen.add(a);
+            }
+        } catch (Exception e) {
+            System.err.println("Error en ConsultaAlmacenenDestino, ACC_Almacenes por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return almacen;
     }
 }
