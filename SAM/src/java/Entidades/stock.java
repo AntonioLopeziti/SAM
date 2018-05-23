@@ -11,7 +11,7 @@ package Entidades;
  */
 public class stock {
      int id_inven;
-    String material;
+    String material = "";
     String descripcion_ES;
     String descripcion_EN;
     String clave_idioma;
@@ -19,7 +19,7 @@ public class stock {
     String unidad_medida;
     String almacen;
     String descripcion_almacen;
-    String stocklibre_utilizacion;
+    String stocklibre_utilizacion = ";";
     String stockcontrol_calidad;
     String stock_bloqueado;
     String stock_traslado;
@@ -29,7 +29,26 @@ public class stock {
     String serie;
     String indicador_lote;
     String descripcion;
+    String num_doc = "";
+    String pos_doc = "";
 
+    public String getNum_doc() {
+        return num_doc;
+    }
+
+    public void setNum_doc(String num_doc) {
+        this.num_doc = num_doc;
+    }
+
+    public String getPos_doc() {
+        return pos_doc;
+    }
+
+    public void setPos_doc(String pos_doc) {
+        this.pos_doc = pos_doc;
+    }
+    
+    
     public String getDescripcion() {
         return descripcion;
     }
