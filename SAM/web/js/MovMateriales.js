@@ -1,10 +1,67 @@
 $(document).ready(function () {
-    /*$('#aceptar').click(function () {
-     mostrarVentana('VentanaModalGestionInp');
-     var theHandle = document.getElementById('handle19');   
-     var theRoot = document.getElementById('VentanaModalGestionInp');
-     Drag.init(theHandle, theRoot);
-     });*/
+    $('#BorrarFilas301').click(function () {
+        EliminarFilas301();
+    });
+    $('#AgregarFilas301').click(function () {
+        AgregarFilasTabla301();
+    });
+    $('#CerrarMCCenDesNuevo').click(function () {
+        var clam = $('#bxClase').val();
+        ocultarVentanaNuevo('VentanaModalCentroDesNuevo', '', '', 'tdCentr', clam);
+    });
+    $('#CerrarMCAlmDesNuevo').click(function () {
+        var clam = $('#bxClase').val();
+        ocultarVentanaNuevo('VentanaModalAlmacenDesNuevo', '', '', 'tdAlmac', clam);
+    });
+    $('#CerrarMCLoteStockE').click(function () {
+        var clam = $('#bxClase').val();
+        ocultarVentanaNuevo('VentanaModalLoteStockE', '', '', 'tdLotes', clam);
+    });
+    $('#btnPnMaterialNuevo').click(function () {
+        $('#BuscarParaMaterialNuevo').css('display', 'block');
+        $('#ConsultaTablaMaterialNuevo').css('display', 'none');
+    });
+    $('#busMatNuevo').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaMaterialesNBuevo();
+        }
+        patron = /[0-9a-zA-ZÑñ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#BusDesMatNuevo').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaMaterialesNBuevo();
+        }
+        patron = /[0-9a-zA-ZÑñ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#numAciertosNuevo').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaMaterialesNBuevo();
+        }
+        patron = /[0-9]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#okMaterialNuevo').click(function () {
+        ConsultaMaterialesNBuevo();
+    });
+    $('#CerrarMCMatNuevo').click(function () {
+        var clam = $('#bxClase').val();
+        ocultarVentanaNuevo('VentanaModalMaterialNuevo', 'BuscarParaMaterialNuevo', 'ConsultaTablaMaterialNuevo', 'tdMater', clam);
+    });
+    $('#CerrarMCMatNuevo2').click(function () {
+        var clam = $('#bxClase').val();
+        ocultarVentanaNuevo('VentanaModalMaterialNuevo', 'BuscarParaMaterialNuevo', 'ConsultaTablaMaterialNuevo', 'tdMater', clam);
+    });
+    $('#aceptar').click(function () {
+
+    });
     $("#DobleSection").scroll(function () {
         $("#SecCuerpoCld").scrollTop($("#DobleSection").scrollTop());
     });
@@ -306,10 +363,13 @@ $(document).ready(function () {
                 case '202':
                 case '261':
                 case '262':
+                case '301':
                 case '303':
                 case '305':
                 case '311':
                 case '312':
+                case '313':
+                case '315':
                     if ($('#bxTexto').val().length > 0)
                         $('#bxTexto').css('background-image', 'none');
                     else
@@ -474,6 +534,12 @@ $(document).ready(function () {
                 }
                 var theHandle = document.getElementById('handle16');
                 var theRoot = document.getElementById('VentanaModal311');
+                Drag.init(theHandle, theRoot);
+                break;
+            case "301":
+            case "313":
+                var theHandle = document.getElementById('hanlde301');
+                var theRoot = document.getElementById('VentanaModal301');
                 Drag.init(theHandle, theRoot);
                 break;
         }
@@ -1106,7 +1172,7 @@ $(document).ready(function () {
                     $('#BuscarParamMaterial').show();
                     $('#ConsultaTablaMaterial').hide();
                     LimpiarPantalla('VentanaModalMaterial');
-                    mostrarVentana('VentanaModalMaterial');
+                    mostrarVentana + ('VentanaModalMaterial');
                     document.getElementById('bxtxtm').focus();
                     var theHandle = document.getElementById('handle8');
                     var theRoot = document.getElementById('VentanaModalMaterial');
@@ -3072,4 +3138,549 @@ function CerrarCalendario() {
     $('#Calenndar').css('display', 'none');
     $('#datapicker').datepicker().hide();
     $('#FecEntrega').focus();
+}
+function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
+{
+    var myTable = document.getElementById(cuerpo);
+    var arr = new Array();
+    for (i = 0; i < myTable.rows[0].cells.length; i++)
+    {
+        arr[i] = myTable.rows[0].cells[i];
+    }
+    var val = 0;
+    for (i = 0; i < arr.length; i++)
+    {
+        val += arr[i].offsetWidth;
+    }
+    var myTableCb = document.getElementById(cabecera);
+    myTableCb.style.width = val + 7 + "px";
+    var arrCb = new Array();
+    for (i = 0; i < myTableCb.rows[0].cells.length; i++)
+    {
+        arrCb[i] = myTableCb.rows[0].cells[i];
+    }
+    for (i = 0; i < arr.length - 1; i++)
+    {
+        arrCb[i].style.width = (arr[i].offsetWidth - diferiencia) + "px";
+    }
+    document.getElementById(section).style.width = val + 17 + "px";
+}
+function loadDoubleScroll(DobleSection, SecCuerpo, DobleContainer, TabBody) {
+    $("#" + DobleSection).scroll(function () {
+        $("#" + SecCuerpo).scrollTop($("#" + DobleSection).scrollTop());
+    });
+    $("#" + SecCuerpo).scroll(function () {
+        $("#" + DobleSection).scrollTop($("#" + SecCuerpo).scrollTop());
+    });
+    document.getElementById(DobleContainer).style.height = document.getElementById(TabBody).offsetHeight + "px";
+}
+function MostrarMatch(id, match, pos) {
+    QuitarMatch();
+    var cm = $('#bxClase').val();
+    $('#' + cm + id + pos).css('width', '80%');
+    $('#' + cm + match + pos).css('display', 'inline-block');
+    if (id == 'tdMater') {
+        $('#' + cm + id + pos).keypress(function (e) {
+            var tecla = (document).all ? e.keyCode : e.which;
+            if (tecla == 13) {
+
+                if ($('#' + cm + id + pos).val().length > 0) {
+//                    ValidarMAterial($('#' + id + pos).val(), pos);
+                }
+            }
+            patron = /[0-9a-zA-ZÑñ]/;
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        });
+        $('#' + cm + id + pos).blur(function () {
+            if ($('#' + cm + id + pos).val().length > 0) {
+                if (ValidarSujLoteNuevo($('#' + cm + id + pos).val(), cm) == 0) {
+                    $('#' + cm + "tdLotes" + pos).val("");
+                    $('#' + cm + "tdLotes" + pos).prop('disabled', true);
+                } else {
+                    $('#' + cm + "tdLotes" + pos).prop('disabled', false);
+                }
+                GetinfoMat($('#' + cm + id + pos).val(), cm, pos);
+            } else {
+                $('#' + clm + "tdDescr" + pos).val("");
+                $('#' + clm + "tdUmedi" + pos).val("");
+                $('#' + cm + "tdLotes" + pos).prop('disabled', false);
+            }
+        });
+    }
+}
+function QuitarMatch() {
+    clm = $('#bxClase').val();
+    var inMat = document.getElementsByName(clm + "MaterTD");
+    var inlot = document.getElementsByName(clm + "LotesTD");
+    var inCen = document.getElementsByName(clm + "CentrTD");
+    var inalm = document.getElementsByName(clm + "AlmacTD");
+    var matchMat = document.getElementsByName(clm + 'matchMaterial');
+    var matchlot = document.getElementsByName(clm + 'matchLote');
+    var matchCen = document.getElementsByName(clm + 'matchCen');
+    var matchAlm = document.getElementsByName(clm + 'matchAlma');
+
+    for (i = 0; i < inMat.length; i++) {
+        inMat[i].style.width = '100%';
+    }
+    for (i = 0; i < inlot.length; i++) {
+        inlot[i].style.width = '100%';
+    }
+    for (i = 0; i < inCen.length; i++) {
+        inCen[i].style.width = '100%';
+    }
+    for (i = 0; i < inalm.length; i++) {
+        inalm[i].style.width = '100%';
+    }
+    for (i = 0; i < matchMat.length; i++) {
+        matchMat[i].style.display = 'none';
+    }
+    for (i = 0; i < matchlot.length; i++) {
+        matchlot[i].style.display = 'none';
+    }
+    for (i = 0; i < matchCen.length; i++) {
+        matchCen[i].style.display = 'none';
+    }
+    for (i = 0; i < matchAlm.length; i++) {
+        matchAlm[i].style.display = 'none';
+    }
+}
+function AbrirMatchElemtnosGrid(VM, handle, bp, ct, pos, bus1, bus2, bus3) {
+    var BE = document.createElement('audio');
+    BE.src = "audio/sapsnd05.wav";
+    BE.play();
+    var ventana = $('#' + VM);
+    var ancho = 600;
+    var alto = 650;
+    var x = (screen.width / 2) - (ancho / 2);
+    var y = (screen.height / 2) - (alto / 2);
+    ventana.css({top: y + "px", left: x + "px"});
+    ventana.css('display', 'block');
+    borramsg();
+    $('#' + bp).css('display', 'block');
+    $('#' + ct).css('display', 'none');
+    var theHandle = document.getElementById(handle);
+    var theRoot = document.getElementById(VM);
+    Drag.init(theHandle, theRoot);
+    $('#posGrid').val(pos);
+    $('#' + bus3).val('500');
+    $('#' + bus1).val('');
+    $('#' + bus2).val('');
+    $('#' + bus1).focus();
+
+}
+function borramsg() {
+    $('#iconmsg').hide();
+    $('#msg').html("");
+}
+function ConsultaMaterialesNBuevo() {
+    var acc = "ConsultaMaterial";
+    var datos = "&Material=" + $('#busMatNuevo').val()
+            + "&Descripcion=" + encodeURIComponent($('#BusDesMatNuevo').val().trim())
+            + "&Cantidad=" + $('#numAciertosNuevo').val()
+            + "&ClaseMov=" + $('#bxClase').val();
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            if (data == 0) {
+                mensajesNuevo(0, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                $('#cargarDatosMaterialNuevo').html(data);
+                $('#BuscarParaMaterialNuevo').css('display', 'none');
+                $('#ConsultaTablaMaterialNuevo').css('display', 'block');
+                document.getElementById('table-scrollMaterialNuevo').onscroll = function () {
+                    document.getElementById('fixedYMaterialNuevo').style.top = document.getElementById('table-scrollMaterialNuevo').scrollTop + 'px';
+                };
+                borramsg();
+            }
+        }
+    });
+}
+function ocultarVentanaNuevo(id, bp, ct, obj, clm)
+{
+    var pos = $('#posGrid').val();
+    var BE = document.createElement('audio');
+    BE.src = "audio/sapsnd05.wav";
+    BE.play();
+    $('#' + id).hide();
+    if (bp != "0") {
+        $('#' + bp).css('display', 'block');
+        $('#' + ct).css('display', 'none');
+    }
+    var campo = clm + obj + pos;
+    $('#' + campo).focus();
+
+}
+function seleccionarMCNuevo(mat, descr, um, clm) {
+    var pos = $('#posGrid').val();
+    $('#' + clm + 'tdMater' + pos).val(mat);
+    $('#' + clm + 'tdDescr' + pos).val(descr);
+    $('#' + clm + 'tdUmedi' + pos).val(um);
+    ocultarVentanaNuevo('VentanaModalMaterialNuevo', 'BuscarParaMaterialNuevo', 'ConsultaTablaMaterialNuevo', 'tdMater', clm);
+}
+function seleccionarMCLoteNuevo(lote, doc, posidoc, clm) {
+    var pos = $('#posGrid').val();
+    $('#' + clm + 'tdLotes' + pos).val(lote);
+    $('#' + clm + 'tdDoc' + pos).val(doc);
+    $('#' + clm + 'tdPos' + pos).val(posidoc);
+    ocultarVentanaNuevo('VentanaModalLoteStockE', '', '', 'tdLotes', clm);
+}
+function seleccionarMCAlmNuevo(alm, clm) {
+    var pos = $('#posGrid').val();
+    $('#' + clm + 'tdAlmac' + pos).val(alm);
+    ocultarVentanaNuevo('VentanaModalAlmacenDesNuevo', '', '', 'tdAlmac', clm);
+}
+function seleccionarMCCentroNuevo(cen, clm) {
+    var pos = $('#posGrid').val();
+    $('#' + clm + 'tdCentr' + pos).val(cen);
+    ocultarVentanaNuevo('VentanaModalCentroDesNuevo', '', '', 'tdCentr', clm);
+}
+function ConsultaLotesNBuevo(pos) {
+    $('#posGrid').val(pos);
+    var clm = $('#bxClase').val();
+    var mater = $('#' + clm + 'tdMater' + pos);
+    if (mater.val().length == 0) {
+        mater.focus();
+        mensajesNuevo(1, "images/advertencia.PNG", "audio/saperror.wav");
+    } else {
+        var acc = "ConsultaLotes";
+        var datos = "&Material=" + $('#' + clm + 'tdMater' + pos).val()
+                + "&Centro=" + $('#bxCentro').val()
+                + "&Almacen=" + $('#bxAlmacen').val()
+                + "&ClaseMov=" + clm;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: 'peticionMovMateriales2',
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: "Accion=" + acc + datos,
+            success: function (data) {
+                if (data == 0) {
+                    mensajesNuevo(0, "images/aceptar.png", "audio/sapmsg.wav");
+                } else {
+                    var BE = document.createElement('audio');
+                    BE.src = "audio/sapsnd05.wav";
+                    BE.play();
+                    var ventana = $('#VentanaModalLoteStockE');
+                    var ancho = 600;
+                    var alto = 650;
+                    var x = (screen.width / 2) - (ancho / 2);
+                    var y = (screen.height / 2) - (alto / 2);
+                    ventana.css({top: y + "px", left: x + "px"});
+                    ventana.css('display', 'block');
+                    borramsg();
+                    var theHandle = document.getElementById("handleLotStockE");
+                    var theRoot = document.getElementById("VentanaModalLoteStockE");
+                    Drag.init(theHandle, theRoot);
+                    $('#cargarDatosLoteStockE').html(data);
+                    document.getElementById('table-scrollLotStokE').onscroll = function () {
+                        document.getElementById('fixedYLoteE').style.top = document.getElementById('table-scrollLotStokE').scrollTop + 'px';
+                    };
+                }
+            }
+        });
+    }
+}
+function ConsultaAlmaNBuevo(pos) {
+    $('#posGrid').val(pos);
+    var clm = $('#bxClase').val();
+    var cen = $('#bxCentro').val();
+    var acc = "ConsultaAlmacen";
+    var datos = "&ClaseMov=" + clm + "&Centro=" + cen;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            if (data == 0) {
+                mensajesNuevo(0, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                var BE = document.createElement('audio');
+                BE.src = "audio/sapsnd05.wav";
+                BE.play();
+                var ventana = $('#VentanaModalAlmacenDesNuevo');
+                var ancho = 600;
+                var alto = 650;
+                var x = (screen.width / 2) - (ancho / 2);
+                var y = (screen.height / 2) - (alto / 2);
+                ventana.css({top: y + "px", left: x + "px"});
+                ventana.css('display', 'block');
+                borramsg();
+                var theHandle = document.getElementById("handleAlmDes");
+                var theRoot = document.getElementById("VentanaModalAlmacenDesNuevo");
+                Drag.init(theHandle, theRoot);
+                $('#cargarDatosAlmacenDesNuevo').html(data);
+                document.getElementById('table-scrollAlmacenDesnuevo').onscroll = function () {
+                    document.getElementById('fixedYAlmacenDesNuevo').style.top = document.getElementById('table-scrollAlmacenDesnuevo').scrollTop + 'px';
+                };
+            }
+        }
+    });
+}
+function ConsultaCentroNuevo(pos) {
+    $('#posGrid').val(pos);
+    var clm = $('#bxClase').val();
+    var acc = "ConsultaCentro";
+    var datos = "&ClaseMov=" + clm;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            if (data == 0) {
+                mensajesNuevo(0, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                var BE = document.createElement('audio');
+                BE.src = "audio/sapsnd05.wav";
+                BE.play();
+                var ventana = $('#VentanaModalCentroDesNuevo');
+                var ancho = 600;
+                var alto = 650;
+                var x = (screen.width / 2) - (ancho / 2);
+                var y = (screen.height / 2) - (alto / 2);
+                ventana.css({top: y + "px", left: x + "px"});
+                ventana.css('display', 'block');
+                borramsg();
+                var theHandle = document.getElementById("handleCentDes");
+                var theRoot = document.getElementById("VentanaModalCentroDesNuevo");
+                Drag.init(theHandle, theRoot);
+                $('#cargarDatosCentroDesNuevo').html(data);
+                document.getElementById('table-scrollCenDesuevo').onscroll = function () {
+                    document.getElementById('fixedYCenDesNuevo').style.top = document.getElementById('table-scrollCenDesuevo').scrollTop + 'px';
+                };
+            }
+        }
+    });
+}
+function CargarTablaMovss() {
+    var centro = $('#bxCentro').val();
+    var clm = $('#bxClase').val();
+    var acc = "CargarTablaMovs";
+    var datos = "&Centro=" + centro + "&ClaseMov=" + clm;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            $('#SecCuerpo301').html(data);
+        }
+    });
+}
+function AgregarFilasTabla301() {
+    var Ctro = "";
+    var Value = "";
+    var dis = "";
+    var dis2 = "";
+    $('#TempRod').remove();
+    var ClaseM = $('#bxClase').val().trim();
+    var Centro = $('#bxCentro').val().trim();
+    var nam12 = ClaseM + 'chkbox';
+    var ch = document.getElementsByName(nam12);
+    var valor = ch[ch.length - 1].value;
+    var i = parseInt(valor) + 1;
+    if (ClaseM === "301") {
+        Value = "1800";
+        dis = "disabled";
+    }
+    if (ClaseM === "313") {
+        Ctro = Centro;
+        dis2 = "disabled";
+    }
+    var newfiladata
+            = "<tr>"
+            + "<td><input type=\"checkbox\" name=\"" + ClaseM + "chkbox\" value=\"" + i + "\"/></td>"
+            + "<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdMater" + i + "\" name=\"" + ClaseM + "MaterTD\" onfocus=\"MostrarMatch('tdMater', 'MCMaterial', '" + i + "')\" maxlength=\"40\" style=\"text-transform: uppercase\"/><button id=\"" + ClaseM + "MCMaterial" + i + "\" onclick=\"AbrirMatchElemtnosGrid('VentanaModalMaterialNuevo', 'handleMatNuevo', 'BuscarParaMaterialNuevo', 'ConsultaTablaMaterialNuevo', '" + i + "', 'busMatNuevo', 'BusDesMatNuevo', 'numAciertosNuevo')\" name=\"" + ClaseM + "matchMaterial\" class='BtnMatchIconGrid'></button></td>"
+            + "<td><input type=\"text\" class=\"tdSMatch\" id=\"" + ClaseM + "tdDescr" + i + "\" name=\"" + ClaseM + "DesciTD\" onfocus=\"QuitarMatch()\" readOnly/></td>"
+            + "<td><input type=\"text\" class=\"tdSMatch\" id=\"" + ClaseM + "tdUmedi" + i + "\" name=\"" + ClaseM + "UMediTD\" onfocus=\"QuitarMatch()\" readOnly/></td>"
+            + "<td><input type=\"text\" class=\"tdSMatch\" id=\"" + ClaseM + "tdCanti" + i + "\" name=\"" + ClaseM + "CantiTD\" onblur=\"this.value = checkDec(this.value, 3)\" onKeyPress=\"return soloNumeros(event)\" onfocus=\"QuitarMatch()\"/></td>"
+            + "<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdLotes" + i + "\" name=\"" + ClaseM + "LotesTD\" onfocus=\"MostrarMatch('tdLotes', 'MCLote', '" + i + "')\" maxlength=\"10\" style=\"text-transform: uppercase\"/><input hidden type=\"text\" id=\"" + ClaseM + "tdDoc" + i + "\" name=\"" + ClaseM + "DocTD\"/><input hidden type=\"text\" id=\"" + ClaseM + "tdPos" + i + "\" name=\"" + ClaseM + "PosTD\"/><button id=\"" + ClaseM + "MCLote" + i + "\" onclick=\"ConsultaLotesNBuevo('" + i + "');\" name=\"" + ClaseM + "matchLote\" class='BtnMatchIconGrid'></button></td>"
+            + "<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdCentr" + i + "\" name=\"" + ClaseM + "CentrTD\" onfocus=\"MostrarMatch('tdCentr', 'MCCen', '" + i + "')\" maxlength=\"4\" style=\"text-transform: uppercase\" value=\"" + Ctro + "\" " + dis2 + "/><button id=\"" + ClaseM + "MCCen" + i + "\" onclick=\"ConsultaCentroNuevo('" + i + "')\" name=\"" + ClaseM + "matchCen\" class='BtnMatchIconGrid'></button></td>"
+            + "<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdAlmac" + i + "\" name=\"" + ClaseM + "AlmacTD\" onfocus=\"MostrarMatch('tdAlmac', 'MCAlm', '" + i + "')\" maxlength=\"4\" style=\"text-transform: uppercase\" value=\"" + Value + "\" " + dis + "/><button id=\"" + ClaseM + "MCAlm" + i + "\" onclick=\"ConsultaAlmaNBuevo('" + i + "')\" name=\"" + ClaseM + "matchCen\" class='BtnMatchIconGrid'></button></td>"
+            + "</tr>";
+    var tempro = "<tr id=\"TempRod\" class=\"ocultar\"><td>0000</td><td>000000000000000</td><td>000000000000000000000000000000</td><td>0000000</td><td>00000000000000</td><td>000000000000000</td><td>00000000000000000</td><td>0000000000000000</td></tr>";
+    $('#TabBody301').append(newfiladata);
+    $('#TabBody301').append(tempro);
+    loadDoubleScroll("DobleSection301", "SecCuerpo301", "DobleContainer301", "TabBody301");
+}
+function EliminarFilas301() {
+    var table = document.getElementById("TabBody301");
+    var ClaseM = $('#bxClase').val().trim();
+    var nam12 = ClaseM + 'chkbox';
+    var chk = document.getElementsByName(nam12);
+    var tam = chk.length;
+    var i = tam;
+    while (i >= 0) {
+        if (i == 0) {
+            break;
+        } else {
+            var o = parseInt(i) - 1;
+            if (chk[o].checked)
+            {
+                table.deleteRow(o);
+                i--;
+            } else {
+                i--;
+            }
+
+        }
+    }
+}
+function Validarmovis() {
+    var ClaseM = $('#bxClase').val().trim();
+    var Centro = $('#bxCentro').val().trim();
+    var Almace = $('#bxAlmacen').val().trim();
+    var Materi = document.getElementsByName(ClaseM + 'MaterTD');
+    var Lote = document.getElementsByName(ClaseM + 'LotesTD');
+    var Canti = document.getElementsByName(ClaseM + 'CantiTD');
+    var Centr = document.getElementsByName(ClaseM + 'CentrTD');
+    var Almac = document.getElementsByName(ClaseM + 'AlmacTD');
+    var Docum = document.getElementsByName(ClaseM + 'DocTD');
+    var Posic = document.getElementsByName(ClaseM + 'PosTD');
+//    switch (ClaseM) {
+//        case "301":
+    var lon = 0;
+    for (i = 0; i < Materi.length; i++) {
+        if (Materi[i].value.length != 0) {
+            lon = lon + 1;
+        }
+        if (lon == 0) {
+            mensajesNuevo(2, "images/advertencia.PNG", "audio/saperror.wav");
+            return;
+        }
+        if (Materi[i].value.length > 0) {
+            if (Canti[i].value.length == 0) {
+                mensajesNuevo(5, "images/advertencia.PNG", "audio/saperror.wav");
+                Canti[i].focus();
+                return;
+            }
+            if (ValidarSujLoteNuevo(Materi[i].value, ClaseM) == 1 && Lote[i].value.length == 0) {
+                mensajesNuevo(4, "images/advertencia.PNG", "audio/saperror.wav");
+                Lote[i].focus();
+                return;
+            }
+            if (ClaseM === "301") {
+                if (Centr[i].value.length == 0) {
+                    mensajesNuevo(6, "images/advertencia.PNG", "audio/saperror.wav");
+                    Centr[i].focus();
+                    return;
+                }
+            }
+            if (ClaseM === "313") {
+                if (Almac[i].value.length == 0) {
+                    mensajesNuevo(9, "images/advertencia.PNG", "audio/saperror.wav");
+                    Almac[i].focus();
+                    return;
+                }
+            }
+            var resu = ValidarExistenciasMatenuevo(Materi[i].value, Centro, Almace, Lote[i].value.trim(), Docum[i].value.trim(), Posic[i].value.trim(), Canti[i].value.trim(), ClaseM);
+            if (resu == 0) {
+                mensajesNuevo(7, "images/advertencia.PNG", "audio/saperror.wav");
+                Canti[i].focus();
+                return;
+            }
+            if (resu == 1) {
+                mensajesNuevo(8, "images/advertencia.PNG", "audio/saperror.wav");
+                Canti[i].focus();
+                return;
+            }
+            var hab = ValidaMaterialHabilitado(Materi[i].value.trim());
+            alert(hab);
+            if (hab == 0) {
+                mensajesNuevo(10, "images/advertencia.PNG", "audio/saperror.wav");
+                Materi[i].focus();
+                return;
+            }
+        }
+    }
+//            break;
+//    }
+}
+function GetinfoMat(mat, clm, pos) {
+    var acc = "CargarInfoMaterial";
+    var datos = "&Material=" + mat + "&ClaseMov=" + clm;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        dataType: 'json',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            if (data == 0) {
+                $('#' + clm + "tdMater" + pos).val("");
+                $('#' + clm + "tdDescr" + pos).val("");
+                $('#' + clm + "tdUmedi" + pos).val("");
+                $('#' + clm + "tdMater" + pos).focus();
+                mensajesNuevo(3, "images/advertencia.PNG", "audio/saperror.wav");
+            } else {
+                $('#' + clm + "tdDescr" + pos).val(data[1]);
+                $('#' + clm + "tdUmedi" + pos).val(data[2]);
+            }
+        }
+    });
+}
+function ValidarSujLoteNuevo(mat, clm) {
+    var rt = 0;
+    var acc = "ValidarSujetoLote";
+    var datos = "&Material=" + mat + "&ClaseMov=" + clm;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            if (data == 1) {
+                rt = 1;
+            }
+        }
+    });
+    return rt;
+
+}
+function ValidarExistenciasMatenuevo(mat, cen, alm, lot, doc, pos, can, clm) {
+    var res = 0;
+    var acc = "ValidarExistencia";
+    var datos = "&Material=" + mat + "&ClaseMov=" + clm
+            + "&Centro=" + cen + "&Almacen=" + alm
+            + "&Lote=" + lot + "&Documento=" + doc
+            + "&Posicion=" + pos + "&CantidadGrid=" + can;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            if (data != 0) {
+                var v1 = parseFloat(can);
+                var v2 = parseFloat(data);
+                if (v1 > v2) {
+                    res = 1;
+                } else {
+                    res = 2;
+                }
+            }
+
+        }
+    });
+    return res;
 }
