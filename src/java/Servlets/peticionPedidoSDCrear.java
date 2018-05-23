@@ -61,6 +61,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
             String sector = request.getParameter("sector");
             String solic = request.getParameter("solicitante");
             String desti = request.getParameter("destinatario");
+            String vende = request.getParameter("Vendedor");
 
             ////// Variables de guardado  /////
             String CLASE = request.getParameter("CLASE");
@@ -95,7 +96,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < cpe.size(); i++) {
-                            out.println("<tr ondblclick=\"SeleccionarData('" + cpe.get(i).getClase_documento_ventas() + "','VentanaModalClasePedido','ClasePedido')\" >");
+                            out.println("<tr ondblclick=\"SeleccionarData('" + cpe.get(i).getClase_documento_ventas() + "','VentanaModalClasePedido','ClasePedido','" + cpe.get(i).getDenominacion() + "','txtClasePedido')\" >");
                             out.println("<td>" + cpe.get(i).getClase_documento_ventas() + "</td>");
                             out.println("<td>" + cpe.get(i).getDenominacion() + "</td>");
                             out.println("</tr>");
@@ -110,14 +111,14 @@ public class peticionPedidoSDCrear extends HttpServlet {
                 case "ConsultarClientes":
                     String pro = "";
                     if (tipo.equals("solicitante")) {
-                        pro = "{call SD.CrearPedidos_ConsultaClientes(?,?,?)}";
+                        pro = "{call SD.CrearPedidos_ConsultaClientes(?,?,?,?)}";
                     } else if (tipo.equals("destinatario")) {
                         pro = "{call SD.CrearPedidos_ConsultaDestinatario(?,?,?)}";
                     } else {
                         pro = "";
                     }
                     if (pro != "") {
-                        ArrayList<clientes> cli = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, nombre, Canti, pro);
+                        ArrayList<clientes> cli = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, nombre, Canti, pro, vende);
                         if (cli.size() > 0) {
                             out.println("<table>");
                             out.println("<tbody>");
@@ -194,7 +195,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < ofic.size(); i++) {
-                            out.println("<tr ondblclick=\"SeleccionarData('" + ofic.get(i).getOficina_ventas() + "','VentanaModalOficinaVentas','OficinaVentas')\" >");
+                            out.println("<tr ondblclick=\"SeleccionarData('" + ofic.get(i).getOficina_ventas() + "','VentanaModalOficinaVentas','OficinaVentas','" + ofic.get(i).getDenominacion() + "','txtOficinaVentas')\" >");
                             out.println("<td>" + ofic.get(i).getOficina_ventas() + "</td>");
                             out.println("<td>" + ofic.get(i).getDenominacion() + "</td>");
                             out.println("</tr>");
@@ -245,7 +246,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < mat.size(); i++) {
-                            out.println("<tr ondblclick=\"SelectData('" + mat.get(i).getMaterial() + "','VentanaModalMateriales','BuscarParMateriales','ConsultaTablaMateriales','tdMater')\" >");
+                            out.println("<tr ondblclick=\"SelectData('" + mat.get(i).getMaterial() + "','VentanaModalMateriales','BuscarParMateriales','ConsultaTablaMateriales','tdMater','" + mat.get(i).getDescripcion() + "','" + mat.get(i).getUnidad_medida_base() + "')\" >");
                             out.println("<td>" + mat.get(i).getMaterial() + "</td>");
                             out.println("<td>" + mat.get(i).getDescripcion() + "</td>");
                             out.println("</tr>");
@@ -258,7 +259,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
 
                     break;
                 case "CargarCliente":
-                    String[] car = ACC_CrearPedidoSD.ObtenerInstancia().CargarCliente(client);
+                    String[] car = ACC_CrearPedidoSD.ObtenerInstancia().CargarCliente(client, vende);
                     if (car[0] == null || car[0] == "") {
                         out.println(0);
                     } else {
@@ -328,18 +329,25 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     break;
                 case "CargarDesRelac":
                     String sql = "{call SD.CrearPedidos_ConsultaDestinatario(?,?,?)}";
-                    ArrayList<clientes> datcl = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, "", "", sql);
+                    ArrayList<clientes> datcl = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, "", "", sql,"");
                     JSONArray ci = new JSONArray();
-                    if(datcl.size()>0){
+                    if (datcl.size() > 0) {
                         ci.add(datcl.get(0).getIdCliente());
                         ci.add(datcl.get(0).getNombre1());
                         out.println(ci);
-                    }else{
+                    } else {
                         ci.add("");
                         ci.add("");
                         out.println(ci);
                     }
-                    
+                    break;
+                case "VerificarAccesoVendedor":
+                    grupo_vendedores gr = ACC_CrearPedidoSD.ObtenerInstancia().VerificarAccVendedort(vende);
+                    if (!gr.getGrupo_vendedores().isEmpty()) {
+                        out.println(gr.getGrupo_vendedores() + "-" + gr.getDenominacion());
+                    } else {
+                        out.println(0);
+                    }
                     break;
 
             }
