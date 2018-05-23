@@ -476,12 +476,11 @@
                             </table>
                         </section>
                         <section class="SecBody" id="SecCuerpo">
-
                         </section>
                     </section>
                     <section>
                         <input id="BorrarFila" onclick="Verificar305();" type="image" src="images/DELETEADD.PNG"/>
-                        <input id="AgregarFila" onclick="AgregaPos();" class="addFila" type="image" src="images/ADD.PNG"/>
+                        <input id="AgregarFila" oynclick="AgregaPos();" class="addFila" type="image" src="images/ADD.PNG"/>
                     </section>
                 </div>
                 <div class="Botones_Match">
@@ -1391,6 +1390,173 @@
                 <img class="BtnMatchIconBut" id="calenimg" src="images/S_B_CANC.gif" style="cursor:pointer;"/>
             </div>
         </div>
+
+        <!--            ///////////////////////// Nuevos Movimientos /////////////
+                    
+                    
+                    ///////////////////////// 301  /////////////////////////////-->
+        <div id="VentanaModal301" class="VentanaModal301">
+            <div id="hanlde301"><label id="TituloMatch" class="Titles"></label></div>
+            <br><div id="BuscarParam303" class="BuscarParam_u">
+                <div class="fondo_Match301">
+                    <div class="DivTabla301">
+                        <div id="tabscrll301">
+                            <section id="TableCom301" >
+                                <section class="TableContainer301">
+                                    <section class="SecHead301">
+                                        <table id="TabHead301">
+                                            <thead>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Material</td>
+                                                    <td>Descripción</td>
+                                                    <td>U.M.</td>
+                                                    <td>Cantidad</td>
+                                                    <td>Lote</td>
+                                                    <td>Cen.Dest.</td>
+                                                    <td>Alm.Dest.</td>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </section>
+                                    <section class="SecBody301" id="SecCuerpo301">
+                                       
+                                    </section>
+                                </section>
+                            </section>
+                        </div>
+                        <section class="DobleScroll301" id="DobleSection301">
+                            <section id="DobleContainer301"></section>
+                        </section>
+                    </div>
+                    <section id="botonesadddel">
+                        <input id="AgregarFilas301" type="image" src="images/ADD.PNG" style="vertical-align: middle"/>
+                        <input id="BorrarFilas301" type="image" src="images/DELETEADD.PNG" style="padding-top: 1px; vertical-align: middle; margin-left: -1%;"/>
+                    </section>
+                </div>
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" onclick="Validarmovis()"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('VentanaModal301', 'btnAdd', 'm');"/>
+                </div>
+            </div>
+        </div>
+        <input hidden type="text" id="posGrid">
+        <div id="VentanaModalMaterialNuevo" class="VentanaModal">
+            <div id="handleMatNuevo"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.STOCKNumMaterial"));%> (1)</label><div class="BotonCerrar_Matc" id="CerrarMCMatNuevo"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button id="btnPnMaterialNuevo"><%out.println(po.getProperty("etiqueta.NTextBDocVlD"));%></button><hr></div>
+            <div id="BuscarParaMaterialNuevo" class="BuscarParam_u">
+                <div class="fondo_Match">
+                    <div class="busquedaMatch">
+                        <label><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></label><input type="text" maxlength="40" id="busMatNuevo" style="width:30%;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%></label><input type="text" maxlength="40" id="BusDesMatNuevo" style="width:50%;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAciertosNuevo" style="width:10%;"/>
+                        <hr>
+                    </div>        
+                </div>
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okMaterialNuevo"/>              
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" id="CerrarMCMatNuevo2"/>
+                </div>
+            </div>
+            <div id="ConsultaTablaMaterialNuevo" style="display: none;">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollMaterialNuevo">
+                        <div class="fixedY" id="fixedYMaterialNuevo">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosMaterialNuevo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="VentanaModalLoteStockE" class="VentanaModalLoteL">
+            <div id="handleLotStockE"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LoteMa_Mov"));%></label><div class="BotonCerrar_Matc" id="CerrarMCLoteStockE"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="ConsultaTablaLoteStckE">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollLotStokE">
+                        <div class="fixedYL" id="fixedYLoteE">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Material</th>
+                                        <th>Lote</th>
+                                        <th>L.U</th>
+                                        <th>Num.Doc</th>
+                                        <th>Pos.</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedXL" id="cargarDatosLoteStockE">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div id="VentanaModalAlmacenDesNuevo" class="VentanaModal">
+            <div id="handleAlmDes"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.RESAlamcene"));%></label><div class="BotonCerrar_Matc" id="CerrarMCAlmDesNuevo" ><label >X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="ConsultaTablaAlmacen">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollAlmacenDesnuevo">
+                        <div class="fixedY" id="fixedYAlmacenDesNuevo">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Centro</th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralAlmacenAll"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosAlmacenDesNuevo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div id="VentanaModalCentroDesNuevo" class="VentanaModal">
+            <div id="handleCentDes"><label id="TituloMatch">Centro</label><div class="BotonCerrar_Matc" id="CerrarMCCenDesNuevo" ><label >X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="ConsultaTablaCentro">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollCenDesuevo">
+                        <div class="fixedY" id="fixedYCenDesNuevo">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Centro</th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralDenominacion"));%></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosCentroDesNuevo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <%
             htmlResponse = html.imprimirTablaCabLotInsp();
             out.println(htmlResponse);
@@ -1450,7 +1616,7 @@
                     };
 
                     function bloq() {
-                        document.getElementById('iconmsg').style.visibility = "hidden";
+                        $('#iconmsg').hide();
                     }
                     function msgWindo123(ven, num) {
                         msg = "";
@@ -1519,6 +1685,9 @@
                             case "262":
                                 title[2].innerHTML = motit + " 262";
                                 break;
+                            case "301":
+                                title[7].innerHTML = motit + " 301";
+                                break;
                             case "303":
                                 title[4].innerHTML = motit + " 303";
                                 break;
@@ -1532,22 +1701,30 @@
                             case "312":
                                 title[5].innerHTML = motit + " 312";
                                 break;
+                            case "313":
+                                title[7].innerHTML = motit + " 313";
+                                break;
+                            case "315":
+//                                title[5].innerHTML = motit + " 315";
+                                break;
                         }
                     }
                     function inv() {
                         var funinva = "<%=funcioninv%>";
-                        var iconm = document.getElementById("iconmsg");
-                        iconm.style.visibility = "visible";
-                        iconm.src = "images/advertencia.PNG";
+                        im = "images/advertencia.PNG";
+                        var icon = $('#iconmsg');
+                        icon.show();
+                        icon.attr('src', im);
                         var men = document.getElementById("msg");
                         men.innerHTML = funinva;
                     }
                     function inval()
                     {
                         var funinva = "<%=CampoOb%>";
-                        var iconm = document.getElementById("iconmsg");
-                        iconm.style.visibility = "visible";
-                        iconm.src = "images/advertencia.PNG";
+                        im = "images/advertencia.PNG";
+                        var icon = $('#iconmsg');
+                        icon.show();
+                        icon.attr('src', im);
                         var men = document.getElementById("msg");
                         men.innerHTML = funinva;
                         var temp = new Array();
@@ -1569,9 +1746,10 @@
                     function invalV(c, a, cl)
                     {
                         var funinva = "<%=menValores%>";
-                        var iconm = document.getElementById("iconmsg");
-                        iconm.style.visibility = "visible";
-                        iconm.src = "images/advertencia.PNG";
+                        im = "images/advertencia.PNG";
+                        var icon = $('#iconmsg');
+                        icon.show();
+                        icon.attr('src', im);
                         var men = document.getElementById("msg");
                         men.innerHTML = funinva;
                         var f1 = document.getElementById("bxCentro");
@@ -1593,17 +1771,19 @@
                     }
                     function invalido(funinva)
                     {
-                        var iconm = document.getElementById("iconmsg");
-                        iconm.style.visibility = "visible";
-                        iconm.src = "images/aceptar.png";
+                        im = "images/aceptar.png";
+                        var icon = $('#iconmsg');
+                        icon.show();
+                        icon.attr('src', im);
                         var men = document.getElementById("msg");
                         men.innerHTML = funinva;
                     }
                     function invalidoAd(funinva)
                     {
-                        var iconm = document.getElementById("iconmsg");
-                        iconm.style.visibility = "visible";
-                        iconm.src = "images/advertencia.PNG";
+                        im = "images/advertencia.PNG";
+                        var icon = $('#iconmsg');
+                        icon.show();
+                        icon.attr('src', im);
                         var men = document.getElementById("msg");
                         men.innerHTML = funinva;
                     }
@@ -1782,6 +1962,12 @@
                                 var ven = document.getElementById(t);
                                 abrirVentana200(ven);
                                 document.getElementById("bxMaterial" + tmov).focus();
+                                break;
+                            case "VentanaModal301":
+                                descm();
+                                var ven = document.getElementById(t);
+                                CargarTablaMovss();
+                                abrirVentana301(ven);
                                 break;
                             case "VentanaModal305":
                                 descm();
@@ -2104,6 +2290,18 @@
                         ventana.style.top = y + "px";
                         ventana.style.display = 'block';
                     }
+                    function abrirVentana301(ventana)
+                    {
+                        var ancho = 1100;
+                        var alto = 600;
+                        var x = (screen.width / 2) - (ancho / 2);
+                        var y = (screen.height / 2) - (alto / 2);
+                        ventana.style.left = x + "px";
+                        ventana.style.top = y + "px";
+                        ventana.style.display = 'block';
+                        loadDoubleScroll("DobleSection301", "SecCuerpo301", "DobleContainer301", "TabBody301");
+        AjustarCabecera('TabHead301', 'TabBody301', 8, 'SecCuerpo301');
+                    }
                     function abrirVentana200(ventana)
                     {
                         var ancho = 1050;
@@ -2150,7 +2348,7 @@
                         var ventana = document.getElementById(ven);
                         ventana.style.display = 'none';
                         document.getElementById("msg").innerHTML = "";
-                        document.getElementById("iconmsg").style.visibility = "hidden";
+                        $('#iconmsg').hide();
                         try {
                             var txt = document.getElementById(id);
                             txt.focus();
@@ -2301,7 +2499,7 @@
                                 } else {
                                     document.getElementById("txtMat" + id).innerHTML = data.trim();
                                     document.getElementById("msg").innerHTML = "";
-                                    document.getElementById("iconmsg").style.visibility = "hidden";
+                                    $('#iconmsg').hide();
                                 }
                             }
                         });
@@ -2331,7 +2529,7 @@
                                     document.getElementById("txtAD" + id).innerHTML = temp[3].trim();
 
                                     document.getElementById("msg").innerHTML = "";
-                                    document.getElementById("iconmsg").style.visibility = "hidden";
+                                    $('#iconmsg').hide();
                                     ObtenerLote300(id);
                                 }
                             }
@@ -2363,7 +2561,7 @@
                                     $('#bxUM' + cl).css('background-image', 'none');
                                     document.getElementById("txtMaterial" + cl).innerHTML = data;
                                     document.getElementById("msg").innerHTML = "";
-                                    document.getElementById("iconmsg").style.visibility = "hidden";
+                                    $('iconmsg').hide();
                                 }
                             }
                         });
@@ -2610,9 +2808,11 @@
                                 temp = xmlhttp.responseText.split(",");
                                 if (temp[0] == 0) {
                                     ocultarVentana(temp[1], temp[2]);
-                                    var iconm = document.getElementById("iconmsg");
-                                    iconm.style.visibility = "visible";
-                                    iconm.src = "images/advertencia.PNG";
+
+                                    var iconm = $('#iconmsg');
+                                    iconm.show();
+                                    im = "images/advertencia.PNG";
+                                    icon.attr('src', im);
                                     var men = document.getElementById("msg");
                                     men.innerHTML = "No hay valores por mostrar";
                                 } else {
@@ -2658,6 +2858,10 @@
                                         case "262":
                                             mostrarVentana('VentanaModal261');
                                             break;
+                                        case "301":
+                                        case "313":
+                                            mostrarVentana('VentanaModal301');
+                                            break;
                                         case "303":
                                             mostrarVentana('VentanaModal303');
                                             break;
@@ -2692,7 +2896,7 @@
                                     {
                                         document.getElementById("txtMaterial").innerHTML = xmlhttp.responseText;
                                         document.getElementById("msg").innerHTML = "";
-                                        document.getElementById("iconmsg").style.visibility = "hidden";
+                                        $('#iconmsg').hide();
                                     }
                                 }
                             };
@@ -2974,10 +3178,10 @@
                         }
                         ValidaMaterialHabilitado(r1[c].value);
                         if (habl === 0) {
-                            var iconm = document.getElementById("iconmsg");
-                            iconm.style.display = "inline";
-                            iconm.style.visibility = "visible";
-                            iconm.src = "images/advertencia.PNG";
+                            var icon = $('#iconmsg');
+                            icon.show();
+                            im = "images/advertencia.PNG";
+                            icon.attr('src', im);
                             var men = document.getElementById("msg");
                             men.innerHTML = "Material inhabilitado";
                             r1[c].focus();
@@ -3491,10 +3695,10 @@
                         if (parseInt(r2[cc].value) > 0) {
                             ValidaMaterialHabilitado(r1[cc].textContent);
                             if (habl === 0) {
-                                var iconm = document.getElementById("iconmsg");
-                                iconm.style.display = "inline";
-                                iconm.style.visibility = "visible";
-                                iconm.src = "images/advertencia.PNG";
+                                var icon = $('#iconmsg');
+                                icon.show();
+                                im = "images/advertencia.PNG";
+                                icon.attr('src', im);
                                 var men = document.getElementById("msg");
                                 men.innerHTML = "Material inhabilitado";
                                 r2[cc].focus();
@@ -3868,12 +4072,12 @@
                                         inval();
                                     } else {
                                         document.getElementById("msg").innerHTML = "";
-                                        document.getElementById("iconmsg").style.visibility = "hidden";
+                                        $('#iconmsg').hide();
                                         ValidarCampos(clase);
                                     }
                                 } else {
                                     document.getElementById("msg").innerHTML = "";
-                                    document.getElementById("iconmsg").style.visibility = "hidden";
+                                    $('#conmsg').hide();
                                     ValidarCampos(clase);
                                 }
                             }
@@ -4149,12 +4353,12 @@
                             if (vl === document.getElementById('bxPerfilC').value && document.getElementById('bxPerfilC').value != "") {
                                 MatchCod9(i);
                                 document.getElementById("msg").innerHTML = "";
-                                document.getElementById("iconmsg").style.visibility = "hidden";
+                                $('#iconmsg').hide();
                             } else {
-                                var iconm = document.getElementById("iconmsg");
-                                iconm.style.display = "inline";
-                                iconm.style.visibility = "visible";
-                                iconm.src = "images/advertencia.PNG";
+                                var icon = $('#iconmsg');
+                                icon.show();
+                                im = "images/advertencia.PNG";
+                                icon.attr('src', im);
                                 var men = document.getElementById("msg");
                                 men.innerHTML = "Grupo códigos " + vl + " contradice los grupos de códigos del perfil de catálogo";
                             }
@@ -4298,10 +4502,10 @@
                                 for (i = 0; i < lote.length; i++) {
                                     ValidaMaterialHabilitado(mat[i].textContent);
                                     if (habl === 0) {
-                                        var iconm = document.getElementById("iconmsg");
-                                        iconm.style.display = "inline";
-                                        iconm.style.visibility = "visible";
-                                        iconm.src = "images/advertencia.PNG";
+                                        var icon = $('#iconmsg');
+                                        im = "images/advertencia.PNG";
+                                        icon.show();
+                                        icon.attr('src', im);
                                         var men = document.getElementById("msg");
                                         men.innerHTML = "Material inhabilitado";
                                         porrc[i].focus();
@@ -4500,9 +4704,8 @@
                                     Drag.init(theHandle, theRoot);
                                     LimpiarPpal("LimpiarPpal");
                                 } else {
-                                    var iconm = document.getElementById("iconmsg");
-                                    iconm.style.display = "none";
-                                    iconm.style.visibility = "hidden";
+
+                                    $('#iconmsg').hide();
                                     var men = document.getElementById("msg");
                                     men.innerHTML = "";
                                     var ven = document.getElementById('VentanaModalAv');
@@ -4534,9 +4737,7 @@
                                     Drag.init(theHandle, theRoot);
                                     LimpiarPpal("LimpiarPpal");
                                 } else {
-                                    var iconm = document.getElementById("iconmsg");
-                                    iconm.style.display = "none";
-                                    iconm.style.visibility = "hidden";
+                                    $('#iconmsg').hide();
                                     var men = document.getElementById("msg");
                                     men.innerHTML = "";
                                     var ven = document.getElementById('VentanaModalAv');
@@ -4568,9 +4769,7 @@
                                     Drag.init(theHandle, theRoot);
                                     LimpiarPpal("LimpiarPpal");
                                 } else {
-                                    var iconm = document.getElementById("iconmsg");
-                                    iconm.style.display = "none";
-                                    iconm.style.visibility = "hidden";
+                                    $('#iconmsg');
                                     var men = document.getElementById("msg");
                                     men.innerHTML = "";
                                     var ven = document.getElementById('VentanaModalAv');
@@ -5251,10 +5450,10 @@
                             beforeSend: function () {
                                 $("button").prop("disabled", true);
                                 $("input").prop("disabled", true);
-                                var iconm = document.getElementById("iconmsg");
-                                iconm.style.display = "inline";
-                                iconm.style.visibility = "visible";
-                                iconm.src = "images/load.gif";
+                                var icon = $('#iconmsg');
+                                icon.show();
+                                im = "images/load.gif";
+                                icon.attr('src', im);
                                 var men = document.getElementById("msg");
                                 men.innerHTML = "Espere un momento por favor......";
                             },
@@ -5290,10 +5489,10 @@
                             error: function (xhr, status) {
                                 $("input").prop("disabled", false);
                                 $("button").prop("disabled", false);
-                                var iconm = document.getElementById("iconmsg");
-                                iconm.style.display = "inline";
-                                iconm.style.visibility = "visible";
-                                iconm.src = "images/advertencia.PNG";
+                                var icon = $('#iconmsg');
+                                im = "images/advertencia.PNG";
+                                icon.show();
+                                icon.attr('src', im);
                                 var men = document.getElementById("msg");
                                 men.innerHTML = "Error de respuesta";
                             }
@@ -5503,10 +5702,10 @@
                         }
                         if (cadena === "")
                         {
-                            var iconm = document.getElementById("iconmsg");
-                            iconm.style.display = "inline";
-                            iconm.style.visibility = "visible";
-                            iconm.src = "images/aceptar.png";
+                            var icon = $('#iconmsg');
+                            im = "images/aceptar.png";
+                            icon.show();
+                            icon.attr('src', im);
                             var men = document.getElementById("msg");
                             men.innerHTML = "No es necesario grabar";
                             return;
@@ -5531,10 +5730,10 @@
                                     if (temp[1] == 0) {
                                         vl = e[pos].value;
                                     }
-                                    var iconm = document.getElementById("iconmsg");
-                                    iconm.style.display = "inline";
-                                    iconm.style.visibility = "visible";
-                                    iconm.src = "images/advertencia.PNG";
+                                    var icon = $('#iconmsg');
+                                    icon.show();
+                                    im = "images/advertencia.PNG";
+                                    icon.attr('src', im);
                                     var men = document.getElementById("msg");
                                     men.innerHTML = "Grupo códigos " + vl + " contradice los grupos de códigos del perfil de catálogo";
                                 } else {
@@ -5565,10 +5764,10 @@
                                         $("#SecCuerpoCld2").find(":text").prop('disabled', true);
                                         $("#btnCld3").prop('disabled', true);
                                         $("#btnCld4").prop('disabled', true);
-                                        var iconm = document.getElementById("iconmsg");
-                                        iconm.style.display = "inline";
-                                        iconm.style.visibility = "visible";
-                                        iconm.src = "images/aceptar.png";
+                                        var icon = $('#iconmsg');
+                                        im = "images/aceptar.png";
+                                        icon.show();
+                                        icon.attr('src', im);
                                         var men = document.getElementById("msg");
                                         men.innerHTML = "Se graban los datos de defectos p. lote de insp. QM" + document.getElementById('bxLoteInspCal').value;
                                     }
@@ -5906,9 +6105,10 @@
                     }
                     function invalR() {
                         var funinva = "<%=menValores%>";
-                        var iconm = document.getElementById("iconmsg");
-                        iconm.style.visibility = "visible";
-                        iconm.src = "images/advertencia.PNG";
+                        var icon = $('#iconmsg');
+                        icon.show();
+                        im = "images/advertencia.PNG";
+                        icon.attr('src', im);
                         var men = document.getElementById("msg");
                         men.innerHTML = funinva;
                     }
@@ -6275,8 +6475,7 @@
 
                     }
                     function borrarmsg() {
-                        var iconm = document.getElementById("iconmsg");
-                        iconm.style.visibility = "hidden";
+                        $('#iconmsg').hide();
                         var men = document.getElementById("msg");
                         men.innerHTML = "";
                     }
@@ -6284,9 +6483,10 @@
                         var BE = document.createElement('audio');
                         BE.src = "audio/saperror.wav";
                         BE.play();
-                        var iconm = document.getElementById("iconmsg");
-                        iconm.style.visibility = "visible";
-                        iconm.src = "images/advertencia.PNG";
+                        var icon = $('#iconmsg');
+                        im = "images/advertencia.PNG";
+                        icon.show();
+                        icon.attr('src', im);
                         var men = document.getElementById("msg");
                         men.innerHTML = msg;
                     }
@@ -6612,6 +6812,55 @@
                                 }
                             }
                         });
+                    }
+                    function mensajesNuevo(msg, img, au)
+                    {
+                        var funinva = "";
+                        switch (msg)
+                        {
+                            case 0:
+                                funinva = "No existen valores para esta selección";
+                                break;
+                            case 1:
+                                funinva = "Material obligatorio";
+                                break;
+                            case 2:
+                                funinva = "Ingrese Materiales en la tabla";
+                                break;
+                            case 3:
+                                funinva = "Material no encontrado";
+                                break;
+                            case 4:
+                                funinva = "El material esta sujeto a lote, asigne un lote";
+                                break;
+                            case 5:
+                                funinva = "Campo cantidad es obligatorio";
+                                break;
+                            case 6:
+                                funinva = "Campo centro es obligatorio";
+                                break;
+                            case 7:
+                                funinva = "No hay existencias Material-Almacen-Centro ";
+                                break;
+                            case 8:
+                                funinva = "Cantidad excedida a disponibilidad en stock libre utilización ";
+                                break;
+                            case 9:
+                                funinva = "Campo almacen es obligatorio ";
+                                break;
+                            case 10:
+                                funinva = "Material no habilitado";
+                                break;
+                        }
+                        var icon = $('#iconmsg');
+                        icon.attr('src', img);
+                        icon.show();
+                        var men = document.getElementById("msg");
+                        men.innerHTML = funinva;
+                        var BE = document.createElement('audio');
+                        BE.src = au;
+                        BE.play();
+
                     }
                 </script>
             </div>
