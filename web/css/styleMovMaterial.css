@@ -7,7 +7,12 @@ and open the template in the editor.
     Created on : 31/08/2016, 12:04:41 PM
     Author     : Panda
 */
- 
+#handleMatNuevo,#handleLotStockE,#handleAlmDes,#handleCentDes{
+    height: 6%;
+    width: 100%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
 .bkcontainer
 {
     width: 68%;
@@ -392,6 +397,22 @@ and open the template in the editor.
     display:none;
     z-index:1002;
 }
+.VentanaModal301
+{    
+    position: fixed;
+    width: 970px;
+    height: 420px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
 .VentanaModalCld
 {    
     position: fixed;
@@ -418,10 +439,22 @@ and open the template in the editor.
     margin-left: .5%;
     margin-right: -1%;
 }
+.fondo_Match301
+{
+    background-color: #E5E5E5;
+    width: 98.5%;
+    /*border: 1px solid #600;*/
+    height: 85%;
+    margin-top: -1%;
+    margin-bottom: 4%;
+    margin-left: .5%;
+    margin-right: -1%;
+}
 .fondo_MatchRG
 {
     background-color: #E5E5E5;
     width: 98.5%;
+    border: 1px solid #600;
     height: 85%;
     margin-top: -1%;
     margin-bottom: 4%;
@@ -755,6 +788,52 @@ and open the template in the editor.
     margin-right: 2%;
     margin-top: -10%;
 }
+/*------------------------*/
+/*--------Match Lote------*/
+.fixedYLn{
+    position: relative;
+    top: 0;
+    z-index: 99;
+    background-color: #ddd;
+    text-align: center;
+}
+.fixedYLn table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.fixedYLn table th, #fixedYLn table td {
+    width: 16%;
+}
+.fixedYLn table th {
+    background-color: #ddd;
+    font: 11% 1em Tahoma;
+    color:#000;
+}
+#cuerpoDatoslote > div.nofixedXLn table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#cuerpoDatoslote > div.nofixedXLn table td {
+    width: 16%;
+}
+.VentanaModalLoteLNUe
+{    
+    position: fixed; 
+    width: 750px;
+    height: 370px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+
+
 /*------------------------*/
 /*--------Match Lote------*/
 .fixedYL{
@@ -1110,6 +1189,105 @@ and open the template in the editor.
     color:#E1F0D0;
     background: #333  top repeat-x;
 }
+
+.DivTabla301{
+    padding-left: 1%;
+    width: 99%;
+    height: 90%;
+    /*border: 1px solid #000;*/
+}
+#tabscrll301{
+    width: 99%;
+    display: inline-block;
+}
+.DobleScroll301 { 
+    height: 280px;
+    width: 17px; 
+    background-color: #007CC0;
+    display: inline-block;
+    margin-bottom: 17px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+}
+#hanlde301{
+    height: 6%;
+    width: 100%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+.tdSMatch{
+    text-align: center;
+    border:none;
+    width:100%;
+}
+.tdCMatch{
+    text-align: center;
+    border:none;
+    width:100%;
+}
+.BtnMatchIconGrid{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/match.png');
+    background-position: center;
+    background-repeat:no-repeat;
+    vertical-align:middle;
+    margin-top: -2.5px;
+    height: 18px;
+    width: 19px;
+    cursor: pointer;
+    display:none;
+}
+/*#DobleSection301 { height: 280px; }*/
+#TableCom301
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainer301
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer301 table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody301 tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+td{
+    text-align: center;
+}
+.SecHead301 thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead301
+{
+    display: block;
+}
+.SecBody301
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo301 { height: 280px; }
+
 
 
 @media screen and (min-width: 1280px) and (max-width: 1350px){
