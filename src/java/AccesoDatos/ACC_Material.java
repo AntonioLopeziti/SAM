@@ -20,25 +20,25 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ACC_Material {
-
+    
     private static ACC_Material Instance = null;
-
+    
     public static ACC_Material ObtenerInstancia() {
         if (Instance == null) {
             Instance = new ACC_Material();
         }
         return Instance;
     }
-
+    
     public boolean sujetoLote(String centro, String material) {
         String dec = "";
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-
+        
         String query = "{CALL PP.sujetoLotePP(?,?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, centro);
@@ -54,15 +54,16 @@ public class ACC_Material {
         }
         return false;
     }
+    
     public String obtenerLote(String centro, String material, String cantidad) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         double ccn;
-
+        
         String query = "{CALL PP.obtenerLotePP(?,?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, centro);
@@ -70,7 +71,7 @@ public class ACC_Material {
             rs = ps.executeQuery();
             while (rs.next()) {
                 ccn = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
-                if(Double.parseDouble(cantidad) <= ccn){
+                if (Double.parseDouble(cantidad) <= ccn) {
                     return rs.getString("lote");
                 }
             }
@@ -81,15 +82,16 @@ public class ACC_Material {
         }
         return "";
     }
+    
     public String obtenerLoteE(String centro, String material, String cantidad, String ped, String pos) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         double ccn;
-
+        
         String query = "{CALL PP.obtenerLoteEE_PP(?,?,?,?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, centro);
@@ -99,7 +101,7 @@ public class ACC_Material {
             rs = ps.executeQuery();
             while (rs.next()) {
                 ccn = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
-                if(Double.parseDouble(cantidad) <= ccn){
+                if (Double.parseDouble(cantidad) <= ccn) {
                     return rs.getString("lote");
                 }
             }
@@ -110,17 +112,17 @@ public class ACC_Material {
         }
         return "";
     }
-
+    
     public int validaCantidad101(String cnt, String orden) {
         String exceso = "";
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         double cc = 0.000;
-
+        
         String query = "{CALL PP.cntOrden(?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, orden);
@@ -129,7 +131,7 @@ public class ACC_Material {
                 cc = Double.parseDouble(rs.getString("cantidad_total"));
                 exceso = rs.getString("exceso_suministro");
             }
-
+            
             if (exceso.equals("X")) {
                 return 1;
             } else if (Double.parseDouble(cnt) <= cc) {
@@ -149,11 +151,11 @@ public class ACC_Material {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         double cc = 0.000;
-
+        
         String query = "{CALL PP.Notif_ConsultarCantidad261(?,?,?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, material);
@@ -163,7 +165,7 @@ public class ACC_Material {
             while (rs.next()) {
                 cc = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
             }
-
+            
         } catch (Exception e) {
             System.out.println("Error StockLibre(), ACC_Material por " + e);
         } finally {
@@ -171,15 +173,16 @@ public class ACC_Material {
         }
         return cc;
     }
+    
     public double StockLibreEE(String material, String lote, String centro, String ped, String pos) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         double cc = 0.000;
-
+        
         String query = "{CALL PP.Notif_ConsultarCantidad261E(?,?,?,?,?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, material);
@@ -191,7 +194,7 @@ public class ACC_Material {
             while (rs.next()) {
                 cc = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
             }
-
+            
         } catch (Exception e) {
             System.out.println("Error StockLibreEE(), ACC_Material por " + e);
         } finally {
@@ -199,13 +202,14 @@ public class ACC_Material {
         }
         return cc;
     }
+    
     public void ActualizaInv261(String material, String lote, String centro, String cnt) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-
+        
         String query = "{CALL PP.ActualizaInv261(?,?,?,?)}";
         PreparedStatement ps;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, material);
@@ -219,13 +223,14 @@ public class ACC_Material {
             cnx.CerrarConexion(con);
         }
     }
+    
     public void ActualizaInv261EE(String material, String lote, String centro, String cnt, String ped, String pos) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-
+        
         String query = "{CALL PP.ActualizaInv261E(?,?,?,?,?,?)}";
         PreparedStatement ps;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, material);
@@ -241,13 +246,14 @@ public class ACC_Material {
             cnx.CerrarConexion(con);
         }
     }
+    
     public void ActualizaInv101(String material, String lote, String centro, String cnt) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-
+        
         String query = "{CALL PP.ActualizaInv101(?,?,?,?)}";
         PreparedStatement ps;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, material);
@@ -261,16 +267,16 @@ public class ACC_Material {
             cnx.CerrarConexion(con);
         }
     }
-
+    
     public int validaCantidad261(String material, String lote, String centro, String cnt) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         double cc = 0.000;
-
+        
         String query = "{CALL PP.Notif_ConsultarCantidad261(?,?,?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, material);
@@ -285,7 +291,7 @@ public class ACC_Material {
             } else {
                 return 0;
             }
-
+            
         } catch (Exception e) {
             System.out.println("Error validaCantidad261(), ACC_Material por " + e);
         } finally {
@@ -293,15 +299,16 @@ public class ACC_Material {
         }
         return 0;
     }
+    
     public int validaCantidad261E(String material, String lote, String centro, String cnt, String ped, String pos) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         double cc = 0.000;
-
+        
         String query = "{CALL PP.Notif_ConsultarCantidad261E(?,?,?,?,?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, material);
@@ -318,7 +325,7 @@ public class ACC_Material {
             } else {
                 return 0;
             }
-
+            
         } catch (Exception e) {
             System.out.println("Error validaCantidad261E(), ACC_Material por " + e);
         } finally {
@@ -326,14 +333,15 @@ public class ACC_Material {
         }
         return 0;
     }
+    
     public int validalote261(String material, String lote, String centro) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-
+        
         String query = "{CALL PP.Notif_ConsultarCantidad261(?,?,?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, material);
@@ -350,14 +358,15 @@ public class ACC_Material {
         }
         return 0;
     }
+    
     public int validalote261E(String material, String lote, String centro, String ped, String pos) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-
+        
         String query = "{CALL PP.Notif_ConsultarCantidad261E(?,?,?,?,?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, material);
@@ -376,15 +385,16 @@ public class ACC_Material {
         }
         return 0;
     }
+    
     public componentesPP Cantidades_PT(String orden) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         componentesPP pt = new componentesPP();
-
+        
         String query = "{CALL PP.CantidadOrden_PT(?)}";
         PreparedStatement ps;
         ResultSet rs;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, orden);
@@ -401,7 +411,7 @@ public class ACC_Material {
         }
         return pt;
     }
-
+    
     public String MMGetUniMed(String um) {
         String u = "";
         Conexion cnx = new Conexion();
@@ -434,7 +444,7 @@ public class ACC_Material {
         }
         return u;
     }
-
+    
     public ArrayList<materiales> CargarMaterialMCSolped(String mat, String des, String cen, String tm, String descampo, String ctd, String us, String tips) {
         ArrayList<materiales> mate = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -471,16 +481,16 @@ public class ACC_Material {
         }
         return mate;
     }
-
+    
     public String GetDecUM(String um) {
         String dec = "";
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-
+        
         String query = "{CALL MM.GetDecUMMaterial(?)}";
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+        
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, um);
@@ -495,7 +505,7 @@ public class ACC_Material {
         }
         return dec;
     }
-
+    
     public String unidadM(String mat) {
         String um = "";
         Conexion cnx = new Conexion();
@@ -515,7 +525,7 @@ public class ACC_Material {
         }
         return um;
     }
-
+    
     public String unidadMT(String mat) {
         String um = "", query;
         Conexion cnx = new Conexion();
@@ -535,12 +545,12 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return um;
     }
-
+    
     public int ConsultaLoteMaterial(String Material) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         String query = "{call MM.SujetoLote_MOM(?)}";
-
+        
         int lote = 0;
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -557,7 +567,7 @@ public class ACC_Material {
         }
         return lote;
     }
-
+    
     public boolean ValidarMaterialModVisual(String mate, String centro) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -583,7 +593,7 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return false;
     }
-
+    
     public LinkedList<tipomaterial> ConsultaMatchTipoMaterial(String query, String idioma) {
         LinkedList<tipomaterial> tm = new LinkedList<>();
         Conexion cnx = new Conexion();
@@ -613,7 +623,7 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return tm;
     }
-
+    
     public LinkedList<canal> ConsultaMatchCanal(String query, String idioma) {
         LinkedList<canal> can = new LinkedList<>();
         Conexion cnx = new Conexion();
@@ -643,7 +653,7 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return can;
     }
-
+    
     public LinkedList<grupoarticulo> ConsultaMatchGrupoArticulo(String query, String idioma) {
         LinkedList<grupoarticulo> gr = new LinkedList<>();
         Conexion cnx = new Conexion();
@@ -678,7 +688,7 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return gr;
     }
-
+    
     public LinkedList<centros> ConsultaMatchCentro(String query) {
         LinkedList<centros> cen = new LinkedList<>();
         Conexion cnx = new Conexion();
@@ -690,7 +700,7 @@ public class ACC_Material {
             rs = st.executeQuery(query);
             while (rs.next()) {
                 centros c = new centros();
-
+                
                 c.setCentro(rs.getString("centro"));
                 c.setDescripcion(rs.getString("descripcion"));
                 cen.add(c);
@@ -701,7 +711,7 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return cen;
     }
-
+    
     public ArrayList ConsultaMatchMaterialOrden(String txt, String mt, String cent, String campoD, String ctd, String Pz) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -735,7 +745,7 @@ public class ACC_Material {
         }
         return mats;
     }
-
+    
     public boolean ValidarMa(String m) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -761,14 +771,14 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return false;
     }
-
+    
     public LinkedList<materiales> CargarMaterialLstMat(String des, String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         ResultSet rs;
         Statement st;
         LinkedList<materiales> mate = new LinkedList<>();
-
+        
         try {
             st = con.createStatement();
             rs = st.executeQuery(query);
@@ -785,14 +795,14 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return mate;
     }
-
+    
     public LinkedList<materiales> MatNPMMatc(String mmmat, String mmtxtbr, String lan) {
         LinkedList<materiales> mt = new LinkedList<>();
         String query = "select * from materiales where material like'" + mmmat + "%'"
                 + " and descripcion_" + lan + " like'" + mmtxtbr + "%'";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
-
+        
         try {
             Statement st;
             ResultSet rs;
@@ -898,7 +908,7 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return ma;
     }
-
+    
     public int validMaterial(String id) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -916,14 +926,14 @@ public class ACC_Material {
                     return 0;
                 }
             }
-
+            
         } catch (Exception e) {
             System.err.println("Error en validMaterial por: " + e);
         }
         cnx.CerrarConexion(con);
         return 0;
     }
-
+    
     public ArrayList<materiales> ConsultaMaterial(String texto, String lang, String Material, String Cantidad) {
         ArrayList<materiales> mm = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -949,7 +959,7 @@ public class ACC_Material {
         }
         return mm;
     }
-
+    
     public String ConsultaNombreMaterial(String Material, String lang) {
         String mm = "";
         Conexion cnx = new Conexion();
@@ -970,7 +980,7 @@ public class ACC_Material {
         }
         return mm;
     }
-
+    
     public materiales ValidarMaterial(String m, String d, String c, String us, String ts) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -999,7 +1009,7 @@ public class ACC_Material {
         }
         return ma;
     }
-
+    
     public materiales CargarMaterialOrden(String numMat, String campoDes) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1025,7 +1035,7 @@ public class ACC_Material {
                 mat.setCentro(rs.getString("centro"));
                 mat.setDescripcion(rs.getString(campoDes));
             }
-
+            
         } catch (Exception ex) {
             System.err.println("Error en el metodo CargarMaterialOrden(ACC_Equipos por: )" + ex);
         } finally {
@@ -1033,7 +1043,7 @@ public class ACC_Material {
         }
         return mat;
     }
-
+    
     public materiales CargarMaterial(String mate) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1042,7 +1052,7 @@ public class ACC_Material {
         materiales ma = new materiales();
         String query = "SELECT * FROM materiales WHERE material = '" + mate + "'";
         String descripcion = null;
-
+        
         try {
             st = con.createStatement();
             rs = st.executeQuery(query);
@@ -1099,14 +1109,14 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return ma;
     }
-
+    
     public LinkedList<materiales_almacen> MatNPMMalm(String mmmat, String mmtxtbr, String lan) {
         LinkedList<materiales_almacen> mt = new LinkedList<>();
         String query = "select top " + lan + " * from materiales_almacen where material like'" + mmmat + "%'"
                 + " and texto_material like'" + mmtxtbr + "%' and almacen='M100'";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
-
+        
         try {
             Statement st;
             ResultSet rs;
@@ -1125,7 +1135,7 @@ public class ACC_Material {
         con.CerrarConexion(conn);
         return mt;
     }
-
+    
     public String CheckLIMat(String mat) {
         String ok = "NOT";
         Conexion cnx = new Conexion();
@@ -1168,11 +1178,11 @@ public class ACC_Material {
         con.CerrarConexion(conn);
         return cn;
     }
-
+    
     public static void main(String args[]) {
         System.out.println(ACC_Material.ObtenerInstancia().ValidarAlmacenMaterial("10001000", "A100", "M100", "BAJA"));
     }
-
+    
     public int ValidarAlmacenMaterial(String mat, String a1, String a2, String ce) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1192,13 +1202,13 @@ public class ACC_Material {
             if (check == 2) {
                 ban = 1;
             }
-
+            
         } catch (Exception e) {
             System.err.println("Error en ValidarAlmacen ACC_ListaMateriales por " + e);
         }
         return ban;
     }
-
+    
     public boolean MMValidaMaterialReservas(String mat, String cen, String alm) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1237,13 +1247,13 @@ public class ACC_Material {
         }
         return false;
     }
-
+    
     public boolean ValidarMaterialModVisual2(String mate, String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         Statement st;
         ResultSet rs;
-
+        
         try {
             st = con.createStatement();
             rs = st.executeQuery(query);
@@ -1263,7 +1273,7 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return false;
     }
-
+    
     public String obtenerCuentaMayor(String catval) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1281,7 +1291,7 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return C;
     }
-
+    
     public int RelacionCMMaterial(String cv, String cm) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1299,7 +1309,7 @@ public class ACC_Material {
         cnx.CerrarConexion(con);
         return n;
     }
-
+    
     public LinkedList<materiales> MMConsultaMatchMateriales(String lim, String mat, String cen, String deno, String descripcion, String tpmat) {
         LinkedList<materiales> mats = new LinkedList<>();
         Conexion cnx = new Conexion();
@@ -1342,19 +1352,19 @@ public class ACC_Material {
         }
         return mats;
     }
-
+    
     public LinkedList<materiales> ConsultaMatchMaterialOfReservas(
             String mate, String des, String cen, String tipo, String lim, String deno) {
-
+        
         LinkedList<materiales> mat = new LinkedList<>();
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         ResultSet rs = null;
         CallableStatement pst = null;
         String query = "{call MM.Materiales_MuestraMatchMate(?, ?, ?, ?, ?)}";
-
+        
         try {
-
+            
             pst = conn.prepareCall(query);
             pst.setString(1, mate);
             pst.setString(2, des);
@@ -1389,7 +1399,7 @@ public class ACC_Material {
         }
         return mat;
     }
-
+    
     public LinkedList<materiales> ConsultaMatchMaterial(String ctdaciertos, String mate, String cetr, String descrip, String texto_mate, String tpmat) {
         LinkedList<materiales> mat = new LinkedList<>();
         Conexion con = new Conexion();
@@ -1397,9 +1407,9 @@ public class ACC_Material {
         ResultSet rs = null;
         CallableStatement pst = null;
         String query = "{call MM.materiales_visulizar_materiales_match(?,?,?,?,?,?)}";
-
+        
         try {
-
+            
             pst = conn.prepareCall(query);
             pst.setString(1, ctdaciertos);
             pst.setString(2, mate);
@@ -1435,7 +1445,7 @@ public class ACC_Material {
         }
         return mat;
     }
-
+    
     public LinkedList<organizacion> ConsultaMatchOrganizacion() {
         LinkedList<organizacion> or = new LinkedList<>();
         Conexion con = new Conexion();
@@ -1471,7 +1481,7 @@ public class ACC_Material {
         }
         return or;
     }
-
+    
     public materiales CargarDatosVisualMa(String mate, String centro, String orga, String can, String idioma) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -1487,9 +1497,9 @@ public class ACC_Material {
         ResultSet rs = null;
         CallableStatement pst = null;
         String query = "{call MM.materiales_CargarDatosVisualMateriales(?,?,?,?,?)}";
-
+        
         try {
-
+            
             pst = conn.prepareCall(query);
             pst.setString(1, mate);
             pst.setString(2, centro);
@@ -1547,7 +1557,7 @@ public class ACC_Material {
             }
         } catch (Exception e) {
             System.err.println("Error en el metodoCargarDatosVisualMa (ACC_Material) por: " + e);
-
+            
         } finally {
             try {
                 if (conn != null) {
@@ -1562,11 +1572,11 @@ public class ACC_Material {
             } catch (Exception a) {
                 System.err.println("Error inesperado al cerrar conexiones");
             }
-
+            
         }
         return ma;
     }
-
+    
     public LinkedList<materiales_almacen> MatNPMMalmNOT(String mmmat, String mmtxtbr, String lan) {
         LinkedList<materiales_almacen> mt = new LinkedList<>();
         String query = "{call MM.materiales_almacen_match(?,?,?)}";
@@ -1574,9 +1584,9 @@ public class ACC_Material {
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
-
+        
         try {
-
+            
             pst = conn.prepareStatement(query);
             pst.setString(1, mmmat);
             pst.setString(2, mmtxtbr);
@@ -1594,7 +1604,7 @@ public class ACC_Material {
         }
         return mt;
     }
-
+    
     public LinkedList<materiales> ConsultaMatMatch(String mat, String des, String lim, String deno) {
         LinkedList<materiales> ma = new LinkedList<>();
         Conexion cnx = new Conexion();
@@ -1627,14 +1637,14 @@ public class ACC_Material {
         }
         return ma;
     }
-
+    
     public int ConsultaLoteMaterialNOT(String Material) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         ResultSet rs = null;
         PreparedStatement pst = null;
         String query = "{call MM.materiales_ConsNOT(?)}";
-
+        
         int lote = 0;
         try {
             pst = con.prepareStatement(query);
@@ -1696,7 +1706,7 @@ public class ACC_Material {
         }
         return false;
     }
-
+    
     public LinkedList<materiales> CargarTodoMaterialNOT(String mater, String descripcion) {
         LinkedList<materiales> mate = new LinkedList<>();
         Conexion con = new Conexion();
@@ -1704,7 +1714,7 @@ public class ACC_Material {
         ResultSet rs = null;
         PreparedStatement pst = null;
         String query = "{call MM.materiales_TABPM01(?)}";
-
+        
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, mater);
@@ -1779,7 +1789,7 @@ public class ACC_Material {
         }
         return mate;
     }
-
+    
     public materiales CargarMaterialNOT(String mate) {
         materiales ma = new materiales();
         String descripcion = null;
@@ -1788,7 +1798,7 @@ public class ACC_Material {
         ResultSet rs = null;
         PreparedStatement pst = null;
         String query = "{call MM.materiales_TABPM01(?)}";
-
+        
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, mate);
@@ -1932,7 +1942,7 @@ public class ACC_Material {
                     gr.add(g);
                 }
             } else {
-
+                
             }
         } catch (Exception e) {
             System.err.println("Error en metodo ConsultaMatchMaterial (ACC_Material) " + e);
@@ -1951,10 +1961,10 @@ public class ACC_Material {
                 System.err.println("Error inesperado al cerrar conexiones");
             }
         }
-
+        
         return gr;
     }
-
+    
     public String ValidarMatExis(String mat) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1973,7 +1983,7 @@ public class ACC_Material {
         }
         return check;
     }
-
+    
     public String ValidarMatExis303(String mat) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1992,7 +2002,7 @@ public class ACC_Material {
         }
         return check;
     }
-
+    
     public String ValidarMtl303(String mat) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2011,7 +2021,7 @@ public class ACC_Material {
         }
         return check;
     }
-
+    
     public String CheckLotVal303(String mat) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2030,7 +2040,7 @@ public class ACC_Material {
         }
         return check;
     }
-
+    
     public boolean ValidarMateCrea(String mate) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2049,7 +2059,7 @@ public class ACC_Material {
         }
         return false;
     }
-
+    
     public boolean InsertarMateCrea(materiales mat) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2104,7 +2114,7 @@ public class ACC_Material {
         }
         return ban;
     }
-
+    
     public boolean InsertarMateCreaPP(materiales mat) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2168,9 +2178,9 @@ public class ACC_Material {
         ResultSet rs = null;
         CallableStatement pst = null;
         String query = "{call PP.materiales_visulizar_materiales_match(?,?,?,?,?,?)}";
-
+        
         try {
-
+            
             pst = conn.prepareCall(query);
             pst.setString(1, ctdaciertos);
             pst.setString(2, mate);
@@ -2206,7 +2216,7 @@ public class ACC_Material {
         }
         return mat;
     }
-
+    
     public materiales CargarDatosVisualMaPP(String mate, String centro, String orga, String can, String idioma) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -2222,9 +2232,9 @@ public class ACC_Material {
         ResultSet rs = null;
         CallableStatement pst = null;
         String query = "{call PP.materiales_CargarDatosVisualMateriales(?,?,?,?,?)}";
-
+        
         try {
-
+            
             pst = conn.prepareCall(query);
             pst.setString(1, mate);
             pst.setString(2, centro);
@@ -2282,7 +2292,7 @@ public class ACC_Material {
             }
         } catch (Exception e) {
             System.err.println("Error en el metodoCargarDatosVisualMa (ACC_Material) por: " + e);
-
+            
         } finally {
             try {
                 if (conn != null) {
@@ -2297,7 +2307,7 @@ public class ACC_Material {
             } catch (Exception a) {
                 System.err.println("Error inesperado al cerrar conexiones");
             }
-
+            
         }
         return ma;
     }
@@ -2338,7 +2348,7 @@ public class ACC_Material {
         }
         return res;
     }
-
+    
     public LinkedList<materiales> ConsultarMateMonEqPP(String Mate, String DenMat, String CaMat, String des) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -2379,7 +2389,7 @@ public class ACC_Material {
         }
         return equi;
     }
-
+    
     public String getExisNumMatePP(String mate) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2403,7 +2413,7 @@ public class ACC_Material {
         }
         return check;
     }
-
+    
     public ArrayList ConsultarMaterialMatchOrdPP(String denMat, String numMat, String descIdMat, String ctdMat) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2424,7 +2434,7 @@ public class ACC_Material {
                 eq.setDescripcion_material(rs.getString(descIdMat));
                 eqs.add(eq);
             }
-
+            
         } catch (Exception e) {
             System.err.println("Error en metodo ConsultarEquipoMatchOrd por: " + e);
         } finally {
@@ -2432,7 +2442,7 @@ public class ACC_Material {
         }
         return eqs;
     }
-
+    
     public ArrayList<PlanPP> MatchMaterialesListOrdenPP(String Cant, String Idioma, String Mate, String DenMate) {
         ArrayList<PlanPP> plMa = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -2476,7 +2486,7 @@ public class ACC_Material {
         }
         return plMa;
     }
-
+    
     public ArrayList<materiales> SP_MatchMateListaordenPP(String Cant, String Idioma, String Mate, String DenMate) {
         ArrayList<materiales> sp_mate = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -2520,10 +2530,10 @@ public class ACC_Material {
                 System.err.println("Error inesperado al cerrar las conexiones debido a: " + f);
             }
         }
-
+        
         return sp_mate;
     }
-
+    
     public ArrayList<materiales_almacen> listadoMaterialesHabilitado(String centro, String almacen) {
         ArrayList<materiales_almacen> mate = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -2552,7 +2562,7 @@ public class ACC_Material {
         }
         return mate;
     }
-
+    
     public int ValidaMaterialHabilitado(String mat, String ctr, String alm) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2581,7 +2591,7 @@ public class ACC_Material {
         }
         return 0;
     }
-
+    
     public LinkedList<materiales> CargarTodoMaterialNotPP(String mater, String descripcion) {
         LinkedList<materiales> mate = new LinkedList<>();
         Conexion con = new Conexion();
@@ -2589,7 +2599,7 @@ public class ACC_Material {
         ResultSet rs = null;
         PreparedStatement pst = null;
         String query = "{call PP.materiales_TABPP01PP(?)}";
-
+        
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, mater);
@@ -2664,7 +2674,7 @@ public class ACC_Material {
         }
         return mate;
     }
-
+    
     public materiales CargarMaterialNotPP(String mate) {
         materiales ma = new materiales();
         String descripcion = null;
@@ -2745,7 +2755,7 @@ public class ACC_Material {
         }
         return ma;
     }
-
+    
     public ArrayList<materiales> ConsultarMaterialHRVis(String Mate, String desc, String DenIdioma, String Ctd) {
         ArrayList<materiales> mt = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -2800,4 +2810,79 @@ public class ACC_Material {
 //        }
 //        return eq;
 //    }
+
+    public ArrayList<materiales> ConsultaMaterialesMov(String mat, String des, String can) {
+        ArrayList<materiales> mater = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.MovimientoMateriales_ConsultaMaterialNuevo(?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, mat);
+            ps.setString(2, des);
+            ps.setString(3, can);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                materiales m = new materiales();
+                m.setMaterial(rs.getString("material"));
+                m.setDescripcion(rs.getString("descripcion_ES"));
+                m.setUnidad_medida(rs.getString("unidad_medida"));
+                mater.add(m);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return mater;
+    }
+    
+    public materiales GetInfoMateriales(String mat) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        materiales m = new materiales();
+        String sql = "{call MM.MovimientosMateriales_MovMaterialesCargarInfoMaterial(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, mat);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                m.setMaterial(rs.getString("material"));
+                m.setDescripcion(rs.getString("descripcion_ES"));
+                m.setUnidad_medida(rs.getString("unidad_medida"));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return m;
+    }
+
+    public int ValidaSujetoLote(String mat) {
+        int n = 0;
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.MovimientosMateriales_SujetoLote(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1,mat);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                n = 1;
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return n;
+    }
+    
 }
