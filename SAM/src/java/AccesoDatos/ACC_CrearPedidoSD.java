@@ -225,7 +225,7 @@ public class ACC_CrearPedidoSD {
                 materiales_venta m = new materiales_venta();
                 m.setMaterial(rs.getString("material"));
                 m.setDescripcion(rs.getString("descripcion_material_cliente"));
-//                m.setCentro(rs.getString("centro"));
+                m.setUnidad_medida_base(rs.getString("unidad_medida_base"));
                 mv.add(m);
             }
         } catch (Exception e) {
@@ -236,7 +236,7 @@ public class ACC_CrearPedidoSD {
         return mv;
     }
 
-    public ArrayList<clientes> GetClientes(String cliente, String nombre, String cantidad, String sql) {
+    public ArrayList<clientes> GetClientes(String cliente, String nombre, String cantidad, String sql, String ven) {
         ArrayList<clientes> cl = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -248,6 +248,9 @@ public class ACC_CrearPedidoSD {
             ps.setString(1, cliente);
             ps.setString(2, nombre);
             ps.setString(3, cantidad);
+            if (!ven.isEmpty()) {
+                ps.setString(4, ven);
+            }
             rs = ps.executeQuery();
             while (rs.next()) {
 
@@ -265,16 +268,17 @@ public class ACC_CrearPedidoSD {
 
     }
 
-    public String[] CargarCliente(String cliente) {
+    public String[] CargarCliente(String cliente, String vend) {
         String[] datos = new String[8];
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{call SD.CrearPedidos_Cargarclientedatos(?)}";
+        String sql = "{call SD.CrearPedidos_Cargarclientedatos(?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, cliente);
+            ps.setString(2, vend);
             rs = ps.executeQuery();
             while (rs.next()) {
                 datos[0] = rs.getString(1);
@@ -381,8 +385,8 @@ public class ACC_CrearPedidoSD {
             ps.setString(2, dm);
             rs = ps.executeQuery();
             while (rs.next()) {
-               c.setIdCliente(rs.getString("IdCliente"));
-               c.setNombre1(rs.getString("nombre1"));
+                c.setIdCliente(rs.getString("IdCliente"));
+                c.setNombre1(rs.getString("nombre1"));
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -419,7 +423,8 @@ public class ACC_CrearPedidoSD {
             cnx.CerrarConexion(con);
         }
     }
-    public void GuardarCliente(String folio, String funcion, String cliente, String usuario, String fecha, String hora ){
+
+    public void GuardarCliente(String folio, String funcion, String cliente, String usuario, String fecha, String hora) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
@@ -438,9 +443,10 @@ public class ACC_CrearPedidoSD {
         } finally {
             cnx.CerrarConexion(con);
         }
-        
+
     }
-    public void GuardarMateriales(String folio, String posicion, String material, String descripcion, String unidad, String usuario, String fecha, String hora ){
+
+    public void GuardarMateriales(String folio, String posicion, String material, String descripcion, String unidad, String usuario, String fecha, String hora) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
@@ -461,9 +467,10 @@ public class ACC_CrearPedidoSD {
         } finally {
             cnx.CerrarConexion(con);
         }
-        
+
     }
-    public void GuardarCantidades(String folio, String posicion, String cantidad,  String usuario, String Fecha, String hora ){
+
+    public void GuardarCantidades(String folio, String posicion, String cantidad, String usuario, String Fecha, String hora) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
@@ -482,9 +489,10 @@ public class ACC_CrearPedidoSD {
         } finally {
             cnx.CerrarConexion(con);
         }
-        
+
     }
-     public void InsertTxtCabecera(String folio, String fila, String user, String txt, String Fecha, String hora) {
+
+    public void InsertTxtCabecera(String folio, String fila, String user, String txt, String Fecha, String hora) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
@@ -504,7 +512,8 @@ public class ACC_CrearPedidoSD {
             cnx.CerrarConexion(con);
         }
     }
-     public void InsertTxtPosicion(String folio, String pos,  String fila, String user, String txt, String Fecha, String hora) {
+
+    public void InsertTxtPosicion(String folio, String pos, String fila, String user, String txt, String Fecha, String hora) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
@@ -524,5 +533,28 @@ public class ACC_CrearPedidoSD {
         } finally {
             cnx.CerrarConexion(con);
         }
+    }
+
+    public grupo_vendedores VerificarAccVendedort(String vendedor) {
+        grupo_vendedores c = new grupo_vendedores();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call SD.CrearPedidos_VerificarVendedor(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, vendedor);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                c.setGrupo_vendedores(rs.getString("grupo_vendedores"));
+                c.setDenominacion(rs.getString("denominacion"));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return c;
     }
 }
