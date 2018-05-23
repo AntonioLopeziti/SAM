@@ -81,6 +81,30 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="shortcut icon" href="images/favicon.ico">
         <script>
+            function CargarVendedorInicial() {
+                var Vend = '<%=Nombre%>';
+                var acc = "VerificarAccesoVendedor";
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    url: 'peticionPedidoSDCrear',
+                    contentType: "application/x-www-form-urlencoded",
+                    processData: true,
+                    data: "Accion=" + acc + "&Vendedor=" + Vend,
+                    success: function (data) {
+                        if (data == 0) {
+                            alert("Pantalla solo disponible a vendedor o no se encuentra registrado, Consulte al administrador");
+                            window.location.href = "Bienvenido.jsp";
+                        }else{
+                            arr = new Array();
+                            arr = data.split("-");
+                            $('#GpoVendedores').val(arr[0]);
+                            $('#txtGpoVended').val(arr[1]);
+                            
+                        }
+                    }
+                });
+            }
             function CheckResolucion() {
                 if (screen.width <= 500) {
                     var msgResolucion = '<%=reso%>';
@@ -275,13 +299,13 @@
                             <hr>
                             <label>Ref.Cliente</label><input type="text" id="refcliente" maxlength="35" style="width:55%; background-repeat: no-repeat"/>
                             <hr>
-                            <label>Creado por</label><input type="text" id="CreadoPor" value="<%=Nombre%>" style="width: 42%;" readonly/>
+                            <label>Creado por</label><input type="text" id="CreadoPor" value="<%=Nombre%>" style="width: 42%;" disabled/>
                             <hr>
                             <label>Fecha entrega</label><input type="text" id="fechaEntrega" readOnly style="width: 25%; background-repeat: no-repeat;"/><button id="matchFechaentrega" class='BtnMatchIcon'></button> 
                             <hr>
                         </section>
                         <section class="SectionFloat2">
-                            <label>Clase de pedido</label><input type="text" id="ClasePedido" maxlength='4' style="width: 8%; background-repeat: no-repeat; text-transform: uppercase;" /><button id="matchClasePedido" class='BtnMatchIcon'></button> <input type='text' id='txtClasePedido'style="width: 52%; background: none; border: none;" readonly/>
+                            <label>Clase de pedido</label><input type="text" id="ClasePedido" maxlength='4' style="width: 8%; background-repeat: no-repeat; text-transform: uppercase;" value="TA" disabled /><button id="matchClasePedido" class='BtnMatchIcon'></button> <input type='text' id='txtClasePedido' value="Pedido Estandar" style="width: 52%; background: none; border: none;" readonly/>
                             <hr>
                             <input type="text" style="width: 100%; background: none; border:none;" id="txtSolicitante" readonly/>
                             <hr style="border:1.8px solid #fff;">
@@ -289,11 +313,11 @@
                             <hr style="border:1.8px solid #fff;">
                             <input type="text" style="width: 100%; background: none; border: none;" id="txtAreaVentas" readOnly/>
                             <hr style="border:1.8px solid #fff;">
-                            <label>Oficina de ventas</label><input type="text"  style="width: 8%; text-transform: uppercase;" maxlength='4' id="OficinaVentas" /><button id="matchpoficinaVentas" class='BtnMatchIcon'></button> <input type='text' id='txtOficinaVentas'style="width: 52%; background: none; border: none;" readonly/>
+                            <label>Oficina de ventas</label><input type="text" value="0001" disabled style="width: 8%; text-transform: uppercase;" maxlength='4' id="OficinaVentas" /><button id="matchpoficinaVentas" class='BtnMatchIcon'></button> <input type='text' value="Oficina SANPER" id='txtOficinaVentas'style="width: 52%; background: none; border: none;" readonly/>
                             <hr>
-                            <label>Gpo. de vendedores</label><input type="text" style="width: 6%; text-transform: uppercase" maxlength="3" id="GpoVendedores" /><button id="matchGpoVendedores" class='BtnMatchIcon'></button> <input type='text' id='txtGpoVended'style="width: 55%; background: none; border: none;" readonly/>
+                            <label>Gpo. de vendedores</label><input type="text" style="width: 6%; text-transform: uppercase" maxlength="3" id="GpoVendedores" disabled /><button id="matchGpoVendedores" class='BtnMatchIcon'></button> <input type='text' id='txtGpoVended'style="width: 55%; background: none; border: none;" readonly/>
                             <hr>
-                            <label>Fecha precio</label><input type="text" id='fechaPrecio'  style="width: 16%" readonly/><button id="matchDescCabecera" class="BtnMatchIconDescricabe"></button>
+                            <label>Fecha precio</label><input type="text" id='fechaPrecio'  style="width: 16%" disabled/><button id="matchDescCabecera" class="BtnMatchIconDescricabe"></button>
                             <hr>
                         </section>
                     </div>
