@@ -137,6 +137,7 @@
         String CenNoEnc = po.getProperty("etiqueta.CenNoVal");
         String ListaRes = po.getProperty("etiqueta.ListaReser");
         String CorreoInv = po.getProperty("etiqueta.CorrNoVal");
+        String flujoDoc = "Flujo de documentos";
     %>
     <%!
         String verificarP(char per) {
@@ -500,13 +501,11 @@
                                                         {title: '<%=modif_m%>', key: "gestMat_Comp_SC_mod"},
                                                         {title: '<%=visua_m%>', key: "gestMat_Comp_SC_vis"},
                                                         {title: '<%=listasolp%>', key: "gestMat_Comp_SC_lisSol"}
-                                                    ]
-                                                },
+                                                    ]},
                                                 {title: '<%=PedCom%>', key: "gestMat_Comp_PC", expand: true,
                                                     children: [
                                                         {title: '<%=VisuPe_m%>', key: "gestMat_Comp_PC_vis"}
-                                                    ]
-                                                }
+                                                    ]}
                                             ]},
                                         {title: '<%=GestSt_m%>', key: "gestMat_GesStk", expand: true,
                                             children: [
@@ -546,7 +545,8 @@
                                                 {title: '<%=crear_m%>', key: "gestCom_Ped_cre"},
                                                 {title: '<%=modif_m%>', key: "gestCom_Ped_mod"},
                                                 {title: '<%=visua_m%>', key: "gestCom_Ped_vis"}
-                                            ]}
+                                            ]},
+                                        {title: '<%=flujoDoc%>', key: "gestCome_Fljdocum"}
                                     ]},
                                 {title: '<%=GesMan_m%>', key: "gestMant", expand: true,
                                     children: [
@@ -807,6 +807,7 @@
                     getPermission("gestProd_NotPP", p.charAt(126)); // // G. Produccion - Notificaciones PP
                     getPermission("gestProd_NotPP_cre", p.charAt(127)); // // G. Produccion - Notificaciones PP - Crear
                     getPermission("gestProd_NotPP_vis", p.charAt(128)); // // G. Produccion - Notificaciones PP - Visualizar    
+                    getPermission("gestCome_Fljdocum", p.charAt(129)); // // G. Comercial - Flujo de documentos   
 
 
                 }
@@ -943,6 +944,7 @@
             key = key + getCheckPermission("gestProd_NotPP"); // 126 G. Produccion - Notificaciones PP
             key = key + getCheckPermission("gestProd_NotPP_cre"); // 127 G. Produccion - Notificaciones PP - Crear
             key = key + getCheckPermission("gestProd_NotPP_vis"); // 128 G. Produccion - Notificaciones PP - Visualizar                    
+            key = key + getCheckPermission("gestCome_Fljdocum"); // 128 G. Produccion - Notificaciones PP - Visualizar                    
 
             return key;
         }
