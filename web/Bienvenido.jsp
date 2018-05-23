@@ -254,6 +254,7 @@
         String gestMant_NPP = verificarP(p.charAt(126));                // GestiÃ³n Mantenimiento Notificaciones PP      
         String gestMant_NPP_Cre = verificarP(p.charAt(127));            // GestiÃ³n Mantenimiento Notificaciones PP Crear
         String gestMant_NPP_Vis = verificarP(p.charAt(128));            // GestiÃ³n Mantenimiento Notificaciones PP1 Visualizar
+        String gestCome_Fljdocum = verificarP(p.charAt(129));            // GestiÃ³n Mantenimiento Notificaciones PP1 Visualizar
     %>
 
     <head>
@@ -409,11 +410,12 @@
                                     </li>
                                     <li class="current" style="display: <%=gestCome_Pedidos%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionComercial_Pedidos_menu"));%></a>
                                         <ul>
-                                            <li style="display: <%=gestCome_Pedi_Crear%>"><a href="CrearPedidoSD.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
+                                            <li style="display: <%=gestCome_Pedi_Crear%>"><a href="javascript:VerificarVendedorPedidos();"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
                                             <li style="display: <%=gestCome_Pedi_Modif%>"><a href="ModificarPedidosSD.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
                                             <li style="display: <%=gestCome_Pedi_Visua%>"><a href="VisualizarPedidosSD.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
                                         </ul>
                                     </li>
+                                    <li class="current" style="display: <%=gestCome_Fljdocum%>"><a href="FlujoDocumentos.jsp">Flujo de documentos</a></li>
                                 </ul>
                             </li>
                             <li class="current" style="display: <%=gestMant%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionMantenim"));%></a>
@@ -628,6 +630,31 @@
                 iconm.show();
                 iconm.attr('src', 'images/aceptar.png');
                 $('#msg').html('<%=SAMnot%>');
+            }
+            function VerificarVendedorPedidos() {
+                var Vend = '<%=Nombre%>';
+                var acc = "VerificarAccesoVendedor";
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    url: 'peticionPedidoSDCrear',
+                    contentType: "application/x-www-form-urlencoded",
+                    processData: true,
+                    data: "Accion=" + acc + "&Vendedor=" + Vend,
+                    success: function (data) {
+                        if (data == 0) {
+                            var BE = document.createElement('audio');
+                            BE.src = "audio/saperror.wav";
+                            BE.play();
+                            var iconm = $('#iconmsg');
+                            iconm.show();
+                            iconm.attr('src', 'images/advertencia.PNG');
+                            $('#msg').html('Modulo disponible para vendedor');
+                        } else {
+                            window.location.href = "CrearPedidoSD.jsp";
+                        }
+                    }
+                });
             }
         </script>
         <div class="contenido">
