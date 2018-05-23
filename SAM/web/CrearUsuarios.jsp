@@ -130,6 +130,7 @@
         String listasolp = po.getProperty("etiqueta.ListaSolpedR");
         String CenNoEnc = po.getProperty("etiqueta.CenNoVal");
         String ListaRes = po.getProperty("etiqueta.ListaReser");
+        String flujoDoc = "Flujo de documentos";
     %> 
     <%!
         String verificarP(char per) {
@@ -490,6 +491,7 @@
             key = key + getPermission("gestProd_NotPP"); // 126 G. Produccion - Notificaciones PP
             key = key + getPermission("gestProd_NotPP_cre"); // 127 G. Produccion - Notificaciones PP - Crear
             key = key + getPermission("gestProd_NotPP_vis"); // 128 G. Produccion - Notificaciones PP - Visualizar                    
+            key = key + getPermission("gestCome_Fljdocum"); // 129 G. Comercial - fluejo de documentos                  
             return key;
         }
 
@@ -622,7 +624,8 @@
                                     {title: '<%=crear_m%>', key: "gestCom_Ped_cre"},
                                     {title: '<%=modif_m%>', key: "gestCom_Ped_mod"},
                                     {title: '<%=visua_m%>', key: "gestCom_Ped_vis"}
-                                ]}
+                                ]},
+                           {title: '<%=flujoDoc%>', key: "gestCome_Fljdocum"}
                         ]},
                     {title: '<%=GesMan_m%>', key: "gestMant", expand: true,
                         children: [
