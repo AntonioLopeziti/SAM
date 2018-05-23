@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    CargarVendedorInicial();
     $('#iconmsg').hide();
     MostrarFolio();
     $('#fechaPrecio').val(GetfechaActual());
@@ -221,7 +222,7 @@ $(document).ready(function () {
                 });
                 break;
             case 9:  ///// Clase pedido
-                v.css('background-image', 'url(images/necesario.PNG)');
+//                v.css('background-image', 'url(images/necesario.PNG)');
                 v.focus(function () {
                     v.css('background-image', 'none');
                     checarPosiMa(6);
@@ -336,6 +337,7 @@ $(document).ready(function () {
                 v.click(function () {
                     $('#Tipodeudor').val('solicitante');
                     $('#BusCliente').val("");
+                    $('#BusCliente').prop('disabled', false);
                     mostrarVentanaModal('VentanaModalCliente', 'handle9', 'BusCliente');
                 });
                 break;
@@ -918,13 +920,14 @@ function ocultarVentanaSimple(id, obj)
     $('#' + id).hide();
     $('#' + obj).focus();
 }
-function SeleccionarData(dato, ventanamodal, obj)
+function SeleccionarData(dato, ventanamodal, obj, dato2, obj2)
 {
     borramsg();
     var BE = document.createElement('audio');
     BE.src = "audio/sapsnd05.wav";
     BE.play();
     $('#' + obj).val(dato);
+    $('#' + obj2).val(dato2);
     ocultarVentanaSimple(ventanamodal, obj);
 }
 function SeleccionarDataGrid(dato, ventanamodal, obj)
@@ -937,10 +940,12 @@ function SeleccionarDataGrid(dato, ventanamodal, obj)
     $('#' + obj + pos).val(dato);
     ocultarVentanaSimple(ventanamodal, obj);
 }
-function SelectData(dato, idv, bp, ct, obj) {
+function SelectData(dato, idv, bp, ct, obj, des, um) {
     if (obj == "tdMater") {
         var pos = $('#postextpos').val();
         obj = "tdMater" + pos;
+        $('#tdDescr' + pos).val(des);
+        $('#tdUmedi' + pos).val(um);
     }
     borramsg();
     $('#' + obj).val(dato);
@@ -1109,8 +1114,9 @@ function ConsultaGpoVendedores() {
 }
 function ConsultaClientes() {
     var tipodeu = $('#Tipodeudor').val();
+    var vend = $('#GpoVendedores').val();
     var acc = "ConsultarClientes";
-    var datos = "&Cliente=" + $('#BusCliente').val() + "&Nombre=" + encodeURIComponent($('#BusNombre').val().trim()) + "&Ctd=" + $('#numAcMax9').val() + "&tipo=" + tipodeu;
+    var datos = "&Cliente=" + $('#BusCliente').val() + "&Nombre=" + encodeURIComponent($('#BusNombre').val().trim()) + "&Ctd=" + $('#numAcMax9').val() + "&tipo=" + tipodeu + "&Vendedor=" + vend;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1315,7 +1321,8 @@ function ocultarVentanaSimpleGrid(id, obj)
 }
 function CargarCliente(sol) {
     var acc = "CargarCliente";
-    var datos = "&Cliente=" + sol;
+    var vend =  $('#GpoVendedores').val();
+    var datos = "&Cliente=" + sol + "&Vendedor=" + vend;
     $.ajax({
         async: false,
         dataType: 'json',
@@ -1800,3 +1807,4 @@ function GuardarTextoPos(pos, a) {
         });
     }
 }
+
