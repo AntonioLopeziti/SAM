@@ -8,19 +8,23 @@ package Servlets;
 import AccesoDatos.ACC_Almacenes;
 import AccesoDatos.ACC_Centro;
 import AccesoDatos.ACC_Material;
+import AccesoDatos.ACC_Pedidos;
 import AccesoDatos.ACC_Stock;
 import Entidades.almacenes;
 import Entidades.centros;
 import Entidades.materiales;
+import Entidades.pedido_detalle;
 import Entidades.stock;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 
 /**
@@ -46,6 +50,7 @@ public class peticionMovMateriales2 extends HttpServlet {
             String Accion = request.getParameter("Accion");
             String Materi = request.getParameter("Material");
             String Descri = request.getParameter("Descripcion");
+            String UnidME = request.getParameter("UnidadMedida");
             String Cantid = request.getParameter("Cantidad");
             String ClaseM = request.getParameter("ClaseMov");
             String Centro = request.getParameter("Centro");
@@ -53,8 +58,11 @@ public class peticionMovMateriales2 extends HttpServlet {
             String Lote = request.getParameter("Lote");
             String Docume = request.getParameter("Documento");
             String Posici = request.getParameter("Posicion");
-            String Canti2 = request.getParameter("CantidadGrid");
-          
+            String IndPos = request.getParameter("Indice");
+            HttpSession session = request.getSession();
+            String us = (String) session.getAttribute("Usuario");
+            Properties po = new Properties();
+            po.load(getServletContext().getResourceAsStream("/WEB-INF/LanguageES.properties"));
             switch (Accion) {
                 case "ConsultaMaterial":
                     ArrayList<materiales> mat = ACC_Material.ObtenerInstancia().ConsultaMaterialesMov(Materi, Descri, Cantid);
@@ -179,11 +187,102 @@ public class peticionMovMateriales2 extends HttpServlet {
                     stock sk = ACC_Stock.ObtenerInstancia().VerificarExistenciaMovis(Materi, Centro, Almace, Lote, Docume, Posici);
                     if (sk.getMaterial().trim().equals("")) {
                         out.println(0);
-                    }  else {
+                    } else {
                         out.println(sk.getStocklibre_utilizacion());
                     }
                     break;
-                    
+                case "ExistenciaDestino":
+                    int exides = ACC_Centro.ObtenerInstancia().CentroDestinoT(Centro, Materi, Almace, "");
+                    out.println(exides);
+                    break;
+                case "VentanaModalMovsnuevos":
+                    pedido_detalle pd = new pedido_detalle();
+                    pd.setNum_posicion(IndPos);
+                    pd.setMaterial(Materi);
+                    pd.setDescripcion(Descri);
+                    pd.setUnidad_medida_base(UnidME);
+                    pd.setCentro(Centro);
+                    pd.setAlmacen(Almace);
+                    pd.setLote(Lote);
+                    pd.setCantidad(Cantid);
+                    pd.setTipo_mov(ClaseM);
+                    pd.setNum_solped(Docume);
+                    pd.setNum_posicion_solped(Posici);
+                    ArrayList<pedido_detalle> pmovs = ACC_Pedidos.ObtenerInstancia().Ingresa30131315(pd, us);
+                    out.println("<table class=\"TablaCont\" id=\"TablaMov\">\n"
+                            + "                                    <tr id=\"CabeceraTabla\">\n"
+                            + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.Tmaterial_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.Tcantidad_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TUM_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.Tlote_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TstockEspecial_MOM") + "</td>\n"
+                            + "                                        <td class=\"ajustar\">" + po.getProperty("etiqueta.Ttextobreve_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.Torden_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TCentroDeCostos_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TclasCost_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TPedido_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TPosPed_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.Treserva_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TPosRes_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TProveedor_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TMaterialDestino_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TCentroDestino_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TAlmacenDestino_MOM") + "</td>\n"
+                            + "                                        <td class=\"ocultar\">&nbsp;</td>\n"
+                            + "                                    </tr> \n"
+                            + "                                    <tbody>");
+                    int c;
+                    for (c = 0; c < pmovs.size(); c++) {
+                        String StockE = "";
+                        if(!pmovs.get(c).getNum_solped().isEmpty()){
+                            StockE = "E";
+                        }
+                        out.println("<tr>\n"
+                                + "<td><input type=\"checkbox\" name=\"Pedidos\" value=\"" + pmovs.get(c).getNum_posicion() + "\"></td>"
+                                + "<td name=\"mmmat\">" + pmovs.get(c).getMaterial() + "</td>"
+                                + "<td name=\"mmprr\">" + pmovs.get(c).getPor_recibir() + "</td>"
+                                + "<td name=\"mmumb\">" + pmovs.get(c).getUnidad_medida_base() + "</td>"
+                                + "<td name=\"mmnlt\">" + pmovs.get(c).getNuevo_lote() + "</td>"
+                                + "<td name=\"mmStEs\">"+StockE+"</td>"
+                                + "<td class=\"ajustar\" name=\"mmdsc\">" + pmovs.get(c).getDescripcion() + "</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td name=\"mmpedid\">"+pmovs.get(c).getNum_solped()+"</td>"
+                                + "<td name=\"mmPosPed\">"+pmovs.get(c).getNum_posicion_solped()+"</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td name=\"mmCentro\">" + pmovs.get(c).getCentro() + "</td>"
+                                + "<td name=\"mmAlmace\">" + pmovs.get(c).getAlmacen() + "</td>"
+                                + "<td class=\"ocultar\" name=\"mmidx\">" + (Integer.parseInt(c + "") + 1) + "</td>"
+                                + "</tr>");
+                    }
+                    for (int d = c; d <= 14; d++) {
+                        out.println("<tr>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "</tr>");
+                    }
+                    break;
             }
 
         }
