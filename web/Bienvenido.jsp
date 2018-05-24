@@ -279,6 +279,12 @@
     <body >   
         <div id="main-header">  
             <hr>
+            <div id="header2" style="display:none">
+                <ul class="sf-menu">
+                    <li  class="current" style="background: #E2E2E2; padding-left: 0; width: 52px; border:  1px solid #ccc; text-align: left; margin-bottom: 0; margin-right: 20px;"><a href="#" style="margin-left:-0.8em;"><%out.println(po.getProperty("etiqueta.Menu_menu"));%></a><div class="arrowc"></div>
+                    </li>
+                </ul>
+            </div>
             <div id="header">
                 <ul class="sf-menu" id="example">
                     <li class="current" style="background: #E2E2E2; padding-left: 0; width: 52px; border:  1px solid #ccc; text-align: left; margin-bottom: 0; margin-right: 20px;"><a href="#" style="margin-left:-0.8em;"><%out.println(po.getProperty("etiqueta.Menu_menu"));%></a>
@@ -565,7 +571,6 @@
         </div>
         <script>
             $(document).ready(function () {
-
                 $('#iconmsg').hide();
                 $('#guardar').prop('disabled', true);
                 $('#regresar').prop('disabled', true);
@@ -602,6 +607,7 @@
                     WriteDate.html("Fecha indefinida");
                 }
                 startTime();
+                CargarAvisosVendedor();
             });
 
             function startTime() {
@@ -656,13 +662,74 @@
                     }
                 });
             }
+            function CargarAvisosVendedor() {
+                var Vend = '<%=Nombre%>';
+                var acc = "CargarAvisosVendor";
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    dataType: 'json',
+                    url: 'peticionPedidoSDCrear',
+                    contentType: "application/x-www-form-urlencoded",
+                    processData: true,
+                    data: "Accion=" + acc + "&Vendedor=" + Vend,
+                    success: function (data) {
+                        if (data[0].length > 0) {
+                            if (data[1].length > 0 || data[2].length > 0 || data[3].length > 0) {
+                                $('#header2').css('display', 'block');
+                                $('#header').css('display', 'none');
+                                $('#confirm_button').prop('disabled', true);
+                                var BE = document.createElement('audio');
+                                BE.src = "saperror.wav";
+                                BE.play();
+                                var ancho = 800;
+                                var alto = 700;
+                                var x = (screen.width / 2) - (ancho / 2);
+                                var y = (screen.height / 2) - (alto / 2);
+                                var ventana = $('#Windowmsg');
+                                ventana.css({top: y + "px", left: x + "px"});
+                                ventana.css('display', 'block');
+                                $('#aviso1txt').val(data[1]);
+                                $('#aviso2txt').val(data[2]);
+                                $('#aviso3txt').val(data[3]);
+                            }
+                        }
+                    }
+                });
+            }
+            function CerrarVentaAviso() {
+                $('#header2').css('display', 'none');
+                $('#header').css('display', 'block');
+                $('#confirm_button').prop('disabled', false);
+                var BE = document.createElement('audio');
+                BE.src = "audio/sapsnd05.wav";
+                BE.play();
+                $('#Windowmsg').css('display', 'none');
+            }
         </script>
         <div class="contenido">
             <div class="logoimage">
                 <IMG SRC="images/Logo_Empresa.png"  ALT="Logo">
             </div>
         </div>            
-
+        <div id="Windowmsg" class="VentanaModalMensajes">
+            <div id="handleMsg"><label id="TituloMatch">Avisos</label><div class="BotonCerrar_Matc" onclick="CerrarVentaAviso();"><label >X</label></div></div>
+            <div class="divAviso1">
+                <label>Aviso 1</label>
+                <hr style="border: 1px solid #007CC0; margin-left: -2%;">
+               <textarea class="textAr"  id="aviso1txt" disabled></textarea>
+            </div>
+            <div class="divAviso1">
+                <label>Aviso 2</label>
+                <hr style="border: 1px solid #007CC0; margin-left: -2%;">
+                 <textarea class="textAr"  id="aviso2txt" disabled></textarea>
+            </div>
+            <div class="divAviso1">
+                <label>Aviso 3</label>
+                <hr style="border: 1px solid #007CC0; margin-left: -2%;">
+                 <textarea class="textAr"  id="aviso3txt" disabled></textarea>
+            </div>
+        </div>
         <footer>
             <hr class="fecha" id="footerline">
             <div  class="fecha">
@@ -688,6 +755,46 @@
                 padding:0;
                 height: auto;
             }
+            .VentanaModalMensajes{
+                position: fixed; 
+                width: 700px; 
+                height: 550px;
+                margin-top: 10px;
+                left: 100%; 
+                font-family:Verdana, Arial, Helvetica, sans-serif; 
+                font-size: 15px; 
+                font-weight: normal; 
+                border: #333333 3px solid; 
+                background-color: #f2f2f2; 
+                color: #000000;
+                display:none;
+                z-index:1002;
+            }
+            #handleMsg{   
+                padding-top: .2%;
+                height: 5%;
+                width: 100%;
+                color:#E1F0D0;
+                background: #333  top repeat-x;
+            }
+            .divAviso1{
+                padding-left: 2%;
+                margin-top: 1%;
+                width: 96%;
+                margin-left: 1%;
+                margin-right: 1%;
+                height: 30%;
+                background: #fff;}
+            .textAr{
+                resize: none;
+                margin-right: 1%;
+                height: 65%;
+                width: 96%;
+                overflow-x: scroll; 
+                overflow-y: scroll; 
+                border: double #000;
+            }
+
         </style>
     </body>
     <%}
