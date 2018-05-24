@@ -329,7 +329,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     break;
                 case "CargarDesRelac":
                     String sql = "{call SD.CrearPedidos_ConsultaDestinatario(?,?,?)}";
-                    ArrayList<clientes> datcl = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, "", "", sql,"");
+                    ArrayList<clientes> datcl = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, "", "", sql, "");
                     JSONArray ci = new JSONArray();
                     if (datcl.size() > 0) {
                         ci.add(datcl.get(0).getIdCliente());
@@ -352,10 +352,17 @@ public class peticionPedidoSDCrear extends HttpServlet {
                 case "CargarAvisosVendor":
                     String[] avis = ACC_CrearPedidoSD.ObtenerInstancia().CargarAvisosVendedor(vende);
                     JSONArray avv = new JSONArray();
-                    avv.add(avis[0].trim());
-                    avv.add(avis[1].trim());
-                    avv.add(avis[2].trim());
-                    avv.add(avis[3].trim());
+                    if (avis[0] == null || avis[0] == "") {
+                        avv.add("");
+                        avv.add("");
+                        avv.add("");
+                        avv.add("");
+                    } else {
+                        avv.add(avis[0].trim());
+                        avv.add(avis[1].trim());
+                        avv.add(avis[2].trim());
+                        avv.add(avis[3].trim());
+                    }
                     out.println(avv);
                     break;
 
