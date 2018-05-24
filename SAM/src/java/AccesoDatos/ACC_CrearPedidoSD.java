@@ -557,4 +557,29 @@ public class ACC_CrearPedidoSD {
         }
         return c;
     }
+
+    public String[] CargarAvisosVendedor(String vend) {
+        String avis[] = new String[4];
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call SD.PedidosSD_CargarAvisosVendedor(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1,vend);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                avis[0] = rs.getString("vendedor");
+                avis[1] = rs.getString("aviso1");
+                avis[2] = rs.getString("aviso2");
+                avis[3] = rs.getString("aviso3");
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return avis;
+    }
 }
