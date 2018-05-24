@@ -1625,4 +1625,91 @@ public class ACC_Pedidos {
         }
         return sam;
     }
+    public ArrayList<pedido_detalle> Ingresa30131315(pedido_detalle pd,  String us) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        Statement st;
+        int l = 0;
+        ArrayList<pedido_detalle> ped = new ArrayList<>();
+
+        String query = "{call TablaMovimientos(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+                + "?,?,?,?,?,?)}";
+        try {
+            PreparedStatement sp = con.prepareStatement(query);
+            sp.setString(1, "");
+            sp.setString(2, "");
+            sp.setString(3, "");
+            sp.setString(4, "");
+            sp.setString(5, "");
+            sp.setString(6, "");
+            sp.setString(7, "");
+            sp.setString(8, "");
+            sp.setString(9, "");
+            sp.setString(10, "");
+            sp.setString(11, "");
+            sp.setString(12, "");
+            sp.setString(13, pd.getNum_posicion());
+            sp.setString(14, "");
+            sp.setString(15, "");
+            sp.setString(16, pd.getMaterial());
+            sp.setString(17, pd.getDescripcion());
+            sp.setString(18, "");
+            sp.setString(19, pd.getUnidad_medida_base());
+            sp.setString(20, "");
+            sp.setString(21, pd.getCentro());
+            sp.setString(22, pd.getAlmacen());
+            sp.setString(23, "");
+            sp.setString(24, "");
+            sp.setString(25, "");
+            sp.setString(26, pd.getNum_solped());
+            sp.setString(27, pd.getNum_posicion_solped());
+            sp.setString(28, "");
+            sp.setString(29, "");
+            sp.setString(30, "");
+            sp.setString(31, "");
+            sp.setString(32, "");
+            sp.setString(33, "");
+            sp.setString(34, "");
+            sp.setString(35, "");
+            sp.setString(36, "");
+            sp.setString(37, "");
+            sp.setString(38, "");
+            sp.setString(39, "");
+            sp.setString(40, "");
+            sp.setString(41, "");
+            sp.setString(42, "");
+            sp.setString(43, "");
+            sp.setString(44, "");
+            sp.setString(45, "");
+            sp.setString(46, "");
+            sp.setString(47, "0");
+            sp.setString(48, pd.getLote());
+            sp.setString(49, pd.getCantidad());
+            sp.setString(50, pd.getTipo_mov());
+            sp.setString(51, us);
+            ResultSet rs = sp.executeQuery();
+            while (rs.next()) {
+                pedido_detalle p = new pedido_detalle();
+                p.setNum_posicion(rs.getString("num_posicion_doc_compras"));
+                p.setMaterial(rs.getString("num_material"));
+                p.setDescripcion(rs.getString("texto_breve"));
+                p.setUltima_cantidad(rs.getString("ultima_cantidad"));
+                p.setPor_recibir(rs.getString("por_recibir"));
+                p.setUnidad_medida_base(rs.getString("unidad_medida_base"));
+                p.setNuevo_lote(rs.getString("nuevo_lote"));
+                p.setCentro(rs.getString("centro"));
+                p.setAlmacen(rs.getString("almacen"));
+                p.setNum_solped(rs.getString("num_solped"));
+                p.setNum_posicion_solped(rs.getString("num_posicion_solped"));
+                ped.add(p);
+            }
+        } catch (Exception ex) {
+            System.err.println("Error en metodo por: " + ex);
+        }
+        cnx.CerrarConexion(con);
+        return ped;
+    }
+
 }
