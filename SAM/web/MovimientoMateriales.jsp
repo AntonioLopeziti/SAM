@@ -6825,7 +6825,7 @@
                                 funinva = "Material obligatorio";
                                 break;
                             case 2:
-                                funinva = "Ingrese Materiales en la tabla";
+                                funinva = "Ingrese Material en la primera posicion en la tabla / Ingrese Materiales";
                                 break;
                             case 3:
                                 funinva = "Material no encontrado";
@@ -6850,6 +6850,9 @@
                                 break;
                             case 10:
                                 funinva = "Material no habilitado";
+                                break;
+                            case 11:
+                                funinva = "Material no existe en Centro-Almacen Destino";
                                 break;
                         }
                         var icon = $('#iconmsg');
