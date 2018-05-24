@@ -118,7 +118,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         pro = "";
                     }
                     if (pro != "") {
-                        ArrayList<clientes> cli = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, nombre, Canti, pro, vende);
+                        ArrayList<clientes> cli = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, nombre, Canti, pro, vende, tipo );
                         if (cli.size() > 0) {
                             out.println("<table>");
                             out.println("<tbody>");
@@ -329,7 +329,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     break;
                 case "CargarDesRelac":
                     String sql = "{call SD.CrearPedidos_ConsultaDestinatario(?,?,?)}";
-                    ArrayList<clientes> datcl = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, "", "", sql, "");
+                    ArrayList<clientes> datcl = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, "", "", sql, "","");
                     JSONArray ci = new JSONArray();
                     if (datcl.size() > 0) {
                         ci.add(datcl.get(0).getIdCliente());
