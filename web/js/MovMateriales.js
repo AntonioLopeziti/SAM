@@ -3545,6 +3545,8 @@ function Validarmovis() {
     var Centro = $('#bxCentro').val().trim();
     var Almace = $('#bxAlmacen').val().trim();
     var Materi = document.getElementsByName(ClaseM + 'MaterTD');
+    var Descri = document.getElementsByName(ClaseM + 'DesciTD');
+    var UnidMe = document.getElementsByName(ClaseM + 'UMediTD');
     var Lote = document.getElementsByName(ClaseM + 'LotesTD');
     var Canti = document.getElementsByName(ClaseM + 'CantiTD');
     var Centr = document.getElementsByName(ClaseM + 'CentrTD');
@@ -3598,17 +3600,35 @@ function Validarmovis() {
                 Canti[i].focus();
                 return;
             }
-            var hab = ValidaMaterialHabilitado(Materi[i].value.trim());
-            alert(hab);
-            if (hab == 0) {
-                mensajesNuevo(10, "images/advertencia.PNG", "audio/saperror.wav");
-                Materi[i].focus();
+            if (ValidamaterialDes(Materi[i].value, Centr[i].value, Almac[i].value, ClaseM) == 0) {
+                mensajesNuevo(11, "images/advertencia.PNG", "audio/saperror.wav");
                 return;
             }
         }
     }
+    for (i = 0; i < Materi.length; i++) {
+        if (Materi[i].value.length != 0) {
+            var nnn = (i) + (1);
+            var extr = "&Material=" + Materi[i].value + "&Descripcion=" + Descri[i].value +
+                    "&UnidadMedida=" + UnidMe[i].value + "&Centro=" + Centr[i].value +
+                    "&Almacen=" + Almac[i].value + "&Cantidad=" + Canti[i].value + "&Lote=" + Lote[i].value +
+                    "&Documento=" + Docum[i].value + "&Posicion=" + Posic[i].value +
+                    "&ClaseMov=" + ClaseM + "&Indice=" + nnn;
+            InserMovsNuevosTemp('VentanaModalMovsnuevos', extr);
+        }
+    }
 //            break;
 //    }
+    $('#iconmsg').hide();
+    var men = document.getElementById("msg");
+    men.innerHTML = "";
+    var ven = document.getElementById('VentanaModalAv');
+    var msg = "Posicion(s) cargada correctamente";
+    abrirVentanaAv(ven, msg);
+    var theHandle = document.getElementById("handleAV");
+    var theRoot = document.getElementById("VentanaModalAv");
+    Drag.init(theHandle, theRoot);
+    ocultarVentana('VentanaModal301', 'btnAdd');
 }
 function GetinfoMat(mat, clm, pos) {
     var acc = "CargarInfoMaterial";
@@ -3683,4 +3703,39 @@ function ValidarExistenciasMatenuevo(mat, cen, alm, lot, doc, pos, can, clm) {
         }
     });
     return res;
+}
+function ValidamaterialDes(mat, cen, alm, clm) {
+    var rt = 0;
+    var acc = "ExistenciaDestino";
+    var datos = "&Material=" + mat + "&ClaseMov=" + clm
+            + "&Centro=" + cen + "&Almacen=" + alm;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            if (data == 1) {
+                rt = 1;
+            }
+        }
+    });
+    return rt;
+
+}
+function InserMovsNuevosTemp(action, extras)
+{
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + action + extras,
+        success: function (data) {
+            $('#SecTabPpal').html(data);
+        }
+    });
 }
