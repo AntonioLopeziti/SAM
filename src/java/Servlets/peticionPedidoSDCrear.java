@@ -349,6 +349,15 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         out.println(0);
                     }
                     break;
+                case "CargarAvisosVendor":
+                    String[] avis = ACC_CrearPedidoSD.ObtenerInstancia().CargarAvisosVendedor(vende);
+                    JSONArray avv = new JSONArray();
+                    avv.add(avis[0].trim());
+                    avv.add(avis[1].trim());
+                    avv.add(avis[2].trim());
+                    avv.add(avis[3].trim());
+                    out.println(avv);
+                    break;
 
             }
         }
