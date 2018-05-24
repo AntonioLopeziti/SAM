@@ -207,7 +207,8 @@ public class Consultas {
     public void CabeceraCreaMov(String v1, String v2, String v3, String v4, String v5, String v6, String v7, String v8, String v9, String v10, String v11, String v12, String v13, String v14, String v15, String v16, String v17, String v18, String v19, String v20) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String query = "{CALL MM.InsertMovimientosCabeceraCrea_MOM(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+//        String query = "{CALL MM.InsertMovimientosCabeceraCrea_MOM(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL MM.InsertMovimientosCabeceraCreaMM_MOM(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, v1);
@@ -456,7 +457,74 @@ public class Consultas {
             cnx.CerrarConexion(con);
         }
     }
-
+    public void PosicionesCreaDet(String v1, String v2, String v3, String v4, String v5, String v6, String v7, String v8, String v9, String v10, String v11, String v12, String v13, String v14, String v15, String v16, String v17, String v18, String v19, String v20, String v21, String v22, String v23, String v24, String v25, String v26, String v27, String v28, String v29, String v30, String v31, String v32, String v33, String v34, String v35, String v36, String v37, String v38, String v39, String v40, String v41, String v42, String v43, String v44, String v45, String v46, String v47, String v48, String v49, String v50, String v51, String v52, String v53, String v54, String v55) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String query = "{CALL MM.posiciones_MovMateriales_MOM(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, v1);
+            ps.setString(2, v2);
+            ps.setString(3, v3);
+            ps.setString(4, v4);
+            ps.setString(5, v5);
+            ps.setString(6, v6);
+            ps.setString(7, v7);
+            ps.setString(8, v8);
+            ps.setString(9, v9);
+            ps.setString(10, v10);
+            ps.setString(11, v11);
+            ps.setString(12, v12);
+            ps.setString(13, v13);
+            ps.setString(14, v14);
+            ps.setString(15, v15);
+            ps.setString(16, v16);
+            ps.setString(17, v17);
+            ps.setString(18, v18);
+            ps.setString(19, v19);
+            ps.setString(20, v20);
+            ps.setString(21, v21);
+            ps.setString(22, v22);
+            ps.setString(23, v23);
+            ps.setString(24, v24);
+            ps.setString(25, v25);
+            ps.setString(26, v26);
+            ps.setString(27, v27);
+            ps.setString(28, v28);
+            ps.setString(29, v29);
+            ps.setString(30, v30);
+            ps.setString(31, v31);
+            ps.setString(32, v32);
+            ps.setString(33, v33);
+            ps.setString(34, v34);
+            ps.setString(35, v35);
+            ps.setString(36, v36);
+            ps.setString(37, v37);
+            ps.setString(38, v38);
+            ps.setString(39, v39);
+            ps.setString(40, v40);
+            ps.setString(41, v41);
+            ps.setString(42, v42);
+            ps.setString(43, v43);
+            ps.setString(44, v44);
+            ps.setString(45, v45);
+            ps.setString(46, v46);
+            ps.setString(47, v47);
+            ps.setString(48, v48);
+            ps.setString(49, v49);
+            ps.setString(50, v50);
+            ps.setString(51, v51);
+            ps.setString(52, v52);
+            ps.setString(53, v53);
+            ps.setString(54, v54);
+            ps.setString(55, v55);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Error en ValidarUMedida ACC_UnidadesMedida por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
     public void CabeceraCreaDet(String v1, String v2, String v3, String v4, String v5, String v6, String v7, String v8, String v9, String v10, String v11, String v12, String v13, String v14, String v15, String v16, String v17, String v18, String v19, String v20, String v21, String v22, String v23, String v24, String v25, String v26, String v27, String v28, String v29, String v30, String v31, String v32, String v33, String v34, String v35, String v36, String v37, String v38, String v39, String v40, String v41, String v42, String v43, String v44, String v45, String v46, String v47, String v48, String v49, String v50, String v51) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
