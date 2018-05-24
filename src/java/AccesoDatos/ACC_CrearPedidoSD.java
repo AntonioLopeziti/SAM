@@ -236,7 +236,7 @@ public class ACC_CrearPedidoSD {
         return mv;
     }
 
-    public ArrayList<clientes> GetClientes(String cliente, String nombre, String cantidad, String sql, String ven) {
+    public ArrayList<clientes> GetClientes(String cliente, String nombre, String cantidad, String sql, String ven, String tipo) {
         ArrayList<clientes> cl = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -248,7 +248,7 @@ public class ACC_CrearPedidoSD {
             ps.setString(1, cliente);
             ps.setString(2, nombre);
             ps.setString(3, cantidad);
-            if (!ven.isEmpty()) {
+            if (tipo.equals("solicitante")) {
                 ps.setString(4, ven);
             }
             rs = ps.executeQuery();
