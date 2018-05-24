@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Entidades.pedido_detalle;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -85,6 +86,8 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
             String v17 = request.getParameter("v17");
             String v18 = request.getParameter("v18");
             String v19 = request.getParameter("v19");
+            String v20 = request.getParameter("v20");
+            String v21 = request.getParameter("v21");
             String almp = request.getParameter("almp");
             String fechaActual = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
             String horaActual = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
@@ -100,6 +103,7 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
             Date fecha = new Date();
             DateFormat fFecha = new SimpleDateFormat("yyyy-MM-dd");
             String calendar = fFecha.format(fecha);
+            String StockEspecial = "";
             Properties po = new Properties();
             try {
                 po.load(getServletContext().getResourceAsStream("/WEB-INF/Language" + Idioma + ".properties"));
@@ -453,13 +457,13 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                 case "Guarda311Cabecera":
                     fl = "MO" + fo.getFolioActual();
                     
-                    if(Consultas.ObtenerInstancia().posicionesMM(fl, v19)){
+//                    if(Consultas.ObtenerInstancia().posicionesMM(fl, v19)){
                         Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", Fch, us);
                         out.println(1);
-                    }else{
-                        Consultas.ObtenerInstancia().BorrarRegistroMM(fl);
-                        out.println(2);
-                    }
+//                    }else{
+//                        Consultas.ObtenerInstancia().BorrarRegistroMM(fl);
+//                        out.println(2);
+//                    }
                     break;
                 case "Guarda312Cabecera":
                     fl = "MO" + fo.getFolioActual();
@@ -541,13 +545,16 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     //v10 -> almacen receptor
                     //v9 -> Centro
                     //v12 -> almacen origen
-                    String wh = ACC_Almacenes.ObtenerInstancia().verificaAlmacenDes(v10, v9);
+//                    String wh = ACC_Almacenes.ObtenerInstancia().verificaAlmacenDes(v10, v9);
                     fl = "MO" + fo.getFolioActual();
-                    if(!wh.trim().equals("")){
-                        Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", v13, v14, "", "", "TR01", "", v9, "", "", "", "", "", "", "", "", "", "", "", v10, "", "", "", "", "", "", "");
-                    }else{
-                        Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", v13, v14, "", "", v10, "", v9, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-                    }
+//                    if(!wh.trim().equals("")){
+//                        Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", v13, v14, "", "", "TR01", "", v9, "", "", "", "", "", "", "", "", "", "", "", v10, "", "", "", "", "", "", "");
+//                    }else{
+//                        Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", v13, v14, "", "", v10, "", v9, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+//                    }
+//                    StockEspecial = (v20.equals("")) ? "" : "E";
+                    Consultas.ObtenerInstancia().PosicionesCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", v13, v14, "", "", v10, "", v9, "", "", "E", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "p1", "p2");
+//                    Consultas.ObtenerInstancia().PosicionesCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", v13, v14, "", "", v10, "", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21);
                     break;
                 case "Guarda312Posiciones":
                     fl = "MO" + fo.getFolioActual();
@@ -809,6 +816,38 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
 //                        System.err.println("Error: " + e);
 //                    }
 //                    break;
+                case "Movimiento311":
+                    DecimalFormat df = new DecimalFormat("#.000");
+                    String ori, des;
+                    Double origen, destino;
+                    String rtnn = "";
+                    int cc3 = Integer.parseInt(v2);
+                    int ppr3 = 0;
+                    String[][] M311 = new String[cc3][6];
+                    String[] parts3 = v1.split(",");
+                    try {
+                        for (int f = 0; f < cc3; f++) {
+                            for (c = 0; c < 6; c++) {
+                                M311[f][c] = parts3[ppr3];
+                                ppr3++;
+                            }
+                        }
+                        for(int i = 0; i < cc3; i++){
+                            origen = ACC_Stock.ObtenerInstancia().StockLibre(M311[i][2], M311[i][0], M311[i][3], M311[i][4]) - Double.parseDouble(M311[i][1]);
+                            destino = ACC_Stock.ObtenerInstancia().StockLibre(M311[i][2], M311[i][0], M311[i][3], M311[i][5]) + Double.parseDouble(M311[i][1]);
+                            ori = df.format(origen);
+                            des = df.format(destino);
+                            //Oriden
+                            ACC_Stock.ObtenerInstancia().ActualizaInv(M311[i][2], M311[i][0], M311[i][3], ori, M311[i][4]);
+                            //Destino
+                            ACC_Stock.ObtenerInstancia().ActualizaInv(M311[i][2], M311[i][0], M311[i][3], des, M311[i][5]);
+                        }
+                        
+                        out.println(2 + "," + rtnn);
+                    } catch (Exception e) {
+                        System.err.println("Error: " + e);
+                    }
+                    break;
 //                case "Movimiento311":
 //                    String rtnn = "";
 //                    int cc3 = Integer.parseInt(v2);
@@ -851,13 +890,13 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
 //                            }
 //                        }
 //                        if (rtn == 2) {
-//                            fl = "MO" + fo.getFolioActual();
-//                            if (v3.equals("311")) {
-//                                rtnn = CallWS.ObtenerInstancia().EnviaWS311(M311, fl, v4, v3, fechaActual, horaActual);
-//                            }
-//                            if (v3.equals("312")) {
-//                                rtnn = CallWS.ObtenerInstancia().EnviaWS312(M311, fl, v4, v3, fechaActual, horaActual);
-//                            }
+////                            fl = "MO" + fo.getFolioActual();
+////                            if (v3.equals("311")) {
+////                                rtnn = CallWS.ObtenerInstancia().EnviaWS311(M311, fl, v4, v3, fechaActual, horaActual);
+////                            }
+////                            if (v3.equals("312")) {
+////                                rtnn = CallWS.ObtenerInstancia().EnviaWS312(M311, fl, v4, v3, fechaActual, horaActual);
+////                            }
 //
 //                            for (int f = 0; f < cc3; f++) {
 //                                try {
