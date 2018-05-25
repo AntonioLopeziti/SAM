@@ -136,11 +136,11 @@ public class ACC_Zebra {
             System.out.println("Printer: " + impresora.getName());
             txt += "\nPrinter: " + impresora.getName();
             if (impresora.getName().contentEquals(nombre)) { // Si el nombre del servicio es el mismo que el que buscamos
-                try (FileWriter writer = new FileWriter("C:\\Users\\Portal Sap\\Desktop\\foo.txt")) {
-                    writer.write(txt);
-                    writer.flush();
-                    // do more stuff with writer
-                }
+//                try (FileWriter writer = new FileWriter("C:\\Users\\Portal Sap\\Desktop\\foo.txt")) {
+//                    writer.write(txt);
+//                    writer.flush();
+//                    // do more stuff with writer
+//                }
                 return impresora; // Nos devuelve el servicio 
             }
         }
@@ -242,18 +242,18 @@ public class ACC_Zebra {
     }
 
     public static void main(String[] args) throws IOException {
-        Zebra_noti_PT zb = new Zebra_noti_PT();
-        zb.setPuesto_trabajo("BB05");
-        zb.setDescripcion("Material XXXXXXXXXXXXXXXXXXXXXX");
-        zb.setFecha("09/04/2018");
-        zb.setHora("18:37:00");
-        zb.setAncho("1234.000");
-        zb.setOrden("1000005");
-        zb.setLote("NUEVOPR");
-        zb.setCantidad("1.00");
-        zb.setCliente("TEXTO DEL CLIENTE DE SANPER DE LEON DEL CENTRO DE MEXICO");
-        zb.setNro_material("1234567890");
-        ACC_Zebra.ObtenerInstancia().PrintTargetPT(zb);
+//        Zebra_noti_PT zb = new Zebra_noti_PT();
+//        zb.setPuesto_trabajo("BB05");
+//        zb.setDescripcion("Material XXXXXXXXXXXXXXXXXXXXXX");
+//        zb.setFecha("09/04/2018");
+//        zb.setHora("18:37:00");
+//        zb.setAncho("1234.000");
+//        zb.setOrden("1000005");
+//        zb.setLote("NUEVOPR");
+//        zb.setCantidad("1.00");
+//        zb.setCliente("TEXTO DEL CLIENTE DE SANPER DE LEON DEL CENTRO DE MEXICO");
+//        zb.setNro_material("1234567890");
+//        ACC_Zebra.ObtenerInstancia().PrintTargetPT(zb);
 
     }
 }
