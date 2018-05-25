@@ -164,86 +164,129 @@
             <div class="titulo"><h1>Notificación de Tiempos PP</h1></div>      
         </div>
         <div class="contenido">
-            <div class="ContentNotif">
-                <label>Busqueda General</label>
-                <hr id="lineaNotiTiempos">
-                <div class="divNoPers1">
-                    <label>No Personal</label><input type="text" id="NoPers" value="" maxlength="10" style="text-transform: uppercase; background-repeat: no-repeat;" /><button id="btnmatchUsuarios"  class="BtnMatchIcon"></button>
-                    <hr>
-                </div>
-                <div class="divNoPerso2">
-                    <button id="LimPantalla" style="margin-left: 40%;">Limpiar Pantalla</button>
-                </div>
-            </div>
-            <div class="bkClassNoti" hidden>
-                <label style="padding-left: 25px; font-size: 13px;">Clase de notificación</label>
-                <!--<label style="padding-left: 10px; font-size: 13.5px;">Clase de notificación</label>-->
-                <hr id="LineaTituloInfo">
-                <input type="radio" value="par" name="clnoti" id="NotParcial"> Notif.pacial
-                <input type="radio" value="fin" name="clnoti" class="rbcln" id="NotFinal"> Notif.final
-                <input type="radio" value="aut" name="clnoti" checked class="rbcln" id="NotFinalAu"> Notif.final autom.
-                <input type="checkbox" value="res" name="ckreserva" class="rbcln" id="CompRes"> Compensar reserva
-            </div>
-            <div class="divmatchEsp">
-                <label>Especificaciones</label> 
-                <hr class="lineaazul">
-                <label id="lblTextoLargo"></label>
-            </div><br><br>
-            <div class="divmatchEsp">
-                <label>Observaciones</label> 
-                <hr class="lineaazul">
-                <label id="lblTextoLargo2"></label>
-            </div><br><br>
-            <div class="DatosGeneNotiTiemp">
-                <label>Datos Generales</label>
-                <hr id="lineaNotiTiempos">
-                <div class="divNoOrdFabri">
-                    <label>Orden Fabricación</label><input type="text" id="OrdFab" maxlength="15" style="text-transform: uppercase; background-repeat: no-repeat;"/><button id="btnmatchOrdLib"  class="BtnMatchIcon"></button>
-                    <section id="sectionMuestraExc" style="margin-left: 4%; width: 40%;">
-                    </section>
-                    <section id="sectionVisualExc" class="sctVisEx" style="margin-left: 4%; width: 40%;">
-                        <input type="checkbox" value="lim" disabled> <label style=" width: 40%;">Exceso Limitado</label>
-                    </section>
+            <section class="bkcontainer">
+                <section class="bkleft">
+                    <div class="ContentNotif">
+                        <label>Busqueda General</label>
+                        <hr id="lineaNotiTiempos">
+                        <div class="divNoPers1">
+                            <label>No Personal</label><input type="text" id="NoPers" value="" maxlength="10" style="text-transform: uppercase; background-repeat: no-repeat;" /><button id="btnmatchUsuarios"  class="BtnMatchIcon"></button>
+                            <hr>
+                        </div>
+                        <div class="divNoPerso2">
+                            <button id="LimPantalla" style="margin-left: 40%;">Limpiar Pantalla</button>
+                        </div>
+                    </div>
+                    <div class="bkClassNoti" hidden>
+                        <label style="padding-left: 25px; font-size: 13px;">Clase de notificación</label>
+                        <!--<label style="padding-left: 10px; font-size: 13.5px;">Clase de notificación</label>-->
+                        <hr id="LineaTituloInfo">
+                        <input type="radio" value="par" name="clnoti" id="NotParcial"> Notif.pacial
+                        <input type="radio" value="fin" name="clnoti" class="rbcln" id="NotFinal"> Notif.final
+                        <input type="radio" value="aut" name="clnoti" checked class="rbcln" id="NotFinalAu"> Notif.final autom.
+                        <input type="checkbox" value="res" name="ckreserva" class="rbcln" id="CompRes"> Compensar reserva
+                    </div>
+                    <div class="DatosGeneNotiTiemp">
+                        <label>Datos Generales</label>
+                        <hr id="lineaNotiTiempos">
+                        <div class="divNoOrdFabri">
+                            <label>Orden Fabricación</label><input type="text" id="OrdFab" maxlength="15" style="text-transform: uppercase; background-repeat: no-repeat;"/><button id="btnmatchOrdLib"  class="BtnMatchIcon"></button>
+                            <section id="sectionMuestraExc" style="margin-left: 4%; width: 40%;">
+                            </section>
+                            <section id="sectionVisualExc" class="sctVisEx" style="margin-left: 4%; width: 40%;">
+                                <input type="checkbox" value="lim" disabled> <label style=" width: 40%;">Exceso Limitado</label>
+                            </section>
 
-                    <!--<label type="text" id="DescripOrd" style="margin-left: 4%; width: 50%;"></label>-->
-                    <hr>
-                    <!--<label>Operación</label>-->                                                            
-                    <section id="sectionMostOp" hidden>
-<!--                        <select id="NoOpe">
-                            <option>0010</option>               
-                        </select>   -->
+                            <!--<label type="text" id="DescripOrd" style="margin-left: 4%; width: 50%;"></label>-->
+                            <hr>
+                            <!--<label>Operación</label>-->                                                            
+                            <section id="sectionMostOp" hidden>
+                                <!--                            <select id="NoOpe">
+                                                                <option>0010</option>               
+                                                            </select>   -->
+                            </section>
+                            <section class="divmatchEsp" style="margin-left: -22%; width: 55%;">
+                                <label><%out.println(po.getProperty("etiqueta.NPMStatus_PP"));%></label>
+                                <label style="display: inline-block; width: 80%; margin-left: -5%;" id="notsta"></label>
+                            </section>
+                            <section class="divmatchEsp" style="margin-left: -2%; width: 40%;">
+                                <label>Notificado:</label>
+                                <label style="display: inline-block; width: 20%; margin-left: 2%;" id="cntNN"></label>
+                                <label>Total:</label>
+                                <label style="display: inline-block; width: 20%; margin-left: -7%;" id="cntRR"></label>
+                                <input type="text" id="cntHID" hidden/>
+                            </section>
 
+                            <!--<hr style="margin-top: -1%;">-->
+                        </div>
+                    </div>
+                    <div class="DatosReales">
+                        <label>Datos Reales</label>
+                        <hr id="lineaNotiTiempos">
+                        <div class="divCntBuenMal">
+                            <label>Not.ctd.buena</label><input type="text" id="cntBuena" style="margin-left: 78px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>&nbsp;&nbsp;&nbsp;<label id="lblUM"></label>
+                            <hr>
+                            <section id="secMala" style="display: none;"><label>Rechazo.notif</label><input disabled value="0.000" type="text" id="cntMala" style="margin-left: 80px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>
+                            <hr></section>
+                        </div>
+                        <div class="divBtnIniFin">
+                            
+                            <button id="btnInicio" onclick="validarCantidades();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio not. tiempos</label>
+                            <br>
+                            <button id="btnFin" onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"></button><label>Fin not. tiempos</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="motivoRechazo();"><input type="image" src="images/btnDescri.png"/></button><label>Motivo rechazo</label>
+                        </div>
+                    </div>
+                </section>
+                <section class="bkright">
+                    <div class="divmatchEsp">
+                        <label>Especificaciones</label> 
+                        <hr class="lineaazul">
+                        <label id="lblTextoLargo"></label>
+                    </div><br>
+                    <div class="divmatchEsp">
+                        <label>Observaciones</label> 
+                        <hr class="lineaazul">
+                        <label id="lblTextoLargo2"></label>
+                    </div>
+                </section>
+            </section>
+            <div class="ContentabOpe">
+                <section class="DobleScroll" id="DobleSectionOpe">
+                    <section id="DobleContainerOpe"></section>
+                </section>
+                <section class="TableContainer">
+                    <section class="SecHead">
+                        <table id="TabHeadOpe">
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>Orden</td>
+                                    <td>Texto breve</td>
+                                    <td>Operación</td>
+                                    <td>Puesto Trabajo</td>
+                                    <td>Clave Control</td>
+                                    <td>Cantidad</td>
+                                    <td>UM</td>
+                                    <td>Centro</td>
+                                </tr>
+                            </thead>
+                        </table>
                     </section>
-                    <section class="divmatchEsp" style="margin-left: -22%; width: 45%;">
-                        <label><%out.println(po.getProperty("etiqueta.NPMStatus_PP"));%></label>
-                        <label style="display: inline-block; width: 80%; margin-left: -5%;" id="notsta"></label>
+                    <section class="SecBody" id="SecCuerpoOpe">
+                        <table id="TabBodyOpe">
+                            <tbody>
+                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                <tr class="ocultar"><td>000</td><td>00000000000</td><td>00000000000000000000000000000000000000</td><td>000000000</td><td>000000000000</td><td>000000000000</td><td>00000000000</td><td>0000</td><td>00000000</td></tr>
+                            </tbody>
+                        </table>
                     </section>
-                    <section class="divmatchEsp" style="margin-left: -5%; width: 55%;">
-                        <label>Notificado:</label>
-                        <label style="display: inline-block; width: 20%; margin-left: -5%;" id="cntNN"></label>
-                        <label>Total:</label>
-                        <label style="display: inline-block; width: 20%; margin-left: -7%;" id="cntRR"></label>
-                        <input type="text" id="cntHID" hidden/>
-                    </section>
-                    
-                    <!--<hr style="margin-top: -1%;">-->
-                </div>
-            </div>
-            <div class="DatosReales">
-                <label>Datos Reales</label>
-                <hr id="lineaNotiTiempos">
-                <div class="divCntBuenMal">
-                    <label>Not.ctd.buena</label><input type="text" id="cntBuena" style="margin-left: 78px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>
-                    <hr>
-                    <label>Rechazo.notif</label><input type="text" id="cntMala" style="margin-left: 80px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>
-                    <hr>
-                </div>
-                <div class="divBtnIniFin">
-                    <button id="btnInicio" onclick="validarCantidades();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio not. tiempos</label>
-                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="motivoRechazo();"><input type="image" src="images/btnDescri.png"/></button><label>Motivo rechazo</label>-->
-                    <br>
-                    <button id="btnFin" onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"></button><label>Fin not. tiempos</label>
-                </div>
             </div>
         </div>
         <div id="ventanaavis" class="VenAvisoss">
@@ -337,6 +380,79 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="VentanaModalRechazo" class="VentanaModalRR">
+            <div id="handle3"><label id="TituloMatch">Captura de Merma</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalRechazo', '');"><label>X</label></div></div>
+            <div id="BuscarParamCentro_SP" class="BuscarParam_u">
+                <div id="ConsultaTablaRec" >
+                    <section class="bkRechazoCab">
+                        <label>Cantidad rechazo:</label>
+                        <input type="text" class="bxRmed" id="bxcntRechazo" maxlength="11" onblur="this.value = checkDecc(this.value, 3);">
+                        <input id="acepRech" type="image" src="images/aceptar.png" onclick="ValidaRechazo();"/>
+                    </section>
+                    <section class="bkRechazo" id="bkRechazos">
+<!--                        <input class="ckhRechazo" type="radio" name="ckRechazoIT" value="ANGOSTO"> ANGOSTO
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="ARRUGAS"> ARRUGAS
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="BOLSA"> BOLSA
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="CORTES"> CORTES
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="GASA"> GASA
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="MAL CENTRADO"> MAL CENTRADO
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="OTRO"> OTRO
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="PROVETA DE PROVEEDOR"> PROVETA DE PROVEEDOR
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="SUCIO"> SUCIO
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="TEXTIL DESHILADO"> TEXTIL DESHILADO
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="TEXTIL DESTEÑIDO"> TEXTIL DESTEÑIDO
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="TRANSMINADO"> TRANSMINADO
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION DE FORRO"> UNION DE FORRO
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION ESPUMA CON CINTA"> UNION ESPUMA CON CINTA
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION ESPUMA EMPALADA"> UNION ESPUMA EMPALADA
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION EVA CON CINTA"> UNION EVA CON CINTA
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION EVA EMPALMADA"> UNION EVA EMPALMADA
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL COSTURA (HILO)"> UNION TEXTIL COSTURA (HILO)
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL DE PROVEEDOR"> UNION TEXTIL DE PROVEEDOR
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL EMPALMADA"> UNION TEXTIL EMPALMADA
+                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL TERMICA"> UNION TEXTIL TERMICA-->
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div id="VentanaModalActividades" class="VentanaModalRR2">
+            <div id="handle4"><label id="TituloMatch">Actividades</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalActividades', '');"><label>X</label></div></div>
+            <div id="BuscarParamCentro_SP" class="BuscarParam_u">
+                <div id="ConsultaTablaRec" >
+                    <div class="ContentNotif2">
+                        <label style="font-size: 1em">Actividades</label>
+                        <hr id="lineaNotiTiempos">
+                        <div class="divNoPersA">
+                            <label id="lblAct1"></label>
+                            <input type="text" class="bxRmed" id="bxAct1" maxlength="11" onblur="this.value = checkDecc(this.value, 3);">
+                            <input type="text" class="bxRSM" id="bxActUM1" maxlength="1" disabled>
+                            <input hidden type="checkbox" name="ckActividades" id="ckAct1" checked><br>
+                            <label id="lblAct2"></label>
+                            <input type="text" class="bxRmed" id="bxAct2" maxlength="11" onblur="this.value = checkDecc(this.value, 3);">
+                            <input type="text" class="bxRSM" id="bxActUM2" maxlength="1" disabled>
+                            <input hidden type="checkbox" name="ckActividades" id="ckAct2" checked><br>
+                            <label id="lblAct3"></label>
+                            <input type="text" class="bxRmed" id="bxAct3" maxlength="11" onblur="this.value = checkDecc(this.value, 3);">
+                            <input type="text" class="bxRSM" id="bxActUM3" maxlength="1" disabled>
+                            <input hidden type="checkbox" name="ckActividades" id="ckAct3" checked><br>
+                            <label id="lblAct4"></label>
+                            <input type="text" class="bxRmed" id="bxAct4" maxlength="11" onblur="this.value = checkDecc(this.value, 3);">
+                            <input type="text" class="bxRSM" id="bxActUM4" maxlength="1" disabled>
+                            <input hidden type="checkbox" name="ckActividades" id="ckAct4" checked><br>
+                            <label id="lblAct5"></label>
+                            <input type="text" class="bxRmed" id="bxAct5" maxlength="11" onblur="this.value = checkDecc(this.value, 3);">
+                            <input type="text" class="bxRSM" id="bxActUM5" maxlength="1" disabled>
+                            <input hidden type="checkbox" name="ckActividades" id="ckAct5" checked><br>
+                            <label id="lblAct6"></label>
+                            <input type="text" class="bxRmed" id="bxAct6" maxlength="11" onblur="this.value = checkDecc(this.value, 3);">
+                            <input type="text" class="bxRSM" id="bxActUM6" maxlength="1" disabled>
+                            <input hidden type="checkbox" name="ckActividades" id="ckAct6" checked>
+                        </div>
+                    </div>
+                    <button style="margin-right: 5%; float: right" onclick="finTiempos();"><input type="image" src="images/ejecuta.png"> Fin not. tiempos</button>
                 </div>
             </div>
         </div>
