@@ -1705,7 +1705,7 @@
                                 title[7].innerHTML = motit + " 313";
                                 break;
                             case "315":
-//                                title[5].innerHTML = motit + " 315";
+                                title[7].innerHTML = motit + " 315";
                                 break;
                         }
                     }
@@ -2860,6 +2860,7 @@
                                             break;
                                         case "301":
                                         case "313":
+                                        case "315":
                                             mostrarVentana('VentanaModal301');
                                             break;
                                         case "303":
@@ -6834,7 +6835,7 @@
                                 funinva = "El material esta sujeto a lote, asigne un lote";
                                 break;
                             case 5:
-                                funinva = "Campo cantidad es obligatorio";
+                                funinva = "Campo cantidad es obligatorio y debe ser mayor a 0.000";
                                 break;
                             case 6:
                                 funinva = "Campo centro es obligatorio";
@@ -6853,6 +6854,9 @@
                                 break;
                             case 11:
                                 funinva = "Material no existe en Centro-Almacen Destino";
+                                break;
+                            case 12:
+                                funinva = "Material no encontrado";
                                 break;
                         }
                         var icon = $('#iconmsg');
