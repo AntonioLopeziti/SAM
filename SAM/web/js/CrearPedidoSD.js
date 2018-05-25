@@ -1730,11 +1730,6 @@ function GuardarPosiciones() {
                 ShowMsg(18, "images/advertencia.PNG", "audio/saperror.wav");
                 return;
             }
-            if (fec[i].value.length == 0) {
-                fec[i].focus();
-                ShowMsg(22, "images/advertencia.PNG", "audio/saperror.wav");
-                return;
-            }
             savePos(mat[i].value, des[i].value, ume[i].value, can[i].value, pos,fec[i].value);
             GuardarTextoPos(pos, i);
             pos = pos + 1;
