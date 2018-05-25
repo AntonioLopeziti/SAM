@@ -10,36 +10,66 @@ package Entidades;
  * @author Jhonatan
  */
 public class PosNotTiempo {
+
     int id_posNot = 0;
     String num_orden = "";
-    String cont_not = "";
-    String folio_not_tiemp = "";
-    String fecha_offline = "";
-    String hora_offline = "";
-    String num_material = "";
+    String num_operacion = "";
+    String num_notificacion = "";
+    String folio_sam = "";
+    String clase_orden = "";
+    String puesto_trabajo = "";
     String centro = "";
-    String activ_not_par = "";
-    String activ_not_final = "";
-    String not_final = "";
-    String comp_reservas = "";
-    String cant_buena = "";
+    String material = "";
+    String texto_breve = "";
+    String num_notificacion_sam = "";
+    String notificacion_parcial = "";
+    String compensar = "";
+    String cantidad_buena = "";
     String unidad_medida = "";
-    String rechazo_notif = "";
-    String cant_trab_res = "";
-    String motiv_desv = "";
+    String rechazo = "";
+    String cantidad_trabajo = "";
+    String motivo_desviacion = "";
+    String actividad_notificar1 = "";
+    String unidad_medida_notificar1 = "";
+    String indicador_actividad1 = "";
+    String actividad_notificar2 = "";
+    String unidad_medida_notificar2 = "";
+    String indicador_actividad2 = "";
+    String actividad_notificar3 = "";
+    String unidad_medida_notificar3 = "";
+    String indicador_actividad3 = "";
+    String actividad_notificar4 = "";
+    String unidad_medida_notificar4 = "";
+    String indicador_actividad4 = "";
+    String actividad_notificar5 = "";
+    String unidad_medida_notificar5 = "";
+    String indicador_actividad5 = "";
+    String actividad_notificar6 = "";
+    String unidad_medida_notificar6 = "";
+    String indicador_actividad6 = "";
     String num_personal = "";
-    String fecha_inic_notificada_ej = "";
-    String hora_notificada_inic_ej = "";
-    String fecha_fin_notificada_ej = "";
-    String hora_notificada_fin_ej = "";
-    String fecha_contab = "";
-    String txt_notif = "";
+    String fecha_inicio = "";
+    String hora_inicio = "";
+    String fecha_fin = "";
+    String hora_fin = "";
+    String fecha_contabilizacion = "";
+    String texto_notificacion = "";
+    String usuario = "";
     String recibido = "";
     String procesado = "";
     String fecha_recibido = "";
-    String hora = "";
+    String hora_recibido = "";
     String mensaje = "";
+    String motivo = "";
 
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+    
     public int getId_posNot() {
         return id_posNot;
     }
@@ -56,44 +86,44 @@ public class PosNotTiempo {
         this.num_orden = num_orden;
     }
 
-    public String getCont_not() {
-        return cont_not;
+    public String getNum_operacion() {
+        return num_operacion;
     }
 
-    public void setCont_not(String cont_not) {
-        this.cont_not = cont_not;
+    public void setNum_operacion(String num_operacion) {
+        this.num_operacion = num_operacion;
     }
 
-    public String getFolio_not_tiemp() {
-        return folio_not_tiemp;
+    public String getNum_notificacion() {
+        return num_notificacion;
     }
 
-    public void setFolio_not_tiemp(String folio_not_tiemp) {
-        this.folio_not_tiemp = folio_not_tiemp;
+    public void setNum_notificacion(String num_notificacion) {
+        this.num_notificacion = num_notificacion;
     }
 
-    public String getFecha_offline() {
-        return fecha_offline;
+    public String getFolio_sam() {
+        return folio_sam;
     }
 
-    public void setFecha_offline(String fecha_offline) {
-        this.fecha_offline = fecha_offline;
+    public void setFolio_sam(String folio_sam) {
+        this.folio_sam = folio_sam;
     }
 
-    public String getHora_offline() {
-        return hora_offline;
+    public String getClase_orden() {
+        return clase_orden;
     }
 
-    public void setHora_offline(String hora_offline) {
-        this.hora_offline = hora_offline;
+    public void setClase_orden(String clase_orden) {
+        this.clase_orden = clase_orden;
     }
 
-    public String getNum_material() {
-        return num_material;
+    public String getPuesto_trabajo() {
+        return puesto_trabajo;
     }
 
-    public void setNum_material(String num_material) {
-        this.num_material = num_material;
+    public void setPuesto_trabajo(String puesto_trabajo) {
+        this.puesto_trabajo = puesto_trabajo;
     }
 
     public String getCentro() {
@@ -104,44 +134,52 @@ public class PosNotTiempo {
         this.centro = centro;
     }
 
-    public String getActiv_not_par() {
-        return activ_not_par;
+    public String getMaterial() {
+        return material;
     }
 
-    public void setActiv_not_par(String activ_not_par) {
-        this.activ_not_par = activ_not_par;
+    public void setMaterial(String material) {
+        this.material = material;
     }
 
-    public String getActiv_not_final() {
-        return activ_not_final;
+    public String getTexto_breve() {
+        return texto_breve;
     }
 
-    public void setActiv_not_final(String activ_not_final) {
-        this.activ_not_final = activ_not_final;
+    public void setTexto_breve(String texto_breve) {
+        this.texto_breve = texto_breve;
     }
 
-    public String getNot_final() {
-        return not_final;
+    public String getNum_notificacion_sam() {
+        return num_notificacion_sam;
     }
 
-    public void setNot_final(String not_final) {
-        this.not_final = not_final;
+    public void setNum_notificacion_sam(String num_notificacion_sam) {
+        this.num_notificacion_sam = num_notificacion_sam;
     }
 
-    public String getComp_reservas() {
-        return comp_reservas;
+    public String getNotificacion_parcial() {
+        return notificacion_parcial;
     }
 
-    public void setComp_reservas(String comp_reservas) {
-        this.comp_reservas = comp_reservas;
+    public void setNotificacion_parcial(String notificacion_parcial) {
+        this.notificacion_parcial = notificacion_parcial;
     }
 
-    public String getCant_buena() {
-        return cant_buena;
+    public String getCompensar() {
+        return compensar;
     }
 
-    public void setCant_buena(String cant_buena) {
-        this.cant_buena = cant_buena;
+    public void setCompensar(String compensar) {
+        this.compensar = compensar;
+    }
+
+    public String getCantidad_buena() {
+        return cantidad_buena;
+    }
+
+    public void setCantidad_buena(String cantidad_buena) {
+        this.cantidad_buena = cantidad_buena;
     }
 
     public String getUnidad_medida() {
@@ -152,28 +190,172 @@ public class PosNotTiempo {
         this.unidad_medida = unidad_medida;
     }
 
-    public String getRechazo_notif() {
-        return rechazo_notif;
+    public String getRechazo() {
+        return rechazo;
     }
 
-    public void setRechazo_notif(String rechazo_notif) {
-        this.rechazo_notif = rechazo_notif;
+    public void setRechazo(String rechazo) {
+        this.rechazo = rechazo;
     }
 
-    public String getCant_trab_res() {
-        return cant_trab_res;
+    public String getCantidad_trabajo() {
+        return cantidad_trabajo;
     }
 
-    public void setCant_trab_res(String cant_trab_res) {
-        this.cant_trab_res = cant_trab_res;
+    public void setCantidad_trabajo(String cantidad_trabajo) {
+        this.cantidad_trabajo = cantidad_trabajo;
     }
 
-    public String getMotiv_desv() {
-        return motiv_desv;
+    public String getMotivo_desviacion() {
+        return motivo_desviacion;
     }
 
-    public void setMotiv_desv(String motiv_desv) {
-        this.motiv_desv = motiv_desv;
+    public void setMotivo_desviacion(String motivo_desviacion) {
+        this.motivo_desviacion = motivo_desviacion;
+    }
+
+    public String getActividad_notificar1() {
+        return actividad_notificar1;
+    }
+
+    public void setActividad_notificar1(String actividad_notificar1) {
+        this.actividad_notificar1 = actividad_notificar1;
+    }
+
+    public String getUnidad_medida_notificar1() {
+        return unidad_medida_notificar1;
+    }
+
+    public void setUnidad_medida_notificar1(String unidad_medida_notificar1) {
+        this.unidad_medida_notificar1 = unidad_medida_notificar1;
+    }
+
+    public String getIndicador_actividad1() {
+        return indicador_actividad1;
+    }
+
+    public void setIndicador_actividad1(String indicador_actividad1) {
+        this.indicador_actividad1 = indicador_actividad1;
+    }
+
+    public String getActividad_notificar2() {
+        return actividad_notificar2;
+    }
+
+    public void setActividad_notificar2(String actividad_notificar2) {
+        this.actividad_notificar2 = actividad_notificar2;
+    }
+
+    public String getUnidad_medida_notificar2() {
+        return unidad_medida_notificar2;
+    }
+
+    public void setUnidad_medida_notificar2(String unidad_medida_notificar2) {
+        this.unidad_medida_notificar2 = unidad_medida_notificar2;
+    }
+
+    public String getIndicador_actividad2() {
+        return indicador_actividad2;
+    }
+
+    public void setIndicador_actividad2(String indicador_actividad2) {
+        this.indicador_actividad2 = indicador_actividad2;
+    }
+
+    public String getActividad_notificar3() {
+        return actividad_notificar3;
+    }
+
+    public void setActividad_notificar3(String actividad_notificar3) {
+        this.actividad_notificar3 = actividad_notificar3;
+    }
+
+    public String getUnidad_medida_notificar3() {
+        return unidad_medida_notificar3;
+    }
+
+    public void setUnidad_medida_notificar3(String unidad_medida_notificar3) {
+        this.unidad_medida_notificar3 = unidad_medida_notificar3;
+    }
+
+    public String getIndicador_actividad3() {
+        return indicador_actividad3;
+    }
+
+    public void setIndicador_actividad3(String indicador_actividad3) {
+        this.indicador_actividad3 = indicador_actividad3;
+    }
+
+    public String getActividad_notificar4() {
+        return actividad_notificar4;
+    }
+
+    public void setActividad_notificar4(String actividad_notificar4) {
+        this.actividad_notificar4 = actividad_notificar4;
+    }
+
+    public String getUnidad_medida_notificar4() {
+        return unidad_medida_notificar4;
+    }
+
+    public void setUnidad_medida_notificar4(String unidad_medida_notificar4) {
+        this.unidad_medida_notificar4 = unidad_medida_notificar4;
+    }
+
+    public String getIndicador_actividad4() {
+        return indicador_actividad4;
+    }
+
+    public void setIndicador_actividad4(String indicador_actividad4) {
+        this.indicador_actividad4 = indicador_actividad4;
+    }
+
+    public String getActividad_notificar5() {
+        return actividad_notificar5;
+    }
+
+    public void setActividad_notificar5(String actividad_notificar5) {
+        this.actividad_notificar5 = actividad_notificar5;
+    }
+
+    public String getUnidad_medida_notificar5() {
+        return unidad_medida_notificar5;
+    }
+
+    public void setUnidad_medida_notificar5(String unidad_medida_notificar5) {
+        this.unidad_medida_notificar5 = unidad_medida_notificar5;
+    }
+
+    public String getIndicador_actividad5() {
+        return indicador_actividad5;
+    }
+
+    public void setIndicador_actividad5(String indicador_actividad5) {
+        this.indicador_actividad5 = indicador_actividad5;
+    }
+
+    public String getActividad_notificar6() {
+        return actividad_notificar6;
+    }
+
+    public void setActividad_notificar6(String actividad_notificar6) {
+        this.actividad_notificar6 = actividad_notificar6;
+    }
+
+    public String getUnidad_medida_notificar6() {
+        return unidad_medida_notificar6;
+    }
+
+    public void setUnidad_medida_notificar6(String unidad_medida_notificar6) {
+        this.unidad_medida_notificar6 = unidad_medida_notificar6;
+    }
+
+    public String getIndicador_actividad6() {
+        return indicador_actividad6;
+    }
+
+    public void setIndicador_actividad6(String indicador_actividad6) {
+        this.indicador_actividad6 = indicador_actividad6;
     }
 
     public String getNum_personal() {
@@ -184,52 +366,60 @@ public class PosNotTiempo {
         this.num_personal = num_personal;
     }
 
-    public String getFecha_inic_notificada_ej() {
-        return fecha_inic_notificada_ej;
+    public String getFecha_inicio() {
+        return fecha_inicio;
     }
 
-    public void setFecha_inic_notificada_ej(String fecha_inic_notificada_ej) {
-        this.fecha_inic_notificada_ej = fecha_inic_notificada_ej;
+    public void setFecha_inicio(String fecha_inicio) {
+        this.fecha_inicio = fecha_inicio;
     }
 
-    public String getHora_notificada_inic_ej() {
-        return hora_notificada_inic_ej;
+    public String getHora_inicio() {
+        return hora_inicio;
     }
 
-    public void setHora_notificada_inic_ej(String hora_notificada_inic_ej) {
-        this.hora_notificada_inic_ej = hora_notificada_inic_ej;
+    public void setHora_inicio(String hora_inicio) {
+        this.hora_inicio = hora_inicio;
     }
 
-    public String getFecha_fin_notificada_ej() {
-        return fecha_fin_notificada_ej;
+    public String getFecha_fin() {
+        return fecha_fin;
     }
 
-    public void setFecha_fin_notificada_ej(String fecha_fin_notificada_ej) {
-        this.fecha_fin_notificada_ej = fecha_fin_notificada_ej;
+    public void setFecha_fin(String fecha_fin) {
+        this.fecha_fin = fecha_fin;
     }
 
-    public String getHora_notificada_fin_ej() {
-        return hora_notificada_fin_ej;
+    public String getHora_fin() {
+        return hora_fin;
     }
 
-    public void setHora_notificada_fin_ej(String hora_notificada_fin_ej) {
-        this.hora_notificada_fin_ej = hora_notificada_fin_ej;
+    public void setHora_fin(String hora_fin) {
+        this.hora_fin = hora_fin;
     }
 
-    public String getFecha_contab() {
-        return fecha_contab;
+    public String getFecha_contabilizacion() {
+        return fecha_contabilizacion;
     }
 
-    public void setFecha_contab(String fecha_contab) {
-        this.fecha_contab = fecha_contab;
+    public void setFecha_contabilizacion(String fecha_contabilizacion) {
+        this.fecha_contabilizacion = fecha_contabilizacion;
     }
 
-    public String getTxt_notif() {
-        return txt_notif;
+    public String getTexto_notificacion() {
+        return texto_notificacion;
     }
 
-    public void setTxt_notif(String txt_notif) {
-        this.txt_notif = txt_notif;
+    public void setTexto_notificacion(String texto_notificacion) {
+        this.texto_notificacion = texto_notificacion;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getRecibido() {
@@ -256,12 +446,12 @@ public class PosNotTiempo {
         this.fecha_recibido = fecha_recibido;
     }
 
-    public String getHora() {
-        return hora;
+    public String getHora_recibido() {
+        return hora_recibido;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setHora_recibido(String hora_recibido) {
+        this.hora_recibido = hora_recibido;
     }
 
     public String getMensaje() {
@@ -271,6 +461,5 @@ public class PosNotTiempo {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
     
 }
