@@ -2811,18 +2811,21 @@ public class ACC_Material {
 //        return eq;
 //    }
 
-    public ArrayList<materiales> ConsultaMaterialesMov(String mat, String des, String can) {
+    public ArrayList<materiales> ConsultaMaterialesMov(String mat, String des, String can , String clm, String cen, String alm) {
         ArrayList<materiales> mater = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{call MM.MovimientoMateriales_ConsultaMaterialNuevo(?,?,?)}";
+        String sql = "{call MM.MovimientoMateriales_ConsultaMaterialNuevo(?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, mat);
             ps.setString(2, des);
             ps.setString(3, can);
+            ps.setString(4, clm);
+            ps.setString(5, cen);
+            ps.setString(6, alm);
             rs = ps.executeQuery();
             while (rs.next()) {
                 materiales m = new materiales();
@@ -2839,16 +2842,17 @@ public class ACC_Material {
         return mater;
     }
     
-    public materiales GetInfoMateriales(String mat) {
+    public materiales GetInfoMateriales(String mat, String clm) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
         materiales m = new materiales();
-        String sql = "{call MM.MovimientosMateriales_MovMaterialesCargarInfoMaterial(?)}";
+        String sql = "{call MM.MovimientosMateriales_MovMaterialesCargarInfoMaterial(?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, mat);
+            ps.setString(2, clm);
             rs = ps.executeQuery();
             while (rs.next()) {
                 m.setMaterial(rs.getString("material"));
