@@ -15,16 +15,16 @@ import Entidades.tabla305;
 import java.util.ArrayList;
 
 public class ACC_Stock {
-    
+
     private static ACC_Stock Instance = null;
-    
+
     public static ACC_Stock ObtenerInstancia() {
         if (Instance == null) {
             Instance = new ACC_Stock();
         }
         return Instance;
     }
-    
+
     public ArrayList<stock> StockCargarMateriales(String lan, String mat, String des) {
         ArrayList<stock> inv = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -51,7 +51,7 @@ public class ACC_Stock {
         }
         return inv;
     }
-    
+
     public ArrayList<stock> StockCargarGArticulo(String lan, String gar, String des) {
         ArrayList<stock> inv = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -78,7 +78,7 @@ public class ACC_Stock {
         }
         return inv;
     }
-    
+
     public ArrayList<stock> StockCargarAlmacen(String lan) {
         ArrayList<stock> inv = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -103,7 +103,7 @@ public class ACC_Stock {
         }
         return inv;
     }
-    
+
     public ArrayList<stock> StockCargarCentro() {
         ArrayList<stock> inv = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -127,7 +127,7 @@ public class ACC_Stock {
         }
         return inv;
     }
-    
+
     public ArrayList<stock> StockCargarLote(String lan) {
         ArrayList<stock> inv = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -155,7 +155,7 @@ public class ACC_Stock {
         }
         return inv;
     }
-    
+
     public int StockValidarMaterial(String mat) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -177,7 +177,7 @@ public class ACC_Stock {
         }
         return ban;
     }
-    
+
     public int StockValidarGArticulo(String gar) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -199,7 +199,7 @@ public class ACC_Stock {
         }
         return ban;
     }
-    
+
     public int StockValidarAlmacen(String a) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -221,7 +221,7 @@ public class ACC_Stock {
         }
         return ban;
     }
-    
+
     public int StockValidarCentro(String c) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -243,7 +243,7 @@ public class ACC_Stock {
         }
         return ban;
     }
-    
+
     public int StockValidarLote(String l) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -265,7 +265,7 @@ public class ACC_Stock {
         }
         return ban;
     }
-    
+
     public int StockValidarQueryTodo(String d[]) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -292,7 +292,7 @@ public class ACC_Stock {
         }
         return ban;
     }
-    
+
     public int StockValidarQuerySuma(String d[]) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -319,7 +319,7 @@ public class ACC_Stock {
         }
         return ban;
     }
-    
+
     public int StockValidarQueryTraslado(String d[]) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -346,7 +346,7 @@ public class ACC_Stock {
         }
         return ban;
     }
-    
+
     public ArrayList<stock> StockCargarQueryTodo(String d[]) {
         ArrayList<stock> st = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -383,7 +383,7 @@ public class ACC_Stock {
         }
         return st;
     }
-    
+
     public ArrayList<stock> StockCargarQuerySuma(String d[]) {
         ArrayList<stock> st = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -418,7 +418,7 @@ public class ACC_Stock {
         }
         return st;
     }
-    
+
     public ArrayList<stock> StockCargarQueryTraslado(String d[]) {
         ArrayList<stock> st = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -455,7 +455,7 @@ public class ACC_Stock {
         }
         return st;
     }
-    
+
     public String ValidarSujLotByMat(String mat, String lot) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -475,7 +475,7 @@ public class ACC_Stock {
         }
         return check;
     }
-    
+
     public String ValidarStockLibre(String mat, String alm, String lot, String ctd) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -497,7 +497,7 @@ public class ACC_Stock {
         }
         return check;
     }
-    
+
     public ArrayList<stock> ConsultaLoteByMat(String mat) {
         String query = "{call MM.Movimientos_LoteByMate(?)}";
         ArrayList<stock> stockmateriales = new ArrayList<>();
@@ -514,7 +514,7 @@ public class ACC_Stock {
                 stockmat.setAlmacen(rs.getString("almacen"));
                 stockmat.setLote(rs.getString("lote"));
                 stockmat.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
-                
+
                 stockmateriales.add(stockmat);
             }
             cnx.CerrarConexion(con);
@@ -525,14 +525,14 @@ public class ACC_Stock {
         }
         return stockmateriales;
     }
-    
+
     static String Num(String data) {
         String nf = "";
         if (data.indexOf(".") != -1) {
             String[] n = data.split("\\.");
             String n1 = n[0];
             String n2 = n[1];
-            
+
             if (n2.length() == 1) {
                 n2 = n2 + "00";
                 nf = n1 + "." + n2;
@@ -545,15 +545,15 @@ public class ACC_Stock {
         } else {
             nf = data += ".000";
         }
-        
+
         return nf;
     }
-    
+
     public static void main(String[] args) {
         ACC_Stock s = new ACC_Stock();
         System.out.println(s.Num("1.900"));
     }
-    
+
     public LinkedList<almacenes> ConsultaMatchAlmacen(String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -611,7 +611,7 @@ public class ACC_Stock {
         }
         return false;
     }
-    
+
     public boolean ValidarTPM(String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -631,7 +631,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return false;
     }
-    
+
     public boolean ValidarGRA(String gart) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -667,7 +667,7 @@ public class ACC_Stock {
         }
         return false;
     }
-    
+
     public boolean ValidarTXT(String txtSM, String no_campoTxt) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -704,7 +704,7 @@ public class ACC_Stock {
         }
         return false;
     }
-    
+
     public boolean ValidarALM(String almace) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -740,7 +740,7 @@ public class ACC_Stock {
         }
         return false;
     }
-    
+
     public boolean ValidarCEN(String cnt) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -776,7 +776,7 @@ public class ACC_Stock {
         }
         return false;
     }
-    
+
     public boolean ValidarLOT(String lott) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -836,7 +836,7 @@ public class ACC_Stock {
                 st.setAlmacen(rs.getString("almacen"));
                 st.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
                 stVacioSuma.add(st);
-                
+
             }
         } catch (Exception a) {
             System.err.println("Error al traer los datos" + a);
@@ -957,7 +957,7 @@ public class ACC_Stock {
         }
         return stSum;
     }
-    
+
     public ArrayList<stock> ConsultaStockMaTodos(String material, String grupoarticulos, String textomaterial, String almacen, String centro, String numerolote, String val, String vl, String no_campoT, String limite, String likeT, String cantT) {
         ArrayList<stock> stTodos = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -1012,7 +1012,7 @@ public class ACC_Stock {
         }
         return stTodos;
     }
-    
+
     public boolean ValidarPRO(String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1032,7 +1032,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return false;
     }
-    
+
     public boolean ValidarTP(String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1052,7 +1052,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return false;
     }
-    
+
     public LinkedList<Lotes> ConsultaLoteStock(String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1107,7 +1107,7 @@ public class ACC_Stock {
                 stockmat.setSerie(rs.getString("serie"));
                 stockmat.setIndicador_lote(rs.getString("indicador_lote"));
                 stockmateriales.add(stockmat);
-                
+
             }
             cnx.CerrarConexion(con);
         } catch (Exception ex) {
@@ -1115,7 +1115,7 @@ public class ACC_Stock {
         }
         return stockmateriales;
     }
-    
+
     public stock ConsultarMateNotifi(String query) {
         stock in = new stock();
         Conexion con = new Conexion();
@@ -1123,7 +1123,7 @@ public class ACC_Stock {
             Statement st;
             ResultSet rs;
             Connection conn = con.ObtenerConexion();
-            
+
             st = conn.createStatement();
             rs = st.executeQuery(query);
             while (rs.next()) {
@@ -1139,10 +1139,10 @@ public class ACC_Stock {
         } catch (Exception e) {
             System.err.println("Error: " + e);
         }
-        
+
         return in;
     }
-    
+
     public int ConsultaLote(String mat, String cantidad, String centro, String almacen, String lote) {
         double cnt = 0.000;
         String query;
@@ -1170,7 +1170,7 @@ public class ACC_Stock {
         }
         return 1;
     }
-    
+
     public int ConsultaLote2(String mat, String centro, String almacen) {
         String query;
         Conexion cnx = new Conexion();
@@ -1192,14 +1192,14 @@ public class ACC_Stock {
         }
         return 0;
     }
-    
+
     public int ConsultaCntST(String mat, String cantidad, String centro) {
         double rt = 0.000, cnt = 0.000;
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        
+
         String query = "{call MM.stock_transferecia_cnt_MOM(?,?)}";
-        
+
         try {
             PreparedStatement sp = con.prepareStatement(query);
             sp.setString(1, mat);
@@ -1221,7 +1221,7 @@ public class ACC_Stock {
         }
         return 1;
     }
-    
+
     public int ConsultaUM(String mat, String um) {
         String query;
         Conexion cnx = new Conexion();
@@ -1243,7 +1243,7 @@ public class ACC_Stock {
         }
         return 0;
     }
-    
+
     public LinkedList<stock> ConsultaInventarios() {
         String query = "";
         LinkedList<stock> stockmateriales = new LinkedList<>();
@@ -1262,14 +1262,14 @@ public class ACC_Stock {
                 } catch (Exception e) {
                     stockmat.setMaterial(rs.getString("material"));
                 }
-                
+
                 stockmat.setCentro(rs.getString("centro"));
                 stockmat.setAlmacen(rs.getString("almacen"));
                 stockmat.setLote(rs.getString("lote"));
                 stockmat.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
-                
+
                 stockmateriales.add(stockmat);
-                
+
             }
             cnx.CerrarConexion(con);
         } catch (Exception ex) {
@@ -1419,7 +1419,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return rtn;
     }
-    
+
     public int VerificarExistentesN(String[][] tabla, int tam)//NuevoLalo
     {
         int rr = 0, rtn = 1;
@@ -1513,7 +1513,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return rtn;
     }
-    
+
     public void UpdateMovimiento201UltimoStock(String ultStock, String mate, String centro, String lote, String alm) {
         String SP;
         Conexion cnx = new Conexion();
@@ -1532,10 +1532,10 @@ public class ACC_Stock {
         } catch (Exception ex) {
             System.err.println("Error: " + ex);
         }
-        
+
         cnx.CerrarConexion(con);
     }
-    
+
     public void UpdateMovimiento261Stock(String ultStock, String mate, String centro, String lote, String alm) {
         String SP;
         Conexion cnx = new Conexion();
@@ -1554,10 +1554,10 @@ public class ACC_Stock {
         } catch (Exception ex) {
             System.err.println("Error: " + ex);
         }
-        
+
         cnx.CerrarConexion(con);
     }
-    
+
     public void UpdateInventarioUltCentroD(String ultCentD, String mate, String centro, String lote, String alm) {
         String SP;
         Conexion cnx = new Conexion();
@@ -1576,10 +1576,10 @@ public class ACC_Stock {
         } catch (Exception ex) {
             System.err.println("Error: " + ex);
         }
-        
+
         cnx.CerrarConexion(con);
     }
-    
+
     public void UpdateMovimiento201StockLibre(String stockL, String mate, String centro, String lote, String alm) {
         String SP;
         Conexion cnx = new Conexion();
@@ -1601,7 +1601,7 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
-    
+
     public void UpdateMovimiento305UltimoStock(String ultSt, String mate, String centro) {
         String SP;
         Conexion cnx = new Conexion();
@@ -1621,7 +1621,7 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
-    
+
     public void UpdateInventarioCtdCentroD(String ctd, String mate, String centro, String lote, String almacen) {
         String SP;
         Conexion cnx = new Conexion();
@@ -1643,7 +1643,7 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
-    
+
     public void UpdateMovimiento305StockTraslado(String StoTras, String mate, String centro) {
         String SP;
         Conexion cnx = new Conexion();
@@ -1663,7 +1663,7 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
-    
+
     public int VerificarExistentesNT(String[][] tabla, int tam)//NuevoLalo
     {
         int rr = 0, rtn = 1;
@@ -1731,7 +1731,7 @@ public class ACC_Stock {
                         ps.setString(2, n2);
                         ps.setString(3, tabla[f][3]);
                         ps.executeUpdate();
-                        
+
                     } catch (Exception ex) {
                         System.err.println("Error: " + ex);
                     }
@@ -1799,7 +1799,7 @@ public class ACC_Stock {
         }
         return rt;
     }
-    
+
     public stock CargarDataInventario(String num) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1829,14 +1829,14 @@ public class ACC_Stock {
                 stockmat.setSerie(rs.getString("serie"));
                 stockmat.setIndicador_lote(rs.getString("indicador_lote"));
             }
-            
+
         } catch (Exception e) {
             System.err.println("Error en metodobCargarDatosVisual ACC_Usuarios por " + e);
         }
         cnx.CerrarConexion(con);
         return stockmat;
     }
-    
+
     public int ValidarMatInventario(String mat) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1862,7 +1862,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return 0;
     }
-    
+
     public int ValidarLotInventario(String lot) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1888,7 +1888,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return 0;
     }
-    
+
     public LinkedList<stock> ConsultaStockLotes(String query) {
         LinkedList<stock> stockmateriales = new LinkedList<stock>();
         Conexion cnx = new Conexion();
@@ -1902,7 +1902,7 @@ public class ACC_Stock {
                 stock stockmat = new stock();
                 stockmat.setLote(rs.getString("lote"));
                 stockmateriales.add(stockmat);
-                
+
             }
             cnx.CerrarConexion(con);
         } catch (Exception ex) {
@@ -1910,7 +1910,7 @@ public class ACC_Stock {
         }
         return stockmateriales;
     }
-    
+
     public Double UltimoLU(String mat, String ctr, String lote, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1936,7 +1936,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return sl;
     }
-    
+
     public Double UltimoST(String mat, String ctr) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1960,7 +1960,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return sl;
     }
-    
+
     public Double LbreST(String mat, String ctr) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1984,7 +1984,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return sl;
     }
-    
+
     public Double LibreLU(String mat, String ctr, String lote, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2010,7 +2010,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return sl;
     }
-    
+
     public int VerificarExistentes300N(String[][] tabla, int tam)//NuevoLalo
     {
         int rtn = 1;
@@ -2023,7 +2023,7 @@ public class ACC_Stock {
         String n2;
         PreparedStatement ps;
         String SP;
-        
+
         for (int f = 0; f < tam; f++) {
             try {
                 int mm = Integer.parseInt(tabla[f][2]);
@@ -2092,7 +2092,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return rtn;
     }
-    
+
     public Double UltimoLUC(String mat, String ctr, String lote, String almacen) {
         String query;
         Conexion cnx = new Conexion();
@@ -2113,7 +2113,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return sl;
     }
-    
+
     public Double LibreLUC(String mat, String ctr, String lote, String almacen) {
         String query;
         Conexion cnx = new Conexion();
@@ -2134,7 +2134,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return sl;
     }
-    
+
     public int VerificarExistentes300NC(String[][] tabla, int tam)//NuevoLalo
     {
         int rtn = 1;
@@ -2145,7 +2145,7 @@ public class ACC_Stock {
         Statement st;
         ResultSet rs;
         String n2;
-        
+
         for (int f = 0; f < tam; f++) {
             try {
                 int mm = Integer.parseInt(tabla[f][2]);
@@ -2207,6 +2207,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return rtn;
     }
+
     public double StockLibre(String material, String lote, String centro, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2234,7 +2235,7 @@ public class ACC_Stock {
         }
         return cc;
     }
-    
+
     public void ActualizaInv(String material, String lote, String centro, String cnt, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2256,6 +2257,7 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
+
     public int VerificarExistentes300(String[][] tabla, int tam)//NuevoLalo
     {
         int rtn = 1, cont = 0;
@@ -2316,7 +2318,7 @@ public class ACC_Stock {
             String fmt = df.format(rm);
             String fmr = df.format(rr);
             String fmd = df.format(rd);
-            
+
             if (rm >= 0) {
                 String ck = ACC_Almacenes.ObtenerInstancia().verificaAlmacenDes(tabla[f][5], tabla[f][3]);
                 String al;
@@ -2347,7 +2349,7 @@ public class ACC_Stock {
                         ps.setString(4, tabla[f][0]);
                         ps.setString(5, al);
                         ps.executeUpdate();
-                        
+
                     } catch (Exception ex) {
                         System.err.println("Error: " + ex);
                     }
@@ -2438,7 +2440,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return rtn;
     }
-    
+
     public Double UltimoLUD(String mat, String ctr, String lote, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2464,7 +2466,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return sl;
     }
-    
+
     public Double LibreLUD(String mat, String ctr, String lote, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2490,7 +2492,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return sl;
     }
-    
+
     public ArrayList<stock> ConsultaInventariosC(String centro, String mat) {
         String query = "{call MM.inventarios_MOM(?,?)}";
         ArrayList<stock> stockmateriales = new ArrayList<>();
@@ -2503,13 +2505,13 @@ public class ACC_Stock {
             ResultSet rs = sp.executeQuery();
             while (rs.next()) {
                 stock stockmat = new stock();
-                
+
                 stockmat.setMaterial(rs.getString("material"));
                 stockmat.setCentro(rs.getString("centro"));
                 stockmat.setAlmacen(rs.getString("almacen"));
                 stockmat.setLote(rs.getString("lote"));
                 stockmat.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
-                
+
                 stockmateriales.add(stockmat);
             }
             cnx.CerrarConexion(con);
@@ -2520,7 +2522,7 @@ public class ACC_Stock {
         }
         return stockmateriales;
     }
-    
+
     public ArrayList<stock> ConsultaInventariosC2(String centro, String mat, String mov, String alm) {
         String query = "{call MM.inventarios_MOM(?,?,?)}";
         ArrayList<stock> stockmateriales = new ArrayList<>();
@@ -2534,7 +2536,7 @@ public class ACC_Stock {
             ResultSet rs = sp.executeQuery();
             while (rs.next()) {
                 stock stockmat = new stock();
-                
+
                 stockmat.setMaterial(rs.getString("material"));
                 stockmat.setCentro(rs.getString("centro"));
                 stockmat.setAlmacen(rs.getString("almacen"));
@@ -2556,7 +2558,7 @@ public class ACC_Stock {
         }
         return stockmateriales;
     }
-    
+
     public ArrayList<stock> ConsultaInventariosEE(String centro, String mat, String mov, String alm, String ped, String pos) {
         String query = "{call MM.inventariosEE_MOM(?,?,?,?,?)}";
         ArrayList<stock> stockmateriales = new ArrayList<>();
@@ -2572,7 +2574,7 @@ public class ACC_Stock {
             ResultSet rs = sp.executeQuery();
             while (rs.next()) {
                 stock stockmat = new stock();
-                
+
                 stockmat.setMaterial(rs.getString("material"));
                 stockmat.setCentro(rs.getString("centro"));
                 stockmat.setAlmacen(rs.getString("almacen"));
@@ -2594,7 +2596,7 @@ public class ACC_Stock {
         }
         return stockmateriales;
     }
-    
+
     public int ConsultaCantidad(String mat, String centro, String almacen, String lote) {
         int rt = 0;
         String query;
@@ -2627,7 +2629,7 @@ public class ACC_Stock {
         }
         return rt;
     }
-    
+
     public String VerificarMatLote(String material) {
         String m = "0";
         Conexion cnx = new Conexion();
@@ -2646,7 +2648,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return m;
     }
-    
+
     public int SujeTlote(String material) {
         int m = 0;
         String query = "";
@@ -2665,7 +2667,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return m;
     }
-    
+
     public int sujetoLoteMate(String Material) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2686,7 +2688,7 @@ public class ACC_Stock {
         }
         return a;
     }
-    
+
     public void ActualizaInventario(String mat, String ctr, String cnd, String lote, String almacen) {
         String query, d_almacen = "";
         Conexion cnx = new Conexion();
@@ -2787,7 +2789,7 @@ public class ACC_Stock {
             }
         }
     }
-    
+
     public void ActualizarrInventario(String mat, String ctr, String cnd, String lote, String almacen) {
         String SP, d_almacen = null;
         Conexion cnx = new Conexion();
@@ -2888,7 +2890,7 @@ public class ACC_Stock {
             }
         }
     }
-    
+
     public int ValidarSujLotMate(String mat) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2914,7 +2916,7 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return 0;
     }
-    
+
     public int ValidarLotInventarioMat(String mat, String lot) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2924,7 +2926,7 @@ public class ACC_Stock {
         try {
             st = con.createStatement();
             rs = st.executeQuery(query);
-            
+
             if (!rs.next()) {
                 return 0;
             } else {
@@ -2936,21 +2938,21 @@ public class ACC_Stock {
         cnx.CerrarConexion(con);
         return 0;
     }
-    
+
     public String GETULCAN(String doc, String pos) {
         String ct = "";
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        
+
         PreparedStatement sp = null;
         ResultSet rs = null;
         String sql = "{CALL MM.ObtenerCantidadPedidosDetalle_MOM(?,?)}";
-        
+
         try {
             sp = con.prepareStatement(sql);
             sp.setString(1, doc);
             sp.setString(2, pos);
-            
+
             rs = sp.executeQuery();
             while (rs.next()) {
                 ct = rs.getString("ultima_cantidad");
@@ -2962,7 +2964,7 @@ public class ACC_Stock {
         }
         return ct;
     }
-    
+
     public Stock_Traslado mDatos305(String material, String centro, String lang) {
         Stock_Traslado st = new Stock_Traslado();
         Conexion cnx = new Conexion();
@@ -2986,7 +2988,7 @@ public class ACC_Stock {
         }
         return st;
     }
-    
+
     public LinkedList<Stock_Traslado> ConsultaStock_T(String texto, String lang, String Material, String Cantidad) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -3015,7 +3017,7 @@ public class ACC_Stock {
         }
         return mate;
     }
-    
+
     public LinkedList<stock> ConsultaStockLotesNOT(String mate) {
         LinkedList<stock> stockmateriales = new LinkedList<stock>();
         Conexion cnx = new Conexion();
@@ -3032,7 +3034,7 @@ public class ACC_Stock {
                 stockmat.setLote(rs.getString("lote"));
                 stockmat.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
                 stockmateriales.add(stockmat);
-                
+
             }
         } catch (Exception ex) {
             System.err.println("Error: " + ex);
@@ -3053,7 +3055,7 @@ public class ACC_Stock {
         }
         return stockmateriales;
     }
-    
+
     public stock ConsultarMateNotifi01(String mate, String lotabp) {
         stock in = new stock();
         Conexion con = new Conexion();
@@ -3094,7 +3096,7 @@ public class ACC_Stock {
         }
         return in;
     }
-    
+
     public stock ConsultarMateNotifiVAL(String mate, String lote) {
         stock in = new stock();
         Conexion con = new Conexion();
@@ -3135,7 +3137,7 @@ public class ACC_Stock {
         }
         return in;
     }
-    
+
     public void elimina305(String usu) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -3150,7 +3152,7 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
-    
+
     public stock ConsultarMateNotifiPM(String material, String lote) {
         stock in = new stock();
         Conexion con = new Conexion();
@@ -3268,7 +3270,7 @@ public class ACC_Stock {
                     cen.add(c);
                 }
             } else {
-                
+
             }
             cnx.CerrarConexion(con);
         } catch (Exception e) {
@@ -3290,7 +3292,7 @@ public class ACC_Stock {
         }
         return cen;
     }
-    
+
     public ArrayList<tabla305> GuardaPosiciones(String mat, String des, String cnt, String um, String lote, String ctr, String usu) {
         ArrayList<tabla305> ar = new ArrayList<>();
         if (mat != null) {
@@ -3329,7 +3331,7 @@ public class ACC_Stock {
         }
         return ar;
     }
-    
+
     public LinkedList<stock> MatNPMMalmNOTstock(String mmmat, String mmtxtbr, String lan, String mmtipM) {
         LinkedList<stock> mt = new LinkedList<>();
         String query = "{call MM.inventarios_almacen_match(?,?,?,?)}";
@@ -3337,9 +3339,9 @@ public class ACC_Stock {
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
-        
+
         try {
-            
+
             pst = conn.prepareStatement(query);
             pst.setString(1, mmmat);
             pst.setString(2, mmtxtbr);
@@ -3353,7 +3355,7 @@ public class ACC_Stock {
                 mat.setDescripcion_ES(rs.getString("Descripcion_ES"));
                 mat.setAlmacen(rs.getString("almacen"));
                 mat.setTipo_material(rs.getString("tipo_material"));
-                
+
                 mt.add(mat);
             }
         } catch (Exception e) {
@@ -3361,7 +3363,7 @@ public class ACC_Stock {
         }
         return mt;
     }
-    
+
     public LinkedList<stock> ConsultaStockLotesEQ(String mate) {
         LinkedList<stock> stockmateriales = new LinkedList<>();
         Conexion cnx = new Conexion();
@@ -3378,7 +3380,7 @@ public class ACC_Stock {
                 stockmat.setLote(rs.getString("lote"));
                 stockmat.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
                 stockmateriales.add(stockmat);
-                
+
             }
         } catch (Exception ex) {
             System.err.println("Error: " + ex);
@@ -3399,7 +3401,7 @@ public class ACC_Stock {
         }
         return stockmateriales;
     }
-    
+
     public LinkedList<stock> ConsultaStockLotesEQEX(String mate) {
         LinkedList<stock> stockmateriales = new LinkedList<>();
         Conexion cnx = new Conexion();
@@ -3416,7 +3418,7 @@ public class ACC_Stock {
                 stockmat.setLote(rs.getString("lote"));
                 stockmat.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
                 stockmateriales.add(stockmat);
-                
+
             }
         } catch (Exception ex) {
             System.err.println("Error: " + ex);
@@ -3437,7 +3439,7 @@ public class ACC_Stock {
         }
         return stockmateriales;
     }
-    
+
     public boolean InsertarMATR(String mtrl, String descripcion_ES, String descripcion_EN, String centro, String unidad_medida, String lote, String tipo_material, String grupo_articulos) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -3473,7 +3475,7 @@ public class ACC_Stock {
         }
         return false;
     }
-    
+
     public boolean ACTUALequipos_not(String orden, String lote) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -3503,7 +3505,7 @@ public class ACC_Stock {
         }
         return false;
     }
-    
+
     public boolean ACTUAINveta(String mat, String lote, String stocklibre) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -3534,7 +3536,7 @@ public class ACC_Stock {
         }
         return false;
     }
-    
+
     public stock ConsultarINVENTARIOSMM(String material, String lote) {
         stock in = new stock();
         Conexion con = new Conexion();
@@ -3575,7 +3577,7 @@ public class ACC_Stock {
         }
         return in;
     }
-    
+
     public String getCantidad311(String mat, String alm, String centro, String lote) {
         String stck = "0.000";
         Conexion cnx = new Conexion();
@@ -3600,7 +3602,7 @@ public class ACC_Stock {
         }
         return stck;
     }
-    
+
     public void Actualizarstock311(String mat, String almacen, String centro, String lote, String cantidad) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -3637,7 +3639,7 @@ public class ACC_Stock {
         } catch (Exception e) {
             System.err.println("Error: " + e);
         }
-        
+
         try {
             String sql = "{call MM.ActualizarStock311Su(?,?,?,?,?,?,?,?,?,?,?,?)}";
             ps = con.prepareStatement(sql);
@@ -3660,13 +3662,13 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
-    
+
     public ArrayList<stock> ConsultaLoteStockNuevo(String mat, String centro, String alm) {
         ArrayList<stock> sto = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
-        
+
         ResultSet rs = null;
         String sql = "{call MM.MovimientosMateriales_ConsultaLoteNuevo(?,?,?)}";
         try {
@@ -3701,14 +3703,14 @@ public class ACC_Stock {
         String sql = "{call MM.MovimeintosMateriales_ExisteciaMateriales(?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1,mat);
-            ps.setString(2,cen);
-            ps.setString(3,alm);
-            ps.setString(4,lot);
-            ps.setString(5,doc);
-            ps.setString(6,pos);
+            ps.setString(1, mat);
+            ps.setString(2, cen);
+            ps.setString(3, alm);
+            ps.setString(4, lot);
+            ps.setString(5, doc);
+            ps.setString(6, pos);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 st.setMaterial(rs.getString("material"));
                 st.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
             }
@@ -3718,5 +3720,33 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
         return st;
+    }
+
+    public stock CargarTransfereancia313(String material, String centro, String almacen) {
+        stock s = new stock();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.MovimientosMateriales_CargarStockTran313(?,?,?)}";
+        try {
+           ps = con.prepareStatement(sql);
+            ps.setString(1, material);
+            ps.setString(2, centro);
+            ps.setString(3, almacen);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                s.setMaterial(rs.getString("material"));
+                s.setDescripcion(rs.getString("descripcion_es"));
+                s.setUnidad_medida(rs.getString("unidad_medida"));
+                s.setLote(rs.getString("lote"));
+                s.setStock_traslado(rs.getString("stock_traslado"));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return s;
     }
 }
