@@ -707,18 +707,18 @@ $(document).ready(function () {
     });
     $('#ok311').click(function () {
         if ($('#bxMaterial311').val().length > 0) {
-            ValidaMaterialHabilitado($('#bxMaterial311').val());
-            if (habl === 1) {
+//            ValidaMaterialHabilitado($('#bxMaterial311').val());
+//            if (habl === 1) {
                 TomarDatos310("ValidaUM");
-            } else {
-                var iconm = document.getElementById("iconmsg");
-                iconm.style.display = "inline";
-                iconm.style.visibility = "visible";
-                iconm.src = "images/advertencia.PNG";
-                var men = document.getElementById("msg");
-                men.innerHTML = "Material inhabilitado";
-                $('#bxMaterial311').focus();
-            }
+//            } else {
+//                var iconm = document.getElementById("iconmsg");
+//                iconm.style.display = "inline";
+//                iconm.style.visibility = "visible";
+//                iconm.src = "images/advertencia.PNG";
+//                var men = document.getElementById("msg");
+//                men.innerHTML = "Material inhabilitado";
+//                $('#bxMaterial311').focus();
+//            }
         } else {
             TomarDatos310("ValidaUM");
         }
