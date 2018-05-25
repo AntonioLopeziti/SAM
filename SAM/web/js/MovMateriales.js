@@ -538,6 +538,7 @@ $(document).ready(function () {
                 break;
             case "301":
             case "313":
+            case "315":
                 var theHandle = document.getElementById('hanlde301');
                 var theRoot = document.getElementById('VentanaModal301');
                 Drag.init(theHandle, theRoot);
@@ -3183,9 +3184,10 @@ function MostrarMatch(id, match, pos) {
         $('#' + cm + id + pos).keypress(function (e) {
             var tecla = (document).all ? e.keyCode : e.which;
             if (tecla == 13) {
-
                 if ($('#' + cm + id + pos).val().length > 0) {
-//                    ValidarMAterial($('#' + id + pos).val(), pos);
+                    if (cm == "315") {
+                        ObtenerStockTransferencia($('#' + cm + id + pos).val(), cm, pos);
+                    }
                 }
             }
             patron = /[0-9a-zA-ZÑñ]/;
@@ -3194,17 +3196,24 @@ function MostrarMatch(id, match, pos) {
         });
         $('#' + cm + id + pos).blur(function () {
             if ($('#' + cm + id + pos).val().length > 0) {
-                if (ValidarSujLoteNuevo($('#' + cm + id + pos).val(), cm) == 0) {
-                    $('#' + cm + "tdLotes" + pos).val("");
-                    $('#' + cm + "tdLotes" + pos).prop('disabled', true);
+                if (cm == "315") {
+                    ObtenerStockTransferencia($('#' + cm + id + pos).val(), cm, pos);
                 } else {
-                    $('#' + cm + "tdLotes" + pos).prop('disabled', false);
+                    if (ValidarSujLoteNuevo($('#' + cm + id + pos).val(), cm) == 0) {
+                        $('#' + cm + "tdLotes" + pos).val("");
+                        $('#' + cm + "tdLotes" + pos).prop('disabled', true);
+                    } else {
+                        $('#' + cm + "tdLotes" + pos).prop('disabled', false);
+                        $('#' + cm + "tdLotes" + pos).prop('disabled', false);
+                    }
+                    GetinfoMat($('#' + cm + id + pos).val(), cm, pos);
                 }
-                GetinfoMat($('#' + cm + id + pos).val(), cm, pos);
             } else {
                 $('#' + clm + "tdDescr" + pos).val("");
                 $('#' + clm + "tdUmedi" + pos).val("");
-                $('#' + cm + "tdLotes" + pos).prop('disabled', false);
+                if (cm != "315") {
+                    $('#' + cm + "tdLotes" + pos).prop('disabled', false);
+                }
             }
         });
     }
@@ -3278,7 +3287,7 @@ function ConsultaMaterialesNBuevo() {
     var datos = "&Material=" + $('#busMatNuevo').val()
             + "&Descripcion=" + encodeURIComponent($('#BusDesMatNuevo').val().trim())
             + "&Cantidad=" + $('#numAciertosNuevo').val()
-            + "&ClaseMov=" + $('#bxClase').val();
+            + "&ClaseMov=" + $('#bxClase').val() + "&Centro=" + $('#bxCentro').val() + "&Almacen=" + $('#bxAlmacen').val();
     $.ajax({
         async: false,
         type: 'GET',
@@ -3318,9 +3327,13 @@ function ocultarVentanaNuevo(id, bp, ct, obj, clm)
 }
 function seleccionarMCNuevo(mat, descr, um, clm) {
     var pos = $('#posGrid').val();
-    $('#' + clm + 'tdMater' + pos).val(mat);
-    $('#' + clm + 'tdDescr' + pos).val(descr);
-    $('#' + clm + 'tdUmedi' + pos).val(um);
+    if (clm == "315") {
+        ObtenerStockTransferencia(mat, clm, pos);
+    } else {
+        $('#' + clm + 'tdMater' + pos).val(mat);
+        $('#' + clm + 'tdDescr' + pos).val(descr);
+        $('#' + clm + 'tdUmedi' + pos).val(um);
+    }
     ocultarVentanaNuevo('VentanaModalMaterialNuevo', 'BuscarParaMaterialNuevo', 'ConsultaTablaMaterialNuevo', 'tdMater', clm);
 }
 function seleccionarMCLoteNuevo(lote, doc, posidoc, clm) {
@@ -3565,44 +3578,52 @@ function Validarmovis() {
             return;
         }
         if (Materi[i].value.length > 0) {
-            if (Canti[i].value.length == 0) {
-                mensajesNuevo(5, "images/advertencia.PNG", "audio/saperror.wav");
-                Canti[i].focus();
-                return;
-            }
-            if (ValidarSujLoteNuevo(Materi[i].value, ClaseM) == 1 && Lote[i].value.length == 0) {
-                mensajesNuevo(4, "images/advertencia.PNG", "audio/saperror.wav");
-                Lote[i].focus();
-                return;
-            }
-            if (ClaseM === "301") {
-                if (Centr[i].value.length == 0) {
-                    mensajesNuevo(6, "images/advertencia.PNG", "audio/saperror.wav");
-                    Centr[i].focus();
+            if (ClaseM == "315") {
+                if (Canti[i].value.length == 0 || Canti[i].value == '0.000') {
+                    mensajesNuevo(5, "images/advertencia.PNG", "audio/saperror.wav");
+                    Canti[i].focus();
                     return;
                 }
-            }
-            if (ClaseM === "313") {
-                if (Almac[i].value.length == 0) {
-                    mensajesNuevo(9, "images/advertencia.PNG", "audio/saperror.wav");
-                    Almac[i].focus();
+            } else {
+                if (Canti[i].value.length == 0 || Canti[i].value == '0.000') {
+                    mensajesNuevo(5, "images/advertencia.PNG", "audio/saperror.wav");
+                    Canti[i].focus();
                     return;
                 }
-            }
-            var resu = ValidarExistenciasMatenuevo(Materi[i].value, Centro, Almace, Lote[i].value.trim(), Docum[i].value.trim(), Posic[i].value.trim(), Canti[i].value.trim(), ClaseM);
-            if (resu == 0) {
-                mensajesNuevo(7, "images/advertencia.PNG", "audio/saperror.wav");
-                Canti[i].focus();
-                return;
-            }
-            if (resu == 1) {
-                mensajesNuevo(8, "images/advertencia.PNG", "audio/saperror.wav");
-                Canti[i].focus();
-                return;
-            }
-            if (ValidamaterialDes(Materi[i].value, Centr[i].value, Almac[i].value, ClaseM) == 0) {
-                mensajesNuevo(11, "images/advertencia.PNG", "audio/saperror.wav");
-                return;
+                if (ValidarSujLoteNuevo(Materi[i].value, ClaseM) == 1 && Lote[i].value.length == 0) {
+                    mensajesNuevo(4, "images/advertencia.PNG", "audio/saperror.wav");
+                    Lote[i].focus();
+                    return;
+                }
+                if (ClaseM === "301") {
+                    if (Centr[i].value.length == 0) {
+                        mensajesNuevo(6, "images/advertencia.PNG", "audio/saperror.wav");
+                        Centr[i].focus();
+                        return;
+                    }
+                }
+                if (ClaseM === "313") {
+                    if (Almac[i].value.length == 0) {
+                        mensajesNuevo(9, "images/advertencia.PNG", "audio/saperror.wav");
+                        Almac[i].focus();
+                        return;
+                    }
+                }
+                var resu = ValidarExistenciasMatenuevo(Materi[i].value, Centro, Almace, Lote[i].value.trim(), Docum[i].value.trim(), Posic[i].value.trim(), Canti[i].value.trim(), ClaseM);
+                if (resu == 0) {
+                    mensajesNuevo(7, "images/advertencia.PNG", "audio/saperror.wav");
+                    Canti[i].focus();
+                    return;
+                }
+                if (resu == 1) {
+                    mensajesNuevo(8, "images/advertencia.PNG", "audio/saperror.wav");
+                    Canti[i].focus();
+                    return;
+                }
+                if (ValidamaterialDes(Materi[i].value, Centr[i].value, Almac[i].value, ClaseM) == 0) {
+                    mensajesNuevo(11, "images/advertencia.PNG", "audio/saperror.wav");
+                    return;
+                }
             }
         }
     }
@@ -3736,6 +3757,37 @@ function InserMovsNuevosTemp(action, extras)
         data: "Accion=" + action + extras,
         success: function (data) {
             $('#SecTabPpal').html(data);
+        }
+    });
+}
+function ObtenerStockTransferencia(mat, clm, pos) {
+    var centro = $('#bxCentro').val();
+    var almace = $('#bxAlmacen').val();
+    var action = "CargarStockTransferencia";
+    $.ajax({
+        async: false,
+        dataType: 'json',
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + action + "&Material=" + mat + "&Centro=" + centro + "&Almacen=" + almace,
+        success: function (data) {
+            if (data[0] == "") {
+                $('#' + clm + "tdMater" + pos).val("");
+                $('#' + clm + "tdDescr" + pos).val("");
+                $('#' + clm + "tdUmedi" + pos).val("");
+                $('#' + clm + "tdCanti" + pos).val("");
+                $('#' + clm + "tdLotes" + pos).val("");
+                $('#' + clm + "tdMater" + pos).focus();
+                mensajesNuevo(12, "images/advertencia.PNG", "audio/saperror.wav");
+            } else {
+                $('#' + clm + "tdMater" + pos).val(data[0]);
+                $('#' + clm + "tdDescr" + pos).val(data[1]);
+                $('#' + clm + "tdUmedi" + pos).val(data[2]);
+                $('#' + clm + "tdLotes" + pos).val(data[3]);
+                $('#' + clm + "tdCanti" + pos).val(data[4]);
+            }
         }
     });
 }
