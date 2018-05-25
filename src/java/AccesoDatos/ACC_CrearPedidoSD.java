@@ -470,11 +470,11 @@ public class ACC_CrearPedidoSD {
 
     }
 
-    public void GuardarCantidades(String folio, String posicion, String cantidad, String usuario, String Fecha, String hora) {
+    public void GuardarCantidades(String folio, String posicion, String cantidad, String usuario, String Fecha, String hora, String FEntrega) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
-        String sql = "{call SD.CrearPedidos_InsertarCantidadesPedido(?,?,?,?,?,?)}";
+        String sql = "{call SD.CrearPedidos_InsertarCantidadesPedido(?,?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, folio);
@@ -483,6 +483,7 @@ public class ACC_CrearPedidoSD {
             ps.setString(4, usuario);
             ps.setString(5, Fecha);
             ps.setString(6, hora);
+            ps.setString(7, FEntrega);
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println(e);
