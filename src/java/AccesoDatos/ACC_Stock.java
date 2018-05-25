@@ -2235,7 +2235,91 @@ public class ACC_Stock {
         }
         return cc;
     }
+    public double StockLibreT(String material, String lote, String centro, String almacen) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        double cc = 0.000;
 
+        String query = "{CALL MM.Notif_ConsultarCantidad(?,?,?,?)}";
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, almacen);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cc = Double.parseDouble(rs.getString("stock_bloqueado"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error StockLibre(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return cc;
+    }
+    public double StockLibreE(String material, String lote, String centro, String almacen, String pedido, String posicion) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        double cc = 0.000;
+
+        String query = "{CALL MM.Notif_ConsultarCantidadE(?,?,?,?,?,?)}";
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, almacen);
+            ps.setString(5, pedido);
+            ps.setString(6, posicion);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cc = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error StockLibre(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return cc;
+    }
+    public double StockLibreET(String material, String lote, String centro, String almacen, String pedido, String posicion) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        double cc = 0.000;
+
+        String query = "{CALL MM.Notif_ConsultarCantidadE(?,?,?,?,?,?)}";
+        PreparedStatement ps;
+        ResultSet rs;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, almacen);
+            ps.setString(5, pedido);
+            ps.setString(6, posicion);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cc = Double.parseDouble(rs.getString("stock_bloqueado"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error StockLibre(), ACC_Material por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return cc;
+    }
     public void ActualizaInv(String material, String lote, String centro, String cnt, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2257,7 +2341,75 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
+    public void ActualizaInvT(String material, String lote, String centro, String cnt, String almacen) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
 
+        String query = "{CALL MM.ActualizaInvT(?,?,?,?,?)}";
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, cnt);
+            ps.setString(5, almacen);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error ActualizaInvT(), ACC_Stock por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
+    public void ActualizaInvE(String material, String lote, String centro, String cnt, String almacen, String pedido, String posicion) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+
+        String query = "{CALL MM.ActualizaInvE(?,?,?,?,?,?,?,?)}";
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, cnt);
+            ps.setString(5, almacen);
+            ps.setString(6, pedido);
+            ps.setString(7, posicion);
+            ps.setString(8, "E");
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error ActualizaInvE(), ACC_Stock por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
+    public void ActualizaInvET(String material, String lote, String centro, String cnt, String almacen, String pedido, String posicion) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+
+        String query = "{CALL MM.ActualizaInvET(?,?,?,?,?,?,?,?)}";
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, material);
+            ps.setString(2, lote);
+            ps.setString(3, centro);
+            ps.setString(4, cnt);
+            ps.setString(5, almacen);
+            ps.setString(6, pedido);
+            ps.setString(7, posicion);
+            ps.setString(8, "E");
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error ActualizaInvET(), ACC_Stock por " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
     public int VerificarExistentes300(String[][] tabla, int tam)//NuevoLalo
     {
         int rtn = 1, cont = 0;
