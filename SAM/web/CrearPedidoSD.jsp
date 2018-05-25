@@ -95,12 +95,12 @@
                         if (data == 0) {
                             alert("Pantalla solo disponible a vendedor o no se encuentra registrado, Consulte al administrador");
                             window.location.href = "Bienvenido.jsp";
-                        }else{
+                        } else {
                             arr = new Array();
                             arr = data.split("-");
                             $('#GpoVendedores').val(arr[0]);
                             $('#txtGpoVended').val(arr[1]);
-                            
+
                         }
                     }
                 });
@@ -183,7 +183,7 @@
                         msg = 'Unidad medida vacia, cargue datos desde material';
                         break;
                     case 18:
-                        msg = 'Cantidad vacia, agregue una cantidad';
+                        msg = 'Cantidad vacia o cantidad en ceros, agregue una cantidad y sea mayor a 0.000';
                         break;
                     case 19:
                         msg = 'Introduce solicitante';
@@ -192,7 +192,10 @@
                         msg = 'Relación Interlocutor no valida';
                         break;
                     case 21:
-                        msg = 'Campo solicitante obligaotrio';
+                        msg = 'Campo solicitante obligatorio';
+                        break;
+                    case 22:
+                        msg = 'Campo Fecha entrega posición obligatorio';
                         break;
                 }
                 $('#msg').html(msg);
@@ -226,6 +229,10 @@
                     dayNames: ['<%=Domingo%>', '<%=Lunes%>', '<%=Martes%>', '<%=Miercoles%>', '<%=Jueves%>', '<%=Viernes%>', '<%=Sabado%>'],
                     dayNamesMin: ['<%=Do%>', '<%=lu%>', '<%=Ma%>', '<%=Mi%>', '<%=Ju%>', '<%=vi%>', '<%=sa%>'],
                     onSelect: function (date) {
+                        var idda = $('#idDataFeee').val();
+                        var fehSet = $('#' + idda);
+                        fehSet.val(date);
+                        fehSet.focus();
                         validarFecha(date);
                         CerrarCalendario();
                     }
@@ -235,6 +242,8 @@
                 $('#datapicker').datepicker().hide();
             });
             function validarFecha(fecha) {
+                var idda = $('#idDataFeee').val();
+                var fehSet = $('#' + idda);
                 var f = fecha.split(".");
                 var d = f[0];
                 var m = f[1];
@@ -247,11 +256,11 @@
                 var f2 = new Date(y1, m1, d1);
                 if (f2 > f1) {
                     ShowMsg(8, "images/advertencia.PNG", "audio/saperror.wav");
-                    $('#fechaEntrega').focus();
-                    $('#fechaEntrega').val('');
+                    fehSet.focus();
+                    fehSet.val('');
                 } else {
-                    $('#fechaEntrega').val(fecha);
-                    $('#fechaEntrega').focus();
+                    fehSet.val(fecha);
+                    fehSet.focus();
                     borramsg();
                 }
             }
@@ -339,6 +348,7 @@
                                                 <td>Material</td>
                                                 <td>Descripción</td>
                                                 <td>Cantidad</td>
+                                                <td>Fe. Entrega</td>
                                                 <td>Unidad Medida</td>
                                                 <td>Texto pos.</td>
                                         </thead>
@@ -353,6 +363,7 @@
                                                 <td><input type="text" class='tdCMatch' id="tdMater0" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '0')" maxlength="40"/><button id="matchtdmaterial0" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '0');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr0" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdCanti0" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdFecEn0" name="FecEnTD" onfocus="MostrarMatch('tdFecEn', 'matchtdFecEntre', '0')" readOnly/><button id="matchtdFecEntre0" onclick="MostrarCalendarioGrid('tdFecEn0')" name="matchFecEnt" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class="tdCMatch" id="tdUmedi0" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><button id="textoPosicion0" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(0)"></button><textarea hidden style="resize: none;" id="textoposTemp0"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp0"></textarea></td>
                                             </tr>
@@ -362,6 +373,7 @@
                                                 <td><input type="text" class='tdCMatch' id="tdMater1" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '1')" maxlength="40"/><button id="matchtdmaterial1" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '1');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr1" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdCanti1" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdFecEn1" name="FecEnTD" onfocus="MostrarMatch('tdFecEn', 'matchtdFecEntre', '1')" readOnly/><button id="matchtdFecEntre1" onclick="MostrarCalendarioGrid('tdFecEn1')" name="matchFecEnt" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class="tdCMatch" id="tdUmedi1" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><button id="textoPosicion1" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(1)"></button><textarea hidden style="resize: none;" id="textoposTemp1"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp1"></textarea></td>
                                             </tr>
@@ -371,6 +383,7 @@
                                                 <td><input type="text" class='tdCMatch' id="tdMater2" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '2')" maxlength="40"/><button id="matchtdmaterial2" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '2');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr2" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdCanti2" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdFecEn2" name="FecEnTD" onfocus="MostrarMatch('tdFecEn', 'matchtdFecEntre', '2')" readOnly/><button id="matchtdFecEntre2" onclick="MostrarCalendarioGrid('tdFecEn2')" name="matchFecEnt" class='BtnMatchIconGrid'></button></td>                   
                                                 <td><input type="text" class="tdCMatch" id="tdUmedi2" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><button id="textoPosicion2" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(2)"></button><textarea hidden style="resize: none;" id="textoposTemp2"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp2"></textarea></td>
                                             </tr>
@@ -380,6 +393,7 @@
                                                 <td><input type="text" class='tdCMatch' id="tdMater3" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '3')" maxlength="40"/><button id="matchtdmaterial3" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '3');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr3" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdCanti3" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdFecEn3" name="FecEnTD" onfocus="MostrarMatch('tdFecEn', 'matchtdFecEntre', '3')" readOnly/><button id="matchtdFecEntre3" onclick="MostrarCalendarioGrid('tdFecEn3')" name="matchFecEnt" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class="tdCMatch" id="tdUmedi3" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><button id="textoPosicion3" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(3)"></button><textarea hidden style="resize: none;" id="textoposTemp3"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp3"></textarea></td>
                                             </tr>
@@ -389,6 +403,7 @@
                                                 <td><input type="text" class='tdCMatch' id="tdMater4" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '4')" maxlength="40"/><button id="matchtdmaterial4" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '4');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr4" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdCanti4" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdFecEn4" name="FecEnTD" onfocus="MostrarMatch('tdFecEn', 'matchtdFecEntre', '4')" readOnly/><button id="matchtdFecEntre4" onclick="MostrarCalendarioGrid('tdFecEn4')" name="matchFecEnt" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class="tdCMatch" id="tdUmedi4" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><button id="textoPosicion4" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(4)"></button><textarea hidden style="resize: none;" id="textoposTemp4"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp4"></textarea></td>
                                             </tr>
@@ -398,6 +413,7 @@
                                                 <td><input type="text" class='tdCMatch' id="tdMater5" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '5')" maxlength="40"/><button id="matchtdmaterial5" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '5');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr5" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdCanti5" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdFecEn5" name="FecEnTD" onfocus="MostrarMatch('tdFecEn', 'matchtdFecEntre', '5')" readOnly/><button id="matchtdFecEntre5" onclick="MostrarCalendarioGrid('tdFecEn5')" name="matchFecEnt" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class="tdCMatch" id="tdUmedi5" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><button id="textoPosicion5" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(5)"></button><textarea hidden style="resize: none;" id="textoposTemp5"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp5"></textarea></td>
                                             </tr>
@@ -407,6 +423,7 @@
                                                 <td><input type="text" class='tdCMatch' id="tdMater6" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '6')" maxlength="40"/><button id="matchtdmaterial6" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '6');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr6" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdCanti6" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdFecEn6" name="FecEnTD" onfocus="MostrarMatch('tdFecEn', 'matchtdFecEntre', '6')" readOnly/><button id="matchtdFecEntre6" onclick="MostrarCalendarioGrid('tdFecEn6')" name="matchFecEnt" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class="tdCMatch" id="tdUmedi6" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><button id="textoPosicion6" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(6)"></button><textarea hidden style="resize: none;" id="textoposTemp6"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp6"></textarea></td>
                                             </tr>
@@ -416,6 +433,7 @@
                                                 <td><input type="text" class='tdCMatch' id="tdMater7" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '7')" maxlength="40"/><button id="matchtdmaterial7" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '7');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr7" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdCanti7" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdFecEn7" name="FecEnTD" onfocus="MostrarMatch('tdFecEn', 'matchtdFecEntre', '7')" readOnly/><button id="matchtdFecEntre7" onclick="MostrarCalendarioGrid('tdFecEn7')" name="matchFecEnt" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class="tdCMatch" id="tdUmedi7" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><button id="textoPosicion7" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(7)"></button><textarea hidden style="resize: none;" id="textoposTemp7"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp7"></textarea></td>
                                             </tr>
@@ -425,6 +443,7 @@
                                                 <td><input type="text" class='tdCMatch' id="tdMater8" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '8')" maxlength="40"/><button id="matchtdmaterial8" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '8');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr8" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdCanti8" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdFecEn8" name="FecEnTD" onfocus="MostrarMatch('tdFecEn', 'matchtdFecEntre', '8')" readOnly/><button id="matchtdFecEntre8" onclick="MostrarCalendarioGrid('tdFecEn8')" name="matchFecEnt" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class="tdCMatch" id="tdUmedi8" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><button id="textoPosicion8" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(8)"></button><textarea hidden style="resize: none;" id="textoposTemp8"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp8"></textarea></td>
                                             </tr>
@@ -434,10 +453,11 @@
                                                 <td><input type="text" class='tdCMatch' id="tdMater9" name="MaterTD" onfocus="MostrarMatch('tdMater', 'matchtdmaterial', '9')" maxlength="40"/><button id="matchtdmaterial9" onclick="MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '9');" name="matchMaterial" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class='tdSMatch' id="tdDescr9" name="DesciTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><input type="text" class="tdSMatch" id="tdCanti9" name="CantiTD" onblur="this.value = checkDec(this.value, 3)" onKeyPress="return soloNumeros(event)" onfocus="QuitarMatch()"/></td>
+                                                <td><input type="text" class="tdCMatch" id="tdFecEn9" name="FecEnTD" onfocus="MostrarMatch('tdFecEn', 'matchtdFecEntre', '9')" readOnly/><button id="matchtdFecEntre9" onclick="MostrarCalendarioGrid('tdFecEn9')" name="matchFecEnt" class='BtnMatchIconGrid'></button></td>
                                                 <td><input type="text" class="tdCMatch" id="tdUmedi9" name="UMediTD" onfocus="QuitarMatch()" readOnly/></td>
                                                 <td><button id="textoPosicion9" name="matchTxtPos" class="BtnMatchIconDescri" onclick="mostrarVentanaTextoPos(9)"></button><textarea hidden style="resize: none;" id="textoposTemp9"></textarea><textarea hidden style="resize: none;" id="textoposEmbaTemp9"></textarea></td>
                                             </tr>
-                                            <tr class="ocultar" id="temporalro"><td>00</td><td>00000000</td><td>0000000000000000000</td><td>00000000000000000000000000000000000000000000000000000000</td><td>00000000000000000000000000</td><td>00000000000000</td><td>000000000000</td></tr>
+                                            <tr class="ocultar" id="temporalro"><td>00</td><td>00000000</td><td>0000000000000000000</td><td>00000000000000000000000000000000000000000000000000000000</td><td>00000000000000000000000000</td><td>000000000000000000</td><td>0000000000000</td><td>000000000000</td></tr>
                                         </tbody>
                                     </table>
                                 </section>
