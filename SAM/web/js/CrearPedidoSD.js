@@ -1189,12 +1189,20 @@ function MostrarMatch(id, match, pos) {
 
 function QuitarMatch() {
     var inMat = document.getElementsByName("MaterTD");
+    var inFec = document.getElementsByName("FecEnTD");
     var matchMat = document.getElementsByName('matchMaterial');
+    var matchFec = document.getElementsByName('matchFecEnt');
+    for (i = 0; i < inFec.length; i++) {
+        inFec[i].style.width = '100%';
+    }
     for (i = 0; i < inMat.length; i++) {
         inMat[i].style.width = '100%';
     }
     for (i = 0; i < matchMat.length; i++) {
         matchMat[i].style.display = 'none';
+    }
+    for (i = 0; i < matchFec.length; i++) {
+        matchFec[i].style.display = 'none';
     }
 }
 function mostrarVentanaTextoPos(pos) {
@@ -1239,6 +1247,7 @@ function mostrarVentanaTextoPos(pos) {
 }
 
 function MostrarMatchGridMateriales(VM, handle, pos) {
+    CerrarCalendario();
     var clp = $('#ClasePedido');
     var cli = $('#solicitante');
     var ref = $('#refcliente');
@@ -1321,7 +1330,7 @@ function ocultarVentanaSimpleGrid(id, obj)
 }
 function CargarCliente(sol) {
     var acc = "CargarCliente";
-    var vend =  $('#GpoVendedores').val();
+    var vend = $('#GpoVendedores').val();
     var datos = "&Cliente=" + sol + "&Vendedor=" + vend;
     $.ajax({
         async: false,
@@ -1590,13 +1599,16 @@ function AgregarFilaTabla() {
             + "<td><input type=\"text\" class=\"tdCMatch\" id=\"tdMater" + i + "\" name=\"MaterTD\" onfocus=\"MostrarMatch('tdMater', 'matchtdmaterial', '" + i + "')\" maxlength=\"40\"/><button id=\"matchtdmaterial" + i + "\" onclick=\"MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '" + i + "');\" name=\"matchMaterial\" class=\"BtnMatchIconGrid\"></button></td>"
             + "<td><input type=\"text\" class=\"tdSMatch\" id=\"tdDescr" + i + "\" name=\"DesciTD\" onfocus=\"QuitarMatch()\" readOnly/></td>"
             + "<td><input type=\"text\" class=\"tdSMatch\" id=\"tdCanti" + i + "\" name=\"CantiTD\" onblur=\"this.value = checkDec(this.value, 3)\" onKeyPress=\"return soloNumeros(event)\" onfocus=\"QuitarMatch()\"/></td>"
+            + "<td><input type=\"text\" class=\"tdCMatch\" id=\"tdFecEn" + i + "\" name=\"FecEnTD\" onfocus=\"MostrarMatch('tdFecEn', 'matchtdFecEntre', '" + i + "')\" readOnly/><button id=\"matchtdFecEntre" + i + "\" onclick=\"MostrarCalendarioGrid('tdFecEn" + i + "')\" name=\"matchFecEnt\" class='BtnMatchIconGrid'></button></td>"
             + "<td><input type=\"text\" class=\"tdCMatch\" id=\"tdUmedi" + i + "\" name=\"UMediTD\" onfocus=\"QuitarMatch()\" readOnly/></td>"
             + "<td><button id=\"textoPosicion" + i + "\" name=\"matchTxtPos\" class=\"BtnMatchIconDescri\" onclick=\"mostrarVentanaTextoPos(" + i + ")\"></button><textarea hidden style=\"resize: none;\" id=\"textoposTemp" + i + "\"></textarea><textarea hidden style=\"resize: none;\" id=\"textoposEmbaTemp" + i + "\"></textarea></td>"
             + "</tr>";
-    var tempro = " <tr class=\"ocultar\" id=\"temporalro\"><td>00</td><td>00000000</td><td>0000000000000000000</td><td>00000000000000000000000000000000000000000000000000000000</td><td>00000000000000000000000000</td><td>00000000000000</td><td>000000000000</td></tr>";
+    var tempro = "<tr class=\"ocultar\" id=\"temporalro\"><td>00</td><td>00000000</td><td>0000000000000000000</td><td>00000000000000000000000000000000000000000000000000000000</td><td>00000000000000000000000000</td><td>000000000000000000</td><td>0000000000000</td><td>000000000000</td></tr>"
 
     $('#TabBody2').append(newfiladata);
     $('#TabBody2').append(tempro);
+    loadDoubleScroll("DobleSection2", "SecCuerpo2", "DobleContainer2", "TabBody2");
+    AjustarCabecera('TabHead2', 'TabBody2', 3, 'SecCuerpo2');
 }
 
 function EliminarFilas() {
@@ -1619,6 +1631,8 @@ function EliminarFilas() {
 
         }
     }
+    loadDoubleScroll("DobleSection2", "SecCuerpo2", "DobleContainer2", "TabBody2");
+    AjustarCabecera('TabHead2', 'TabBody2', 3, 'SecCuerpo2');
 }
 
 function validarInterlocutores() {
@@ -1696,6 +1710,7 @@ function GuardarPosiciones() {
     var des = document.getElementsByName("DesciTD");
     var ume = document.getElementsByName("UMediTD");
     var can = document.getElementsByName("CantiTD");
+    var fec = document.getElementsByName("FecEnTD");
     var pos = 0;
     for (i = 0; i < ch.length; i++) {
         if (mat[i].value.length > 0) {
@@ -1710,12 +1725,17 @@ function GuardarPosiciones() {
                 mat[i].focus();
                 return;
             }
-            if (can[i].value.length == 0) {
+            if (can[i].value == "0.000" || can[i].value.length == 0  ) {
                 can[i].focus();
                 ShowMsg(18, "images/advertencia.PNG", "audio/saperror.wav");
                 return;
             }
-            savePos(mat[i].value, des[i].value, ume[i].value, can[i].value, pos);
+            if (fec[i].value.length == 0) {
+                fec[i].focus();
+                ShowMsg(22, "images/advertencia.PNG", "audio/saperror.wav");
+                return;
+            }
+            savePos(mat[i].value, des[i].value, ume[i].value, can[i].value, pos,fec[i].value);
             GuardarTextoPos(pos, i);
             pos = pos + 1;
         }
@@ -1724,10 +1744,10 @@ function GuardarPosiciones() {
     GuardarCabecera();
 }
 
-function savePos(mat, des, um, can, i) {
+function savePos(mat, des, um, can, i, fe) {
     var usuario = $('#CreadoPor').val();
     var acc = "GuardarPosiciones";
-    var datos = "&MATER=" + mat + "&DESCR=" + des + "&UNIDA=" + um + "&CANTI=" + can + "&POSIC=" + i + "&USUAR=" + usuario;
+    var datos = "&MATER=" + mat + "&DESCR=" + des + "&UNIDA=" + um + "&CANTI=" + can + "&POSIC=" + i + "&USUAR=" + usuario + "&FECEP=" + fe;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1807,4 +1827,24 @@ function GuardarTextoPos(pos, a) {
         });
     }
 }
-
+function MostrarCalendarioGrid(id) {
+    ocultarVentanaSimple('VentanaModalMateriales', "");
+    QuitarMatch();
+    $("#" + id).focus();
+    $("#idDataFeee").val(id);
+    var BE = document.createElement('audio');
+    BE.src = "audio/sapsnd05.wav";
+    BE.play();
+    var ancho = 500;
+    var alto = 750;
+    var x = (screen.width / 2) - (ancho / 2);
+    var y = (screen.height / 2) - (alto / 2);
+    var ventana = $('#Calenndar');
+    ventana.css({top: y + "px", left: x + "px"});
+    ventana.css('display', 'block');
+    borramsg();
+    var theHandle = document.getElementById("handlecalendar");
+    var theRoot = document.getElementById("Calenndar");
+    Drag.init(theHandle, theRoot);
+    $('#datapicker').datepicker().show();
+}
