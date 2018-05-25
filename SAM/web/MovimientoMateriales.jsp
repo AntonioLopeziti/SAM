@@ -4916,6 +4916,16 @@
                             var cdes = document.getElementsByName('mmctr');
                             var unmms = document.getElementsByName('mmumb');
                             var almpe = document.getElementsByName('mmalmped');
+                            
+                            
+                            var cdese = document.getElementsByName('mmCentro');
+                            var almDese = document.getElementsByName('mmAlmace');
+                            
+                            var eeped = document.getElementsByName('mmpedid');
+                            var eepos = document.getElementsByName('mmPosPed');
+                            var eeese = document.getElementsByName('mmStEs');
+                            
+                            
 
                             //                        var tab = document.getElementsByName("Pedidos");
                             //                        if (tab.length == 0) {
@@ -5035,11 +5045,12 @@
                                     for (i = 0; i < lote.length; i++)
                                     {
                                         extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen + "," + almDes[i].textContent + ",";
+                                                "," + almacen + "," + almDes[i].textContent + "," + eeped[i].textContent + "," + eepos[i].textContent +
+                                                "," + eeese[i].textContent + "," + "K,";
                                     }
                                     extrass = extrass.substring(0, extrass.length - 1);
                                     extrass += "&v2=" + lote.length + "&v3=" + tmov + "&v4=" + lang;
-                                    Lote311(extrass, tt, extra, cad);
+                                    Lote311(extrass, tt, extra, cad, "Movimiento311");
                                     break;
                                 case "312":
                                     var extrass = "&v1=";
@@ -5051,7 +5062,33 @@
                                     }
                                     extrass = extrass.substring(0, extrass.length - 1);
                                     extrass += "&v2=" + lote.length + "&v3=" + tmov + "&v4=" + lang;
-                                    Lote311(extrass, tt, extra, cad);
+                                    Lote311(extrass, tt, extra, cad, "Movimiento311");
+                                    break;
+                                case "301":
+                                    var extrass = "&v1=";
+                                    var lang = "<%=Idioma%>";
+                                    for (i = 0; i < lote.length; i++)
+                                    {
+                                        extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
+                                                "," + almacen + "," + almDese[i].textContent + "," + cdese[i].textContent + 
+                                                "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
+                                    }
+                                    extrass = extrass.substring(0, extrass.length - 1);
+                                    extrass += "&v2=" + lote.length + "&v3=" + tmov + "&v4=" + lang;
+                                    Lote301(extrass, tt, extra, cad, "Movimiento301");
+                                    break;
+                                case "313":
+                                    var extrass = "&v1=";
+                                    var lang = "<%=Idioma%>";
+                                    for (i = 0; i < lote.length; i++)
+                                    {
+                                        extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
+                                                "," + almacen + "," + almDese[i].textContent + "," + cdese[i].textContent + 
+                                                "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
+                                    }
+                                    extrass = extrass.substring(0, extrass.length - 1);
+                                    extrass += "&v2=" + lote.length + "&v3=" + tmov + "&v4=" + lang;
+                                    Lote301(extrass, tt, extra, cad, "Movimiento313");
                                     break;
                             }
 
@@ -5124,7 +5161,7 @@
                             GuardarMovimientos(tt, extra, extrass, lote.length, action);
                         }, 2000);
                     }
-                    function Lote311(extrass, tt, extra, cad)//NuevoLalo
+                    function Lote311(extrass, tt, extra, cad, action)//NuevoLalo
                     {
                         var centro = document.getElementById('bxCentro').value.toUpperCase();
                         var alm = document.getElementById('bxAlmacen').value.toUpperCase();
@@ -5137,6 +5174,10 @@
                         var tabix = document.getElementsByName('mmidx');
                         var almdes = document.getElementsByName('mmalm');
                         var unmms = document.getElementsByName('mmumb');
+                        var eeped = document.getElementsByName('mmpedid');
+                        var eepos = document.getElementsByName('mmPosPed');
+                        var eeese = document.getElementsByName('mmStEs');
+                        var cdes = document.getElementsByName('mmctr');
 
                         var actt = "Guarda" + tmov + "Posiciones";
                         for (i = 0; i < lote.length; i++)
@@ -5154,11 +5195,56 @@
                                     "&v5=" + Descripc[i].textContent + "&v6=" + material[i].textContent +
                                     "&v7=" + cad + "&v8=" + tabix[i].textContent + "&v9=" + centro +
                                     "&v10=" + almdes[i].textContent + "&v11=" + unmms[i].textContent +
-                                    "&v12=" + alm + "&v13=" + rsv_ + "&v14=" + pos_;
+                                    "&v12=" + alm + "&v13=" + rsv_ + "&v14=" + pos_ + "&v15=" + cdes[i].textContent +
+                                    "&v20=" + eeped[i].textContent + "&v21=" + eepos[i].textContent +
+                                    "&v22=" + eeese[i].textContent;
                             GuardarMovimientos(actt, extras);
                         }
                         setTimeout(function () {
-                            GuardarMovimientos(tt, extra, extrass, lote.length);
+                            GuardarMovimientos(tt, extra, extrass, lote.length, action);
+                        }, 2000);
+                    }
+                    function Lote301(extrass, tt, extra, cad, action)//NuevoLalo
+                    {
+                        var centro = document.getElementById('bxCentro').value.toUpperCase();
+                        var alm = document.getElementById('bxAlmacen').value.toUpperCase();
+                        var fecha = document.getElementById('bxFecha').value;
+                        var tmov = document.getElementById('bxClase').value;
+                        var lote = document.getElementsByName('mmnlt');
+                        var cantidad = document.getElementsByName('mmprr');//Por recibir
+                        var Descripc = document.getElementsByName('mmdsc');
+                        var material = document.getElementsByName('mmmat');
+                        var tabix = document.getElementsByName('mmidx');
+                        var almdes = document.getElementsByName('mmAlmace');
+                        var unmms = document.getElementsByName('mmumb');
+                        var eeped = document.getElementsByName('mmpedid');
+                        var eepos = document.getElementsByName('mmPosPed');
+                        var eeese = document.getElementsByName('mmStEs');
+                        var cdes = document.getElementsByName('mmCentro');
+
+                        var actt = "Guarda" + tmov + "Posiciones";
+                        for (i = 0; i < lote.length; i++)
+                        {
+                            var rsv_, pos_;
+                            try {
+                                rsv_ = document.getElementById('txtrsv').value;
+                                pos_ = document.getElementsByName('mmPosR')[i].textContent;
+                            } catch (err) {
+                                rsv_ = "";
+                                pos_ = "";
+                            }
+                            var extras = "&v1=" + fecha + "&v2=" + tmov +
+                                    "&v3=" + lote[i].textContent + "&v4=" + cantidad[i].textContent +
+                                    "&v5=" + Descripc[i].textContent + "&v6=" + material[i].textContent +
+                                    "&v7=" + cad + "&v8=" + tabix[i].textContent + "&v9=" + centro +
+                                    "&v10=" + almdes[i].textContent + "&v11=" + unmms[i].textContent +
+                                    "&v12=" + alm + "&v13=" + rsv_ + "&v14=" + pos_ + "&v15=" + cdes[i].textContent +
+                                    "&v20=" + eeped[i].textContent + "&v21=" + eepos[i].textContent +
+                                    "&v22=" + eeese[i].textContent;
+                            GuardarMovimientos(actt, extras);
+                        }
+                        setTimeout(function () {
+                            GuardarMovimientos(tt, extra, extrass, lote.length, action);
                         }, 2000);
                     }
 //                    function Lote311(extrass, tt, extra, cad)//NuevoLalo
@@ -5405,6 +5491,8 @@
                                             Guarda300(extrass, acc);
                                             break;
                                         case "311":
+                                        case "301":
+                                        case "313":
                                             Guarda310(extrass, acc);
                                             break;
                                     }
@@ -5445,8 +5533,8 @@
                         xmlhttp.open("GET", "PeticionGuardaMovMateriales?Action=" + action + extras, true);
                         xmlhttp.send();
                     }
-                    function Guarda310(extrass) {
-                        var dtrer = "Action=Movimiento311" + extrass;
+                    function Guarda310(extrass, acc) {
+                        var dtrer = "Action=" + acc + extrass;
                         $.ajax({
                             beforeSend: function () {
                                 $("button").prop("disabled", true);
