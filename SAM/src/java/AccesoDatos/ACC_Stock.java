@@ -3730,7 +3730,7 @@ public class ACC_Stock {
         ResultSet rs = null;
         String sql = "{call MM.MovimientosMateriales_CargarStockTran313(?,?,?)}";
         try {
-           ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, material);
             ps.setString(2, centro);
             ps.setString(3, almacen);
@@ -3749,4 +3749,30 @@ public class ACC_Stock {
         }
         return s;
     }
+
+    public String ValidarCantidadMaterial(String material, String centro, String almacen, String lote) {
+        String sto = "X";
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.ValidarCantidadMaterialStockTrans(?,?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1,material);
+            ps.setString(2,centro);
+            ps.setString(3,almacen);
+            ps.setString(4,lote);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                sto = rs.getString("stock_traslado");
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return sto;
+    }
+
 }
