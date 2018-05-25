@@ -307,6 +307,10 @@ public class peticionMovMateriales2 extends HttpServlet {
                     }
                     out.println(j3);
                     break;
+                case "ValidarCantidMaterial315":
+                    String stk = ACC_Stock.ObtenerInstancia().ValidarCantidadMaterial(Materi, Centro, Almace, Lote);
+                    out.println(stk);
+                    break;
             }
 
         }
