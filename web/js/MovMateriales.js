@@ -3584,6 +3584,11 @@ function Validarmovis() {
                     Canti[i].focus();
                     return;
                 }
+                if (validarCantiExcedida(Materi[i].value, Centro, Almace, Lote[i].value, Canti[i].value)) {
+                    mensajesNuevo(8, "images/advertencia.PNG", "audio/saperror.wav");
+                    Canti[i].focus();
+                    return;
+                }
             } else {
                 if (Canti[i].value.length == 0 || Canti[i].value == '0.000') {
                     mensajesNuevo(5, "images/advertencia.PNG", "audio/saperror.wav");
@@ -3790,4 +3795,28 @@ function ObtenerStockTransferencia(mat, clm, pos) {
             }
         }
     });
+}
+function validarCantiExcedida(mat, centro, alm, lote, cant) {
+    var x = true;
+    var action = "ValidarCantidMaterial315";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + action + "&Material=" + mat + "&Centro=" + centro + "&Almacen=" + alm + "&Lote=" + lote,
+        success: function (data) {
+            if (data != "X") {
+                var can2 = parseFloat(data);
+                var can1 = parseFloat(cant);
+                if (can1 < can2) {
+                    x = false;
+                }
+            }else{
+                x = true
+            }
+        }
+    });
+    return x;
 }
