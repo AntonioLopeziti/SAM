@@ -61,6 +61,24 @@ public class operaciones_ordenes_crea {
     String clase_coste = "";
     String solicitante = "";
     String num_notificacion_operacion = "";
+    String cantidad_rc = "";
+    String unidad_medida_rc = "";
+
+    public String getCantidad_rc() {
+        return cantidad_rc;
+    }
+
+    public void setCantidad_rc(String cantidad_rc) {
+        this.cantidad_rc = cantidad_rc;
+    }
+
+    public String getUnidad_medida_rc() {
+        return unidad_medida_rc;
+    }
+
+    public void setUnidad_medida_rc(String unidad_medida_rc) {
+        this.unidad_medida_rc = unidad_medida_rc;
+    }
 
     public String getFolio_sam() {
         return folio_sam;
