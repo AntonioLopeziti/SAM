@@ -38,7 +38,7 @@ public class ACC_Ordenes_pp_notificaciones {
         return Instance;
     }
 
-    public void PosicionInsertaMovNot(String folio_sam, String orden, String hora, String fecha, String contador, String material, String cantidad, String um, String lote, String centro, String claseMov, String posL, String ancho, String ee) {
+    public void PosicionInsertaMovNot(String folio_sam, String orden, String hora, String fecha, String contador, String material, String cantidad, String um, String lote, String centro, String claseMov, String posL, String ancho, String ee, String op) {
         
         String query = "{CALL PP.Notif_InsertaPosMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         Conexion con = new Conexion();
@@ -47,41 +47,41 @@ public class ACC_Ordenes_pp_notificaciones {
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, folio_sam);
-            pst.setString(2, "");
-            pst.setString(3, orden);
-            pst.setString(4, hora);
-            pst.setString(5, fecha);
-            pst.setString(6, contador);
-            pst.setString(7, "");
-            pst.setString(8, material);
-            pst.setString(9, "");
-            pst.setString(10, cantidad);
-            pst.setString(11, um);
-            pst.setString(12, lote);
-            pst.setString(13, centro);
-            pst.setString(14, "1400");
-            pst.setString(15, claseMov);
-            pst.setString(16, "0.000");
+            pst.setString(2, orden);
+            pst.setString(3, hora);
+            pst.setString(4, fecha);
+            pst.setString(5, contador);
+            pst.setString(6, "");
+            pst.setString(7, material);
+            pst.setString(8, "");
+            pst.setString(9, cantidad);
+            pst.setString(10, um);
+            pst.setString(11, lote);
+            pst.setString(12, centro);
+            pst.setString(13, "1400");
+            pst.setString(14, claseMov);
+            pst.setString(15, "0.000");
+            pst.setString(16, "");
             pst.setString(17, "");
-            pst.setString(18, "");
-            pst.setString(19, "0.000");
-            pst.setString(20, "");
-            pst.setString(21, "0.000");
-            pst.setString(22, "");
-            pst.setString(23, "0.000");
-            pst.setString(24, "");
-            pst.setString(25, "0.000");
-            pst.setString(26, "");
-            pst.setString(27, "0.000");
-            pst.setString(28, "");
+            pst.setString(18, "0.000");
+            pst.setString(19, "");
+            pst.setString(20, "0.000");
+            pst.setString(21, "");
+            pst.setString(22, "0.000");
+            pst.setString(23, "");
+            pst.setString(24, "0.000");
+            pst.setString(25, "");
+            pst.setString(26, "0.000");
+            pst.setString(27, "");
+            pst.setString(28, "0");
             pst.setString(29, "0");
-            pst.setString(30, "0");
-            pst.setString(31, "");
-            pst.setString(32, "0.000");
-            pst.setString(33, "");
-            pst.setString(34, "0");
-            pst.setString(35, "");
-            pst.setString(36, "0");
+            pst.setString(30, "");
+            pst.setString(31, "0.000");
+            pst.setString(32, "");
+            pst.setString(33, "0");
+            pst.setString(34, "");
+            pst.setString(35, "0");
+            pst.setString(36, "");
             pst.setString(37, "");
             pst.setString(38, "");
             pst.setString(39, "");
@@ -97,10 +97,10 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(49, "");
             pst.setString(50, "");
             pst.setString(51, "");
-            pst.setString(52, "");
-            pst.setString(53, posL);
-            pst.setString(54, ancho);
-            pst.setString(55, ee);
+            pst.setString(52, posL);
+            pst.setString(53, ancho);
+            pst.setString(54, ee);
+            pst.setString(55, op);
             pst.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error: " + e);
@@ -118,16 +118,16 @@ public class ACC_Ordenes_pp_notificaciones {
         }
     }
 
-    public void CabeceraInsertaMovNot(String folio_sam, String orden, String mate, String hora, String fecha, String centro, String clasMov, String usuario) {
-        String query = "{CALL PP.Notif_InsertaCabMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+    public void CabeceraInsertaMovNot(String folio_sam, String orden, String mate, String hora, String fecha, String centro, String clasMov, String usuario, String operacion, String buena) {
+        String query = "{CALL PP.Notif_InsertaCabMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, folio_sam);
-            pst.setString(2, "");
-            pst.setString(3, orden);
+            pst.setString(2, orden);
+            pst.setString(3, operacion);
             pst.setString(4, mate);
             pst.setString(5, hora);
             pst.setString(6, fecha);
@@ -135,7 +135,7 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(8, "");
             pst.setString(9, centro);
             pst.setString(10, "1400");
-            pst.setString(11, "0.000");
+            pst.setString(11, buena);
             pst.setString(12, clasMov);
             pst.setString(13, "");
             pst.setString(14, "");
@@ -149,10 +149,7 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(22, "");
             pst.setString(23, "");
             pst.setString(24, "");
-            pst.setString(25, "");
-            pst.setString(26, "");
-            pst.setString(27, "");
-            pst.setString(28, usuario);
+            pst.setString(25, usuario);
             pst.executeUpdate();
             
         } catch (Exception e) {
@@ -921,6 +918,27 @@ public class ACC_Ordenes_pp_notificaciones {
         
         return rtn;
     }
+    public String GetUMoper(String orden){
+        String rtn = "";
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs;
+        
+        String query = "{call PP.getUMoper(?)}";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, orden);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rtn = rs.getString("unidad_medida_base");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        con.CerrarConexion(conn);
+        
+        return rtn;
+    }
     
     public ArrayList<componentesPP> MostraTABPM01NOPP(String ord, String cnt, String ll) {
         ArrayList<componentesPP> mpm = new ArrayList<>();
@@ -983,7 +1001,9 @@ public class ACC_Ordenes_pp_notificaciones {
 //                ma.setPosListaM(rs2.getString("num_pos_lista_materiales"));
                 ma.setDisabled("disabled");
                 ma.setStock_especial(rs2.getString("stock_especial"));
-                mpm.add(ma);
+                if(!ma.getCantidad().equals("0.000")){
+                    mpm.add(ma);
+                }
             }
         } catch (Exception e) {
             System.err.println("Error: " + e);
@@ -1003,6 +1023,48 @@ public class ACC_Ordenes_pp_notificaciones {
             }
         }
         return mpm;
+    }
+    public ArrayList<operaciones_ordenes_crea> MostrarTabOperaciones(String ord) {
+        ArrayList<operaciones_ordenes_crea> ope = new ArrayList<>();
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call PP.tablaOpercaiones_PP(?)}";
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, ord);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                operaciones_ordenes_crea ma = new operaciones_ordenes_crea();
+                ma.setNum_orden(rs.getString("num_orden"));
+                ma.setTexto_breve_operacion(rs.getString("texto_breve_operacion"));
+                ma.setNum_operacion(rs.getString("num_operacion"));
+                ma.setTrabajo_operacion(rs.getString("puesto_trabajo"));
+                ma.setClave_control(rs.getString("clave_control"));
+                ma.setCantidad_rc(rs.getString("cantidad_rc"));
+                ma.setUnidad_medida_rc(rs.getString("unidad_medida"));
+                ma.setCentro(rs.getString("centro"));
+                ope.add(ma);
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        } finally {
+            try {
+                if (conn != null) {
+                    con.CerrarConexion(conn);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error: " + e);
+            }
+        }
+        return ope;
     }
 
     public pp_operaciones_noti INPGRNOTPMNOTPP(String ord, String ope) {
