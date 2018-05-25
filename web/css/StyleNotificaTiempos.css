@@ -7,6 +7,84 @@ and open the template in the editor.
     Created on : Jan 15, 2018, 4:53:30 PM
     Author     : Jhonatan
 */
+.VentanaModalRR
+{    
+    position: fixed; 
+    width: 300px; 
+    height: 380px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
+.VentanaModalRR2
+{    
+    position: fixed; 
+    width: 450px; 
+    height: 230px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1003;
+}
+.bkRechazo
+{
+    margin-top: 1%;
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #E6EBEB;
+    height: 300px;
+}
+.ckhRechazo{
+    margin-left: 10%;
+}
+.bkRechazoCab{
+    margin-left: 5%;
+    margin-top: 1%;
+}
+.bkRechazoCab label{
+    margin-top: 0;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+#acepRech{
+    vertical-align:middle;
+    cursor:pointer;
+    display: inline-block;
+}
+.bxRmed {
+    background-repeat: no-repeat;
+    width: 35%;
+    height: 14px;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1em;
+    font-weight: bold;
+}
+.bxRSM {
+    background-repeat: no-repeat;
+    width: 7%;
+    height: 14px;
+    text-align: left;
+    font-family:  Courier New;
+    font-size: 1em;
+    font-weight: bold;
+}
 .Ventabdes{    
     position: fixed; 
     width: 983px; 
@@ -18,6 +96,18 @@ and open the template in the editor.
     color: #000000;
     display:none;
 
+}
+#handle4{
+    margin-left: -2px;
+    padding-top: .4%;
+    padding-left: .3%;
+    padding-bottom: .2%;
+    height: 8%;
+    width: 100.5%;
+    color:#E1F0D0;
+    font-family: "Tahoma"; 
+    font-size: 1em;
+    background: #333  top repeat-x;   
 }
 #handlePM01{
     margin-left: -2px;
@@ -37,6 +127,12 @@ and open the template in the editor.
     width: 98%;
     height: auto;
 }
+.ContentabOpe{
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 64%;
+    height: auto;
+}
 .DobleScroll {
     width: 17px;
     display: block;
@@ -49,6 +145,8 @@ and open the template in the editor.
 }
 #DobleSection { height: 420px; }
 #SecCuerpoCld { height: 420px; }
+#DobleSectionOpe { height: 150px; }
+#SecCuerpoOpe { height: 150px; }
 .TableContainer
 {
     width: 100%;
@@ -244,11 +342,18 @@ input{
 }
 /*Busqueda General*/
 .ContentNotif{
-    margin-bottom: 30px;
-    width: 60%;
+    margin-bottom: 2%;
+    width: 98%;
     height: 70px;
     background: #fff;
     padding-left: 2%;
+}
+.ContentNotif2{
+    margin: 10px;
+    width: 92%;
+    background: #fff;
+    padding-left: 2%;
+    padding-bottom: 2%;
 }
 #lineaNotiTiempos{
     border: 1px solid #3892E0;
@@ -271,13 +376,22 @@ input{
     margin-left: 0;
     margin-top: -1px;
 }
+.divNoPersA{
+    width: 100%;
+}
+.divNoPersA label{
+    font-size: 13px;
+    font-family: Tahoma;
+    width: 51%;
+    display: inline-block;
+}
 .divNoPerso2{
     width: 35%;
     float: right;
 }
 /*Div Radio Buttons*/
 .bkClassNoti{
-    margin-bottom: 30px;
+    margin-bottom: 2%;
     background-color: white;
     margin-right: 55%;    
     padding-bottom: 5px;
@@ -301,12 +415,12 @@ input{
 
 /*Div Datos Generales*/
 .DatosGeneNotiTiemp{
-    margin-bottom: 30px;
+    margin-bottom: 2%;
     /*margin-top: 6px;*/
-    width: 60%;
-    height: 105px;
+    width: 98%;
     background: #fff;
     padding-left: 2%;
+    display: inline-block;
 }
 .divNoOrdFabri hr{
     width: 20%;
@@ -329,10 +443,11 @@ input{
 /*Div Datos Reales*/
 .DatosReales{
     /*margin-top: 40px;*/
-    width: 60%;
-    height: 90px;
+    width: 98%;
     background: #fff;
     padding-left: 2%;
+    padding-bottom: 1%;
+    display: inline-block;
 }
 .divCntBuenMal{
     float: left;
@@ -352,8 +467,8 @@ input{
 }
 .divmatchEsp{
     background: #FFFFFF;
-    width: 60%;
-    display: inline-block;
+    width: 98%;
+    /*display: inline-block;*/
     padding-left: 2%;
     padding-bottom: 1%;
 }
@@ -364,16 +479,26 @@ input{
     border: 1px solid #3892E0;
 }
 
+.bkleft{
+    width: 65%;
+}
+.bkright{
+    width: 32%;
+    float: right;
+}
+.bkcontainer section{
+    display: inline-block;
+    margin-top: 0;
+}
 @media screen and (min-width: 500px) and (max-width: 1000px){  
     .ContentNotif{
-        width: 100%;   
+        width: 98%;   
     }
 
 }
 @media screen and (min-width: 200px) and (max-width: 500px){  
     .ContentNotif{
-        width: 100%;   
-        
+        width: 98%;   
     }
 
 }
