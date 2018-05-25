@@ -14,10 +14,12 @@ import AccesoDatos.Consultas;
 import Entidades.control_tiempos;
 import Entidades.CabNotTiempo;
 import Entidades.ControlListaOrdenes;
+import Entidades.MotivosRechazo;
 import Entidades.OrdenesOperaciones;
 import Entidades.PlanPP;
 import Entidades.folios;
 import Entidades.PosNotTiempo;
+import Entidades.texto_actividades;
 import Entidades.usuarios;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -58,6 +60,28 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
             String finall = request.getParameter("final");
             String autom = request.getParameter("autom");
             String reserv = request.getParameter("reserv");
+            String v1 = request.getParameter("v1");
+            String v2 = request.getParameter("v2");
+            String v3 = request.getParameter("v3");
+            String v4 = request.getParameter("v4");
+            String v5 = request.getParameter("v5");
+            String v6 = request.getParameter("v6");
+            String v7 = request.getParameter("v7");
+            String v8 = request.getParameter("v8");
+            String v9 = request.getParameter("v9");
+            String v10 = request.getParameter("v10");
+            String v11 = request.getParameter("v11");
+            String v12 = request.getParameter("v12");
+            String v13 = request.getParameter("v13");
+            String v14 = request.getParameter("v14");
+            String v15 = request.getParameter("v15");
+            String v16 = request.getParameter("v16");
+            String v17 = request.getParameter("v17");
+            String v18 = request.getParameter("v18");
+            String v19 = request.getParameter("v19");
+            String v20 = request.getParameter("v20");
+            String v21 = request.getParameter("v21");
+            String v22 = request.getParameter("v22");
             //Filtros de Match Orden
             String matchOr = request.getParameter("modOrd");
             String matchTxt = request.getParameter("modTxtB");
@@ -112,7 +136,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     break;
                 case "LlenarTablas":
                     control_tiempos cnto = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ObtenerRegistroOrdenes(usuario, orden);
-                    PlanPP pla = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ObtenerDatosPlan(orden);
+                    PlanPP pla = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ObtenerDatosPlan(orden, v21);
                     CabNotTiempo cnta = new CabNotTiempo();
                     String fl = "PP" + folioActual.getFolioActual();
                     String folAct = "" + folioActual.getFolioActual();
@@ -130,33 +154,54 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
 
                     PosNotTiempo posno = new PosNotTiempo();
                     posno.setNum_orden(cnto.getOrden_fab());
-                    posno.setCont_not(pla.getContador_notificacion());
-                    posno.setFolio_not_tiemp(fl);
-                    posno.setFecha_offline(fechaActual);
-                    posno.setHora_offline(horaActual);
-                    posno.setNum_material(pla.getNum_material());
+                    posno.setNum_operacion(v21);
+                    posno.setNum_notificacion("0");
+                    posno.setFolio_sam(fl);
+                    posno.setClase_orden("0");
+                    posno.setPuesto_trabajo(pla.getPuesto_trabajo_responsable());
                     posno.setCentro(pla.getCentro());
-                    posno.setActiv_not_par(cnto.getNot_parcial());
-                    posno.setActiv_not_final(cnto.getNot_final());
-                    posno.setNot_final(cnto.getNot_final_aut());
-                    posno.setComp_reservas(cnto.getComp_reserva());
-                    posno.setCant_buena(cnto.getCtd_buena());
+                    posno.setMaterial(pla.getNum_material());
+                    posno.setTexto_breve("");
+                    posno.setNum_notificacion_sam("0");
+                    posno.setNotificacion_parcial("");
+                    posno.setCompensar("");
+                    posno.setCantidad_buena(v1);
                     posno.setUnidad_medida(pla.getUnidad_medida());
-                    posno.setRechazo_notif(cnto.getCtd_mala());
-                    //Cnt de trabajo repaso actual a notificar
-                    //Motivo de la desviacion
-                    posno.setNum_personal(cnto.getNo_personal());
-                    posno.setFecha_inic_notificada_ej(cnto.getFecha());
-                    posno.setHora_notificada_inic_ej(cnto.getHora());
-                    posno.setFecha_fin_notificada_ej(fechaActual);
-                    posno.setHora_notificada_fin_ej(horaActual);
-                    //Fecha de contabilizacion
-                    //Texto de notificacion
-                    //recibido
-                    //procesado
-                    //fecha de recibido
-                    //hora
-                    //mensaje
+                    posno.setRechazo(v2);
+                    posno.setCantidad_trabajo("0"); //????????????
+                    posno.setMotivo_desviacion("");
+                    posno.setActividad_notificar1(v3);
+                    posno.setUnidad_medida_notificar1(v4);
+                    posno.setIndicador_actividad1(v5);
+                    posno.setActividad_notificar2(v6);
+                    posno.setUnidad_medida_notificar2(v7);
+                    posno.setIndicador_actividad2(v8);
+                    posno.setActividad_notificar3(v9);
+                    posno.setUnidad_medida_notificar3(v10);
+                    posno.setIndicador_actividad3(v11);
+                    posno.setActividad_notificar4(v12);
+                    posno.setUnidad_medida_notificar4(v13);
+                    posno.setIndicador_actividad4(v14);
+                    posno.setActividad_notificar5(v15);
+                    posno.setUnidad_medida_notificar5(v16);
+                    posno.setIndicador_actividad5(v17);
+                    posno.setActividad_notificar6(v18);
+                    posno.setUnidad_medida_notificar6(v19);
+                    posno.setIndicador_actividad6(v20);
+                    posno.setNum_personal("");
+                    posno.setFecha_inicio(cnto.getFecha());
+                    posno.setHora_inicio(cnto.getHora());
+                    posno.setFecha_fin(fechaActual);
+                    posno.setHora_fin(horaActual);
+                    posno.setFecha_contabilizacion("");
+                    posno.setTexto_notificacion("");
+                    posno.setUsuario(cnto.getNo_personal());
+                    posno.setRecibido("");
+                    posno.setProcesado("");
+                    posno.setFecha_recibido("");
+                    posno.setHora_recibido("");
+                    posno.setMensaje("");
+                    posno.setMotivo(v22);
                     if (ACC_NotificarTiempos.ObtenerInstancia().InsertarCabNotTiempo(cnta)) {
                         if (ACC_NotificarTiempos.ObtenerInstancia().InsertarPosNotTiempo(posno)) {
                             ACC_Folios.ObtenerIstancia().ActualizarFolio("PP", Integer.parseInt(folAct));
@@ -260,7 +305,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     }
                     break;
                 case "revDatosUs":
-                    control_tiempos ct = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().CargarDatosPorUs(usuario, orden);
+                    control_tiempos ct = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().CargarDatosPorUs(usuario, orden, oper);
                     if (ct.getNo_personal() == null || ct.getNo_personal().equals("")) {
                         out.println(0);
                     } else {
@@ -275,6 +320,30 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                         j.add(ct.getCtd_buena());
                         j.add(ct.getCtd_mala());
                         out.println(j);
+                    }
+                    break;
+                case "getActividades":
+                    texto_actividades tx = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().obtenerTextosAct(v1);
+
+                    JSONArray j = new JSONArray();
+                    j.add(tx.getTexto_actividad1());
+                    j.add(tx.getTexto_actividad2());
+                    j.add(tx.getTexto_actividad3());
+                    j.add(tx.getTexto_actividad4());
+                    j.add(tx.getTexto_actividad5());
+                    j.add(tx.getTexto_actividad6());
+                    j.add(tx.getIndicador_visualiza1());
+                    j.add(tx.getIndicador_visualiza2());
+                    j.add(tx.getIndicador_visualiza3());
+                    j.add(tx.getIndicador_visualiza4());
+                    j.add(tx.getIndicador_visualiza5());
+                    j.add(tx.getIndicador_visualiza6());
+                    out.println(j);
+                    break;
+                case "getMotivosRC":
+                    ArrayList<MotivosRechazo> mc = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().GetMotivosRC(v1);
+                    for(int i = 0; i < mc.size(); i++){
+                        out.println("<input class=\"ckhRechazo\" type=\"radio\" name=\"ckRechazoIT\" value=\"" + mc.get(i).getMotivo() + "\"> " + mc.get(i).getMotivo() + "<br>");
                     }
                     break;
                 case "borrarRegControl":
@@ -301,7 +370,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     out.println(u);
                     break;
                 case "validarNotifCread":
-                    int p = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ValidarNotifCreada(usuario, orden);
+                    int p = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ValidarNotifCreada(usuario, orden, oper);
                     out.println(p);
                     break;
                 default:
