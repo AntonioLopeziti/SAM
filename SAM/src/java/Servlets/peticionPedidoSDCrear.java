@@ -81,6 +81,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
             String UNIDA = request.getParameter("UNIDA");
             String CANTI = request.getParameter("CANTI");
             String POSIC = request.getParameter("POSIC");
+            String FECEP = request.getParameter("FECEP");
             String FILA = request.getParameter("FILA");
             String POS = request.getParameter("POS");
             String TEXTOCAB = request.getParameter("TEXTOCAB");
@@ -312,8 +313,9 @@ public class peticionPedidoSDCrear extends HttpServlet {
                 case "GuardarPosiciones":
                     int POSDO = Integer.parseInt(POSIC) + 1;
                     String POSFIN = String.valueOf(POSDO) + "0";
+                    String FECENTPO = Consultas.ObtenerInstancia().DateFormatGuion(FECEP);
                     ACC_CrearPedidoSD.ObtenerInstancia().GuardarMateriales(folioSAM, POSFIN, MATER, DESCR, UNIDA, USUAR, FechaActual, HoraActual);
-                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCantidades(folioSAM, POSFIN, CANTI, USUAR, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCantidades(folioSAM, POSFIN, CANTI, USUAR, FechaActual, HoraActual, FECENTPO);
                     break;
                 case "ActaulizarFolio":
                     ACC_Folios.ObtenerIstancia().ActualizarFolio("PV", fo.getFolioActual());
