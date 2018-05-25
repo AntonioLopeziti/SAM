@@ -65,7 +65,7 @@ public class peticionMovMateriales2 extends HttpServlet {
             po.load(getServletContext().getResourceAsStream("/WEB-INF/LanguageES.properties"));
             switch (Accion) {
                 case "ConsultaMaterial":
-                    ArrayList<materiales> mat = ACC_Material.ObtenerInstancia().ConsultaMaterialesMov(Materi, Descri, Cantid);
+                    ArrayList<materiales> mat = ACC_Material.ObtenerInstancia().ConsultaMaterialesMov(Materi, Descri, Cantid, ClaseM, Centro, Almace);
                     if (mat.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
@@ -141,6 +141,7 @@ public class peticionMovMateriales2 extends HttpServlet {
                     String Value = "";
                     String dis = "";
                     String dis2 = "";
+                    String dis3 = "";
                     if (ClaseM.trim().equals("301")) {
                         Value = "1800";
                         dis = "disabled";
@@ -148,6 +149,11 @@ public class peticionMovMateriales2 extends HttpServlet {
                     if (ClaseM.trim().equals("313")) {
                         Ctro = Centro;
                         dis2 = "disabled";
+                    }
+                    if (ClaseM.trim().equals("315")) {
+                        dis = "disabled";
+                        dis2 = "disabled";
+                        dis3 = "disabled";
                     }
                     out.println("<table id=\"TabBody301\">");
                     out.println("<tbody>");
@@ -158,7 +164,7 @@ public class peticionMovMateriales2 extends HttpServlet {
                         out.println("<td><input type=\"text\" class=\"tdSMatch\" id=\"" + ClaseM + "tdDescr" + i + "\" name=\"" + ClaseM + "DesciTD\" onfocus=\"QuitarMatch()\" readOnly/></td>");
                         out.println("<td><input type=\"text\" class=\"tdSMatch\" id=\"" + ClaseM + "tdUmedi" + i + "\" name=\"" + ClaseM + "UMediTD\" onfocus=\"QuitarMatch()\" readOnly/></td>");
                         out.println("<td><input type=\"text\" class=\"tdSMatch\" id=\"" + ClaseM + "tdCanti" + i + "\" name=\"" + ClaseM + "CantiTD\" onblur=\"this.value = checkDec(this.value, 3)\" onKeyPress=\"return soloNumeros(event)\" onfocus=\"QuitarMatch()\"/></td>");
-                        out.println("<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdLotes" + i + "\" name=\"" + ClaseM + "LotesTD\" onfocus=\"MostrarMatch('tdLotes', 'MCLote', '" + i + "')\" maxlength=\"10\" style=\"text-transform: uppercase\"/><input hidden type=\"text\" id=\"" + ClaseM + "tdDoc" + i + "\" name=\"" + ClaseM + "DocTD\"/><input hidden type=\"text\" id=\"" + ClaseM + "tdPos" + i + "\" name=\"" + ClaseM + "PosTD\"/><button id=\"" + ClaseM + "MCLote" + i + "\" onclick=\"ConsultaLotesNBuevo('" + i + "');\" name=\"" + ClaseM + "matchLote\" class='BtnMatchIconGrid'></button></td>");
+                        out.println("<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdLotes" + i + "\" name=\"" + ClaseM + "LotesTD\" onfocus=\"MostrarMatch('tdLotes', 'MCLote', '" + i + "')\" maxlength=\"10\" style=\"text-transform: uppercase\" " + dis3 + "/><input hidden type=\"text\" id=\"" + ClaseM + "tdDoc" + i + "\" name=\"" + ClaseM + "DocTD\"/><input hidden type=\"text\" id=\"" + ClaseM + "tdPos" + i + "\" name=\"" + ClaseM + "PosTD\"/><button id=\"" + ClaseM + "MCLote" + i + "\" onclick=\"ConsultaLotesNBuevo('" + i + "');\" name=\"" + ClaseM + "matchLote\" class='BtnMatchIconGrid'></button></td>");
                         out.println("<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdCentr" + i + "\" name=\"" + ClaseM + "CentrTD\" onfocus=\"MostrarMatch('tdCentr', 'MCCen', '" + i + "')\" maxlength=\"4\" style=\"text-transform: uppercase\" value=\"" + Ctro + "\" " + dis2 + "/><button id=\"" + ClaseM + "MCCen" + i + "\" onclick=\"ConsultaCentroNuevo('" + i + "')\" name=\"" + ClaseM + "matchCen\" class='BtnMatchIconGrid'></button></td>");
                         out.println("<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdAlmac" + i + "\" name=\"" + ClaseM + "AlmacTD\" onfocus=\"MostrarMatch('tdAlmac', 'MCAlm', '" + i + "')\" maxlength=\"4\" style=\"text-transform: uppercase\" value=\"" + Value + "\" " + dis + "/><button id=\"" + ClaseM + "MCAlm" + i + "\" onclick=\"ConsultaAlmaNBuevo('" + i + "')\" name=\"" + ClaseM + "matchCen\" class='BtnMatchIconGrid'></button></td>");
                         out.println("</tr>");
@@ -168,7 +174,7 @@ public class peticionMovMateriales2 extends HttpServlet {
                     out.println("</table>");
                     break;
                 case "CargarInfoMaterial":
-                    materiales min = ACC_Material.ObtenerInstancia().GetInfoMateriales(Materi);
+                    materiales min = ACC_Material.ObtenerInstancia().GetInfoMateriales(Materi, ClaseM);
                     if (min.getMaterial().trim().equals("")) {
                         out.println(0);
                     } else {
@@ -235,7 +241,7 @@ public class peticionMovMateriales2 extends HttpServlet {
                     int c;
                     for (c = 0; c < pmovs.size(); c++) {
                         String StockE = "";
-                        if(!pmovs.get(c).getNum_solped().isEmpty()){
+                        if (!pmovs.get(c).getNum_solped().isEmpty()) {
                             StockE = "E";
                         }
                         out.println("<tr>\n"
@@ -244,13 +250,13 @@ public class peticionMovMateriales2 extends HttpServlet {
                                 + "<td name=\"mmprr\">" + pmovs.get(c).getPor_recibir() + "</td>"
                                 + "<td name=\"mmumb\">" + pmovs.get(c).getUnidad_medida_base() + "</td>"
                                 + "<td name=\"mmnlt\">" + pmovs.get(c).getNuevo_lote() + "</td>"
-                                + "<td name=\"mmStEs\">"+StockE+"</td>"
+                                + "<td name=\"mmStEs\">" + StockE + "</td>"
                                 + "<td class=\"ajustar\" name=\"mmdsc\">" + pmovs.get(c).getDescripcion() + "</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
-                                + "<td name=\"mmpedid\">"+pmovs.get(c).getNum_solped()+"</td>"
-                                + "<td name=\"mmPosPed\">"+pmovs.get(c).getNum_posicion_solped()+"</td>"
+                                + "<td name=\"mmpedid\">" + pmovs.get(c).getNum_solped() + "</td>"
+                                + "<td name=\"mmPosPed\">" + pmovs.get(c).getNum_posicion_solped() + "</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
@@ -282,6 +288,24 @@ public class peticionMovMateriales2 extends HttpServlet {
                                 + "<td>&nbsp;</td>"
                                 + "</tr>");
                     }
+                    break;
+                case "CargarStockTransferencia":
+                    stock st1 = ACC_Stock.ObtenerInstancia().CargarTransfereancia313(Materi, Centro, Almace);
+                    JSONArray j3 = new JSONArray();
+                    if (st1.getMaterial().equals("")) {
+                        j3.add("");
+                        j3.add("");
+                        j3.add("");
+                        j3.add("");
+                        j3.add("");
+                    } else {
+                        j3.add(st1.getMaterial());
+                        j3.add(st1.getDescripcion());
+                        j3.add(st1.getUnidad_medida());
+                        j3.add(st1.getLote());
+                        j3.add(st1.getStock_traslado());
+                    }
+                    out.println(j3);
                     break;
             }
 
