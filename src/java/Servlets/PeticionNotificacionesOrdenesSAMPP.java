@@ -95,6 +95,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             String v11 = request.getParameter("v11");
             String v12 = request.getParameter("v12");
             String v13 = request.getParameter("v13");
+            String v14 = request.getParameter("v14");
             //Liberar Ordenes
             String operacion = request.getParameter("ope");
             String fecha = request.getParameter("fecha");
@@ -118,7 +119,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             switch (acc) {
                 case "guardaCabecera":
                     String fl = "PP" + folioActual.getFolioActual();
-                    AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().CabeceraInsertaMovNot(fl, v1, v2, horaActual, fechaActual, v3, v4, v5);
+                    AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().CabeceraInsertaMovNot(fl, v1, v2, horaActual, fechaActual, v3, v4, v5, v6, v7);
                     out.println(fl);
                     break;
                 case "guardaPos":
@@ -145,7 +146,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                             System.out.println(ccnt);
                         }
                     }
-                    AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().PosicionInsertaMovNot(fll, v1, horaActual, fechaActual, v2, v3, v4, v5, v6, v7, v8, v9, v10, v13);
+                    AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().PosicionInsertaMovNot(fll, v1, horaActual, fechaActual, v2, v3, v4, v5, v6, v7, v8, v9, v10, v13, v14);
                     break;
                 case "PonerCentro":
                     PlanPP cent = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerCntroOrden(ord);
@@ -414,7 +415,51 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                             + "</table>");
 
                     break;
-
+                case "TabOperacionesPP":
+                    int opp = 0;
+                    ArrayList<operaciones_ordenes_crea> opeO = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().MostrarTabOperaciones(ord);
+                    out.println("<table id=\"TabBodyOpe\">\n"
+                            + "<tbody>");
+                    for (opp = 0; opp < opeO.size(); opp++) {
+                        out.println("<tr>"
+                                + "<td><input onclick=\"verificarContenidoUs();\" type=\"radio\" name=\"ckOperPP\" value=\"" + opp + "\"></td>"
+                                + "<td id=\"opeNumOrd" + opp + "\">" + opeO.get(opp).getNum_orden() + "</td>"
+                                + "<td id=\"opeTxtB" + opp + "\">" + opeO.get(opp).getTexto_breve_operacion() + "</td>"
+                                + "<td id=\"opeNumOpe" + opp + "\">" + opeO.get(opp).getNum_operacion() + "</td>"
+                                + "<td id=\"opeTrabOpe" + opp + "\">" + opeO.get(opp).getTrabajo_operacion() + "</td>"
+                                + "<td id=\"opeClavCon" + opp + "\">" + opeO.get(opp).getClave_control() + "</td>"
+                                + "<td id=\"opeCantrc" + opp + "\">" + opeO.get(opp).getCantidad_rc() + "</td>"
+                                + "<td id=\"opeUMrc" + opp + "\">" + opeO.get(opp).getUnidad_medida_rc() + "</td>"
+                                + "<td id=\"opeCtr" + opp + "\">" + opeO.get(opp).getCentro() + "</td>"
+                                + "</tr>");
+                    }
+                    for(int m = opp; m < 7; m++){
+                        out.println("<tr>"
+                            + "<td>&nbsp;</td>"
+                            + "<td>&nbsp;</td>"
+                            + "<td>&nbsp;</td>"
+                            + "<td>&nbsp;</td>"
+                            + "<td>&nbsp;</td>"
+                            + "<td>&nbsp;</td>"
+                            + "<td>&nbsp;</td>"
+                            + "<td>&nbsp;</td>"
+                            + "<td>&nbsp;</td>"
+                            + "</tr>");
+                    }
+                    out.println("<tr class=\"ocultar\">"
+                            + "<td>000</td>"
+                            + "<td>00000000000</td>"
+                            + "<td>00000000000000000000000000000000000000</td>"
+                            + "<td>000000000</td>"
+                            + "<td>000000000000</td>"
+                            + "<td>000000000000</td>"
+                            + "<td>00000000000</td>"
+                            + "<td>0000</td>"
+                            + "<td>00000000</td>"
+                            + "</tr>"
+                            + "</tbody>"
+                            + "</table>");
+                    break;
                 case "SujetoLote":
                     if (ACC_Material.ObtenerInstancia().sujetoLote(v1, v2)) {
                         out.println(1);
@@ -458,6 +503,9 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     break;
                 case "TextoLargo2":
                     out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().TextoLargoP2(v1));
+                    break;
+                case "getUMoper":
+                    out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().GetUMoper(v1));
                     break;
                 case "imprimePT":
                     Zebra_noti_PT z1 = ACC_Zebra.ObtenerInstancia().DatosFaltantesCabecera(v1);
