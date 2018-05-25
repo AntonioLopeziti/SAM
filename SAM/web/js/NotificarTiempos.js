@@ -5,11 +5,12 @@
  */
 $(document).ready(function () {
     ponerUsuarioDefault();
+    AjustarCabecera('TabHeadOpe', 'TabBodyOpe', 3, 'SecCuerpoOpe');
     startTime();
 //    $('#NoPers').css('background-image', 'url(images/necesario.PNG)');
     $('#OrdFab').css('background-image', 'url(images/necesario.PNG)');
     $('#cntBuena').css('background-image', 'url(images/necesario.PNG)');
-    $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
+//    $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
     $('#aceptar').prop('disabled', true);
     $('#guardar').prop('disabled', true);
     $('#finalizar').prop('disabled', true);
@@ -31,9 +32,9 @@ $(document).ready(function () {
     $('#cntBuena').click(function () {
         $('#cntBuena').css('background-image', 'none');
     });
-    $('#cntMala').click(function () {
-        $('#cntMala').css('background-image', 'none');
-    });
+//    $('#cntMala').click(function () {
+//        $('#cntMala').css('background-image', 'none');
+//    });
     $('#NoPers').blur(function () {
         if ($('#NoPers').val().length > 0) {
             $('#NoPers').css('background-image', 'none');
@@ -46,8 +47,10 @@ $(document).ready(function () {
         var tecla = (document).all ? e.keyCode : e.which;
         if (tecla == 13) {
             validarStatusOrden();
-            verificarContenidoUs();
+//            verificarContenidoUs();
             validarOrdenLib();
+            tabOpePP($('#OrdFab').val());
+            getUmOpe();
         }
         if (tecla == 32) {
             return false;
@@ -95,12 +98,12 @@ $(document).ready(function () {
         te = String.fromCharCode(tecla);
         return patron.test(te);
     });
-    $('#cntMala').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        patron = /[0-9]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
+//    $('#cntMala').keypress(function (e) {
+//        var tecla = (document).all ? e.keyCode : e.which;
+//        patron = /[0-9]/;
+//        te = String.fromCharCode(tecla);
+//        return patron.test(te);
+//    });
     $('#NoPers').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
         if (tecla == 13) {
@@ -116,9 +119,10 @@ $(document).ready(function () {
     $('#OrdFab').blur(function () {
         if ($('#OrdFab').val().length > 0) {
             $('#OrdFab').css('background-image', 'none');
-            validarStatusOrden();
-            verificarContenidoUs();
-            validarOrdenLib();
+//            validarStatusOrden();
+//            verificarContenidoUs();
+//            validarOrdenLib();
+//            tabOpePP($('#OrdFab').val());
         } else {
             $('#OrdFab').css('background-image', 'url(images/necesario.PNG)');
         }
@@ -130,18 +134,22 @@ $(document).ready(function () {
             $('#cntBuena').css('background-image', 'url(images/necesario.PNG)');
         }
     });
-    $('#cntMala').blur(function () {
-        if ($('#cntMala').val().length > 0) {
-            $('#cntMala').css('background-image', 'none');
-        } else {
-            $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
-        }
-    });
+//    $('#cntMala').blur(function () {
+//        if ($('#cntMala').val().length > 0) {
+//            $('#cntMala').css('background-image', 'none');
+//        } else {
+//            $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
+//        }
+//    });
     $('#regresar').click(function () {
         $(location).attr('href', 'Bienvenido.jsp');
     });
     $('#OrdFab').focus(function () {
         $('#btnmatchOrdLib').show();
+        $('#OrdFab').css('background-image', 'none');
+    });
+    $('#cntBuena').focus(function () {
+        $('#cntBuena').css('background-image', 'none');
     });
     $('#OrdFab').click(function () {
         $('#btnmatchUsuarios').hide();
@@ -171,6 +179,7 @@ $(document).ready(function () {
         desbloquearCampos();
         borrarmsg();
         ponerUsuarioDefault();
+        tabOpePP("");
     });
     $("#okOrden").click(function () {
         CargarContenidoOrdFab();
@@ -183,6 +192,16 @@ $(document).ready(function () {
 function verificarContenidoUs() {
     var us = $('#NoPers').val().toUpperCase();
     var orden = $('#OrdFab').val();
+    var op;
+    var ckOpe = document.getElementsByName("ckOperPP");
+    for (i = 0; i < ckOpe.length; i++) {
+        document.getElementById("TabBodyOpe").rows[ckOpe[i].value].style.backgroundColor = "#E6EBEB";
+        if (ckOpe[i].checked) {
+            op = $("#opeNumOpe" + ckOpe[i].value).text();
+            document.getElementById("TabBodyOpe").rows[ckOpe[i].value].style.backgroundColor = "#86C3FF";
+        }
+    }
+
     var acc = "validarNotifCread";
     $.ajax({
         async: false,
@@ -190,11 +209,16 @@ function verificarContenidoUs() {
         url: 'PeticionNotificarTiemposPP',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "acc=" + acc + "&usuario=" + us + "&orden=" + orden,
+        data: "acc=" + acc + "&usuario=" + us + "&orden=" + orden + "&oper=" + op,
         success: function (data) {
             if (data == 0) {
+                $('#OrdFab').prop('disabled', false);
+                $('#cntBuena').prop('disabled', false);
+//                $('#cntMala').prop('disabled', false);
+                $('#btnInicio').prop('disabled', false);
+                $('#cntBuena').val($("#cntHID").val());
             } else {
-                revDatos(us, orden);
+                revDatos(us, orden, op);
             }
         }
     });
@@ -227,30 +251,16 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    } else if (buena == "") {
-        $('#cntBuena').focus();
-        $('#cntBuena').css('background-image', 'none');
-        $('#msg').html("Complete los campos obligatorios");
-        var icon = $('#iconmsg');
-        icon.show();
-        icon.attr('src', 'images/advertencia.PNG');
-        var BE = document.createElement('audio');
-        BE.src = 'audio/saperror.wav';
-        BE.play();
-    } else if (mala == "") {
-        $('#cntMala').focus();
-        $('#cntMala').css('background-image', 'none');
-        $('#msg').html("Complete los campos obligatorios");
-        var icon = $('#iconmsg');
-        icon.show();
-        icon.attr('src', 'images/advertencia.PNG');
-        var BE = document.createElement('audio');
-        BE.src = 'audio/saperror.wav';
-        BE.play();
-    } else if (parseInt(restante) == 0) {
-        $('#OrdFab').focus();
-        $('#OrdFab').css('background-image', 'none');
-        $('#msg').html("Orden notificada");
+    }
+    var ckOpe = document.getElementsByName("ckOperPP");
+    var bn = false;
+    for (i = 0; i < ckOpe.length; i++) {
+        if (ckOpe[i].checked) {
+            bn = true;
+        }
+    }
+    if (!bn) {
+        $('#msg').html("Seleccione una Operación");
         var icon = $('#iconmsg');
         icon.show();
         icon.attr('src', 'images/advertencia.PNG');
@@ -258,32 +268,77 @@ function validarCantidades() {
         BE.src = 'audio/saperror.wav';
         BE.play();
     } else {
-        if ($('#checkCntExceso').prop('checked')) {
-            validarDatos();
-        } else {
-            var acc = "validarCant";
-            $.ajax({
-                async: false,
-                type: 'GET',
-                url: 'PeticionNotificarTiemposPP',
-                contentType: "application/x-www-form-urlencoded",
-                processData: true,
-                data: "acc=" + acc + "&buena=" + buena + "&mala=" + mala + "&orden=" + orden,
-                success: function (data) {
-                    if (data == 0) {
-                        $('#msg').html("Las cantidades sobrepasan la cantidad total de la orden");
-                        var icon = $('#iconmsg');
-                        icon.show();
-                        icon.attr('src', 'images/advertencia.PNG');
-                        var BE = document.createElement('audio');
-                        BE.src = 'audio/saperror.wav';
-                        BE.play();
-                        $("#cntBuena").focus();
-                    } else {
-                        validarDatos();
-                    }
+        for (i = 0; i < ckOpe.length; i++) {
+            if (ckOpe[i].checked) {
+//            alert($("#opeClavCon" + ckOpe[i].value).text());
+                switch ($("#opeClavCon" + ckOpe[i].value).text()) {
+                    case "PP03":
+                        if (buena == "") {
+                            $('#cntBuena').focus();
+                            $('#cntBuena').css('background-image', 'none');
+                            $('#msg').html("Complete los campos obligatorios");
+                            var icon = $('#iconmsg');
+                            icon.show();
+                            icon.attr('src', 'images/advertencia.PNG');
+                            var BE = document.createElement('audio');
+                            BE.src = 'audio/saperror.wav';
+                            BE.play();
+                        } else if (mala == "") {
+                            $('#cntMala').val("0.000");
+//                            $('#cntMala').focus();
+//                            $('#cntMala').css('background-image', 'none');
+//                            $('#msg').html("Complete los campos obligatorios");
+//                            var icon = $('#iconmsg');
+//                            icon.show();
+//                            icon.attr('src', 'images/advertencia.PNG');
+//                            var BE = document.createElement('audio');
+//                            BE.src = 'audio/saperror.wav';
+//                            BE.play();
+                        } else if (parseInt(restante) == 0) {
+                            $('#OrdFab').focus();
+                            $('#OrdFab').css('background-image', 'none');
+                            $('#msg').html("Orden notificada");
+                            var icon = $('#iconmsg');
+                            icon.show();
+                            icon.attr('src', 'images/advertencia.PNG');
+                            var BE = document.createElement('audio');
+                            BE.src = 'audio/saperror.wav';
+                            BE.play();
+                        } else {
+                            if ($('#checkCntExceso').prop('checked')) {
+                                validarDatos();
+                            } else {
+                                var acc = "validarCant";
+                                $.ajax({
+                                    async: false,
+                                    type: 'GET',
+                                    url: 'PeticionNotificarTiemposPP',
+                                    contentType: "application/x-www-form-urlencoded",
+                                    processData: true,
+                                    data: "acc=" + acc + "&buena=" + buena + "&mala=" + mala + "&orden=" + orden,
+                                    success: function (data) {
+                                        if (data == 0) {
+                                            $('#msg').html("Las cantidades sobrepasan la cantidad total de la orden");
+                                            var icon = $('#iconmsg');
+                                            icon.show();
+                                            icon.attr('src', 'images/advertencia.PNG');
+                                            var BE = document.createElement('audio');
+                                            BE.src = 'audio/saperror.wav';
+                                            BE.play();
+                                            $("#cntBuena").focus();
+                                        } else {
+                                            validarDatos();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                        break;
+                    case "PP01":
+                        validarDatos2();
+                        break;
                 }
-            });
+            }
         }
     }
 }
@@ -292,7 +347,13 @@ function validarDatos() {
     var acc = "insertarDatos";
     var pers = $('#NoPers').val();
     var orden = $('#OrdFab').val();
-    var op = $('#selNoOp').val();
+    var op;
+    var ckOpe = document.getElementsByName("ckOperPP");
+    for (i = 0; i < ckOpe.length; i++) {
+        if (ckOpe[i].checked) {
+            op = $("#opeNumOpe" + ckOpe[i].value).text();
+        }
+    }
     var par = $('#NotParcial');
     var fin = $('#NotFinal');
     var aut = $('#NotFinalAu');
@@ -341,6 +402,72 @@ function validarDatos() {
                 BE.src = 'audio/sapmsg.wav';
                 BE.play();
                 limpiarCampos();
+                tabOpePP("");
+                ponerUsuarioDefault();
+            }
+        }
+    });
+}
+function validarDatos2() {
+    var acc = "insertarDatos";
+    var pers = $('#NoPers').val();
+    var orden = $('#OrdFab').val();
+    var op;
+    var ckOpe = document.getElementsByName("ckOperPP");
+    for (i = 0; i < ckOpe.length; i++) {
+        if (ckOpe[i].checked) {
+            op = $("#opeNumOpe" + ckOpe[i].value).text();
+        }
+    }
+    var par = $('#NotParcial');
+    var fin = $('#NotFinal');
+    var aut = $('#NotFinalAu');
+    var res = $('#CompRes');
+    var pa = "";
+    var fi = "";
+    var au = "";
+    var re = "";
+    var cntBuena = $("#cntHID").val();
+    var cntMala = "0.000";
+    if (par.prop('checked')) {
+        pa = par.val();
+    }
+    if (fin.prop('checked')) {
+        fi = fin.val();
+    }
+    if (aut.prop('checked')) {
+        au = aut.val();
+    }
+    if (res.prop('checked')) {
+        re = res.val();
+    }
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionNotificarTiemposPP',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + "&usuario=" + pers.toUpperCase() + "&orden=" + orden + "&oper=" + op + "&buena=" + cntBuena + "&mala=" + cntMala + "&parcial=" + pa + "&final=" + fi + "&autom=" + au + "&reserv=" + re,
+        success: function (data) {
+            if (data == 0) {
+                $('#msg').html("El registro no se agregó");
+                var icon = $('#iconmsg');
+                icon.show();
+                icon.attr('src', 'images/advertencia.PNG');
+                var BE = document.createElement('audio');
+                BE.src = 'audio/saperror.wav';
+                BE.play();
+            } else {
+//                $('#msg').html("Registro agregado correctamente");
+                $('#msg').html("Notificación iniciada correctamente");
+                var icon = $('#iconmsg');
+                icon.show();
+                icon.attr('src', 'images/aceptar.png');
+                var BE = document.createElement('audio');
+                BE.src = 'audio/sapmsg.wav';
+                BE.play();
+                limpiarCampos();
+                tabOpePP("");
                 ponerUsuarioDefault();
             }
         }
@@ -353,6 +480,105 @@ function validarLlenado() {
     var buena = $('#cntBuena').val();
     var mala = $('#cntMala').val();
     var orden = $('#OrdFab').val();
+    var cadena, v1 = "", v2 = "", v3 = "", v4 = "", v5 = "", v6 = "";
+    var f1 = "", f2 = "", f3 = "", f4 = "", f5 = "", f6 = "";
+    var s1 = "", s2 = "", s3 = "", s4 = "", s5 = "", s6 = "";
+    var motivo = "";
+    if (parseFloat(mala) > 0) {
+        var ckRechaz = document.getElementsByName("ckRechazoIT");
+        for (j = 0; j < ckRechaz.length; j++) {
+            if (ckRechaz[j].checked) {
+                motivo = ckRechaz[j].value;
+            }
+        }
+    }
+
+    f1 = $("#bxAct1").val();
+    f2 = $("#bxAct2").val();
+    f3 = $("#bxAct3").val();
+    f4 = $("#bxAct4").val();
+    f5 = $("#bxAct5").val();
+    f6 = $("#bxAct6").val();
+    s1 = $("#bxActUM1").val();
+    s2 = $("#bxActUM2").val();
+    s3 = $("#bxActUM3").val();
+    s4 = $("#bxActUM4").val();
+    s5 = $("#bxActUM5").val();
+    s6 = $("#bxActUM6").val();
+
+    if ($("#bxAct1").val().length > 0) {
+        v1 = "X";
+    } else {
+        f1 = "0";
+        s1 = "0";
+        v1 = "0";
+    }
+    if ($("#bxAct2").val().length > 0) {
+        v2 = "X";
+    } else {
+        f2 = "0";
+        s2 = "0";
+        v2 = "0";
+    }
+    if ($("#bxAct3").val().length > 0) {
+        v3 = "X";
+    } else {
+        f3 = "0";
+        s3 = "0";
+        v3 = "0";
+    }
+    if ($("#bxAct4").val().length > 0) {
+        v4 = "X";
+    } else {
+        f4 = "0";
+        s4 = "0";
+        v4 = "0";
+    }
+    if ($("#bxAct5").val().length > 0) {
+        v5 = "X";
+    } else {
+        f5 = "0";
+        s5 = "0";
+        v5 = "0";
+    }
+    if ($("#bxAct6").val().length > 0) {
+        v6 = "X";
+    } else {
+        f6 = "0";
+        s6 = "0";
+        v6 = "0";
+    }
+    var op;
+    var ckOpe = document.getElementsByName("ckOperPP");
+    for (k = 0; k < ckOpe.length; k++) {
+        if (ckOpe[k].checked) {
+            op = $("#opeNumOpe" + ckOpe[k].value).text();
+        }
+    }
+
+    cadena = "&v1=" + buena
+            + "&v2=" + mala
+            + "&v3=" + f1
+            + "&v4=" + s1
+            + "&v5=" + v1
+            + "&v6=" + f2
+            + "&v7=" + s2
+            + "&v8=" + v2
+            + "&v9=" + f3
+            + "&v10=" + s3
+            + "&v11=" + v3
+            + "&v12=" + f4
+            + "&v13=" + s4
+            + "&v14=" + v4
+            + "&v15=" + f5
+            + "&v16=" + s5
+            + "&v17=" + v5
+            + "&v18=" + f6
+            + "&v19=" + s6
+            + "&v20=" + v6
+            + "&v21=" + op
+            + "&v22=" + motivo;
+
     if (us == "" || ord == "" || buena == "" || mala == "") {
         $('#msg').html("Complete los campos obligatorios");
         var icon = $('#iconmsg');
@@ -368,7 +594,7 @@ function validarLlenado() {
             url: 'PeticionNotificarTiemposPP',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "acc=" + acc + "&usuario=" + us + "&orden=" + ord,
+            data: "acc=" + acc + "&usuario=" + us + "&orden=" + ord + cadena,
             success: function (data) {
                 if (data != 0) {
                     $('#msg').html("Se ha grabado la orden con el nro. de documento: " + data);
@@ -383,6 +609,8 @@ function validarLlenado() {
                     borrarDatoControl(us, ord);
                     ponerUsuarioDefault();
                     $('#btnInicio').prop('disabled', false);
+                    ocultarVentana('VentanaModalActividades', '');
+                    tabOpePP("");
 //                    $('#btnFin').prop('disabled', true);
                 } else {
                     $('#msg').html("Error al notificar la orden");
@@ -499,10 +727,10 @@ function MostrarOperaciones(orden) {
         success: function (data) {
             if (data == 0) {
 //                ErrorBusquedaMatch();
-                //$('#sectionMostOp').html("<select><option></option></select>");
+//                $('#sectionMostOp').html("<select><option></option></select>");
             } else {
-                //$('#sectionMostOp').html(data);
-                $('#NoOpe').css("visibility", false);
+//                $('#sectionMostOp').html(data);
+//                $('#NoOpe').css("visibility", false);
                 borrarmsg();
                 revisarExcesoCant(orden);
             }
@@ -530,7 +758,7 @@ function revisarExcesoCant(orden) {
         }
     });
 }
-function revDatos(usuario, orden) {
+function revDatos(usuario, orden, op) {
     var acc = "revDatosUs";
     $.ajax({
         async: false,
@@ -539,7 +767,7 @@ function revDatos(usuario, orden) {
         dataType: "json",
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "acc=" + acc + "&usuario=" + usuario + "&orden=" + orden,
+        data: "acc=" + acc + "&usuario=" + usuario + "&orden=" + orden + "&oper=" + op,
         success: function (data) {
             if (data == 0) {
 //                limpiarCampos();  
@@ -548,9 +776,9 @@ function revDatos(usuario, orden) {
                 document.getElementById("NotFinalAu").checked = false;
                 document.getElementById("CompRes").checked = false;
                 $('#OrdFab').val("");
-                $('#sectionMostOp').html("<select><option>0010</option></select>");
+//                $('#sectionMostOp').html("<select><option>0010</option></select>");
                 $('#cntBuena').val("");
-                $('#cntMala').val("");
+//                $('#cntMala').val("");
                 desbloquearCampos();
             } else {
                 var n = data;
@@ -639,14 +867,14 @@ function validarOrdenLib() {
                 $('#iconmsg').attr('src', 'images/advertencia.PNG');
                 $('#OrdFab').val("");
                 $('#cntBuena').val("");
-                $('#cntMala').val("");
+//                $('#cntMala').val("");
                 $('#OrdFab').prop("disabled", false);
                 $('#cntBuena').prop("disabled", false);
-                $('#cntMala').prop("disabled", false);
+//                $('#cntMala').prop("disabled", false);
                 $('#OrdFab').focus();
                 $('#cntBuena').css('background-image', 'url(images/necesario.PNG)');
-                $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
-                //$('#sectionMostOp').html("<select><option></option></select>");
+//                $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
+//                $('#sectionMostOp').html("<select><option></option></select>");
             } else {
                 validarOrdFab();
                 TextoLargo();
@@ -677,7 +905,7 @@ function validarOrdFab() {
                 $('#iconmsg').show();
                 $('#iconmsg').attr('src', 'images/advertencia.PNG');
                 $('#OrdFab').val("");
-                //$('#sectionMostOp').html("<select><option></option></select>");
+//                $('#sectionMostOp').html("<select><option></option></select>");
             } else {
                 revisarExcesoCant(orden);
 //                MostrarOperaciones(orden);
@@ -732,16 +960,17 @@ function limpiarCampos() {
     document.getElementById("NotFinalAu").checked = false;
     document.getElementById("CompRes").checked = false;
     $('#OrdFab').val("");
-    //$('#sectionMostOp').html("<select><option>0010</option></select>");
+//    $('#sectionMostOp').html("<select><option>0010</option></select>");
     $('#cntBuena').val("");
-    $('#cntMala').val("");
+//    $('#cntMala').val("");
     $('#sectionMuestraExc').hide();
     $('#sectionVisualExc').show();
     $('#notsta').html("");
     $('#lblTextoLargo').html("");
     $('#cntNN').html("");
     $('#cntRR').html("");
-
+    $('#lblUM').html("");
+    $("#secMala").hide();
 }
 function bloquearCampos() {
     $('#OrdFab').prop("disabled", true);
@@ -750,7 +979,7 @@ function bloquearCampos() {
     $('#NotFinalAu').prop("disabled", true);
     $('#CompRes').prop("disabled", true);
     $('#cntBuena').prop("disabled", true);
-    $('#cntMala').prop("disabled", true);
+//    $('#cntMala').prop("disabled", true);
     $('#btnInicio').prop("disabled", true);
 }
 function desbloquearCampos() {
@@ -760,13 +989,13 @@ function desbloquearCampos() {
     $('#NotFinalAu').prop("disabled", false);
     $('#CompRes').prop("disabled", false);
     $('#cntBuena').prop("disabled", false);
-    $('#cntMala').prop("disabled", false);
+//    $('#cntMala').prop("disabled", false);
     $('#btnInicio').prop('disabled', false);
 //    $('#btnFin').prop('disabled', true);
     //$('#NoPers').css('background-image', 'url(images/necesario.PNG)');
     $('#OrdFab').css('background-image', 'url(images/necesario.PNG)');
     $('#cntBuena').css('background-image', 'url(images/necesario.PNG)');
-    $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
+//    $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
     $('#btnmatchOrdLib').show();
 }
 
@@ -826,13 +1055,15 @@ function SelectOrd(obj, tipo, des) {
             $('#btnmatchOrdLib').hide();
             $('#OrdFab').css('background-image', 'none');
             $('#DescripOrd').html(des);
-            //MostrarOperaciones(obj);
+            MostrarOperaciones(obj);
             revisarExcesoCant(obj);
             TextoLargo();
             TextoLargo2();
             cantidadPT();
             ordsta();
             verificarContenidoUs();
+            tabOpePP($('#OrdFab').val());
+            getUmOpe();
             break;
     }
 }
@@ -949,17 +1180,35 @@ function selecoftabPP() {
         BE.play();
         $("#OrdFab").focus();
     } else {
-        pp1prt3FORSAMPP($("#OrdFab").val());
-        mostrarventabs("ventaPM01");
-        var theHandle = document.getElementById("handlePM01");
-        var theRoot = document.getElementById("ventaPM01");
-        Drag.init(theHandle, theRoot);
-        AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpoCld');
-        fisrtChild();
-        ajustaCantidades(0);
-        document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
-        sujetoLote();
-        obtenerLote();
+        var ckOpe = document.getElementsByName("ckOperPP");
+        for (x = 0; x < ckOpe.length; x++) {
+            if (ckOpe[x].checked) {
+//            alert($("#opeClavCon" + ckOpe[x].value).text());
+                switch ($("#opeClavCon" + ckOpe[x].value).text()) {
+                    case "PP03":
+                        pp1prt3FORSAMPP($("#OrdFab").val());
+                        mostrarventabs("ventaPM01");
+                        var theHandle = document.getElementById("handlePM01");
+                        var theRoot = document.getElementById("ventaPM01");
+                        Drag.init(theHandle, theRoot);
+                        AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpoCld');
+                        fisrtChild();
+                        ajustaCantidades(0);
+                        document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                        sujetoLote();
+                        obtenerLote();
+                        break;
+                    case "PP01":
+                        mostrarventabs("VentanaModalActividades");
+                        var theHandle = document.getElementById("handle4");
+                        var theRoot = document.getElementById("VentanaModalActividades");
+                        Drag.init(theHandle, theRoot);
+                        getActividades($("#opeTrabOpe" + ckOpe[x].value).text(), ckOpe[x].value);
+                        borrarmsg();
+                        break;
+                }
+            }
+        }
     }
 }
 
@@ -1007,6 +1256,21 @@ function pp1prt3FORSAMPP(ord) {
         data: enviar,
         success: function (data) {
             document.getElementById('SecCuerpoCld').innerHTML = data;
+        }
+    });
+}
+function tabOpePP(ord) {
+    var acc = "TabOperacionesPP";
+    var enviar = "&ord=" + ord + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: enviar,
+        success: function (data) {
+            document.getElementById('SecCuerpoOpe').innerHTML = data;
         }
     });
 }
@@ -1235,6 +1499,10 @@ function mostrarVentana(t)
 {
     switch (t) {
         case "VentanaModalLote":
+            var ven = document.getElementById(t);
+            abrirVentanaLote(ven);
+            break;
+        case "VentanaModalRechazo":
             var ven = document.getElementById(t);
             abrirVentanaLote(ven);
             break;
@@ -1471,11 +1739,19 @@ function guardaCabecera() {
     var mat = document.getElementsByName("tdMaterial");
     var centro = document.getElementsByName("tdCentro");
     var cl = document.getElementsByName("tdClaseM");
+    var buena = document.getElementById("cntBuena").value;
+    var op;
+    var ckOpe = document.getElementsByName("ckOperPP");
+    for (i = 0; i < ckOpe.length; i++) {
+        if (ckOpe[i].checked) {
+            op = $("#opeNumOpe" + ckOpe[i].value).text();
+        }
+    }
 
 //    if (cl[0].textContent == "101") {
     var acc = "guardaCabecera";
 
-    var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + mat[0].textContent + "&v3=" + centro[0].textContent + "&v4=" + cl[0].textContent + "&v5=" + $("#NoPers").val();
+    var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + mat[0].textContent + "&v3=" + centro[0].textContent + "&v4=" + cl[0].textContent + "&v5=" + $("#NoPers").val() + "&v6=" + op + "&v7=" + buena;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1543,13 +1819,20 @@ function guardaPos() {
     var pos = document.getElementsByName("bxNpos");
 
     var tabix = 0;
+    var op;
+    var ckOpe = document.getElementsByName("ckOperPP");
+    for (z = 0; z < ckOpe.length; z++) {
+        if (ckOpe[z].checked) {
+            op = $("#opeNumOpe" + ckOpe[z].value).text();
+        }
+    }
 
     for (i = 0; i < mat.length; i++) {
 //        tabix = parseInt(i);
 //        if (i == 0) {
         tabix = parseInt(i + 1);
 //        }
-        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + tabix + "&v3=" + mat[i].textContent + "&v4=" + cant[i].value + "&v5=" + um[i].textContent + "&v6=" + lote[i].value.toUpperCase() + "&v7=" + centro[i].textContent + "&v8=" + cl[i].textContent + "&v9=" + lm[i].value + "&v10=" + ee[i].value + "&v11=" + ped[i].value + "&v12=" + pos[i].value + "&v13=" + ancho[i].value;
+        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + tabix + "&v3=" + mat[i].textContent + "&v4=" + cant[i].value + "&v5=" + um[i].textContent + "&v6=" + lote[i].value.toUpperCase() + "&v7=" + centro[i].textContent + "&v8=" + cl[i].textContent + "&v9=" + lm[i].value + "&v10=" + ee[i].value + "&v11=" + ped[i].value + "&v12=" + pos[i].value + "&v13=" + ancho[i].value + "&v14=" + op;
         $.ajax({
             async: false,
             type: 'GET',
@@ -1560,7 +1843,7 @@ function guardaPos() {
             success: function (data) {
                 if (i == mat.length - 1) {
 //                    guardaCabecera2();
-                    Print_PT();
+//                    Print_PT();
                     ocultarVentana('ventaPM01', '');
 //                    $('#LimPantalla').trigger('click');
 //                    updateFolio();
@@ -1613,7 +1896,39 @@ function Print_PT() {
     }
 }
 function motivoRechazo() {
+    if (document.getElementById("OrdFab").disabled == true) {
+        var ckOpe = document.getElementsByName("ckOperPP");
+        for (i = 0; i < ckOpe.length; i++) {
+            if (ckOpe[i].checked) {
+                if ($("#opeClavCon" + ckOpe[i].value).text() == "PP03") {
+                    mostrarVentana('VentanaModalRechazo');
+                    var theHandle = document.getElementById('handle3');
+                    var theRoot = document.getElementById('VentanaModalRechazo');
+                    Drag.init(theHandle, theRoot);
+                    getMotivosRC();
+                } else {
+                    $('#msg').html("Operación no valida");
+                    var icon = $('#iconmsg');
+                    icon.show();
+                    icon.attr('src', 'images/advertencia.PNG');
+                    var BE = document.createElement('audio');
+                    BE.src = 'audio/saperror.wav';
+                    BE.play();
+                }
+            }
+        }
 
+    } else {
+        $('#OrdFab').focus();
+        $('#OrdFab').css('background-image', 'none');
+        $('#msg').html("No se ha iniciado ninguna actividad");
+        var icon = $('#iconmsg');
+        icon.show();
+        icon.attr('src', 'images/advertencia.PNG');
+        var BE = document.createElement('audio');
+        BE.src = 'audio/saperror.wav';
+        BE.play();
+    }
 }
 
 function addPos() {
@@ -1704,4 +2019,240 @@ function AgregaPos(pos)
         table.rows[r1.length - 1].cells[1].style.display = "none";
         sujetoLote();
     }
+}
+
+function ValidaRechazo() {
+    if ($("#bxcntRechazo").val() == "") {
+        $("#bxcntRechazo").focus();
+        $('#msg').html("Cantidad obligatoria");
+        var icon = $('#iconmsg');
+        icon.show();
+        icon.attr('src', 'images/advertencia.PNG');
+        var BE = document.createElement('audio');
+        BE.src = 'audio/saperror.wav';
+        BE.play();
+        return;
+    }
+    var ban = false;
+    var ckOpe = document.getElementsByName("ckRechazoIT");
+    for (i = 0; i < ckOpe.length; i++) {
+        if (ckOpe[i].checked) {
+            ban = true;
+            if (parseFloat(document.getElementById("bxcntRechazo").value) < parseFloat(document.getElementById("cntBuena").value)) {
+                var tx1 = parseFloat($("#cntMala").val()) + parseFloat($("#bxcntRechazo").val());
+                var tx2 = parseFloat($("#cntBuena").val()) - parseFloat($("#bxcntRechazo").val());
+                $("#cntBuena").val(tx2.toFixed(3));
+                $("#cntMala").val(tx1.toFixed(3));
+                ocultarVentana('VentanaModalRechazo', '');
+                $("#secMala").show();
+            } else {
+                $("#bxcntRechazo").focus();
+                $('#msg').html("Cantidad no valida");
+                var icon = $('#iconmsg');
+                icon.show();
+                icon.attr('src', 'images/advertencia.PNG');
+                var BE = document.createElement('audio');
+                BE.src = 'audio/saperror.wav';
+                BE.play();
+            }
+        }
+    }
+    if (!ban) {
+        $('#msg').html("Seleccione una opción");
+        var icon = $('#iconmsg');
+        icon.show();
+        icon.attr('src', 'images/advertencia.PNG');
+        var BE = document.createElement('audio');
+        BE.src = 'audio/saperror.wav';
+        BE.play();
+    }
+}
+
+function getActividades(puesto, pos) {
+    var acc = "getActividades";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionNotificarTiemposPP',
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + "&v1=" + puesto,
+        success: function (data) {
+            var n = data;
+            $("#lblAct1").html(n[0]);
+            $("#lblAct2").html(n[1]);
+            $("#lblAct3").html(n[2]);
+            $("#lblAct4").html(n[3]);
+            $("#lblAct5").html(n[4]);
+            $("#lblAct6").html(n[5]);
+            if (n[6] == "X") {
+                $('#bxAct1').prop('disabled', true);
+                $('#bxActUM1').val("");
+            } else {
+                $('#bxAct1').prop('disabled', false);
+                $('#bxAct1').val($("#opeCantrc" + pos).text());
+                $('#bxActUM1').val($("#opeUMrc" + pos).text());
+            }
+            if (n[7] == "X") {
+                $('#bxAct2').prop('disabled', true);
+                $('#bxActUM2').val("");
+            } else {
+                $('#bxAct2').prop('disabled', false);
+                $('#bxAct2').val($("#opeCantrc" + pos).text());
+                $('#bxActUM2').val($("#opeUMrc" + pos).text());
+            }
+            if (n[8] == "X") {
+                $('#bxAct3').prop('disabled', true);
+                $('#bxActUM3').val("");
+            } else {
+                $('#bxAct3').prop('disabled', false);
+                $('#bxAct3').val($("#opeCantrc" + pos).text());
+                $('#bxActUM3').val($("#opeUMrc" + pos).text());
+            }
+            if (n[9] == "X") {
+                $('#bxAct4').prop('disabled', true);
+                $('#bxActUM4').val("");
+            } else {
+                $('#bxAct4').prop('disabled', false);
+                $('#bxAct4').val($("#opeCantrc" + pos).text());
+                $('#bxActUM4').val($("#opeUMrc" + pos).text());
+            }
+            if (n[10] == "X") {
+                $('#bxAct5').prop('disabled', true);
+                $('#bxActUM5').val("");
+            } else {
+                $('#bxAct5').prop('disabled', false);
+                $('#bxAct5').val($("#opeCantrc" + pos).text());
+                $('#bxActUM5').val($("#opeUMrc" + pos).text());
+            }
+            if (n[11] == "X") {
+                $('#bxAct6').prop('disabled', true);
+                $('#bxActUM6').val("");
+            } else {
+                $('#bxAct6').prop('disabled', false);
+                $('#bxAct6').val($("#opeCantrc" + pos).text());
+                $('#bxActUM6').val($("#opeUMrc" + pos).text());
+            }
+        }
+    });
+}
+function finTiempos() {
+    if (document.getElementById("bxAct1").disabled == false) {
+        if (document.getElementById("bxAct1").value.length < 1) {
+            $('#bxAct1').focus();
+            $('#msg').html("Cantidad obligatoria");
+            var icon = $('#iconmsg');
+            icon.show();
+            icon.attr('src', 'images/advertencia.PNG');
+            var BE = document.createElement('audio');
+            BE.src = 'audio/saperror.wav';
+            BE.play();
+            return;
+        }
+    }
+    if (document.getElementById("bxAct2").disabled == false) {
+        if (document.getElementById("bxAct2").value.length < 1) {
+            $('#bxAct2').focus();
+            $('#msg').html("Cantidad obligatoria");
+            var icon = $('#iconmsg');
+            icon.show();
+            icon.attr('src', 'images/advertencia.PNG');
+            var BE = document.createElement('audio');
+            BE.src = 'audio/saperror.wav';
+            BE.play();
+            return;
+        }
+    }
+    if (document.getElementById("bxAct3").disabled == false) {
+        if (document.getElementById("bxAct3").value.length < 1) {
+            $('#bxAct3').focus();
+            $('#msg').html("Cantidad obligatoria");
+            var icon = $('#iconmsg');
+            icon.show();
+            icon.attr('src', 'images/advertencia.PNG');
+            var BE = document.createElement('audio');
+            BE.src = 'audio/saperror.wav';
+            BE.play();
+            return;
+        }
+    }
+    if (document.getElementById("bxAct4").disabled == false) {
+        if (document.getElementById("bxAct4").value.length < 1) {
+            $('#bxAct4').focus();
+            $('#msg').html("Cantidad obligatoria");
+            var icon = $('#iconmsg');
+            icon.show();
+            icon.attr('src', 'images/advertencia.PNG');
+            var BE = document.createElement('audio');
+            BE.src = 'audio/saperror.wav';
+            BE.play();
+            return;
+        }
+    }
+    if (document.getElementById("bxAct5").disabled == false) {
+        if (document.getElementById("bxAct5").value.length < 1) {
+            $('#bxAct5').focus();
+            $('#msg').html("Cantidad obligatoria");
+            var icon = $('#iconmsg');
+            icon.show();
+            icon.attr('src', 'images/advertencia.PNG');
+            var BE = document.createElement('audio');
+            BE.src = 'audio/saperror.wav';
+            BE.play();
+            return;
+        }
+    }
+    if (document.getElementById("bxAct6").disabled == false) {
+        if (document.getElementById("bxAct6").value.length < 1) {
+            $('#bxAct6').focus();
+            $('#msg').html("Cantidad obligatoria");
+            var icon = $('#iconmsg');
+            icon.show();
+            icon.attr('src', 'images/advertencia.PNG');
+            var BE = document.createElement('audio');
+            BE.src = 'audio/saperror.wav';
+            BE.play();
+            return;
+        }
+    }
+    validarLlenado();
+}
+function getUmOpe() {
+    var acc = "getUMoper";
+
+    var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            $("#lblUM").text(data);
+        }
+    });
+}
+function getMotivosRC() {
+    var acc = "getMotivosRC";
+    var op;
+    var ckOpe = document.getElementsByName("ckOperPP");
+    for (w = 0; w < ckOpe.length; w++) {
+        if (ckOpe[w].checked) {
+            op = $("#opeCtr" + ckOpe[w].value).text();
+        }
+    }
+    var send = "&v1=" + op + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificarTiemposPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            $("#bkRechazos").html(data);
+        }
+    });
 }
