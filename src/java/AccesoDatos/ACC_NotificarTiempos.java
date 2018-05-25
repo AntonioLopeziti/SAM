@@ -6,7 +6,9 @@
 package AccesoDatos;
 
 import Entidades.CabNotTiempo;
+import Entidades.texto_actividades;
 import Entidades.ControlListaOrdenes;
+import Entidades.MotivosRechazo;
 import Entidades.control_tiempos;
 import Entidades.OrdenesOperaciones;
 import Entidades.PlanPP;
@@ -54,7 +56,30 @@ public class ACC_NotificarTiempos {
         }
         return cl;
     }
-
+    public ArrayList<MotivosRechazo> GetMotivosRC(String centro) {
+        ArrayList<MotivosRechazo> cl = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "{CALL PP.getMotivoRC(?)}";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, centro);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                MotivosRechazo cont = new MotivosRechazo();
+                cont.setMotivo(rs.getString("motivo"));
+                cl.add(cont);
+            }
+        } catch (Exception e) {
+            System.err.println("Error en Consultar GetMotivosRC, ACC_NotificarTiempos por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return cl;
+    }
+    
     //Consultar ordenes de fabricacion por match
     public ArrayList<PlanPP> ConsultarOrdenesFabPP(String matchOr, String matchTxt, String matchCnt) {
         ArrayList<PlanPP> pl = new ArrayList<>();
@@ -84,17 +109,18 @@ public class ACC_NotificarTiempos {
     }
 
     //Verificar y cargar datos por Usuario
-    public control_tiempos CargarDatosPorUs(String usuario, String orden) {
+    public control_tiempos CargarDatosPorUs(String usuario, String orden, String operacion) {
         control_tiempos ct = new control_tiempos();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "{CALL PP.NotTiempos_CargarDatosPorUsuario(?,?)}";
+        String query = "{CALL PP.NotTiempos_CargarDatosPorUsuario(?,?,?)}";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, usuario);
             ps.setString(2, orden);
+            ps.setString(3, operacion);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ct.setNo_personal(rs.getString("no_personal"));
@@ -106,6 +132,38 @@ public class ACC_NotificarTiempos {
                 ct.setNum_op(rs.getString("num_op"));
                 ct.setCtd_buena(rs.getString("ctd_buena"));
                 ct.setCtd_mala(rs.getString("ctd_mala"));
+            }
+        } catch (Exception e) {
+            System.err.println("Error en Consultar Datos Usuario, ACC_NotificarTiempos por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ct;
+    }
+    public texto_actividades obtenerTextosAct(String puesto) {
+        texto_actividades ct = new texto_actividades();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        ResultSet rs;
+        String query = "{CALL PP.actividadesPuestoTrabajo(?)}";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, puesto);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ct.setTexto_actividad1(rs.getString("texto_actividad1"));
+                ct.setTexto_actividad2(rs.getString("texto_actividad2"));
+                ct.setTexto_actividad3(rs.getString("texto_actividad3"));
+                ct.setTexto_actividad4(rs.getString("texto_actividad4"));
+                ct.setTexto_actividad5(rs.getString("texto_actividad5"));
+                ct.setTexto_actividad6(rs.getString("texto_actividad6"));
+                ct.setIndicador_visualiza1(rs.getString("indicador_visualiza1"));
+                ct.setIndicador_visualiza2(rs.getString("indicador_visualiza2"));
+                ct.setIndicador_visualiza3(rs.getString("indicador_visualiza3"));
+                ct.setIndicador_visualiza4(rs.getString("indicador_visualiza4"));
+                ct.setIndicador_visualiza5(rs.getString("indicador_visualiza5"));
+                ct.setIndicador_visualiza6(rs.getString("indicador_visualiza6"));
             }
         } catch (Exception e) {
             System.err.println("Error en Consultar Datos Usuario, ACC_NotificarTiempos por: " + e);
@@ -187,17 +245,18 @@ public class ACC_NotificarTiempos {
         }
         return ban;
     }
-    public int ValidarNotifCreada(String us, String orden){
+    public int ValidarNotifCreada(String us, String orden, String operacion){
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps;
         ResultSet rs;
         int ban = 0;
-        String query = "{CALL PP.NotTiempo_ValidarNotifCreada(?,?)}";
+        String query = "{CALL PP.NotTiempo_ValidarNotifCreada(?,?,?)}";
         try{
             ps = con.prepareStatement(query);
             ps.setString(1, us);
             ps.setString(2, orden);
+            ps.setString(3, operacion);
             rs = ps.executeQuery();
             while(rs.next()){
                 ban = 1;
@@ -283,28 +342,59 @@ public class ACC_NotificarTiempos {
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         Boolean ban = false;
-        String query = "{CALL PP.NotTiempo_InsertarRegistroPosNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL PP.NotTiempo_InsertarRegistroPosNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, posno.getNum_orden());
-            ps.setString(2, posno.getCont_not());
-            ps.setString(3, posno.getFolio_not_tiemp());
-            ps.setString(4, posno.getFecha_offline());
-            ps.setString(5, posno.getHora_offline());
-            ps.setString(6, posno.getNum_material());            
+            ps.setString(2, posno.getNum_operacion());
+            ps.setString(3, posno.getNum_notificacion());
+            ps.setString(4, posno.getFolio_sam());
+            ps.setString(5, posno.getClase_orden());
+            ps.setString(6, posno.getPuesto_trabajo());
             ps.setString(7, posno.getCentro());
-            ps.setString(8, posno.getActiv_not_par());
-            ps.setString(9, posno.getActiv_not_final());
-            ps.setString(10, posno.getNot_final());
-            ps.setString(11, posno.getComp_reservas());
-            ps.setString(12, posno.getCant_buena());
-            ps.setString(13, posno.getRechazo_notif());
-            ps.setString(14, posno.getNum_personal());
-            ps.setString(15, posno.getFecha_inic_notificada_ej());
-            ps.setString(16, posno.getHora_notificada_inic_ej());
-            ps.setString(17, posno.getFecha_fin_notificada_ej());
-            ps.setString(18, posno.getHora_notificada_fin_ej());
-            ps.setString(19, posno.getUnidad_medida());
+            ps.setString(8, posno.getMaterial());
+            ps.setString(9, posno.getTexto_breve());
+            ps.setString(10, posno.getNum_notificacion_sam());
+            ps.setString(11, posno.getNotificacion_parcial());
+            ps.setString(12, posno.getCompensar());
+            ps.setString(13, posno.getCantidad_buena());
+            ps.setString(14, posno.getUnidad_medida());
+            ps.setString(15, posno.getRechazo());
+            ps.setString(16, posno.getCantidad_trabajo());
+            ps.setString(17, posno.getMotivo_desviacion());
+            ps.setString(18, posno.getActividad_notificar1());
+            ps.setString(19, posno.getUnidad_medida_notificar1());
+            ps.setString(20, posno.getIndicador_actividad1());
+            ps.setString(21, posno.getActividad_notificar2());
+            ps.setString(22, posno.getUnidad_medida_notificar2());
+            ps.setString(23, posno.getIndicador_actividad2());
+            ps.setString(24, posno.getActividad_notificar3());
+            ps.setString(25, posno.getUnidad_medida_notificar3());
+            ps.setString(26, posno.getIndicador_actividad3());
+            ps.setString(27, posno.getActividad_notificar4());
+            ps.setString(28, posno.getUnidad_medida_notificar4());
+            ps.setString(29, posno.getIndicador_actividad4());
+            ps.setString(30, posno.getActividad_notificar5());
+            ps.setString(31, posno.getUnidad_medida_notificar5());
+            ps.setString(32, posno.getIndicador_actividad5());
+            ps.setString(33, posno.getActividad_notificar6());
+            ps.setString(34, posno.getUnidad_medida_notificar6());
+            ps.setString(35, posno.getIndicador_actividad6());
+            ps.setString(36, posno.getNum_personal());
+            ps.setString(37, posno.getFecha_inicio());
+            ps.setString(38, posno.getHora_inicio());
+            ps.setString(39, posno.getFecha_fin());
+            ps.setString(40, posno.getHora_fin());
+            ps.setString(41, posno.getFecha_contabilizacion());
+            ps.setString(42, posno.getTexto_notificacion());
+            ps.setString(43, posno.getUsuario());
+            ps.setString(44, posno.getRecibido());
+            ps.setString(45, posno.getProcesado());
+            ps.setString(46, posno.getFecha_recibido());
+            ps.setString(47, posno.getHora_recibido());
+            ps.setString(48, posno.getMensaje());
+            ps.setString(49, posno.getMotivo());
+            
             if (ps.executeUpdate() == 1) {
                 ban = true;
             }
@@ -382,7 +472,7 @@ public class ACC_NotificarTiempos {
             ps.setString(4, "X");
             ps.setString(5, "");
             ps.setString(6, res.getOrden_fab());
-            ps.setString(7, "0010");
+            ps.setString(7, res.getNum_op());
             ps.setString(8, res.getCtd_buena());
             ps.setString(9, res.getCtd_mala());
             ps.setString(10, res.getHora());
@@ -467,22 +557,24 @@ public class ACC_NotificarTiempos {
         return cnTi;
     }
 
-    public PlanPP ObtenerDatosPlan(String orden) {
+    public PlanPP ObtenerDatosPlan(String orden, String ope) {
         PlanPP plan = new PlanPP();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "{CALL PP.NotTiempo_ObtenerDatosMatCen(?)}";
+        String query = "{CALL PP.NotTiempo_ObtenerDatosMatCen(?,?)}";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, orden);
+            ps.setString(2, ope);
             rs = ps.executeQuery();
             while (rs.next()) {
                 plan.setNum_material(rs.getString("num_material"));
                 plan.setCentro(rs.getString("centro"));
                 plan.setContador_notificacion(rs.getString("contador_notificacion"));
                 plan.setUnidad_medida(rs.getString("unidad_medida_base"));
+                plan.setPuesto_trabajo_responsable(rs.getString("puesto_trabajo"));
             }
         } catch (Exception e) {
             System.err.println("Error en Consultar Datos Usuario, ACC_NotificarTiempos por: " + e);
