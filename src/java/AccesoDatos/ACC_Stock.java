@@ -1170,6 +1170,35 @@ public class ACC_Stock {
         }
         return 1;
     }
+    public int ConsultaLoteStockE(String mat, String cantidad, String centro, String almacen, String lote, String doc, String po) {
+        double cnt = 0.000;
+        String query;
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        query = "{call MM.consultaLotesEE_MOM(?,?,?,?,?,?)}";
+        try {
+            PreparedStatement sp = con.prepareStatement(query);
+            sp.setString(1, mat);
+            sp.setString(2, centro);
+            sp.setString(3, almacen);
+            sp.setString(4, lote);
+            sp.setString(5, doc);
+            sp.setString(6, po);
+            ResultSet rs = sp.executeQuery();
+            while (rs.next()) {
+                cnt = Double.parseDouble(rs.getString("stocklibre_utilizacion"));
+            }
+            double cc = Double.parseDouble(cantidad);
+            if (cc > cnt) {
+                return 0;
+            }
+        } catch (Exception ex) {
+            System.err.println("Error: " + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return 1;
+    }
 
     public int ConsultaLote2(String mat, String centro, String almacen) {
         String query;
