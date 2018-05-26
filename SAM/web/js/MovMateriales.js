@@ -3810,7 +3810,7 @@ function validarCantiExcedida(mat, centro, alm, lote, cant) {
             if (data != "X") {
                 var can2 = parseFloat(data);
                 var can1 = parseFloat(cant);
-                if (can1 < can2) {
+                if (can1 <= can2) {
                     x = false;
                 }
             }else{
