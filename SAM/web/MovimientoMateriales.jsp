@@ -3586,7 +3586,7 @@
                                 }
                             }
                         };
-                        xmlhttp.open("GET", "PeticionMovMateriales?Action=" + action + "&v1=" + material + "&v2=" + UM + "&v3=" + cantidad + "&v4=" + centro + "&v5=" + almacen + "&lote=" + lote + "&v6=" + AlmDes + "&v7=" + movimiento, true);
+                        xmlhttp.open("GET", "PeticionMovMateriales?Action=" + action + "&v1=" + material + "&v2=" + UM + "&v3=" + cantidad + "&v4=" + centro + "&v5=" + almacen + "&lote=" + lote + "&v6=" + AlmDes + "&v7=" + movimiento + "&DocEE=" + Doclo + "&docPEE=" + Docpos, true);
                         xmlhttp.send();
                     }
                     function cantconvert(valor) {
