@@ -3445,6 +3445,8 @@
                         var UM = document.getElementById('bxUM311').value.toUpperCase();
                         var lote = document.getElementById('bxLote311').value.toUpperCase();
                         var AlmDes = document.getElementById('bxAlmacen311').value.toUpperCase();
+                        var Doclo = document.getElementById('bxDoc311').value;
+                        var Docpos = document.getElementById('bxDocPos311').value;
 
                         var centro = document.getElementById('bxCentro').value.toUpperCase();
                         var almacen = document.getElementById('bxAlmacen').value.toUpperCase();
@@ -3562,7 +3564,7 @@
                                                             "&v5=" + texto + "&almacen=" + AlmDes +
                                                             "&v7=" + centro + "&clase=" + clas +
                                                             "&v8=" + pp + "&v9=" + movimiento +
-                                                            "&v12=" + pos_;
+                                                            "&v12=" + pos_ + "&doclote=" + Doclo + "&docposlote=" + Docpos;
                                                     Tabla200('VentanaModal311', extr);
                                                     var ven = document.getElementById('VentanaModalAv');
                                                     var msg = "Posición añadida correctamente";
