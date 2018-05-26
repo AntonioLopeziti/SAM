@@ -5094,6 +5094,19 @@
                                     extrass += "&v2=" + lote.length + "&v3=" + tmov + "&v4=" + lang;
                                     Lote301(extrass, tt, extra, cad, "Movimiento313");
                                     break;
+                                case "315":
+                                    var extrass = "&v1=";
+                                    var lang = "<%=Idioma%>";
+                                    for (i = 0; i < lote.length; i++)
+                                    {
+                                        extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
+                                                "," + almacen + "," + almacen + "," + cdese[i].textContent + 
+                                                "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
+                                    }
+                                    extrass = extrass.substring(0, extrass.length - 1);
+                                    extrass += "&v2=" + lote.length + "&v3=" + tmov + "&v4=" + lang;
+                                    Lote301(extrass, tt, extra, cad, "Movimiento315");
+                                    break;
                             }
 
                         }
@@ -5497,6 +5510,7 @@
                                         case "311":
                                         case "301":
                                         case "313":
+                                        case "315":
                                             Guarda310(extrass, acc);
                                             break;
                                     }
