@@ -90,6 +90,8 @@ public class PeticionMovMateriales extends HttpServlet {
             String Idioma = (String) session.getAttribute("Idioma");
             String fechaActual = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
             String horaActual = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
+            String docEE = request.getParameter("DocEE");
+            String docPEE = request.getParameter("DocPEE");
 
             switch (accion) {
                 case "VentanaModalCentro":
@@ -517,8 +519,13 @@ public class PeticionMovMateriales extends HttpServlet {
                         out.println(rs + ",Cantidad en Lote o Almacén no suficiente,1,0");
                     }
                     if ((v7.equals("201") || v7.equals("311") || v7.equals("303") || v7.equals("261")) && lote.equals("")) {
-                        int rs = ACC_Stock.ObtenerInstancia().ConsultaLote(v1, v3, v4, v5, lote);
-                        out.println(rs + ",Cantidad en Almacén no suficiente,1,0");
+                        if (docEE.equals("")) {
+                             int rs = ACC_Stock.ObtenerInstancia().ConsultaLote(v1, v3, v4, v5, lote);
+                            out.println(rs + ",Cantidad en Almacén Stock Especial no suficiente,1,0");
+                        } else {
+                            int rs = ACC_Stock.ObtenerInstancia().ConsultaLote(v1, v3, v4, v5, lote);
+                            out.println(rs + ",Cantidad en Almacén no suficiente,1,0");
+                        }
                     }
                     if (v7.equals("312") && !lote.equals("")) {
                         int rs = ACC_Stock.ObtenerInstancia().ConsultaLote(v1, v3, v4, v6, lote);
@@ -749,7 +756,7 @@ public class PeticionMovMateriales extends HttpServlet {
                 case "GetTolearanciaConf":
                     String pedt = request.getParameter("pedidotol");
                     String post = request.getParameter("postol");
-                    String Tol = Consultas.ObtenerInstancia().GetTolerancia(pedt,post);
+                    String Tol = Consultas.ObtenerInstancia().GetTolerancia(pedt, post);
                     out.println(Tol);
                     break;
                 case "DocMovimiento102":
@@ -956,10 +963,10 @@ public class PeticionMovMateriales extends HttpServlet {
                     }
                     break;
                 case "insertarDataFile":
-                        DocumentosDMSenvio doc = new DocumentosDMSenvio();
+                    DocumentosDMSenvio doc = new DocumentosDMSenvio();
                     folios fo = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("MO");
                     int fa = fo.getFolioActual();
-                    doc.setFolio_dms("MO"+fa);
+                    doc.setFolio_dms("MO" + fa);
                     doc.setTabix(v1);
                     doc.setFecha(fechaActual);
                     doc.setHora_dia(horaActual);
