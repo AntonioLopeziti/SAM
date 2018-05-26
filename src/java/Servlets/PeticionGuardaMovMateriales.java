@@ -482,6 +482,11 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", us);
                     out.println(1);
                     break;
+                case "Guarda315Cabecera":
+                    fl = "MO" + fo.getFolioActual();
+                    Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", us);
+                    out.println(1);
+                    break;
                 case "Guarda101Posiciones":
                     String n = "";
                     for (int i = v8.length(); i < 5; i++) {
@@ -578,6 +583,10 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                 case "Guarda313Posiciones":
                     fl = "MO" + fo.getFolioActual();
                     Consultas.ObtenerInstancia().PosicionesCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", v10, "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21);
+                    break;
+                case "Guarda315Posiciones":
+                    fl = "MO" + fo.getFolioActual();
+                    Consultas.ObtenerInstancia().PosicionesCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", v12, "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21);
                     break;
                 case "Lote101Posiciones":
                     int cl1 = Integer.parseInt(v2);
@@ -920,6 +929,51 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                         }
 
                         out.println(2 + "," + rtnnk);
+                    } catch (Exception e) {
+                        System.err.println("Error: " + e);
+                    }
+                    break;
+                case "Movimiento315":
+                    DecimalFormat dfkj = new DecimalFormat("#.000");
+                    String orikj,
+                     deskj;
+                    Double origenkj,
+                     destinokj;
+                    String rtnnkj = "";
+                    int cc3kj = Integer.parseInt(v2);
+                    int ppr3kj = 0;
+                    String[][] M311kj = new String[cc3kj][11];
+                    String[] parts3kj = v1.split(",");
+                    try {
+                        for (int f = 0; f < cc3kj; f++) {
+                            for (c = 0; c < 11; c++) {
+                                M311kj[f][c] = parts3kj[ppr3kj];
+                                ppr3kj++;
+                            }
+                        }
+                        for (int i = 0; i < cc3kj; i++) {
+                            if (M311kj[i][9].equals("E")) {
+                                origenkj = ACC_Stock.ObtenerInstancia().StockLibreE(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4], M311kj[i][7], M311kj[i][8]) + Double.parseDouble(M311kj[i][1]);
+                                destinokj = ACC_Stock.ObtenerInstancia().StockLibreET(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4], M311kj[i][7], M311kj[i][8]) - Double.parseDouble(M311kj[i][1]);
+                                orikj = dfkj.format(origenkj);
+                                deskj = dfkj.format(destinokj);
+                                //Oriden
+                                ACC_Stock.ObtenerInstancia().ActualizaInvE(M311kj[i][2], M311kj[i][0], M311kj[i][3], orikj, M311kj[i][4], M311kj[i][7], M311kj[i][8]);
+                                //Destino
+                                ACC_Stock.ObtenerInstancia().ActualizaInvET(M311kj[i][2], M311kj[i][0], M311kj[i][3], deskj, M311kj[i][4], M311kj[i][7], M311kj[i][8]);
+                            } else {
+                                origenkj = ACC_Stock.ObtenerInstancia().StockLibre(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4]) + Double.parseDouble(M311kj[i][1]);
+                                destinokj = ACC_Stock.ObtenerInstancia().StockLibreT(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4]) - Double.parseDouble(M311kj[i][1]);
+                                orikj = dfkj.format(origenkj);
+                                deskj = dfkj.format(destinokj);
+                                //Oriden
+                                ACC_Stock.ObtenerInstancia().ActualizaInv(M311kj[i][2], M311kj[i][0], M311kj[i][3], orikj, M311kj[i][4]);
+                                //Destino
+                                ACC_Stock.ObtenerInstancia().ActualizaInvT(M311kj[i][2], M311kj[i][0], M311kj[i][3], deskj, M311kj[i][4]);
+                            }
+                        }
+
+                        out.println(2 + "," + rtnnkj);
                     } catch (Exception e) {
                         System.err.println("Error: " + e);
                     }
