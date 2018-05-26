@@ -556,6 +556,8 @@
                             <hr>
                             <label><%out.println(po.getProperty("etiqueta.LoteDocVLD"));%></label>
                             <input type="text" class="bxMMD200" id="bxLote311" style="text-transform: uppercase;" maxlength="10">
+                            <input type="text" hidden id="bxDoc311">
+                            <input type="text" hidden id="bxDocPos311">
                             <button id="btnLot311" class='BtnMatchIcon'></button>
                             <hr>
                             <!--<span class="lb311">
