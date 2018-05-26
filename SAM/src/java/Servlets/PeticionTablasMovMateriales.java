@@ -67,6 +67,9 @@ public class PeticionTablasMovMateriales extends HttpServlet {
             pp.setNum_doc_compras(request.getParameter("v10"));
             pp.setNum_cuenta_proveedor(request.getParameter("v11"));//Num posición 
             pp.setNum_posicion_solped(request.getParameter("v12"));
+            
+            String Doculot = request.getParameter("doclote");
+            String Docposlot = request.getParameter("docposlote");
 
             String accion = request.getParameter("Action");
             String almacen = request.getParameter("almacen");
@@ -759,7 +762,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                 case "VentanaModal311312":
                 case "VentanaModal311311":
 
-                    LinkedList<pedido_detalle> p3 = ACC_Pedidos.ObtenerInstancia().Ingresa310(pp, us);
+                    LinkedList<pedido_detalle> p3 = ACC_Pedidos.ObtenerInstancia().Ingresa310(pp, us, Doculot, Docposlot);
                     out.println("<table class=\"TablaCont\" id=\"TablaMov\">\n"
                             + "                                    <tr id=\"CabeceraTabla\">\n"
                             + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
@@ -785,19 +788,23 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                             + "                                    </tr> \n"
                             + "                                    <tbody>");
                     for (c = 0; c < p3.size(); c++) {
+                         String StockE = "";
+                        if (!p3.get(c).getNum_solped().isEmpty()) {
+                            StockE = "E";
+                        }
                         out.println("<tr>"
                                 + "<td><input type=\"checkbox\" name=\"Pedidos\" value=\"" + p3.get(c).getNum_posicion() + "\"></td>"
                                 + "<td name=\"mmmat\">" + p3.get(c).getMaterial() + "</td>"
                                 + "<td name=\"mmprr\">" + p3.get(c).getPor_recibir() + "</td>"
                                 + "<td name=\"mmumb\">" + p3.get(c).getUnidad_medida_base() + "</td>"
                                 + "<td name=\"mmnlt\">" + p3.get(c).getNuevo_lote() + "</td>"
-                                + "<td>&nbsp;</td>"
+                                + "<td name=\"mmStEs\">" + StockE + "</td>"
                                 + "<td class=\"ajustar\" name=\"mmdsc\">" + p3.get(c).getDescripcion() + "</td>"
                                 + "<td>" + p3.get(c).getNum_orden() + "</td>"
                                 + "<td name=\"mmcec\">" + p3.get(c).getCentro_coste() + "</td>"
                                 + "<td>" + p3.get(c).getClase_coste() + "</td>"
-                                + "<td name=\"mmped\">" + p3.get(c).getPedido() + "</td>"
-                                + "<td>&nbsp;</td>"
+                                + "<td name=\"mmped\">" + p3.get(c).getNum_solped() + "</td>"
+                               + "<td name=\"mmPosPed\">" + p3.get(c).getNum_posicion_solped() + "</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"//proveedor
