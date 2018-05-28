@@ -6,6 +6,7 @@
 package AccesoDatos;
 
 import Entidades.Cabecera_PedidosSD;
+import Entidades.ClientesPedidoSDCrea;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,6 +82,41 @@ import java.util.ArrayList;
         }
         return sam;
     }
+    //Traer cliente por Folio SAM
+    public ArrayList<ClientesPedidoSDCrea> SD_Reporte_TrerCliente(String folio){
+        ArrayList<ClientesPedidoSDCrea> sp_cliente = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try{
+            pst = con.prepareCall("{call SD.Reporte_PedidosObtenerCliente(?)}");
+            pst.setString(1, folio);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                ClientesPedidoSDCrea cli = new ClientesPedidoSDCrea();
+                cli.setNumero_deudor(rs.getString("numero_deudor"));
+                sp_cliente.add(cli);
+            }
+        }catch (Exception a) {
+            System.err.println("Error al traer los datos por :" + a);
+        } finally {
+            try {
+                if (con != null) {
+                    cnx.CerrarConexion(con);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception a) {
+                System.err.println("Error inesperado al cerrar conexiones");
+            }
+        }
+        return sp_cliente;
+    }
     
     //Consulta Reporte Todos
     public ArrayList<Cabecera_PedidosSD> SD_Reporte_PedidosConsulta(String centros, String centros2, String foliosam, String foliosam2, String fe1, String fe2, String radio) {
@@ -101,7 +137,7 @@ import java.util.ArrayList;
             rs = pst.executeQuery();
             while (rs.next()) {
                 Cabecera_PedidosSD or = new Cabecera_PedidosSD();
-                //Clase de movimiento
+                or.setDocumento_ventas(rs.getString("documento_ventas"));
                 or.setFolio_sam(rs.getString("folio_sam"));
                 or.setClase_documento(rs.getString("Clase_documento"));
                 //Cliente
