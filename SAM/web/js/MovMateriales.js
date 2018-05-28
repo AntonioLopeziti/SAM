@@ -709,7 +709,7 @@ $(document).ready(function () {
         if ($('#bxMaterial311').val().length > 0) {
 //            ValidaMaterialHabilitado($('#bxMaterial311').val());
 //            if (habl === 1) {
-                TomarDatos310("ValidaUM");
+            TomarDatos310("ValidaUM");
 //            } else {
 //                var iconm = document.getElementById("iconmsg");
 //                iconm.style.display = "inline";
@@ -1414,11 +1414,7 @@ $(document).ready(function () {
                     Drag.init(theHandle, theRoot);
                     break;
                 case 1:
-                    mostrarVentana('VentanaModalLote');
-                    peticiones('PeticionMovMateriales', 'cargarDatosLote', 'VentanaModalLote', 'Lote', '');
-                    var theHandle = document.getElementById('handle6');
-                    var theRoot = document.getElementById('VentanaModalLote');
-                    Drag.init(theHandle, theRoot);
+                    ConsultaLotesNBuevo("");
                     break;
                 case 2:
                     mostrarVentana('VentanaModalAlmacenA');
@@ -3337,11 +3333,19 @@ function seleccionarMCNuevo(mat, descr, um, clm) {
     ocultarVentanaNuevo('VentanaModalMaterialNuevo', 'BuscarParaMaterialNuevo', 'ConsultaTablaMaterialNuevo', 'tdMater', clm);
 }
 function seleccionarMCLoteNuevo(lote, doc, posidoc, clm) {
-    var pos = $('#posGrid').val();
-    $('#' + clm + 'tdLotes' + pos).val(lote);
-    $('#' + clm + 'tdDoc' + pos).val(doc);
-    $('#' + clm + 'tdPos' + pos).val(posidoc);
-    ocultarVentanaNuevo('VentanaModalLoteStockE', '', '', 'tdLotes', clm);
+    if (clm == "311") {
+        $('#bxLote311').val(lote);
+        $('#bxDoc311').val(doc);
+        $('#bxDocPos311').val(posidoc);
+        ocultarVentanaNuevo('VentanaModalLoteStockE', '', '', '', clm);
+        $('#bxLote311').focus();
+    } else {
+        var pos = $('#posGrid').val();
+        $('#' + clm + 'tdLotes' + pos).val(lote);
+        $('#' + clm + 'tdDoc' + pos).val(doc);
+        $('#' + clm + 'tdPos' + pos).val(posidoc);
+        ocultarVentanaNuevo('VentanaModalLoteStockE', '', '', 'tdLotes', clm);
+    }
 }
 function seleccionarMCAlmNuevo(alm, clm) {
     var pos = $('#posGrid').val();
@@ -3356,13 +3360,9 @@ function seleccionarMCCentroNuevo(cen, clm) {
 function ConsultaLotesNBuevo(pos) {
     $('#posGrid').val(pos);
     var clm = $('#bxClase').val();
-    var mater = $('#' + clm + 'tdMater' + pos);
-    if (mater.val().length == 0) {
-        mater.focus();
-        mensajesNuevo(1, "images/advertencia.PNG", "audio/saperror.wav");
-    } else {
+    if (clm == "311") {
         var acc = "ConsultaLotes";
-        var datos = "&Material=" + $('#' + clm + 'tdMater' + pos).val()
+        var datos = "&Material=" + $('#bxMaterial311').val()
                 + "&Centro=" + $('#bxCentro').val()
                 + "&Almacen=" + $('#bxAlmacen').val()
                 + "&ClaseMov=" + clm;
@@ -3398,6 +3398,50 @@ function ConsultaLotesNBuevo(pos) {
                 }
             }
         });
+    } else {
+        var mater = $('#' + clm + 'tdMater' + pos);
+        if (mater.val().length == 0) {
+            mater.focus();
+            mensajesNuevo(1, "images/advertencia.PNG", "audio/saperror.wav");
+        } else {
+            var acc = "ConsultaLotes";
+            var datos = "&Material=" + $('#' + clm + 'tdMater' + pos).val()
+                    + "&Centro=" + $('#bxCentro').val()
+                    + "&Almacen=" + $('#bxAlmacen').val()
+                    + "&ClaseMov=" + clm;
+            $.ajax({
+                async: false,
+                type: 'GET',
+                url: 'peticionMovMateriales2',
+                contentType: "application/x-www-form-urlencoded",
+                processData: true,
+                data: "Accion=" + acc + datos,
+                success: function (data) {
+                    if (data == 0) {
+                        mensajesNuevo(0, "images/aceptar.png", "audio/sapmsg.wav");
+                    } else {
+                        var BE = document.createElement('audio');
+                        BE.src = "audio/sapsnd05.wav";
+                        BE.play();
+                        var ventana = $('#VentanaModalLoteStockE');
+                        var ancho = 600;
+                        var alto = 650;
+                        var x = (screen.width / 2) - (ancho / 2);
+                        var y = (screen.height / 2) - (alto / 2);
+                        ventana.css({top: y + "px", left: x + "px"});
+                        ventana.css('display', 'block');
+                        borramsg();
+                        var theHandle = document.getElementById("handleLotStockE");
+                        var theRoot = document.getElementById("VentanaModalLoteStockE");
+                        Drag.init(theHandle, theRoot);
+                        $('#cargarDatosLoteStockE').html(data);
+                        document.getElementById('table-scrollLotStokE').onscroll = function () {
+                            document.getElementById('fixedYLoteE').style.top = document.getElementById('table-scrollLotStokE').scrollTop + 'px';
+                        };
+                    }
+                }
+            });
+        }
     }
 }
 function ConsultaAlmaNBuevo(pos) {
@@ -3813,7 +3857,7 @@ function validarCantiExcedida(mat, centro, alm, lote, cant) {
                 if (can1 <= can2) {
                     x = false;
                 }
-            }else{
+            } else {
                 x = true
             }
         }
