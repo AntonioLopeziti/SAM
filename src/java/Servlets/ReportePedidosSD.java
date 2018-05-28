@@ -13,6 +13,7 @@ import Entidades.centros;
 import Entidades.CabMovNotificaciones;
 import Entidades.reportes_estatus_ordenes;
 import Entidades.Cabecera_PedidosSD;
+import Entidades.ClientesPedidoSDCrea;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -177,21 +178,24 @@ public class ReportePedidosSD extends HttpServlet {
                     }
                     out.println("<table id=\"TabBody\">");
                     out.println("<tbody>");                   
-                    ACC_ReportePedidoSD crp = new ACC_ReportePedidoSD();
+                    ACC_ReportePedidoSD crp = new ACC_ReportePedidoSD();                    
                     String f1 = cn.DateFormatGuion(fech);
                     String f2 = cn.DateFormatGuion(fech2);
-                    for (Cabecera_PedidosSD a : crp.SD_Reporte_PedidosConsulta(centroN, centroN2, docVen, docVen2, f1, f2, tipoRad)) {
-                        out.println("<tr>");
-                        out.println("<td></td>");
-                        out.println("<td>" + a.getFolio_sam() + "</td>");
-                        out.println("<td>" + a.getClase_documento() + "</td>");
-                        out.println("<td></td>");
-                        out.println("<td>" + a.getGrupo_vendedores() + "</td>");
-                        out.println("<td>" + cn.DateFormat(a.getFecha_creacion()) + "</td>");
-                        out.println("<td>" + a.getHora_creacion() + "</td>");
-                        out.println("<td>" + a.getRecibido() + "</td>");
-                        out.println("<td>" + a.getProcesado() + "</td>");
-                        out.println("<td>" + a.getError() + "</td>");                        
+                    for (Cabecera_PedidosSD a : crp.SD_Reporte_PedidosConsulta(centroN, centroN2, docVen, docVen2, f1, f2, tipoRad)) {   
+                        ArrayList<ClientesPedidoSDCrea> ob = ACC_ReportePedidoSD.ObtenerInstancia().SD_Reporte_TrerCliente(a.getFolio_sam());
+                        for(ClientesPedidoSDCrea p : ob){
+                            out.println("<tr>");
+                            out.println("<td>" + a.getDocumento_ventas() + "</td>");
+                            out.println("<td>" + a.getFolio_sam() + "</td>");
+                            out.println("<td>" + a.getClase_documento() + "</td>");
+                            out.println("<td>" + p.getNumero_deudor() + "</td>");
+                            out.println("<td>" + a.getGrupo_vendedores() + "</td>");
+                            out.println("<td>" + cn.DateFormat(a.getFecha_creacion()) + "</td>");
+                            out.println("<td>" + a.getHora_creacion() + "</td>");
+                            out.println("<td>" + a.getRecibido() + "</td>");
+                            out.println("<td>" + a.getProcesado() + "</td>");
+                            out.println("<td>" + a.getError() + "</td>");                        
+                        }                        
                     }
                     out.println("<tr class=\"ocultar\"><td>0000000000000000</td><td>0000000000000000</td><td>0000000000000000</td><td>0000000000000000</td><td>0000000000000000</td><td>000000000000000000000000</td><td>00000000000000</td><td>00000000000000</td><td>00000000000000000000</td><td>00000000000000000000</td></tr>");
                     out.println("</tbody>");
