@@ -221,7 +221,7 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                         out.println("<td>" + a.getNum_lote() + "</td>");                                         
                         out.println("<td>" + a.getUm_cant_prev() + "</td>");   
                         out.println("<td>" + a.getCant_prev_um() + "</td>");
-                        out.println("<td></td>");   //Campo EL
+                        out.println("<td>" + a.getFecha_cre_reg() +"</td>");   //Campo EL
                         out.println("<td>" + a.getCentro_solic() + "</td>");                                         
                         out.println("<td>" + a.getSolicitante() + "</td>");                                         
                         out.println("<td>" + a.getAlmacen() + "</td>");  
