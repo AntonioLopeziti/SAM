@@ -131,7 +131,7 @@ public class ACC_FlujoDocumentos extends Conexion{
                 or.setNum_lote(rs.getString("num_lote"));
                 or.setUm_cant_prev(rs.getString("um_cant_prev"));
                 or.setCant_prev_um(rs.getString("cant_prev_um"));
-                //Campo EL fecha
+                or.setFecha_cre_reg(rs.getString("fecha_cre_reg"));
                 or.setCentro_solic(rs.getString("centro_solic"));
                 or.setSolicitante(rs.getString("solicitante"));
                 or.setAlmacen(rs.getString("almacen"));
