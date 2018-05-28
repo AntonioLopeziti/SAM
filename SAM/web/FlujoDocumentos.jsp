@@ -207,7 +207,7 @@
                         <hr>
                         <label id="lblFolioSAM">Pedido de Venta</label><input id="pedVenta" type="text" style='width: 35%; text-transform: uppercase;' maxlength="10"><button id="match_A2" class='BtnMatchIcon'></button>
                         <hr>
-                        <label id="lblFolioSAP">Material</label><input id="material" type="text" style='width: 35%; text-transform: uppercase;' maxlength="25"><button id="match_A3" class='BtnMatchIcon'></button>
+                        <label id="lblFolioSAP">Material</label><input id="material" type="text" style='width: 38%; text-transform: uppercase;' maxlength="25"><button id="match_A3" class='BtnMatchIcon'></button>
                         <hr>
                         <label id="lblFecha">Fecha de Pedido</label><input value="" maxlength="10" type="text" value="" id="fecha_inicio" style="width:20%;"/><button id="match_F1" class='BtnMatchIcon'></button>
                         <hr>
@@ -218,7 +218,7 @@
                         
                         <label><%out.println(po.getProperty("etiqueta.Rango_a"));%></label><input id="pedVenta2" type="text" style='width: 35%; text-transform: uppercase;' maxlength="10"><button id="match_A4" class='BtnMatchIcon'></button>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.Rango_a"));%></label><input id="material2" type="text" style='width: 35%; text-transform: uppercase;' maxlength="25"><button id="match_A5" class='BtnMatchIcon'></button>
+                        <label><%out.println(po.getProperty("etiqueta.Rango_a"));%></label><input id="material2" type="text" style='width: 38%; text-transform: uppercase;' maxlength="25"><button id="match_A5" class='BtnMatchIcon'></button>
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.Rango_a"));%></label><input value="" maxlength="10" type="text" value="" id="fecha_fin" style="width:20%;"/><button id="match_F2" class='BtnMatchIcon'></button>
                         <hr>
