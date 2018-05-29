@@ -64,6 +64,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
             String vende = request.getParameter("Vendedor");
 
             ////// Variables de guardado  /////
+            String FOLIO = request.getParameter("FOLIO");
             String CLASE = request.getParameter("CLASE");
             String ORGVE = request.getParameter("ORGVE");
             String CANAL = request.getParameter("CANAL");
@@ -119,7 +120,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         pro = "";
                     }
                     if (pro != "") {
-                        ArrayList<clientes> cli = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, nombre, Canti, pro, vende, tipo );
+                        ArrayList<clientes> cli = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, nombre, Canti, pro, vende, tipo);
                         if (cli.size() > 0) {
                             out.println("<table>");
                             out.println("<tbody>");
@@ -306,32 +307,31 @@ public class peticionPedidoSDCrear extends HttpServlet {
                 case "Guardarcabacera":
                     String FECHAENT = Consultas.ObtenerInstancia().DateFormatGuion(FECHE);
                     String FECHAPRE = Consultas.ObtenerInstancia().DateFormatGuion(FECHP);
-                    ACC_CrearPedidoSD.ObtenerInstancia().InsertarCabecera1(folioSAM, CLASE, ORGVE, CANAL, SECTO, GRUPV, OFICV, FECHAENT, FECHAPRE, REFCL, USUAR, FechaActual, HoraActual);
-                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(folioSAM, "AG", SOLIC, USUAR, FechaActual, HoraActual);
-                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(folioSAM, "WE", DESTI, USUAR, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().InsertarCabecera1(FOLIO, CLASE, ORGVE, CANAL, SECTO, GRUPV, OFICV, FECHAENT, FECHAPRE, REFCL, USUAR, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(FOLIO, "AG", SOLIC, USUAR, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(FOLIO, "WE", DESTI, USUAR, FechaActual, HoraActual);
                     break;
                 case "GuardarPosiciones":
-                    int POSDO = Integer.parseInt(POSIC) + 1;
-                    String POSFIN = String.valueOf(POSDO) + "0";
-                    String FECENTPO = Consultas.ObtenerInstancia().DateFormatGuion(FECEP);
-                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarMateriales(folioSAM, POSFIN, MATER, DESCR, UNIDA, USUAR, FechaActual, HoraActual);
-                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCantidades(folioSAM, POSFIN, CANTI, USUAR, FechaActual, HoraActual, FECENTPO);
+                    String POSFIN = String.valueOf(POSIC) + "0";
+                    String FECENTPO = Consultas.ObtenerInstancia().DateFormatGuion(FECEP.trim());
+                        ACC_CrearPedidoSD.ObtenerInstancia().GuardarMateriales(FOLIO, POSFIN, MATER, DESCR, UNIDA, USUAR, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCantidades(FOLIO, POSFIN, CANTI, USUAR, FechaActual, HoraActual, FECENTPO);
                     break;
                 case "ActaulizarFolio":
                     ACC_Folios.ObtenerIstancia().ActualizarFolio("PV", fo.getFolioActual());
-                    out.println(folioSAM);
+                    out.println(FOLIO);
                     break;
                 case "GuardarTextCab":
-                    ACC_CrearPedidoSD.ObtenerInstancia().InsertTxtCabecera(folioSAM, FILA, USUAR, TEXTOCAB, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().InsertTxtCabecera(FOLIO, FILA, USUAR, TEXTOCAB, FechaActual, HoraActual);
                     break;
                 case "GuardarTextPos":
-                    int POSTXT = Integer.parseInt(POS) + 1;
-                    String POSTF = String.valueOf(POSTXT) + "0";
+//                    int POSTXT = Integer.parseInt(POS) + 1;
+                    String POSTF = String.valueOf(POS) + "0";
                     ACC_CrearPedidoSD.ObtenerInstancia().InsertTxtPosicion(folioSAM, POSTF, FILA, USUAR, TEXTPOS, FechaActual, HoraActual);
                     break;
                 case "CargarDesRelac":
                     String sql = "{call SD.CrearPedidos_ConsultaDestinatario(?,?,?)}";
-                    ArrayList<clientes> datcl = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, "", "", sql, "","");
+                    ArrayList<clientes> datcl = ACC_CrearPedidoSD.ObtenerInstancia().GetClientes(client, "", "", sql, "", "");
                     JSONArray ci = new JSONArray();
                     if (datcl.size() > 0) {
                         ci.add(datcl.get(0).getIdCliente());
@@ -366,6 +366,10 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         avv.add(avis[3].trim());
                     }
                     out.println(avv);
+                    break;
+                case "RevisarFolio":
+                    String ok = ACC_CrearPedidoSD.ObtenerInstancia().CheckFolio(folioSAM);
+                    out.println(ok);
                     break;
 
             }
