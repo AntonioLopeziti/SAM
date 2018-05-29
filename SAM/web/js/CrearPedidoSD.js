@@ -739,15 +739,39 @@ $(document).ready(function () {
                 a += 1;
             }
         }
-        var cab = $('#textoCabecera').val();
-        if (cab.length > 0) {
-            GuardarTextoCab();
-        }
-
         if (a > 0) {
-            GuardarPosiciones();
+            var org = $('#orgVentas').val();
+            var cadi = $('#CanalDis').val();
+            var sec = $('#Sector').val();
+            var ch = document.getElementsByName("Cehckbx");
+            var mat = document.getElementsByName("MaterTD");
+            var ume = document.getElementsByName("UMediTD");
+            var can = document.getElementsByName("CantiTD");
+            for (i = 0; i < ch.length; i++) {
+                if (mat[i].value.length > 0) {
+                    var d = ValidateMate(mat[i].value, org, can, sec);
+                    if (d == "0") {
+                        ShowMsg(10, "images/advertencia.PNG", "audio/saperror.wav", '', mat[i].value, org, cadi);
+                        mat[i].focus();
+                        return;
+                    }
+                    if (ume[i].value.length == 0) {
+                        ShowMsg(17, "images/advertencia.PNG", "audio/saperror.wav");
+                        mat[i].focus();
+                        return;
+                    }
+                    if (can[i].value == "0.000" || can[i].value.length == 0) {
+                        can[i].focus();
+                        ShowMsg(18, "images/advertencia.PNG", "audio/saperror.wav");
+                        return;
+                    }
+                }
+            }
+            $('#guardar').prop("disabled", true);
+            ShowMsg(24, "images/load.gif", "audio/sapmsg.wav");
+            SaveDataFolio();
         } else {
-            GuardarCabecera();
+            ShowMsg(23, "images/advertencia.PNG", "audio/saperror.wav");
         }
 
     });
@@ -1653,7 +1677,7 @@ function validarInterlocutores() {
     });
     return retu;
 }
-function GuardarCabecera() {
+function GuardarCabecera(folio) {
     var clasePedi = $('#ClasePedido').val();
     var orgVentas = $('#orgVentas').val();
     var canalDist = $('#CanalDis').val();
@@ -1666,7 +1690,7 @@ function GuardarCabecera() {
     var usuario = $('#CreadoPor').val();
     var solicitante = $('#solicitante').val();
     var destinatario = $('#destinatario').val();
-    var datos = "&CLASE=" + clasePedi.toUpperCase() + "&ORGVE=" + orgVentas + "&CANAL=" + canalDist + "&SECTO=" + sector + "&GRUPV=" + grupoVend + "&OFICV=" + oficinaVe + "&FECHE=" + fechaEntr + "&FECHP=" + fechaPrec + "&REFCL=" + refClient + "&USUAR=" + usuario + "&SOLIC=" + solicitante + "&DESTI=" + destinatario;
+    var datos = "&CLASE=" + clasePedi.toUpperCase() + "&ORGVE=" + orgVentas + "&CANAL=" + canalDist + "&SECTO=" + sector + "&GRUPV=" + grupoVend + "&OFICV=" + oficinaVe + "&FECHE=" + fechaEntr + "&FECHP=" + fechaPrec + "&REFCL=" + refClient + "&USUAR=" + usuario + "&SOLIC=" + solicitante + "&DESTI=" + destinatario + "&FOLIO=" + folio;
     var acc = "Guardarcabacera";
     $.ajax({
         async: false,
@@ -1676,7 +1700,6 @@ function GuardarCabecera() {
         processData: true,
         data: "Accion=" + acc + datos,
         success: function (data) {
-            ActualizaFolio();
         }
     });
 }
@@ -1701,10 +1724,7 @@ function ValidateMate(material, org, can, sec) {
     });
     return ret;
 }
-function GuardarPosiciones() {
-    var org = $('#orgVentas').val();
-    var cadi = $('#CanalDis').val();
-    var sec = $('#Sector').val();
+function GuardarPosiciones(folio) {
     var ch = document.getElementsByName("Cehckbx");
     var mat = document.getElementsByName("MaterTD");
     var des = document.getElementsByName("DesciTD");
@@ -1714,39 +1734,22 @@ function GuardarPosiciones() {
     var pos = 0;
     for (i = 0; i < ch.length; i++) {
         if (mat[i].value.length > 0) {
-            var d = ValidateMate(mat[i].value, org, can, sec);
-            if (d == "0") {
-                ShowMsg(10, "images/advertencia.PNG", "audio/saperror.wav", '', mat[i].value, org, cadi);
-                mat[i].focus();
-                return;
-            }
-            if (ume[i].value.length == 0) {
-                ShowMsg(17, "images/advertencia.PNG", "audio/saperror.wav");
-                mat[i].focus();
-                return;
-            }
-            if (can[i].value == "0.000" || can[i].value.length == 0  ) {
-                can[i].focus();
-                ShowMsg(18, "images/advertencia.PNG", "audio/saperror.wav");
-                return;
-            }
-            savePos(mat[i].value, des[i].value, ume[i].value, can[i].value, pos,fec[i].value);
-            GuardarTextoPos(pos, i);
+            savePos(mat[i].value, des[i].value, ume[i].value, can[i].value, pos, fec[i].value, folio);
+            GuardarTextoPos(pos, i, folio);
             pos = pos + 1;
         }
     }
-    $('#guardar').prop("disabled", true);
-    GuardarCabecera();
 }
 
-function savePos(mat, des, um, can, i, fe) {
+
+function savePos(mat, des, um, can, i, fe, folio) {
     var usuario = $('#CreadoPor').val();
+    var posi = (i) + 1;
     var acc = "GuardarPosiciones";
-    var datos = "&MATER=" + mat + "&DESCR=" + des + "&UNIDA=" + um + "&CANTI=" + can + "&POSIC=" + i + "&USUAR=" + usuario + "&FECEP=" + fe;
+    var datos = "&MATER=" + mat + "&DESCR=" + encodeURIComponent(des) + "&UNIDA=" + um + "&CANTI=" + can + "&POSIC=" + posi + "&USUAR=" + usuario + "&FECEP=" + fe + "&FOLIO=" + folio;
     $.ajax({
         async: false,
         type: 'GET',
-        dataType: 'json',
         url: 'peticionPedidoSDCrear',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
@@ -1755,7 +1758,7 @@ function savePos(mat, des, um, can, i, fe) {
         }
     });
 }
-function ActualizaFolio()
+function ActualizaFolio(folio)
 {
     var acc = "ActaulizarFolio";
     $.ajax({
@@ -1764,13 +1767,13 @@ function ActualizaFolio()
         url: 'peticionPedidoSDCrear',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Accion=" + acc,
+        data: "Accion=" + acc + "&FOLIO="+folio,
         success: function (data) {
             window.location.href = "CrearPedidoSD.jsp?FolioPV=" + data;
         }
     });
 }
-function GuardarTextoCab() {
+function GuardarTextoCab(folio) {
     var usuario = $('#CreadoPor').val();
     var txtCa = $('#textoCabecera').val();
     var txtO = txtCa.replace(/'/g, "´");
@@ -1782,7 +1785,7 @@ function GuardarTextoCab() {
         no = txtO.substr(d, 132);
         var acc = "GuardarTextCab";
         var fila = i + 1;
-        var enviar = "&FILA=" + fila + "&TEXTOCAB=" + encodeURIComponent(no) + "&USUAR=" + usuario;
+        var enviar = "&FILA=" + fila + "&TEXTOCAB=" + encodeURIComponent(no) + "&USUAR=" + usuario + "&FOLIO=" + folio;
         $.ajax({
             async: false,
             type: 'GET',
@@ -1796,7 +1799,8 @@ function GuardarTextoCab() {
         });
     }
 }
-function GuardarTextoPos(pos, a) {
+function GuardarTextoPos(pos, a, folio) {
+    pos = (pos) + 1;
     var usuario = $('#CreadoPor').val();
     var txtpos = $('#textoposTemp' + a).val();
     var txtO = txtpos.replace(/'/g, "´");
@@ -1808,7 +1812,7 @@ function GuardarTextoPos(pos, a) {
         no = txtO.substr(d, 132);
         var acc = "GuardarTextPos";
         var fila = i + 1;
-        var enviar = "&POS=" + pos + "&FILA=" + fila + "&TEXTPOS=" + encodeURIComponent(no) + "&USUAR=" + usuario;
+        var enviar = "&POS=" + pos + "&FILA=" + fila + "&TEXTPOS=" + encodeURIComponent(no) + "&USUAR=" + usuario + "&FOLIO=" + folio;
         $.ajax({
             async: false,
             type: 'GET',
@@ -1842,4 +1846,37 @@ function MostrarCalendarioGrid(id) {
     var theRoot = document.getElementById("Calenndar");
     Drag.init(theHandle, theRoot);
     $('#datapicker').datepicker().show();
+}
+function SaveDataFolio() {
+    var folio = Getfolio();
+    if (folio == 0) {
+        ShowMsg(25, "images/advertencia.PNG", "audio/saperror.wav");
+    } else if (folio == 1) {
+        setTimeout(function () {
+            SaveDataFolio();
+        }, 2000);
+    } else {
+        GuardarCabecera(folio);
+        GuardarTextoCab(folio);
+        GuardarPosiciones(folio);
+        ActualizaFolio(folio);
+    }
+}
+
+function Getfolio() {
+    var folio;
+    acc = "RevisarFolio";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionPedidoSDCrear',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc,
+        success: function (data) {
+            folio = data;
+
+        }
+    });
+    return folio;
 }
