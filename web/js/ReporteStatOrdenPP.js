@@ -5,6 +5,7 @@
  */
 $(document).ready(function ()
 {
+    $('#centro').focus();
     $('#match_A1').hide();
     $('#match_A2').hide();
     $('#match_A3').hide();
@@ -352,6 +353,103 @@ $(document).ready(function ()
         var tecla = (document).all ? e.keyCode : e.which;
         if (tecla == 13) {
             ConsultaFolioSAP2();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });  
+    //Keypress de inputs principales
+    $('#centro').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ValidarEO();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });  
+    $('#sam1').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ValidarEO();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });  
+    $('#sam2').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ValidarEO();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });  
+    $('#sap1').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ValidarEO();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });  
+    $('#sap2').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ValidarEO();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });  
+    $('#fecha_inicio').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ValidarEO();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });  
+    $('#fecha_fin').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ValidarEO();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });  
+    $('#fecha_inicio').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ValidarEO();
         }
         if (tecla == 32) {
             return false;
