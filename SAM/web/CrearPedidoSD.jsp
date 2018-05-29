@@ -197,6 +197,15 @@
                     case 22:
                         msg = 'Campo Fecha entrega posición obligatorio';
                         break;
+                    case 23:
+                        msg = 'El pedido debe llevar una posicion minima para grabarse';
+                        break;
+                    case 24:
+                        msg = 'Espere un momento por favor, guardando documento...';
+                        break;
+                    case 25:
+                        msg = 'Ocurrio un error inesperado al guardar, Consulte a su administrador';
+                        break;
                 }
                 $('#msg').html(msg);
                 var icon = $('#iconmsg');
