@@ -179,7 +179,7 @@
                                                 <td>Hora</td>
                                                 <td>Número Material</td>                                                
                                                 <td>Centro</td>
-                                                <td>Almacén</td>
+                                                <!--<td>Almacén</td>-->
                                                 <td>Error</td>
                                                 <td>Usuario</td>
                                             </tr>
