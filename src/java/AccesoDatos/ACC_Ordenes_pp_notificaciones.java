@@ -63,6 +63,17 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(15, "0.000");
             pst.setString(16, "");
             pst.setString(17, "");
+            pst.setString(18, "");
+            pst.setString(19, "0.000");
+            pst.setString(20, "");
+            pst.setString(21, "0.000");
+            pst.setString(22, "");
+            pst.setString(23, "0.000");
+            pst.setString(24, "");
+            pst.setString(25, "0.000");
+            pst.setString(26, "");
+            pst.setString(27, "0.000");     
+            pst.setString(28, "");
             pst.setString(18, "0.000");
             pst.setString(19, "");
             pst.setString(20, "0.000");
