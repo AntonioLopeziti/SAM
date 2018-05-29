@@ -6,6 +6,7 @@
 package AccesoDatos;
 
 import Entidades.CabMovNotificaciones;
+import Entidades.PosNotTiempo;
 import Entidades.Repo_solped;
 import Entidades.ReporteActividadesAvisos;
 import Entidades.ReporteAvisos;
@@ -789,8 +790,8 @@ public class ACC_Reportes extends Conexion {
     }
 
     //Consulta Todos Mov Notificaciones
-    public ArrayList<CabMovNotificaciones> PP_Reporte_StatusTodosMN(String centros, String foliosam, String foliosam2, String foliosap, String foliosap2, String fe1, String fe2) {
-        ArrayList<CabMovNotificaciones> sp_todos = new ArrayList<>();
+    public ArrayList<PosNotTiempo> PP_Reporte_StatusTodosMN(String centros, String foliosam, String foliosam2, String foliosap, String foliosap2, String fe1, String fe2) {
+        ArrayList<PosNotTiempo> sp_todos = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
@@ -806,16 +807,16 @@ public class ACC_Reportes extends Conexion {
             pst.setString(7, fe2);
             rs = pst.executeQuery();
             while (rs.next()) {
-                CabMovNotificaciones or = new CabMovNotificaciones();
-                or.setFolio_sam(rs.getString("folio_sam"));
-                or.setHora(rs.getString("hora"));
-                or.setFecha(rs.getString("fecha"));
+                PosNotTiempo or = new PosNotTiempo();
+                or.setFolio_not_tiemp(rs.getString("folio_not_tiemp"));
+                or.setHora_notificada_inic_ej(rs.getString("hora_notificada_inic_ej"));
+                or.setFecha_inic_notificada_ej(rs.getString("fecha_inic_notificada_ej"));
                 or.setNum_orden(rs.getString("num_orden"));
                 or.setNum_material(rs.getString("num_material"));
                 or.setCentro(rs.getString("centro"));
-                or.setAlmacen(rs.getString("almacen"));
-                or.setError(rs.getString("error"));
-                or.setUsuario(rs.getString("usuario"));
+//                or.setAlmacen(rs.getString("almacen"));
+                or.setMensaje(rs.getString("mensaje"));
+                or.setNum_personal(rs.getString("num_personal"));
                 sp_todos.add(or);
             }
         } catch (Exception a) {
@@ -3813,8 +3814,8 @@ public class ACC_Reportes extends Conexion {
     }
 
     /*[Reportes Mov Not Consulta folio SAP*/
-    public ArrayList<CabMovNotificaciones> SAPStatusMN(String folOrd, String CentroOrd, String CtdOrd) {
-        ArrayList<CabMovNotificaciones> sap = new ArrayList<>();
+    public ArrayList<PosNotTiempo> SAPStatusMN(String folOrd, String CentroOrd, String CtdOrd) {
+        ArrayList<PosNotTiempo> sap = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
@@ -3827,7 +3828,7 @@ public class ACC_Reportes extends Conexion {
             pst.setString(3, CtdOrd);
             rs = pst.executeQuery();
             while (rs.next()) {
-                CabMovNotificaciones so = new CabMovNotificaciones();
+                PosNotTiempo so = new PosNotTiempo();
                 so.setNum_orden(rs.getString("num_orden"));
                 so.setCentro(rs.getString("centro"));
                 sap.add(so);
@@ -10050,8 +10051,8 @@ public class ACC_Reportes extends Conexion {
     }
 
     /*[Reportes Mov Notificaciones Consulta folio SAM*/
-    public ArrayList<CabMovNotificaciones> SAMStatusMN(String folSAM, String CentroFol, String CtdFol) {
-        ArrayList<CabMovNotificaciones> sam = new ArrayList<>();
+    public ArrayList<PosNotTiempo> SAMStatusMN(String folSAM, String CentroFol, String CtdFol) {
+        ArrayList<PosNotTiempo> sam = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
@@ -10063,8 +10064,8 @@ public class ACC_Reportes extends Conexion {
             pst.setString(3, CtdFol);
             rs = pst.executeQuery();
             while (rs.next()) {
-                CabMovNotificaciones so = new CabMovNotificaciones();
-                so.setFolio_sam(rs.getString("folio_sam"));
+                PosNotTiempo so = new PosNotTiempo();
+                so.setFolio_not_tiemp(rs.getString("folio_not_tiemp"));
                 so.setCentro(rs.getString("centro"));
                 sam.add(so);
             }
