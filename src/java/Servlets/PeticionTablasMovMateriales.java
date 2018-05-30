@@ -793,8 +793,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                             StockE = "E";
                         }
                         out.println("<tr>"
-                                + "<td><input type=\"checkbox\" name=\"Pedidos\" value=\"" + p3.get(c).getNum_posicion() + "\"></td>"
-                                + "<td name=\"mmmat\">" + p3.get(c).getMaterial() + "</td>"
+                                + "<td><input type=\"checkbox\" name=\"Pedidos\" value=\"" + p3.get(c).getNum_posicion() + "\"></td>"                                + "<td name=\"mmmat\">" + p3.get(c).getMaterial() + "</td>"
                                 + "<td name=\"mmprr\">" + p3.get(c).getPor_recibir() + "</td>"
                                 + "<td name=\"mmumb\">" + p3.get(c).getUnidad_medida_base() + "</td>"
                                 + "<td name=\"mmnlt\">" + p3.get(c).getNuevo_lote() + "</td>"
