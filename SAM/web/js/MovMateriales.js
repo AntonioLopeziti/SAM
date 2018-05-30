@@ -3,7 +3,6 @@ $(document).ready(function () {
         EliminarFilas301();
     });
     $('#AgregarFilas301').click(function () {
-        var clam = $('#bxClase').val();
         AgregarFilasTabla301();
     });
     $('#CerrarMCCenDesNuevo').click(function () {
