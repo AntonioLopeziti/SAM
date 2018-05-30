@@ -3650,6 +3650,11 @@ function Validarmovis() {
                         Centr[i].focus();
                         return;
                     }
+                    if(Centr[i].value === Centro ){
+                        mensajesNuevo(13, "images/advertencia.PNG", "audio/saperror.wav");
+                        Centr[i].focus();
+                        return;
+                    }
                 }
                 if (ClaseM === "313") {
                     if (Almac[i].value.length == 0) {
