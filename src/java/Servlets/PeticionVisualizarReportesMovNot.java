@@ -12,7 +12,7 @@ import Entidades.centros;
 import Entidades.CabMovNotificaciones;
 import Entidades.PosNotTiempo;
 import Entidades.reportes_estatus_ordenes;
-import Entidades.PosNotifTiempoOrdenes;
+//import Entidades.PosNotifTiempoOrdenes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -98,13 +98,13 @@ public class PeticionVisualizarReportesMovNot extends HttpServlet {
                     }
                     break;
                 case "SamStatuss":
-                    ArrayList<PosNotifTiempoOrdenes> sam = ACC_Reportes.ObtenerInstancia().SAMStatusMN(folSAM,CentroFol, CtdFol);
+                    ArrayList<PosNotTiempo> sam = ACC_Reportes.ObtenerInstancia().SAMStatusMN(folSAM,CentroFol, CtdFol);
                     if (sam.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
-                        for (PosNotifTiempoOrdenes m : sam) {
-                            out.println("<tr ondblclick=\"Select('" + m.getFolio_not_tiemp() + "','" + tipo + "')\">");
-                            out.println("<td>" + m.getFolio_not_tiemp() + "</td>");
+                        for (PosNotTiempo m : sam) {
+                            out.println("<tr ondblclick=\"Select('" + m.getFolio_sam() + "','" + tipo + "')\">");
+                            out.println("<td>" + m.getFolio_sam() + "</td>");
                             out.println("<td>" + m.getCentro() + "</td>");
                             out.println("</tr>");
                         }
@@ -115,11 +115,11 @@ public class PeticionVisualizarReportesMovNot extends HttpServlet {
                     }
                     break;
                 case "SapStatus":
-                    ArrayList<PosNotifTiempoOrdenes> sap = ACC_Reportes.ObtenerInstancia().SAPStatusMN(folOrd, CentroOrd, CtdOrd);
+                    ArrayList<PosNotTiempo> sap = ACC_Reportes.ObtenerInstancia().SAPStatusMN(folOrd, CentroOrd, CtdOrd);
                     if (sap.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
-                        for (PosNotifTiempoOrdenes n : sap) {
+                        for (PosNotTiempo n : sap) {
                             out.println("<tr ondblclick=\"Select('" + n.getNum_orden() + "','" + tipo + "')\">");
                             out.println("<td>" + n.getNum_orden() + "</td>");
                             out.println("<td>" + n.getCentro() + "</td>");
@@ -155,7 +155,7 @@ public class PeticionVisualizarReportesMovNot extends HttpServlet {
                     }
                     String ff = cn.DateFormatGuion(fe1);
                     String fff = cn.DateFormatGuion(fe2);
-                    ArrayList<PosNotifTiempoOrdenes> ord = ACC_Reportes.ObtenerInstancia().PP_Reporte_StatusTodosMN(centros, foliosam, foliosam2, foliosap, foliosap2, ff, fff);
+                    ArrayList<PosNotTiempo> ord = ACC_Reportes.ObtenerInstancia().PP_Reporte_StatusTodosMN(centros, foliosam, foliosam2, foliosap, foliosap2, ff, fff);
                     if (ord.size() >= 1) {
                         out.println(1);
                     } else {
@@ -210,13 +210,13 @@ public class PeticionVisualizarReportesMovNot extends HttpServlet {
                     ACC_Reportes crp = new ACC_Reportes();
                     String f1 = cn.DateFormatGuion(fecha1);
                     String f2 = cn.DateFormatGuion(fecha2);
-                    for (PosNotifTiempoOrdenes a : crp.PP_Reporte_StatusTodosMN(centro, sam1, sam2, sap1, sap2, f1, f2)) {
+                    for (PosNotTiempo a : crp.PP_Reporte_StatusTodosMN(centro, sam1, sam2, sap1, sap2, f1, f2)) {
                         out.println("<tr>");                        
-                        out.println("<td>" + a.getFolio_not_tiemp() + "</td>");
+                        out.println("<td>" + a.getFolio_sam() + "</td>");
                         out.println("<td>" + a.getNum_orden() + "</td>");                                                
-                        out.println("<td>" + cn.DateFormat(a.getFecha_inic_notificada_ej()) + "</td>");
-                        out.println("<td>" + a.getHora_notificada_inic_ej() + "</td>");
-                        out.println("<td>" + a.getNum_material() + "</td>");
+                        out.println("<td>" + cn.DateFormat(a.getFecha_inicio()) + "</td>");
+                        out.println("<td>" + a.getHora_inicio() + "</td>");
+                        out.println("<td>" + a.getMaterial() + "</td>");
                         out.println("<td>" + a.getCentro() + "</td>");
 //                        out.println("<td>" + a.getAlmacen() + "</td>");
                         out.println("<td>" + a.getMensaje() + "</td>");
