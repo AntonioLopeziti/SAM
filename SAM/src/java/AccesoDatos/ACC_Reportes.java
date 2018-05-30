@@ -791,8 +791,8 @@ public class ACC_Reportes extends Conexion {
     }
 
     //Consulta Todos Mov Notificaciones
-    public ArrayList<PosNotifTiempoOrdenes> PP_Reporte_StatusTodosMN(String centros, String foliosam, String foliosam2, String foliosap, String foliosap2, String fe1, String fe2) {
-        ArrayList<PosNotifTiempoOrdenes> sp_todos = new ArrayList<>();
+    public ArrayList<PosNotTiempo> PP_Reporte_StatusTodosMN(String centros, String foliosam, String foliosam2, String foliosap, String foliosap2, String fe1, String fe2) {
+        ArrayList<PosNotTiempo> sp_todos = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
@@ -808,12 +808,12 @@ public class ACC_Reportes extends Conexion {
             pst.setString(7, fe2);
             rs = pst.executeQuery();
             while (rs.next()) {
-                PosNotifTiempoOrdenes or = new PosNotifTiempoOrdenes();
-                or.setFolio_not_tiemp(rs.getString("folio_not_tiemp"));
-                or.setHora_notificada_inic_ej(rs.getString("hora_notificada_inic_ej"));
-                or.setFecha_inic_notificada_ej(rs.getString("fecha_inic_notificada_ej"));
+                PosNotTiempo or = new PosNotTiempo();
+                or.setFolio_sam(rs.getString("folio_sam"));
+                or.setHora_inicio(rs.getString("hora_inicio"));
+                or.setFecha_inicio(rs.getString("fecha_inicio"));
                 or.setNum_orden(rs.getString("num_orden"));
-                or.setNum_material(rs.getString("num_material"));
+                or.setMaterial(rs.getString("material"));
                 or.setCentro(rs.getString("centro"));
 //                or.setAlmacen(rs.getString("almacen"));
                 or.setMensaje(rs.getString("mensaje"));
@@ -3815,8 +3815,8 @@ public class ACC_Reportes extends Conexion {
     }
 
     /*[Reportes Mov Not Consulta folio SAP*/
-    public ArrayList<PosNotifTiempoOrdenes> SAPStatusMN(String folOrd, String CentroOrd, String CtdOrd) {
-        ArrayList<PosNotifTiempoOrdenes> sap = new ArrayList<>();
+    public ArrayList<PosNotTiempo> SAPStatusMN(String folOrd, String CentroOrd, String CtdOrd) {
+        ArrayList<PosNotTiempo> sap = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
@@ -3829,7 +3829,7 @@ public class ACC_Reportes extends Conexion {
             pst.setString(3, CtdOrd);
             rs = pst.executeQuery();
             while (rs.next()) {
-                PosNotifTiempoOrdenes so = new PosNotifTiempoOrdenes();
+                PosNotTiempo so = new PosNotTiempo();
                 so.setNum_orden(rs.getString("num_orden"));
                 so.setCentro(rs.getString("centro"));
                 sap.add(so);
@@ -10052,8 +10052,8 @@ public class ACC_Reportes extends Conexion {
     }
 
     /*[Reportes Mov Notificaciones Consulta folio SAM*/
-    public ArrayList<PosNotifTiempoOrdenes> SAMStatusMN(String folSAM, String CentroFol, String CtdFol) {
-        ArrayList<PosNotifTiempoOrdenes> sam = new ArrayList<>();
+    public ArrayList<PosNotTiempo> SAMStatusMN(String folSAM, String CentroFol, String CtdFol) {
+        ArrayList<PosNotTiempo> sam = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement pst = null;
@@ -10065,8 +10065,8 @@ public class ACC_Reportes extends Conexion {
             pst.setString(3, CtdFol);
             rs = pst.executeQuery();
             while (rs.next()) {
-                PosNotifTiempoOrdenes so = new PosNotifTiempoOrdenes();
-                so.setFolio_not_tiemp(rs.getString("folio_not_tiemp"));
+                PosNotTiempo so = new PosNotTiempo();
+                so.setFolio_sam(rs.getString("folio_sam"));
                 so.setCentro(rs.getString("centro"));
                 sam.add(so);
             }
