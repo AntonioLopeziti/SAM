@@ -6964,6 +6964,9 @@
                             case 12:
                                 funinva = "Material no encontrado";
                                 break;
+                            case 13:
+                                funinva = "Seleccione otro centro difente al origen";
+                                break;
                         }
                         var icon = $('#iconmsg');
                         icon.attr('src', img);
