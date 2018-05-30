@@ -803,7 +803,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                                 + "<td>" + p3.get(c).getNum_orden() + "</td>"
                                 + "<td name=\"mmcec\">" + p3.get(c).getCentro_coste() + "</td>"
                                 + "<td>" + p3.get(c).getClase_coste() + "</td>"
-                                + "<td name=\"mmped\">" + p3.get(c).getNum_solped() + "</td>"
+                                + "<td name=\"mmpedid\">" + p3.get(c).getNum_solped() + "</td>"
                                + "<td name=\"mmPosPed\">" + p3.get(c).getNum_posicion_solped() + "</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
