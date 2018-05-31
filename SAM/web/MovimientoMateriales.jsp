@@ -6959,13 +6959,16 @@
                                 funinva = "Material no habilitado";
                                 break;
                             case 11:
-                                funinva = "Material no existe en Centro-Almacen Destino";
+                                funinva = "Material no se encuentra ampliado en Centro-Almacen Destino";
                                 break;
                             case 12:
                                 funinva = "Material no encontrado";
                                 break;
                             case 13:
                                 funinva = "Seleccione otro centro difente al origen";
+                                break;
+                            case 14:
+                                funinva = "Lote obligatorio";
                                 break;
                         }
                         var icon = $('#iconmsg');
