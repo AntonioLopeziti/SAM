@@ -3183,7 +3183,7 @@ function MostrarMatch(id, match, pos) {
             if (tecla == 13) {
                 if ($('#' + cm + id + pos).val().length > 0) {
                     if (cm == "315") {
-                        ObtenerStockTransferencia($('#' + cm + id + pos).val(), cm, pos);
+                        GetinfoMat($('#' + cm + id + pos).val(), cm, pos);
                     }
                 }
             }
@@ -3194,7 +3194,8 @@ function MostrarMatch(id, match, pos) {
         $('#' + cm + id + pos).blur(function () {
             if ($('#' + cm + id + pos).val().length > 0) {
                 if (cm == "315") {
-                    ObtenerStockTransferencia($('#' + cm + id + pos).val(), cm, pos);
+                    GetinfoMat($('#' + cm + id + pos).val(), cm, pos);
+//                    ObtenerStockTransferencia($('#' + cm + id + pos).val(), cm, pos);
                 } else {
                     if (ValidarSujLoteNuevo($('#' + cm + id + pos).val(), cm) == 0) {
                         $('#' + cm + "tdLotes" + pos).val("");
@@ -3324,22 +3325,29 @@ function ocultarVentanaNuevo(id, bp, ct, obj, clm)
 }
 function seleccionarMCNuevo(mat, descr, um, clm) {
     var pos = $('#posGrid').val();
-    if (clm == "315") {
-        ObtenerStockTransferencia(mat, clm, pos);
-    } else {
-        $('#' + clm + 'tdMater' + pos).val(mat);
-        $('#' + clm + 'tdDescr' + pos).val(descr);
-        $('#' + clm + 'tdUmedi' + pos).val(um);
-    }
+//    if (clm == "315") {
+//        //ObtenerStockTransferencia(mat, clm, pos);
+//    } else {
+    $('#' + clm + 'tdMater' + pos).val(mat);
+    $('#' + clm + 'tdDescr' + pos).val(descr);
+    $('#' + clm + 'tdUmedi' + pos).val(um);
+//    }
     ocultarVentanaNuevo('VentanaModalMaterialNuevo', 'BuscarParaMaterialNuevo', 'ConsultaTablaMaterialNuevo', 'tdMater', clm);
 }
-function seleccionarMCLoteNuevo(lote, doc, posidoc, clm) {
+function seleccionarMCLoteNuevo(lote, doc, posidoc, clm, can) {
     if (clm == "311") {
         $('#bxLote311').val(lote);
         $('#bxDoc311').val(doc);
         $('#bxDocPos311').val(posidoc);
         ocultarVentanaNuevo('VentanaModalLoteStockE', '', '', '', clm);
         $('#bxLote311').focus();
+    } else if (clm == "315") {
+        var pos = $('#posGrid').val();
+        $('#' + clm + 'tdLotes' + pos).val(lote);
+        $('#' + clm + 'tdCanti' + pos).val(can);
+        $('#' + clm + 'tdDoc' + pos).val(doc);
+        $('#' + clm + 'tdPos' + pos).val(posidoc);
+        ocultarVentanaNuevo('VentanaModalLoteStockE', '', '', 'tdCanti', clm);
     } else {
         var pos = $('#posGrid').val();
         $('#' + clm + 'tdLotes' + pos).val(lote);
@@ -3560,10 +3568,10 @@ function AgregarFilasTabla301() {
         Ctro = Centro;
         dis2 = "disabled";
     }
-    if(ClaseM === "315"){
+    if (ClaseM === "315") {
         dis = "disabled";
         dis2 = "disabled";
-        dis3 = "disabled";
+        dis3 = "";
     }
     var newfiladata
             = "<tr>"
@@ -3572,7 +3580,7 @@ function AgregarFilasTabla301() {
             + "<td><input type=\"text\" class=\"tdSMatch\" id=\"" + ClaseM + "tdDescr" + i + "\" name=\"" + ClaseM + "DesciTD\" onfocus=\"QuitarMatch()\" readOnly/></td>"
             + "<td><input type=\"text\" class=\"tdSMatch\" id=\"" + ClaseM + "tdUmedi" + i + "\" name=\"" + ClaseM + "UMediTD\" onfocus=\"QuitarMatch()\" readOnly/></td>"
             + "<td><input type=\"text\" class=\"tdSMatch\" id=\"" + ClaseM + "tdCanti" + i + "\" name=\"" + ClaseM + "CantiTD\" onblur=\"this.value = checkDec(this.value, 3)\" onKeyPress=\"return soloNumeros(event)\" onfocus=\"QuitarMatch()\"/></td>"
-            + "<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdLotes" + i + "\" name=\"" + ClaseM + "LotesTD\" onfocus=\"MostrarMatch('tdLotes', 'MCLote', '" + i + "')\" maxlength=\"10\" style=\"text-transform: uppercase\" "+dis3+"/><input hidden type=\"text\" id=\"" + ClaseM + "tdDoc" + i + "\" name=\"" + ClaseM + "DocTD\"/><input hidden type=\"text\" id=\"" + ClaseM + "tdPos" + i + "\" name=\"" + ClaseM + "PosTD\"/><button id=\"" + ClaseM + "MCLote" + i + "\" onclick=\"ConsultaLotesNBuevo('" + i + "');\" name=\"" + ClaseM + "matchLote\" class='BtnMatchIconGrid'></button></td>"
+            + "<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdLotes" + i + "\" name=\"" + ClaseM + "LotesTD\" onfocus=\"MostrarMatch('tdLotes', 'MCLote', '" + i + "')\" maxlength=\"10\" style=\"text-transform: uppercase\" " + dis3 + "/><input hidden type=\"text\" id=\"" + ClaseM + "tdDoc" + i + "\" name=\"" + ClaseM + "DocTD\"/><input hidden type=\"text\" id=\"" + ClaseM + "tdPos" + i + "\" name=\"" + ClaseM + "PosTD\"/><button id=\"" + ClaseM + "MCLote" + i + "\" onclick=\"ConsultaLotesNBuevo('" + i + "');\" name=\"" + ClaseM + "matchLote\" class='BtnMatchIconGrid'></button></td>"
             + "<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdCentr" + i + "\" name=\"" + ClaseM + "CentrTD\" onfocus=\"MostrarMatch('tdCentr', 'MCCen', '" + i + "')\" maxlength=\"4\" style=\"text-transform: uppercase\" value=\"" + Ctro + "\" " + dis2 + "/><button id=\"" + ClaseM + "MCCen" + i + "\" onclick=\"ConsultaCentroNuevo('" + i + "')\" name=\"" + ClaseM + "matchCen\" class='BtnMatchIconGrid'></button></td>"
             + "<td><input type=\"text\" class=\"tdCMatch\" id=\"" + ClaseM + "tdAlmac" + i + "\" name=\"" + ClaseM + "AlmacTD\" onfocus=\"MostrarMatch('tdAlmac', 'MCAlm', '" + i + "')\" maxlength=\"4\" style=\"text-transform: uppercase\" value=\"" + Value + "\" " + dis + "/><button id=\"" + ClaseM + "MCAlm" + i + "\" onclick=\"ConsultaAlmaNBuevo('" + i + "')\" name=\"" + ClaseM + "matchCen\" class='BtnMatchIconGrid'></button></td>"
             + "</tr>";
@@ -3635,7 +3643,12 @@ function Validarmovis() {
                     Canti[i].focus();
                     return;
                 }
-                if (validarCantiExcedida(Materi[i].value, Centro, Almace, Lote[i].value, Canti[i].value)) {
+                if(Lote[i].value.length == 0){
+                    mensajesNuevo(14, "images/advertencia.PNG", "audio/saperror.wav");
+                    Lote[i].focus();
+                    return;
+                }
+                if (validarCantiExcedida(Materi[i].value, Centro, Almace, Lote[i].value, Canti[i].value, Docum[i].value, Posic[i].value )) {
                     mensajesNuevo(8, "images/advertencia.PNG", "audio/saperror.wav");
                     Canti[i].focus();
                     return;
@@ -3657,7 +3670,7 @@ function Validarmovis() {
                         Centr[i].focus();
                         return;
                     }
-                    if(Centr[i].value === Centro ){
+                    if (Centr[i].value === Centro) {
                         mensajesNuevo(13, "images/advertencia.PNG", "audio/saperror.wav");
                         Centr[i].focus();
                         return;
@@ -3852,7 +3865,14 @@ function ObtenerStockTransferencia(mat, clm, pos) {
         }
     });
 }
-function validarCantiExcedida(mat, centro, alm, lote, cant) {
+function validarCantiExcedida(mat, centro, alm, lote, cant, doc, pos) {
+//    alert("Material: " + mat + "\n\
+//           Centro: " + centro + "\n\
+//           Almacen: " + alm + "\n\
+//           Lote: " + lote + "\n\
+//           Cantidad: " + cant + "\n\
+//           Documento: " + doc + "\n\
+//           Posicion:" + pos);
     var x = true;
     var action = "ValidarCantidMaterial315";
     $.ajax({
@@ -3861,8 +3881,9 @@ function validarCantiExcedida(mat, centro, alm, lote, cant) {
         url: 'peticionMovMateriales2',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Accion=" + action + "&Material=" + mat + "&Centro=" + centro + "&Almacen=" + alm + "&Lote=" + lote,
+        data: "Accion=" + action + "&Material=" + mat + "&Centro=" + centro + "&Almacen=" + alm + "&Lote=" + lote + "&Documento=" + doc + "&Posicion=" + pos,
         success: function (data) {
+//            alert(data);
             if (data != "X") {
                 var can2 = parseFloat(data);
                 var can1 = parseFloat(cant);
