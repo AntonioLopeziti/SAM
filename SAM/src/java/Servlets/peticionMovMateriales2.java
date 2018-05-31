@@ -82,12 +82,12 @@ public class peticionMovMateriales2 extends HttpServlet {
                     }
                     break;
                 case "ConsultaLotes":
-                    ArrayList<stock> st = ACC_Stock.ObtenerInstancia().ConsultaLoteStockNuevo(Materi, Centro, Almace);
+                    ArrayList<stock> st = ACC_Stock.ObtenerInstancia().ConsultaLoteStockNuevo(Materi, Centro, Almace, ClaseM);
                     if (st.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < st.size(); i++) {
-                            out.println("<tr ondblclick=\"seleccionarMCLoteNuevo('" + st.get(i).getLote() + "','" + st.get(i).getNum_doc() + "', '" + st.get(i).getPos_doc() + "', '" + ClaseM + "');\">");
+                            out.println("<tr ondblclick=\"seleccionarMCLoteNuevo('" + st.get(i).getLote() + "','" + st.get(i).getNum_doc() + "', '" + st.get(i).getPos_doc() + "', '" + ClaseM + "','"+st.get(i).getStocklibre_utilizacion()+"');\">");
                             out.println("<td>" + st.get(i).getMaterial() + "</td>");
                             out.println("<td>" + st.get(i).getLote() + "</td>");
                             out.println("<td>" + st.get(i).getStocklibre_utilizacion() + "</td>");
@@ -153,7 +153,7 @@ public class peticionMovMateriales2 extends HttpServlet {
                     if (ClaseM.trim().equals("315")) {
                         dis = "disabled";
                         dis2 = "disabled";
-                        dis3 = "disabled";
+                        dis3 = "";
                     }
                     out.println("<table id=\"TabBody301\">");
                     out.println("<tbody>");
@@ -308,7 +308,7 @@ public class peticionMovMateriales2 extends HttpServlet {
                     out.println(j3);
                     break;
                 case "ValidarCantidMaterial315":
-                    String stk = ACC_Stock.ObtenerInstancia().ValidarCantidadMaterial(Materi, Centro, Almace, Lote);
+                    String stk = ACC_Stock.ObtenerInstancia().ValidarCantidadMaterial(Materi, Centro, Almace, Lote,Docume, Posici );
                     out.println(stk);
                     break;
             }
