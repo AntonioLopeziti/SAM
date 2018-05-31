@@ -1170,6 +1170,7 @@ public class ACC_Stock {
         }
         return 1;
     }
+
     public int ConsultaLoteStockE(String mat, String cantidad, String centro, String almacen, String lote, String doc, String po) {
         double cnt = 0.000;
         String query;
@@ -2264,6 +2265,7 @@ public class ACC_Stock {
         }
         return cc;
     }
+
     public double StockLibreT(String material, String lote, String centro, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2291,6 +2293,7 @@ public class ACC_Stock {
         }
         return cc;
     }
+
     public double StockLibreE(String material, String lote, String centro, String almacen, String pedido, String posicion) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2320,6 +2323,7 @@ public class ACC_Stock {
         }
         return cc;
     }
+
     public double StockLibreET(String material, String lote, String centro, String almacen, String pedido, String posicion) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2349,6 +2353,7 @@ public class ACC_Stock {
         }
         return cc;
     }
+
     public void ActualizaInv(String material, String lote, String centro, String cnt, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2370,6 +2375,7 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
+
     public void ActualizaInvT(String material, String lote, String centro, String cnt, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2391,6 +2397,7 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
+
     public void ActualizaInvE(String material, String lote, String centro, String cnt, String almacen, String pedido, String posicion) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2415,6 +2422,7 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
+
     public void ActualizaInvET(String material, String lote, String centro, String cnt, String almacen, String pedido, String posicion) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2439,6 +2447,7 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
     }
+
     public int VerificarExistentes300(String[][] tabla, int tam)//NuevoLalo
     {
         int rtn = 1, cont = 0;
@@ -3844,19 +3853,20 @@ public class ACC_Stock {
         }
     }
 
-    public ArrayList<stock> ConsultaLoteStockNuevo(String mat, String centro, String alm) {
+    public ArrayList<stock> ConsultaLoteStockNuevo(String mat, String centro, String alm, String clm) {
         ArrayList<stock> sto = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
 
         ResultSet rs = null;
-        String sql = "{call MM.MovimientosMateriales_ConsultaLoteNuevo(?,?,?)}";
+        String sql = "{call MM.MovimientosMateriales_ConsultaLoteNuevo(?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, mat);
             ps.setString(2, centro);
             ps.setString(3, alm);
+            ps.setString(4, clm);
             rs = ps.executeQuery();
             while (rs.next()) {
                 stock s = new stock();
@@ -3931,21 +3941,23 @@ public class ACC_Stock {
         return s;
     }
 
-    public String ValidarCantidadMaterial(String material, String centro, String almacen, String lote) {
+    public String ValidarCantidadMaterial(String material, String centro, String almacen, String lote, String doc, String pos) {
         String sto = "X";
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{call MM.ValidarCantidadMaterialStockTrans(?,?,?,?)}";
+        String sql = "{call MM.ValidarCantidadMaterialStockTrans(?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1,material);
-            ps.setString(2,centro);
-            ps.setString(3,almacen);
-            ps.setString(4,lote);
+            ps.setString(1, material);
+            ps.setString(2, centro);
+            ps.setString(3, almacen);
+            ps.setString(4, lote);
+            ps.setString(5, doc);
+            ps.setString(6, pos);
             rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 sto = rs.getString("stock_traslado");
             }
         } catch (Exception e) {
