@@ -30,25 +30,30 @@ public class ACC_VisualizarPedidosSD {
         return Instance;
     }
 
-    public ArrayList<SD_cabecera_pedidos_venta> ConsultaMCPedidosSD(String doc, String clase, String can, String folioSAM) {
+    public ArrayList<SD_cabecera_pedidos_venta> ConsultaMCPedidosSD(String ven, String fe1, String fe2, String cli, String pcl, String ped, String can) {
         ArrayList<SD_cabecera_pedidos_venta> pv = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{call SD.VisualizarPedidosSD_ConsultaDocVentasMC(?,?,?,?)}";
+        String sql = "{call SD.VisualizarPedidosSD_ConsultaDocVentasMC(?,?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, doc);
-            ps.setString(2, clase);
-            ps.setString(3, can);
-            ps.setString(4, folioSAM);
+            ps.setString(1, ven);
+            ps.setString(2, fe1);
+            ps.setString(3, fe2);
+            ps.setString(4, cli);
+            ps.setString(5, pcl);
+            ps.setString(6, ped);
+            ps.setString(7, can);
             rs = ps.executeQuery();
             while (rs.next()) {
                 SD_cabecera_pedidos_venta p = new SD_cabecera_pedidos_venta();
                 p.setDocumento_ventas(rs.getString("documento_ventas"));
                 p.setFolio_sam(rs.getString("folio_sam"));
-                p.setClase_documento_ventas(rs.getString("clase_documento_ventas"));
+                p.setFecha_documento(rs.getString("fecha_documento"));
+                p.setSolicitante(rs.getString("solicitante"));
+                p.setNum_pedido_cliente(rs.getString("num_pedido_cliente"));
                 pv.add(p);
             }
         } catch (Exception e) {
@@ -59,16 +64,17 @@ public class ACC_VisualizarPedidosSD {
         return pv;
     }
 
-    public SD_cabecera_pedidos_venta ObtenerCabeceraPed(String doc) {
+    public SD_cabecera_pedidos_venta ObtenerCabeceraPed(String doc, String ven) {
         SD_cabecera_pedidos_venta cab = new SD_cabecera_pedidos_venta();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{call SD.VisualizarPedidosSD_ConsultarPedido(?)}";
+        String sql = "{call SD.VisualizarPedidosSD_ConsultarPedido(?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, doc);
+            ps.setString(2, ven);
             rs = ps.executeQuery();
             while (rs.next()) {
                 cab.setDocumento_ventas(rs.getString("documento_ventas"));
@@ -355,5 +361,50 @@ public class ACC_VisualizarPedidosSD {
             cnx.CerrarConexion(con);
         }
         return texto;
+    }
+
+    public String GetDesClientSD(String cliente) {
+        String ce = "";
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call SD.VisualizarPedidosSD_GetClienteDesPed(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, cliente);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ce = rs.getString("nombre1");
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ce;
+    }
+
+    public String GetTextComercialInfo(String mat) {
+        String txt = "";
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call SD.VisualizarPedidosSD_ObtenerTxtMaterial(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1,mat);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                txt = rs.getString("descripcion_material_cliente");
+            }
+            
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return txt;
     }
 }
