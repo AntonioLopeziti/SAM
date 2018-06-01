@@ -17,7 +17,13 @@ $(document).ready(function () {
         $('#msg').html("");
         $('#iconmsg').hide();
         $('#DocumVenta').val('');
-        $('#ClasePedid').val('');
+        $('#fechDocBus').val('');
+        $('#fechDocBus2').val('');
+        $('#Clientebusc').val('');
+        $('#NumpedCliente').val('');
+        if ($('#txtbvedn').val().length == 0) {
+            $('#VendBus').val('');
+        }
         $('#numAcMax').val('500');
         var BE = document.createElement('audio');
         BE.src = "audio/sapsnd05.wav";
@@ -170,7 +176,7 @@ $(document).ready(function () {
         if (tecla == 13) {
             BuscarPedMC();
         }
-        if(tecla == 32){
+        if (tecla == 32) {
             return true;
         }
 
@@ -467,8 +473,10 @@ function GetData() {
                     $('#Sector').val(data2);
                     $('#OficinaVentas').val(data2);
                     $('#DOficinaVentas').val(data2);
-                    $('#GpoVendedores').val(data2);
-                    $('#DGpoVendedores').val(data2);
+                    if ($('#txtbvedn').val().length == 0) {
+                        $('#GpoVendedores').val(data2);
+                        $('#DGpoVendedores').val(data2);
+                    }
                     $('#fechaDocumento').val(data2);
                     $('#AreVentas').val(data2);
                     $('#NombreResp').val(data2);
@@ -714,8 +722,10 @@ function cleanDatosCab() {
     $('#Sector').val("");
     $('#OficinaVentas').val("");
     $('#DOficinaVentas').val("");
-    $('#GpoVendedores').val("");
-    $('#DGpoVendedores').val("");
+    if ($('#txtbvedn').val().length == 0) {
+        $('#GpoVendedores').val("");
+        $('#DGpoVendedores').val("");
+    }
 //    $('#MotivoPed').remove();
     $('#fechaDocumento').val("");
     $('#AreVentas').val("");
