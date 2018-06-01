@@ -33,7 +33,7 @@ public class ACC_Zebra {
         }
         return Instance;
     }
-
+    String txt = "";
     public void PrintTargetPT(Zebra_noti_PT z) throws IOException {
         String texto;
         if (z.getDescripcion().length() < 74) {
@@ -117,7 +117,12 @@ public class ACC_Zebra {
 
 //        PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
         PrintService ps = impresoras(impresora(z.getPuesto_trabajo()));
-
+        txt += "-" +impresora(z.getPuesto_trabajo());
+        try (FileWriter writer = new FileWriter("C:\\Users\\Portal Sap\\Desktop\\foo.txt")) {
+                    writer.write(txt);
+                    writer.flush();
+                    // do more stuff with writer
+                }
         DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
         DocPrintJob dj = ps.createPrintJob();
         Doc doc = new SimpleDoc(texto.getBytes(), flavor, null);
@@ -129,18 +134,14 @@ public class ACC_Zebra {
     }
 
     public PrintService impresoras(String nombre) throws IOException {
-        String txt = "IP_dir: " + nombre;
+        txt = "IP_dir: " + nombre;
         System.out.println("IP: " + nombre);
         PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null); //Obtenemos los servicios de impresion del sistema 
         for (PrintService impresora : printServices) { //Recorremos el array de servicios de impresion
             System.out.println("Printer: " + impresora.getName());
             txt += "\nPrinter: " + impresora.getName();
+                
             if (impresora.getName().contentEquals(nombre)) { // Si el nombre del servicio es el mismo que el que buscamos
-//                try (FileWriter writer = new FileWriter("C:\\Users\\Portal Sap\\Desktop\\foo.txt")) {
-//                    writer.write(txt);
-//                    writer.flush();
-//                    // do more stuff with writer
-//                }
                 return impresora; // Nos devuelve el servicio 
             }
         }
