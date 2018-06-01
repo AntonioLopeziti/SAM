@@ -43,24 +43,29 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String Accion = request.getParameter("Accion");
+            String GpoVended = request.getParameter("GpoVended");
             String Documento = request.getParameter("Documento");
-            String FolioSAM = request.getParameter("FolioSAM");
+            String Fecha1 = request.getParameter("Fech1");
+            String Fecha2 = request.getParameter("Fech2");
+            String Cliente = request.getParameter("Cliente");
+            String NumpedC = request.getParameter("NumpedC");
             String Posicion = request.getParameter("Posicion");
-            String Clase = request.getParameter("Clase");
             String Ctd = request.getParameter("Ctd");
             String TipoCon = request.getParameter("TipoConsulta");
             Consultas c = new Consultas();
             switch (Accion) {
                 case "ConsultaMCPedido":
-                    ArrayList<SD_cabecera_pedidos_venta> mc1 = ACC_VisualizarPedidosSD.ObtenerInstancia().ConsultaMCPedidosSD(Documento, Clase, Ctd, FolioSAM);
+                    ArrayList<SD_cabecera_pedidos_venta> mc1 = ACC_VisualizarPedidosSD.ObtenerInstancia().ConsultaMCPedidosSD(GpoVended,c.DateFormatGuion(Fecha1),c.DateFormatGuion(Fecha2),Cliente,NumpedC,Documento,Ctd);
                     if (mc1.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < mc1.size(); i++) {
                             out.println("<tr ondblclick=\"seleccionar('" + mc1.get(i).getDocumento_ventas() + "')\">");
-                            out.println("<td>" + mc1.get(i).getClase_documento_ventas() + "</td>");
                             out.println("<td>" + mc1.get(i).getDocumento_ventas() + "</td>");
                             out.println("<td>" + mc1.get(i).getFolio_sam() + "</td>");
+                            out.println("<td>" + c.DateFormat(mc1.get(i).getFecha_documento()) + "</td>");
+                            out.println("<td>" + mc1.get(i).getSolicitante() + "</td>");
+                            out.println("<td>" + mc1.get(i).getNum_pedido_cliente() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -71,7 +76,7 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                     break;
                 case "ConsultaDocumentoTipo":
                     String var = "0";
-                    SD_cabecera_pedidos_venta p = ACC_VisualizarPedidosSD.ObtenerInstancia().ObtenerCabeceraPed(Documento);
+                    SD_cabecera_pedidos_venta p = ACC_VisualizarPedidosSD.ObtenerInstancia().ObtenerCabeceraPed(Documento, GpoVended);
                     if (!(p.getDocumento_ventas().trim() == "" || p.getDocumento_ventas().trim() == null)) {
                         var = "1";
                     }
@@ -81,14 +86,14 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                     JSONArray j = new JSONArray();
                     switch (TipoCon) {
                         case "1":
-                            SD_cabecera_pedidos_venta pe = ACC_VisualizarPedidosSD.ObtenerInstancia().ObtenerCabeceraPed(Documento);
+                            SD_cabecera_pedidos_venta pe = ACC_VisualizarPedidosSD.ObtenerInstancia().ObtenerCabeceraPed(Documento,GpoVended );
                             j.add(pe.getDocumento_ventas().trim());
                             j.add(pe.getSolicitante().trim());
                             j.add(pe.getDestinatario_mercancias().trim());
                             j.add(pe.getNum_pedido_cliente().trim());
-                            j.add(pe.getTexto_visual_interlocutor1().trim());
-                            j.add(pe.getTexto_visual_interlocutor2().trim());
-                            j.add(c.DateFormat(pe.getFecha_pedido_compra_cliente().trim()));
+                            j.add(ACC_VisualizarPedidosSD.ObtenerInstancia().GetDesClientSD(pe.getSolicitante().trim()));
+                            j.add(ACC_VisualizarPedidosSD.ObtenerInstancia().GetDesClientSD(pe.getDestinatario_mercancias().trim()));
+                            j.add(c.DateFormat(pe.getFecha_documento().trim()));
                             j.add(pe.getClase_documento_ventas().trim());
                             j.add(pe.getOrganizacion_ventas().trim());
                             j.add(pe.getCanal_distribucion().trim());
@@ -132,7 +137,7 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                                 out.println("<td>" + pos.get(n).getUnidad_medida_venta() + "</td>");
                                 out.println("<td><input type=\"checkbox\" disabled " + CheckR(pos.get(n).getExisten_repartos()) + "/></td>");
 //                                out.println("<td>" + pos.get(n).getTexto_breve_posicion_pedido_cliente() + "</td>");
-                                out.println("<td>" + pos.get(n).getNumero_material_cliente() + "</td>");
+                                out.println("<td>" +  ACC_VisualizarPedidosSD.ObtenerInstancia().GetTextComercialInfo(pos.get(n).getNumero_material()) + "</td>");
                                 out.println("<td>" + pos.get(n).getTipo_pos_doc_com() + "</td>");
                                 out.println("<td>" + pos.get(n).getPerfil_ind_merc_com() + "</td>");
                                 out.println("<td>" + pos.get(n).getPosicion_sup_estra_lis_mat() + "</td>");
@@ -161,7 +166,7 @@ public class peticionVisualizarPedidosSD extends HttpServlet {
                             out.println("</tr>");
                         }
                     }
-                    out.println(" <tr class=\"ocultar\"><td>00</td><td>0000000</td><td>000000000000</td><td>00000000000000000</td><td>00000</td><td>000</td><td>0000000000000000000000</td><td>00000000</td><td>0000000000000</td><td>00000000</td><td>00000000000000000</td><td>0000000000000000</td></tr>");
+                    out.println("<tr class=\"ocultar\"><td>00</td><td>0000000</td><td>000000000000</td><td>00000000000000000</td><td>00000</td><td>000</td><td>0000000000000000000000000000000000000000000000000</td><td>00000000</td><td>0000000000000</td><td>00000000</td><td>00000000000000000</td><td>0000000000000000</td></tr>");
                     out.println("</tbody>");
                     out.println("</table>");
                     break;
