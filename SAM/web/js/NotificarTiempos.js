@@ -1843,7 +1843,7 @@ function guardaPos() {
             success: function (data) {
                 if (i == mat.length - 1) {
 //                    guardaCabecera2();
-//                    Print_PT();
+                    Print_PT();
                     ocultarVentana('ventaPM01', '');
 //                    $('#LimPantalla').trigger('click');
 //                    updateFolio();
