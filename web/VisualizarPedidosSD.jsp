@@ -69,6 +69,13 @@
         String Viernes = po.getProperty("etiqueta.Viernes");
         String Sabado = po.getProperty("etiqueta.Sabado");
         String Domingo = po.getProperty("etiqueta.Domingo");
+        String Do = po.getProperty("etiqueta.CSPDom");
+        String lu = po.getProperty("etiqueta.CSPLun");
+        String Ma = po.getProperty("etiqueta.CSPMar");
+        String Mi = po.getProperty("etiqueta.CSPMie");
+        String Ju = po.getProperty("etiqueta.CSPJue");
+        String vi = po.getProperty("etiqueta.CSPVie");
+        String sa = po.getProperty("etiqueta.CSPSab");
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
@@ -110,6 +117,9 @@
                     case 3:
                         msg = '<%=ErorPedi%>';
                         break;
+                    case 4:
+                        msg = 'Error: Formato de fecha invalida';
+                        break;
 
                 }
                 $('#msg').html(msg);
@@ -120,7 +130,31 @@
                 BE.src = au;
                 BE.play();
             }
-
+            function VerificarIncioVendedor() {
+                var Vend = '<%=Nombre%>';
+                var acc = "VerificarAccesoVendedor";
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    url: 'peticionPedidoSDCrear',
+                    contentType: "application/x-www-form-urlencoded",
+                    processData: true,
+                    data: "Accion=" + acc + "&Vendedor=" + Vend,
+                    success: function (data) {
+                        if (data == 0) {
+//                            alert("Pantalla solo disponible a vendedor o no se encuentra registrado, Consulte al administrador");
+//                            window.location.href = "Bienvenido.jsp";
+                        } else {
+                            arr = new Array();
+                            arr = data.split("-");
+                            $('#VendBus').val(arr[0]);
+                            $('#VendBus').prop('disabled', true);
+                            $('#GpoVendedores').val(arr[0]);
+                            $('#DGpoVendedores').val(arr[1]);
+                        }
+                    }
+                });
+            }
         </script>
         <link rel="stylesheet" href="css/StyleGeneral.css"> 
         <link rel="stylesheet" href="css/StylePedidoSDVisualizar.css"> 
@@ -132,7 +166,29 @@
         <script src="js/PedidoSDVisualziar.js"></script>  
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
         <title><%out.println(po.getProperty("etiqueta.PedidosSDTituloVisua"));%></title>       
-    <body>   
+    <body>  
+        <script>
+            $(function () {
+                $("#datapicker").datepicker({
+                    dateFormat: 'dd.mm.yy',
+                    firstDay: 0,
+                    monthNames: ['<%=Enero%>', '<%=Febrero%>', '<%=Marzo%>', '<%=Abril%>', '<%=Mayo%>', '<%=Junio%>',
+                        '<%=Julio%>', '<%=Agosto%>', '<%=Septiembre%>', '<%=Octubre%>', '<%=Noviembre%>', '<%=Diciembre%>'],
+                    dayNames: ['<%=Domingo%>', '<%=Lunes%>', '<%=Martes%>', '<%=Miercoles%>', '<%=Jueves%>', '<%=Viernes%>', '<%=Sabado%>'],
+                    dayNamesMin: ['<%=Do%>', '<%=lu%>', '<%=Ma%>', '<%=Mi%>', '<%=Ju%>', '<%=vi%>', '<%=sa%>'],
+                    onSelect: function (date) {
+                        var idda = $('#idDataFeee').val();
+                        var fehSet = $('#' + idda);
+                        fehSet.val(date);
+                        fehSet.focus();
+                        CerrarCalendario();
+                    }
+                });
+            });
+            $(function () {
+                $('#datapicker').datepicker().hide();
+            });
+        </script>
         <div id="main-header">    
             <hr>
             <div id="header">
@@ -173,9 +229,9 @@
 
                     </div>
                     <div class="divIzq">
-                        <label><%out.println(po.getProperty("etiqueta.PedidosSDValorNeto"));%></label><input tye="text" disabled style="width: 38%;" id="valorNeto"/> <input type="text" style="width: 12%;" disabled id="Moneda1"/>
-                        <hr>
-                        <input tye="text" readonly style="width: 100%; border: none; background: none; text-decoration: underline;" id="TextoInter1"/>
+<!--                        <label ><%out.println(po.getProperty("etiqueta.PedidosSDValorNeto"));%></label><input tye="text" disabled style="width: 38%;" id="valorNeto"/> <input type="text" style="width: 12%;" disabled id="Moneda1"/>
+                        <hr>-->
+                        <input tye="text" readonly style="width: 100%; border: none; background: none; margin-top:35px;  text-decoration: underline;" id="TextoInter1"/>
                         <hr style="border: #F2F2F2">
                         <input tye="text" disabled style="width: 100%; border: none; background: none; margin-top: 5px; text-decoration: underline;" id="TextoInter2"/>
                         <hr style="border: #F2F2F2">
@@ -297,8 +353,8 @@
                                                             <td><%out.println(po.getProperty("etiqueta.PedidosSDCantidPedi"));%></td>
                                                             <td><%out.println(po.getProperty("etiqueta.PedidosSDUM"));%></td>
                                                             <td><%out.println(po.getProperty("etiqueta.PedidosSDR"));%></td>
-                                                            <!--<td><%out.println(po.getProperty("etiqueta.PedidosSDDemonmacion"));%></td>-->
-                                                            <td><%out.println(po.getProperty("etiqueta.PedidosSDNMaterialClien"));%></td>
+                                                            <td><%out.println(po.getProperty("etiqueta.PedidosSDDemonmacion"));%></td>
+                                                            <!--<td><%out.println(po.getProperty("etiqueta.PedidosSDNMaterialClien"));%></td>-->
                                                             <td><%out.println(po.getProperty("etiqueta.PedidosSDTPos"));%></td>
                                                             <td><%out.println(po.getProperty("etiqueta.PedidosSDPIndMciaPelig"));%></td>
                                                             <td><%out.println(po.getProperty("etiqueta.PedidosSDPosSup"));%></td>
@@ -319,7 +375,7 @@
                                                         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                                         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                                         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                        <tr class="ocultar"><td>00</td><td>0000000</td><td>000000000000</td><td>00000000000000000</td><td>00000</td><td>000</td><td>0000000000000000000000</td><td>00000000</td><td>0000000000000</td><td>00000000</td><td>00000000000000000</td><td>0000000000000000</td></tr>
+                                                        <tr class="ocultar"><td>00</td><td>0000000</td><td>000000000000</td><td>00000000000000000</td><td>00000</td><td>000</td><td>0000000000000000000000000000000000000000000000000</td><td>00000000</td><td>0000000000000</td><td>00000000</td><td>00000000000000000</td><td>0000000000000000</td></tr>
                                                     </tbody>
                                                 </table>
                                             </section>
@@ -482,19 +538,23 @@
                 </div>
             </div>
         </div>
-        <div id="VentanaModalPedidosSD" class="VentanaModal">
-            <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.PedidosSDDocumVe"));%></label><div class="BotonCerrar_Matc" id="CerraMCPed"><label >X</label></div></div>
+        <div id="VentanaModalPedidosSD" class="VentanaModalVpedido">
+            <div id="handleVped"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.PedidosSDDocumVe"));%></label><div class="BotonCerrar_Matc" id="CerraMCPed"><label >X</label></div></div>
             <div class="PanelBntMatch"><button id="retPed"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
             <div id="BuscarParPedSD" class="BuscarParam_u">
                 <div class="fondo_Match">
-                    <div class="busquedaMatch">
-                        <label><%out.println(po.getProperty("etiqueta.PedidosSDDocu"));%></label><input type="text" id="DocumVenta" maxlength="12" style="width:35%; text-transform: uppercase;"/>
-                        <hr>
-                        <label>Folio SAM</label><input type="text" id="FSAM" maxlength="10" style="width:35%; text-transform: uppercase;"/>
-                        <hr>
-                        <label><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></label><input type="text" id="ClasePedid" maxlength="4" style="width:35%; text-transform: uppercase;"/>
+                    <div class="busquedaMatch12">
+                        <label>Gpo.Vendedor</label><input type="text" id="VendBus" maxlength="3" style="width:8%; text-transform: uppercase;"/>
                         <hr>  
-                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax"   style="width:10%;" />
+                        <label>Fecha Documento</label><input type="text" id="fechDocBus" maxlength="10" style="width:20%; text-transform: uppercase;"/><button id="MFe1" class='BtnMatchIcon'></button>  a  <input type="text" id="fechDocBus2" maxlength="10" style="width:20%; text-transform: uppercase;"/><button id="MFe2" class='BtnMatchIcon'></button>
+                        <hr>  
+                        <label>Cliente</label><input type="text" id="Clientebusc" maxlength="10" style="width:20%; text-transform: uppercase;"/>
+                        <hr>  
+                        <label>Num.Pedido</label><input type="text" id="DocumVenta" maxlength="12" style="width:20%; text-transform: uppercase;"/>
+                        <hr>
+                        <label>Num.Ped.cliente</label><input type="text" id="NumpedCliente" maxlength="35" style="width:45%; text-transform: uppercase;"/>
+                        <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="numAcMax"   style="width:8%;" />
                         <hr>
                     </div>        
                 </div> 
@@ -506,18 +566,20 @@
             <div id="ConsultaTablaPedidos" style="display: none;">
                 <div class="tablaCab">
                     <div class="table-scroll" id="table-scrollpedido">
-                        <div class="fixedY" id="fixedYPedidoSd">
+                        <div class="fixedYr" id="fixedYPedidoSd">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.PedidosSDClasePedido"));%></th>
                                         <th><%out.println(po.getProperty("etiqueta.PedidosSDDocu"));%></th>
                                         <th>Folio SAM</th>
+                                        <th>Fecha documento</th>
+                                        <th>Cliente</th>
+                                        <th>Num.Ped.Cliente</th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
-                        <div id="cuerpoDatos">
+                        <div id="cuerpoDatos22">
                             <div class="nofixedX" id="cargarDatosPedidos">
                             </div>
                         </div>
@@ -525,6 +587,11 @@
                 </div>
             </div>            
         </div>
+        <div id="Calenndar" class="VentanaFecha">
+            <div id="handlecalendar"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CSPCalen"));%></label><div class="BotonCerrar_Matc" id="CerraCalendar1"><label >X</label></div></div>
+            <div class="scrolCale"><div id="datapicker"></div></div>
+            <input id="idDataFeee" hidden/>
+        </div> 
         <footer>
             <hr class="fecha" id="footerline">
             <div  class="fecha">
