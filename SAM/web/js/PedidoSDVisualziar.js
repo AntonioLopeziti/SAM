@@ -6,10 +6,14 @@
 
 $(document).ready(function () {
     $('#MCPedidos').hide();
+    VerificarIncioVendedor();
     $('#txtPedido').focus(function () {
         $('#MCPedidos').show();
     });
     $('#MCPedidos').click(function () {
+        $('#MFe1').hide();
+        $('#MFe2').hide();
+        $('#MCPedidos').hide();
         $('#msg').html("");
         $('#iconmsg').hide();
         $('#DocumVenta').val('');
@@ -19,14 +23,14 @@ $(document).ready(function () {
         BE.src = "audio/sapsnd05.wav";
         BE.play();
         var ventana = $('#VentanaModalPedidosSD');
-        var ancho = 350;
+        var ancho = 850;
         var alto = 650;
         var x = (screen.width / 2) - (ancho / 2);
         var y = (screen.height / 2) - (alto / 2);
         ventana.css({top: y + "px", left: x + "px"});
         ventana.css('display', 'block');
         borramsg();
-        var theHandle = document.getElementById("handle");
+        var theHandle = document.getElementById("handleVped");
         var theRoot = document.getElementById("VentanaModalPedidosSD");
         Drag.init(theHandle, theRoot);
         $('#DocumVenta').focus();
@@ -38,6 +42,7 @@ $(document).ready(function () {
         $('#DocumVenta').focus();
     });
     $('#CerraMCPed').click(function () {
+        CerrarCalendario();
         var BE = document.createElement('audio');
         BE.src = "audio/sapsnd05.wav";
         BE.play();
@@ -47,6 +52,7 @@ $(document).ready(function () {
         $('#txtPedido').focus();
     });
     $('#CerraMCPed2').click(function () {
+        CerrarCalendario();
         var BE = document.createElement('audio');
         BE.src = "audio/sapsnd05.wav";
         BE.play();
@@ -54,6 +60,92 @@ $(document).ready(function () {
         $('#BuscarParPedSD').css('display', 'block');
         $('#ConsultaTablaPedidos').css('display', 'none');
         $('#txtPedido').focus();
+    });
+    $('#VendBus').focus(function () {
+        $('#MFe1').hide();
+        $('#MFe2').hide();
+        $('#MCPedidos').hide();
+    });
+    $('#VendBus').keypress(function (e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 13) {
+            BuscarPedMC();
+        }
+        if (tecla == 8) {
+            return true;
+        }
+
+        patron = /[0-9a-zA-z]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    });
+    $('#MFe1').click(function () {
+        OpenCalendario('fechDocBus');
+    });
+    $('#fechDocBus').focus(function () {
+        $('#MFe1').show();
+        $('#MFe2').hide();
+        $('#MCPedidos').hide();
+    });
+    $('#fechDocBus').keypress(function (e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 13) {
+            BuscarPedMC();
+        }
+        if (tecla == 8) {
+            return true;
+        }
+
+        patron = /^\d{4}\-\d{2}\\d{2}$/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    });
+    $('#MFe2').click(function () {
+        OpenCalendario('fechDocBus2');
+    });
+    $('#fechDocBus2').focus(function () {
+        $('#MFe1').hide();
+        $('#MFe2').show();
+        $('#MCPedidos').hide();
+    });
+    $('#CerraCalendar1').click(function () {
+        CerrarCalendario();
+    });
+    $('#fechDocBus2').keypress(function (e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 13) {
+            BuscarPedMC();
+        }
+        if (tecla == 8) {
+            return true;
+        }
+
+        patron = /^\d{4}\-\d{2}\\d{2}$/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    });
+    $('#Clientebusc').focus(function () {
+        $('#MFe1').hide();
+        $('#MFe2').hide();
+        $('#MCPedidos').hide();
+    });
+    $('#Clientebusc').keypress(function (e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 13) {
+            BuscarPedMC();
+        }
+        if (tecla == 8) {
+            return true;
+        }
+
+        patron = /[0-9a-zA-z]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    });
+    $('#DocumVenta').focus(function () {
+        $('#MFe1').hide();
+        $('#MFe2').hide();
+        $('#MCPedidos').hide();
     });
     $('#DocumVenta').keypress(function (e) {
         tecla = (document.all) ? e.keyCode : e.which;
@@ -68,12 +160,17 @@ $(document).ready(function () {
         tecla_final = String.fromCharCode(tecla);
         return patron.test(tecla_final);
     });
-    $('#FSAM').keypress(function (e) {
+    $('#NumpedCliente').focus(function () {
+        $('#MFe1').hide();
+        $('#MFe2').hide();
+        $('#MCPedidos').hide();
+    });
+    $('#NumpedCliente').keypress(function (e) {
         tecla = (document.all) ? e.keyCode : e.which;
         if (tecla == 13) {
             BuscarPedMC();
         }
-        if (tecla == 8) {
+        if(tecla == 32){
             return true;
         }
 
@@ -81,20 +178,14 @@ $(document).ready(function () {
         tecla_final = String.fromCharCode(tecla);
         return patron.test(tecla_final);
     });
-    $('#ClasePedid').keypress(function (e) {
-        tecla = (document.all) ? e.keyCode : e.which;
-        if (tecla == 8) {
-            return true;
-        }
-        if (tecla == 13) {
-            BuscarPedMC();
-        }
-        patron = /[0-9a-zA-z]/;
-        tecla_final = String.fromCharCode(tecla);
-        return patron.test(tecla_final);
-    });
+
     $('#okPedido').click(function () {
         BuscarPedMC();
+    });
+    $('#numAcMax').focus(function () {
+        $('#MFe1').hide();
+        $('#MFe2').hide();
+        $('#MCPedidos').hide();
     });
     $('#numAcMax').keypress(function (e) {
         tecla = (document.all) ? e.keyCode : e.which;
@@ -266,6 +357,21 @@ function borramsg() {
     $('#msg').html("");
 }
 function BuscarPedMC() {
+    CerrarCalendario();
+    if ($('#fechDocBus').val().length > 0) {
+        if ($('#fechDocBus').val().length < 10) {
+            ShowMsg(4, "images/advertencia.PNG", "audio/saperror.wav");
+            $('#fechDocBus').focus();
+            return;
+        }
+    }
+    if ($('#fechDocBus2').val().length > 0) {
+        if ($('#fechDocBus2').val().length < 10) {
+            ShowMsg(4, "images/advertencia.PNG", "audio/saperror.wav");
+            $('#fechDocBus2').focus();
+            return;
+        }
+    }
     var acc = "ConsultaMCPedido";
     $.ajax({
         async: false,
@@ -273,7 +379,7 @@ function BuscarPedMC() {
         url: 'peticionVisualizarPedidosSD',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Accion=" + acc + "&Documento=" + $('#DocumVenta').val().trim() + "&FolioSAM=" + $('#FSAM').val().trim() + "&Clase=" + $('#ClasePedid').val().trim() + "&Ctd=" + $('#numAcMax').val().trim(),
+        data: "Accion=" + acc + "&GpoVended=" + $('#VendBus').val().trim() + "&Fech1=" + $('#fechDocBus').val().trim() + "&Fech2=" + $('#fechDocBus2').val().trim() + "&Cliente=" + $('#Clientebusc').val().trim() + "&NumpedC=" + $('#NumpedCliente').val().trim() + "&Documento=" + $('#DocumVenta').val().trim() + "&Ctd=" + $('#numAcMax').val().trim(),
         success: function (data) {
             if (data == 0) {
                 ShowMsg(1, "images/aceptar.png", "audio/sapmsg.wav");
@@ -289,6 +395,32 @@ function BuscarPedMC() {
         }
     });
 }
+function CerrarCalendario() {
+    var BE = document.createElement('audio');
+    BE.src = "audio/sapsnd05.wav";
+    BE.play();
+    $('#Calenndar').css('display', 'none');
+    $('#datapicker').datepicker().hide();
+}
+function OpenCalendario(id) {
+    $("#" + id).focus();
+    $("#idDataFeee").val(id);
+    var BE = document.createElement('audio');
+    BE.src = "audio/sapsnd05.wav";
+    BE.play();
+    var ancho = 500;
+    var alto = 750;
+    var x = (screen.width / 2) - (ancho / 2);
+    var y = (screen.height / 2) - (alto / 2);
+    var ventana = $('#Calenndar');
+    ventana.css({top: y + "px", left: x + "px"});
+    ventana.css('display', 'block');
+    borramsg();
+    var theHandle = document.getElementById("handlecalendar");
+    var theRoot = document.getElementById("Calenndar");
+    Drag.init(theHandle, theRoot);
+    $('#datapicker').datepicker().show();
+}
 function seleccionar(dato) {
     var BE = document.createElement('audio');
     BE.src = "audio/sapsnd05.wav";
@@ -303,6 +435,7 @@ function GetData() {
     cleanDatosCab();
     cleanDatospos();
     var tipo = "0";
+    var gven = $('#VendBus').val().trim();
     var ped = $('#txtPedido');
     if (ped.val().trim() === "") {
         ShowMsg(2, "images/advertencia.PNG", "audio/saperror.wav");
@@ -315,7 +448,7 @@ function GetData() {
             url: 'peticionVisualizarPedidosSD',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Accion=" + acc + "&Documento=" + ped.val().trim(),
+            data: "Accion=" + acc + "&Documento=" + ped.val().trim() + "&GpoVended=" + gven,
             success: function (data) {
                 tipo = data.trim();
                 if (data.trim() === "0") {
@@ -354,7 +487,7 @@ function GetData() {
                         url: 'peticionVisualizarPedidosSD',
                         contentType: "application/x-www-form-urlencoded",
                         processData: true,
-                        data: "Accion=" + acc + "&Documento=" + ped.val().trim() + "&TipoConsulta=" + data,
+                        data: "Accion=" + acc + "&Documento=" + ped.val().trim() + "&TipoConsulta=" + data + "&GpoVended=" + gven,
                         success: function (data) {
                             $('#Pedido').val(data[0]);
                             $('#txtPedido').val(data[0]);
