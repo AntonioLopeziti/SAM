@@ -250,29 +250,7 @@
             $(function () {
                 $('#datapicker').datepicker().hide();
             });
-            function validarFecha(fecha) {
-                var idda = $('#idDataFeee').val();
-                var fehSet = $('#' + idda);
-                var f = fecha.split(".");
-                var d = f[0];
-                var m = f[1];
-                var y = f[2];
-                var f1 = new Date(y, m, d);
-                var date = new Date();
-                var d1 = checkTime(date.getDate());
-                var m1 = checkTime(date.getMonth() + 1);
-                var y1 = date.getFullYear();
-                var f2 = new Date(y1, m1, d1);
-                if (f2 > f1) {
-                    ShowMsg(8, "images/advertencia.PNG", "audio/saperror.wav");
-                    fehSet.focus();
-                    fehSet.val('');
-                } else {
-                    fehSet.val(fecha);
-                    fehSet.focus();
-                    borramsg();
-                }
-            }
+            
             function MostrarFolio()
             {
                 var men = document.getElementById("msg");
