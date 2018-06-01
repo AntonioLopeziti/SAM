@@ -147,6 +147,7 @@
                         } else {
                             arr = new Array();
                             arr = data.split("-");
+                            $('#txtbvedn').val(arr[0]);
                             $('#VendBus').val(arr[0]);
                             $('#VendBus').prop('disabled', true);
                             $('#GpoVendedores').val(arr[0]);
@@ -213,6 +214,7 @@
                         <div class="divPed">
                             <label><%out.println(po.getProperty("etiqueta.PedidosSDPedido"));%></label><input type="text" style="width: 25%; text-transform: uppercase;" id="txtPedido" maxlength="10" /><button id="MCPedidos" class='BtnMatchIcon'></button>
                             <hr>
+                            <input type="text" id="txtbvedn" hidden/>
                         </div>
                     </div>
                 </div>
