@@ -69,6 +69,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
@@ -530,8 +531,8 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     zb.setFol_sam(v7);
                     zb.setCentro(v8);
                     zb.setUm(v9);
-                    ACC_Zebra.ObtenerInstancia().PrintTargetPT(zb);
                     ACC_Zebra.ObtenerInstancia().guardaEtiquetaDB(zb);                    
+//                    ACC_Zebra.ObtenerInstancia().PrintTargetPT(zb);
                     break; 
                case "pp1prt1PP":
                     pp_operaciones_noti eqs = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().INPGRNOTPMNOTPP(ord, oper);
