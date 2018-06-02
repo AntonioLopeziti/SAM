@@ -218,7 +218,7 @@ public class ACC_Zebra {
     public void guardaEtiquetaDB(Zebra_noti_PT zl) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String query = "{CALL PP.guarda_etiquetaPT(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL PP.guarda_etiquetaPT(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, zl.getOrden());
@@ -234,6 +234,7 @@ public class ACC_Zebra {
             ps.setString(11, zl.getCliente());
             ps.setString(12, zl.getDescripcion());
             ps.setString(13, "");
+            ps.setString(14, zl.getNro_material());
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error en ValidarUMedida ACC_UnidadesMedida por: " + e);
