@@ -1028,6 +1028,9 @@ public class ACC_Pedidos {
                 case "305":
                 case "311":
                 case "312":
+                case "301":
+                case "313":
+                case "315":
                     ps.setString(1, v1);
                     break;
             }
