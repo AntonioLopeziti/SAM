@@ -135,12 +135,12 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                         System.out.println(ccnt);
                     }
                     if (v8.equals("261")) {
-                        if(v10.equals("E")){
+                        if (v10.equals("E")) {
                             ccnt = ACC_Material.ObtenerInstancia().StockLibreEE(v3, v6, v7, v11, v12) - Double.parseDouble(v4);
                             fmt = (ccnt >= 1) ? df.format(ccnt) : "0" + df.format(ccnt);
                             ACC_Material.ObtenerInstancia().ActualizaInv261EE(v3, v6, v7, fmt, v11, v12);
                             System.out.println(ccnt);
-                        }else{
+                        } else {
                             ccnt = ACC_Material.ObtenerInstancia().StockLibre(v3, v6, v7) - Double.parseDouble(v4);
                             fmt = (ccnt >= 1) ? df.format(ccnt) : "0" + df.format(ccnt);
                             ACC_Material.ObtenerInstancia().ActualizaInv261(v3, v6, v7, fmt);
@@ -355,7 +355,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     break;
                 case "TablasPP01MAtPP":
                     int con;
-                    ArrayList<componentesPP> tno = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().MostraTABPM01NOPP(ord, v1, xx.getFolioActual()+"");
+                    ArrayList<componentesPP> tno = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().MostraTABPM01NOPP(ord, v1, xx.getFolioActual() + "");
                     out.println("<table id=\"TabBody\">\n"
                             + "<tbody>");
                     for (con = 0; con < tno.size(); con++) {
@@ -434,18 +434,18 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                                 + "<td id=\"opeCtr" + opp + "\">" + opeO.get(opp).getCentro() + "</td>"
                                 + "</tr>");
                     }
-                    for(int m = opp; m < 7; m++){
+                    for (int m = opp; m < 7; m++) {
                         out.println("<tr>"
-                            + "<td>&nbsp;</td>"
-                            + "<td>&nbsp;</td>"
-                            + "<td>&nbsp;</td>"
-                            + "<td>&nbsp;</td>"
-                            + "<td>&nbsp;</td>"
-                            + "<td>&nbsp;</td>"
-                            + "<td>&nbsp;</td>"
-                            + "<td>&nbsp;</td>"
-                            + "<td>&nbsp;</td>"
-                            + "</tr>");
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "</tr>");
                     }
                     out.println("<tr class=\"ocultar\">"
                             + "<td>000</td>"
@@ -479,16 +479,24 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     out.println(c);
                     break;
                 case "validaDatos261":
-                    int t = ACC_Material.ObtenerInstancia().validaCantidad261(v3, v4, v1, v2);
-                    int e = ACC_Material.ObtenerInstancia().validalote261(v3, v4, v1);
+                    if (v7.equals("261")) {
+                        int t = ACC_Material.ObtenerInstancia().validaCantidad261(v3, v4, v1, v2);
+                        int e = ACC_Material.ObtenerInstancia().validalote261(v3, v4, v1);
 
-                    out.println(t + "," + e);
+                        out.println(t + "," + e);
+                    } else {
+                        out.println("1,1");
+                    }
                     break;
                 case "validaDatos261E":
-                    int tnn = ACC_Material.ObtenerInstancia().validaCantidad261E(v3, v4, v1, v2, v5, v6);
-                    int enn = ACC_Material.ObtenerInstancia().validalote261E(v3, v4, v1, v5, v6);
+                    if (v7.equals("261")) {
+                        int tnn = ACC_Material.ObtenerInstancia().validaCantidad261E(v3, v4, v1, v2, v5, v6);
+                        int enn = ACC_Material.ObtenerInstancia().validalote261E(v3, v4, v1, v5, v6);
 
-                    out.println(tnn + "," + enn);
+                        out.println(tnn + "," + enn);
+                    } else {
+                        out.println("1,1");
+                    }
                     break;
                 case "DatosOrdenCnt":
                     componentesPP pt = ACC_Material.ObtenerInstancia().Cantidades_PT(v1);
@@ -510,13 +518,13 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     break;
                 case "imprimePT":
                     Zebra_noti_PT z1 = ACC_Zebra.ObtenerInstancia().DatosFaltantesCabecera(v1);
-                    Zebra_noti_PT z2 = ACC_Zebra.ObtenerInstancia().DatosFaltantesPosiciones(v1 , v6);
-                    
+                    Zebra_noti_PT z2 = ACC_Zebra.ObtenerInstancia().DatosFaltantesPosiciones(v1, v6);
+
                     Zebra_noti_PT zb = new Zebra_noti_PT();
-                    
+
                     Date date = new Date();
                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    
+
                     zb.setPuesto_trabajo(z2.getPuesto_trabajo());
                     zb.setDescripcion(v3);//Cambiar a nuevo Campo
                     zb.setFecha(dateFormat.format(date));
@@ -531,10 +539,10 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     zb.setFol_sam(v7);
                     zb.setCentro(v8);
                     zb.setUm(v9);
-                    ACC_Zebra.ObtenerInstancia().guardaEtiquetaDB(zb);                    
+                    ACC_Zebra.ObtenerInstancia().guardaEtiquetaDB(zb);
 //                    ACC_Zebra.ObtenerInstancia().PrintTargetPT(zb);
-                    break; 
-               case "pp1prt1PP":
+                    break;
+                case "pp1prt1PP":
                     pp_operaciones_noti eqs = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().INPGRNOTPMNOTPP(ord, oper);
                     out.println("<input type'text' id='nspp12' value='" + ord + "' />");
                     out.println("<input type'text' id='npspp12' value='" + oper + "' />");
