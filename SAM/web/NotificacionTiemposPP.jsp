@@ -220,23 +220,7 @@
                             <!--<hr style="margin-top: -1%;">-->
                         </div>
                     </div>
-                    <div class="DatosReales">
-                        <label>Datos Reales</label>
-                        <hr id="lineaNotiTiempos">
-                        <div class="divCntBuenMal">
-                            <label>Not.ctd.buena</label><input type="text" id="cntBuena" style="margin-left: 78px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>&nbsp;&nbsp;&nbsp;<label id="lblUM"></label>
-                            <hr>
-                            <section id="secMala" style="display: none;"><label>Rechazo.notif</label><input disabled value="0.000" type="text" id="cntMala" style="margin-left: 80px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>
-                            <hr></section>
-                        </div>
-                        <div class="divBtnIniFin">
-                            
-                            <button id="btnInicio" onclick="validarCantidades();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio not. tiempos</label>
-                            <br>
-                            <button id="btnFin" onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"></button><label>Fin not. tiempos</label>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="motivoRechazo();"><input type="image" src="images/btnDescri.png"/></button><label>Motivo rechazo</label>
-                        </div>
-                    </div>
+
                 </section>
                 <section class="bkright">
                     <div class="divmatchEsp">
@@ -287,6 +271,23 @@
                             </tbody>
                         </table>
                     </section>
+            </div>
+                                <div class="DatosReales" style="width: 63%;">
+                <label>Datos Reales</label>
+                <hr id="lineaNotiTiempos">
+                <div class="divCntBuenMal">
+                    <label>Not.ctd.buena</label><input type="text" id="cntBuena" style="margin-left: 78px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>&nbsp;&nbsp;&nbsp;<label id="lblUM"></label>
+                    <hr>
+                    <section id="secMala" style="display: none;"><label>Rechazo.notif</label><input disabled value="0.000" type="text" id="cntMala" style="margin-left: 80px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>
+                        <hr></section>
+                </div>
+                <div class="divBtnIniFin">
+
+                    <button id="btnInicio" onclick="validarCantidades();"><input type="image" src="images/ejecuta.png"/></button><label>Inicio not. tiempos</label>
+                    <br>
+                    <button id="btnFin" onclick="selecoftabPP();"><input type="image" src="images/ejecuta.png"></button><label>Fin not. tiempos</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="motivoRechazo();"><input type="image" src="images/btnDescri.png"/></button><label>Motivo rechazo</label>
+                </div>
             </div>
         </div>
         <div id="ventanaavis" class="VenAvisoss">
@@ -393,27 +394,27 @@
                         <input id="acepRech" type="image" src="images/aceptar.png" onclick="ValidaRechazo();"/>
                     </section>
                     <section class="bkRechazo" id="bkRechazos">
-<!--                        <input class="ckhRechazo" type="radio" name="ckRechazoIT" value="ANGOSTO"> ANGOSTO
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="ARRUGAS"> ARRUGAS
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="BOLSA"> BOLSA
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="CORTES"> CORTES
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="GASA"> GASA
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="MAL CENTRADO"> MAL CENTRADO
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="OTRO"> OTRO
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="PROVETA DE PROVEEDOR"> PROVETA DE PROVEEDOR
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="SUCIO"> SUCIO
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="TEXTIL DESHILADO"> TEXTIL DESHILADO
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="TEXTIL DESTEÑIDO"> TEXTIL DESTEÑIDO
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="TRANSMINADO"> TRANSMINADO
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION DE FORRO"> UNION DE FORRO
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION ESPUMA CON CINTA"> UNION ESPUMA CON CINTA
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION ESPUMA EMPALADA"> UNION ESPUMA EMPALADA
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION EVA CON CINTA"> UNION EVA CON CINTA
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION EVA EMPALMADA"> UNION EVA EMPALMADA
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL COSTURA (HILO)"> UNION TEXTIL COSTURA (HILO)
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL DE PROVEEDOR"> UNION TEXTIL DE PROVEEDOR
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL EMPALMADA"> UNION TEXTIL EMPALMADA
-                        <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL TERMICA"> UNION TEXTIL TERMICA-->
+                        <!--                        <input class="ckhRechazo" type="radio" name="ckRechazoIT" value="ANGOSTO"> ANGOSTO
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="ARRUGAS"> ARRUGAS
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="BOLSA"> BOLSA
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="CORTES"> CORTES
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="GASA"> GASA
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="MAL CENTRADO"> MAL CENTRADO
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="OTRO"> OTRO
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="PROVETA DE PROVEEDOR"> PROVETA DE PROVEEDOR
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="SUCIO"> SUCIO
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="TEXTIL DESHILADO"> TEXTIL DESHILADO
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="TEXTIL DESTEÑIDO"> TEXTIL DESTEÑIDO
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="TRANSMINADO"> TRANSMINADO
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION DE FORRO"> UNION DE FORRO
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION ESPUMA CON CINTA"> UNION ESPUMA CON CINTA
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION ESPUMA EMPALADA"> UNION ESPUMA EMPALADA
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION EVA CON CINTA"> UNION EVA CON CINTA
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION EVA EMPALMADA"> UNION EVA EMPALMADA
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL COSTURA (HILO)"> UNION TEXTIL COSTURA (HILO)
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL DE PROVEEDOR"> UNION TEXTIL DE PROVEEDOR
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL EMPALMADA"> UNION TEXTIL EMPALMADA
+                                                <br><input class="ckhRechazo"  type="radio" name="ckRechazoIT" value="UNION TEXTIL TERMICA"> UNION TEXTIL TERMICA-->
                     </section>
                 </div>
             </div>
