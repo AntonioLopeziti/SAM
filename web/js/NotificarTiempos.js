@@ -1532,6 +1532,7 @@ function peticiones(url, id, accion, f, lote, pos, ee)
     var extras = "";
     var v1, v2, v3;
     var acc = accion + ee;
+    alert(acc);
     switch (acc)
     {
         case "VentanaModalLote":
@@ -1675,38 +1676,35 @@ function validacnt261() {
     for (i = 0; i < mat.length; i++) {
 
         acc = accion + ee[i].value;
-        if (cl[i].textContent == "261") {
-            var send = "&v2=" + cant[i].value + "&acc=" + acc + "&v3=" + mat[i].textContent + "&v4=" + lote[i].value + "&v1=" + centro[i].textContent + "&v5=" + ped[i].value + "&v6=" + pos[i].value;
-            $.ajax({
-                async: false,
-                type: 'GET',
-                url: "PeticionNotificacionesOrdenesSAMPP",
-                contentType: "application/x-www-form-urlencoded",
-                processData: true,
-                data: send,
-                success: function (data) {
-                    var temp = new Array();
-                    temp = data.split(",");
+        var send = "&v2=" + cant[i].value + "&acc=" + acc + "&v3=" + mat[i].textContent + "&v4=" + lote[i].value + "&v1=" + centro[i].textContent + "&v5=" + ped[i].value + "&v6=" + pos[i].value + "&v7=" + cl[i].textContent;
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "PeticionNotificacionesOrdenesSAMPP",
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: send,
+            success: function (data) {
+                var temp = new Array();
+                temp = data.split(",");
 
-                    if (temp[1] == 0) {
-                        msjError("Material " + mat[i].textContent + " no existe para el lote Almacén-Centro");
-                        lote[i].focus();
-                        lote[i].value = "";
-                        return;
-                    } else if (temp[0] == 0) {
-                        msjError("Cantidad no valida");
-                        cant[i].focus();
-                        cant[i].value = "";
-                        return;
-                    } else {
-
+                if (temp[1] == 0) {
+                    msjError("Material " + mat[i].textContent + " no existe para el lote Almacén-Centro");
+                    lote[i].focus();
+                    lote[i].value = "";
+                    return;
+                } else if (temp[0] == 0) {
+                    msjError("Cantidad no valida");
+                    cant[i].focus();
+                    cant[i].value = "";
+                    return;
+                } else {
+                    if (i == mat.length - 1) {
+                        guardaCabecera();
                     }
                 }
-            });
-        }
-        if (i == mat.length - 1) {
-            guardaCabecera();
-        }
+            }
+        });
     }
 }
 function cantidadPT() {
