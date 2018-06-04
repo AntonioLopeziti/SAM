@@ -1532,7 +1532,6 @@ function peticiones(url, id, accion, f, lote, pos, ee)
     var extras = "";
     var v1, v2, v3;
     var acc = accion + ee;
-    alert(acc);
     switch (acc)
     {
         case "VentanaModalLote":
