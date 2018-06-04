@@ -130,19 +130,19 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
 
                     if (v8.equals("101") || v8.equals("531")) {
                         ccnt = ACC_Material.ObtenerInstancia().StockLibre(v3, v6, v7) + Double.parseDouble(v4);
-                        fmt = df.format(ccnt);
+                        fmt = (ccnt >= 1) ? df.format(ccnt) : "0" + df.format(ccnt);
                         ACC_Material.ObtenerInstancia().ActualizaInv101(v3, v6, v7, fmt);
                         System.out.println(ccnt);
                     }
                     if (v8.equals("261")) {
                         if(v10.equals("E")){
                             ccnt = ACC_Material.ObtenerInstancia().StockLibreEE(v3, v6, v7, v11, v12) - Double.parseDouble(v4);
-                            fmt = df.format(ccnt);
+                            fmt = (ccnt >= 1) ? df.format(ccnt) : "0" + df.format(ccnt);
                             ACC_Material.ObtenerInstancia().ActualizaInv261EE(v3, v6, v7, fmt, v11, v12);
                             System.out.println(ccnt);
                         }else{
                             ccnt = ACC_Material.ObtenerInstancia().StockLibre(v3, v6, v7) - Double.parseDouble(v4);
-                            fmt = df.format(ccnt);
+                            fmt = (ccnt >= 1) ? df.format(ccnt) : "0" + df.format(ccnt);
                             ACC_Material.ObtenerInstancia().ActualizaInv261(v3, v6, v7, fmt);
                             System.out.println(ccnt);
                         }
