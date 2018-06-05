@@ -3643,12 +3643,12 @@ function Validarmovis() {
                     Canti[i].focus();
                     return;
                 }
-                if(Lote[i].value.length == 0){
+                if (Lote[i].value.length == 0) {
                     mensajesNuevo(14, "images/advertencia.PNG", "audio/saperror.wav");
                     Lote[i].focus();
                     return;
                 }
-                if (validarCantiExcedida(Materi[i].value, Centro, Almace, Lote[i].value, Canti[i].value, Docum[i].value, Posic[i].value )) {
+                if (validarCantiExcedida(Materi[i].value, Centro, Almace, Lote[i].value, Canti[i].value, Docum[i].value, Posic[i].value)) {
                     mensajesNuevo(8, "images/advertencia.PNG", "audio/saperror.wav");
                     Canti[i].focus();
                     return;
@@ -3701,15 +3701,23 @@ function Validarmovis() {
             }
         }
     }
+    var kk = 0;
+    try {
+        var ix = document.getElementsByName('Pedidos');
+        kk = ix[ix.length - 1].value;
+        alert(kk);
+    } catch (e) {}
+    var ii = kk;
     for (i = 0; i < Materi.length; i++) {
         if (Materi[i].value.length != 0) {
-            var nnn = (i) + (1);
+            var nnn = parseInt(ii) + (1);
             var extr = "&Material=" + Materi[i].value + "&Descripcion=" + Descri[i].value +
                     "&UnidadMedida=" + UnidMe[i].value + "&Centro=" + Centr[i].value +
                     "&Almacen=" + Almac[i].value + "&Cantidad=" + Canti[i].value + "&Lote=" + Lote[i].value +
                     "&Documento=" + Docum[i].value + "&Posicion=" + Posic[i].value +
                     "&ClaseMov=" + ClaseM + "&Indice=" + nnn;
             InserMovsNuevosTemp('VentanaModalMovsnuevos', extr);
+            ii++;
         }
     }
 //            break;
