@@ -195,11 +195,11 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                     }
                     if (docVen2.equals("")) {
                         docVen2 = "";
-                    }    
-                    if (mate.equals("")){
+                    }
+                    if (mate.equals("")) {
                         mate = "";
                     }
-                    if (mate2.equals("")){
+                    if (mate2.equals("")) {
                         mate2 = "";
                     }
                     if (fech.equals("")) {
@@ -209,107 +209,109 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                         fech2 = "";
                     }
                     out.println("<table id=\"TabBody\">");
-                    out.println("<tbody>");                   
+                    out.println("<tbody>");
                     ACC_FlujoDocumentos crp = new ACC_FlujoDocumentos();
                     String f1 = cn.DateFormatGuion(fech);
                     String f2 = cn.DateFormatGuion(fech2);
                     for (FlujoDocumentos a : crp.SD_EjecutarConsultaFlujoDocs(centroN, centroN2, docVen, docVen2, mate, mate2, f1, f2)) {
-                        out.println("<tr>");                        
-                        out.println("<td>" + a.getTxt_breve_pos_ped() + "</td>");                                         
+                        out.println("<tr>");
                         out.println("<td>" + a.getClase_doc_ventas() + "</td>");
-                        out.println("<td>" + a.getNum_orden() + "</td>");                                         
-                        out.println("<td>" + a.getNum_lote() + "</td>");                                         
-                        out.println("<td>" + a.getUm_cant_prev() + "</td>");   
-                        out.println("<td>" + a.getCant_prev_um() + "</td>");
-                        out.println("<td>" + a.getFecha_cre_reg() +"</td>");   //Campo EL
-                        out.println("<td>" + a.getCentro_solic() + "</td>");                                         
-                        out.println("<td>" + a.getSolicitante() + "</td>");                                         
-                        out.println("<td>" + a.getAlmacen() + "</td>");  
-                        out.println("<td></td>");   //Mandante
-                        out.println("<td>" + a.getGpo_articulos() + "</td>");                                         
-                        out.println("<td>" + a.getNum_material() + "</td>");                                         
-                        out.println("<td>" + a.getMaterial_introd() + "</td>");                                         
-                        out.println("<td>" + a.getVal_neto_pos_ped() + "</td>");                                         
-                        out.println("<td></td>");     //Asigacion
-                        out.println("<td></td>");     //Mat.precio  
-                        out.println("<td>" + a.getPos_doc_ventas() + "</td>");                                         
-                        out.println("<td>" + a.getJerarquia_prod() + "</td>");                                         
-                        out.println("<td>" + a.getRuta() + "</td>");                                         
-                        out.println("<td>" + a.getSector() + "</td>");                                         
-                        out.println("<td>" + a.getDoc_ventas() + "</td>");                                         
-                        out.println("<td></td>");       //TpDocVntas
-                        out.println("<td>" + a.getOficina_ventas() + "</td>");                                         
-                        out.println("<td>" + a.getGpo_vendedores() + "</td>");                                         
-                        out.println("<td>" + a.getOrg_ventas() + "</td>");                                         
-                        out.println("<td>" + a.getCanal_distrib() + "</td>");                                         
-                        out.println("<td>" + a.getMoneda_doc_com() + "</td>");                                         
-                        out.println("<td>" + a.getCentro() + "</td>");                                         
-                        out.println("<td>" + a.getRefer_cliente() + "</td>");                                         
-                        out.println("<td></td>");     //Entrega
-                        out.println("<td></td>");     //Pos.Ent
-                        out.println("<td>" + a.getCant_ent_efec() + "</td>");                                         
-                        out.println("<td>" + a.getUm_cant_prev() + "</td>");                                         
-                        out.println("<td></td>");     //Transporte
-                        out.println("<td>" + a.getClase_med_transp() + "</td>");                                         
-                        out.println("<td></td>");     //Cant.Trans
-                        out.println("<td></td>");     //UMT
-                        out.println("<td></td>");     //Mov.Entrega
-                        out.println("<td></td>");     //pos.Entrega
-                        out.println("<td>" + a.getCant_ent_efec() + "</td>");                                         
-                        out.println("<td></td>");     //UME
-                        out.println("<td></td>");     //Factura
-                        out.println("<td></td>");     //PosFactura
-                        out.println("<td></td>");     //Cant Factura
-                        out.println("<td></td>");     //UMF
+                        out.println("<td>" + a.getDoc_ventas() + "</td>");
+                        out.println("<td>" + a.getFecha_cre_reg() + "</td>");   //Campo EL
+                        out.println("<td></td>"); // F./Reparto
+                        out.println("<td>" + a.getRefer_cliente() + "</td>");
+                        out.println("<td>" + a.getPos_doc_ventas() + "</td>");
+                        out.println("<td>" + a.getNum_material() + "</td>");
+                        out.println("<td>" + a.getTxt_breve_pos_ped() + "</td>");
+                        out.println("<td>" + a.getCentro() + "</td>");
+                        out.println("<td>" + a.getSolicitante() + "</td>");
                         out.println("<td></td>");     //Destinatario de merca
-                        out.println("<td>" + a.getPeso_total() + "</td>");                                         
-                        out.println("<td>" + a.getFecha_carga() + "</td>");                                         
-                        out.println("<td></td>");     //Entrega Externa
-                        out.println("<td>" + a.getPeso_neto() + "</td>");                                         
-                        out.println("<td>" + a.getFecha_planif_trans() + "</td>");                                         
-                        out.println("<td>" + a.getPto_exped() + "</td>");                                         
-                        out.println("<td>" + a.getNum_lote() + "</td>");                                         
-                        out.println("<td>" + a.getUnidad_peso() + "</td>");                                         
-                        out.println("<td>" + a.getCant_ent_efec() + "</td>");                                         
-                        out.println("<td></td>");     //Denom Ruta
-                        out.println("<td></td>");     //Creado por
-                        out.println("<td></td>");     //No_pedido cliente
-                        out.println("<td>" + a.getGastos_transp() + "</td>");                                         
-                        out.println("<td>" + a.getNum_transp() + "</td>");                                         
-                        out.println("<td>" + a.getStatus_transfer() + "</td>");                                         
-                        out.println("<td></td>");     //Importe Gasto
-//                        //****** FALTANTES *****//
-                        out.println("<td></td>");     //Docto de compras
-                        out.println("<td>" + a.getSuplem1() + "</td>");
-                        out.println("<td>" + a.getSuplem2() + "</td>");
-                        out.println("<td>" + a.getSuplem3() + "</td>");
-                        out.println("<td>" + a.getSuplem4() + "</td>");
-                        out.println("<td>" + a.getClase_med_transp() + "</td>");
-                        out.println("<td>" + a.getId__exte() + "</td>");
-                        out.println("<td>" + a.getId_exte2() + "</td>");
+                        out.println("<td>" + a.getRuta() + "</td>");                        
+                        out.println("<td></td>");     //Ctd. Ped.
+                        out.println("<td></td>");     //Entrega
+                        out.println("<td>" + a.getCant_ent_efec() + "</td>");
+                        out.println("<td>" + a.getNum_lote() + "</td>");
+                        out.println("<td></td>");     //Factura
+                        out.println("<td></td>");     //Cant Factura
+                        out.println("<td>" + a.getUm_cant_prev() + "</td>");
+                        out.println("<td></td>");     //Transporte
+                        out.println("<td>" + a.getFecha_carga() + "</td>");
+                        out.println("<td>" + a.getFecha_planif_trans() + "</td>");
                         out.println("<td>" + a.getRuta() + "</td>");
-                        out.println("<td>" + a.getClas_tranp() + "</td>");
-                        out.println("<td>" + a.getSignatu() + "</td>");
-//                        //****** FALTANTES *****//
-                        out.println("<td>" + a.getStatus_glob() + "</td>");                                         
                         out.println("<td></td>");     //Transportista
-                        out.println("<td></td>");     //Denominacion
-                        out.println("<td></td>");     //Clase de ex
-                        out.println("<td>" + a.getFecha_ini() + "</td>");                                         
-                        out.println("<td>" + a.getFecha_fin() + "</td>");                                         
-                        out.println("<td>" + a.getStatus() + "</td>");                                         
-                        out.println("<td>" + a.getStock_vs_lin() + "</td>");     
-                        out.println("</tr>");
+                        out.println("<td>" + a.getNum_orden() + "</td>");
+                        out.println("<td>" + a.getFecha_ini() + "</td>");
+                        out.println("<td>" + a.getFecha_fin() + "</td>");
+                        out.println("<td>" + a.getStatus() + "</td>");
+                        out.println("<td>" + a.getStock_vs_lin() + "</td>");
+//                        out.println("<td>" + a.getCant_prev_um() + "</td>");
+//                        out.println("<td>" + a.getCentro_solic() + "</td>");
+//                        out.println("<td>" + a.getAlmacen() + "</td>");
+//                        out.println("<td></td>");   //Mandante
+//                        out.println("<td>" + a.getGpo_articulos() + "</td>");
+//                        out.println("<td>" + a.getMaterial_introd() + "</td>");
+//                        out.println("<td>" + a.getVal_neto_pos_ped() + "</td>");
+//                        out.println("<td></td>");     //Asigacion
+//                        out.println("<td></td>");     //Mat.precio  
+//                        out.println("<td>" + a.getJerarquia_prod() + "</td>");
+//                        out.println("<td>" + a.getSector() + "</td>");
+//                        out.println("<td></td>");       //TpDocVntas
+//                        out.println("<td>" + a.getOficina_ventas() + "</td>");
+//                        out.println("<td>" + a.getGpo_vendedores() + "</td>");
+//                        out.println("<td>" + a.getOrg_ventas() + "</td>");
+//                        out.println("<td>" + a.getCanal_distrib() + "</td>");
+//                        out.println("<td>" + a.getMoneda_doc_com() + "</td>");
+//                        out.println("<td></td>");     //Pos.Ent
+//                        out.println("<td>" + a.getUm_cant_prev() + "</td>");
+//                        out.println("<td>" + a.getClase_med_transp() + "</td>");
+//                        out.println("<td></td>");     //Cant.Trans
+//                        out.println("<td></td>");     //UMT
+//                        out.println("<td></td>");     //Mov.Entrega
+//                        out.println("<td></td>");     //pos.Entrega
+//                        out.println("<td>" + a.getCant_ent_efec() + "</td>");
+//                        out.println("<td></td>");     //UME
+//                        out.println("<td></td>");     //PosFactura
+//                        out.println("<td></td>");     //UMF
+//                        out.println("<td>" + a.getPeso_total() + "</td>");
+//                        out.println("<td></td>");     //Entrega Externa
+//                        out.println("<td>" + a.getPeso_neto() + "</td>");
+//                        out.println("<td>" + a.getPto_exped() + "</td>");
+//                        out.println("<td>" + a.getNum_lote() + "</td>");
+//                        out.println("<td>" + a.getUnidad_peso() + "</td>");
+//                        out.println("<td>" + a.getCant_ent_efec() + "</td>");
+//                        out.println("<td></td>");     //Denom Ruta
+//                        out.println("<td></td>");     //Creado por
+//                        out.println("<td></td>");     //No_pedido cliente
+//                        out.println("<td>" + a.getGastos_transp() + "</td>");
+//                        out.println("<td>" + a.getNum_transp() + "</td>");
+//                        out.println("<td>" + a.getStatus_transfer() + "</td>");
+//                        out.println("<td></td>");     //Importe Gasto
+////                        //****** FALTANTES *****//
+//                        out.println("<td></td>");     //Docto de compras
+//                        out.println("<td>" + a.getSuplem1() + "</td>");
+//                        out.println("<td>" + a.getSuplem2() + "</td>");
+//                        out.println("<td>" + a.getSuplem3() + "</td>");
+//                        out.println("<td>" + a.getSuplem4() + "</td>");
+//                        out.println("<td>" + a.getClase_med_transp() + "</td>");
+//                        out.println("<td>" + a.getId__exte() + "</td>");
+//                        out.println("<td>" + a.getId_exte2() + "</td>");
+//                        out.println("<td>" + a.getClas_tranp() + "</td>");
+//                        out.println("<td>" + a.getSignatu() + "</td>");
+////                        //****** FALTANTES *****//
+//                        out.println("<td>" + a.getStatus_glob() + "</td>");
+//                        out.println("<td></td>");     //Denominacion
+//                        out.println("<td></td>");     //Clase de ex
+//                        out.println("</tr>");
                     }
                     out.println("<tr class=\"ocultar\">"
-                            + "<td>00000000000000000000000000000000000000</td>"
+                            + "<td>000000000000</td>"
                             + "<td>0000000000000000</td>"
-                            + "<td>0000000000000000</td>"
-                            + "<td>0000000000000000</td>"
-                            + "<td>0000000000000000</td>"
-                            + "<td>000000000000000000000000</td>"
                             + "<td>00000000000000</td>"
                             + "<td>00000000000000</td>"
+                            + "<td>0000000000000000</td>"
+                            + "<td>00000000000000000000</td>"
+                            + "<td>00000000000000000000000000000000000000000</td>"
+                            + "<td>00000000000</td>"
                             + "<td>00000000000000000000</td>"
                             + "<td>00000000000000000000</td>"
                             + "<td>00000000000000000000</td>"
@@ -330,60 +332,61 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                             + "<td>00000000000000000000</td>"
                             + "<td>00000000000000000000</td>"
                             + "<td>00000000000000000000</td>"
+                            + "<td>0000000000000000000000000000000000000000000000000000000000000000000000000</td>"
                             + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
-                            + "<td>00000000000000000000</td>"                            
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
+//                            + "<td>00000000000000000000</td>"
                             + "</tr>");
                     out.println("</tbody>");
                     out.println("</table>");
