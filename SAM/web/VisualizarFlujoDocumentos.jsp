@@ -184,41 +184,54 @@
                                     <table id="TabHead">
                                         <thead>
                                             <tr>
-                                                <td>Denomin.</td>
                                                 <td>ClDocVenta</td>
-                                                <td>Orden</td>
-                                                <td>Lote</td>
-                                                <td>UMCtdPrev</td>                                                
-                                                <td>Ctd.Prev</td>                                                
-                                                <td>El</td>                                                
-                                                <td>Ce.coste</td>                                                
+                                                <td>Doc.vta.</td>
+                                                <td>El</td>   
+                                                <td>F./Reparto</td><!--F./Reparto-->
+                                                <td>Referencia</td>                                             
+                                                <td>Posición</td>                                                
+                                                <td>Material</td>                                                
+                                                <td>Denomin.</td>
+                                                <td>Centro</td>                                                
                                                 <td>Solicitan.</td>                                                
+                                                <td>Destinat.Merc</td>                                                
+                                                <td>Ruta</td>   
+                                                <td>Ctd. Ped.</td><!--Ctd. Ped.-->
+                                                <td>Entrega</td>                                                
+                                                <td>Cant.Ent</td>
+                                                <td>Lote</td>
+                                                <td>Factura</td>                                                
+                                                <td>Cant.Fact</td>                                                
+                                                <td>UMCtdPrev</td>                                                
+                                                <td>Transporte</td>                                                
+                                                <td>Fecha carg</td>                                                
+                                                <td>Fecha planif.transp</td>                                                
+                                                <td>Ruta p. Transp</td>                                                
+                                                <td>Transportista</td>
+                                                <td>Orden</td>
+                                                <td>F.Inicio.PP</td>
+                                                <td>F.Fin.PP</td>
+                                                <td>Status Orden</td>
+                                                <td>Stock Ped</td>
+<!--                                                <td>Ctd.Prev</td>                                                
+                                                <td>Ce.coste</td>                                                
                                                 <td>Álmacen</td>                                                
                                                 <td>Mandante</td>                                                
                                                 <td>Gpo.artíc.</td>                                                
-                                                <td>Material</td>                                                
                                                 <td>Mat.intr.</td>                                                
                                                 <td>Valor neto</td>                                                
                                                 <td>Asignación</td>                                                
                                                 <td>Mat.precio</td>                                                
-                                                <td>Posición</td>                                                
                                                 <td>JquíaProd</td>                                                
-                                                <td>Ruta</td>                                               
                                                 <td>Sector</td>                                                
-                                                <td>Doc.vta.</td>                                                
                                                 <td>TpDocVtas</td>                                                
-                                                <td>ofic.vta.</td>                                                
+                                                <td>Ofic.vta.</td>                                                
                                                 <td>GrVendedor</td>                                                
                                                 <td>Org.Ventas</td>                                                
                                                 <td>Can.distr.</td>                                                
                                                 <td>Moneda</td>                                                
-                                                <td>Centro</td>                                                
-                                                <td>Referencia</td>                                             
-                                                <td>Entrega</td>                                                
                                                 <td>Pos.Ent</td> 
-                                                <td>Cant.Ent</td>
                                                 <td>UME</td>                                                
-                                                <td>Transporte</td>                                                
                                                 <td>Pos.Trans</td>                                                
                                                 <td>Cant.Trans</td>                                                
                                                 <td>UMT</td>                                                
@@ -226,15 +239,11 @@
                                                 <td>Pos.MovEnt</td>                                                
                                                 <td>Cant.MovEnt</td>                                               
                                                 <td>UMME</td>                                                
-                                                <td>Factura</td>                                                
                                                 <td>Pos.Fact</td>                                                
-                                                <td>Cant.Fact</td>                                                
                                                 <td>UMF</td>                                                
-                                                <td>Destinat.Merc</td>                                                
                                                 <td>Peso total</td>                                                
-                                                <td>Fecha carg</td>                                                
                                                 <td>Entrega externa</td>                                                
-                                                <td>Peso neto</td>                                                                                           <td>Fecha planif.transp</td>                                                
+                                                <td>Peso neto</td>                                                                                           
                                                 <td>Puesto expedicion</td>                                                
                                                 <td>Lote</td>                                                
                                                 <td>Unidad peso</td>                                                
@@ -254,17 +263,11 @@
                                                 <td>Clase medio trasporte</td>                                                
                                                 <td>Identificador ext 1</td>                                                
                                                 <td>Identificador ext 2</td>                                                
-                                                <td>Ruta p. Transp</td>                                                
                                                 <td>Clase transp</td>                                                
                                                 <td>Signatura</td>                                                
                                                 <td>Status global transp</td>  
-                                                <td>Transportista</td>
                                                 <td>Denominacion</td>
-                                                <td>Clase de ex</td>
-                                                <td>F.Inicio.PP</td>
-                                                <td>F.Fin.PP</td>
-                                                <td>Status Orden</td>
-                                                <td>Stock Ped</td>
+                                                <td>Clase de ex</td>-->
                                             </tr>
                                         </thead>
                                     </table>
