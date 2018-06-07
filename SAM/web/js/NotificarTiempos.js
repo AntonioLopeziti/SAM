@@ -1203,6 +1203,7 @@ function selecoftabPP() {
                         var theHandle = document.getElementById("handle4");
                         var theRoot = document.getElementById("VentanaModalActividades");
                         Drag.init(theHandle, theRoot);
+                        getFechaInicio(ckOpe[x].value);
                         getActividades($("#opeTrabOpe" + ckOpe[x].value).text(), ckOpe[x].value);
                         borrarmsg();
                         break;
@@ -2064,9 +2065,35 @@ function ValidaRechazo() {
         BE.play();
     }
 }
+function getFechaInicio(pos) {
+    var acc = "getFechaI";
 
+    var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + $("#opeNumOpe" + pos).text();
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            $("#bxFechaInicio").val(data);
+        }
+    });
+}
 function getActividades(puesto, pos) {
     var acc = "getActividades";
+    var fechaInicio = $("#bxFechaInicio").val();
+    var f = new Date();
+    var fechaFin = f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds();
+
+    var startTime = moment(fechaInicio, "HH:mm:ss");
+    var endTime = moment(fechaFin, "HH:mm:ss");
+
+    var result = endTime.diff(startTime, 'minutes') / 60;
+    
+
+
     $.ajax({
         async: false,
         type: 'GET',
@@ -2085,51 +2112,81 @@ function getActividades(puesto, pos) {
             $("#lblAct6").html(n[5]);
             if (n[6] == "X") {
                 $('#bxAct1').prop('disabled', true);
+                $('#bxAct1').val("");
                 $('#bxActUM1').val("");
             } else {
                 $('#bxAct1').prop('disabled', false);
                 $('#bxAct1').val($("#opeCantrc" + pos).text());
                 $('#bxActUM1').val($("#opeUMrc" + pos).text());
+                if ($("#opeCtr" + pos).text() == "1000") {
+                    $('#bxAct1').prop('disabled', true);
+                    $('#bxAct1').val(result.toFixed(3));
+                }
             }
             if (n[7] == "X") {
                 $('#bxAct2').prop('disabled', true);
+                $('#bxAct2').val("");
                 $('#bxActUM2').val("");
             } else {
                 $('#bxAct2').prop('disabled', false);
                 $('#bxAct2').val($("#opeCantrc" + pos).text());
                 $('#bxActUM2').val($("#opeUMrc" + pos).text());
+                if ($("#opeCtr" + pos).text() == "1000") {
+                    $('#bxAct2').prop('disabled', true);
+                    $('#bxAct2').val(result.toFixed(3));
+                }
             }
             if (n[8] == "X") {
                 $('#bxAct3').prop('disabled', true);
+                $('#bxAct3').val("");
                 $('#bxActUM3').val("");
             } else {
                 $('#bxAct3').prop('disabled', false);
                 $('#bxAct3').val($("#opeCantrc" + pos).text());
                 $('#bxActUM3').val($("#opeUMrc" + pos).text());
+                if ($("#opeCtr" + pos).text() == "1000") {
+                    $('#bxAct3').prop('disabled', true);
+                    $('#bxAct3').val(result.toFixed(3));
+                }
             }
             if (n[9] == "X") {
                 $('#bxAct4').prop('disabled', true);
+                $('#bxAct4').val("");
                 $('#bxActUM4').val("");
             } else {
                 $('#bxAct4').prop('disabled', false);
                 $('#bxAct4').val($("#opeCantrc" + pos).text());
                 $('#bxActUM4').val($("#opeUMrc" + pos).text());
+                if ($("#opeCtr" + pos).text() == "1000") {
+                    $('#bxAct4').prop('disabled', true);
+                    $('#bxAct4').val(result.toFixed(3));
+                }
             }
             if (n[10] == "X") {
                 $('#bxAct5').prop('disabled', true);
+                $('#bxAct5').val("");
                 $('#bxActUM5').val("");
             } else {
                 $('#bxAct5').prop('disabled', false);
                 $('#bxAct5').val($("#opeCantrc" + pos).text());
                 $('#bxActUM5').val($("#opeUMrc" + pos).text());
+                if ($("#opeCtr" + pos).text() == "1000") {
+                    $('#bxAct5').prop('disabled', true);
+                    $('#bxAct5').val(result.toFixed(3));
+                }
             }
             if (n[11] == "X") {
                 $('#bxAct6').prop('disabled', true);
+                $('#bxAct6').val("");
                 $('#bxActUM6').val("");
             } else {
                 $('#bxAct6').prop('disabled', false);
                 $('#bxAct6').val($("#opeCantrc" + pos).text());
                 $('#bxActUM6').val($("#opeUMrc" + pos).text());
+                if ($("#opeCtr" + pos).text() == "1000") {
+                    $('#bxAct6').prop('disabled', true);
+                    $('#bxAct6').val(result.toFixed(3));
+                }
             }
         }
     });
