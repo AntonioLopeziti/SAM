@@ -950,7 +950,28 @@ public class ACC_Ordenes_pp_notificaciones {
         
         return rtn;
     }
-    
+    public String GetFIoper(String orden, String ope){
+        String rtn = "";
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs;
+        
+        String query = "{call PP.getFechaI(?,?)}";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, orden);
+            ps.setString(2, ope);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rtn = rs.getString("hora");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        con.CerrarConexion(conn);
+        
+        return rtn;
+    }
     public ArrayList<componentesPP> MostraTABPM01NOPP(String ord, String cnt, String ll) {
         ArrayList<componentesPP> mpm = new ArrayList<>();
         String ope = "", ped = "", pos = "";
