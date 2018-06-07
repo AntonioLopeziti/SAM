@@ -143,6 +143,7 @@
         <link rel="stylesheet" href="css/menu.css" media="screen">
         <script src="js/dom-drag.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="js/moment.js"></script>
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
         <script src="js/NotificarTiempos.js"></script>
         <title>Notificar Tiempos</title>    
@@ -277,6 +278,7 @@
                 <hr id="lineaNotiTiempos">
                 <div class="divCntBuenMal">
                     <label>Not.ctd.buena</label><input type="text" id="cntBuena" style="margin-left: 78px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>&nbsp;&nbsp;&nbsp;<label id="lblUM"></label>
+                    <input hidden type="text" id="bxFechaInicio" hidden>
                     <hr>
                     <section id="secMala" style="display: none;"><label>Rechazo.notif</label><input disabled value="0.000" type="text" id="cntMala" style="margin-left: 80px; text-transform: uppercase; background-repeat: no-repeat;" onblur="this.value = checkDecc(this.value, 3)"/>
                         <hr></section>
