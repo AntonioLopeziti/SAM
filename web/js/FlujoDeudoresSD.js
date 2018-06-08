@@ -69,7 +69,7 @@ $(document).ready(function () {
         $('#match_F2').hide();
     });
     /*Function mostrar ventana modal Material2*/
-    $('#material2').focus(function () {
+    $('#clienteDos').focus(function () {
         $('#match_A1').hide();
         $('#match_A2').hide();
         $('#match_A3').hide();
@@ -121,7 +121,8 @@ $(document).ready(function () {
         var theHandle = document.getElementById("handle3");
         var theRoot = document.getElementById("VentanaModalSAM2");
         Drag.init(theHandle, theRoot);
-        mosVenMod('SAM1');
+        ConsultaFolioSAM1();
+//        mosVenMod('SAM1');
     });
     //SAM2 Nuevo Numero de Documento 2
     $('#match_A4').click(function () {
@@ -132,21 +133,21 @@ $(document).ready(function () {
         mosVenMod('SAM2');
     });
 //    //SAP1 No Orden
-//    $('#match_A3').click(function () {
-//        $("BODY").append('<div id="overlay"></div>');
-//        var theHandle = document.getElementById("handle4");
-//        var theRoot = document.getElementById("VentanaModalSAP1");
-//        Drag.init(theHandle, theRoot);
-//        mosVenMod('SAP1');
-//    });
-//    //SAP2 No Orden
-//    $('#match_A5').click(function () {
-//        $("BODY").append('<div id="overlay"></div>');
-//        var theHandle = document.getElementById("handle5");
-//        var theRoot = document.getElementById("VentanaModalSAP2");
-//        Drag.init(theHandle, theRoot);
-//        mosVenMod('SAP2');
-//    });
+    $('#match_A3').click(function () {
+        $("BODY").append('<div id="overlay"></div>');
+        var theHandle = document.getElementById("handle4");
+        var theRoot = document.getElementById("VentanaModalSAP1");
+        Drag.init(theHandle, theRoot);
+        mosVenMod('SAP1');
+    });
+    //SAP2 No Orden
+    $('#match_A5').click(function () {
+        $("BODY").append('<div id="overlay"></div>');
+        var theHandle = document.getElementById("handle5");
+        var theRoot = document.getElementById("VentanaModalSAP2");
+        Drag.init(theHandle, theRoot);
+        mosVenMod('SAP2');
+    });
     /*Match fecha 1 Reservas*/
     $('#match_F1').click(function () {
         OpenCalendario("fecha_inicio");
@@ -191,12 +192,12 @@ $(document).ready(function () {
     $('#okFolio2').click(function () {
         ConsultaFolioSAM2();
     });
-//    $('#okOrden1').click(function () {
-//        ConsultaFolioSAP1();
-//    });
-//    $('#okOrden2').click(function () {
-//        ConsultaFolioSAP2();
-//    });
+    $('#okOrden1').click(function () {
+        ConsultaFolioSAP1();
+    });
+    $('#okOrden2').click(function () {
+        ConsultaFolioSAP2();
+    });
     //Match Folio
     $('#BusFolio').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
@@ -345,6 +346,80 @@ $(document).ready(function () {
         te = String.fromCharCode(tecla);
         return patron.test(te);
     });
+    //Match Folio SAP 1 Nuevo Cliente
+    $('#BusNumOrd').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAP1();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#CenNumOrd').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAP1();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#numAcMaxNumOrd').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAP1();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    //Match Folio SAP 2 Nuevo Cliente DOS
+    $('#BusNumOrd2').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAP2();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#CenNumOrd2').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAP2();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#numAcMaxNumOrd2').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaFolioSAP2();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
 });
 function inval() {
     ShowMsg(0, "images/advertencia.PNG", "audio/saperror.wav");
@@ -476,26 +551,26 @@ function mosVenMod(tipo) {
             $('#BuscarParamFolio2_SP').show();
             $('#ConsultaTablaFolioSAM2').hide();
             break;
-//        case "SAP1":
-//            var ventana = document.getElementById('VentanaModalSAP1');
-//            abrirVentana(ventana);
-//            $("#BusNumOrd").focus();
-//            $("#BusNumOrd").val('');
-//            $("#CenNumOrd").val('');
-//            $("#numAcMaxNumOrd").val('500');
-//            $('#BuscarParamFolioSAP_SP').show();
-//            $('#ConsultaTablaFolioSAP1').hide();
-//            break;
-//        case "SAP2":
-//            var ventana = document.getElementById('VentanaModalSAP2');
-//            abrirVentana(ventana);
-//            $("#BusNumOrd2").focus();
-//            $("#BusNumOrd2").val('');
-//            $("#CenNumOrd2").val('');
-//            $("#numAcMaxNumOrd2").val('500');
-//            $('#BuscarParamFolioSAP2_SP').show();
-//            $('#ConsultaTablaFolioSAP2').hide();
-//            break;
+        case "SAP1":
+            var ventana = document.getElementById('VentanaModalSAP1');
+            abrirVentana(ventana);
+            $("#BusNumOrd").focus();
+            $("#BusNumOrd").val('');
+            $("#CenNumOrd").val('');
+            $("#numAcMaxNumOrd").val('500');
+            $('#BuscarParamFolioSAP_SP').show();
+            $('#ConsultaTablaFolioSAP1').hide();
+            break;
+        case "SAP2":
+            var ventana = document.getElementById('VentanaModalSAP2');
+            abrirVentana(ventana);
+            $("#BusNumOrd2").focus();
+            $("#BusNumOrd2").val('');
+            $("#CenNumOrd2").val('');
+            $("#numAcMaxNumOrd2").val('500');
+            $('#BuscarParamFolioSAP2_SP').show();
+            $('#ConsultaTablaFolioSAP2').hide();
+            break;
     }
 }
 function cambiarMatchCentro() {
@@ -659,16 +734,13 @@ function ConsultaCentro2() {
     });
 }
 function  ConsultaFolioSAM1() {
-    var acc = "SamStatuss";
-    var fol = $("#NuDoc").val();
-    var centro = $("#ClaDoc").val();
-    var ctd = $("#numAcMaxFolio").val();
+    var acc = "SamStatuss";    
     var tipo = "sam1";
-    var enviar = "&tipo=" + tipo + "&folSAM=" + fol + "&CentroFol=" + centro + "&CtdFol=" + ctd;
+    var enviar = "&tipo=" + tipo;
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'ReportePedidosSD',
+        url: 'PeticionFlujoDeudoresSD',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "Action=" + acc + enviar,
@@ -676,17 +748,15 @@ function  ConsultaFolioSAM1() {
             if (data == 0) {
                 ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
-                $("#BuscarParamFolio_SP").css("display", "none");
-                $("#ConsultaTablaFolioSAM1").css("display", "block");
+                $('#VentanaModalSAM1').show();
+                $('#VentanaModalSAM1').css({
+                    position: 'absolute', left: 510, top: 60
+                });
+                $('#BuscarParamFolio_SP').hide();
+                $('#ConsultaTablaFolioSAM1').show();
                 $("#cargarDatosFolioSAM1").html(data);
+                fnc("table-scrollSAM", "fixedYSAM");
                 borramsg();
-//                $('#VentanaModalSAM1').show();
-//                $('#VentanaModalSAM1').css({
-//                    position: 'absolute', left: 510, top: 60
-//                });
-//                $("#cargarDatosFolioSAM1").html(data);
-//                fnc("table-scrollSAM", "fixedYSAM");
-//                borramsg();
             }
         }
     });
@@ -734,7 +804,7 @@ function ConsultaFolioSAP1() {
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'PeticionVisualizarReportesMovNot',
+        url: 'PeticionFlujoDeudoresSD',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "Action=" + acc + enviar,
@@ -767,7 +837,7 @@ function ConsultaFolioSAP2() {
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'PeticionVisualizarReportesMovNot',
+        url: 'PeticionFlujoDeudoresSD',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "Action=" + acc + enviar,
@@ -936,28 +1006,28 @@ function fnc(scroll, fixe) {
 }
 function Select(dato, tipo) {
     switch (tipo) {
-        case "centro":
-            $("#folioSAM").val(dato);
-            ocultarVentana(tipo);
-            break;
-        case "centro2":
-            $("#folioSAM2").val(dato);
-            ocultarVentana(tipo);
-            break;
+//        case "centro":
+//            $("#folioSAM").val(dato);
+//            ocultarVentana(tipo);
+//            break;
+//        case "centro2":
+//            $("#folioSAM2").val(dato);
+//            ocultarVentana(tipo);
+//            break;
         case "sam1":
-            $("#numDoc").val(dato);
+            $("#factura").val(dato);
             ocultarVentana(tipo);
             break;
-        case "sam2":
-            $("#numDoc2").val(dato);
-            ocultarVentana(tipo);
-            break;
+//        case "sam2":
+//            $("#numDoc2").val(dato);
+//            ocultarVentana(tipo);
+//            break;
         case "sap1":
-            $("#sap1").val(dato);
+            $("#clienteUno").val(dato);
             ocultarVentana(tipo);
             break;
         case "sap2":
-            $("#sap2").val(dato);
+            $("#clienteDos").val(dato);
             ocultarVentana(tipo);
             break;
     }
