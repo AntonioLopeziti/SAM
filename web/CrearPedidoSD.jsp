@@ -206,6 +206,9 @@
                     case 25:
                         msg = 'Ocurrio un error inesperado al guardar, Consulte a su administrador';
                         break;
+                    case 26:
+                        msg = 'Campo Lista precio obligatorio';
+                        break;
                 }
                 $('#msg').html(msg);
                 var icon = $('#iconmsg');
@@ -311,6 +314,8 @@
                             <hr>
                             <label>Area de ventas</label><input type="text" id="orgVentas" maxlength="4" style="width:10%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchOrgVentas" class='BtnMatchIcon'></button> / <input type="text" id="CanalDis" maxlength="2"  style="width:8%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchcanalDis" class='BtnMatchIcon'></button> / <input type="text" id="Sector" maxlength="2"  style="width:8%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchSector" class='BtnMatchIcon'></button>
                             <hr>
+                            <label>Oficina de ventas</label><input type="text" value="0001" disabled style="width: 10%; text-transform: uppercase;" maxlength='4' id="OficinaVentas" /><button id="matchpoficinaVentas" class='BtnMatchIcon'></button> <input type='text' value="Oficina SANPER" id='txtOficinaVentas'style="width: 40%; background: none; border: none;" readonly/>
+                            <hr>
                             <label>Ref.Cliente</label><input type="text" id="refcliente" maxlength="35" style="width:55%; background-repeat: no-repeat"/>
                             <hr>
                             <label>Creado por</label><input type="text" id="CreadoPor" value="<%=Nombre%>" style="width: 42%;" disabled/>
@@ -322,12 +327,12 @@
                             <label>Clase de pedido</label><input type="text" id="ClasePedido" maxlength='4' style="width: 8%; background-repeat: no-repeat; text-transform: uppercase;" value="TA" disabled /><button id="matchClasePedido" class='BtnMatchIcon'></button> <input type='text' id='txtClasePedido' value="Pedido Estandar" style="width: 52%; background: none; border: none;" readonly/>
                             <hr>
                             <input type="text" style="width: 100%; background: none; border:none;" id="txtSolicitante" readonly/>
-                            <hr style="border:1.8px solid #fff;">
+                            <hr style="border:1.2px solid #fff;">
                             <input type="text" style="width: 100%; background: none; border:none;" id="txtDestMcia" readOnly/>
-                            <hr style="border:1.8px solid #fff;">
+                            <hr style="border:1.2px solid #fff;">
                             <input type="text" style="width: 100%; background: none; border: none;" id="txtAreaVentas" readOnly/>
                             <hr style="border:1.8px solid #fff;">
-                            <label>Oficina de ventas</label><input type="text" value="0001" disabled style="width: 8%; text-transform: uppercase;" maxlength='4' id="OficinaVentas" /><button id="matchpoficinaVentas" class='BtnMatchIcon'></button> <input type='text' value="Oficina SANPER" id='txtOficinaVentas'style="width: 52%; background: none; border: none;" readonly/>
+                            <label>Lista de precio</label><input type="text" style="width: 6%; text-transform: uppercase"  maxlength="2" id="ListaPrecio"  /><button id="matchListaPre" class='BtnMatchIcon'></button> <input type='text' id='txtListaPrecio'style="width: 55%; background: none; border: none;" readonly/>
                             <hr>
                             <label>Gpo. de vendedores</label><input type="text" style="width: 6%; text-transform: uppercase" maxlength="3" id="GpoVendedores" disabled /><button id="matchGpoVendedores" class='BtnMatchIcon'></button> <input type='text' id='txtGpoVended'style="width: 55%; background: none; border: none;" readonly/>
                             <hr>
@@ -769,6 +774,30 @@
                         </div>
                         <div id="cuerpoDatos">
                             <div class="nofixedX" id="cargarDatosUnidadMedida">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="VentanaModalListaPrecio" class="VentanaModal">
+            <div id="handle10"><label id="TituloMatch">Lista Precios</label><div class="BotonCerrar_Matc" id="CerrarMCListaPrecio"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="ConsultaTablaListaPrecio">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollListaPrecio">
+                        <div class="fixedY" id="fixedYListaPrecio">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Lista precio</th>
+                                        <th>Denominación</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosListaPrecio">
                             </div>
                         </div>
                     </div>
