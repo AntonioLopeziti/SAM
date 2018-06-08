@@ -265,6 +265,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                                 } else {
                                     out.println("<tr ondblclick=\"SelectOrd('" + pl.get(conta).getNum_orden() + "', 'Orden' , '" + pl.get(conta).getTexto_breve() + "')\">");
                                     out.println("<td>" + pl.get(conta).getNum_orden() + "</td>");
+                                    out.println("<td>" + pl.get(conta).getTexto_material() + "</td>");
                                     out.println("</tr>");
                                 }
                             }
