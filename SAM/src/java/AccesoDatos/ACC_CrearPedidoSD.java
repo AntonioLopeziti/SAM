@@ -23,16 +23,16 @@ import java.util.ArrayList;
  *
  */
 public class ACC_CrearPedidoSD {
-    
+
     public static ACC_CrearPedidoSD Instance = null;
-    
+
     public static ACC_CrearPedidoSD ObtenerInstancia() {
         if (Instance == null) {
             Instance = new ACC_CrearPedidoSD();
         }
         return Instance;
     }
-    
+
     public ArrayList<clase_pedido_sd> GetClasePedido() {
         ArrayList<clase_pedido_sd> cpedi = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -56,7 +56,7 @@ public class ACC_CrearPedidoSD {
         }
         return cpedi;
     }
-    
+
     public ArrayList<organizacion_ventas> GetOrgVentas() {
         ArrayList<organizacion_ventas> org = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -80,7 +80,7 @@ public class ACC_CrearPedidoSD {
         }
         return org;
     }
-    
+
     public ArrayList<canal_distribucion> GetCanalDistribucion() {
         ArrayList<canal_distribucion> can = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -105,7 +105,7 @@ public class ACC_CrearPedidoSD {
         }
         return can;
     }
-    
+
     public ArrayList<Sector> GetSector() {
         ArrayList<Sector> sec = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -129,7 +129,7 @@ public class ACC_CrearPedidoSD {
         }
         return sec;
     }
-    
+
     public ArrayList<oficina_ventas> GetOficinaVentas() {
         ArrayList<oficina_ventas> ofic = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -153,7 +153,7 @@ public class ACC_CrearPedidoSD {
         }
         return ofic;
     }
-    
+
     public ArrayList<grupo_vendedores> GetGrupoVendedores(String grupo, String denomi, String cant) {
         ArrayList<grupo_vendedores> gpo = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -180,7 +180,7 @@ public class ACC_CrearPedidoSD {
         }
         return gpo;
     }
-    
+
     public ArrayList<unidades_medida> GetUnidadMedida() {
         ArrayList<unidades_medida> ume = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -204,8 +204,8 @@ public class ACC_CrearPedidoSD {
         }
         return ume;
     }
-    
-    public ArrayList<materiales_venta> GetMateriales(String material, String denominacion, String cantidad, String cliente, String org, String canal) {
+
+    public ArrayList<materiales_venta> GetMateriales(String material, String denominacion, String cantidad, String cliente, String vendedor, String lista) {
         ArrayList<materiales_venta> mv = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -218,14 +218,14 @@ public class ACC_CrearPedidoSD {
             ps.setString(2, denominacion);
             ps.setString(3, cantidad);
             ps.setString(4, cliente);
-            ps.setString(5, org);
-            ps.setString(6, canal);
+            ps.setString(5, vendedor);
+            ps.setString(6, lista);
             rs = ps.executeQuery();
             while (rs.next()) {
                 materiales_venta m = new materiales_venta();
                 m.setMaterial(rs.getString("material"));
                 m.setDescripcion(rs.getString("descripcion_material_cliente"));
-                m.setUnidad_medida_base(rs.getString("unidad_medida_base"));
+                m.setUnidad_medida_base(rs.getString("unidad_medida"));
                 mv.add(m);
             }
         } catch (Exception e) {
@@ -235,7 +235,7 @@ public class ACC_CrearPedidoSD {
         }
         return mv;
     }
-    
+
     public ArrayList<clientes> GetClientes(String cliente, String nombre, String cantidad, String sql, String ven, String tipo) {
         ArrayList<clientes> cl = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -253,7 +253,7 @@ public class ACC_CrearPedidoSD {
             }
             rs = ps.executeQuery();
             while (rs.next()) {
-                
+
                 clientes c = new clientes();
                 c.setIdCliente(rs.getString("IdCliente"));
                 c.setNombre1(rs.getString("nombre1"));
@@ -265,9 +265,9 @@ public class ACC_CrearPedidoSD {
             cnx.CerrarConexion(con);
         }
         return cl;
-        
+
     }
-    
+
     public String[] CargarCliente(String cliente, String vend) {
         String[] datos = new String[8];
         Conexion cnx = new Conexion();
@@ -297,7 +297,7 @@ public class ACC_CrearPedidoSD {
         }
         return datos;
     }
-    
+
     public String denominacion(String variable, String tipo) {
         String den = "";
         Conexion cnx = new Conexion();
@@ -320,8 +320,8 @@ public class ACC_CrearPedidoSD {
         }
         return den;
     }
-    
-    public materiales_venta getDMat(String mat, String org, String can, String cliente) {
+
+    public materiales_venta getDMat(String mat, String cliente, String vendedor, String lis) {
         materiales_venta m = new materiales_venta();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -331,14 +331,14 @@ public class ACC_CrearPedidoSD {
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, mat);
-            ps.setString(2, org);
-            ps.setString(3, can);
-            ps.setString(4, cliente);
+            ps.setString(2, cliente);
+            ps.setString(3, vendedor);
+            ps.setString(4, lis);
             rs = ps.executeQuery();
             while (rs.next()) {
                 m.setMaterial(rs.getString("material"));
                 m.setDescripcion(rs.getString("descripcion_material_cliente"));
-                m.setUnidad_medida_base(rs.getString("unidad_medida_base"));
+                m.setUnidad_medida_base(rs.getString("unidad_medida"));
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -347,7 +347,7 @@ public class ACC_CrearPedidoSD {
         }
         return m;
     }
-    
+
     public String GetTextoComercial(String mat, String org, String sec) {
         String texto = "";
         Conexion cnx = new Conexion();
@@ -371,7 +371,7 @@ public class ACC_CrearPedidoSD {
         }
         return texto;
     }
-    
+
     public clientes ValidarInterlocutor(String sol, String dm) {
         clientes c = new clientes();
         Conexion cnx = new Conexion();
@@ -395,12 +395,12 @@ public class ACC_CrearPedidoSD {
         }
         return c;
     }
-    
-    public void InsertarCabecera1(String folioSAM, String Clase, String Org, String Can, String Sec, String gpo, String ofic, String fe, String fp, String ref, String usu, String fechA, String Hora) {
+
+    public void InsertarCabecera1(String folioSAM, String Clase, String Org, String Can, String Sec, String gpo, String ofic, String fe, String fp, String ref, String usu, String fechA, String Hora, String lip) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
-        String sql = "{call SD.CrearPedidos_InsertarPedido(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call SD.CrearPedidos_InsertarPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, folioSAM);
@@ -416,6 +416,7 @@ public class ACC_CrearPedidoSD {
             ps.setString(11, usu);
             ps.setString(12, fechA);
             ps.setString(13, Hora);
+            ps.setString(14, lip);
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println(e);
@@ -423,7 +424,7 @@ public class ACC_CrearPedidoSD {
             cnx.CerrarConexion(con);
         }
     }
-    
+
     public void GuardarCliente(String folio, String funcion, String cliente, String usuario, String fecha, String hora) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -443,9 +444,9 @@ public class ACC_CrearPedidoSD {
         } finally {
             cnx.CerrarConexion(con);
         }
-        
+
     }
-    
+
     public void GuardarMateriales(String folio, String posicion, String material, String descripcion, String unidad, String usuario, String fecha, String hora) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -467,9 +468,9 @@ public class ACC_CrearPedidoSD {
         } finally {
             cnx.CerrarConexion(con);
         }
-        
+
     }
-    
+
     public void GuardarCantidades(String folio, String posicion, String cantidad, String usuario, String Fecha, String hora, String FEntrega) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -490,9 +491,9 @@ public class ACC_CrearPedidoSD {
         } finally {
             cnx.CerrarConexion(con);
         }
-        
+
     }
-    
+
     public void InsertTxtCabecera(String folio, String fila, String user, String txt, String Fecha, String hora) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -513,7 +514,7 @@ public class ACC_CrearPedidoSD {
             cnx.CerrarConexion(con);
         }
     }
-    
+
     public void InsertTxtPosicion(String folio, String pos, String fila, String user, String txt, String Fecha, String hora) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -535,7 +536,7 @@ public class ACC_CrearPedidoSD {
             cnx.CerrarConexion(con);
         }
     }
-    
+
     public grupo_vendedores VerificarAccVendedort(String vendedor) {
         grupo_vendedores c = new grupo_vendedores();
         Conexion cnx = new Conexion();
@@ -558,7 +559,7 @@ public class ACC_CrearPedidoSD {
         }
         return c;
     }
-    
+
     public String[] CargarAvisosVendedor(String vend) {
         String avis[] = new String[4];
         Conexion cnx = new Conexion();
@@ -593,11 +594,11 @@ public class ACC_CrearPedidoSD {
         String sql = "{call SD.CrearPedidos_RevisarFolio(?)}";
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1,folio);
+            ps.setString(1, folio);
             rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 x = "1";
-            }else{
+            } else {
                 x = folio;
             }
         } catch (Exception e) {
@@ -607,4 +608,30 @@ public class ACC_CrearPedidoSD {
         }
         return x;
     }
+
+    public ArrayList<String[]> CargarListaPrecios() {
+        ArrayList<String[]> lista = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call SD.CrearPedidos_CargarListaPrecios}";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String[] n = new String[2];
+                n[0] = rs.getString("tipo_lista_precio");
+                n[1] = rs.getString("descripcion");
+                lista.add(n);
+            }          
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return lista;
+    }
+
 }
+
