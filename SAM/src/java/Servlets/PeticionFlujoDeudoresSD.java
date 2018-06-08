@@ -60,6 +60,7 @@ public class PeticionFlujoDeudoresSD extends HttpServlet {
             /*----------------------------*/
  /*Valores Accion Switch*/
             String accion = request.getParameter("Action");
+            String tipo = request.getParameter("tipo");
             String vendedor = request.getParameter("vendedor");
             String factura = request.getParameter("factura");
             String clienteUno = request.getParameter("clienteUno");
@@ -90,6 +91,39 @@ public class PeticionFlujoDeudoresSD extends HttpServlet {
             Consultas cn = new Consultas();
 
             switch (accion) {
+                case "SamStatuss":
+                    ArrayList<FlujoDeudoresSD> sam = AccesoDatos.ACC_FlujoDeudoresSD.ObtenerInstancia().MatchFactura();
+                    if (sam.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        for (FlujoDeudoresSD m : sam) {
+                            out.println("<tr ondblclick=\"Select('" + m.getFactura() + "','" + tipo + "')\">");
+                            out.println("<td>" + m.getFactura() + "</td>");                            
+                            out.println("</tr>");
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println(0);
+                    }
+                    break;
+                case "SapStatus":
+                    ArrayList<FlujoDeudoresSD> sap = AccesoDatos.ACC_FlujoDeudoresSD.ObtenerInstancia().MatchCliente(folOrd, CentroOrd, CtdOrd);
+                    if (sap.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        for (FlujoDeudoresSD n : sap) {
+                            out.println("<tr ondblclick=\"Select('" + n.getCliente() + "','" + tipo + "')\">");
+                            out.println("<td>" + n.getCliente() + "</td>");
+                            out.println("<td>" + n.getNombre_cliente() + "</td>");
+                            out.println("</tr>");
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println(0);
+                    }
+                    break;
                 case "ValidarQuery":
                     if (vendedor.equals("")) {
                         vendedor = " ";
@@ -144,32 +178,32 @@ public class PeticionFlujoDeudoresSD extends HttpServlet {
                     String f2 = cn.DateFormatGuion(fech2);
                     for (FlujoDeudoresSD a : crp.SD_Reporte_FLujoDocsConsulta(vendedorN, facturaN, cliUnoN, cliDosN, f1, f2)) {
                         out.println("<tr>");
-                        out.println("<td>" + a.getEjercicio() + "</td>");
-                        out.println("<td>" + a.getMes_contable() + "</td>");
+                        out.println("<td>" + a.getCliente() + "</td>");
+                        out.println("<td>" + a.getNombre_cliente() + "</td>");
+                        out.println("<td>" + a.getFactura() + "</td>");
                         out.println("<td>" + cn.DateFormat(a.getFecha_contable()) + "</td>");
                         out.println("<td>" + cn.DateFormat(a.getFecha_vencimiento()) + "</td>");
                         out.println("<td>" + a.getDias_vencimiento() + "</td>");
-                        out.println("<td>" + a.getFactura() + "</td>");
                         out.println("<td>" + a.getImporte() + "</td>");
                         out.println("<td>" + a.getMoneda() + "</td>");
-                        out.println("<td>" + a.getCliente() + "</td>");
-                        out.println("<td>" + a.getNombre_cliente() + "</td>");
+                        out.println("<td>" + a.getEjercicio() + "</td>");
+                        out.println("<td>" + a.getMes_contable() + "</td>");
                         out.println("<td>" + a.getVendedor() + "</td>");
                         out.println("<td>" + a.getNombre_vendedor() + "</td>");
                     }
                     out.println("<tr class=\"ocultar\">"
+                            + "<td>00000000000000</td>"
+                            + "<td>0000000000000000000000000000000000000000</td>"
+                            + "<td>0000000000000</td>"
                             + "<td>0000000000000000</td>"
-                            + "<td>0000000000000000</td>"
-                            + "<td>0000000000000000</td>"
-                            + "<td>0000000000000000</td>"
-                            + "<td>0000000000000000</td>"
-                            + "<td>000000000000000000000000</td>"
+                            + "<td>00000000000000000</td>"
+                            + "<td>000000000000000000</td>"
+                            + "<td>000000000000</td>"
+                            + "<td>000000000000</td>"
+                            + "<td>000000000000</td>"
                             + "<td>00000000000000</td>"
                             + "<td>00000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
-                            + "<td>00000000000000000000</td>"
+                            + "<td>00000000000000000000000</td>"
                             + "</tr>");
                     out.println("</tbody>");
                     out.println("</table>");
