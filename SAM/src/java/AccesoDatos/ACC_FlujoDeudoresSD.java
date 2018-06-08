@@ -30,7 +30,55 @@ public class ACC_FlujoDeudoresSD extends Conexion {
         }
         return Instance;
     }
-
+    //Match Factura
+    public ArrayList<FlujoDeudoresSD> MatchFactura() {
+        ArrayList<FlujoDeudoresSD> sam = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareCall("{call SD.ReporteFlujoDeudoresFactura}");            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                FlujoDeudoresSD so = new FlujoDeudoresSD();
+                so.setFactura(rs.getString("factura"));                
+                sam.add(so);
+            }
+        } catch (Exception e) {
+            System.err.println("Error en CentroReservass, ACC_Centro por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return sam;
+    }
+    //Match Cliente
+    public ArrayList<FlujoDeudoresSD> MatchCliente(String cliente, String nom_cli, String cant) {
+        ArrayList<FlujoDeudoresSD> sap = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = "{call SD.ReporteFlujoDeudoresCliente(?,?,?)}";
+        try {
+            pst = con.prepareCall(query);
+            pst.setString(1, cliente);
+            pst.setString(2, nom_cli);
+            pst.setString(3, cant);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                FlujoDeudoresSD so = new FlujoDeudoresSD();
+                so.setCliente(rs.getString("cliente"));
+                so.setNombre_cliente(rs.getString("nombre_cliente"));
+                sap.add(so);
+            }
+        } catch (Exception ex) {
+            System.err.println("ERROR en el metodo SAPStatus por :" + ex);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return sap;
+    }
     //Consulta Reporte Todos
     public ArrayList<FlujoDeudoresSD> SD_Reporte_FLujoDocsConsulta(String vendedor, String factura, String clienteUno, String clienteDos, String fe1, String fe2) {
         ArrayList<FlujoDeudoresSD> sp_todos = new ArrayList<>();
