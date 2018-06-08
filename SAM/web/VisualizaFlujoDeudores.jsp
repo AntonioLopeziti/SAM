@@ -182,16 +182,16 @@
                                     <table id="TabHead">
                                         <thead>
                                             <tr>                                                
-                                                <td>Ejercicio</td>
-                                                <td>Mes Contable</td>
+                                                <td>Cliente</td>
+                                                <td>Nombre Cliente</td>
+                                                <td>Factura</td>
                                                 <td>Fecha Contable</td>
                                                 <td>Fecha Vencimiento</td>
                                                 <td>Dias Vencimiento</td>                                                
-                                                <td>Factura</td>
                                                 <td>Importe</td>
                                                 <td>Moneda</td>
-                                                <td>Cliente</td>
-                                                <td>Nombre Cliente</td>
+                                                <td>Ejercicio</td>
+                                                <td>Mes Contable</td>
                                                 <td>Vendedor</td>
                                                 <td>Nombre Vendedor</td>
                                             </tr>
