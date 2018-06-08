@@ -98,6 +98,7 @@ public class ACC_NotificarTiempos {
                 PlanPP pp = new PlanPP();
                 pp.setNum_orden(rs.getString("num_orden"));
                 pp.setTexto_breve(rs.getString("texto_breve"));
+                pp.setTexto_material(rs.getString("texto_material"));
                 pl.add(pp);
             }
         } catch (Exception e) {
