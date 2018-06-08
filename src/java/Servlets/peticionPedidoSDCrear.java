@@ -62,6 +62,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
             String solic = request.getParameter("solicitante");
             String desti = request.getParameter("destinatario");
             String vende = request.getParameter("Vendedor");
+            String lista = request.getParameter("listap");
 
             ////// Variables de guardado  /////
             String FOLIO = request.getParameter("FOLIO");
@@ -83,6 +84,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
             String CANTI = request.getParameter("CANTI");
             String POSIC = request.getParameter("POSIC");
             String FECEP = request.getParameter("FECEP");
+            String LISTP = request.getParameter("LISTP");
             String FILA = request.getParameter("FILA");
             String POS = request.getParameter("POS");
             String TEXTOCAB = request.getParameter("TEXTOCAB");
@@ -243,7 +245,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     }
                     break;
                 case "ConsultarMateriales":
-                    ArrayList<materiales_venta> mat = ACC_CrearPedidoSD.ObtenerInstancia().GetMateriales(Materi, Denom, Canti, client, org, canal);
+                    ArrayList<materiales_venta> mat = ACC_CrearPedidoSD.ObtenerInstancia().GetMateriales(Materi, Denom, Canti, client, vende, lista);
                     if (mat.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
@@ -281,7 +283,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     out.println(denomi);
                     break;
                 case "ValidarMaterial":
-                    materiales_venta ma = ACC_CrearPedidoSD.ObtenerInstancia().getDMat(Materi, org, canal, client);
+                    materiales_venta ma = ACC_CrearPedidoSD.ObtenerInstancia().getDMat(Materi, client, vende, lista);
                     if (ma.getMaterial() == null || ma.getMaterial() == "") {
                         out.println(0);
                     } else {
@@ -307,14 +309,14 @@ public class peticionPedidoSDCrear extends HttpServlet {
                 case "Guardarcabacera":
                     String FECHAENT = Consultas.ObtenerInstancia().DateFormatGuion(FECHE);
                     String FECHAPRE = Consultas.ObtenerInstancia().DateFormatGuion(FECHP);
-                    ACC_CrearPedidoSD.ObtenerInstancia().InsertarCabecera1(FOLIO, CLASE, ORGVE, CANAL, SECTO, GRUPV, OFICV, FECHAENT, FECHAPRE, REFCL, USUAR, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().InsertarCabecera1(FOLIO, CLASE, ORGVE, CANAL, SECTO, GRUPV, OFICV, FECHAENT, FECHAPRE, REFCL, USUAR, FechaActual, HoraActual, LISTP);
                     ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(FOLIO, "AG", SOLIC, USUAR, FechaActual, HoraActual);
                     ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(FOLIO, "WE", DESTI, USUAR, FechaActual, HoraActual);
                     break;
                 case "GuardarPosiciones":
                     String POSFIN = String.valueOf(POSIC) + "0";
                     String FECENTPO = Consultas.ObtenerInstancia().DateFormatGuion(FECEP.trim());
-                        ACC_CrearPedidoSD.ObtenerInstancia().GuardarMateriales(FOLIO, POSFIN, MATER, DESCR, UNIDA, USUAR, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarMateriales(FOLIO, POSFIN, MATER, DESCR, UNIDA, USUAR, FechaActual, HoraActual);
                     ACC_CrearPedidoSD.ObtenerInstancia().GuardarCantidades(FOLIO, POSFIN, CANTI, USUAR, FechaActual, HoraActual, FECENTPO);
                     break;
                 case "ActaulizarFolio":
@@ -370,6 +372,23 @@ public class peticionPedidoSDCrear extends HttpServlet {
                 case "RevisarFolio":
                     String ok = ACC_CrearPedidoSD.ObtenerInstancia().CheckFolio(folioSAM);
                     out.println(ok);
+                    break;
+                case "ConsultarListaPrecio":
+                    ArrayList<String[]> li = ACC_CrearPedidoSD.ObtenerInstancia().CargarListaPrecios();
+                    if (li.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        for (int i = 0; i < li.size(); i++) {
+                            out.println("<tr ondblclick=\"SeleccionarData('" + li.get(i)[0] + "','VentanaModalListaPrecio','ListaPrecio','" + li.get(i)[1] + "','txtListaPrecio')\">");
+                            out.println("<td>" + li.get(i)[0]+ "</td>");
+                            out.println("<td>" + li.get(i)[1]+ "</td>");
+                            out.println("</tr>");
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println();
+                    }
                     break;
 
             }
