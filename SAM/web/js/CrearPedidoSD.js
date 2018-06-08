@@ -33,7 +33,8 @@ $(document).ready(function () {
         $('#GpoVendedores'),
         $('#txtGpoVended'),
         $('#fechaPrecio'),
-        $('#textoCabec')
+        $('#textoCabec'),
+        $('#ListaPrecio')
     ];
     var matchs = [
         $('#matchSolicitante'),
@@ -44,7 +45,8 @@ $(document).ready(function () {
         $('#matchFechaentrega'),
         $('#matchClasePedido'),
         $('#matchpoficinaVentas'),
-        $('#matchGpoVendedores')
+        $('#matchGpoVendedores'),
+        $('#matchListaPre')
     ];
     $.each(inputs, function (i, v) {
         switch (i) {
@@ -327,6 +329,34 @@ $(document).ready(function () {
                     checarPosiMa(-1);
                 });
                 break;
+            case 20:  ///// Lista precio
+                v.css('background-image', 'url(images/necesario.PNG)');
+                v.focus(function () {
+                    v.css('background-image', 'none');
+                    checarPosiMa(9);
+                });
+                v.blur(function () {
+                    if (v.val().length > 0) {
+                        v.css('background-image', 'none');
+                    } else {
+                        v.css('background-image', 'url(images/necesario.PNG)');
+                    }
+                });
+                v.keypress(function (e) {
+                    var tecla = (document).all ? e.keyCode : e.which;
+                    if (tecla == 13) {
+                        if (v.val().length > 0) {
+                            ObtenerDescripcion(v.val().trim(), 'L', 'ListaPrecio', 'txtListaPrecio');
+                        }
+                    }
+                    if (tecla == 8) {
+                        return false;
+                    }
+                    patron = /[0-9a-zA-ZñÑ]/;
+                    te = String.fromCharCode(tecla);
+                    return patron.test(te);
+                });
+                break;
 
         }
     });
@@ -391,6 +421,11 @@ $(document).ready(function () {
                     mostrarVentanaModal('VentanaModalGrpoVend', 'handle7', 'Busgpovend');
                 });
                 break;
+            case 9:
+                v.click(function () {
+                    ConsultaListaPrecio();
+                });
+                break;
         }
 
     });
@@ -427,6 +462,9 @@ $(document).ready(function () {
     });
     $('#CerrarMCSector').click(function () {
         ocultarVentanaSimple('VentanaModalSector', 'Sector');
+    });
+    $('#CerrarMCListaPrecio').click(function () {
+        ocultarVentanaSimple('VentanaModalListaPrecio', 'ListaPrecio');
     });
     $('#CerrarMCOficinaVentas').click(function () {
         ocultarVentanaSimple('VentanaModalOficinaVentas', 'OficinaVentas');
@@ -685,6 +723,11 @@ $(document).ready(function () {
         if ($('#fechaEntrega').val().length == 0) {
             ShowMsg(7, "images/advertencia.PNG", "audio/saperror.wav");
             $('#fechaEntrega').focus();
+            return;
+        }
+        if ($('#ListaPrecio').val().length == 0) {
+            ShowMsg(26, "images/advertencia.PNG", "audio/saperror.wav");
+            $('#ListaPrecio').focus();
             return;
         }
         if ($('#orgVentas').val().length == 0 && $('#CanalDis').val().length == 0 && $('#Sector').val().length == 0) {
@@ -1084,6 +1127,24 @@ function ConsultaOficinaVentas() {
         }
     });
 }
+function ConsultaListaPrecio() {
+    var acc = "ConsultarListaPrecio";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionPedidoSDCrear',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc,
+        success: function (data) {
+            if (data == 0) {
+                ShowMsg(1, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                MostratVentanaModalSimple('VentanaModalListaPrecio', 'cargarDatosListaPrecio', data, 'table-scrollListaPrecio', 'fixedYListaPrecio', 'handle10');
+            }
+        }
+    });
+}
 function ConsultaUnidadMedida(vm, h, p) {
     var acc = "ConsultarUnidadMedida";
     $.ajax({
@@ -1167,8 +1228,10 @@ function ConsultaMateriales() {
     var cli = $('#solicitante').val();
     var org = $('#orgVentas').val();
     var can = $('#CanalDis').val();
+    var ven = $('#GpoVendedores').val();
+    var lis = $('#ListaPrecio').val();
     var acc = "ConsultarMateriales";
-    var datos = "&Material=" + $('#BusMaterial').val() + "&DescripcionCPedido=" + encodeURIComponent($('#BusdesMaterial').val().trim()) + "&Ctd=" + $('#numAcMax8').val() + "&Cliente=" + cli + "&org=" + org + "&canal=" + can;
+    var datos = "&Material=" + $('#BusMaterial').val() + "&DescripcionCPedido=" + encodeURIComponent($('#BusdesMaterial').val().trim()) + "&Ctd=" + $('#numAcMax8').val() + "&Cliente=" + cli + "&org=" + org + "&canal=" + can + "&Vendedor=" + ven + "&listap=" + lis;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1257,6 +1320,11 @@ function mostrarVentanaTextoPos(pos) {
         $('#fechaEntrega').focus();
         return;
     }
+    if ($('#ListaPrecio').val().length == 0) {
+            ShowMsg(26, "images/advertencia.PNG", "audio/saperror.wav");
+            $('#ListaPrecio').focus();
+            return;
+        }
     if ($('#orgVentas').val().length == 0 && $('#CanalDis').val().length == 0 && $('#Sector').val().length == 0) {
         ShowMsg(9, "images/advertencia.PNG", "audio/saperror.wav");
         return;
@@ -1303,6 +1371,11 @@ function MostrarMatchGridMateriales(VM, handle, pos) {
         ShowMsg(7, "images/advertencia.PNG", "audio/saperror.wav");
         return;
     }
+    if ($('#ListaPrecio').val().length == 0) {
+            ShowMsg(26, "images/advertencia.PNG", "audio/saperror.wav");
+            $('#ListaPrecio').focus();
+            return;
+        }
     var BE = document.createElement('audio');
     BE.src = "audio/sapsnd05.wav";
     BE.play();
@@ -1436,6 +1509,11 @@ function ValidarMAterial(material, pos) {
         $('#fechaEntrega').focus();
         return;
     }
+    if ($('#ListaPrecio').val().length == 0) {
+            ShowMsg(26, "images/advertencia.PNG", "audio/saperror.wav");
+            $('#ListaPrecio').focus();
+            return;
+        }
     if ($('#orgVentas').val().length == 0 && $('#CanalDis').val().length == 0 && $('#Sector').val().length == 0) {
         ShowMsg(9, "images/advertencia.PNG", "audio/saperror.wav");
         return;
@@ -1445,7 +1523,9 @@ function ValidarMAterial(material, pos) {
     var can = $('#CanalDis').val();
     var sec = $('#Sector').val();
     var acc = "ValidarMaterial";
-    var datos = "&Material=" + material + "&org=" + org + "&canal=" + can + "&Cliente=" + clie;
+    var ven =  $('#GpoVendedores').val();
+    var lis =  $('#ListaPrecio').val();
+    var datos = "&Material=" + material + "&Cliente=" + clie + "&Vendedor=" + ven + "&listap=" + lis ;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1529,11 +1609,10 @@ function soloNumeros(e) {
 function validarMaterial(pos) {
     var material = $('#tdMater' + pos).val();
     var clie = $('#solicitante').val();
-    var org = $('#orgVentas').val();
-    var can = $('#CanalDis').val();
-    var sec = $('#Sector').val();
+    var ven = $('#GpoVendedores').val();
+    var lis = $('#ListaPrecio').val();
     var acc = "ValidarMaterial";
-    var datos = "&Material=" + material + "&org=" + org + "&canal=" + can + "&Cliente=" + clie;
+    var datos = "&Material=" + material + "&Vendedor=" + ven + "&listap=" + lis + "&Cliente=" + clie;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1690,7 +1769,8 @@ function GuardarCabecera(folio) {
     var usuario = $('#CreadoPor').val();
     var solicitante = $('#solicitante').val();
     var destinatario = $('#destinatario').val();
-    var datos = "&CLASE=" + clasePedi.toUpperCase() + "&ORGVE=" + orgVentas + "&CANAL=" + canalDist + "&SECTO=" + sector + "&GRUPV=" + grupoVend + "&OFICV=" + oficinaVe + "&FECHE=" + fechaEntr + "&FECHP=" + fechaPrec + "&REFCL=" + refClient + "&USUAR=" + usuario + "&SOLIC=" + solicitante + "&DESTI=" + destinatario + "&FOLIO=" + folio;
+    var listaprecio = $('#ListaPrecio').val();
+    var datos = "&CLASE=" + clasePedi.toUpperCase() + "&ORGVE=" + orgVentas + "&CANAL=" + canalDist + "&SECTO=" + sector + "&GRUPV=" + grupoVend + "&OFICV=" + oficinaVe + "&FECHE=" + fechaEntr + "&FECHP=" + fechaPrec + "&REFCL=" + refClient + "&USUAR=" + usuario + "&SOLIC=" + solicitante + "&DESTI=" + destinatario + "&FOLIO=" + folio + "&LISTP=" + listaprecio;
     var acc = "Guardarcabacera";
     $.ajax({
         async: false,
@@ -1705,9 +1785,11 @@ function GuardarCabecera(folio) {
 }
 function ValidateMate(material, org, can, sec) {
     var clie = $('#solicitante').val();
+    var lis = $('#ListaPrecio').val();
+    var ven = $('#GpoVendedores').val();
     var ret = "0";
     var acc = "ValidarMaterial";
-    var datos = "&Material=" + material + "&org=" + org + "&canal=" + can + "&Cliente=" + clie;
+    var datos = "&Material=" + material + "&Vendedor=" + ven + "&listap=" + lis + "&Cliente=" + clie;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1767,7 +1849,7 @@ function ActualizaFolio(folio)
         url: 'peticionPedidoSDCrear',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Accion=" + acc + "&FOLIO="+folio,
+        data: "Accion=" + acc + "&FOLIO=" + folio,
         success: function (data) {
             window.location.href = "CrearPedidoSD.jsp?FolioPV=" + data;
         }
