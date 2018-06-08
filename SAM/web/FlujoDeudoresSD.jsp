@@ -224,7 +224,7 @@
                         <hr>
                     </section>
                     <section class='DivRight'>                                               
-                        <label><%out.println(po.getProperty("etiqueta.Rango_a"));%></label><input id="clienteDos" type="text" style='width: 35%; text-transform: uppercase;' maxlength="10"><button id="match_A4" class='BtnMatchIcon'></button>
+                        <label><%out.println(po.getProperty("etiqueta.Rango_a"));%></label><input id="clienteDos" type="text" style='width: 35%; text-transform: uppercase;' maxlength="10"><button id="match_A5" class='BtnMatchIcon'></button>
                         <hr>                        
                         <label><%out.println(po.getProperty("etiqueta.Rango_a"));%></label><input value="" maxlength="10" type="text" value="" id="fecha_fin" style="width:20%;"/><button id="match_F2" class='BtnMatchIcon'></button>
                         <hr>
@@ -331,7 +331,7 @@
         <!--Ventana Folio Nueva Numero Documento-->
         <div id="VentanaModalSAM1" class="VentanaModal">
             <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sam1')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button onclick="cambiarMatchFolio();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
             <div id="BuscarParamFolio_SP" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
@@ -355,8 +355,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Num Documento</th>
-                                        <th>Clase Documento</th>
+                                        <th>Factura</th>                                        
                                     </tr>
                                 </thead>
                             </table>
@@ -416,9 +415,9 @@
             <div id="BuscarParamFolioSAP_SP" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label>Material</label><input type="text" id="BusNumOrd" style="width:35%; text-transform: uppercase;"/>
+                        <label>Cliente</label><input type="text" id="BusNumOrd" style="width:35%; text-transform: uppercase;"/>
                         <hr>
-                        <label>Texto Breve</label><input type="text" id="CenNumOrd" style="width:35%;"/>
+                        <label>Nombre Cliente</label><input type="text" id="CenNumOrd" style="width:35%;"/>
                         <hr>                           
                         <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxNumOrd" maxlength="3" style="width:10%;" />
                         <hr>
@@ -436,8 +435,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Número Orden</th>
-                                        <th>Centro</th>
+                                        <th>Cliente</th>
+                                        <th>Nombre Cliente</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -456,9 +455,9 @@
             <div id="BuscarParamFolioSAP2_SP" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label>Material</label><input type="text" id="BusNumOrd2" style="width:35%; text-transform: uppercase;"/>
+                        <label>Cliente</label><input type="text" id="BusNumOrd2" style="width:35%; text-transform: uppercase;"/>
                         <hr>
-                        <label>Texto Breve</label><input type="text" id="CenNumOrd2" style="width:35%;"/>
+                        <label>Nombre Cliente</label><input type="text" id="CenNumOrd2" style="width:35%;"/>
                         <hr>                           
                         <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxNumOrd2" maxlength="3" style="width:10%;" />
                         <hr>
@@ -476,8 +475,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Número Orden</th>
-                                        <th>Centro</th>
+                                        <th>Cliente</th>
+                                        <th>Nombre Cliente</th>
                                     </tr>
                                 </thead>
                             </table>
