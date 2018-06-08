@@ -327,7 +327,7 @@
                             <label>Orden</label>
                             <input type="text" id="txtOrd" style="width:35%; text-transform: uppercase;"/>
                             <hr>
-                            <label>Texto breve</label>
+                            <label>Texto Material</label>
                             <input type="text" id="txtBrev" style="width:55%; text-transform: uppercase;"/>
                             <hr>
                             <label>Ctd.máxima aciertos</label>
@@ -347,7 +347,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Orden Fabricación</th>
+                                            <th>Orden</th>
+                                            <th>Texto Material</th>
                                         </tr>
                                     </thead>
                                 </table>
