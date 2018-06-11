@@ -950,6 +950,27 @@ public class ACC_Ordenes_pp_notificaciones {
         
         return rtn;
     }
+    public String GetCentroUsr(String usuario){
+        String rtn = "";
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs;
+        
+        String query = "{call PP.getCentroUsuario(?)}";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, usuario);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rtn = rs.getString("centro");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        con.CerrarConexion(conn);
+        
+        return rtn;
+    }
     public String GetFIoper(String orden, String ope){
         String rtn = "";
         Conexion con = new Conexion();
