@@ -516,6 +516,9 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                 case "getUMoper":
                     out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().GetUMoper(v1));
                     break;
+                case "getCentroUsr":
+                    out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().GetCentroUsr(v1));
+                    break;
                 case "getFechaI":
                     out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().GetFIoper(v1, v2));
                     break;
