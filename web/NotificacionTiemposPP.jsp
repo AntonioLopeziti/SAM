@@ -173,7 +173,7 @@
                         <hr id="lineaNotiTiempos">
                         <div class="divNoPers1">
                             <label>No Personal</label><input type="text" id="NoPers" value="" maxlength="10" style="text-transform: uppercase; background-repeat: no-repeat;" /><button id="btnmatchUsuarios"  class="BtnMatchIcon"></button>
-                            <input type="text" id="centroUsr"/>
+                            <input type="text" id="centroUsr" hidden/>
                             <hr>
                         </div>
                         <div class="divNoPerso2">
