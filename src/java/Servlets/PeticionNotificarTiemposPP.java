@@ -250,7 +250,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     }
                     break;
                 case "ConsultarOrdenesFab":
-                    ArrayList<PlanPP> pl = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ConsultarOrdenesFabPP(matchOr, matchTxt, matchCnt);
+                    ArrayList<PlanPP> pl = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ConsultarOrdenesFabPP(matchOr, matchTxt, matchCnt, v1);
                     int conta = 0;
                     ArrayList<ControlListaOrdenes> lo = new ArrayList<>();
                     if (pl.size() > 0) {
