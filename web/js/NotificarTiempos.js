@@ -5,6 +5,7 @@
  */
 $(document).ready(function () {
     ponerUsuarioDefault();
+    getCtrUsr();
     AjustarCabecera('TabHeadOpe', 'TabBodyOpe', 3, 'SecCuerpoOpe');
     startTime();
 //    $('#NoPers').css('background-image', 'url(images/necesario.PNG)');
@@ -180,6 +181,7 @@ $(document).ready(function () {
         borrarmsg();
         ponerUsuarioDefault();
         tabOpePP("");
+        getCtrUsr();
     });
     $("#okOrden").click(function () {
         CargarContenidoOrdFab();
@@ -404,6 +406,7 @@ function validarDatos() {
                 limpiarCampos();
                 tabOpePP("");
                 ponerUsuarioDefault();
+                getCtrUsr();
             }
         }
     });
@@ -469,6 +472,7 @@ function validarDatos2() {
                 limpiarCampos();
                 tabOpePP("");
                 ponerUsuarioDefault();
+                getCtrUsr();
             }
         }
     });
@@ -611,6 +615,7 @@ function validarLlenado() {
                     $('#btnInicio').prop('disabled', false);
                     ocultarVentana('VentanaModalActividades', '');
                     tabOpePP("");
+                    getCtrUsr();
 //                    $('#btnFin').prop('disabled', true);
                 } else {
                     $('#msg').html("Error al notificar la orden");
@@ -691,9 +696,11 @@ function CargarContenidoOrdFab() {
     var ord = $('#txtOrd').val();
     var txt = $('#txtBrev').val();
     var nAc = $('#numAcMaxOrd').val();
+    var ctr = $('#centroUsr').val();
     var dataSend = "&modOrd=" + ord +
             "&modTxtB=" + txt +
-            "&modAcO=" + nAc;
+            "&modAcO=" + nAc +
+            "&v1=" + ctr;
     $.ajax({
         async: false,
         type: 'GET',
@@ -936,6 +943,7 @@ function validarUsuario() {
                 desbloquearCampos();
             } else {
                 borrarmsg();
+                getCtrUsr();
                 //revDatos(us);
             }
         }
@@ -2307,6 +2315,22 @@ function getMotivosRC() {
         data: send,
         success: function (data) {
             $("#bkRechazos").html(data);
+        }
+    });
+}
+
+function getCtrUsr() {
+    var acc = "getCentroUsr";
+    var send = "&v1=" + $("#NoPers").val() + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            $("#centroUsr").val(data);
         }
     });
 }
