@@ -81,18 +81,19 @@ public class ACC_NotificarTiempos {
     }
     
     //Consultar ordenes de fabricacion por match
-    public ArrayList<PlanPP> ConsultarOrdenesFabPP(String matchOr, String matchTxt, String matchCnt) {
+    public ArrayList<PlanPP> ConsultarOrdenesFabPP(String matchOr, String matchTxt, String matchCnt, String centro) {
         ArrayList<PlanPP> pl = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String proc = "{CALL PP.NotTiempo_ConsultarOrdenesFabPP (?,?,?)}";
+        String proc = "{CALL PP.NotTiempo_ConsultarOrdenesFabPP (?,?,?,?)}";
         try {
             ps = con.prepareStatement(proc);
             ps.setString(1, matchOr);
             ps.setString(2, matchTxt);
             ps.setString(3, matchCnt);
+            ps.setString(4, centro);
             rs = ps.executeQuery();
             while (rs.next()) {
                 PlanPP pp = new PlanPP();
