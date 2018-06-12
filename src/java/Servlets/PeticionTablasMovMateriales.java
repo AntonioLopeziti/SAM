@@ -67,7 +67,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
             pp.setNum_doc_compras(request.getParameter("v10"));
             pp.setNum_cuenta_proveedor(request.getParameter("v11"));//Num posición 
             pp.setNum_posicion_solped(request.getParameter("v12"));
-            
+
             String Doculot = request.getParameter("doclote");
             String Docposlot = request.getParameter("docposlote");
 
@@ -88,10 +88,9 @@ public class PeticionTablasMovMateriales extends HttpServlet {
 
             int c;
             Properties po = new Properties();
-            try
-            {
-                po.load(getServletContext().getResourceAsStream("/WEB-INF/Language"+Idioma+".properties"));
-            }catch(Exception e) {
+            try {
+                po.load(getServletContext().getResourceAsStream("/WEB-INF/Language" + Idioma + ".properties"));
+            } catch (Exception e) {
                 System.err.println("Error por: " + e);
             }
             switch (accion) {
@@ -158,138 +157,138 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                     break;
                 case "VentanaModal101101":
                     if (ACC_Pedidos.ObtenerInstancia().ConsultaPedidoExiste(v1, v3)) {
-                            if (ACC_Pedidos.ObtenerInstancia().veriPediServ(v1)) {
-                                if (ACC_Pedidos.ObtenerInstancia().CheckOrdenLibPedido(v1) == 1) {
-                                    if (ACC_Pedidos.ObtenerInstancia().checkLiberacion(v1, v2, v3, almacen)) {
-                                        ArrayList<pedido_detalle> pe = ACC_Pedidos.ObtenerInstancia().ConsultaPedidos(v1, v2, v3);
-                                        if (pe.size() > 0) {
-                                            out.println("<table class=\"TablaCont\" id=\"TablaPedido\">\n"
-                                                    + "        <thead>\n"
-                                                    + "                <tr id=\"CabeceraTabla\">\n"
-                                                    + "                    <td>&nbsp;&nbsp;&nbsp;</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.Tmaterial_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.Tdescripcion_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TAlmacen_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TPorRecibir_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.Tlote_MOM") + "</td>\n"
-                                                    + "                    <td></td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TUEAN_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TloteProv_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TcantidadR_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.Tcantidad_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TUMB_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.Tcentro_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TfechaEntrega_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TTP_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TBSAR_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TProveedor_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TPedido_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.Tposicion_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TCentCos_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.Torden_MOM") + "</td>\n"
-                                                    + "                    <td>" + po.getProperty("etiqueta.TclasCost_MOM") + "</td>\n"
-                                                    + "                    <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                    <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                    <td class=\"ocultar\">ADMON_PORTUARIA__INTEGRAL_DE_TOPO_S_Mas_Espacio</td>\n"
-                                                    + "\n"
-                                                    + "                </tr>\n"
-                                                    + "        </thead>\n"
-                                                    + "        <tbody>");
+                        if (ACC_Pedidos.ObtenerInstancia().veriPediServ(v1)) {
+                            if (ACC_Pedidos.ObtenerInstancia().CheckOrdenLibPedido(v1) == 1) {
+                                if (ACC_Pedidos.ObtenerInstancia().checkLiberacion(v1, v2, v3, almacen)) {
+                                    ArrayList<pedido_detalle> pe = ACC_Pedidos.ObtenerInstancia().ConsultaPedidos(v1, v2, v3);
+                                    if (pe.size() > 0) {
+                                        out.println("<table class=\"TablaCont\" id=\"TablaPedido\">\n"
+                                                + "        <thead>\n"
+                                                + "                <tr id=\"CabeceraTabla\">\n"
+                                                + "                    <td>&nbsp;&nbsp;&nbsp;</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.Tmaterial_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.Tdescripcion_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TAlmacen_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TPorRecibir_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.Tlote_MOM") + "</td>\n"
+                                                + "                    <td></td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TUEAN_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TloteProv_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TcantidadR_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.Tcantidad_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TUMB_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.Tcentro_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TfechaEntrega_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TTP_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TBSAR_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TProveedor_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TPedido_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.Tposicion_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TCentCos_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.Torden_MOM") + "</td>\n"
+                                                + "                    <td>" + po.getProperty("etiqueta.TclasCost_MOM") + "</td>\n"
+                                                + "                    <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                    <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                    <td class=\"ocultar\">ADMON_PORTUARIA__INTEGRAL_DE_TOPO_S_Mas_Espacio</td>\n"
+                                                + "\n"
+                                                + "                </tr>\n"
+                                                + "        </thead>\n"
+                                                + "        <tbody>");
 
-                                            for (c = 0; c < pe.size(); c++) {
-                                                BigDecimal res = new BigDecimal(Double.parseDouble(pe.get(c).getCantidad_pedido()) - Double.parseDouble(pe.get(c).getCantidad()) - Double.parseDouble(pe.get(c).getUltima_cantidad())).setScale(12, BigDecimal.ROUND_HALF_DOWN);
-                                                Double c1 = res.doubleValue();
-                                                Double c2 = Double.parseDouble(pe.get(c).getCantidad()) + Double.parseDouble(pe.get(c).getUltima_cantidad());
-                                                out.println("<tr>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td name=\"tdMaterial\">" + pe.get(c).getMaterial() + "</td>\n"
-                                                        + "                <td name=\"tdtxt\">" + pe.get(c).getDescripcion() + "</td>\n"
-                                                        + "                <td name=\"tdAlmacen\">" + pe.get(c).getAlmacen() + "</td>\n"
-                                                        + "                <td><input maxlength=\"13\" type=\"text\"  value=\"" + Num(String.valueOf(c1)) + "\"name=\"bx101Prb\"  class=\"bx101N\" id=\"bxPrb" + c + "\" onblur=\"this.value = checkDec(this.value, 3)\"   onKeyUp=\"this.value = check99(this.value, '999999', 7)\" onfocus=\"loteBtnHide('" + pe.size() + "')\"></td>\n"
-                                                        + "                <td><input type=\"text\" name=\"bx101Lote\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bx101NL\" id=\"bxLote" + c + "\" onfocus=\"loteBtnShow('" + c + "', '" + pe.size() + "')\"></td>\n"
-                                                        + "                <td><button id=\"btnLote" + c + "\" class='BtnMatchIcon' style=\"display : none;\" onclick=\"MatchLote('" + c + "', '" + pe.get(c).getMaterial() + "')\"></button></td>\n"
-                                                        + "                <td><input type=\"text\" style=\"text-transform: uppercase;\" disabled maxlength=\"3\" value=\"" + pe.get(c).getUnidad_medida_base() + "\" name=\"bx101UEAN\" class=\"bx101N\" id=\"bxUEAN" + c + "\" onfocus=\"loteBtnHide('" + pe.size() + "')\"></td>\n"
-                                                        + "                <td><input type=\"text\" style=\"text-transform: uppercase;\" maxlength=\"15\" name=\"bx101Prov\" class=\"bx101N\" id=\"bxProv" + c + "\" onfocus=\"loteBtnHide('" + pe.size() + "')\"   ></td>\n"
-                                                        + "                <td name=\"tdCR\">" + Num(String.valueOf(c2)) + "</td>\n"
-                                                        + "                <td name=\"tdCP\">" + Num(pe.get(c).getCantidad_pedido()) + "</td>\n"
-                                                        + "                <td name=\"tdUM\">" + pe.get(c).getUnidad_medida_base() + "</td>\n"
-                                                        + "                <td name=\"tdCentro\">" + pe.get(c).getCentro() + "</td>\n"
-                                                        + "                <td name=\"tdFechaE\">" + pe.get(c).getFecha_entrega_posicion() + "</td>\n"
-                                                        + "                <td name=\"tdDocCom\">" + pe.get(c).getTipo_doc_compras() + "</td>\n"
-                                                        + "                <td name=\"tdClase\">" + pe.get(c).getClase_pedido() + "</td>\n"
-                                                        + "                <td name=\"tdProveedor\">" + pe.get(c).getNum_cuenta_proveedor() + "</td>\n"
-                                                        + "                <td name=\"tdPedido\">" + pe.get(c).getPedido() + "</td>\n"
-                                                        + "                <td name=\"tdPos\">" + pe.get(c).getNum_posicion() + "</td>\n"
-                                                        + "                <td name=\"tdCeCo\">" + pe.get(c).getCentro_coste() + "</td>\n"
-                                                        + "                <td name=\"tdOrder\">" + pe.get(c).getNum_orden() + "</td>\n"
-                                                        + "                <td name=\"tdClCoste\">" + pe.get(c).getClase_coste() + "</td>\n"
-                                                        + "                <td class=\"ocultar\" name=\"tdTPos\">" + pe.get(c).getTipo_posicion_doc_compras() + "</td>\n"
-                                                        + "                <td class=\"ocultar\" name=\"tdTImp\">" + pe.get(c).getTipo_imputacion() + "</td>\n"
-                                                        + "                <td class=\"ocultar\" name=\"tdulc\">" + pe.get(c).getUltima_cantidad() + "</td>\n"
-                                                        + "           </tr>");
-                                            }
-                                            for (int d = c; d <= 19; d++) {
-                                                out.println("<tr>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "                <td>&nbsp;</td>\n"
-                                                        + "           </tr>");
-                                            }
+                                        for (c = 0; c < pe.size(); c++) {
+                                            BigDecimal res = new BigDecimal(Double.parseDouble(pe.get(c).getCantidad_pedido()) - Double.parseDouble(pe.get(c).getCantidad()) - Double.parseDouble(pe.get(c).getUltima_cantidad())).setScale(12, BigDecimal.ROUND_HALF_DOWN);
+                                            Double c1 = res.doubleValue();
+                                            Double c2 = Double.parseDouble(pe.get(c).getCantidad()) + Double.parseDouble(pe.get(c).getUltima_cantidad());
                                             out.println("<tr>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">ADMON_PORTUARIA__INTEGRAL_DE_TOPO_S_Mas_Espacio</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td name=\"tdMaterial\">" + pe.get(c).getMaterial() + "</td>\n"
+                                                    + "                <td name=\"tdtxt\">" + pe.get(c).getDescripcion() + "</td>\n"
+                                                    + "                <td name=\"tdAlmacen\">" + pe.get(c).getAlmacen() + "</td>\n"
+                                                    + "                <td><input maxlength=\"13\" type=\"text\"  value=\"" + Num(String.valueOf(c1)) + "\"name=\"bx101Prb\"  class=\"bx101N\" id=\"bxPrb" + c + "\" onblur=\"this.value = checkDec(this.value, 3)\"   onKeyUp=\"this.value = check99(this.value, '999999', 7)\" onfocus=\"loteBtnHide('" + pe.size() + "')\"></td>\n"
+                                                    + "                <td><input type=\"text\" name=\"bx101Lote\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bx101NL\" id=\"bxLote" + c + "\" onfocus=\"loteBtnShow('" + c + "', '" + pe.size() + "')\"></td>\n"
+                                                    + "                <td><button id=\"btnLote" + c + "\" class='BtnMatchIcon' style=\"display : none;\" onclick=\"MatchLote('" + c + "', '" + pe.get(c).getMaterial() + "')\"></button></td>\n"
+                                                    + "                <td><input type=\"text\" style=\"text-transform: uppercase;\" disabled maxlength=\"3\" value=\"" + pe.get(c).getUnidad_medida_base() + "\" name=\"bx101UEAN\" class=\"bx101N\" id=\"bxUEAN" + c + "\" onfocus=\"loteBtnHide('" + pe.size() + "')\"></td>\n"
+                                                    + "                <td><input type=\"text\" style=\"text-transform: uppercase;\" maxlength=\"15\" name=\"bx101Prov\" class=\"bx101N\" id=\"bxProv" + c + "\" onfocus=\"loteBtnHide('" + pe.size() + "')\"   ></td>\n"
+                                                    + "                <td name=\"tdCR\">" + Num(String.valueOf(c2)) + "</td>\n"
+                                                    + "                <td name=\"tdCP\">" + Num(pe.get(c).getCantidad_pedido()) + "</td>\n"
+                                                    + "                <td name=\"tdUM\">" + pe.get(c).getUnidad_medida_base() + "</td>\n"
+                                                    + "                <td name=\"tdCentro\">" + pe.get(c).getCentro() + "</td>\n"
+                                                    + "                <td name=\"tdFechaE\">" + pe.get(c).getFecha_entrega_posicion() + "</td>\n"
+                                                    + "                <td name=\"tdDocCom\">" + pe.get(c).getTipo_doc_compras() + "</td>\n"
+                                                    + "                <td name=\"tdClase\">" + pe.get(c).getClase_pedido() + "</td>\n"
+                                                    + "                <td name=\"tdProveedor\">" + pe.get(c).getNum_cuenta_proveedor() + "</td>\n"
+                                                    + "                <td name=\"tdPedido\">" + pe.get(c).getPedido() + "</td>\n"
+                                                    + "                <td name=\"tdPos\">" + pe.get(c).getNum_posicion() + "</td>\n"
+                                                    + "                <td name=\"tdCeCo\">" + pe.get(c).getCentro_coste() + "</td>\n"
+                                                    + "                <td name=\"tdOrder\">" + pe.get(c).getNum_orden() + "</td>\n"
+                                                    + "                <td name=\"tdClCoste\">" + pe.get(c).getClase_coste() + "</td>\n"
+                                                    + "                <td class=\"ocultar\" name=\"tdTPos\">" + pe.get(c).getTipo_posicion_doc_compras() + "</td>\n"
+                                                    + "                <td class=\"ocultar\" name=\"tdTImp\">" + pe.get(c).getTipo_imputacion() + "</td>\n"
+                                                    + "                <td class=\"ocultar\" name=\"tdulc\">" + pe.get(c).getUltima_cantidad() + "</td>\n"
                                                     + "           </tr>");
-                                            out.print("</tbody>"
-                                                    + "          </table>");
                                         }
-                                    } else {
-                                        out.println(1);
+                                        for (int d = c; d <= 19; d++) {
+                                            out.println("<tr>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "                <td>&nbsp;</td>\n"
+                                                    + "           </tr>");
+                                        }
+                                        out.println("<tr>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">ADMON_PORTUARIA__INTEGRAL_DE_TOPO_S_Mas_Espacio</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "                <td class=\"ocultar\">&nbsp;</td>\n"
+                                                + "           </tr>");
+                                        out.print("</tbody>"
+                                                + "          </table>");
                                     }
                                 } else {
-                                    out.println(3);
+                                    out.println(1);
                                 }
                             } else {
-                                out.println(2);
+                                out.println(3);
                             }
+                        } else {
+                            out.println(2);
+                        }
 
                     } else {
                         out.println(0);
@@ -438,7 +437,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                                         + "                <td name=\"tdCanEnt102\">" + md.get(c).getCantidad1() + "</td>\n"
                                         + "                <td name=\"tdUME102\">" + md.get(c).getUnidad_medida_base() + "</td>\n"
                                         + "                <td name=\"tdCentro102\">" + md.get(c).getCentro() + "</td>\n"
-                                        + "                <td name=\"tdFecEnt102\">" + md.get(c).getFecha()+ "</td>\n"
+                                        + "                <td name=\"tdFecEnt102\">" + md.get(c).getFecha() + "</td>\n"
                                         + "                <td>&nbsp;</td>\n"
                                         + "                <td>&nbsp;</td>\n"
                                         + "                <td name=\"tdNumProv102\">" + md.get(c).getNum_cuenta_proveedor() + "</td>\n"
@@ -584,7 +583,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                     break;
                 case "VentanaModal261261":
                 case "VentanaModal261262":
-                    LinkedList<pedido_detalle> o = ACC_Pedidos.ObtenerInstancia().Ingresa260(pp, us);
+                    LinkedList<pedido_detalle> o = ACC_Pedidos.ObtenerInstancia().Ingresa260(pp, us, Doculot, Docposlot);
                     out.println("<table class=\"TablaCont\" id=\"TablaMov\">\n"
                             + "                                    <tr id=\"CabeceraTabla\">\n"
                             + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
@@ -611,13 +610,17 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                             + "                                    <tbody>");
                     if (o.size() > 0) {
                         for (c = 0; c < o.size(); c++) {
+                            String StockE = "";
+                            if (!o.get(c).getNum_solped().isEmpty()) {
+                                StockE = "E";
+                            }
                             out.println("<tr>"
                                     + "<td><input type=\"checkbox\" name=\"Pedidos\" value=\"" + o.get(c).getNum_posicion() + "\"></td>"
                                     + "<td name=\"mmmat\">" + o.get(c).getMaterial() + "</td>"
                                     + "<td name=\"mmprr\">" + o.get(c).getPor_recibir() + "</td>"
                                     + "<td name=\"mmumb\">" + o.get(c).getUnidad_medida_base() + "</td>"
                                     + "<td name=\"mmnlt\">" + o.get(c).getNuevo_lote() + "</td>"
-                                    + "<td>&nbsp;</td>"
+                                    + "<td name=\"mmStEs\">" + StockE + "</td>"
                                     + "<td class=\"ajustar\" name=\"mmdsc\">" + o.get(c).getDescripcion() + "</td>"
                                     + "<td name=\"mmnord\">" + o.get(c).getNum_orden() + "</td>"
                                     + "<td>" + o.get(c).getCentro_coste() + "</td>"
@@ -630,6 +633,8 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                                     + "<td>&nbsp;</td>"
                                     + "<td name=\"mmctr\">" + o.get(c).getCentro() + "</td>"
                                     + "<td>&nbsp;</td>"
+                                    + "<td class=\"ocultar\" name=\"mmpedid\">" + o.get(c).getNum_solped() + "</td>"
+                                    + "<td class=\"ocultar\" name=\"mmPosPed\">" + o.get(c).getNum_registro_info() + "</td>"
                                     + "<td class=\"ocultar\" name=\"tdPoss\">" + o.get(c).getNum_posicion() + "</td>"
                                     + "<td class=\"ocultar\" name=\"mmidx\">" + (Integer.parseInt(c + "") + 1) + "</td>"
                                     + "<td class=\"ocultar\" name=\"mmPosR\">" + o.get(c).getNum_posicion_solped() + "</td>"
@@ -788,12 +793,12 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                             + "                                    </tr> \n"
                             + "                                    <tbody>");
                     for (c = 0; c < p3.size(); c++) {
-                         String StockE = "";
+                        String StockE = "";
                         if (!p3.get(c).getNum_solped().isEmpty()) {
                             StockE = "E";
                         }
                         out.println("<tr>"
-                                + "<td><input type=\"checkbox\" name=\"Pedidos\" value=\"" + p3.get(c).getNum_posicion() + "\"></td>"                                + "<td name=\"mmmat\">" + p3.get(c).getMaterial() + "</td>"
+                                + "<td><input type=\"checkbox\" name=\"Pedidos\" value=\"" + p3.get(c).getNum_posicion() + "\"></td>" + "<td name=\"mmmat\">" + p3.get(c).getMaterial() + "</td>"
                                 + "<td name=\"mmprr\">" + p3.get(c).getPor_recibir() + "</td>"
                                 + "<td name=\"mmumb\">" + p3.get(c).getUnidad_medida_base() + "</td>"
                                 + "<td name=\"mmnlt\">" + p3.get(c).getNuevo_lote() + "</td>"
@@ -803,7 +808,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                                 + "<td name=\"mmcec\">" + p3.get(c).getCentro_coste() + "</td>"
                                 + "<td>" + p3.get(c).getClase_coste() + "</td>"
                                 + "<td name=\"mmpedid\">" + p3.get(c).getNum_solped() + "</td>"
-                               + "<td name=\"mmPosPed\">" + p3.get(c).getNum_posicion_solped() + "</td>"
+                                + "<td name=\"mmPosPed\">" + p3.get(c).getNum_posicion_solped() + "</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"//proveedor
@@ -890,7 +895,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                                 + "<td>&nbsp;</td>"
                                 + "</tr>");
                     }
-                    String q = "DELETE FROM relaciontablausuario WHERE Usuario='"+us+"'";
+                    String q = "DELETE FROM relaciontablausuario WHERE Usuario='" + us + "'";
                     Consultas.ObtenerInstancia().ExecuteQuery(q);
                     break;
             }
