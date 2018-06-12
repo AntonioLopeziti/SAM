@@ -425,7 +425,7 @@ function inval() {
     ShowMsg(0, "images/advertencia.PNG", "audio/saperror.wav");
 }
 function back() {
-    window.location.href = "Reportes.jsp";
+    window.location.href = "Bienvenido.jsp";
 }
 function fin() {
     window.location.href = "Bienvenido.jsp";
