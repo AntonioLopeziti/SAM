@@ -254,7 +254,8 @@
         String gestMant_NPP = verificarP(p.charAt(126));                // GestiÃ³n Mantenimiento Notificaciones PP      
         String gestMant_NPP_Cre = verificarP(p.charAt(127));            // GestiÃ³n Mantenimiento Notificaciones PP Crear
         String gestMant_NPP_Vis = verificarP(p.charAt(128));            // GestiÃ³n Mantenimiento Notificaciones PP1 Visualizar
-        String gestCome_Fljdocum = verificarP(p.charAt(129));            // GestiÃ³n Mantenimiento Notificaciones PP1 Visualizar
+        String gestCome_Fljdocum = verificarP(p.charAt(129));           // Gestion Comercial Flujo de Dcoumentos
+        String gestCome_Fljdeudores = verificarP(p.charAt(130));           // Gestion Comercial Flujo de Deudores
     %>
 
     <head>
@@ -422,6 +423,7 @@
                                         </ul>
                                     </li>
                                     <li class="current" style="display: <%=gestCome_Fljdocum%>"><a href="FlujoDocumentos.jsp">Flujo de documentos</a></li>
+                                    <li class="current" style="display: <%=gestCome_Fljdeudores%>"><a href="FlujoDeudoresSD.jsp">Flujo deudores</a></li>
                                 </ul>
                             </li>
                             <li class="current" style="display: <%=gestMant%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionMantenim"));%></a>
