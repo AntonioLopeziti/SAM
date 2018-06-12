@@ -437,6 +437,8 @@
                             <hr>
                             <label><%out.println(po.getProperty("etiqueta.LoteDocVLD"));%></label>
                             <input type="text" class="bxMMD200" id="bxLote261" style="text-transform: uppercase;" maxlength="10">
+                            <input type="text" hidden class="bxMMD200" id="bxDocLote261" style="text-transform: uppercase;" maxlength="10">
+                            <input type="text" hidden class="bxMMD200" id="bxDocPosLote261" style="text-transform: uppercase;" maxlength="10">
                             <button id="btnLot261" class='BtnMatchIcon'></button>
                             <hr>
                             <label><%out.println(po.getProperty("etiqueta.PedidoOrnd"));%></label>
@@ -2814,7 +2816,7 @@
                                     var iconm = $('#iconmsg');
                                     iconm.show();
                                     im = "images/advertencia.PNG";
-                                    icon.attr('src', im);
+                                    iconm.attr('src', im);
                                     var men = document.getElementById("msg");
                                     men.innerHTML = "No hay valores por mostrar";
                                 } else {
@@ -3302,6 +3304,8 @@
                         var cantidad = document.getElementById('bxcnt261').value;
                         var UM = document.getElementById('bxUM261').value.toUpperCase();
                         var lote = document.getElementById('bxLote261').value.toUpperCase();
+                        var DocL = document.getElementById('bxDocLote261').value.toUpperCase();
+                        var DocPosL = document.getElementById('bxDocPosLote261').value.toUpperCase();
                         var ord = document.getElementById('bxord261').value;
 
 
@@ -3411,7 +3415,7 @@
                                                             "&v5=" + texto + "&Orden=" + ord +
                                                             "&v7=" + centro + "&clase=" + clas +
                                                             "&v8=" + pp + "&v9=" + movimiento +
-                                                            "&v12=" + pos_;
+                                                            "&v12=" + pos_ + "&doclote=" + DocL + "&docposlote=" + DocPosL;
                                                     Tabla200('VentanaModal261', extr);
                                                     var ven = document.getElementById('VentanaModalAv');
                                                     var msg = "Posición añadida correctamente";
@@ -4082,7 +4086,7 @@
                                     }
                                 } else {
                                     document.getElementById("msg").innerHTML = "";
-                                    $('#conmsg').hide();
+                                    $('#iconmsg').hide();
                                     ValidarCampos(clase);
                                 }
                             }
