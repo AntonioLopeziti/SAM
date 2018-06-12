@@ -1175,7 +1175,7 @@ public class ACC_Pedidos {
         return ped;
     }
 
-    public LinkedList<pedido_detalle> Ingresa260(pedido_detalle pd, String us) {
+    public LinkedList<pedido_detalle> Ingresa260(pedido_detalle pd, String us, String doc, String pos) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         LinkedList<pedido_detalle> ped = new LinkedList<>();
@@ -1210,8 +1210,8 @@ public class ACC_Pedidos {
             sp.setString(22, "");
             sp.setString(23, "");
             sp.setString(24, "");
-            sp.setString(25, "");
-            sp.setString(26, "");
+            sp.setString(25, pos);
+            sp.setString(26, doc);
             sp.setString(27, pd.getNum_posicion_solped());
             sp.setString(28, "");
             sp.setString(29, "");
@@ -1256,6 +1256,8 @@ public class ACC_Pedidos {
                 p.setNum_posicion(Integer.parseInt(rs.getString("num_posicion_doc_compras")) + "");
                 p.setNum_cuenta_proveedor(rs.getString("num_cuenta_proveedor"));
                 p.setNum_posicion_solped(rs.getString("num_posicion_solped"));
+                p.setNum_subpaquete(rs.getString("num_solped"));
+                p.setNum_registro_info(rs.getString("num_registro_info"));
                 ped.add(p);
             }
         } catch (Exception e) {
