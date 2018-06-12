@@ -138,6 +138,7 @@
         String ListaRes = po.getProperty("etiqueta.ListaReser");
         String CorreoInv = po.getProperty("etiqueta.CorrNoVal");
         String flujoDoc = "Flujo de documentos";
+        String flujoDeu = "Flujo deudores";
     %>
     <%!
         String verificarP(char per) {
@@ -546,7 +547,8 @@
                                                 {title: '<%=modif_m%>', key: "gestCom_Ped_mod"},
                                                 {title: '<%=visua_m%>', key: "gestCom_Ped_vis"}
                                             ]},
-                                        {title: '<%=flujoDoc%>', key: "gestCome_Fljdocum"}
+                                        {title: '<%=flujoDoc%>', key: "gestCome_Fljdocum"},
+                                        {title: '<%=flujoDeu%>', key: "gestCome_FljDeudores"}
                                     ]},
                                 {title: '<%=GesMan_m%>', key: "gestMant", expand: true,
                                     children: [
@@ -808,6 +810,7 @@
                     getPermission("gestProd_NotPP_cre", p.charAt(127)); // // G. Produccion - Notificaciones PP - Crear
                     getPermission("gestProd_NotPP_vis", p.charAt(128)); // // G. Produccion - Notificaciones PP - Visualizar    
                     getPermission("gestCome_Fljdocum", p.charAt(129)); // // G. Comercial - Flujo de documentos   
+                    getPermission("gestCome_FljDeudores", p.charAt(130)); // // G. Comercial - Flujo deudores   
 
 
                 }
@@ -944,7 +947,8 @@
             key = key + getCheckPermission("gestProd_NotPP"); // 126 G. Produccion - Notificaciones PP
             key = key + getCheckPermission("gestProd_NotPP_cre"); // 127 G. Produccion - Notificaciones PP - Crear
             key = key + getCheckPermission("gestProd_NotPP_vis"); // 128 G. Produccion - Notificaciones PP - Visualizar                    
-            key = key + getCheckPermission("gestCome_Fljdocum"); // 128 G. Produccion - Notificaciones PP - Visualizar                    
+            key = key + getCheckPermission("gestCome_Fljdocum"); // 129 G. Comercial - Flujo de documentos                   
+            key = key + getCheckPermission("gestCome_FljDeudores"); // 130 G. Comercial - Flujo deudores             
 
             return key;
         }
