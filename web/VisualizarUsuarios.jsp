@@ -77,6 +77,7 @@
         String modif_m = po.getProperty("etiqueta.Modi_menu");
         String visua_m = po.getProperty("etiqueta.Vis_menu");
         String flujoDoc = "Flujo de documentos";
+        String flujoDeu = "Flujo deudores";
         String folios_m = po.getProperty("etiqueta.Folios_menu");
         String repo_m = po.getProperty("etiqueta.Reportes_menu");
         String reposam_m = po.getProperty("etiqueta.ReportesSAM_menu");
@@ -496,7 +497,8 @@
                                                 {title: '<%=modif_m%>', key: "gestCom_Ped_mod"},
                                                 {title: '<%=visua_m%>', key: "gestCom_Ped_vis"}
                                             ]},
-                                                {title: '<%=flujoDoc%>', key: "gestCome_Fljdocum"}
+                                                {title: '<%=flujoDoc%>', key: "gestCome_Fljdocum"},
+                                                {title: '<%=flujoDeu%>', key: "gestCome_FljDeudores"}
                                     ]},
                                 {title: '<%=GesMan_m%>', key: "gestMant", expand: true,
                                     children: [
@@ -759,6 +761,7 @@
                     getPermission("gestProd_NotPP_cre", p.charAt(127)); // // G. Produccion - Notificaciones PP - Crear
                     getPermission("gestProd_NotPP_vis", p.charAt(128)); // // G. Produccion - Notificaciones PP - Visualizar                    
                     getPermission("gestCome_Fljdocum", p.charAt(129)); // // G. Comercial - Flujo de documentos                    
+                    getPermission("gestCome_FljDeudores", p.charAt(130)); // // G. Comercial - Flujo de documentos                    
                 }
             });
         }
