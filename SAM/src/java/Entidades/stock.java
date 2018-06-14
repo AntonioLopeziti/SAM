@@ -19,7 +19,7 @@ public class stock {
     String unidad_medida;
     String almacen;
     String descripcion_almacen;
-    String stocklibre_utilizacion = ";";
+    String stocklibre_utilizacion;
     String stockcontrol_calidad;
     String stock_bloqueado;
     String stock_traslado;
@@ -31,6 +31,16 @@ public class stock {
     String descripcion;
     String num_doc = "";
     String pos_doc = "";
+    String indicador_se = "";
+
+    public String getIndicador_se() {
+        return indicador_se;
+    }
+
+    public void setIndicador_se(String indicador_se) {
+        this.indicador_se = indicador_se;
+    }
+    
 
     public String getNum_doc() {
         return num_doc;
