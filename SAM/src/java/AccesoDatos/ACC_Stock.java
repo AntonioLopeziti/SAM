@@ -374,6 +374,9 @@ public class ACC_Stock {
                 s.setGrupoArticulos(rs.getString("grupo_articulos"));
                 s.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
                 s.setStock_traslado(rs.getString("stock_traslado"));
+                s.setNum_doc(rs.getString(10));
+                s.setPos_doc(rs.getString(11));
+                s.setIndicador_se(rs.getString(12));
                 st.add(s);
             }
         } catch (Exception e) {
@@ -446,6 +449,9 @@ public class ACC_Stock {
                 s.setGrupoArticulos(rs.getString("grupo_articulos"));
                 s.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
                 s.setStock_traslado(rs.getString("stock_traslado"));
+                s.setNum_doc(rs.getString(10));
+                s.setPos_doc(rs.getString(11));
+                s.setIndicador_se(rs.getString(12));               
                 st.add(s);
             }
         } catch (Exception e) {
