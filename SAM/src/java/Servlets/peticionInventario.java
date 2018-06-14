@@ -221,8 +221,11 @@ public class peticionInventario extends HttpServlet {
                             out.println("<td>" + lotelan + "</td>");
                             out.println("<td>" + umlan + "</td>");
                             out.println("<td>" + galan + "</td>");
+                            out.println("<td> Stk.E </td>");
                             out.println("<td>" + stoklibre + "</td>");
                             out.println("<td>" + stoktras + "</td>");
+                            out.println("<td> Num.Doc. </td>");
+                            out.println("<td> Pos. </td>");
                             out.println("</tr>");
                             out.println("</thead>");
                             out.println("</table>");
@@ -238,20 +241,26 @@ public class peticionInventario extends HttpServlet {
                                 out.println("<td>" + st.getLote() + "</td>");
                                 out.println("<td>" + st.getUnidad_medida() + "</td>");
                                 out.println("<td>" + st.getGrupoArticulos() + "</td>");
+                                out.println("<td>" + st.getIndicador_se() + "</td>");
                                 out.println("<td>" + st.getStocklibre_utilizacion() + "</td>");
                                 out.println("<td>" + st.getStock_traslado() + "</td>");
+                                out.println("<td>" + st.getNum_doc() + "</td>");
+                                out.println("<td>" + st.getPos_doc() + "</td>");
                                 out.println("</tr>");
                             }
                             out.println("<tr class=\"ocultar\">");
                             out.println("<td>00000000000000</td>");//12
-                            out.println("<td>00000000000000000000000000</td>");//40
+                            out.println("<td>0000000000000000000000000000000000</td>");//40
                             out.println("<td>00000000000</td>");//6
                             out.println("<td>00000000000</td>");//12
                             out.println("<td>000000000000000</td>");//12
-                            out.println("<td>0000000</td>");//12
-                            out.println("<td>00000000000000000</td>");//12
-                            out.println("<td>00000000000</td>");//12
-                            out.println("<td>00000000000</td>");//12
+                            out.println("<td>000000000</td>");//12
+                            out.println("<td>0000000000000000</td>");//12
+                            out.println("<td>000000</td>");//12
+                            out.println("<td>0000000000000</td>");//12
+                            out.println("<td>0000000000000</td>");//12
+                            out.println("<td>0000000000000</td>");//12
+                            out.println("<td>0000000000</td>");//12
                             out.println("</tr>");
                             out.println("</table>");
                             out.println("</section>");
@@ -309,8 +318,11 @@ public class peticionInventario extends HttpServlet {
                             out.println("<td>" + lotelan + "</td>");
                             out.println("<td>" + umlan + "</td>");
                             out.println("<td>" + galan + "</td>");
+                            out.println("<td> Stk.E </td>");
                             out.println("<td>" + stoklibre + "</td>");
                             out.println("<td>" + stoktras + "</td>");
+                            out.println("<td> Num.Doc </td>");
+                            out.println("<td> Pos. </td>");
                             out.println("</tr>");
                             out.println("</thead>");
                             out.println("</table>");
@@ -326,20 +338,26 @@ public class peticionInventario extends HttpServlet {
                                 out.println("<td>" + stic.getLote() + "</td>");
                                 out.println("<td>" + stic.getUnidad_medida() + "</td>");
                                 out.println("<td>" + stic.getGrupoArticulos() + "</td>");
+                                out.println("<td>" + stic.getIndicador_se() + "</td>");
                                 out.println("<td>" + stic.getStocklibre_utilizacion() + "</td>");
                                 out.println("<td>" + stic.getStock_traslado()+ "</td>");
+                                out.println("<td>" + stic.getNum_doc() + "</td>");
+                                out.println("<td>" + stic.getPos_doc() + "</td>");
                                 out.println("</tr>");
                             }
                             out.println("<tr class=\"ocultar\">");
                             out.println("<td>00000000000000</td>");//12
-                            out.println("<td>00000000000000000000000000</td>");//40
+                            out.println("<td>0000000000000000000000000000000000</td>");//40
                             out.println("<td>00000000000</td>");//6
                             out.println("<td>00000000000</td>");//12
                             out.println("<td>0000000000000000000</td>");//12
                             out.println("<td>0000000</td>");//12
-                            out.println("<td>00000000000000000</td>");//12
-                            out.println("<td>00000000000</td>");//12
-                            out.println("<td>00000000000</td>");//12
+                            out.println("<td>0000000000000</td>");//12
+                            out.println("<td>000000</td>");//12
+                            out.println("<td>0000000000000</td>");//12
+                            out.println("<td>0000000000000</td>");//12
+                            out.println("<td>0000000000000</td>");//12
+                            out.println("<td>000000000</td>");//12
                             out.println("</tr>");
                             out.println("</table>");
                             out.println("</section>");
