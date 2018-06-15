@@ -77,7 +77,7 @@
         String modif_m = po.getProperty("etiqueta.Modi_menu");
         String visua_m = po.getProperty("etiqueta.Vis_menu");
         String flujoDoc = "Flujo de documentos";
-        String flujoDeu = "Flujo deudores";
+        String flujoDeu = "Saldo de clientes";
         String folios_m = po.getProperty("etiqueta.Folios_menu");
         String repo_m = po.getProperty("etiqueta.Reportes_menu");
         String reposam_m = po.getProperty("etiqueta.ReportesSAM_menu");
