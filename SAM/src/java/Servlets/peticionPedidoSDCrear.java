@@ -275,6 +275,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         j.add(car[4]);
                         j.add(car[6]);
                         j.add(AreVent);
+                        j.add(car[8]); 
                         out.println(j);
                     }
                     break;
