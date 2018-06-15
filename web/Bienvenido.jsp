@@ -423,7 +423,7 @@
                                         </ul>
                                     </li>
                                     <li class="current" style="display: <%=gestCome_Fljdocum%>"><a href="FlujoDocumentos.jsp">Flujo de documentos</a></li>
-                                    <li class="current" style="display: <%=gestCome_Fljdeudores%>"><a href="FlujoDeudoresSD.jsp">Flujo deudores</a></li>
+                                    <li class="current" style="display: <%=gestCome_Fljdeudores%>"><a href="FlujoDeudoresSD.jsp">Saldo de clientes</a></li>
                                 </ul>
                             </li>
                             <li class="current" style="display: <%=gestMant%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionMantenim"));%></a>
