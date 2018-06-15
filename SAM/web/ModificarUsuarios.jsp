@@ -138,7 +138,7 @@
         String ListaRes = po.getProperty("etiqueta.ListaReser");
         String CorreoInv = po.getProperty("etiqueta.CorrNoVal");
         String flujoDoc = "Flujo de documentos";
-        String flujoDeu = "Flujo deudores";
+        String flujoDeu = "Saldo de clientes";
     %>
     <%!
         String verificarP(char per) {
