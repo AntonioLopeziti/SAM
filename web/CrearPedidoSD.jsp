@@ -332,7 +332,7 @@
                             <hr style="border:1.2px solid #fff;">
                             <input type="text" style="width: 100%; background: none; border: none;" id="txtAreaVentas" readOnly/>
                             <hr style="border:1.8px solid #fff;">
-                            <label>Lista de precio</label><input type="text" style="width: 6%; text-transform: uppercase"  maxlength="2" id="ListaPrecio"  /><button id="matchListaPre" class='BtnMatchIcon'></button> <input type='text' id='txtListaPrecio'style="width: 55%; background: none; border: none;" readonly/>
+                            <label>Lista de precio</label><input type="text" style="width: 6%; text-transform: uppercase; background-repeat: no-repeat;"  maxlength="2" id="ListaPrecio"  /><button id="matchListaPre" class='BtnMatchIcon'></button> <input type='text' id='txtListaPrecio'style="width: 55%; background: none; border: none;" readonly/>
                             <hr>
                             <label>Gpo. de vendedores</label><input type="text" style="width: 6%; text-transform: uppercase" maxlength="3" id="GpoVendedores" disabled /><button id="matchGpoVendedores" class='BtnMatchIcon'></button> <input type='text' id='txtGpoVended'style="width: 55%; background: none; border: none;" readonly/>
                             <hr>
