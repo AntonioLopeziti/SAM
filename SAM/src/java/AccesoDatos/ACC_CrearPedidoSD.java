@@ -269,7 +269,7 @@ public class ACC_CrearPedidoSD {
     }
 
     public String[] CargarCliente(String cliente, String vend) {
-        String[] datos = new String[8];
+        String[] datos = new String[9];
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
@@ -289,6 +289,7 @@ public class ACC_CrearPedidoSD {
                 datos[5] = rs.getString(6);
                 datos[6] = rs.getString(7);
                 datos[7] = rs.getString(8);
+                datos[8] = rs.getString(9);
             }
         } catch (Exception e) {
             System.err.println(e);
