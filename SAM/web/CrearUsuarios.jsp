@@ -131,7 +131,7 @@
         String CenNoEnc = po.getProperty("etiqueta.CenNoVal");
         String ListaRes = po.getProperty("etiqueta.ListaReser");
         String flujoDoc = "Flujo de documentos";
-        String flujoDeu = "Flujo deudores";
+        String flujoDeu = "Saldo de clientes";
     %> 
     <%!
         String verificarP(char per) {
