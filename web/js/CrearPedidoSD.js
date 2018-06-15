@@ -1449,15 +1449,19 @@ function CargarCliente(sol) {
                 $('#CanalDis').val("");
                 $('#Sector').val("");
                 $('#txtAreaVentas').val("");
+                $('#ListaPrecio').val("");
                 $('#pedido').focus();
                 ShowMsg(2, "images/advertencia.PNG", "audio/saperror.wav");
             } else {
+                $('#ListaPrecio').css('background-image', 'none');
                 $('#solicitante').css('background-image', 'none');
                 $('#txtSolicitante').val(data[1]);
                 $('#orgVentas').val(data[2]);
                 $('#CanalDis').val(data[3]);
                 $('#Sector').val(data[4]);
                 $('#txtAreaVentas').val(data[5]);
+                $('#ListaPrecio').val(data[6]);
+                ObtenerDescripcion($('#ListaPrecio').val().trim(), 'L', 'ListaPrecio', 'txtListaPrecio');
                 CargarDesRelac(sol);
             }
         }
