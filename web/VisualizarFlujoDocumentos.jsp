@@ -185,14 +185,14 @@
                                         <thead>
                                             <tr>
                                                 <!--<td>Cliente</td>-->
-                                                <td>Denomin.</td>
+                                                <td>Cliente(Desc.)</td>
                                                 <!--<td>Doc.Vta.</td>-->
                                                 <td>F.SAM</td>   
                                                 <td>Fe.Pedido</td>
                                                 <td>Ref.Pedido</td>                                             
                                                 <td>Pos.</td>                                                
                                                 <!--<td>Material</td>-->                                                
-                                                <td>Denomin.</td>
+                                                <td>Material(Desc.)</td>
                                                 <td>Cant.Pedido</td>                                                
                                                 <td>UME</td>                                                
                                                 <td>Fe.Inicio PP</td>                                                
