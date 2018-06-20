@@ -215,14 +215,14 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                     String f2 = cn.DateFormatGuion(fech2);
                     for (FlujoDocumentos a : crp.SD_EjecutarConsultaFlujoDocs(centroN, centroN2, docVen, docVen2, mate, mate2, f1, f2)) {
                         out.println("<tr>");
-                        out.println("<td>" + a.getSolicitante() + "</td>");
+//                        out.println("<td>" + a.getSolicitante() + "</td>");
                         out.println("<td>" + crp.DesFlujoDocs(a.getSolicitante(), "sol") + "</td>");  //// Den. cliente
-                        out.println("<td>" + a.getDoc_ventas() + "</td>");
+//                        out.println("<td>" + a.getDoc_ventas() + "</td>");
                         out.println("<td>" + a.getNum_doc_ref() + "</td>");
                         out.println("<td>" + crp.DesFlujoDocs(a.getDoc_ventas(), "fecp") + "</td>");  //// Fecha Pedido
                         out.println("<td>" + a.getRefer_cliente() + "</td>");
                         out.println("<td>" + a.getPos_doc_ventas() + "</td>");
-                        out.println("<td>" + a.getNum_material() + "</td>");
+//                        out.println("<td>" + a.getNum_material() + "</td>");
                         out.println("<td>" + crp.DesFlujoDocs(a.getNum_material(), "mat") + "</td>");
                         out.println("<td>" + a.getVal_neto_pos_ped() + "</td>");
                         out.println("<td>" + a.getUm_cant_prev() + "</td>");
@@ -233,19 +233,19 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                         out.println("<td>" + cn.DateFormat(a.getMaterial_introd()) + " </td>"); //// Fecha Factura
                         out.println("<td>" + cn.DateFormat(a.getFecha_carga()) + "</td>");
                         out.println("<td>" + cn.DateFormat(a.getFecha_planif_trans()) + "</td>");
-                        out.println("<td>" + a.getNum_doc_comp() + "</td>");
+                        out.println("<td>" + a.getDoc_ventas() + "</td>");
                         out.println("</tr>");
                        
                     }
                     out.println("<tr class=\"ocultar\">"
-                            + "<td>0000000000</td>"  //// Cliente
+                            //+ "<td>0000000000</td>"  //// Cliente
                             + "<td>000000000000000000000000000000000000000000000000</td>" //// Den Cliente
-                            + "<td>000000000000000</td>" //// Doc Ventas
+//                            + "<td>000000000000000</td>" //// Doc Ventas
                             + "<td>000000000000000</td>" //// Folio SAM
                             + "<td>000000000000000</td>" //// Fecha pedido
                             + "<td>00000000000000000000000000000000000000000</td>" //// Refer. Cliente
                             + "<td>000000000</td>" //// Pos 
-                            + "<td>000000000000000000000</td>" //// Material
+//                            + "<td>000000000000000000000</td>" //// Material
                             + "<td>00000000000000000000000000000000000000000</td>"  //// Den material
                             + "<td>00000000000000000000</td>" //// Cantidad pedido
                             + "<td>000000000</td>" //// Unidad Medida
