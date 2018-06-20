@@ -187,23 +187,23 @@ public class PeticionFlujoDeudoresSD extends HttpServlet {
                         out.println("<td>" + a.getImporte() + "</td>");
                         out.println("<td>" + a.getMoneda() + "</td>");
                         out.println("<td>" + a.getEjercicio() + "</td>");
-                        out.println("<td>" + a.getMes_contable() + "</td>");
-                        out.println("<td>" + a.getVendedor() + "</td>");
-                        out.println("<td>" + a.getNombre_vendedor() + "</td>");
+//                        out.println("<td>" + a.getMes_contable() + "</td>");
+//                        out.println("<td>" + a.getVendedor() + "</td>");
+//                        out.println("<td>" + a.getNombre_vendedor() + "</td>");
                     }
                     out.println("<tr class=\"ocultar\">"
                             + "<td>00000000000000</td>"
-                            + "<td>0000000000000000000000000000000000000000</td>"
-                            + "<td>0000000000000</td>"
-                            + "<td>0000000000000000</td>"
+                            + "<td>000000000000000000000000000000000000000000000000000000</td>"
+                            + "<td>00000000000000</td>"
+                            + "<td>000000000000000</td>"
                             + "<td>00000000000000000</td>"
-                            + "<td>000000000000000000</td>"
+                            + "<td>000000000000000000000</td>"
+                            + "<td>000000000000000</td>"
                             + "<td>000000000000</td>"
                             + "<td>000000000000</td>"
-                            + "<td>000000000000</td>"
-                            + "<td>00000000000000</td>"
-                            + "<td>00000000000000</td>"
-                            + "<td>00000000000000000000000</td>"
+//                            + "<td>00000000000000</td>"
+//                            + "<td>00000000000000</td>"
+//                            + "<td>00000000000000000000000</td>"
                             + "</tr>");
                     out.println("</tbody>");
                     out.println("</table>");
