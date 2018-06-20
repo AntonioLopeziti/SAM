@@ -191,9 +191,9 @@
                                                 <td>Importe</td>
                                                 <td>Moneda</td>
                                                 <td>Ejercicio</td>
-                                                <td>Mes Contable</td>
+<!--                                                <td>Mes Contable</td>
                                                 <td>Vendedor</td>
-                                                <td>Nombre Vendedor</td>
+                                                <td>Nombre Vendedor</td>-->
                                             </tr>
                                         </thead>
                                     </table>
