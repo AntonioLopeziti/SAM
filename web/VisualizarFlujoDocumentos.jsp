@@ -184,14 +184,14 @@
                                     <table id="TabHead">
                                         <thead>
                                             <tr>
-                                                <td>Cliente</td>
+                                                <!--<td>Cliente</td>-->
                                                 <td>Denomin.</td>
-                                                <td>Doc.Vta.</td>
+                                                <!--<td>Doc.Vta.</td>-->
                                                 <td>F.SAM</td>   
                                                 <td>Fe.Pedido</td>
                                                 <td>Ref.Pedido</td>                                             
                                                 <td>Pos.</td>                                                
-                                                <td>Material</td>                                                
+                                                <!--<td>Material</td>-->                                                
                                                 <td>Denomin.</td>
                                                 <td>Cant.Pedido</td>                                                
                                                 <td>UME</td>                                                
