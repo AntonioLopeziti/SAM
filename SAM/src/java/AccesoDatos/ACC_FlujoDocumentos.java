@@ -143,7 +143,9 @@ public class ACC_FlujoDocumentos extends Conexion {
                 or.setFecha_planif_trans(rs.getString("fecha_planif_trans"));
                 or.setNum_doc_comp(rs.getString("num_doc_comp"));
                 or.setMaterial_introd(rs.getString("material_introd"));
-//                or.setTxt_breve_pos_ped(rs.getString("txt_breve_pos_ped"));
+                or.setTxt_breve_pos_ped(rs.getString("txt_breve_pos_ped"));
+                or.setDenominacion_cliente(rs.getString("denominacion_cliente"));
+                or.setFecha_pedido(rs.getString("fecha_pedido"));
 //                or.setClase_doc_ventas(rs.getString("clase_doc_ventas"));
 //                or.setNum_orden(rs.getString("num_orden"));
 //                or.setNum_lote(rs.getString("num_lote"));
