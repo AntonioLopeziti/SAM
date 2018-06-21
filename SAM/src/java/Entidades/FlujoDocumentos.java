@@ -92,6 +92,25 @@ public class FlujoDocumentos {
     String status;
     String stock_vs_lin;
     String ind_vs;
+    String denominacion_cliente;
+    String fecha_pedido;
+
+    public String getDenominacion_cliente() {
+        return denominacion_cliente;
+    }
+
+    public void setDenominacion_cliente(String denominacion_cliente) {
+        this.denominacion_cliente = denominacion_cliente;
+    }
+
+    public String getFecha_pedido() {
+        return fecha_pedido;
+    }
+
+    public void setFecha_pedido(String fecha_pedido) {
+        this.fecha_pedido = fecha_pedido;
+    }
+    
 
     public String getDoc_ventas() {
         return doc_ventas;
