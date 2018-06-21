@@ -216,14 +216,14 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                     for (FlujoDocumentos a : crp.SD_EjecutarConsultaFlujoDocs(centroN, centroN2, docVen, docVen2, mate, mate2, f1, f2)) {
                         out.println("<tr>");
 //                        out.println("<td>" + a.getSolicitante() + "</td>");
-                        out.println("<td>" + crp.DesFlujoDocs(a.getSolicitante(), "sol") + "</td>");  //// Den. cliente
+                        out.println("<td>" + a.getDenominacion_cliente() + "</td>");  //// Den. cliente
 //                        out.println("<td>" + a.getDoc_ventas() + "</td>");
                         out.println("<td>" + a.getNum_doc_ref() + "</td>");
-                        out.println("<td>" + crp.DesFlujoDocs(a.getDoc_ventas(), "fecp") + "</td>");  //// Fecha Pedido
+                        out.println("<td>" + a.getFecha_pedido() + "</td>");  //// Fecha Pedido
                         out.println("<td>" + a.getRefer_cliente() + "</td>");
                         out.println("<td>" + a.getPos_doc_ventas() + "</td>");
 //                        out.println("<td>" + a.getNum_material() + "</td>");
-                        out.println("<td>" + crp.DesFlujoDocs(a.getNum_material(), "mat") + "</td>");
+                        out.println("<td>" + a.getTxt_breve_pos_ped() + "</td>");
                         out.println("<td>" + a.getVal_neto_pos_ped() + "</td>");
                         out.println("<td>" + a.getUm_cant_prev() + "</td>");
                         out.println("<td>" + cn.DateFormat(a.getFecha_ini()) + "</td>");
