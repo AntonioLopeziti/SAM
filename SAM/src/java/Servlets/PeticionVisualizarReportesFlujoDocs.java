@@ -229,7 +229,7 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                         out.println("<td>" + cn.DateFormat(a.getFecha_ini()) + "</td>");
                         out.println("<td>" + cn.DateFormat(a.getFecha_fin()) + "</td>");
                         out.println("<td>" + a.getCant_ent_efec() + "</td>");
-                        out.println("<td>" + a.getNumero_asign() + "</td>");
+                        out.println("<td>" + a.getNum_doc_comercial4()+ "</td>");
                         out.println("<td>" + cn.DateFormat(a.getMaterial_introd()) + " </td>"); //// Fecha Factura
                         out.println("<td>" + cn.DateFormat(a.getFecha_carga()) + "</td>");
                         out.println("<td>" + cn.DateFormat(a.getFecha_planif_trans()) + "</td>");
