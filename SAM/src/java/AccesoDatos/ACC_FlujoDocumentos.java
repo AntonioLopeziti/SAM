@@ -138,7 +138,7 @@ public class ACC_FlujoDocumentos extends Conexion {
                 or.setFecha_ini(rs.getString("fecha_ini"));
                 or.setFecha_fin(rs.getString("fecha_fin"));
                 or.setCant_ent_efec(rs.getString("cant_ent_efec"));
-                or.setNumero_asign(rs.getString("numero_asign"));
+                or.setNum_doc_comercial4(rs.getString("num_doc_comercial4"));
                 or.setFecha_carga(rs.getString("fecha_carga"));
                 or.setFecha_planif_trans(rs.getString("fecha_planif_trans"));
                 or.setNum_doc_comp(rs.getString("num_doc_comp"));
