@@ -209,7 +209,7 @@
                         <hr>
                         <label id="lblFolioSAP">Material</label><input id="material" type="text" style='width: 38%; text-transform: uppercase;' maxlength="25"><button id="match_A3" class='BtnMatchIcon'></button>
                         <hr>
-                        <label id="lblFecha">Fecha de Pedido</label><input value="" maxlength="10" type="text" value="" id="fecha_inicio" style="width:20%;"/><button id="match_F1" class='BtnMatchIcon'></button>
+                        <label id="lblFecha">Fecha de Pedido</label><input value="" maxlength="10" type="text" value="" id="fecha_inicio" style="width:30%;"/><button id="match_F1" class='BtnMatchIcon'></button>
                         <hr>
                     </section>
                     <section class='DivRight'>
@@ -220,7 +220,7 @@
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.Rango_a"));%></label><input id="material2" type="text" style='width: 38%; text-transform: uppercase;' maxlength="25"><button id="match_A5" class='BtnMatchIcon'></button>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.Rango_a"));%></label><input value="" maxlength="10" type="text" value="" id="fecha_fin" style="width:20%;"/><button id="match_F2" class='BtnMatchIcon'></button>
+                        <label><%out.println(po.getProperty("etiqueta.Rango_a"));%></label><input value="" maxlength="10" type="text" value="" id="fecha_fin" style="width:30%;"/><button id="match_F2" class='BtnMatchIcon'></button>
                         <hr>
                     </section>
                 </section>
@@ -240,244 +240,218 @@
                 <input type="text" hidden id="IDFecha"/>
             </div>
         </div>
-        <!--Ventana Centro Nueva Solicitante -->
-        <div id="VentanaModalCentro" class="VentanaModal">
-            <div id="handle"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('centro')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button onclick="cambiarMatchCentro();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
-            <div id="BuscarParamCentro_SP" class="BuscarParam_u">
+            
+        <!-- Cliente -->
+        <div id="VentanaModalCliente" class="VentanaModal">
+            <div id="handle"><label id="TituloMatch">Cliente</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Cliente')"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button onclick="retornPCliente();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarPCliente" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label>Nombre</label><input type="text" id="BusCentro" style="width:35%; text-transform: uppercase;"/>
+                        <label>Cliente</label><input type="text" id="BusCliente" style="width:35%; text-transform: uppercase;" maxlength="20"/>
                         <hr>
-                        <label>Centro</label><input type="text" id="BusDesCentro" style="width:35%;"/>
+                        <label>Nombre</label><input type="text" id="BusDesCliente" style="width:35%;" maxlength="40"/>
                         <hr>                           
                         <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMax" maxlength="3" style="width:10%;" />
                         <hr>
                     </div>        
                 </div> 
                 <div class="Botones_Match">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okCentro"/>
-                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('centro');"/>
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okCliente"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('Cliente');"/>
                 </div>
             </div>
-            <div id="ConsultaTablaOCompras">
+            <div id="ConsultaTablaCliente">
                 <div class="tablaCab">
-                    <div class="table-scroll" id="table-scrollCentro">
-                        <div class="fixedY" id="fixedYCentro">
+                    <div class="table-scroll" id="table-scrollCliente">
+                        <div class="fixedY" id="fixedYCliente">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Solicitante</th>
-                                        <th>Centro</th>
+                                        <th style="width:20%;">Cliente</th>
+                                        <th style="width:80%;">Nombre</th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
                         <div id="cuerpoDatos">
-                            <div class="nofixedX" id="cargarDatosOCompras">
+                            <div class="nofixedX" id="cargarDatosClientes">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Ventana Centro 2 Nueva Solicitante 2-->
-        <div id="VentanaModalCentro2" class="VentanaModal">
-            <div id="handle6"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('centro2')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button onclick="cambiarMatchCentro2();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
-            <div id="BuscarParamCentro_SP2" class="BuscarParam_u">
+        <!-- Cliente 2 -->
+        <div id="VentanaModalCliente2" class="VentanaModal">
+            <div id="handle2"><label id="TituloMatch">Cliente</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Cliente2')"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button onclick="retornPCliente2();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarPCliente2" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label>Nombre</label><input type="text" id="BusCentro2" style="width:35%; text-transform: uppercase;"/>
+                        <label>Cliente</label><input type="text" id="BusCliente2" style="width:35%; text-transform: uppercase;" maxlength="20"/>
                         <hr>
-                        <label>Centro</label><input type="text" id="BusDesCentro2" style="width:35%;"/>
+                        <label>Nombre</label><input type="text" id="BusDesCliente2" style="width:35%;" maxlength="40"/>
                         <hr>                           
                         <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMax2" maxlength="3" style="width:10%;" />
                         <hr>
                     </div>        
                 </div> 
                 <div class="Botones_Match">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okCentro2"/>
-                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('centro2');"/>
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okCliente2"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('Cliente2');"/>
                 </div>
             </div>
-            <div id="ConsultaTablaOCompras2">
+            <div id="ConsultaTablaCliente2">
                 <div class="tablaCab">
-                    <div class="table-scroll" id="table-scrollCentro">
-                        <div class="fixedY" id="fixedYCentro">
+                    <div class="table-scroll" id="table-scrollCliente2">
+                        <div class="fixedY" id="fixedYCliente2">
                             <table>
                                 <thead>
                                     <tr>
+                                        <th style="width:20%;">Cliente</th>
+                                        <th style="width:80%;">Nombre</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedX" id="cargarDatosClientes2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--Pedidos Venta-->
+        <div id="VentanaModalPedidos" class="VentanaModal">
+            <div id="handle3"><label id="TituloMatch">Pedido Vta.</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Pedido')"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="ConsultaTablaPedidos">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollPedido">
+                        <div class="fixedY" id="fixedYPedido">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Folio SAM</th>
+                                        <th>Pedido Vta</th>
                                         <th>Solicitante</th>
-                                        <th>Centro</th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
                         <div id="cuerpoDatos">
-                            <div class="nofixedX" id="cargarDatosOCompras2">
+                            <div class="nofixedX" id="cargarDatosPedido">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Ventana Folio Nueva Pedido de Venta-->
-        <div id="VentanaModalSAM1" class="VentanaModal">
-            <div id="handle2"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sam1')"><label >X</label></div></div>
+        <!--Pedidos Venta-->
+        <div id="VentanaModalPedidos2" class="VentanaModal">
+            <div id="handle4"><label id="TituloMatch">Pedido Vta.</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Pedido2')"><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
-            <div id="BuscarParamFolio_SP" class="BuscarParam_u">
-                <div class="fondo_Match">
-                    <div class="busquedaMatch">
-                        <label>Ped. Venta</label><input type="text" id="BusFolio" style="width:35%; text-transform: uppercase;"/>
-                        <hr>
-                        <label>Centro</label><input type="text" id="CenFolio" style="width:35%;"/>
-                        <hr>                           
-                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxFolio" maxlength="3" style="width:10%;" />
-                        <hr>
-                    </div>        
-                </div> 
-                <div class="Botones_Match">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okFolio"/>
-                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('sam1');"/>
-                </div>
-            </div>
-            <div id="ConsultaTablaFolioSAM1">
+            <div id="ConsultaTablaPedidos2">
                 <div class="tablaCab">
-                    <div class="table-scroll" id="table-scrollSAM">
-                        <div class="fixedY" id="fixedYSAM">
+                    <div class="table-scroll" id="table-scrollPedido2">
+                        <div class="fixedY" id="fixedYPedido2">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Ped. Venta</th>
-                                        <th>Centro</th>
+                                        <th>Folio SAM</th>
+                                        <th>Pedido Vta</th>
+                                        <th>Solicitante</th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
                         <div id="cuerpoDatos">
-                            <div class="nofixedX" id="cargarDatosFolioSAM1">
+                            <div class="nofixedX" id="cargarDatosPedido2">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Ventana Folio 2 Nueva Pedido de Venta 2-->                                
-        <div id="VentanaModalSAM2" class="VentanaModal">
-            <div id="handle3"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sam2')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
-            <div id="BuscarParamFolio2_SP" class="BuscarParam_u">
+        <!--- Materiales -->
+        <div id="VentanaModalMateriales" class="VentanaModal">
+            <div id="handle5"><label id="TituloMatch">Material</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Materiales')"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button onclick="retornPMateriales();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarPMateriales" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label>Ped. Venta</label><input type="text" id="BusFolio2" style="width:35%; text-transform: uppercase;"/>
+                        <label>Material</label><input type="text" id="BusMaterial" style="width:35%; text-transform: uppercase;" maxlength="40"/>
                         <hr>
-                        <label>Centro</label><input type="text" id="CenFolio2" style="width:35%;"/>
+                        <label>Descripción</label><input type="text" id="BusDMaterial" style="width:35%;" maxlength="40"/>
                         <hr>                           
-                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxFolio2" maxlength="3" style="width:10%;" />
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMax3" maxlength="3" style="width:10%;" />
                         <hr>
                     </div>        
                 </div> 
                 <div class="Botones_Match">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okFolio2"/>
-                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('sam2');"/>
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okMateriales"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('Materiales');"/>
                 </div>
             </div>
-            <div id="ConsultaTablaFolioSAM2">
+            <div id="ConsultaTablaMateriales">
                 <div class="tablaCab">
-                    <div class="table-scroll" id="table-scrollSAM2">
-                        <div class="fixedY" id="fixedYSAM2">
+                    <div class="table-scroll" id="table-scrollMateriales">
+                        <div class="fixedY" id="fixedYMateriales">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Ped. Venta</th>
-                                        <th>Centro</th>
+                                        <th style="width:20%;">Material</th>
+                                        <th style="width:80%;">Descipción</th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
                         <div id="cuerpoDatos">
-                            <div class="nofixedX" id="cargarDatosFolioSAM2">
+                            <div class="nofixedX" id="cargarDatosMateriales">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="VentanaModalSAP1" class="VentanaModal">
-            <div id="handle4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sap1')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button onclick="cambiarMatchNumMate();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
-            <div id="BuscarParamFolioSAP_SP" class="BuscarParam_u">
+        <!--- Materiales 2 -->
+        <div id="VentanaModalMateriales2" class="VentanaModal">
+            <div id="handle6"><label id="TituloMatch">Material</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('Materiales2')"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button onclick="retornPMateriales2();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="BuscarPMateriales2" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label>Material</label><input type="text" id="BusNumOrd" style="width:35%; text-transform: uppercase;"/>
+                        <label>Material</label><input type="text" id="BusMaterial2" style="width:35%; text-transform: uppercase;" maxlength="40"/>
                         <hr>
-                        <label>Centro</label><input type="text" id="CenNumOrd" style="width:35%;"/>
+                        <label>Descripción</label><input type="text" id="BusDMaterial2" style="width:35%;" maxlength="40"/>
                         <hr>                           
-                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxNumOrd" maxlength="3" style="width:10%;" />
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMax4" maxlength="3" style="width:10%;" />
                         <hr>
                     </div>        
                 </div> 
                 <div class="Botones_Match">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okOrden1"/>
-                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('sap1');"/>
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okMateriales2"/>
+                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('Materiales2');"/>
                 </div>
             </div>
-            <div id="ConsultaTablaFolioSAP1">
+            <div id="ConsultaTablaMateriales2">
                 <div class="tablaCab">
-                    <div class="table-scroll" id="table-scrollSAP">
-                        <div class="fixedY" id="fixedYSAP">
+                    <div class="table-scroll" id="table-scrollMateriales2">
+                        <div class="fixedY" id="fixedYMateriales2">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Material</th>
-                                        <th>Centro</th>
+                                        <th style="width:20%;">Material</th>
+                                        <th style="width:80%;">Descipción</th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
                         <div id="cuerpoDatos">
-                            <div class="nofixedX" id="cargarDatosFolioSAP1">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="VentanaModalSAP2" class="VentanaModal">
-            <div id="handle5"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LimitarAmbitoValor_US"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('sap2')"><label >X</label></div></div>
-            <div class="PanelBntMatch"><button onclick="cambiarMatchNumMate2();"><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>   
-            <div id="BuscarParamFolioSAP2_SP" class="BuscarParam_u">
-                <div class="fondo_Match">
-                    <div class="busquedaMatch">
-                        <label>Material</label><input type="text" id="BusNumOrd2" style="width:35%; text-transform: uppercase;"/>
-                        <hr>
-                        <label>Centro</label><input type="text" id="CenNumOrd2" style="width:35%;"/>
-                        <hr>                           
-                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" id="numAcMaxNumOrd2" maxlength="3" style="width:10%;" />
-                        <hr>
-                    </div>        
-                </div> 
-                <div class="Botones_Match">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okOrden2"/>
-                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('sap2');"/>
-                </div>
-            </div>
-            <div id="ConsultaTablaFolioSAP2">
-                <div class="tablaCab">
-                    <div class="table-scroll" id="table-scrollSAP2">
-                        <div class="fixedY" id="fixedYSAP2">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Material</th>
-                                        <th>Centro</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                        <div id="cuerpoDatos">
-                            <div class="nofixedX" id="cargarDatosFolioSAP2">
+                            <div class="nofixedX" id="cargarDatosMateriales2">
                             </div>
                         </div>
                     </div>
