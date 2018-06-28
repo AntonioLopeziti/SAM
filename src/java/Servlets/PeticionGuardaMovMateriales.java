@@ -497,7 +497,8 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
 
                     //String query2 = "insert into movimientos_detalle_crea values ('MO" + fo.getFolioActual() + "','" + v9 + "','" + v1 + "','" + Chepos(Integer.parseInt(v10)) + "','','" + v2 + "','','" + v16 + "','" + v3 + "','" + v13 + "','','','','','','" + v4 + "','" + v17 + "','','','','','" + v5 + "','" + v6 + "','','','','','','','','','" + v12 + "','" + v7 + "','" + n + "','','','','" + v14 + "','','','','','','" + v18 + "','" + v15 + "','0.000','','','','','')";
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().InsertarMovDetallesCrea(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v10)), "", v2, "", v16, v3, v13, "", "", "", "", "", v4, v17, "", "", "", "", v5, v6, "", "", "", "", "", "", "", "", v12, v7, n, "", "", "", v14, "", "", "", "", "", v18, v15, "0.000", "", "", "", "", "");
+//                    Consultas.ObtenerInstancia().InsertarMovDetallesCrea(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v10)), "", v2, "", v16, v3, v13, "", "", "", "", "", v4, v17, "", "", "", "", v5, v6, "", "", "", "", "", "", "", "", v12, v7, n, "", "", "", v14, "", "", "", "", "", v18, v15, "0.000", "", "", "", "", "");
+                    Consultas.ObtenerInstancia().InsertarMovDetallesCrea(fl, Chepos(Integer.parseInt(v10)), horaActual, fechaActual, "", v2, "", v16, v3, v13, "0.000", "0.000", "", "0.000", "", v4, v17, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v12, v7, n, "", "", "", v14, "", "", "", "", "", v18, v15, "", "", "", "", "", "", "", "", "", "");
                     //queryUT = "insert into pedidos_historial values ('" + v7 + "','" + n + "','" + v6 + "','" + v5 + "','" + cp + "','" + v13 + "','WE','" + v2 + "','','000','" + v4 + "','" + v13 + "','" + calendar + "','" + v1 + "','MO" + fo.getFolioActual() + "','X')";
                     Consultas.ObtenerInstancia().InsertarPedidosHistorial(v7, n, v6, v5, cp, v13, "WE", v2, "", "000", v4, v13, calendar, v1, "MO" + fo.getFolioActual(), "X");
 
@@ -514,7 +515,8 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     n1 += v8;
                     String cp1 = ACC_Pedidos.ObtenerInstancia().cantidad(v7, n1);
                     // String query4 = "insert into movimientos_detalle_crea values ('MO" + fo.getFolioActual() + "','" + v9 + "','" + v1 + "','" + Chepos(Integer.parseInt(v10)) + "','','" + v2 + "','','','" + v3 + "','" + v13 + "','','','','','','" + v4 + "','" + v16 + "','','','','','" + v5 + "','" + v6 + "','','','','','','','','','" + v12 + "','" + v7 + "','" + n1 + "','','','','','','','','','','','','" + v4 + "','" + v14 + "','" + v17 + "','','','')";
-                    Consultas.ObtenerInstancia().InsertarMovDetallesCrea(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v10)), "", v2, "", "", v3, v13, "", "", "", "", "", v4, v16, "", "", "", "", v5, v6, "", "", "", "", "", "", "", "", v12, v7, n1, "", "", "", "", "", "", "", "", "", "", "", v4, v14, v17, "", "", "");
+//                    Consultas.ObtenerInstancia().InsertarMovDetallesCrea(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v10)), "", v2, "", "", v3, v13, "", "", "", "", "", v4, v16, "", "", "", "", v5, v6, "", "", "", "", "", "", "", "", v12, v7, n1, "", "", "", "", "", "", "", "", "", "", "", v4, v14, v17, "", "", "");
+                    Consultas.ObtenerInstancia().InsertarMovDetallesCrea(fl, Chepos(Integer.parseInt(v10)), horaActual, fechaActual, "", v2, "", "", v3, v13, "0.000", "0.000", "", "0.000", "", v4, v16, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v12, v7, n1, "", "", "", "", "", "", "", "", "", "", "", "", "", "", v14, v17, "", "", "", "", "");
                     // queryUT = "insert into pedidos_historial values ('" + v7 + "','" + n1 + "','" + v6 + "','" + v5 + "','" + cp1 + "','" + v13 + "','WE','" + v2 + "','','000','-" + v4 + "','" + v13 + "','" + calendar + "','" + v1 + "','MO" + fo.getFolioActual() + "','X')";
                     Consultas.ObtenerInstancia().InsertarPedidosHistorial(v7, n1, v6, v5, cp1, v13, "WE", v2, "", "000", "-" + v4, v13, calendar, v1, "MO" + fo.getFolioActual(), "X");
 
@@ -537,27 +539,27 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     break;
                 case "Guarda201Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", v13, v14, "", "", "", "", v9, "", "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", v13, v14, "", "0.000", "", "0", v9, "", "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     break;
                 case "Guarda202Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", "", "", "", "", "", "", v9, "", "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v9, "", "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     break;
                 case "Guarda261Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", v10, v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", v13, v14, "", "", "", "", v9, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", v10, v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", v13, v14, "", "0.000", "", "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21 );
                     break;
                 case "Guarda262Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", v10, v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", "", "", "", "", "", "", v9, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", v10, v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21 );
                     break;
                 case "Guarda303Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", "", "", "", "", "", "", v9, "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v9, "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     break;
                 case "Guarda305Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", "", "", "", "", "", "", v9, "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v9, "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     break;
                 case "Guarda311Posiciones":
                     //v10 -> almacen receptor
@@ -574,7 +576,7 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     break;
                 case "Guarda312Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, "", "", "", "", "", v5, v6, "", "", "", "", "", "", v10, "", v9, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+//                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, "", "", "", "", "", v5, v6, "", "", "", "", "", "", v10, "", v9, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     break;
                 case "Guarda301Posiciones":
                     fl = "MO" + fo.getFolioActual();
@@ -812,37 +814,37 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                         System.err.println("Error: " + e);
                     }
                     break;
-//                case "Movimiento305":
-//                    int cc3nn = Integer.parseInt(v2);
-//                    int ppr3nn = 0;
-//                    String[][] M305 = new String[cc3nn][6];
-//                    String[] parts3nn = v1.split(",");
-//                    try {
-//                        for (int f = 0; f < cc3nn; f++) {
-//                            for (c = 0; c < 6; c++) {
-//                                M305[f][c] = parts3nn[ppr3nn];
-//                                ppr3nn++;
-//                            }
-//                        }
-//                        int rtn = ACC_Stock.ObtenerInstancia().VerificarExistentesNT(M305, cc3nn);
-//                        if (rtn == 1) {
-//                            for (int f = 0; f < cc3nn; f++) {
-//                                Double rt = ACC_Stock.ObtenerInstancia().LbreST(M305[f][2], M305[f][3]);
-//                                ACC_Stock.ObtenerInstancia().UpdateMovimiento305UltimoStock(Num(String.valueOf(rt)), M305[f][2], M305[f][3]);
-//                            }
-//                        }
-//                        if (rtn == 2) {
-//                            for (int f = 0; f < cc3nn; f++) {
-//                                Double rt = ACC_Stock.ObtenerInstancia().UltimoST(M305[f][2], M305[f][3]);
-//                                ACC_Stock.ObtenerInstancia().UpdateMovimiento305StockTraslado(Num(String.valueOf(rt)), M305[f][2], M305[f][3]);
-//                                ACC_Stock.ObtenerInstancia().ActualizaInventario(M305[f][2], M305[f][5], M305[f][1], M305[f][0], M305[f][4]);
-//                            }
-//                        }
-//                        out.println(rtn);
-//                    } catch (Exception e) {
-//                        System.err.println("Error: " + e);
-//                    }
-//                    break;
+                case "Movimiento305":
+                    int cc3nn = Integer.parseInt(v2);
+                    int ppr3nn = 0;
+                    String[][] M305 = new String[cc3nn][6];
+                    String[] parts3nn = v1.split(",");
+                    try {
+                        for (int f = 0; f < cc3nn; f++) {
+                            for (c = 0; c < 6; c++) {
+                                M305[f][c] = parts3nn[ppr3nn];
+                                ppr3nn++;
+                            }
+                        }
+                        int rtn = ACC_Stock.ObtenerInstancia().VerificarExistentesNT(M305, cc3nn);
+                        if (rtn == 1) {
+                            for (int f = 0; f < cc3nn; f++) {
+                                Double rt = ACC_Stock.ObtenerInstancia().LbreST(M305[f][2], M305[f][3]);
+                                ACC_Stock.ObtenerInstancia().UpdateMovimiento305UltimoStock(Num(String.valueOf(rt)), M305[f][2], M305[f][3]);
+                            }
+                        }
+                        if (rtn == 2) {
+                            for (int f = 0; f < cc3nn; f++) {
+                                Double rt = ACC_Stock.ObtenerInstancia().UltimoST(M305[f][2], M305[f][3]);
+                                ACC_Stock.ObtenerInstancia().UpdateMovimiento305StockTraslado(Num(String.valueOf(rt)), M305[f][2], M305[f][3]);
+                                ACC_Stock.ObtenerInstancia().ActualizaInventario(M305[f][2], M305[f][5], M305[f][1], M305[f][0], M305[f][4]);
+                            }
+                        }
+                        out.println(rtn);
+                    } catch (Exception e) {
+                        System.err.println("Error: " + e);
+                    }
+                    break;
                 case "Movimiento311":
                     DecimalFormat df = new DecimalFormat("#.000");
                     String ori,
@@ -1105,60 +1107,122 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
 //                    }
 //                    break;
                 case "Movimiento261":
-                    int cc2 = Integer.parseInt(v2);
-                    int ppr2 = 0;
-                    String[][] M261 = new String[cc2][5];
-                    String[] parts22 = v1.split(",");
+//                    int cc2 = Integer.parseInt(v2);
+//                    int ppr2 = 0;
+//                    String[][] M261 = new String[cc2][5];
+//                    String[] parts22 = v1.split(",");
+//                    try {
+//                        for (int f = 0; f < cc2; f++) {
+//                            for (c = 0; c < 5; c++) {
+//                                M261[f][c] = parts22[ppr2];
+//                                ppr2++;
+//                            }
+//                        }
+//                        int rtn = ACC_Stock.ObtenerInstancia().VerificarExistentesN(M261, cc2);
+//                        if (rtn == 1) {
+//                            for (int f = 0; f < cc2; f++) {
+//                                String nlu1 = "";
+//                                nlu1 += M261[f][2];
+//                                Double ul1 = ACC_Stock.ObtenerInstancia().UltimoLU(nlu1, M261[f][3], M261[f][0], M261[f][4]);
+//                                ACC_Stock.ObtenerInstancia().UpdateMovimiento201UltimoStock(Num(String.valueOf(ul1)), nlu1, M261[f][3], M261[f][0], M261[f][4]);
+//                            }
+//                        }
+//                        if (rtn == 2) {
+//                            for (int f = 0; f < cc2; f++) {
+//                                String nlu = "";
+//                                nlu += M261[f][2];
+//                                Double ul1 = ACC_Stock.ObtenerInstancia().LibreLU(nlu, M261[f][3], M261[f][0], M261[f][4]);
+//                                ACC_Stock.ObtenerInstancia().UpdateMovimiento261Stock(Num(String.valueOf(ul1)), nlu, M261[f][3], M261[f][0], M261[f][4]);
+//                            }
+//                        }
+//                        out.println(rtn);
+//                    } catch (Exception e) {
+//                        System.err.println("Error: " + e);
+//                    }
+                    DecimalFormat ddt = new DecimalFormat("#.000");
+                    String orit6;
+                    Double origent6;
+                    String rtnnt6 = "";
+                    int cc3t6 = Integer.parseInt(v2);
+                    int ppr3t6 = 0;
+                    String[][] M311t6 = new String[cc3t6][9];
+                    String[] parts3t6 = v1.split(",");
                     try {
-                        for (int f = 0; f < cc2; f++) {
-                            for (c = 0; c < 5; c++) {
-                                M261[f][c] = parts22[ppr2];
-                                ppr2++;
+                        for (int f = 0; f < cc3t6; f++) {
+                            for (c = 0; c < 9; c++) {
+                                M311t6[f][c] = parts3t6[ppr3t6];
+                                ppr3t6++;
                             }
                         }
-                        int rtn = ACC_Stock.ObtenerInstancia().VerificarExistentesN(M261, cc2);
-                        if (rtn == 1) {
-                            for (int f = 0; f < cc2; f++) {
-                                String nlu1 = "";
-//                                for (int i = M261[f][2].length(); i < 18; i++) {
-//                                    nlu1 += "0";
-//                                }
-                                nlu1 += M261[f][2];
-                                Double ul1 = ACC_Stock.ObtenerInstancia().UltimoLU(nlu1, M261[f][3], M261[f][0], M261[f][4]);
-                                ACC_Stock.ObtenerInstancia().UpdateMovimiento201UltimoStock(Num(String.valueOf(ul1)), nlu1, M261[f][3], M261[f][0], M261[f][4]);
+                        for (int i = 0; i < cc3t6; i++) {
+                            if (M311t6[i][7].equals("E")) {
+                                origent6 = ACC_Stock.ObtenerInstancia().StockLibreE(M311t6[i][2], M311t6[i][0], M311t6[i][3], M311t6[i][4], M311t6[i][5], M311t6[i][6]) - Double.parseDouble(M311t6[i][1]);
+                                
+                                orit6 = (origent6 >= 1) ? ddt.format(origent6) : "0" + ddt.format(origent6);
+                                //Oriden
+                                ACC_Stock.ObtenerInstancia().ActualizaInvE(M311t6[i][2], M311t6[i][0], M311t6[i][3], orit6, M311t6[i][4], M311t6[i][5], M311t6[i][6]);
+                            } else {
+                                origent6 = ACC_Stock.ObtenerInstancia().StockLibre(M311t6[i][2], M311t6[i][0], M311t6[i][3], M311t6[i][4]) - Double.parseDouble(M311t6[i][1]);
+                                orit6 = (origent6 >= 1) ? ddt.format(origent6) : "0" + ddt.format(origent6);
+                                //Oriden
+                                ACC_Stock.ObtenerInstancia().ActualizaInv(M311t6[i][2], M311t6[i][0], M311t6[i][3], orit6, M311t6[i][4]);
                             }
                         }
-                        if (rtn == 2) {
-                            for (int f = 0; f < cc2; f++) {
-                                String nlu = "";
-//                                for (int i = M261[f][2].length(); i < 18; i++) {
-//                                    nlu += "0";
-//                                }
-                                nlu += M261[f][2];
-                                Double ul1 = ACC_Stock.ObtenerInstancia().LibreLU(nlu, M261[f][3], M261[f][0], M261[f][4]);
-                                ACC_Stock.ObtenerInstancia().UpdateMovimiento261Stock(Num(String.valueOf(ul1)), nlu, M261[f][3], M261[f][0], M261[f][4]);
-                            }
-                        }
-                        out.println(rtn);
+
+                        out.println(2 + "," + rtnnt6);
                     } catch (Exception e) {
                         System.err.println("Error: " + e);
                     }
                     break;
                 case "Lote262Posiciones":
-                    int cl3 = Integer.parseInt(v2);
-                    int pr3 = 0;
-                    String[][] M262 = new String[cl3][5];
-                    String[] parts262 = v1.split(",");
+//                    int cl3 = Integer.parseInt(v2);
+//                    int pr3 = 0;
+//                    String[][] M262 = new String[cl3][5];
+//                    String[] parts262 = v1.split(",");
+//                    try {
+//                        for (int f = 0; f < cl3; f++) {
+//                            for (c = 0; c < 5; c++) {
+//                                M262[f][c] = parts262[pr3];
+//                                pr3++;
+//                            }
+//                        }
+//                        for (int f = 0; f < cl3; f++) {
+//                            ACC_Stock.ObtenerInstancia().ActualizarrInventario(M262[f][2], M262[f][3], M262[f][1], M262[f][0], M262[f][4]);
+//                        }
+//                    } catch (Exception e) {
+//                        System.err.println("Error: " + e);
+//                    }
+                    DecimalFormat dd62 = new DecimalFormat("#.000");
+                    String orit62;
+                    Double origent62;
+                    String rtnnt62 = "";
+                    int cc3t62 = Integer.parseInt(v2);
+                    int ppr3t62 = 0;
+                    String[][] M311t62 = new String[cc3t62][9];
+                    String[] parts3t62 = v1.split(",");
                     try {
-                        for (int f = 0; f < cl3; f++) {
-                            for (c = 0; c < 5; c++) {
-                                M262[f][c] = parts262[pr3];
-                                pr3++;
+                        for (int f = 0; f < cc3t62; f++) {
+                            for (c = 0; c < 9; c++) {
+                                M311t62[f][c] = parts3t62[ppr3t62];
+                                ppr3t62++;
                             }
                         }
-                        for (int f = 0; f < cl3; f++) {
-                            ACC_Stock.ObtenerInstancia().ActualizarrInventario(M262[f][2], M262[f][3], M262[f][1], M262[f][0], M262[f][4]);
+                        for (int i = 0; i < cc3t62; i++) {
+                            if (M311t62[i][7].equals("E")) {
+                                origent62 = ACC_Stock.ObtenerInstancia().StockLibreE(M311t62[i][2], M311t62[i][0], M311t62[i][3], M311t62[i][4], M311t62[i][5], M311t62[i][6]) + Double.parseDouble(M311t62[i][1]);
+                                
+                                orit62 = (origent62 >= 1) ? dd62.format(origent62) : "0" + dd62.format(origent62);
+                                //Oriden
+                                ACC_Stock.ObtenerInstancia().ActualizaInvE(M311t62[i][2], M311t62[i][0], M311t62[i][3], orit62, M311t62[i][4], M311t62[i][5], M311t62[i][6]);
+                            } else {
+                                origent62 = ACC_Stock.ObtenerInstancia().StockLibre(M311t62[i][2], M311t62[i][0], M311t62[i][3], M311t62[i][4]) - Double.parseDouble(M311t62[i][1]);
+                                orit62 = (origent62 >= 1) ? dd62.format(origent62) : "0" + dd62.format(origent62);
+                                //Oriden
+                                ACC_Stock.ObtenerInstancia().ActualizaInv(M311t62[i][2], M311t62[i][0], M311t62[i][3], orit62, M311t62[i][4]);
+                            }
                         }
+
+                        out.println(2 + "," + rtnnt62);
                     } catch (Exception e) {
                         System.err.println("Error: " + e);
                     }
