@@ -306,37 +306,39 @@
                     <hr id="linetitu">
                     <div class='Contenedor1'>
                         <section class="SectionFloat">
-                            <label>Pedido</label><input type="text" id="pedido" maxlenght="10" style="width:25%;" readonly/>
+                            <label>Clase de pedido</label><input type="text" id="ClasePedido" maxlength='4' style="width: 8%; background-repeat: no-repeat; text-transform: uppercase;" value="TA"/><button id="matchClasePedido" class='BtnMatchIcon'></button> <input type='text' id='txtClasePedido' value="Pedido Estandar" style="width: 35%; background: none; border: none;" readonly/>
                             <hr>
-                            <label>Solicitante</label><input type="text" id="solicitante" maxlength="10" style="width:35%; background-repeat: no-repeat; text-transform: uppercase;"/><button id="matchSolicitante" class='BtnMatchIcon'></button>
+                            <label>Solicitante</label><input type="text" id="solicitante" maxlength="10" style="width:45%; background-repeat: no-repeat; text-transform: uppercase;"/><button id="matchSolicitante" class='BtnMatchIcon'></button>
                             <hr>
-                            <label>Dest.Mcia.</label><input type="text" id="destinatario" maxlength="10" style="width:35%; background-repeat: no-repeat; text-transform: uppercase;"/><button id="matchDestMecia" class='BtnMatchIcon'></button>
+                            <label>Dest.Mcia.</label><input type="text" id="destinatario" maxlength="10" style="width:45%; background-repeat: no-repeat; text-transform: uppercase;"/><button id="matchDestMecia" class='BtnMatchIcon'></button>
                             <hr>
-                            <label>Area de ventas</label><input type="text" id="orgVentas" maxlength="4" style="width:10%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchOrgVentas" class='BtnMatchIcon'></button> / <input type="text" id="CanalDis" maxlength="2"  style="width:8%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchcanalDis" class='BtnMatchIcon'></button> / <input type="text" id="Sector" maxlength="2"  style="width:8%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchSector" class='BtnMatchIcon'></button>
+                            <label>Area de ventas</label><input type="text" id="orgVentas" maxlength="4" style="width:15%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchOrgVentas" class='BtnMatchIcon'></button> / <input type="text" id="CanalDis" maxlength="2"  style="width:12%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchcanalDis" class='BtnMatchIcon'></button> / <input type="text" id="Sector" maxlength="2"  style="width:12%; background-repeat: no-repeat; text-transform: uppercase;" disabled/><button id="matchSector" class='BtnMatchIcon'></button>
                             <hr>
-                            <label>Oficina de ventas</label><input type="text" value="0001" disabled style="width: 10%; text-transform: uppercase;" maxlength='4' id="OficinaVentas" /><button id="matchpoficinaVentas" class='BtnMatchIcon'></button> <input type='text' value="Oficina SANPER" id='txtOficinaVentas'style="width: 40%; background: none; border: none;" readonly/>
-                            <hr>
-                            <label>Ref.Cliente</label><input type="text" id="refcliente" maxlength="35" style="width:55%; background-repeat: no-repeat"/>
-                            <hr>
-                            <label>Creado por</label><input type="text" id="CreadoPor" value="<%=Nombre%>" style="width: 42%;" disabled/>
-                            <hr>
-                            <label>Fecha entrega</label><input type="text" id="fechaEntrega" readOnly style="width: 25%; background-repeat: no-repeat;"/><button id="matchFechaentrega" class='BtnMatchIcon'></button> 
+                            <label>Lista de precio</label><input type="text" style="width: 10%; text-transform: uppercase; background-repeat: no-repeat;"  maxlength="2" id="ListaPrecio"  /><button id="matchListaPre" class='BtnMatchIcon'></button> <input type='text' id='txtListaPrecio'style="width: 40%; background: none; border: none;" readonly/>
                             <hr>
                         </section>
                         <section class="SectionFloat2">
-                            <label>Clase de pedido</label><input type="text" id="ClasePedido" maxlength='4' style="width: 8%; background-repeat: no-repeat; text-transform: uppercase;" value="TA" disabled /><button id="matchClasePedido" class='BtnMatchIcon'></button> <input type='text' id='txtClasePedido' value="Pedido Estandar" style="width: 52%; background: none; border: none;" readonly/>
+                            <label>Fecha entrega</label><input type="text" id="fechaEntrega" readOnly style="width: 25%; background-repeat: no-repeat;"/><button id="matchFechaentrega" class='BtnMatchIcon'></button> 
                             <hr>
                             <input type="text" style="width: 100%; background: none; border:none;" id="txtSolicitante" readonly/>
                             <hr style="border:1.2px solid #fff;">
                             <input type="text" style="width: 100%; background: none; border:none;" id="txtDestMcia" readOnly/>
                             <hr style="border:1.2px solid #fff;">
                             <input type="text" style="width: 100%; background: none; border: none;" id="txtAreaVentas" readOnly/>
-                            <hr style="border:1.8px solid #fff;">
-                            <label>Lista de precio</label><input type="text" style="width: 6%; text-transform: uppercase; background-repeat: no-repeat;"  maxlength="2" id="ListaPrecio"  /><button id="matchListaPre" class='BtnMatchIcon'></button> <input type='text' id='txtListaPrecio'style="width: 55%; background: none; border: none;" readonly/>
+                            <hr style="border:1.8px solid #fff; margin-bottom: 2px;">
+                            <label>Ref.Cliente</label><input type="text" id="refcliente" maxlength="35" style="width:55%; background-repeat: no-repeat"/>
                             <hr>
-                            <label>Gpo. de vendedores</label><input type="text" style="width: 6%; text-transform: uppercase" maxlength="3" id="GpoVendedores" disabled /><button id="matchGpoVendedores" class='BtnMatchIcon'></button> <input type='text' id='txtGpoVended'style="width: 55%; background: none; border: none;" readonly/>
+                        </section>
+                        <section class="SectionFloat3">
+                            <label>Creado por</label><input type="text" id="CreadoPor" value="<%=Nombre%>" style="width: 12%;" disabled/>
                             <hr>
-                            <label>Fecha precio</label><input type="text" id='fechaPrecio'  style="width: 16%" disabled/><button id="matchDescCabecera" class="BtnMatchIconDescricabe"></button>
+                            <label>Ofic.Vtas.</label><input type="text" value="0001" disabled style="width: 15%; text-transform: uppercase;" maxlength='4' id="OficinaVentas" /><button id="matchpoficinaVentas" class='BtnMatchIcon'></button> <input type='text' value="Oficina SANPER" id='txtOficinaVentas'style="width: 35%; background: none; border: none;" readonly/>
+                            <hr>
+                            <label>Gpo.Vend.</label><input type="text" style="width: 12%; text-transform: uppercase" maxlength="3" id="GpoVendedores" disabled /><button id="matchGpoVendedores" class='BtnMatchIcon'></button> <input type='text' id='txtGpoVended'style="width: 35%; background: none; border: none;" readonly/>
+                            <hr>
+                            <label>Fec.Precio</label><input type="text" id='fechaPrecio'  style="width: 28%" disabled/>
+                            <hr>
+                            <label>Pedido</label><input type="text" id="pedido" maxlenght="10" style="width:35%;" readonly/><button id="matchDescCabecera" class="BtnMatchIconDescricabe"></button>
                             <hr>
                         </section>
                     </div>
