@@ -91,20 +91,27 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
             String fech = request.getParameter("Fecha1");
             String fech2 = request.getParameter("Fecha2");
             String tipoRad = request.getParameter("tipoRad");
+            
+            ///// Parametros Nuevo
+            String Cliente  = request.getParameter("Cliente");
+            String DClient  = request.getParameter("DCliente");
+            String Cantida  = request.getParameter("Cantidad");
+            String Materia  = request.getParameter("Material");
+            String DMateri  = request.getParameter("DMaterial");
 
             //Parametro de Radio Buton 1 con Error y 0 Todos
             String radio = request.getParameter("radio");
             Consultas cn = new Consultas();
             switch (accion) {
-                case "CentroStatus":
-                    ArrayList<FlujoDocumentos> pt = AccesoDatos.ACC_FlujoDocumentos.ObtenerInstancia().MatchSolicitante(Centro, Ncentr, Cantid);
+                case "CargarSolicitante":
+                    ArrayList<FlujoDocumentos> pt = AccesoDatos.ACC_FlujoDocumentos.ObtenerInstancia().MatchSolicitante(Cliente, DClient, Cantida);
                     if (pt.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < pt.size(); i++) {
                             out.println("<tr ondblclick=\"Select('" + pt.get(i).getSolicitante() + "','" + tipo + "')\">");
-                            out.println("<td>" + pt.get(i).getSolicitante() + "</td>");
-                            out.println("<td>" + pt.get(i).getCentro_solic() + "</td>");
+                            out.println("<td style=\"width:20%;\">" + pt.get(i).getSolicitante() + "</td>");
+                            out.println("<td style=\"width:80%; text-align: left;\">" + pt.get(i).getCentro_solic() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -113,16 +120,16 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                         out.println(0);
                     }
                     break;
-                case "SamStatuss":
+                case "CargarPedidos":
                     ArrayList<FlujoDocumentos> sam = AccesoDatos.ACC_FlujoDocumentos.ObtenerInstancia().MatchDocVentas();
-//                    ArrayList<Cabecera_PedidosSD> sam = AccesoDatos.ACC_ReportePedidoSD.ObtenerInstancia().NumDocMatch(folSAM, CentroFol, CtdFol);
                     if (sam.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (FlujoDocumentos m : sam) {
                             out.println("<tr ondblclick=\"Select('" + m.getDoc_ventas() + "','" + tipo + "')\">");
+                            out.println("<td>" + m.getNum_doc_ref() + "</td>");
                             out.println("<td>" + m.getDoc_ventas() + "</td>");
-                            out.println("<td>" + m.getCentro() + "</td>");
+                            out.println("<td>" + m.getSolicitante() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -131,16 +138,15 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                         out.println(0);
                     }
                     break;
-                case "SapStatus":
-//                    ArrayList<CabMovNotificaciones> sap = ACC_Reportes.ObtenerInstancia().SAPStatusMN(folOrd, CentroOrd, CtdOrd);
-                    ArrayList<FlujoDocumentos> sap = AccesoDatos.ACC_FlujoDocumentos.ObtenerInstancia().MatchMaterial(folOrd, CentroOrd, CtdOrd);
+                case "CargarMateriales":
+                    ArrayList<FlujoDocumentos> sap = AccesoDatos.ACC_FlujoDocumentos.ObtenerInstancia().MatchMaterial(Materia, DMateri, Cantida);
                     if (sap.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (FlujoDocumentos n : sap) {
                             out.println("<tr ondblclick=\"Select('" + n.getNum_material() + "','" + tipo + "')\">");
-                            out.println("<td>" + n.getNum_material() + "</td>");
-                            out.println("<td>" + n.getCentro() + "</td>");
+                            out.println("<td style=\"width:20%;\">" + n.getNum_material() + "</td>");
+                            out.println("<td style=\"width:80%;\" text-align: left;>" + n.getCentro() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
