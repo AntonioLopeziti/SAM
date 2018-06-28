@@ -821,7 +821,7 @@ function ConsultaFolioSAP1() {
 //                    position: 'absolute', left: 510, top: 60
 //                });
 //                $("#cargarDatosFolioSAP1").html(data);
-//                fnc("table-scrollSAP", "fixedYSAP");
+                fnc("table-scrollSAP", "fixedYSAP");
 //                borramsg();
             }
         }
@@ -854,7 +854,7 @@ function ConsultaFolioSAP2() {
 //                    position: 'absolute', left: 510, top: 60
 //                });
 //                $("#cargarDatosFolioSAP2").html(data);
-//                fnc("table-scrollSAP2", "fixedYSAP2");
+                fnc("table-scrollSAP2", "fixedYSAP2");
 //                borramsg();
             }
         }
