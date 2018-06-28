@@ -98,7 +98,7 @@ public class PeticionFlujoDeudoresSD extends HttpServlet {
                         out.println("<tbody>");
                         for (FlujoDeudoresSD m : sam) {
                             out.println("<tr ondblclick=\"Select('" + m.getFactura() + "','" + tipo + "')\">");
-                            out.println("<td>" + m.getFactura() + "</td>");                            
+                            out.println("<td>" + m.getFactura() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -178,6 +178,7 @@ public class PeticionFlujoDeudoresSD extends HttpServlet {
                     String f2 = cn.DateFormatGuion(fech2);
                     for (FlujoDeudoresSD a : crp.SD_Reporte_FLujoDocsConsulta(vendedorN, facturaN, cliUnoN, cliDosN, f1, f2)) {
                         out.println("<tr>");
+                        out.println("<td><img src='images/" + Semaforo(a.getDias_vencimiento()) + ".PNG' /></td>");
                         out.println("<td>" + a.getCliente() + "</td>");
                         out.println("<td>" + a.getNombre_cliente() + "</td>");
                         out.println("<td>" + a.getFactura() + "</td>");
@@ -192,6 +193,7 @@ public class PeticionFlujoDeudoresSD extends HttpServlet {
 //                        out.println("<td>" + a.getNombre_vendedor() + "</td>");
                     }
                     out.println("<tr class=\"ocultar\">"
+                            + "<td>000000000000</td>"
                             + "<td>00000000000000</td>"
                             + "<td>000000000000000000000000000000000000000000000000000000</td>"
                             + "<td>00000000000000</td>"
@@ -201,15 +203,33 @@ public class PeticionFlujoDeudoresSD extends HttpServlet {
                             + "<td>000000000000000</td>"
                             + "<td>000000000000</td>"
                             + "<td>000000000000</td>"
-//                            + "<td>00000000000000</td>"
-//                            + "<td>00000000000000</td>"
-//                            + "<td>00000000000000000000000</td>"
+                            //                            + "<td>00000000000000</td>"
+                            //                            + "<td>00000000000000</td>"
+                            //                            + "<td>00000000000000000000000</td>"
                             + "</tr>");
                     out.println("</tbody>");
                     out.println("</table>");
                     break;
             }
         }
+    }
+
+    public String Semaforo(String dias) {
+        String icon = "advertencia";
+        try {
+            int d = Integer.parseInt(dias);
+            if (d < 1) {
+                icon = "@0AQStatus@";
+            } else if (d > 5) {
+                icon = "@08QStatus@";
+            } else {
+                icon = "@09QStatus@";
+            }
+
+        } catch (Exception e) {
+            icon = icon;
+        }
+        return icon;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
