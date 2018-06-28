@@ -128,8 +128,8 @@ public class peticionPedidoSDCrear extends HttpServlet {
                             out.println("<tbody>");
                             for (int i = 0; i < cli.size(); i++) {
                                 out.println("<tr ondblclick=\"SelectDataCli('" + cli.get(i).getIdCliente() + "','VentanaModalCliente','BuscarParDeudores','ConsultaTablaDeudores', '" + tipo + "')\" >");
-                                out.println("<td>" + cli.get(i).getIdCliente() + "</td>");
-                                out.println("<td>" + cli.get(i).getNombre1() + "</td>");
+                                out.println("<td style=\"width: 20%;\">" + cli.get(i).getIdCliente() + "</td>");
+                                out.println("<td style=\"width: 80%; text-align: left;\">" + cli.get(i).getNombre1() + "</td>");
                                 out.println("</tr>");
                             }
                             out.println("</tbody>");
@@ -251,8 +251,8 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         out.println("<tbody>");
                         for (int i = 0; i < mat.size(); i++) {
                             out.println("<tr ondblclick=\"SelectData('" + mat.get(i).getMaterial() + "','VentanaModalMateriales','BuscarParMateriales','ConsultaTablaMateriales','tdMater','" + mat.get(i).getDescripcion() + "','" + mat.get(i).getUnidad_medida_base() + "')\" >");
-                            out.println("<td>" + mat.get(i).getMaterial() + "</td>");
-                            out.println("<td>" + mat.get(i).getDescripcion() + "</td>");
+                            out.println("<td style=\"width: 20%;\">" + mat.get(i).getMaterial() + "</td>");
+                            out.println("<td style=\"width: 80%; text-align: left;\">" + mat.get(i).getDescripcion() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
