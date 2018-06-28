@@ -302,10 +302,10 @@ public class Consultas {
         }
     }
 
-    public void InsertarMovDetallesCrea(String v1, String v2, String v3, String v4, String v5, String v6, String v7, String v8, String v9, String v10, String v11, String v12, String v13, String v14, String v15, String v16, String v17, String v18, String v19, String v20, String v21, String v22, String v23, String v24, String v25, String v26, String v27, String v28, String v29, String v30, String v31, String v32, String v33, String v34, String v35, String v36, String v37, String v38, String v39, String v40, String v41, String v42, String v43, String v44, String v45, String v46, String v47, String v48, String v49, String v50, String v51) {
+    public void InsertarMovDetallesCrea(String v1, String v2, String v3, String v4, String v5, String v6, String v7, String v8, String v9, String v10, String v11, String v12, String v13, String v14, String v15, String v16, String v17, String v18, String v19, String v20, String v21, String v22, String v23, String v24, String v25, String v26, String v27, String v28, String v29, String v30, String v31, String v32, String v33, String v34, String v35, String v36, String v37, String v38, String v39, String v40, String v41, String v42, String v43, String v44, String v45, String v46, String v47, String v48, String v49, String v50, String v51, String v52, String v53, String v54, String v55) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String query = "{CALL MM.MovimientosDetalleCrea_MOM(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL MM.MovimientosDetalleCrea_MOM(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, v1);
@@ -369,6 +369,10 @@ public class Consultas {
             ps.setString(49, v49);
             ps.setString(50, v50);
             ps.setString(51, v51);
+            ps.setString(52, v52);
+            ps.setString(53, v53);
+            ps.setString(54, v54);
+            ps.setString(55, v55);
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error Insertar Movimientos Detalles Crea por: " + e);
@@ -528,11 +532,10 @@ public class Consultas {
             cnx.CerrarConexion(con);
         }
     }
-
-    public void CabeceraCreaDet(String v1, String v2, String v3, String v4, String v5, String v6, String v7, String v8, String v9, String v10, String v11, String v12, String v13, String v14, String v15, String v16, String v17, String v18, String v19, String v20, String v21, String v22, String v23, String v24, String v25, String v26, String v27, String v28, String v29, String v30, String v31, String v32, String v33, String v34, String v35, String v36, String v37, String v38, String v39, String v40, String v41, String v42, String v43, String v44, String v45, String v46, String v47, String v48, String v49, String v50, String v51) {
+    public void CabeceraCreaDet(String v1, String v2, String v3, String v4, String v5, String v6, String v7, String v8, String v9, String v10, String v11, String v12, String v13, String v14, String v15, String v16, String v17, String v18, String v19, String v20, String v21, String v22, String v23, String v24, String v25, String v26, String v27, String v28, String v29, String v30, String v31, String v32, String v33, String v34, String v35, String v36, String v37, String v38, String v39, String v40, String v41, String v42, String v43, String v44, String v45, String v46, String v47, String v48, String v49, String v50, String v51, String v52, String v53, String v54, String v55) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String query = "{CALL MM.InsertMovimientosDetalleCrea_MOM(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL MM.InsertMovimientosDetalleCrea_MOM(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, v1);
@@ -586,6 +589,10 @@ public class Consultas {
             ps.setString(49, v49);
             ps.setString(50, v50);
             ps.setString(51, v51);
+            ps.setString(52, v52);
+            ps.setString(53, v53);
+            ps.setString(54, v54);
+            ps.setString(55, v55);
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error en ValidarUMedida ACC_UnidadesMedida por: " + e);
