@@ -501,7 +501,7 @@ public class peticionVisualizarDirecto extends HttpServlet {
                     Consultas.ObtenerInstancia().ActualizarRpCancelacion(Folio, fl,  "Cancelado");
                     break;
                 case "GuardarPosiciones312":
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Posi, "", clas, "", "", lote, UM, "", "", "", "", "", Cant, "TR01", "", "", "", "", Desc, Mate, "", "", Rese, PosR, "", "", Alma, "", Cent, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+//                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Posi, "", clas, "", "", lote, UM, "", "", "", "", "", Cant, "TR01", "", "", "", "", Desc, Mate, "", "", Rese, PosR, "", "", Alma, "", Cent, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     String stc1 = ACC_Stock.ObtenerInstancia().getCantidad311(Mate, Alma, Cent, lote);
                     String stc2 = ACC_Stock.ObtenerInstancia().getCantidad311(Mate, "TR01", Cent, lote);
                     Double fstc1 = Double.parseDouble(stc1) + Double.parseDouble(Cant);
@@ -522,7 +522,7 @@ public class peticionVisualizarDirecto extends HttpServlet {
                     Consultas.ObtenerInstancia().ActualizarIndReporteIvent(Folio, fl);
                     break;
                 case "GuardarPosiciones311":
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Posi, "", clas, "", "", lote, UM, "", "", "", "", "", Cant, "TR01", "", "", "", "", Desc, Mate, "", "", Rese, PosR, "", "", AlmD, "", Cent, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+//                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Posi, "", clas, "", "", lote, UM, "", "", "", "", "", Cant, "TR01", "", "", "", "", Desc, Mate, "", "", Rese, PosR, "", "", AlmD, "", Cent, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     String stc = ACC_Stock.ObtenerInstancia().getCantidad311(Mate, AlmD, Cent, lote);
                     String tr0 = ACC_Stock.ObtenerInstancia().getCantidad311(Mate, "TR01", Cent, lote);
                     Double fstc = Double.parseDouble(stc) + Double.parseDouble(Cant);
