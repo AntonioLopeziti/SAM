@@ -703,8 +703,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Materiales</th>
-                                        <th>Descripción</th>
+                                        <th style="width: 20%;">Materiales</th>
+                                        <th style="width: 80%;">Descripción</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -744,8 +744,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Cliente</th>
-                                        <th>Nombre</th>
+                                        <th style="width: 20%;">Cliente</th>
+                                        <th style="width: 80%;">Nombre</th>
                                     </tr>
                                 </thead>
                             </table>
