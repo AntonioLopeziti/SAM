@@ -114,8 +114,8 @@ public class PeticionFlujoDeudoresSD extends HttpServlet {
                         out.println("<tbody>");
                         for (FlujoDeudoresSD n : sap) {
                             out.println("<tr ondblclick=\"Select('" + n.getCliente() + "','" + tipo + "')\">");
-                            out.println("<td>" + n.getCliente() + "</td>");
-                            out.println("<td>" + n.getNombre_cliente() + "</td>");
+                            out.println("<td style=\"width: 20%;\">" + n.getCliente() + "</td>");
+                            out.println("<td style=\"width: 80%; text-align: left;\">" + n.getNombre_cliente() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
