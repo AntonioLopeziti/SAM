@@ -182,6 +182,7 @@
                                     <table id="TabHead">
                                         <thead>
                                             <tr>                                                
+                                                <td></td>
                                                 <td>Cliente</td>
                                                 <td>Nombre Cliente</td>
                                                 <td>Factura</td>
