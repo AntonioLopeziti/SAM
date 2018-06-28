@@ -32,7 +32,7 @@ public class ACC_FlujoDocumentos extends Conexion {
         return Instance;
     }
     
-    public ArrayList<FlujoDocumentos> MatchSolicitante(String solic, String cent, String CtdFol) {
+    public ArrayList<FlujoDocumentos> MatchSolicitante(String cli, String nom, String CtdFol) {
         ArrayList<FlujoDocumentos> sam = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -40,14 +40,14 @@ public class ACC_FlujoDocumentos extends Conexion {
         ResultSet rs = null;
         try {
             pst = con.prepareCall("{call SD.ReporteFlujoDocsMatchSolic(?,?,?)}");
-            pst.setString(1, solic);
-            pst.setString(2, cent);
+            pst.setString(1, cli);
+            pst.setString(2, nom);
             pst.setString(3, CtdFol);
             rs = pst.executeQuery();
             while (rs.next()) {
                 FlujoDocumentos so = new FlujoDocumentos();
-                so.setSolicitante(rs.getString("solicitante"));
-                so.setCentro_solic(rs.getString("centro_solic"));
+                so.setSolicitante(rs.getString("IdCliente"));
+                so.setCentro_solic(rs.getString("Nombre1"));
                 sam.add(so);
             }
         } catch (Exception e) {
@@ -69,8 +69,9 @@ public class ACC_FlujoDocumentos extends Conexion {
             rs = pst.executeQuery();
             while (rs.next()) {
                 FlujoDocumentos so = new FlujoDocumentos();
+                so.setNum_doc_ref(rs.getString("num_doc_ref"));
                 so.setDoc_ventas(rs.getString("doc_ventas"));
-                so.setCentro(rs.getString("centro"));
+                so.setSolicitante(rs.getString("solicitante"));
                 sam.add(so);
             }
         } catch (Exception e) {
@@ -81,7 +82,7 @@ public class ACC_FlujoDocumentos extends Conexion {
         return sam;
     }
     
-    public ArrayList<FlujoDocumentos> MatchMaterial(String folOrd, String CentroOrd, String CtdOrd) {
+    public ArrayList<FlujoDocumentos> MatchMaterial(String Material, String Descripcion, String Cantidad) {
         ArrayList<FlujoDocumentos> sap = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -90,14 +91,14 @@ public class ACC_FlujoDocumentos extends Conexion {
         String query = "{call SD.ReporteFlujoDocsMatchMaterial(?,?,?)}";
         try {
             pst = con.prepareCall(query);
-            pst.setString(1, folOrd);
-            pst.setString(2, CentroOrd);
-            pst.setString(3, CtdOrd);
+            pst.setString(1, Material);
+            pst.setString(2, Descripcion);
+            pst.setString(3, Cantidad);
             rs = pst.executeQuery();
             while (rs.next()) {
                 FlujoDocumentos so = new FlujoDocumentos();
-                so.setNum_material(rs.getString("num_material"));
-                so.setCentro(rs.getString("centro"));
+                so.setNum_material(rs.getString("material"));
+                so.setCentro(rs.getString("descripcion_material_cliente"));
                 sap.add(so);
             }
         } catch (Exception ex) {
