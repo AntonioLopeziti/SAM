@@ -1013,6 +1013,7 @@ function SelectData(dato, idv, bp, ct, obj, des, um) {
         obj = "tdMater" + pos;
         $('#tdDescr' + pos).val(des);
         $('#tdUmedi' + pos).val(um);
+        BanBlo(0);
     }
     borramsg();
     $('#' + obj).val(dato);
@@ -1259,13 +1260,20 @@ function MostrarMatch(id, match, pos) {
     $('#' + id + pos).css('width', '80%');
     $('#' + match + pos).css('display', 'inline-block');
     if (id == 'tdMater') {
+
         $('#' + id + pos).keypress(function (e) {
             var tecla = (document).all ? e.keyCode : e.which;
             if (tecla == 13) {
-
                 if ($('#' + id + pos).val().length > 0) {
                     ValidarMAterial($('#' + id + pos).val(), pos);
+                } else {
+                    $('#' + id + pos).val("");
+                    $('#tdDescr' + pos).val("");
+                    $('#tdCanti' + pos).val("");
+                    $('#tdFecEn' + pos).val("");
+                    $('#tdUmedi' + pos).val("");
                 }
+                VerificarDatosBl();
             }
             patron = /[0-9a-zA-ZÑñ]/;
             te = String.fromCharCode(tecla);
@@ -1321,10 +1329,10 @@ function mostrarVentanaTextoPos(pos) {
         return;
     }
     if ($('#ListaPrecio').val().length == 0) {
-            ShowMsg(26, "images/advertencia.PNG", "audio/saperror.wav");
-            $('#ListaPrecio').focus();
-            return;
-        }
+        ShowMsg(26, "images/advertencia.PNG", "audio/saperror.wav");
+        $('#ListaPrecio').focus();
+        return;
+    }
     if ($('#orgVentas').val().length == 0 && $('#CanalDis').val().length == 0 && $('#Sector').val().length == 0) {
         ShowMsg(9, "images/advertencia.PNG", "audio/saperror.wav");
         return;
@@ -1356,14 +1364,9 @@ function MostrarMatchGridMateriales(VM, handle, pos) {
         ShowMsg(21, "images/advertencia.PNG", "audio/saperror.wav");
         return;
     }
-    if (org.val().length == 0 && can.val().length == 0) {
-        cli.focus();
-        ShowMsg(2, "images/advertencia.PNG", "audio/saperror.wav");
-        return;
-    }
-    if (ref.val().length == 0) {
-        ref.focus();
-        ShowMsg(5, "images/advertencia.PNG", "audio/saperror.wav");
+    if ($('#ListaPrecio').val().length == 0) {
+        ShowMsg(26, "images/advertencia.PNG", "audio/saperror.wav");
+        $('#ListaPrecio').focus();
         return;
     }
     if (fec.val().length == 0) {
@@ -1371,11 +1374,12 @@ function MostrarMatchGridMateriales(VM, handle, pos) {
         ShowMsg(7, "images/advertencia.PNG", "audio/saperror.wav");
         return;
     }
-    if ($('#ListaPrecio').val().length == 0) {
-            ShowMsg(26, "images/advertencia.PNG", "audio/saperror.wav");
-            $('#ListaPrecio').focus();
-            return;
-        }
+    if (ref.val().length == 0) {
+        ref.focus();
+        ShowMsg(5, "images/advertencia.PNG", "audio/saperror.wav");
+        return;
+    }
+
     var BE = document.createElement('audio');
     BE.src = "audio/sapsnd05.wav";
     BE.play();
@@ -1488,48 +1492,48 @@ function ObtenerDescripcion(variable, tipo, id1, id2) {
     });
 }
 function ValidarMAterial(material, pos) {
-    if ($('#ClasePedido').val().length == 0) {
-        ShowMsg(6, "images/advertencia.PNG", "audio/saperror.wav");
-        $('#ClasePedido').focus();
-        return;
-    }
-    if ($('#solicitante').val().length == 0) {
-        ShowMsg(3, "images/advertencia.PNG", "audio/saperror.wav");
-        $('#solicitante').focus();
-        return;
-    }
-    if ($('#destinatario').val().length == 0) {
-        ShowMsg(4, "images/advertencia.PNG", "audio/saperror.wav");
-        $('#destinatario').focus();
-        return;
-    }
-    if ($('#refcliente').val().length == 0) {
-        ShowMsg(5, "images/advertencia.PNG", "audio/saperror.wav");
-        $('#refcliente').focus();
-        return;
-    }
-    if ($('#fechaEntrega').val().length == 0) {
-        ShowMsg(7, "images/advertencia.PNG", "audio/saperror.wav");
-        $('#fechaEntrega').focus();
-        return;
-    }
-    if ($('#ListaPrecio').val().length == 0) {
-            ShowMsg(26, "images/advertencia.PNG", "audio/saperror.wav");
-            $('#ListaPrecio').focus();
-            return;
-        }
-    if ($('#orgVentas').val().length == 0 && $('#CanalDis').val().length == 0 && $('#Sector').val().length == 0) {
-        ShowMsg(9, "images/advertencia.PNG", "audio/saperror.wav");
-        return;
-    }
+//    if ($('#ClasePedido').val().length == 0) {
+//        ShowMsg(6, "images/advertencia.PNG", "audio/saperror.wav");
+//        $('#ClasePedido').focus();
+//        return;
+//    }
+//    if ($('#solicitante').val().length == 0) {
+//        ShowMsg(3, "images/advertencia.PNG", "audio/saperror.wav");
+//        $('#solicitante').focus();
+//        return;
+//    }
+//    if ($('#destinatario').val().length == 0) {
+//        ShowMsg(4, "images/advertencia.PNG", "audio/saperror.wav");
+//        $('#destinatario').focus();
+//        return;
+//    }
+//    if ($('#refcliente').val().length == 0) {
+//        ShowMsg(5, "images/advertencia.PNG", "audio/saperror.wav");
+//        $('#refcliente').focus();
+//        return;
+//    }
+//    if ($('#fechaEntrega').val().length == 0) {
+//        ShowMsg(7, "images/advertencia.PNG", "audio/saperror.wav");
+//        $('#fechaEntrega').focus();
+//        return;
+//    }
+//    if ($('#ListaPrecio').val().length == 0) {
+//        ShowMsg(26, "images/advertencia.PNG", "audio/saperror.wav");
+//        $('#ListaPrecio').focus();
+//        return;
+//    }
+//    if ($('#orgVentas').val().length == 0 && $('#CanalDis').val().length == 0 && $('#Sector').val().length == 0) {
+//        ShowMsg(9, "images/advertencia.PNG", "audio/saperror.wav");
+//        return;
+//    }
     var clie = $('#solicitante').val();
     var org = $('#orgVentas').val();
     var can = $('#CanalDis').val();
     var sec = $('#Sector').val();
     var acc = "ValidarMaterial";
-    var ven =  $('#GpoVendedores').val();
-    var lis =  $('#ListaPrecio').val();
-    var datos = "&Material=" + material + "&Cliente=" + clie + "&Vendedor=" + ven + "&listap=" + lis ;
+    var ven = $('#GpoVendedores').val();
+    var lis = $('#ListaPrecio').val();
+    var datos = "&Material=" + material + "&Cliente=" + clie + "&Vendedor=" + ven + "&listap=" + lis;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1541,6 +1545,7 @@ function ValidarMAterial(material, pos) {
         success: function (data) {
             if (data == 0) {
                 $('#tdDescr' + pos).focus();
+                $('#tdMater' + pos).val("");
                 $('#tdDescr' + pos).val("");
                 $('#tdUmedi' + pos).val("");
                 ShowMsg(10, "images/advertencia.PNG", "audio/saperror.wav", '', material, org, can);
@@ -1554,6 +1559,7 @@ function ValidarMAterial(material, pos) {
             }
         }
     });
+    VerificarDatosBl();
 }
 function checkDec(num, tam) {
     var limit;
@@ -1740,6 +1746,7 @@ function EliminarFilas() {
     }
     loadDoubleScroll("DobleSection2", "SecCuerpo2", "DobleContainer2", "TabBody2");
     AjustarCabecera('TabHead2', 'TabBody2', 3, 'SecCuerpo2');
+    VerificarDatosBl();
 }
 
 function validarInterlocutores() {
@@ -1965,4 +1972,27 @@ function Getfolio() {
         }
     });
     return folio;
+}
+function BanBlo(active) {
+    if (active == 0) {
+        $('#ClasePedido').prop('disabled', true);
+        $('#ListaPrecio').prop('disabled', true);
+    } else {
+        $('#ClasePedido').prop('disabled', false);
+        $('#ListaPrecio').prop('disabled', false);
+    }
+}
+function VerificarDatosBl() {
+    var mat = document.getElementsByName("MaterTD");
+    var a = 0;
+    for (i = 0; i < mat.length; i++) {
+        if (mat[i].value.trim().length > 7) {
+            a = (a) + 1;
+        }
+    }
+    if (a > 0) {
+        BanBlo(0);
+    } else {
+        BanBlo(1);
+    }
 }
