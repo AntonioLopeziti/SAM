@@ -169,7 +169,7 @@
         <!--<script src="js/VisualizarReporteStatusOrden.js" type="text/javascript"></scripT>-->
         <title>Flujo Deudores SD</title>  
     </head>
-    
+
     <body>
         <script>
             $(function () {
@@ -435,8 +435,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Cliente</th>
-                                        <th>Nombre Cliente</th>
+                                        <th style="width: 20%;">Cliente</th>
+                                        <th style="width: 80%;">Nombre</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -475,8 +475,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Cliente</th>
-                                        <th>Nombre Cliente</th>
+                                        <th style="width: 20%;">Cliente</th>
+                                        <th style="width: 80%;">Nombre</th>
                                     </tr>
                                 </thead>
                             </table>
