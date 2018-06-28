@@ -146,7 +146,7 @@ public class PeticionVisualizarReportesFlujoDocs extends HttpServlet {
                         for (FlujoDocumentos n : sap) {
                             out.println("<tr ondblclick=\"Select('" + n.getNum_material() + "','" + tipo + "')\">");
                             out.println("<td style=\"width:20%;\">" + n.getNum_material() + "</td>");
-                            out.println("<td style=\"width:80%;\" text-align: left;>" + n.getCentro() + "</td>");
+                            out.println("<td style=\"width:80%; text-align: left;\">" + n.getCentro() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
