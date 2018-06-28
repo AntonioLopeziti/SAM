@@ -98,55 +98,41 @@ $(document).ready(function () {
         $('#match_F1').hide();
         $('#match_F2').show();
     });
-    //Centro Nuevo Solicitante
+    //Cliente
     $('#match_A1').click(function () {
-        $("BODY").append('<div id="overlay"></div>');
         var theHandle = document.getElementById("handle");
-        var theRoot = document.getElementById("VentanaModalCentro");
+        var theRoot = document.getElementById("VentanaModalCliente");
         Drag.init(theHandle, theRoot);
-        mosVenMod('Centro');
+        mosVenMod('Cliente');
     });
-    //Centro 2 Nuevo Solicitante 2
+    //Cliente 2
     $('#match_A6').click(function () {
-        $("BODY").append('<div id="overlay"></div>');
-        var theHandle = document.getElementById("handle");
-        var theRoot = document.getElementById("VentanaModalCentro2");
-        Drag.init(theHandle, theRoot);
-        mosVenMod('Centro2');
-    });
-    //SAM1
-    $('#match_A2').click(function () {
-        $("BODY").append('<div id="overlay"></div>');
-        var theHandle = document.getElementById("handle3");
-        var theRoot = document.getElementById("VentanaModalSAM2");
-        Drag.init(theHandle, theRoot);
-//        mosVenMod('SAM1');
-        ConsultaFolioSAM1();
-    });
-    //SAM2
-    $('#match_A4').click(function () {
-        $("BODY").append('<div id="overlay"></div>');
         var theHandle = document.getElementById("handle2");
-        var theRoot = document.getElementById("VentanaModalSAM1");
+        var theRoot = document.getElementById("VentanaModalCliente2");
         Drag.init(theHandle, theRoot);
-//        mosVenMod('SAM2');
-        ConsultaFolioSAM2();
+        mosVenMod('Cliente2');
     });
-    //SAP1 No Orden
+    //Pedido
+    $('#match_A2').click(function () {
+        ConsultaPedidos();
+    });
+    //Pedido 2
+    $('#match_A4').click(function () {
+        ConsultaPedidos2();
+    });
+    // Materiales
     $('#match_A3').click(function () {
-        $("BODY").append('<div id="overlay"></div>');
-        var theHandle = document.getElementById("handle4");
-        var theRoot = document.getElementById("VentanaModalSAP1");
-        Drag.init(theHandle, theRoot);
-        mosVenMod('SAP1');
-    });
-    //SAP2 No Orden
-    $('#match_A5').click(function () {
-        $("BODY").append('<div id="overlay"></div>');
         var theHandle = document.getElementById("handle5");
-        var theRoot = document.getElementById("VentanaModalSAP2");
+        var theRoot = document.getElementById("VentanaModalMateriales");
         Drag.init(theHandle, theRoot);
-        mosVenMod('SAP2');
+        mosVenMod('Materiales');
+    });
+    // Materiales 2
+    $('#match_A5').click(function () {
+        var theHandle = document.getElementById("handle6");
+        var theRoot = document.getElementById("VentanaModalMateriales2");
+        Drag.init(theHandle, theRoot);
+        mosVenMod('Materiales2');
     });
     /*Match fecha 1 Reservas*/
     $('#match_F1').click(function () {
@@ -180,29 +166,12 @@ $(document).ready(function () {
     $('#calenimg').click(function () {
         CerrarCalendario();
     });
-    $('#okCentro').click(function () {
-        ConsultaCentro();
-    });
-    $('#okCentro2').click(function () {
-        ConsultaCentro2();
-    });
-    $('#okFolio').click(function () {
-        ConsultaFolioSAM1();
-    });
-    $('#okFolio2').click(function () {
-        ConsultaFolioSAM2();
-    });
-    $('#okOrden1').click(function () {
-        ConsultaFolioSAP1();
-    });
-    $('#okOrden2').click(function () {
-        ConsultaFolioSAP2();
-    });
-    //Match Centro
-    $('#BusCentro').keypress(function (e) {
+    
+    // Eventos inputs
+    $('#BusCliente').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
         if (tecla == 13) {
-            ConsultaCentro();
+            ConsultaCliente();
         }
         if (tecla == 32) {
             return false;
@@ -211,13 +180,13 @@ $(document).ready(function () {
         te = String.fromCharCode(tecla);
         return patron.test(te);
     });
-    $('#BusDesCentro').keypress(function (e) {
+    $('#BusDesCliente').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
         if (tecla == 13) {
-            ConsultaCentro();
+            ConsultaCliente();
         }
         if (tecla == 32) {
-            return false;
+            return true;
         }
         patron = /[0-9a-zA-ZñÑ]/;
         te = String.fromCharCode(tecla);
@@ -226,7 +195,7 @@ $(document).ready(function () {
     $('#numAcMax').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
         if (tecla == 13) {
-            ConsultaCentro();
+            ConsultaCliente();
         }
         if (tecla == 32) {
             return false;
@@ -235,11 +204,13 @@ $(document).ready(function () {
         te = String.fromCharCode(tecla);
         return patron.test(te);
     });
-    //Match Centro nuevo Solicitante 2
-    $('#BusCentro2').keypress(function (e) {
+    $('#okCliente').click(function () {
+        ConsultaCliente();
+    });
+    $('#BusCliente2').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
         if (tecla == 13) {
-            ConsultaCentro2();
+            ConsultaCliente2();
         }
         if (tecla == 32) {
             return false;
@@ -248,13 +219,13 @@ $(document).ready(function () {
         te = String.fromCharCode(tecla);
         return patron.test(te);
     });
-    $('#BusDesCentro2').keypress(function (e) {
+    $('#BusDesCliente2').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
         if (tecla == 13) {
-            ConsultaCentro2();
+            ConsultaCliente2();
         }
         if (tecla == 32) {
-            return false;
+            return true;
         }
         patron = /[0-9a-zA-ZñÑ]/;
         te = String.fromCharCode(tecla);
@@ -263,7 +234,7 @@ $(document).ready(function () {
     $('#numAcMax2').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
         if (tecla == 13) {
-            ConsultaCentro2();
+            ConsultaCliente2();
         }
         if (tecla == 32) {
             return false;
@@ -272,155 +243,92 @@ $(document).ready(function () {
         te = String.fromCharCode(tecla);
         return patron.test(te);
     });
-    //Match Folio SAM 1
-    $('#BusFolio').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAM1();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    $('#CenFolio').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAM1();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    $('#numAcMaxFolio').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAM1();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    //Match Folio SAM 2
-    $('#BusFolio2').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAM2();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    $('#CenFolio2').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAM2();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    $('#numAcMaxFolio2').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAM2();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    //Match Num Orden 1
-    $('#BusNumOrd').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAP1();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    $('#CenNumOrd').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAP1();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    $('#numAcMaxNumOrd').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAP1();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    //Match Num Orden 2
-    $('#BusNumOrd2').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAP2();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    $('#CenNumOrd2').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAP2();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    });
-    $('#numAcMaxNumOrd2').keypress(function (e) {
-        var tecla = (document).all ? e.keyCode : e.which;
-        if (tecla == 13) {
-            ConsultaFolioSAP2();
-        }
-        if (tecla == 32) {
-            return false;
-        }
-        patron = /[0-9a-zA-ZñÑ]/;
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
+    $('#okCliente2').click(function () {
+        ConsultaCliente2();
     });
 
+    // Material
+    
+    $('#BusMaterial').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaMateriales();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#BusDMaterial').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaMateriales();
+        }
+        if (tecla == 32) {
+            return true;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#numAcMax3').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaMateriales();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+     $('#okMateriales').click(function () {
+        ConsultaMateriales();
+    });
+    // Material2
+    
+    $('#BusMaterial2').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaMateriales2();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#BusDMaterial2').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaMateriales2();
+        }
+        if (tecla == 32) {
+            return true;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#numAcMax4').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaMateriales2();
+        }
+        if (tecla == 32) {
+            return false;
+        }
+        patron = /[0-9a-zA-ZñÑ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+     $('#okMateriales2').click(function () {
+        ConsultaMateriales2();
+    });
 });
 function inval() {
     ShowMsg(0, "images/advertencia.PNG", "audio/saperror.wav");
@@ -487,170 +395,107 @@ function enviarDatos(centro, centro2, sam1, sam2, sap1, sap2, fecha1, fecha2) {
         processData: true,
         data: enviar,
         success: function (data) {
-            location.href = "VisualizarFlujoDocumentos.jsp?"+ enviar;
+            location.href = "VisualizarFlujoDocumentos.jsp?" + enviar;
         }
     });
 }
-$("#vemoce").click(function () {
-    BacMain('BuscarParamCentro_SP', 'ConsultaTablaCentro')
-});
-function BacMain(di1, di2) {
-    $("#" + di1).css("display", "block");
-    $("#" + di2).css("display", "none");
-}
+
 function mosVenMod(tipo) {
     switch (tipo) {
-        case "Centro":
-            var ventana = document.getElementById('VentanaModalCentro');
+        case "Cliente":
+            var ventana = document.getElementById('VentanaModalCliente');
             abrirVentana(ventana);
-            $("#BusCentro").focus();
-            $("#BusCentro").val('');
-            $("#BusCentro").val('');
+            $("#BusCliente").focus();
+            $("#BusCliente").val('');
+            $("#BusDesCliente").val('');
             $("#numAcMax").val('500');
-            $('#BuscarParamCentro_SP').show();
-            $('#ConsultaTablaOCompras').hide();
+            $('#BuscarPCliente').show();
+            $('#ConsultaTablaCliente').hide();
             break;
-        case "Centro2":
-            var ventana = document.getElementById('VentanaModalCentro2');
+        case "Cliente2":
+            var ventana = document.getElementById('VentanaModalCliente2');
             abrirVentana(ventana);
-            $("#BusCentro2").focus();
-            $("#BusCentro2").val('');
-            $("#BusCentro2").val('');
+            $("#BusCliente2").focus();
+            $("#BusCliente2").val('');
+            $("#BusDesCliente2").val('');
             $("#numAcMax2").val('500');
-            $('#BuscarParamCentro_SP2').show();
-            $('#ConsultaTablaOCompras2').hide();
+            $('#BuscarPCliente2').show();
+            $('#ConsultaTablaCliente2').hide();
             break;
-        case "SAM1":
-            var ventana = document.getElementById('VentanaModalSAM1');
+        case "Materiales":
+            var ventana = document.getElementById('VentanaModalMateriales');
             abrirVentana(ventana);
-            $("#BusFolio").focus();
-            $("#BusFolio").val('');
-            $("#CenFolio").val('');
-            $("#numAcMaxFolio").val('500');
-            $('#BuscarParamFolio_SP').show();
-            $('#ConsultaTablaFolioSAM1').hide();
+            $("#BusMaterial").focus();
+            $("#BusMaterial").val('');
+            $("#BusDMaterial").val('');
+            $("#numAcMax3").val('500');
+            $('#BuscarPMateriales').show();
+            $('#ConsultaTablaMateriales').hide();
             break;
-        case "SAM2":
-            var ventana = document.getElementById('VentanaModalSAM2');
+        case "Materiales2":
+            var ventana = document.getElementById('VentanaModalMateriales2');
             abrirVentana(ventana);
-            $("#BusFolio2").focus();
-            $("#BusFolio2").val('');
-            $("#CenFolio2").val('');
-            $("#numAcMaxFolio2").val('500');
-            $('#BuscarParamFolio2_SP').show();
-            $('#ConsultaTablaFolioSAM2').hide();
-            break;
-        case "SAP1":
-            var ventana = document.getElementById('VentanaModalSAP1');
-            abrirVentana(ventana);
-            $("#BusNumOrd").focus();
-            $("#BusNumOrd").val('');
-            $("#CenNumOrd").val('');
-            $("#numAcMaxNumOrd").val('500');
-            $('#BuscarParamFolioSAP_SP').show();
-            $('#ConsultaTablaFolioSAP1').hide();
-            break;
-        case "SAP2":
-            var ventana = document.getElementById('VentanaModalSAP2');
-            abrirVentana(ventana);
-            $("#BusNumOrd2").focus();
-            $("#BusNumOrd2").val('');
-            $("#CenNumOrd2").val('');
-            $("#numAcMaxNumOrd2").val('500');
-            $('#BuscarParamFolioSAP2_SP').show();
-            $('#ConsultaTablaFolioSAP2').hide();
+            $("#BusMaterial2").focus();
+            $("#BusMaterial2").val('');
+            $("#BusDMaterial2").val('');
+            $("#numAcMax4").val('500');
+            $('#BuscarPMateriales2').show();
+            $('#ConsultaTablaMateriales2').hide();
             break;
     }
 }
-function cambiarMatchCentro() {
-    $('#BuscarParamCentro_SP').show();
-    $('#ConsultaTablaOCompras').hide();
-    $('#BusCentro').focus();
+function retornPCliente() {
+    $('#BuscarPCliente').show();
+    $('#ConsultaTablaCliente').hide();
+    $('#BusCliente').focus();
 }
-function cambiarMatchCentro2() {
-    $('#BuscarParamCentro_SP2').show();
-    $('#ConsultaTablaOCompras2').hide();
-    $('#BusCentro2').focus();
+function retornPCliente2() {
+    $('#BuscarPCliente2').show();
+    $('#ConsultaTablaCliente2').hide();
+    $('#BusCliente2').focus();
 }
-function cambiarMatchFolio() {
-    $('#BuscarParamFolio_SP').show();
-    $('#ConsultaTablaFolioSAM1').hide();
-    $('#BusCentro2').focus();
+function retornPMateriales() {
+    $('#BuscarPMateriales').show();
+    $('#ConsultaTablaMateriales').hide();
+    $('#BusMaterial').focus();
 }
-function cambiarMatchFolio2() {
-    $('#BuscarParamFolio2_SP').show();
-    $('#ConsultaTablaFolioSAM2').hide();
+function retornPMateriales2() {
+    $('#BuscarPMateriales2').show();
+    $('#ConsultaTablaMateriales2').hide();
+    $('#BusMaterial2').focus();
 }
-function cambiarMatchNumMate() {
-    $('#BuscarParamFolioSAP_SP').show();
-    $('#ConsultaTablaFolioSAP1').hide();
-    $('#BusNumOrd').focus();
-}
-function cambiarMatchNumMate2() {
-    $('#BuscarParamFolioSAP2_SP').show();
-    $('#ConsultaTablaFolioSAP2').hide();
-    $('#BusNumOrd2').focus();
-}
-//function mostrarVentanaModal(tipo) {
-//    var BE = document.createElement('audio');
-//    BE.src = "audio/sapsnd05.wav";
-//    BE.play();
-//    switch (tipo) {
-//        case "centro":
-//            ConsultaCentro();
-//            break;
-//        case "sam1":
-//            ConsultaFolioSAM1();
-//            break;
-//        case "sam2":
-//            ConsultaFolioSAM2();
-//            break;
-//        case "sap1":
-//            ConsultaFolioSAP1();
-//            break;
-//        case "sap2":
-//            ConsultaFolioSAP2();
-//            break;
-//    }
-//}
 function ocultarVentana(tipo) {
     var BE = document.createElement('audio');
     BE.src = "audio/sapsnd05.wav";
     BE.play();
     switch (tipo) {
-        case "centro":
-            var ventana1 = $('#VentanaModalCentro');
-            ventana1.hide();
+        case "Cliente":
+            $('#VentanaModalCliente').hide();
             $('#solicitante').focus();
             borramsg();
             break;
-        case "centro2":
-            var ventana1 = $('#VentanaModalCentro2');
-            ventana1.hide();
+        case "Cliente2":
+            $('#VentanaModalCliente2').hide();
             $('#solicitante2').focus();
             borramsg();
             break;
-        case "sam1":
-            var ventana2 = $('#VentanaModalSAM1');
-            ventana2.hide();
+        case "Pedido":
+            $('#VentanaModalPedidos').hide();
             $('#pedVenta').focus();
             borramsg();
             break;
-        case "sam2":
-            var ventana3 = $('#VentanaModalSAM2');
-            ventana3.hide();
+        case "Pedido2":
+            $('#VentanaModalPedidos2').hide();
             $('#pedVenta2').focus();
             borramsg();
             break;
-        case "sap1":
-            var ventana4 = $('#VentanaModalSAP1');
-            ventana4.hide();
+        case "Materiales":
+            $('#VentanaModalMateriales').hide();
             $('#material').focus();
             borramsg();
             break;
-        case "sap2":
-            var ventana5 = $('#VentanaModalSAP2');
-            ventana5.hide();
+        case "Materiales2":
+            $('#VentanaModalMateriales2').hide();
             $('#material2').focus();
             borramsg();
             break;
@@ -663,13 +508,14 @@ function borramsg() {
     $('#msg').html("");
 }
 
-function ConsultaCentro() {
-    var acc = "CentroStatus";
-    var Cen = $("#BusCentro").val();
-    var Nom = $("#BusDesCentro").val();
+function ConsultaCliente() {
+    var acc = "CargarSolicitante";
+    var Cli = $("#BusCliente").val();
+    var Nom = $("#BusDesCliente").val();
     var ctd = $("#numAcMax").val();
-    var tipo = "centro";
-    var enviar = "&Centro=" + Cen + "&CentroNom=" + Nom + "&Ctd=" + ctd + "&tipo=" + tipo;
+    var tipo = "Cliente";
+    var enviar = "&Cliente=" + Cli + "&DCliente=" + Nom + "&Cantidad=" + ctd + "&tipo=" + tipo;
+    ;
     $.ajax({
         async: false,
         type: 'GET',
@@ -681,25 +527,23 @@ function ConsultaCentro() {
             if (data == 0) {
                 ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
-                $("#BuscarParamCentro_SP").css("display", "none");
-                $("#ConsultaTablaOCompras").css("display", "block");
-                $("#cargarDatosOCompras").html(data);
-//                var ventana1 = $('#VentanaModalCentro');
-//                abrirVentana(ventana1);
-//                $('#cargarDatosOCompras').html(data);
-//                fnc("table-scrollCentro", "fixedYCentro");
+                $("#BuscarPCliente").css("display", "none");
+                $("#ConsultaTablaCliente").css("display", "block");
+                $("#cargarDatosClientes").html(data);
+                fnc("table-scrollCliente", "fixedYCliente");
                 borramsg();
             }
         }
     });
 }
-function ConsultaCentro2() {
-    var acc = "CentroStatus";
-    var Cen = $("#BusCentro").val();
-    var Nom = $("#BusDesCentro").val();
-    var ctd = $("#numAcMax").val();
-    var tipo = "centro2";
-    var enviar = "&Centro=" + Cen + "&CentroNom=" + Nom + "&Ctd=" + ctd + "&tipo=" + tipo;
+function ConsultaCliente2() {
+    var acc = "CargarSolicitante";
+    var Cli = $("#BusCliente2").val();
+    var Nom = $("#BusDesCliente2").val();
+    var ctd = $("#numAcMax2").val();
+    var tipo = "Cliente2";
+    var enviar = "&Cliente=" + Cli + "&DCliente=" + Nom + "&Cantidad=" + ctd + "&tipo=" + tipo;
+    ;
     $.ajax({
         async: false,
         type: 'GET',
@@ -711,90 +555,20 @@ function ConsultaCentro2() {
             if (data == 0) {
                 ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
-                $("#BuscarParamCentro_SP2").css("display", "none");
-                $("#ConsultaTablaOCompras2").css("display", "block");
-                $("#cargarDatosOCompras2").html(data);
-//                var ventana1 = $('#VentanaModalCentro');
-//                abrirVentana(ventana1);
-//                $('#cargarDatosOCompras').html(data);
-//                fnc("table-scrollCentro", "fixedYCentro");
-                borramsg();
-            }
-        }
-    });
-}
-function  ConsultaFolioSAM1() {
-    var acc = "SamStatuss";
-    var tipo = "sam1";
-    var enviar = "&tipo=" + tipo;
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: 'PeticionVisualizarReportesFlujoDocs',
-        contentType: "application/x-www-form-urlencoded",
-        processData: true,
-        data: "Action=" + acc + enviar,
-        success: function (data) {
-            if (data == 0) {
-                ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
-            } else {
-//                $("#BuscarParamFolio_SP").css("display", "none");
-//                $("#ConsultaTablaFolioSAM1").css("display", "block");
-//                $("#cargarDatosFolioSAM1").html(data);
-//                borramsg();
-                $('#VentanaModalSAM1').show();
-                $('#VentanaModalSAM1').css({
-                    position: 'absolute', left: 510, top: 60
-                });
-                $('#BuscarParamFolio_SP').hide();
-                $('#ConsultaTablaFolioSAM1').show();
-                $("#cargarDatosFolioSAM1").html(data);
-                fnc("table-scrollSAM", "fixedYSAM");
-                borramsg();
-            }
-        }
-    });
-}
-function ConsultaFolioSAM2() {
-    var acc = "SamStatuss";
-    var tipo = "sam2";
-    var enviar = "&tipo=" + tipo;
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: 'PeticionVisualizarReportesFlujoDocs',
-        contentType: "application/x-www-form-urlencoded",
-        processData: true,
-        data: "Action=" + acc + enviar,
-        success: function (data) {
-            if (data == 0) {
-                ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
-            } else {
-//                $("#BuscarParamFolio2_SP").css("display", "none");
-//                $("#ConsultaTablaFolioSAM2").css("display", "block");
-//                $("#cargarDatosFolioSAM2").html(data);
-//                borramsg();
-                $('#VentanaModalSAM2').show();
-                $('#VentanaModalSAM2').css({
-                    position: 'absolute', left: 510, top: 60
-                });
-                $('#BuscarParamFolio2_SP').hide();
-                $('#ConsultaTablaFolioSAM2').show();
-                $("#cargarDatosFolioSAM2").html(data);
-                fnc("table-scrollSAM2", "fixedYSAM2");
+                $("#BuscarPCliente2").css("display", "none");
+                $("#ConsultaTablaCliente2").css("display", "block");
+                $("#cargarDatosClientes2").html(data);
+                fnc("table-scrollCliente2", "fixedYCliente2");
                 borramsg();
             }
         }
     });
 }
 
-function ConsultaFolioSAP1() {
-    var acc = "SapStatus";
-    var fol = $("#BusNumOrd").val();
-    var centro = $("#CenNumOrd").val();
-    var ctd = $("#numAcMaxNumOrd").val();
-    var tipo = "sap1";
-    var enviar = "&tipo=" + tipo + "&folOrd=" + fol + "&CentroOrd=" + centro + "&CtdOrd=" + ctd;
+function  ConsultaPedidos() {
+    var acc = "CargarPedidos";
+    var tipo = "Pedido";
+    var enviar = "&tipo=" + tipo;
     $.ajax({
         async: false,
         type: 'GET',
@@ -806,28 +580,22 @@ function ConsultaFolioSAP1() {
             if (data == 0) {
                 ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
-                $("#BuscarParamFolioSAP_SP").css("display", "none");
-                $("#ConsultaTablaFolioSAP1").css("display", "block");
-                $("#cargarDatosFolioSAP1").html(data);
+                var ventana = document.getElementById('VentanaModalPedidos');
+                abrirVentana(ventana);
+                $("#cargarDatosPedido").html(data);
+                var theHandle = document.getElementById("handle3");
+                var theRoot = document.getElementById("VentanaModalPedidos");
+                Drag.init(theHandle, theRoot);
+                fnc("table-scrollPedido", "fixedYPedido");
                 borramsg();
-//                $('#VentanaModalSAP1').show();
-//                $('#VentanaModalSAP1').css({
-//                    position: 'absolute', left: 510, top: 60
-//                });
-//                $("#cargarDatosFolioSAP1").html(data);
-//                fnc("table-scrollSAP", "fixedYSAP");
-//                borramsg();
             }
         }
     });
 }
-function ConsultaFolioSAP2() {
-    var acc = "SapStatus";
-    var fol = $("#BusNumOrd2").val();
-    var centro = $("#CenNumOrd2").val();
-    var ctd = $("#numAcMaxNumOrd2").val();
-    var tipo = "sap2";
-    var enviar = "&tipo=" + tipo + "&folOrd=" + fol + "&CentroOrd=" + centro + "&CtdOrd=" + ctd;
+function  ConsultaPedidos2() {
+    var acc = "CargarPedidos";
+    var tipo = "Pedido2";
+    var enviar = "&tipo=" + tipo;
     $.ajax({
         async: false,
         type: 'GET',
@@ -839,17 +607,69 @@ function ConsultaFolioSAP2() {
             if (data == 0) {
                 ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
-                $("#BuscarParamFolioSAP2_SP").css("display", "none");
-                $("#ConsultaTablaFolioSAP2").css("display", "block");
-                $("#cargarDatosFolioSAP2").html(data);
+                var ventana = document.getElementById('VentanaModalPedidos2');
+                abrirVentana(ventana);
+                $("#cargarDatosPedido2").html(data);
+                var theHandle = document.getElementById("handle4");
+                var theRoot = document.getElementById("VentanaModalPedidos2");
+                Drag.init(theHandle, theRoot);
+                fnc("table-scrollPedido2", "fixedYPedido2");
                 borramsg();
-//                $('#VentanaModalSAP2').show();
-//                $('#VentanaModalSAP2').css({
-//                    position: 'absolute', left: 510, top: 60
-//                });
-//                $("#cargarDatosFolioSAP2").html(data);
-//                fnc("table-scrollSAP2", "fixedYSAP2");
-//                borramsg();
+            }
+        }
+    });
+}
+
+function ConsultaMateriales() {
+    var acc = "CargarMateriales";
+    var Mater = $("#BusMaterial").val();
+    var Descr = $("#BusDMaterial").val();
+    var ctd = $("#numAcMax3").val();
+    var tipo = "Materiales";
+    var enviar = "&tipo=" + tipo + "&Material=" + Mater + "&DMaterial=" + Descr + "&Cantidad=" + ctd;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionVisualizarReportesFlujoDocs',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Action=" + acc + enviar,
+        success: function (data) {
+            if (data == 0) {
+                ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                $("#BuscarPMateriales").css("display", "none");
+                $("#ConsultaTablaMateriales").css("display", "block");
+                $("#cargarDatosMateriales").html(data);
+                fnc("table-scrollMateriales", "fixedYMateriales");
+                borramsg();
+            }
+        }
+    });
+}
+function ConsultaMateriales2() {
+    var acc = "CargarMateriales";
+    var Mater = $("#BusMaterial2").val();
+    var Descr = $("#BusDMaterial2").val();
+    var ctd = $("#numAcMax4").val();
+    var tipo = "Materiales2";
+    var enviar = "&tipo=" + tipo + "&Material=" + Mater + "&DMaterial=" + Descr + "&Cantidad=" + ctd;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionVisualizarReportesFlujoDocs',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Action=" + acc + enviar,
+        success: function (data) {
+            if (data == 0) {
+                ShowMsg(6, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                $("#BuscarPMateriales2").css("display", "none");
+                $("#ConsultaTablaMateriales2").css("display", "block");
+                $("#cargarDatosMateriales2").html(data);
+                fnc("table-scrollMateriales2", "fixedYMateriales2");
+                borramsg();
             }
         }
     });
@@ -980,7 +800,6 @@ function validarsap2() {
     }
 }
 function abrirVentana(ventana) {
-    ///abrir ventanas
     var BE = document.createElement('audio');
     BE.src = "audio/sapsnd05.wav";
     BE.play();
@@ -1000,27 +819,27 @@ function fnc(scroll, fixe) {
 }
 function Select(dato, tipo) {
     switch (tipo) {
-        case "centro":
+        case "Cliente":
             $("#solicitante").val(dato);
             ocultarVentana(tipo);
             break;
-        case "centro2":
+        case "Cliente2":
             $("#solicitante2").val(dato);
             ocultarVentana(tipo);
             break;
-        case "sam1":
+        case "Pedido":
             $("#pedVenta").val(dato);
             ocultarVentana(tipo);
             break;
-        case "sam2":
+        case "Pedido2":
             $("#pedVenta2").val(dato);
             ocultarVentana(tipo);
             break;
-        case "sap1":
+        case "Materiales":
             $("#material").val(dato);
             ocultarVentana(tipo);
             break;
-        case "sap2":
+        case "Materiales2":
             $("#material2").val(dato);
             ocultarVentana(tipo);
             break;
