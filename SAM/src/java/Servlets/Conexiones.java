@@ -62,7 +62,7 @@ public class Conexiones extends HttpServlet {
                         Jd.add(data[2]);
                         Jd.add(data[3]);
                         Jd.add(data[4]);
-                        Jd.add(data[5]);
+//                        Jd.add(data[5]);
                         out.println(Jd);
                     } else {
                         out.println(0);
