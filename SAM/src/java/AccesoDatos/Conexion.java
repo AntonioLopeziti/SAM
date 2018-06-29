@@ -27,6 +27,7 @@ import org.xml.sax.SAXException;
 import java.net.Socket;
 
 import com.sap.mw.jco.JCO;
+import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.*;
@@ -53,7 +54,8 @@ public class Conexion {
     private String lib = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private String url = "";
     private Connection con;
-    private String ruta = "config.xml";
+//    private String ruta = "config.xml"
+    private String ruta = "C:\\conexionconfig\\configServidorSAM.xml";
 
     public Connection ObtenerConexion() {
         String[] data = CargarDatos();
@@ -103,18 +105,50 @@ public class Conexion {
         return false;
     }
 
-    public boolean GuardarConfiguracion(usuarioRoot us) {
-        URL url = getClass().getResource(ruta);
-        String arr[] = new String[5];
+//    public boolean GuardarConfiguracion(usuarioRoot us) {
+//        URL url = getClass().getResource(ruta);
+//        String arr[] = new String[5];
+//        try {
+//            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder db = null;
+//            try {
+//                db = dbf.newDocumentBuilder();
+//            } catch (ParserConfigurationException ex) {
+//                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            Document doc = db.parse(url.openStream());
+//            NodeList nList = doc.getElementsByTagName("config");
+//            Node nNode = nList.item(0);
+//            Element eElement = (Element) nNode;
+//            eElement.getElementsByTagName("usuario").item(0).setTextContent(us.getUsuarioSAM());
+//            eElement.getElementsByTagName("clave").item(0).setTextContent(us.getPasswordSAM());
+//            eElement.getElementsByTagName("servidor").item(0).setTextContent(us.getServidorSAM());
+//            eElement.getElementsByTagName("puerto").item(0).setTextContent(us.getPuertoSAM());
+//            eElement.getElementsByTagName("basedatos").item(0).setTextContent(us.getBaseDatosSAM());
+//            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+//            Transformer transformer = transformerFactory.newTransformer();
+//            DOMSource source = new DOMSource(doc);
+//            StreamResult result = new StreamResult(new File(url.getPath()));
+//            transformer.transform(source, result);
+//            return true;
+//        } catch (SAXException | IOException ex) {
+//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+//            return false;
+//        } catch (TransformerConfigurationException ex) {
+//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+//            return false;
+//        } catch (TransformerException ex) {
+//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+//            return false;
+//        }
+//    }
+     public boolean GuardarConfiguracion(usuarioRoot us) {
+        DOMParser parser = new DOMParser();
         try {
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = null;
-            try {
-                db = dbf.newDocumentBuilder();
-            } catch (ParserConfigurationException ex) {
-                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Document doc = db.parse(url.openStream());
+            parser.parse(ruta);
+            Document doc = parser.getDocument();
+            doc.getDocumentElement().normalize();
+            doc = parser.getDocument();
             NodeList nList = doc.getElementsByTagName("config");
             Node nNode = nList.item(0);
             Element eElement = (Element) nNode;
@@ -126,7 +160,7 @@ public class Conexion {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File(url.getPath()));
+            StreamResult result = new StreamResult(new File(ruta));
             transformer.transform(source, result);
             return true;
         } catch (SAXException | IOException ex) {
@@ -181,18 +215,47 @@ public class Conexion {
         System.out.println(d[1]);
     }
 
-    public String[] CargarDatos() {
-        URL url = getClass().getResource(ruta);
-        String arr[] = new String[6];
+//    public String[] CargarDatos() {
+//        URL url = getClass().getResource(ruta);
+//        String arr[] = new String[6];
+//        try {
+//            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder db = null;
+//            try {
+//                db = dbf.newDocumentBuilder();
+//            } catch (ParserConfigurationException ex) {
+//                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            Document doc = db.parse(url.openStream());
+//            NodeList nList = doc.getElementsByTagName("config");
+//            Node nNode = nList.item(0);
+//            Element eElement = (Element) nNode;
+//            String u = eElement.getElementsByTagName("usuario").item(0).getTextContent();
+//            String c = eElement.getElementsByTagName("clave").item(0).getTextContent();
+//            String s = eElement.getElementsByTagName("servidor").item(0).getTextContent();
+//            String p = eElement.getElementsByTagName("puerto").item(0).getTextContent();
+//            String b = eElement.getElementsByTagName("basedatos").item(0).getTextContent();
+//            String w = eElement.getElementsByTagName("url_ws").item(0).getTextContent();
+//            arr[0] = u;
+//            arr[1] = c;
+//            arr[2] = s;
+//            arr[3] = p;
+//            arr[4] = b;
+//            arr[5] = w;
+//        } catch (SAXException | IOException ex) {
+//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return arr;
+//    }
+
+     public String[] CargarDatos() {
+        String arr[] = new String[5];
         try {
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = null;
-            try {
-                db = dbf.newDocumentBuilder();
-            } catch (ParserConfigurationException ex) {
-                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Document doc = db.parse(url.openStream());
+            DOMParser parser = new DOMParser();
+            parser.parse(ruta);
+            Document doc = parser.getDocument();
+            doc.getDocumentElement().normalize();
+            doc = parser.getDocument();
             NodeList nList = doc.getElementsByTagName("config");
             Node nNode = nList.item(0);
             Element eElement = (Element) nNode;
@@ -201,19 +264,16 @@ public class Conexion {
             String s = eElement.getElementsByTagName("servidor").item(0).getTextContent();
             String p = eElement.getElementsByTagName("puerto").item(0).getTextContent();
             String b = eElement.getElementsByTagName("basedatos").item(0).getTextContent();
-            String w = eElement.getElementsByTagName("url_ws").item(0).getTextContent();
             arr[0] = u;
             arr[1] = c;
             arr[2] = s;
             arr[3] = p;
             arr[4] = b;
-            arr[5] = w;
         } catch (SAXException | IOException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return arr;
     }
-
     public void CerrarConexion(Connection cnx) {
         try {
             System.out.println(cnx);
