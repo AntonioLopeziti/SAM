@@ -24,10 +24,7 @@ $(document).ready(function () {
     $('#NoPers').click(function () {
         $('#NoPers').css('background-image', 'none');
     });
-    $('#OrdFab').click(function () {
-        $('#OrdFab').css('background-image', 'none');
-    });
-    $('#OrdFab').click(function () {
+    $('#OrdFab').focus(function () {
         $('#OrdFab').css('background-image', 'none');
     });
     $('#cntBuena').click(function () {
@@ -39,7 +36,6 @@ $(document).ready(function () {
     $('#NoPers').blur(function () {
         if ($('#NoPers').val().length > 0) {
             $('#NoPers').css('background-image', 'none');
-            validarUsuario();
         } else {
             $('#NoPers').css('background-image', 'url(images/necesario.PNG)');
         }
@@ -50,8 +46,7 @@ $(document).ready(function () {
             validarStatusOrden();
 //            verificarContenidoUs();
             validarOrdenLib();
-            tabOpePP($('#OrdFab').val());
-            getUmOpe();
+
         }
         if (tecla == 32) {
             return false;
@@ -255,14 +250,29 @@ function validarCantidades() {
         BE.play();
     }
     var ckOpe = document.getElementsByName("ckOperPP");
+    var bxSts = document.getElementsByName("bxStOrd");
+    var st = "NOTP";
+    var operacion = "";
     var bn = false;
     for (i = 0; i < ckOpe.length; i++) {
         if (ckOpe[i].checked) {
             bn = true;
+            if (i > 0) {
+                st = bxSts[parseInt(ckOpe[i].value) - 1].value;
+                operacion = $("#opeNumOpe" + parseInt(ckOpe[i].value - 1)).text();
+            }
         }
     }
     if (!bn) {
         $('#msg').html("Seleccione una Operación");
+        var icon = $('#iconmsg');
+        icon.show();
+        icon.attr('src', 'images/advertencia.PNG');
+        var BE = document.createElement('audio');
+        BE.src = 'audio/saperror.wav';
+        BE.play();
+    } else if (st !== "NOTP") {
+        $('#msg').html("Complete la Operación " + operacion);
         var icon = $('#iconmsg');
         icon.show();
         icon.attr('src', 'images/advertencia.PNG');
@@ -481,7 +491,7 @@ function validarLlenado() {
     var acc = "LlenarTablas";
     var us = $('#NoPers').val();
     var ord = $('#OrdFab').val();
-    var buena = $('#cntBuena').val();
+    var buena;
     var mala = $('#cntMala').val();
     var orden = $('#OrdFab').val();
     var cadena, v1 = "", v2 = "", v3 = "", v4 = "", v5 = "", v6 = "";
@@ -496,7 +506,21 @@ function validarLlenado() {
             }
         }
     }
-
+    var cc;
+    var cl;
+    var ckOpe = document.getElementsByName("ckOperPP");
+    for (var tt = 0; tt < ckOpe.length; tt++) {
+        if (ckOpe[tt].checked) {
+            cc = $("#opeClavCon" + ckOpe[tt].value).text();
+            cl = $("#opeClavCon" + ckOpe[tt].value).text();
+        }
+    }
+    if(cl === "PP03"){
+        buena = $('#bxcnt0').val();
+    }else{
+        buena = $('#cntBuena').val();
+    }
+    
     f1 = $("#bxAct1").val();
     f2 = $("#bxAct2").val();
     f3 = $("#bxAct3").val();
@@ -581,7 +605,8 @@ function validarLlenado() {
             + "&v19=" + s6
             + "&v20=" + v6
             + "&v21=" + op
-            + "&v22=" + motivo;
+            + "&v22=" + motivo
+            + "&v23=" + cc;
 
     if (us == "" || ord == "" || buena == "" || mala == "") {
         $('#msg').html("Complete los campos obligatorios");
@@ -849,6 +874,7 @@ function validarStatusOrden() {
                 $('#iconmsg').attr('src', 'images/advertencia.PNG');
                 $('#OrdFab').val("");
             } else {
+                borrarmsg();
             }
         }
     });
@@ -863,7 +889,7 @@ function validarOrdenLib() {
         url: 'PeticionNotificarTiemposPP',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "acc=" + acc + "&orden=" + orden,
+        data: "acc=" + acc + "&orden=" + orden + "&v1=" + $('#centroUsr').val(),
         success: function (data) {
             if (data == 0) {
                 var BE = document.createElement('audio');
@@ -880,6 +906,11 @@ function validarOrdenLib() {
 //                $('#cntMala').prop("disabled", false);
                 $('#OrdFab').focus();
                 $('#cntBuena').css('background-image', 'url(images/necesario.PNG)');
+                limpiarCampos();
+                desbloquearCampos();
+                ponerUsuarioDefault();
+                tabOpePP("");
+                getCtrUsr();
 //                $('#cntMala').css('background-image', 'url(images/necesario.PNG)');
 //                $('#sectionMostOp').html("<select><option></option></select>");
             } else {
@@ -888,6 +919,9 @@ function validarOrdenLib() {
                 TextoLargo2();
                 cantidadPT();
                 ordsta();
+                tabOpePP($('#OrdFab').val());
+                getUmOpe();
+                borrarmsg();
             }
         }
     });
@@ -943,7 +977,9 @@ function validarUsuario() {
                 desbloquearCampos();
             } else {
                 borrarmsg();
-                getCtrUsr();
+                limpiarCampos();
+                desbloquearCampos();
+                tabOpePP("");
                 //revDatos(us);
             }
         }
@@ -970,7 +1006,7 @@ function limpiarCampos() {
     $('#OrdFab').val("");
 //    $('#sectionMostOp').html("<select><option>0010</option></select>");
     $('#cntBuena').val("");
-//    $('#cntMala').val("");
+    $('#cntMala').val("0.000");
     $('#sectionMuestraExc').hide();
     $('#sectionVisualExc').show();
     $('#notsta').html("");
@@ -1047,11 +1083,12 @@ function ocultarVentanaMatch(tipo) {
 function Select(obj, tipo) {
     switch (tipo) {
         case "Usuario":
+            validarUsuario();
             document.getElementById("NoPers").value = obj;
             ocultarVentanaMatch("NoPer");
             $('#btnmatchUsuarios').hide();
             $('#NoPers').css('background-image', 'none');
-            validarUsuario();
+            getCtrUsr();
             break;
     }
 }
@@ -1482,13 +1519,14 @@ function mensajesValidacionInco(msg) {
 
 function btnloteShow(pos) {
     var btn = document.getElementsByName("btnShowLot");
-    for (i = 0; i < btn.length; i++) {
-        if (i === pos) {
+    var ck = document.getElementsByName("ckMovMer");
+    for (var i = 0; i < btn.length; i++) {
+        if (parseInt(pos) === parseInt(ck[i].value)) {
             if ($("#tdCmov" + pos).text() != "101") {
                 $("#btnLot" + pos).show();
             }
         } else {
-            $("#btnLot" + i).hide();
+            $("#btnLot" + ck[i].value).hide();
         }
     }
 }
@@ -1607,6 +1645,7 @@ function ConsMaterial() {
     var cant = document.getElementsByName("bxcantidad");
     var lote = document.getElementsByName("bxlote");
     var anch = document.getElementsByName("bxancho");
+    var centro = document.getElementsByName("tdCentro");
 
     for (var i = 0; i < mat.length; i++) {
         if (cant[i].value == "") {
@@ -1627,9 +1666,11 @@ function ConsMaterial() {
         }
         if (anch[i].value == "") {
             if (anch[i].disabled == false) {
-                msjError("Ancho es Obligatorio");
-                anch[i].focus();
-                return;
+                if (centro[i].textContent != "3000") {
+                    msjError("Ancho es Obligatorio");
+                    anch[i].focus();
+                    return;
+                }
             }
         } else {
             borrarmsg();
@@ -1888,7 +1929,7 @@ function Print_PT() {
     var acc = "imprimePT";
 
     if ($("#tdCmov0").text() == "101") {
-        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + encodeURIComponent($("#tdDes0").text()) + "&v4=" + $("#bxLote0").val().toUpperCase() + "&v5=" + $("#bxcnt0").val() + "&v6=" + $("#tdOpr0").text() + "&v7=" + folio101 + "&v8=" + $("#tdCtr0").text() + "&v9=" + $("#tdUM0").text() + "&v10=" + $("#bxanc0").val();
+        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + encodeURIComponent($("#tdDes0").text()) + "&v4=" + $("#bxLote0").val().toUpperCase() + "&v5=" + $("#bxcnt0").val() + "&v6=" + $("#tdOpr0").text() + "&v7=" + folio101 + "&v8=" + $("#tdCtr0").text() + "&v9=" + $("#tdUM0").text() + "&v10=" + $("#bxanc0").val().replace("+","%2b");
         $.ajax({
             async: false,
             type: 'GET',
@@ -2099,7 +2140,7 @@ function getActividades(puesto, pos) {
     var endTime = moment(fechaFin, "HH:mm:ss");
 
     var result = endTime.diff(startTime, 'minutes') / 60;
-    
+
 
 
     $.ajax({
