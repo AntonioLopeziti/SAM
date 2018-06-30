@@ -701,13 +701,20 @@ and open the template in the editor.
     margin-top: 15px;
     float: left;
 }
+.fondo_MatchAv input
+{
+    margin-left: 12px;
+    margin-top: 12px;
+    float: left;
+    width: 50%;
+}
 .fondo_MatchAv
 {
     background-color: #E5E5E5;
     width: 100%;
     height: 83%;
 }
-#handleAV
+#handleAV, #handleBC
 {
     margin-left: -2px;
     padding-top: .4%;
