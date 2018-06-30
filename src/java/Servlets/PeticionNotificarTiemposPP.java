@@ -82,6 +82,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
             String v20 = request.getParameter("v20");
             String v21 = request.getParameter("v21");
             String v22 = request.getParameter("v22");
+            String v23 = request.getParameter("v23");
             //Filtros de Match Orden
             String matchOr = request.getParameter("modOrd");
             String matchTxt = request.getParameter("modTxtB");
@@ -89,7 +90,6 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
             String fechaActual = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
             String horaActual = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
             folios folioActual = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("PP");
-            folios xx = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("XX");
             String par = "";
             String fin = "";
             String aut = "";
@@ -205,7 +205,11 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     if (ACC_NotificarTiempos.ObtenerInstancia().InsertarCabNotTiempo(cnta)) {
                         if (ACC_NotificarTiempos.ObtenerInstancia().InsertarPosNotTiempo(posno)) {
                             ACC_Folios.ObtenerIstancia().ActualizarFolio("PP", Integer.parseInt(folAct));
-                            ACC_Folios.ObtenerIstancia().ActualizarFolio("XX", xx.getFolioActual());
+                            if(!v23.equals("PP03")){ ACC_NotificarTiempos.ObtenerInstancia().ActualizaStatusOrdenPP(orden, v21); }
+                            else{
+                                //Descontar a la operacion PP03 (Cantidad)
+                                
+                            }
                             out.println(fl);
                         } else {
                             out.println(0);
@@ -355,7 +359,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     }
                     break;
                 case "ValidarOrdLibBlur":
-                    int b = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ValidarStatusLibBlur(orden);
+                    int b = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ValidarStatusLibBlur(orden, v1);
                     out.println(b);
                     break;
                 case "ValidarStatusOrden":
