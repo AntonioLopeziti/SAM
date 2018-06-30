@@ -543,6 +543,11 @@ $(document).ready(function () {
                 var theHandle = document.getElementById('hanlde301');
                 var theRoot = document.getElementById('VentanaModal301');
                 Drag.init(theHandle, theRoot);
+                if (clase === "315") {
+                    $("#btnBarCode").show();
+                } else {
+                    $("#btnBarCode").hide();
+                }
                 break;
         }
 
@@ -799,6 +804,59 @@ $(document).ready(function () {
         if (e.which == 13 || e.keyCode == 13) {
             ObtenerMaterialN3();
             ObtenerLoteD();
+        }
+    });
+    $('#okBC').click(function () {
+        var bc = $("#bxBC").val();
+        var arr = new Array();
+        arr = bc.split("'");
+        var ar1 = arr[0];
+        var ar2 = arr[1];
+        var ar3 = arr[2];
+
+        var mate = document.getElementsByName('315MaterTD');
+        var lote = document.getElementsByName('315LotesTD');
+        var cnt = document.getElementsByName('315CantiTD');
+        var doc = document.getElementsByName('315DocTD');
+        var pos = document.getElementsByName('315PosTD');
+        for (var i = 0; i < mate.length; i++) {
+            if (mate[i].value === "") {
+                mate[i].value = ar1;
+                lote[i].value = ar2;
+                cnt[i].value = ar3;
+                ocultarVentana('VentanaModalBarCode', '');
+                mate[i].focus();
+                pedidoPos(ar2, doc[i], pos[i]);
+                return;
+            }
+        }
+
+    });
+    $('#bxBC').keypress(function (e) {
+        if (e.which == 13 || e.keyCode == 13) {
+            var bc = $("#bxBC").val();
+            var arr = new Array();
+            arr = bc.split("'");
+            var ar1 = arr[0];
+            var ar2 = arr[1];
+            var ar3 = arr[2];
+
+            var mate = document.getElementsByName('315MaterTD');
+            var lote = document.getElementsByName('315LotesTD');
+            var cnt = document.getElementsByName('315CantiTD');
+            var doc = document.getElementsByName('315DocTD');
+            var pos = document.getElementsByName('315PosTD');
+            for (var i = 0; i < mate.length; i++) {
+                if (mate[i].value === "") {
+                    mate[i].value = ar1;
+                    lote[i].value = ar2;
+                    cnt[i].value = ar3;
+                    ocultarVentana('VentanaModalBarCode', '');
+                    mate[i].focus();
+                    pedidoPos(ar2, doc[i], pos[i]);
+                    return;
+                }
+            }
         }
     });
     $('#bxMaterial311').blur(function ()//NuevoLalo
@@ -3767,7 +3825,7 @@ function Validarmovis() {
     try {
         var ix = document.getElementsByName('Pedidos');
         kk = ix[ix.length - 1].value;
-        alert(kk);
+//        alert(kk);
     } catch (e) {
     }
     var ii = kk;
@@ -3865,7 +3923,6 @@ function ValidarExistenciasMatenuevo(mat, cen, alm, lot, doc, pos, can, clm) {
                     res = 2;
                 }
             }
-
         }
     });
     return res;
@@ -3967,4 +4024,28 @@ function validarCantiExcedida(mat, centro, alm, lote, cant, doc, pos) {
         }
     });
     return x;
+}
+function BarCode() {
+    var theHandle = document.getElementById('handleBC');
+    var theRoot = document.getElementById('VentanaModalBarCode');
+    Drag.init(theHandle, theRoot);
+    mostrarVentana('VentanaModalBarCode');
+    $("#bxBC").focus();
+    $("#bxBC").val("");
+}
+function pedidoPos(lote, doc, pos) {
+    var action = "PedidoPos";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + action + "&Lote=" + lote,
+        success: function (data) {
+            doc.value = data[0];
+            pos.value = data[1];
+        }
+    });
 }
