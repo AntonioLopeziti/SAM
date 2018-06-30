@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 import Entidades.Stock_Traslado;
+import Entidades.componentesPP;
 import Entidades.tabla305;
 import java.util.ArrayList;
 
@@ -3917,6 +3918,27 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
         return st;
+    }
+    
+    public componentesPP getPedPos(String lote){
+        componentesPP c = new componentesPP();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "{call MM.ObtenerLoteFirst(?)}";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, lote);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                c.setPedido(rs.getString("num_documento"));
+                c.setPosicion( rs.getString("num_posicion"));
+            }
+        }catch(Exception e){
+            System.err.println("Error ACC_Stock - getPedPos pos: " + e);
+        }
+        return c;
     }
 
     public stock CargarTransfereancia313(String material, String centro, String almacen) {
