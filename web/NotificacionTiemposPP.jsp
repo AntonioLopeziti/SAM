@@ -197,7 +197,7 @@
                             <section id="sectionMuestraExc" style="margin-left: 4%; width: 40%;">
                             </section>
                             <section id="sectionVisualExc" class="sctVisEx" style="margin-left: 4%; width: 40%;">
-                                <input type="checkbox" value="lim" disabled> <label style=" width: 40%;">Exceso Limitado</label>
+                                <input type="checkbox" value="lim" disabled> <label style=" width: 40%;">Exceso Ilimitado</label>
                             </section>
 
                             <!--<label type="text" id="DescripOrd" style="margin-left: 4%; width: 50%;"></label>-->
@@ -275,7 +275,7 @@
                         </table>
                     </section>
             </div>
-                                <div class="DatosReales" style="width: 63%;">
+            <div class="DatosReales" style="width: 63%;">
                 <label>Datos Reales</label>
                 <hr id="lineaNotiTiempos">
                 <div class="divCntBuenMal">
