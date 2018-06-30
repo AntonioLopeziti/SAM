@@ -271,16 +271,17 @@ public class ACC_NotificarTiempos {
         return ban;
     }
     //Validar que al blur de la orden solo se acepten ordenes LIB.
-    public int ValidarStatusLibBlur(String orden) {
+    public int ValidarStatusLibBlur(String orden, String centro) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps;
         ResultSet rs;
         int ban = 0;
-        String query = "{CALL PP.NotTiempo_ValidarOrdenTablaPPSoloLib(?)}";
+        String query = "{CALL PP.NotTiempo_ValidarOrdenTablaPPSoloLib(?,?)}";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, orden);
+            ps.setString(2, centro);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ban = 1;
@@ -427,6 +428,22 @@ public class ACC_NotificarTiempos {
             cnx.CerrarConexion(con);
         }
         return ban;
+    }
+    public void ActualizaStatusOrdenPP(String orden, String operacion){
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        String query = "{CALL PP.ActualizaSatusOrdenPP(?,?)}";
+        try{
+            ps = con.prepareStatement(query);
+            ps.setString(1, orden);
+            ps.setString(2, operacion);
+            ps.executeUpdate();
+        }catch(Exception e){
+            System.err.println("Error en ACC_NotificarTiempos, ActualizaStatusOrdenPP,   por: " + e);
+        }finally{
+            cnx.CerrarConexion(con);
+        }
     }
     //insertar registro en tabla de posiciones 
     public boolean InsertarCabNotTiempo(CabNotTiempo cnta) {
