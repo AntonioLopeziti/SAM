@@ -12,6 +12,7 @@ import AccesoDatos.ACC_Pedidos;
 import AccesoDatos.ACC_Stock;
 import Entidades.almacenes;
 import Entidades.centros;
+import Entidades.componentesPP;
 import Entidades.materiales;
 import Entidades.pedido_detalle;
 import Entidades.stock;
@@ -310,6 +311,14 @@ public class peticionMovMateriales2 extends HttpServlet {
                 case "ValidarCantidMaterial315":
                     String stk = ACC_Stock.ObtenerInstancia().ValidarCantidadMaterial(Materi, Centro, Almace, Lote,Docume, Posici );
                     out.println(stk);
+                    break;
+                case "PedidoPos":
+                    //Solo se va a usar porque tiene pedido(documento), posición
+                    componentesPP cc = ACC_Stock.ObtenerInstancia().getPedPos(Lote);
+                    JSONArray jc = new JSONArray();
+                    jc.add(cc.getPedido());
+                    jc.add(cc.getPosicion());
+                    out.println(jc);
                     break;
             }
 
