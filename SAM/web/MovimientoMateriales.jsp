@@ -1436,11 +1436,25 @@
                     <section id="botonesadddel">
                         <input id="AgregarFilas301" type="image" src="images/ADD.PNG" style="vertical-align: middle"/>
                         <input id="BorrarFilas301" type="image" src="images/DELETEADD.PNG" style="padding-top: 1px; vertical-align: middle; margin-left: -1%;"/>
+                        <button id="btnBarCode" onclick="BarCode();" style="margin-left: 3%"><input type="image" src="images/busqueda.png"/>Código de Barras</button>
                     </section>
                 </div>
                 <div class="Botones_Match">
                     <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" onclick="Validarmovis()"/>
                     <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('VentanaModal301', 'btnAdd', 'm');"/>
+                </div>
+            </div>
+        </div>
+        <div id="VentanaModalBarCode" class="VentanaModalAv">
+            <div id="handleBC"><label id="TituloMatch">Código de Barras</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalBarCode', 'btnAdd');"><label >X</label></div></div>
+            <div id="BuscarParamAv" class="BuscarParam_u">
+                <div class="fondo_MatchAv">
+                    <br>
+                    <label style="margin-left: 30px;">Código:</label>
+                    <input type="text" id="bxBC"/>
+                </div>
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okBC"/>
                 </div>
             </div>
         </div>
@@ -1901,6 +1915,7 @@
                             case "VentanaModalOrden":
                             case "VentanaModalDocMat":
                             case "VentanaModalMaterial303":
+                            case "VentanaModalBarCode":
                                 var ven = document.getElementById(t);
                                 abrirVentana(ven);
                                 break;
@@ -5008,7 +5023,8 @@
                                     for (i = 0; i < lote.length; i++)
                                     {
                                         extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen + ",";
+                                                "," + almacen + 
+                                                "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
                                     }
                                     extrass = extrass.substring(0, extrass.length - 1);
                                     extrass += "&v2=" + lote.length;
@@ -5019,7 +5035,8 @@
                                     for (i = 0; i < lote.length; i++)
                                     {
                                         extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen + ",";
+                                                "," + almacen + 
+                                                "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
                                     }
                                     extrass = extrass.substring(0, extrass.length - 1);
                                     extrass += "&v2=" + lote.length;
@@ -5128,6 +5145,9 @@
                         var tabix = document.getElementsByName('mmidx');
                         var orden = document.getElementsByName('mmnord');
                         var unmms = document.getElementsByName('mmumb');
+                        var eeped = document.getElementsByName('mmpedid');
+                        var eepos = document.getElementsByName('mmPosPed');
+                        var eeese = document.getElementsByName('mmStEs');
 
                         var actt = "Guarda" + tmov + "Posiciones";
                         for (i = 0; i < lote.length; i++)
@@ -5145,7 +5165,9 @@
                                     "&v5=" + Descripc[i].textContent + "&v6=" + material[i].textContent +
                                     "&v7=" + cad + "&v8=" + tabix[i].textContent + "&v9=" + centro +
                                     "&v10=" + orden[i].textContent + "&v11=" + unmms[i].textContent +
-                                    "&v12=" + alm + "&v13=" + rsv_ + "&v14=" + pos_;
+                                    "&v12=" + alm + "&v13=" + rsv_ + "&v14=" + pos_ +
+                                    "&v20=" + eeped[i].textContent + "&v21=" + eepos[i].textContent +
+                                    "&v22=" + eeese[i].textContent;
                             GuardarMovimientos(actt, extras);
                         }
                         setTimeout(function () {
