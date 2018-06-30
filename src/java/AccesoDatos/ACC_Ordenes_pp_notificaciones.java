@@ -1098,6 +1098,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setCantidad_rc(rs.getString("cantidad_rc"));
                 ma.setUnidad_medida_rc(rs.getString("unidad_medida"));
                 ma.setCentro(rs.getString("centro"));
+                ma.setStatus_orden(rs.getString("status_orden").substring(0, 4));
                 ope.add(ma);
             }
         } catch (Exception e) {
