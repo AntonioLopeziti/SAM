@@ -414,7 +414,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                             + "</tr>"
                             + "</tbody>"
                             + "</table>");
-
+                    ACC_Folios.ObtenerIstancia().ActualizarFolio("XX", xx.getFolioActual());
                     break;
                 case "TabOperacionesPP":
                     int opp = 0;
@@ -422,9 +422,18 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     out.println("<table id=\"TabBodyOpe\">\n"
                             + "<tbody>");
                     for (opp = 0; opp < opeO.size(); opp++) {
-                        out.println("<tr>"
-                                + "<td><input onclick=\"verificarContenidoUs();\" type=\"radio\" name=\"ckOperPP\" value=\"" + opp + "\"></td>"
-                                + "<td id=\"opeNumOrd" + opp + "\">" + opeO.get(opp).getNum_orden() + "</td>"
+                        String input = "";
+                        String color = "";
+                        if(opeO.get(opp).getStatus_orden().equals("NOTP")){
+                            input = "<td></td>";
+                            color = "style=\"background-color:#ffff33;\"";
+                        }else{
+                            input = "<td><input onclick=\"verificarContenidoUs();\" type=\"radio\" name=\"ckOperPP\" value=\"" + opp + "\"></td>";
+                        }
+                        out.println("<tr " + color + ">"
+                                + input
+                                + "<td id=\"opeNumOrd" + opp + "\">" + opeO.get(opp).getNum_orden() + ""
+                                + "<input type=\"text\" name=\"bxStOrd\" value=\"" + opeO.get(opp).getStatus_orden() + "\" hidden></td>"
                                 + "<td id=\"opeTxtB" + opp + "\">" + opeO.get(opp).getTexto_breve_operacion() + "</td>"
                                 + "<td id=\"opeNumOpe" + opp + "\">" + opeO.get(opp).getNum_operacion() + "</td>"
                                 + "<td id=\"opeTrabOpe" + opp + "\">" + opeO.get(opp).getTrabajo_operacion() + "</td>"
