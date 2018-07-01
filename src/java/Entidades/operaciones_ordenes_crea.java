@@ -63,6 +63,15 @@ public class operaciones_ordenes_crea {
     String num_notificacion_operacion = "";
     String cantidad_rc = "";
     String unidad_medida_rc = "";
+    String status_orden = "";
+
+    public String getStatus_orden() {
+        return status_orden;
+    }
+
+    public void setStatus_orden(String status_orden) {
+        this.status_orden = status_orden;
+    }
 
     public String getCantidad_rc() {
         return cantidad_rc;
