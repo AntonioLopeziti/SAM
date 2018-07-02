@@ -150,7 +150,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     cnta.setAct_not_final(cnto.getNot_final());
                     cnta.setNot_final(cnto.getNot_final_aut());
                     cnta.setCom_reserv(cnto.getComp_reserva());
-                    cnta.setNum_personal(cnto.getNo_personal());
+                    cnta.setNum_personal(usuario);
 
                     PosNotTiempo posno = new PosNotTiempo();
                     posno.setNum_orden(cnto.getOrden_fab());
@@ -195,7 +195,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     posno.setHora_fin(horaActual);
                     posno.setFecha_contabilizacion("");
                     posno.setTexto_notificacion("");
-                    posno.setUsuario(cnto.getNo_personal());
+                    posno.setUsuario(usuario);
                     posno.setRecibido("");
                     posno.setProcesado("");
                     posno.setFecha_recibido("");
