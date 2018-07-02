@@ -212,7 +212,7 @@ function enviarDatos(use, pwd, lan)
             men.html('Espere un momento por favor');
         },
         type: 'GET',
-        url: 'AutenticarT',
+        url: 'Autenticar',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
         data: "Usuario=" + user + "&Password=" + pwd + "&Idioma=" + lan,
