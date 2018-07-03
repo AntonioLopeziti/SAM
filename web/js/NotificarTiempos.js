@@ -917,6 +917,7 @@ function validarOrdenLib() {
                 validarOrdFab();
                 TextoLargo();
                 TextoLargo2();
+                TextoLargo3();
                 cantidadPT();
                 ordsta();
                 tabOpePP($('#OrdFab').val());
@@ -1104,6 +1105,7 @@ function SelectOrd(obj, tipo, des) {
             revisarExcesoCant(obj);
             TextoLargo();
             TextoLargo2();
+            TextoLargo3();
             cantidadPT();
             ordsta();
             verificarContenidoUs();
@@ -1169,6 +1171,23 @@ function TextoLargo2() {
         data: send,
         success: function (data) {
             $("#lblTextoLargo2").text(data.trim());
+        }
+    });
+}
+
+function TextoLargo3() {
+    var acc = "TextoLargo3";
+
+    var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: send,
+        success: function (data) {
+            $("#lblTextoLargo3").text(data.trim());
         }
     });
 }
