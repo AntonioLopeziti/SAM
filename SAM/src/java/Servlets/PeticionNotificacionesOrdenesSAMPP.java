@@ -522,6 +522,9 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                 case "TextoLargo2":
                     out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().TextoLargoP2(v1));
                     break;
+                case "TextoLargo3":
+                    out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().TextoLargoP3(v1));
+                    break;
                 case "getUMoper":
                     out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().GetUMoper(v1));
                     break;
