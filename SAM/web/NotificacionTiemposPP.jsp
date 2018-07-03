@@ -235,7 +235,12 @@
                         <label>Observaciones</label> 
                         <hr class="lineaazul">
                         <label id="lblTextoLargo2"></label>
-                    </div>
+                    </div><br>
+                    <div class="divmatchEsp">
+                        <label>Cliente</label> 
+                        <hr class="lineaazul">
+                        <label id="lblTextoLargo3"></label>
+                    </div><br>
                 </section>
             </section>
             <div class="ContentabOpe">
