@@ -929,6 +929,27 @@ public class ACC_Ordenes_pp_notificaciones {
         
         return rtn;
     }
+    public String TextoLargoP3(String orden){
+        String rtn = "";
+        Conexion con = new Conexion();
+        Connection conn = con.ObtenerConexion();
+        ResultSet rs;
+        
+        String query = "{call PP.TextoLargo2(?)}";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, orden);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rtn = rs.getString("nombre");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        con.CerrarConexion(conn);
+        
+        return rtn;
+    }
     public String GetUMoper(String orden){
         String rtn = "";
         Conexion con = new Conexion();
