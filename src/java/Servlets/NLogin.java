@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Panda
  */
-@WebServlet(name = "NLogin", urlPatterns = {"/Autenticar"})
+@WebServlet(name = "NLogin", urlPatterns = {"/NLogin"})
 public class NLogin extends HttpServlet {
 
     /**
