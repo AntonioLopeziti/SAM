@@ -28,7 +28,6 @@ public class ACC_CentroCosto {
         return Instance;
     }
 
-
     //Muestra Match de Centro Coste
     public LinkedList<centro_coste> ConsultaMatchMMCenCoste(String lim, String cen, String soci, String des, String deno) {
         LinkedList<centro_coste> cencos = new LinkedList<>();
@@ -108,7 +107,6 @@ public class ACC_CentroCosto {
         return false;
     }
 
-
     public ArrayList<CeCos> ConsultaMCCentroCoste(String ce, String des, String soc, int ctd, String us) {
         ArrayList<CeCos> ceco = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -160,7 +158,6 @@ public class ACC_CentroCosto {
         return ban;
     }
 
-
     public LinkedList<centro_coste> ConsultaCeCO(String ceco, String soc, String text, String Lang) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -203,7 +200,7 @@ public class ACC_CentroCosto {
         Connection con = cnx.ObtenerConexion();
         ArrayList<CeCos> cco = new ArrayList<>();
         String query = "{call MM.cecos_match_MOM(?,?,?,?)}";
-       
+
         try {
             PreparedStatement sp = con.prepareStatement(query);
             sp.setString(1, clc);
@@ -218,12 +215,11 @@ public class ACC_CentroCosto {
                 c.setClaseCoste(rs.getString("clase_coste"));
                 c.setDescripcion(rs.getString("descripcion_clase_coste"));
                 cco.add(c);
-            }  
+            }
         } catch (Exception e) {
 
             System.err.println("Error por: " + e);
-        }
-        finally {
+        } finally {
             cnx.CerrarConexion(con);
         }
         return cco;
@@ -233,7 +229,7 @@ public class ACC_CentroCosto {
         int rt = 0;
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        
+
         String query = "{call MM.consultaCecos_MOM(?)}";
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -276,7 +272,7 @@ public class ACC_CentroCosto {
         Connection con = cnx.ObtenerConexion();
 //        query = "select * from inventarios where almacen = '" + almacen + "' and centro='" + centro + "' and lote = '" + lote + "' and material='" + material + "'";
         String query = "{call MM.materiales_almacenValida_MOM(?,?,?)}";
-        
+
         try {
             PreparedStatement sp = con.prepareStatement(query);
             sp.setString(1, almacen);
@@ -311,6 +307,33 @@ public class ACC_CentroCosto {
             System.err.println("Error en ConsultaCentroCosto ACC_CentroCosto por: " + e);
         }
         cnx.CerrarConexion(con);
+        return cco;
+    }
+
+    public ArrayList<centro_coste> ConsultarCentroCosteReserva(String ccosto, String desc, String can) {
+        Conexion cnx = new Conexion();
+        ArrayList<centro_coste> cco = new ArrayList<>();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.ReservasCrear_CargaCCosto(?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ccosto);
+            ps.setString(2, desc);
+            ps.setString(3, can);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                centro_coste c = new centro_coste();
+                c.setCentro_coste(rs.getString("centro_coste"));
+                c.setDescripcion(rs.getString("descripcion_ES"));
+                cco.add(c);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
         return cco;
     }
 }
