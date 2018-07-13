@@ -389,7 +389,7 @@
                                                     <li style="display: <%=gestMat_GSMov_MovM%>"><a href="MovimientoMateriales.jsp"><%out.println(po.getProperty("etiqueta.GestionStockMovimMovMat_menu"));%></a></li>
                                                     <li class="current" style="display: <%=gestMat_GSMov_ResM%>"><a href="#"><%out.println(po.getProperty("etiqueta.GestionStockMovimReservas_menu"));%></a>
                                                         <ul>
-                                                            <li style="display: <%=gestMat_GSMov_ResMCr%>"><a href="Reservas.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
+                                                            <li style="display: <%=gestMat_GSMov_ResMCr%>"><a href="CrearReserva.jsp"><%out.println(po.getProperty("etiqueta.Crear_menu"));%></a></li>
                                                             <li style="display: <%=gestMat_GSMov_ResMMo%>"><a href="ModificarReservas.jsp"><%out.println(po.getProperty("etiqueta.Modi_menu"));%></a></li>
                                                             <li style="display: <%=gestMat_GSMov_ResMVi%>"><a href="VisualizarReservas.jsp"><%out.println(po.getProperty("etiqueta.Vis_menu"));%></a></li>
                                                             <li style="display: <%=gestMatListReser%>"><a href="ReporteReservas2.jsp"><%out.println(po.getProperty("etiqueta.ListaReser"));%></a></li>
