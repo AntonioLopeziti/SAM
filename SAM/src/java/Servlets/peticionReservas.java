@@ -127,7 +127,7 @@ public class peticionReservas extends HttpServlet {
                     }
                     break;
                 case "ConsultaMatchOrdenes":
-                    LinkedList<plan_orden> pl = ACC_Reservas.ObtenerInstancia().MMConsultaMatchOrdenMM(ctdmax, numord, descripco);
+                    ArrayList<plan_orden> pl = ACC_Reservas.ObtenerInstancia().MMConsultaMatchOrdenMM(ctdmax, numord, descripco);
                     if (pl.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
