@@ -1,0 +1,188 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/07/2018, 04:33:58 PM
+    Author     : panda
+*/
+.ContentReserva{
+    width:90%;
+}
+.ContentCabecera{
+    width: 100%;
+    height: 170px;
+    background: #fff;
+}
+.lines{
+    margin-top: 0; width: 100%;  border: 1px solid #3892E0;
+}
+.div1R{
+    width: 35%;
+    padding-left: 2%;
+    float:left;
+}
+.div1R label{
+    width: 35%;
+    display: inline-block;
+}
+.div1R hr{
+    width: 35%;
+    margin-top: -1px;
+    margin-left: 0;
+}
+.div2R{
+    width: 62%;
+    float:left;
+}
+.ResInp{
+    width: 95%;
+    border: 1px solid #ddd;
+    height: 75px;
+}
+.imp1{
+    width: 47%;
+    float: left;
+    padding-left: 2%;
+}
+.imp1 label{
+    width: 43%;
+    display: inline-block;
+}
+.imp1 hr{
+    width: 43%;
+    margin-top: -1px;
+    margin-left: 0;
+}
+.imp2{
+    width: 49%;
+    float: left;
+}
+.imp2 label{
+    width: 45%;
+    display: inline-block;
+}
+.imp2 hr{
+    width: 45%;
+    margin-left: 0;
+    margin-top:-1px;
+}
+.ResTras{
+    margin-top: 1%;
+    width: 95%;
+    border: 1px solid #ddd;
+    height: 75px;
+}
+.tras{
+    padding-left:2%;
+}
+.tras label{
+    width: 21%;
+    display:inline-block;
+}
+.tras hr{
+    width: 21%;
+    margin-left: 0;
+    margin-top: -1px;
+}
+.BtnLisMat{
+    margin-left: 5%;
+}
+.DivPosiciones{
+    width: 98%;
+    padding-top: 1%;
+    padding-left: 2%;
+    height:300px;
+    background: #fff;  
+    margin-top: 1%;
+}
+#tabscrll2{
+    margin-left: -1%;
+    width: 99%;
+    display: inline-block;
+}
+.DobleScroll2 { 
+    height: 220px;
+    width: 17px; 
+    background-color: #007CC0;
+    display: inline-block;
+    margin-bottom: 17px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+}
+#TableNotfi2
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainer2
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainer2 table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBody2 tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+td{
+    text-align: center;
+}
+.SecHead2 thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHead2
+{
+    display: block;
+}
+.SecBody2
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpo2  { height: 220px; }
+.ocultar
+{
+    visibility: hidden;
+}
+.tdSMatch{
+    text-align: center;
+    border:none;
+    width:100%;
+}
+.tdCMatch{
+    text-align: center;
+    border:none;
+    width:100%;
+}
+.BtnMatchIconGrid{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/match.png');
+    background-position: center;
+    background-repeat:no-repeat;
+    vertical-align:middle;
+    margin-top: -2.5px;
+    height: 18px;
+    width: 19px;
+    cursor: pointer;
+    display:none;
+}
