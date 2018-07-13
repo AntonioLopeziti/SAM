@@ -900,7 +900,6 @@ function COMPRmatereial() {
 
 
 function GuardaDatosTabla() {
-
     var folio = $('#ffff').val();
     var actual = parseInt(folio);
     var numfilas = $("input[name = 'material']").length;
@@ -961,7 +960,7 @@ function GuardaDatosTabla() {
 }
 
 function inst(enviar) {
-    //alert("Aqui hace la insercion: " + enviar);
+    alert("Aqui hace la insercion: " + enviar);
     var rt = false;
     var acc = "GuardarReservaPosiciones";
     $.ajax({
