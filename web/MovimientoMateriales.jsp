@@ -1108,6 +1108,35 @@
                 </div>
             </div>
         </div>
+        <div id="VentanaModalBarCode" class="VentanaModalAv">
+            <div id="handleBC"><label id="TituloMatch">Código de Barras</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalBarCode', 'btnAdd');"><label >X</label></div></div>
+            <div id="BuscarParamAv" class="BuscarParam_u">
+                <div class="fondo_MatchAv">
+                    <section class="secBC" id="secAlmDesBC">
+                        <label>Almacén destino:</label>
+                        <input type="text" id="313tdAlmacPP"/>
+                        <button id="313MCAlmPP" onclick="ConsultaAlmaNBuevo('PP')"  class="BtnMatchIconGrid" style="display: inline-block;"></button>
+                    </section>
+                    <section class="secBC" id="secAlmDesBC2">
+                        <label>Almacén destino:</label>
+                        <input type="text" id="311tdAlmacPP"/>
+                        <button id="311MCAlmPP" onclick="ConsultaAlmaNBuevo('PP')"  class="BtnMatchIconGrid" style="display: inline-block;"></button>
+                    </section>
+                    <section class="secBC" id="secCenDesBC">
+                        <label>Centro Destino:</label>
+                        <input type="text" id="301tdCentrPP"/>
+                        <button id="301MCCenPP" onclick="ConsultaCentroNuevo('PP')" class="BtnMatchIconGrid" style="display: inline-block;"></button>
+                    </section>
+                    <section class="secBC" id="secBarCodeBC">
+                        <label>Código:</label>
+                        <input type="text" id="bxBC"/>
+                    </section>
+                </div>
+                <div class="Botones_Match">
+                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okBC"/>
+                </div>
+            </div>
+        </div>
         <div id="VentanaModalDocMat" class="VentanaModal">
             <div id="handle18"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.DocMoMt_MOv"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalDocMat', 'bxPedido');"><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.DocMoMt_MOv"));%></button><hr></div>
@@ -1424,7 +1453,7 @@
                                         </table>
                                     </section>
                                     <section class="SecBody301" id="SecCuerpo301">
-                                       
+
                                     </section>
                                 </section>
                             </section>
@@ -1445,19 +1474,7 @@
                 </div>
             </div>
         </div>
-        <div id="VentanaModalBarCode" class="VentanaModalAv">
-            <div id="handleBC"><label id="TituloMatch">Código de Barras</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalBarCode', 'btnAdd');"><label >X</label></div></div>
-            <div id="BuscarParamAv" class="BuscarParam_u">
-                <div class="fondo_MatchAv">
-                    <br>
-                    <label style="margin-left: 30px;">Código:</label>
-                    <input type="text" id="bxBC"/>
-                </div>
-                <div class="Botones_Match">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="okBC"/>
-                </div>
-            </div>
-        </div>
+
         <input hidden type="text" id="posGrid">
         <div id="VentanaModalMaterialNuevo" class="VentanaModal">
             <div id="handleMatNuevo"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.STOCKNumMaterial"));%> (1)</label><div class="BotonCerrar_Matc" id="CerrarMCMatNuevo"><label >X</label></div></div>
@@ -1526,7 +1543,7 @@
                 </div>
             </div>
         </div>
-       <div id="VentanaModalAlmacenDesNuevo" class="VentanaModal">
+        <div id="VentanaModalAlmacenDesNuevo" class="VentanaModal">
             <div id="handleAlmDes"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.RESAlamcene"));%></label><div class="BotonCerrar_Matc" id="CerrarMCAlmDesNuevo" ><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
             <div id="ConsultaTablaAlmacen">
@@ -1551,7 +1568,7 @@
                 </div>
             </div>
         </div>
-       <div id="VentanaModalCentroDesNuevo" class="VentanaModal">
+        <div id="VentanaModalCentroDesNuevo" class="VentanaModal">
             <div id="handleCentDes"><label id="TituloMatch">Centro</label><div class="BotonCerrar_Matc" id="CerrarMCCenDesNuevo" ><label >X</label></div></div>
             <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
             <div id="ConsultaTablaCentro">
@@ -1713,7 +1730,8 @@
                                 title[3].innerHTML = motit + " 305";
                                 break;
                             case "311":
-                                title[5].innerHTML = motit + " 311";
+//                                title[5].innerHTML = motit + " 311";
+                                title[7].innerHTML = motit + " 311";
                                 title[6].innerHTML = motit + " 311";
                                 break;
                             case "312":
@@ -1915,9 +1933,12 @@
                             case "VentanaModalOrden":
                             case "VentanaModalDocMat":
                             case "VentanaModalMaterial303":
-                            case "VentanaModalBarCode":
                                 var ven = document.getElementById(t);
                                 abrirVentana(ven);
+                                break;
+                            case "VentanaModalBarCode":
+                                var ven = document.getElementById(t);
+                                abrirVentanaBC(ven);
                                 break;
                             case "VentanaModalReserva":
                                 var ven = document.getElementById(t);
@@ -2254,6 +2275,17 @@
                         ventana.style.display = 'block';
                         document.getElementById('aceptar').focus();
                     }
+                    function abrirVentanaBC(ventana)
+                    {
+                        var ancho = 600;
+                        var alto = 450;
+                        var x = (screen.width / 2) - (ancho / 2);
+                        var y = (screen.height / 2) - (alto / 2);
+                        ventana.style.left = x + "px";
+                        ventana.style.top = y + "px";
+                        ventana.style.display = 'block';
+                        document.getElementById('aceptar').focus();
+                    }
                     function abrirVentanaReserva(ventana)
                     {
                         var ancho = 1300;
@@ -2319,7 +2351,7 @@
                         ventana.style.top = y + "px";
                         ventana.style.display = 'block';
                         loadDoubleScroll("DobleSection301", "SecCuerpo301", "DobleContainer301", "TabBody301");
-        AjustarCabecera('TabHead301', 'TabBody301', 8, 'SecCuerpo301');
+                        AjustarCabecera('TabHead301', 'TabBody301', 8, 'SecCuerpo301');
                     }
                     function abrirVentana200(ventana)
                     {
@@ -2878,6 +2910,7 @@
                                             mostrarVentana('VentanaModal261');
                                             break;
                                         case "301":
+                                        case "311":
                                         case "313":
                                         case "315":
                                             mostrarVentana('VentanaModal301');
@@ -2888,7 +2921,7 @@
                                         case "305":
                                             mostrarVentana('VentanaModal305');
                                             break;
-                                        case "311":
+//                                        case "311":
                                         case "312":
                                             mostrarVentana('VentanaModal311');
                                             break;
@@ -4939,16 +4972,16 @@
                             var cdes = document.getElementsByName('mmctr');
                             var unmms = document.getElementsByName('mmumb');
                             var almpe = document.getElementsByName('mmalmped');
-                            
-                            
+
+
                             var cdese = document.getElementsByName('mmCentro');
                             var almDese = document.getElementsByName('mmAlmace');
-                            
+
                             var eeped = document.getElementsByName('mmpedid');
                             var eepos = document.getElementsByName('mmPosPed');
                             var eeese = document.getElementsByName('mmStEs');
-                            
-                            
+
+
 
                             //                        var tab = document.getElementsByName("Pedidos");
                             //                        if (tab.length == 0) {
@@ -5023,7 +5056,7 @@
                                     for (i = 0; i < lote.length; i++)
                                     {
                                         extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen + 
+                                                "," + almacen +
                                                 "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
                                     }
                                     extrass = extrass.substring(0, extrass.length - 1);
@@ -5035,7 +5068,7 @@
                                     for (i = 0; i < lote.length; i++)
                                     {
                                         extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen + 
+                                                "," + almacen +
                                                 "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
                                     }
                                     extrass = extrass.substring(0, extrass.length - 1);
@@ -5070,7 +5103,7 @@
                                     for (i = 0; i < lote.length; i++)
                                     {
                                         extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen + "," + almDes[i].textContent + "," + eeped[i].textContent + "," + eepos[i].textContent +
+                                                "," + almacen + "," + almDese[i].textContent + "," + eeped[i].textContent + "," + eepos[i].textContent +
                                                 "," + eeese[i].textContent + "," + "K,";
                                     }
                                     extrass = extrass.substring(0, extrass.length - 1);
@@ -5095,7 +5128,7 @@
                                     for (i = 0; i < lote.length; i++)
                                     {
                                         extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen + "," + almDese[i].textContent + "," + cdese[i].textContent + 
+                                                "," + almacen + "," + almDese[i].textContent + "," + cdese[i].textContent +
                                                 "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
                                     }
                                     extrass = extrass.substring(0, extrass.length - 1);
@@ -5108,7 +5141,7 @@
                                     for (i = 0; i < lote.length; i++)
                                     {
                                         extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen + "," + almDese[i].textContent + "," + cdese[i].textContent + 
+                                                "," + almacen + "," + almDese[i].textContent + "," + cdese[i].textContent +
                                                 "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
                                     }
                                     extrass = extrass.substring(0, extrass.length - 1);
@@ -5121,7 +5154,7 @@
                                     for (i = 0; i < lote.length; i++)
                                     {
                                         extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen + "," + almacen + "," + cdese[i].textContent + 
+                                                "," + almacen + "," + almacen + "," + cdese[i].textContent +
                                                 "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
                                     }
                                     extrass = extrass.substring(0, extrass.length - 1);
@@ -5215,12 +5248,14 @@
                         var Descripc = document.getElementsByName('mmdsc');
                         var material = document.getElementsByName('mmmat');
                         var tabix = document.getElementsByName('mmidx');
-                        var almdes = document.getElementsByName('mmalm');
+//                        var almdes = document.getElementsByName('mmalm');
+                        var almdes = document.getElementsByName('mmAlmace');
                         var unmms = document.getElementsByName('mmumb');
                         var eeped = document.getElementsByName('mmpedid');
                         var eepos = document.getElementsByName('mmPosPed');
                         var eeese = document.getElementsByName('mmStEs');
-                        var cdes = document.getElementsByName('mmctr');
+//                        var cdes = document.getElementsByName('mmctr');
+                        var cdes = document.getElementsByName('mmCentro');
 
                         var actt = "Guarda" + tmov + "Posiciones";
                         for (i = 0; i < lote.length; i++)
