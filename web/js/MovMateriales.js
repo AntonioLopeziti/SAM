@@ -528,7 +528,7 @@ $(document).ready(function () {
                 var theRoot = document.getElementById('VentanaModal303');
                 Drag.init(theHandle, theRoot);
                 break;
-            case "311":
+//            case "311":
             case "312":
                 if (document.getElementsByName('reserv1').length < 1) {
                     Limpia310();
@@ -540,10 +540,17 @@ $(document).ready(function () {
             case "301":
             case "313":
             case "315":
+            case "311":
                 var theHandle = document.getElementById('hanlde301');
                 var theRoot = document.getElementById('VentanaModal301');
                 Drag.init(theHandle, theRoot);
                 if (clase === "315") {
+                    $("#btnBarCode").show();
+                } else if (clase === "301") {
+                    $("#btnBarCode").show();
+                } else if (clase === "313") {
+                    $("#btnBarCode").show();
+                } else if (clase === "311") {
                     $("#btnBarCode").show();
                 } else {
                     $("#btnBarCode").hide();
@@ -807,30 +814,85 @@ $(document).ready(function () {
         }
     });
     $('#okBC').click(function () {
-        var bc = $("#bxBC").val();
-        var arr = new Array();
-        arr = bc.split("'");
-        var ar1 = arr[0];
-        var ar2 = arr[1];
-        var ar3 = arr[2];
-
-        var mate = document.getElementsByName('315MaterTD');
-        var lote = document.getElementsByName('315LotesTD');
-        var cnt = document.getElementsByName('315CantiTD');
-        var doc = document.getElementsByName('315DocTD');
-        var pos = document.getElementsByName('315PosTD');
-        for (var i = 0; i < mate.length; i++) {
-            if (mate[i].value === "") {
-                mate[i].value = ar1;
-                lote[i].value = ar2;
-                cnt[i].value = ar3;
-                ocultarVentana('VentanaModalBarCode', '');
-                mate[i].focus();
-                pedidoPos(ar2, doc[i], pos[i]);
-                return;
-            }
-        }
-
+        ocultarVentana('VentanaModalBarCode', '');
+//        var bc = $("#bxBC").val();
+//        var arr = new Array();
+//        arr = bc.split("'");
+//        var ar1 = arr[0];
+//        var ar2 = arr[1];
+//        var ar3 = arr[2];
+//
+//        var claseD = document.getElementById("bxClase").value;
+//
+//        if (claseD === "315") {
+//            var mate = document.getElementsByName('315MaterTD');
+//            var lote = document.getElementsByName('315LotesTD');
+//            var cnt = document.getElementsByName('315CantiTD');
+//            var doc = document.getElementsByName('315DocTD');
+//            var pos = document.getElementsByName('315PosTD');
+//            for (var i = 0; i < mate.length; i++) {
+//                if (mate[i].value === "") {
+//                    mate[i].value = ar1;
+//                    lote[i].value = ar2;
+//                    cnt[i].value = ar3;
+//                    ocultarVentana('VentanaModalBarCode', '');
+//                    mate[i].focus();
+//                    pedidoPos(ar2, doc[i], pos[i]);
+//                    return;
+//                }
+//            }
+//        } else if (claseD === "301") {
+//            var mate = document.getElementsByName('301MaterTD');
+//            var lote = document.getElementsByName('301LotesTD');
+//            var cnt = document.getElementsByName('301CantiTD');
+//            var doc = document.getElementsByName('301DocTD');
+//            var pos = document.getElementsByName('301PosTD');
+//            for (var i = 0; i < mate.length; i++) {
+//                if (mate[i].value === "") {
+//                    mate[i].value = ar1;
+//                    lote[i].value = ar2;
+//                    cnt[i].value = ar3;
+//                    ocultarVentana('VentanaModalBarCode', '');
+//                    mate[i].focus();
+//                    pedidoPos(ar2, doc[i], pos[i]);
+//                    return;
+//                }
+//            }
+//        } else if (claseD === "313") {
+//            var mate = document.getElementsByName('313MaterTD');
+//            var lote = document.getElementsByName('313LotesTD');
+//            var cnt = document.getElementsByName('313CantiTD');
+//            var doc = document.getElementsByName('313DocTD');
+//            var pos = document.getElementsByName('313PosTD');
+//            for (var i = 0; i < mate.length; i++) {
+//                if (mate[i].value === "") {
+//                    mate[i].value = ar1;
+//                    lote[i].value = ar2;
+//                    cnt[i].value = ar3;
+//                    ocultarVentana('VentanaModalBarCode', '');
+//                    mate[i].focus();
+//                    pedidoPos(ar2, doc[i], pos[i]);
+//                    return;
+//                }
+//            }
+//        } else if (claseD === "311") {
+//            var mate = document.getElementsByName('311MaterTD');
+//            var lote = document.getElementsByName('311LotesTD');
+//            var cnt = document.getElementsByName('311CantiTD');
+//            var doc = document.getElementsByName('311DocTD');
+//            var pos = document.getElementsByName('311PosTD');
+//            for (var i = 0; i < mate.length; i++) {
+//                if (mate[i].value === "") {
+//                    mate[i].value = ar1;
+//                    lote[i].value = ar2;
+//                    cnt[i].value = ar3;
+//                    ocultarVentana('VentanaModalBarCode', '');
+//                    mate[i].focus();
+//                    pedidoPos(ar2, doc[i], pos[i]);
+//                    return;
+//                }
+//            }
+//        }
     });
     $('#bxBC').keypress(function (e) {
         if (e.which == 13 || e.keyCode == 13) {
@@ -841,22 +903,96 @@ $(document).ready(function () {
             var ar2 = arr[1];
             var ar3 = arr[2];
 
-            var mate = document.getElementsByName('315MaterTD');
-            var lote = document.getElementsByName('315LotesTD');
-            var cnt = document.getElementsByName('315CantiTD');
-            var doc = document.getElementsByName('315DocTD');
-            var pos = document.getElementsByName('315PosTD');
-            for (var i = 0; i < mate.length; i++) {
-                if (mate[i].value === "") {
-                    mate[i].value = ar1;
-                    lote[i].value = ar2;
-                    cnt[i].value = ar3;
-                    ocultarVentana('VentanaModalBarCode', '');
-                    mate[i].focus();
-                    pedidoPos(ar2, doc[i], pos[i]);
-                    return;
+            var claseD = document.getElementById("bxClase").value;
+
+            if (claseD === "315") {
+                var mate = document.getElementsByName('315MaterTD');
+                var lote = document.getElementsByName('315LotesTD');
+                var cnt = document.getElementsByName('315CantiTD');
+                var doc = document.getElementsByName('315DocTD');
+                var pos = document.getElementsByName('315PosTD');
+                var ckck = document.getElementsByName('315chkbox');
+                for (var i = 0; i < mate.length; i++) {
+                    if (mate[i].value === "") {
+                        mate[i].value = ar1;
+                        lote[i].value = ar2;
+                        cnt[i].value = ar3;
+//                        ocultarVentana('VentanaModalBarCode', '');
+//                        mate[i].focus();
+                        pedidoPos(ar2, doc[i], pos[i]);
+                        GetinfoMat($('#315tdMater' + ckck[i].value).val(), "315", ckck[i].value);
+                        $("#bxBC").val("");
+                        return;
+                    }
+                }
+            } else if (claseD === "301") {
+                var mate = document.getElementsByName('301MaterTD');
+                var lote = document.getElementsByName('301LotesTD');
+                var cnt = document.getElementsByName('301CantiTD');
+                var doc = document.getElementsByName('301DocTD');
+                var pos = document.getElementsByName('301PosTD');
+                var cen = document.getElementsByName('301CentrTD');
+                var ckck = document.getElementsByName('301chkbox');
+                for (var i = 0; i < mate.length; i++) {
+                    if (mate[i].value === "") {
+                        mate[i].value = ar1;
+                        lote[i].value = ar2;
+                        cnt[i].value = ar3;
+                        cen[i].value = $("#301tdCentrPP").val();
+//                        ocultarVentana('VentanaModalBarCode', '');
+//                        mate[i].focus();
+                        pedidoPos(ar2, doc[i], pos[i]);
+                        GetinfoMat($('#301tdMater' + ckck[i].value).val(), "301", ckck[i].value);
+                        $("#bxBC").val("");
+                        return;
+                    }
+                }
+            } else if (claseD === "313") {
+                var mate = document.getElementsByName('313MaterTD');
+                var lote = document.getElementsByName('313LotesTD');
+                var cnt = document.getElementsByName('313CantiTD');
+                var doc = document.getElementsByName('313DocTD');
+                var pos = document.getElementsByName('313PosTD');
+                var alm = document.getElementsByName('313AlmacTD');
+                var ckck = document.getElementsByName('313chkbox');
+                for (var i = 0; i < mate.length; i++) {
+                    if (mate[i].value === "") {
+                        mate[i].value = ar1;
+                        lote[i].value = ar2;
+                        cnt[i].value = ar3;
+                        alm[i].value = $("#313tdAlmacPP").val();
+//                        ocultarVentana('VentanaModalBarCode', '');
+//                        mate[i].focus();
+                        pedidoPos(ar2, doc[i], pos[i]);
+                        GetinfoMat($('#313tdMater' + ckck[i].value).val(), "313", ckck[i].value);
+                        $("#bxBC").val("");
+                        return;
+                    }
+                }
+            } else if (claseD === "311") {
+                var mate = document.getElementsByName('311MaterTD');
+                var lote = document.getElementsByName('311LotesTD');
+                var cnt = document.getElementsByName('311CantiTD');
+                var doc = document.getElementsByName('311DocTD');
+                var pos = document.getElementsByName('311PosTD');
+                var alm = document.getElementsByName('311AlmacTD');
+                var ckck = document.getElementsByName('311chkbox');
+                for (var i = 0; i < mate.length; i++) {
+                    if (mate[i].value === "") {
+                        mate[i].value = ar1;
+                        lote[i].value = ar2;
+                        cnt[i].value = ar3;
+                        alm[i].value = $("#311tdAlmacPP").val();
+//                        ocultarVentana('VentanaModalBarCode', '');
+//                        mate[i].focus();
+                        pedidoPos(ar2, doc[i], pos[i]);
+                        GetinfoMat($('#311tdMater' + ckck[i].value).val(), "311", ckck[i].value);
+                        $("#bxBC").val("");
+                        return;
+                    }
                 }
             }
+            
         }
     });
     $('#bxMaterial311').blur(function ()//NuevoLalo
@@ -3244,6 +3380,15 @@ function MostrarMatch(id, match, pos) {
                     if (cm == "315") {
                         GetinfoMat($('#' + cm + id + pos).val(), cm, pos);
                     }
+                    if (cm == "301") {
+                        GetinfoMat($('#' + cm + id + pos).val(), cm, pos);
+                    }
+                    if (cm == "313") {
+                        GetinfoMat($('#' + cm + id + pos).val(), cm, pos);
+                    }
+                    if (cm == "311") {
+                        GetinfoMat($('#' + cm + id + pos).val(), cm, pos);
+                    }
                 }
             }
             patron = /[0-9a-zA-ZÑñ]/;
@@ -3394,7 +3539,7 @@ function seleccionarMCNuevo(mat, descr, um, clm) {
     ocultarVentanaNuevo('VentanaModalMaterialNuevo', 'BuscarParaMaterialNuevo', 'ConsultaTablaMaterialNuevo', 'tdMater', clm);
 }
 function seleccionarMCLoteNuevo(lote, doc, posidoc, clm, can) {
-    if (clm == "311") {
+    if (clm == "NADA") {//Poner "311" si se quiere regresar a la pantalla que antes se tenia del mov. 311
         $('#bxLote311').val(lote);
         $('#bxDoc311').val(doc);
         $('#bxDocPos311').val(posidoc);
@@ -3481,7 +3626,8 @@ function ConsultaLotesNBuevo(pos) {
                 });
             }
             break;
-        case "311":
+//        case "311":
+        case "NADA"://Quitar este case si se quiere regresar a la validacion anterior del 311
             if ($('#bxMaterial311').val().trim().length == 0) {
                 $('#bxMaterial311').focus();
                 mensajesNuevo(1, "images/advertencia.PNG", "audio/saperror.wav");
@@ -3525,6 +3671,7 @@ function ConsultaLotesNBuevo(pos) {
             }
             break;
         case "301":
+        case "311":
         case "313":
         case "315":
             var mater = $('#' + clm + 'tdMater' + pos);
@@ -3683,6 +3830,10 @@ function AgregarFilasTabla301() {
     if (ClaseM === "301") {
         Value = "1800";
         dis = "disabled";
+    }
+    if (ClaseM === "311") {
+        dis2 = "disabled";
+        Ctro = Centro;
     }
     if (ClaseM === "313") {
         Ctro = Centro;
@@ -4030,8 +4181,38 @@ function BarCode() {
     var theRoot = document.getElementById('VentanaModalBarCode');
     Drag.init(theHandle, theRoot);
     mostrarVentana('VentanaModalBarCode');
-    $("#bxBC").focus();
     $("#bxBC").val("");
+    $("#313tdAlmacPP").val("");
+    $("#311tdAlmacPP").val("");
+    $("#301tdCentrPP").val("");
+    ////
+    var cl = document.getElementById("bxClase").value;
+    switch (cl) {
+        case "315":
+            $("#secAlmDesBC").hide();
+            $("#secAlmDesBC2").hide();
+            $("#secCenDesBC").hide();
+            $("#bxBC").focus();
+            break;
+        case "313":
+            $("#secAlmDesBC").show();
+            $("#secAlmDesBC2").hide();
+            $("#secCenDesBC").hide();
+            $("#bxBCAlmacenD").focus();
+            break;
+        case "311":
+            $("#secAlmDesBC").hide();
+            $("#secAlmDesBC2").show();
+            $("#secCenDesBC").hide();
+            $("#bxBCAlmacenD").focus();
+            break;
+        case "301":
+            $("#secAlmDesBC").hide();
+            $("#secAlmDesBC2").hide();
+            $("#secCenDesBC").show();
+            $("#301tdCentrPP").focus();
+            break;
+    }
 }
 function pedidoPos(lote, doc, pos) {
     var action = "PedidoPos";
