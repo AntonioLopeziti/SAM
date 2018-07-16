@@ -147,6 +147,10 @@ public class peticionMovMateriales2 extends HttpServlet {
                         Value = "1800";
                         dis = "disabled";
                     }
+                    if (ClaseM.trim().equals("311")) {
+                        dis2 = "disabled";
+                        Ctro = Centro;
+                    }
                     if (ClaseM.trim().equals("313")) {
                         Ctro = Centro;
                         dis2 = "disabled";
