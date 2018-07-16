@@ -7,6 +7,31 @@ and open the template in the editor.
     Created on : 31/08/2016, 12:04:41 PM
     Author     : Panda
 */
+/*VentanaModalAv*/
+/*contenido*/
+#VentanaModalBarCode{
+    z-index: 1003;
+}
+#VentanaModalAlmacenDesNuevo{
+    z-index: 1004;
+}
+.secBC{
+    width: 100%;
+    display: inline-block;
+}
+.secBC label{
+    width: 30%;
+    float: left;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+.secBC button{
+    margin-top: 14px;
+}
+#301tdCentrPP, #311tdAlmacPP, #313tdAlmacPP{
+    width: 20%;
+}
+
 #handleMatNuevo,#handleLotStockE,#handleAlmDes,#handleCentDes{
     height: 6%;
     width: 100%;
