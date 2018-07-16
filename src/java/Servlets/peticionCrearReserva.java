@@ -212,7 +212,7 @@ public class peticionCrearReserva extends HttpServlet {
                     ACC_Reservas.ObtenerInstancia().GuardaCabecera(FolioF, FechaActual, HoraActual, Centro, TipoMov, Almacen, CCosto, Orden, AlmacenDes, Usu );
                     break;
                 case "GuardarItems":
-                    ACC_Reservas.ObtenerInstancia().GuardaItems(FolioF, PosicionItem, Material, Centro, Almacen, Cantidad, UnidadMedida, CCosto, Orden, TipoMov, Descripcion, AlmacenDes );
+                    ACC_Reservas.ObtenerInstancia().GuardaItems(FolioF, Chepos(PosicionItem), Material, Centro, Almacen, Cantidad, UnidadMedida, CCosto, Orden, TipoMov, Descripcion, AlmacenDes );
                     break;
                 case "ActualizarFolio":
                     ACC_Folios.ObtenerIstancia().ActualizarFolio("RE", fo.getFolioActual());
@@ -221,7 +221,26 @@ public class peticionCrearReserva extends HttpServlet {
             }
         }
     }
-
+public String Chepos(String data) {
+        int valor = Integer.parseInt(data);
+        String i = data;
+        if (i.length() == 5) {
+            return i;
+        }
+        if (valor < 10) {
+            i = "000" + data + "0";
+        }
+        if (valor >= 10 && valor < 100) {
+            i = "00" + data + "0";
+        }
+        if (valor >= 100 && valor < 1000) {
+            i = "0" + data + "0";
+        }
+        if (valor >= 1000 && valor < 10000) {
+            i = data + "0";
+        }
+        return i;
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
