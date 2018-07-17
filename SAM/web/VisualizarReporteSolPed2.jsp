@@ -131,7 +131,7 @@
         <div class="contenido">
             <div class="ContentLista">
                 <div class="gen">
-                    <label class="labelTitulo"> BAJAFERRIES </label>
+                    <label class="labelTitulo"> SANPER </label>
                     <div class="period">
                         <label id="fech" name="fech" class="labelDate"></label> <label class="labelDate"> Usuario: </label> <label class="labelDate"> <% out.println(Nombre);%> </label>
                         <script type="text/javascript">
