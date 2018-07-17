@@ -295,7 +295,7 @@ public class ACC_ReporteReservas {
                 r.setCentro(rs.getString("centro"));
                 r.setAlmacen(rs.getString("almacen"));
                 r.setNum_material(rs.getString("num_material"));
-                r.setTexto_breve("");
+                r.setTexto_breve(rs.getString("texto_posicion"));
                 r.setCantidad_necesaria(rs.getString("cantidad_necesaria"));
                 r.setUnidad_medida(rs.getString("unidad_medida_base"));
                 r.setNum_orden(rs.getString("num_orden"));
