@@ -159,7 +159,7 @@
         <div class="contenido">
             <div class="ContentDoc">
                 <div class="gen">
-                    <label class="labelTitulo"> BAJAFERRIES </label> <br>
+                    <label class="labelTitulo"> SANPER </label> <br>
                     <div class="period">
                         <label id="fech" name="fech" class="labelDate"></label> <label class="labelDate"> <%out.println(po.getProperty("etiqueta.Usuario_USCR"));%> </label> <label class="labelDate"> <% out.println(Nombre);%> </label>
                         <script type="text/javascript">
