@@ -310,22 +310,23 @@ public class ACC_CentroCosto {
         return cco;
     }
 
-    public ArrayList<centro_coste> ConsultarCentroCosteReserva(String ccosto, String desc, String can) {
+    public ArrayList<centro_coste> ConsultarCentroCosteReserva(String ccosto, String desc, String can,String usuario) {
         Conexion cnx = new Conexion();
         ArrayList<centro_coste> cco = new ArrayList<>();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{call MM.ReservasCrear_CargaCCosto(?,?,?)}";
+        String sql = "{call MM.ReservasCrear_CargaCCosto(?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, ccosto);
             ps.setString(2, desc);
             ps.setString(3, can);
+            ps.setString(4, usuario);
             rs = ps.executeQuery();
             while(rs.next()){
                 centro_coste c = new centro_coste();
-                c.setCentro_coste(rs.getString("centro_coste"));
+                c.setCentro_costo(rs.getString("centro_costo"));
                 c.setDescripcion(rs.getString("descripcion_ES"));
                 cco.add(c);
             }
