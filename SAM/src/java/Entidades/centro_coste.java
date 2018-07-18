@@ -15,6 +15,14 @@ public class centro_coste {
     String centro_coste;
     String descripcion;
 
+    public String getCentro_costo() {
+        return centro_costo;
+    }
+
+    public void setCentro_costo(String centro_costo) {
+        this.centro_costo = centro_costo;
+    }
+    String centro_costo;
     public int getId_cc() {
         return id_cc;
     }
