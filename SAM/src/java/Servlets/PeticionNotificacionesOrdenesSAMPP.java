@@ -179,6 +179,13 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
 
 //                    ordenes_pp_notificaciones pl = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenStatusCNPMNOTPP(ord);
                     break;
+                case "ChecarMaterialOp":
+                    PlanPP pmate = AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenerStatusOrdenSAPPP(ord);
+//                    out.println("<input type='text' id ='nosta' value='" + paln.getStatus() + "' />");
+                    out.println(pmate.getTexto_material());
+
+//                    ordenes_pp_notificaciones pl = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().ObtenStatusCNPMNOTPP(ord);
+                    break;
                 case "LlenarTabMax":
                     LinkedList<pp_operaciones_noti> tb = ACC_Pp_operaciones_noti.ObtenerInstancia().TABGRNOTPMNotPP(ord, ope);
                     String checa = "";
