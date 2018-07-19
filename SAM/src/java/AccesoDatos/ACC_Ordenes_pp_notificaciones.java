@@ -351,6 +351,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 pn.setStatus(rs.getString("status"));
                 pn.setTexto_breve(rs.getString("texto_breve"));
                 pn.setCentro(rs.getString("centro"));
+                pn.setTexto_material(rs.getString("texto_material"));
             }
             con.CerrarConexion(conn);
         } catch (Exception e) {
@@ -931,6 +932,8 @@ public class ACC_Ordenes_pp_notificaciones {
     }
     public String TextoLargoP3(String orden){
         String rtn = "";
+        String var1 = "";
+        String var2 = "";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         ResultSet rs;
@@ -941,13 +944,18 @@ public class ACC_Ordenes_pp_notificaciones {
             ps.setString(1, orden);
             rs = ps.executeQuery();
             while (rs.next()) {
-                rtn = rs.getString("nombre");
+                var1 = rs.getString("cadena_cliente");
+                var2 = rs.getString("nombre");
             }
         } catch (Exception e) {
             System.err.println("Error: " + e);
         }
         con.CerrarConexion(conn);
-        
+        if(var1.trim().isEmpty()){
+            rtn = var2;
+        }else{
+            rtn = var1;
+        }
         return rtn;
     }
     public String GetUMoper(String orden){
