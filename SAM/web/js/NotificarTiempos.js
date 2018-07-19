@@ -515,12 +515,12 @@ function validarLlenado() {
             cl = $("#opeClavCon" + ckOpe[tt].value).text();
         }
     }
-    if(cl === "PP03"){
+    if (cl === "PP03") {
         buena = $('#bxcnt0').val();
-    }else{
+    } else {
         buena = $('#cntBuena').val();
     }
-    
+
     f1 = $("#bxAct1").val();
     f2 = $("#bxAct2").val();
     f3 = $("#bxAct3").val();
@@ -920,6 +920,7 @@ function validarOrdenLib() {
                 TextoLargo3();
                 cantidadPT();
                 ordsta();
+                ordMaterial();
                 tabOpePP($('#OrdFab').val());
                 getUmOpe();
                 borrarmsg();
@@ -1108,6 +1109,7 @@ function SelectOrd(obj, tipo, des) {
             TextoLargo3();
             cantidadPT();
             ordsta();
+            ordMaterial();
             verificarContenidoUs();
             tabOpePP($('#OrdFab').val());
             getUmOpe();
@@ -1192,11 +1194,46 @@ function TextoLargo3() {
     });
 }
 
+function ordMaterial() {
+    var acc = "ChecarMaterialOp";
+    var ord = $("#OrdFab").val();
+    var enviar = "&ord=" + ord;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + enviar,
+        success: function (data) {
+            $("#MaterialPP").text(data);
+//            ordCliente();
+        }
+    });
+}
 function ordsta() {
     var acc = "ChecarStatusOrdenOpe";
     var ord = $("#OrdFab").val();
     var oper = $("#NoOpe").val();
     var enviar = "&ord=" + ord + "&oper=" + oper;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: "PeticionNotificacionesOrdenesSAMPP",
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "acc=" + acc + enviar,
+        success: function (data) {
+            $("#notsta").text(data);
+//            ordCliente();
+        }
+    });
+}
+function ordCliente() {
+    var acc = "ChecarClienteOrden";
+    var ord = $("#OrdFab").val();
+    var oper = $("#NoOpe").val();
+    var enviar = "&ord=" + ord;
     $.ajax({
         async: false,
         type: 'GET',
@@ -1948,7 +1985,7 @@ function Print_PT() {
     var acc = "imprimePT";
 
     if ($("#tdCmov0").text() == "101") {
-        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + encodeURIComponent($("#tdDes0").text()) + "&v4=" + $("#bxLote0").val().toUpperCase() + "&v5=" + $("#bxcnt0").val() + "&v6=" + $("#tdOpr0").text() + "&v7=" + folio101 + "&v8=" + $("#tdCtr0").text() + "&v9=" + $("#tdUM0").text() + "&v10=" + $("#bxanc0").val().replace("+","%2b");
+        var send = "&v1=" + $("#OrdFab").val() + "&acc=" + acc + "&v2=" + $("#tdMat0").text() + "&v3=" + encodeURIComponent($("#tdDes0").text()) + "&v4=" + $("#bxLote0").val().toUpperCase() + "&v5=" + $("#bxcnt0").val() + "&v6=" + $("#tdOpr0").text() + "&v7=" + folio101 + "&v8=" + $("#tdCtr0").text() + "&v9=" + $("#tdUM0").text() + "&v10=" + $("#bxanc0").val().replace("+", "%2b");
         $.ajax({
             async: false,
             type: 'GET',
