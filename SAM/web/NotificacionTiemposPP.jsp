@@ -209,8 +209,9 @@
                                                             </select>   -->
                             </section>
                             <section class="divmatchEsp" style="margin-left: -22%; width: 55%;">
-                                <label><%out.println(po.getProperty("etiqueta.NPMStatus_PP"));%></label>
-                                <label style="display: inline-block; width: 80%; margin-left: -5%;" id="notsta"></label>
+                                <label>Material</label>
+                                <label style="display: inline-block; width: 80%; margin-left: -5%;" id="MaterialPP"></label>
+                                <label style="display: none; width: 80%; margin-left: -5%;" id="notsta"></label>
                             </section>
                             <section class="divmatchEsp" style="margin-left: -2%; width: 40%;">
                                 <label>Notificado:</label>
