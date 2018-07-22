@@ -2168,7 +2168,14 @@ $(document).ready(function () {
         if (tab <= 0) {
             ShowMsg(28, "images/advertencia.PNG", "audio/saperror.wav");
         } else {
-            GuardarSolped();
+            var p1 = Math.floor((Math.random()*3));
+            var p2 = Math.floor((Math.random()*10));
+            var p3 = Math.floor((Math.random()*10));
+            var p4 = Math.floor((Math.random()*10));
+            var tiempo = p1+''+p2+''+p3+''+p4; 
+            
+            setTimeout(GuardarSolped(),tiempo);
+            
         }
     }
     function GuardarSolped() {
