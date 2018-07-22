@@ -223,6 +223,16 @@ public class PeticionSolPed extends HttpServlet {
                     ArrayList<SolpedCrea> sl = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user);
                     ArrayList<SolpedServicios> se = ACC_Servicios.ObtenerInstancia().CargarServicios(user, "0");
                     ArrayList<textos_posiciones_solped> t = ACC_Textos_posiciones_solped.ObtenerInstancia().CargarTxtPos(user);
+                    int posSolpedi = 0;
+                    int foactu =fo.getFolioActual();
+                    while( posSolpedi == 0){
+                      posSolpedi = ACC_SolicitudPedidos.ObtenerInstancia().retornfoliSolped(foactu,fo.getIdFolios());
+                      if(posSolpedi == 0){            
+                          foactu++;
+                      }else{
+                        folioSAM = fo.getIdFolios() + foactu; 
+                      }   
+                    } 
                     ACC_SolicitudPedidos.ObtenerInstancia().InsertarSolped(sl, folioSAM, HoraServidor);
                     ACC_Servicios.ObtenerInstancia().InsertarSolpedServicios(se, folioSAM, user, HoraServidor);
                     ACC_Textos_posiciones_solped.ObtenerInstancia().InsertTxtPos(t, folioSAM, user);
