@@ -1719,6 +1719,30 @@ public class ACC_SolicitudPedidos {
         }
         return pos;
     }
+   
+        public int retornfoliSolped(int foliosam, String indi) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.Verificar_folSolPed(?,?)}";
+        int ban = 0;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, foliosam);
+            ps.setString(2, indi);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                    ban = 1;
+                
+            }
+        } catch (Exception e) {
+            System.err.println("Error  por " + e);
+        }
+        return ban;
+    }
+
+    
     public void Eliminartablas(String folio, String user, String ind) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
