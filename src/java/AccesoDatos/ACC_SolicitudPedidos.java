@@ -1762,5 +1762,31 @@ public class ACC_SolicitudPedidos {
             cnx.CerrarConexion(con);
         }
     }
+    
+    
+        public String CheckFolio(String folio) {
+        String x = "0";
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.CrearsolPedidos_RevisarFolio(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, folio);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                x = "1";
+            } else {
+                x = folio;
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return x;
+    }
+
 
 }
