@@ -2122,6 +2122,7 @@ $(document).ready(function () {
             }
         });
     }
+    
     function ActFol() {
         var acc = "FolioAct";
         $.ajax({
