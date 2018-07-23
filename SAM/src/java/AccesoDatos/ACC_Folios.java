@@ -68,6 +68,7 @@ public class ACC_Folios {
         }
         return f;
     }
+    
 
     public void ActualizarFolio(String pref, int Actual) {
         Conexion cnx = new Conexion();
