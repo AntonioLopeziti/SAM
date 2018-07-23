@@ -2169,18 +2169,42 @@ $(document).ready(function () {
         if (tab <= 0) {
             ShowMsg(28, "images/advertencia.PNG", "audio/saperror.wav");
         } else {
-            var p1 = Math.floor((Math.random()*3));
-            var p2 = Math.floor((Math.random()*10));
-            var p3 = Math.floor((Math.random()*10));
-            var p4 = Math.floor((Math.random()*10));
-            var tiempo = p1+''+p2+''+p3+''+p4; 
-            
-            setTimeout(GuardarSolped(),tiempo);
-            
+                var folio = Getfolio();
+                if (folio == 0) {
+                    ShowMsg(25, "images/advertencia.PNG", "audio/saperror.wav");
+                } else if (folio == 1) {
+                    setTimeout(function () {
+                        GuardarDatosSolped(folio);
+                    }, 2000);
+                } else {            
+                    var p1 = Math.floor((Math.random()*10));
+                    var tiempo = p1+'999'; 
+                    setTimeout(GuardarSolped(),tiempo);
+        } 
         }
     }
-    function GuardarSolped() {
+    
+    function Getfolio() {
+    var folio;
+    acc = "RevisarFolio";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionSolPed',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc,
+        success: function (data) {
+            folio = data;
+
+        }
+    });
+    return folio;
+}
+    
+    function GuardarSolped(folio) {
         var acc = "GuardarSolped";
+        var dat = "&fsp=" + folio;
         $.ajax({
             async: false,
             type: 'GET',
@@ -2188,7 +2212,7 @@ $(document).ready(function () {
             url: 'PeticionSolPed',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Accion=" + acc,
+            data: "Accion=" + acc+dat,
             success: function (data) {
                 if (data[0] == 0) {
                     var tc = $('#TextCabecera_SP');
