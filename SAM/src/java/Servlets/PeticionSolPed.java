@@ -217,6 +217,7 @@ public class PeticionSolPed extends HttpServlet {
                 case "SAVETEX":
                     ACC_Textos_posiciones_solped.ObtenerInstancia().InsertartxtPosTemp(Chepos(POS), fila, user, texps);
                     break;
+                    
                 case "GuardarSolped":
                     String retorn = "";
                     int n = 0;
