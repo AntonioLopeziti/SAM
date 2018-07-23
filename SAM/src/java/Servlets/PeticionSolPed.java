@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import AccesoDatos.ACC_CrearPedidoSD;
 import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_Servicios;
 import AccesoDatos.ACC_SolicitudPedidos;
@@ -73,6 +74,7 @@ public class PeticionSolPed extends HttpServlet {
             String CCO = request.getParameter("CC");
             String ORD = request.getParameter("OR");
             String fila = request.getParameter("fila");
+            String fsp = request.getParameter("fsp");
             String texps = request.getParameter("texps");
             Consultas con = new Consultas();
             String FechaServidor = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
@@ -224,22 +226,22 @@ public class PeticionSolPed extends HttpServlet {
                     ArrayList<SolpedCrea> sl = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user);
                     ArrayList<SolpedServicios> se = ACC_Servicios.ObtenerInstancia().CargarServicios(user, "0");
                     ArrayList<textos_posiciones_solped> t = ACC_Textos_posiciones_solped.ObtenerInstancia().CargarTxtPos(user);
-                    int posSolpedi = 0;
-                    int foactu =fo.getFolioActual();
-                    while( posSolpedi == 0){
-                      posSolpedi = ACC_SolicitudPedidos.ObtenerInstancia().retornfoliSolped(foactu,fo.getIdFolios());
-                      if(posSolpedi == 0){            
-                          foactu++;
-                      }else{
-                        folioSAM = fo.getIdFolios() + foactu; 
-                      }   
-                    } 
-                    ACC_SolicitudPedidos.ObtenerInstancia().InsertarSolped(sl, folioSAM, HoraServidor);
-                    ACC_Servicios.ObtenerInstancia().InsertarSolpedServicios(se, folioSAM, user, HoraServidor);
-                    ACC_Textos_posiciones_solped.ObtenerInstancia().InsertTxtPos(t, folioSAM, user);
-                    int posSolped = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("N", user, folioSAM);
-                    int posServic = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("S", user, folioSAM);
-                    int postextos = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("T", user, folioSAM);
+//                    int posSolpedi = 0;
+//                    int foactu =fo.getFolioActual();
+//                    while( posSolpedi == 0){
+//                      posSolpedi = ACC_SolicitudPedidos.ObtenerInstancia().retornfoliSolped(foactu,fo.getIdFolios());
+//                      if(posSolpedi == 0){            
+//                          foactu++;
+//                      }else{
+//                        folioSAM = fo.getIdFolios() + foactu; 
+//                      }   
+//                    } 
+                    ACC_SolicitudPedidos.ObtenerInstancia().InsertarSolped(sl, fsp, HoraServidor);
+                    ACC_Servicios.ObtenerInstancia().InsertarSolpedServicios(se, fsp, user, HoraServidor);
+                    ACC_Textos_posiciones_solped.ObtenerInstancia().InsertTxtPos(t, fsp, user);
+                    int posSolped = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("N", user, fsp);
+                    int posServic = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("S", user, fsp);
+                    int postextos = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("T", user, fsp);
                     if (posSolped != sl.size()) {
                         n = 1;  ////// las posiciones normales no coinciden
                     }
@@ -250,14 +252,18 @@ public class PeticionSolPed extends HttpServlet {
                         n = 3; ////// las posiciones servicios no coinciden
                     }
                     if (n != 0) {
-                        ACC_SolicitudPedidos.ObtenerInstancia().Eliminartablas(folioSAM, user, "X");
+                        ACC_SolicitudPedidos.ObtenerInstancia().Eliminartablas(fsp, user, "X");
                     } else {
-                        ACC_SolicitudPedidos.ObtenerInstancia().Eliminartablas(folioSAM, user, "");
+                        ACC_SolicitudPedidos.ObtenerInstancia().Eliminartablas(fsp, user, "");
                     }
                     JSONArray j = new JSONArray();
                     j.add(n);
                     j.add(folioSAM);
                     out.println(j);
+                    break;
+                case "RevisarFolio":
+                    String ok = ACC_SolicitudPedidos.ObtenerInstancia().CheckFolio(folioSAM);
+                    out.println(ok);
                     break;
                 case "SAVETEXTCAB":
                     String fol = request.getParameter("folio");
