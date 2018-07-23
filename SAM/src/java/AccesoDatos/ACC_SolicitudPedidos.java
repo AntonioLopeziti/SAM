@@ -1719,6 +1719,7 @@ public class ACC_SolicitudPedidos {
         }
         return pos;
     }
+    
    
         public int retornfoliSolped(int foliosam, String indi) {
         Conexion cnx = new Conexion();
