@@ -5,6 +5,7 @@
  */
 
 $(document).ready(function () {
+    GetIp();
     $('#AgregarFilas').click(function () {
         AgregarFilaTabla();
     });
@@ -15,65 +16,64 @@ $(document).ready(function () {
         EliminarFilas();
     });
     $('#guardar').click(function () {
-        folioRamdomIP();
-//        var Centro = $('#Centro');
-//        var Almacen = $('#Almacen');
-//        var CentroCoste = $('#CentroCoste');
-//        var Orden = $('#Orden');
-//        var movi = $("#ListTipMov").val();
-//        var mov = movi.substr(0, 3);
-//        if (Centro.val().length == 0) {
-//            ShowMsg(3, "images/advertencia.PNG", "audio/sapmsg.wav");
-//            Centro.focus();
-//            return;
-//        }
-//        if (ValidarDatos('CEN', Centro.val(), '', '') == false) {
-//            ShowMsg(10, "images/advertencia.PNG", "audio/sapmsg.wav");
-//            Centro.focus();
-//            return;
-//        }
-//        if (Almacen.val().length == 0) {
-//            ShowMsg(4, "images/advertencia.PNG", "audio/sapmsg.wav");
-//            Almacen.focus();
-//            return
-//        }
-//        if (ValidarDatos('ALM', Almacen.val(), Centro.val(), '') == false) {
-//            ShowMsg(11, "images/advertencia.PNG", "audio/sapmsg.wav");
-//            Almacen.focus();
-//            return;
-//        }
-//        switch (mov) {
-//            case "201":
-//                if (CentroCoste.val().length == 0) {
-//                    ShowMsg(8, "images/advertencia.PNG", "audio/sapmsg.wav");
-//                    CentroCoste.focus();
-//                    return;
-//                }
-//                if (ValidarDatos('CCO', CentroCoste.val(), '', '') == false) {
-//                    ShowMsg(12, "images/advertencia.PNG", "audio/sapmsg.wav");
-//                    CentroCoste.focus();
-//                    return;
-//                }
-//                ValidarTabla(Centro.val(), Almacen.val(), '201', CentroCoste.val(), '');
-//                break;
-//            case "261":
-//                if (Orden.val().length == 0) {
-//                    ShowMsg(9, "images/advertencia.PNG", "audio/sapmsg.wav");
-//                    Orden.focus();
-//                    return;
-//                }
-//                if (ValidarDatos('ORD', Orden.val(), '', '') == false) {
-//                    ShowMsg(13, "images/advertencia.PNG", "audio/sapmsg.wav");
-//                    Orden.focus();
-//                    return;
-//                }
-//                ValidarTabla(Centro.val(), Almacen.val(), '261', '', Orden.val());
-//                break;
-//            default:
-//                ShowMsg(7, "images/advertencia.PNG", "audio/sapmsg.wav");
-//                $("#ListTipMov").focus();
-//                break;
-//        }
+        var Centro = $('#Centro');
+        var Almacen = $('#Almacen');
+        var CentroCoste = $('#CentroCoste');
+        var Orden = $('#Orden');
+        var movi = $("#ListTipMov").val();
+        var mov = movi.substr(0, 3);
+        if (Centro.val().length == 0) {
+            ShowMsg(3, "images/advertencia.PNG", "audio/sapmsg.wav");
+            Centro.focus();
+            return;
+        }
+        if (ValidarDatos('CEN', Centro.val(), '', '') == false) {
+            ShowMsg(10, "images/advertencia.PNG", "audio/sapmsg.wav");
+            Centro.focus();
+            return;
+        }
+        if (Almacen.val().length == 0) {
+            ShowMsg(4, "images/advertencia.PNG", "audio/sapmsg.wav");
+            Almacen.focus();
+            return
+        }
+        if (ValidarDatos('ALM', Almacen.val(), Centro.val(), '') == false) {
+            ShowMsg(11, "images/advertencia.PNG", "audio/sapmsg.wav");
+            Almacen.focus();
+            return;
+        }
+        switch (mov) {
+            case "201":
+                if (CentroCoste.val().length == 0) {
+                    ShowMsg(8, "images/advertencia.PNG", "audio/sapmsg.wav");
+                    CentroCoste.focus();
+                    return;
+                }
+                if (ValidarDatos('CCO', CentroCoste.val(), '', '') == false) {
+                    ShowMsg(12, "images/advertencia.PNG", "audio/sapmsg.wav");
+                    CentroCoste.focus();
+                    return;
+                }
+                ValidarTabla(Centro.val(), Almacen.val(), '201', CentroCoste.val(), '');
+                break;
+            case "261":
+                if (Orden.val().length == 0) {
+                    ShowMsg(9, "images/advertencia.PNG", "audio/sapmsg.wav");
+                    Orden.focus();
+                    return;
+                }
+                if (ValidarDatos('ORD', Orden.val(), '', '') == false) {
+                    ShowMsg(13, "images/advertencia.PNG", "audio/sapmsg.wav");
+                    Orden.focus();
+                    return;
+                }
+                ValidarTabla(Centro.val(), Almacen.val(), '261', '', Orden.val());
+                break;
+            default:
+                ShowMsg(7, "images/advertencia.PNG", "audio/sapmsg.wav");
+                $("#ListTipMov").focus();
+                break;
+        }
     });
     $('#iconmsg').hide();
     startTime();
@@ -1034,49 +1034,62 @@ function ValidarTabla(Centro, Almacen, TipoMov, CCosto, Orden) {
 
             }
         }
-        $('#guardar').prop("disabled", true);
         ShowMsg(18, "images/load.gif", "audio/sapmsg.wav");
+        $('#guardar').prop("disabled", true);
         SaveDataFolio(Centro, Almacen, TipoMov, CCosto, Orden);
     }
 }
 function SaveDataFolio(Centro, Almacen, TipoMov, CCosto, Orden) {
-    var folio = Getfolio();
-    if (folio == 0) {
-        ShowMsg(19, "images/advertencia.PNG", "audio/saperror.wav");
-    } else if (folio == 1) {
-        cont = 1;
-        if (cont == 10) {
-            setTimeout(function () {
-                SaveDataFolio(Centro, Almacen, TipoMov, CCosto, Orden);
-            }, 2000);
-            cont = cont + 1;
-        } else {
-            ShowMsg(19, "images/advertencia.PNG", "audio/saperror.wav");
-        }
-    } else {
-        GuardarCabecera(Centro, Almacen, TipoMov, CCosto, Orden, folio);
-        GuardarPosiciones(Centro, Almacen, TipoMov, CCosto, Orden, folio);
-        ActualizaFolio(folio);
-    }
+//    var folio = Getfolio();
+//    if (folio == 0) {
+//        ShowMsg(19, "images/advertencia.PNG", "audio/saperror.wav");
+//    } else if (folio == 1) {
+//        cont = 1;
+//        if (cont == 50) {
+//            var time = Randomtime();
+//            setTimeout(function () {
+//                SaveDataFolio(Centro, Almacen, TipoMov, CCosto, Orden);
+//            }, time);
+//        } else {
+//            ShowMsg(19, "images/advertencia.PNG", "audio/saperror.wav");
+//        }
+//        cont = cont + 1;
+//    } else {
+//      
+//    }
+
+    var random = ObtenerFolioRandom();
+    GuardarCabecera(Centro, Almacen, TipoMov, CCosto, Orden, random);
 }
-function Getfolio() {
-    var folio;
-    acc = "RevisarFolio";
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: 'peticionCrearReserva',
-        contentType: "application/x-www-form-urlencoded",
-        processData: true,
-        data: "Accion=" + acc,
-        success: function (data) {
-            folio = data;
-        }
-    });
-    return folio;
+function ObtenerFolioRandom() {
+    var name = $('#NombreUser').val();
+    var ip = $('#IpData').val();
+    var n = ip + "" + name;
+    return n;
 }
-function GuardarCabecera(Centro, Almacen, TipoMov, CCosto, Orden, Folio) {
-    var datos = "&Centro=" + Centro + "&Almacen=" + Almacen + "&TipoMov=" + TipoMov + "&CCossto=" + CCosto + "&Orden=" + Orden + "&FolioF=" + Folio;
+function Randomtime() {
+    var number = Math.random() * 10000;
+    return number;
+}
+
+//function Getfolio() {
+//    var folio;
+//    acc = "RevisarFolio";
+//    $.ajax({
+//        async: false,
+//        type: 'GET',
+//        url: 'peticionCrearReserva',
+//        contentType: "application/x-www-form-urlencoded",
+//        processData: true,
+//        data: "Accion=" + acc,
+//        success: function (data) {
+//            folio = data;
+//        }
+//    });
+//    return folio;
+//}
+function GuardarCabecera(Centro, Almacen, TipoMov, CCosto, Orden,  random) {
+    var datos = "&Centro=" + Centro + "&Almacen=" + Almacen + "&TipoMov=" + TipoMov + "&CCossto=" + CCosto + "&Orden=" + Orden + "&Random=" + random;
     var acc = "Guardarcabacera";
     $.ajax({
         async: false,
@@ -1086,10 +1099,11 @@ function GuardarCabecera(Centro, Almacen, TipoMov, CCosto, Orden, Folio) {
         processData: true,
         data: "Accion=" + acc + datos,
         success: function (data) {
+            GuardarPosiciones(Centro, Almacen, TipoMov, CCosto, Orden, random);
         }
     });
 }
-function GuardarPosiciones(Centro, Almacen, TipoMov, CCosto, Orden, folio) {
+function GuardarPosiciones(Centro, Almacen, TipoMov, CCosto, Orden, random) {
     var ch = document.getElementsByName("Cehckbx");
     var Mats = document.getElementsByName("MaterTD");
     var Cant = document.getElementsByName("CantiTD");
@@ -1098,10 +1112,11 @@ function GuardarPosiciones(Centro, Almacen, TipoMov, CCosto, Orden, folio) {
     var pos = 0;
     for (i = 0; i < ch.length; i++) {
         if (Mats[i].value.length > 0) {
-            savePos(folio, i, Mats[i].value, Centro, Almacen, Cant[i].value, Umed[i].value, CCosto, Orden, TipoMov, Desc[i].value);
+            savePos(random, i, Mats[i].value, Centro, Almacen, Cant[i].value, Umed[i].value, CCosto, Orden, TipoMov, Desc[i].value);
             pos = pos + 1;
         }
     }
+    ActualizaFolio(random);
 }
 function savePos(folio, i, mat, cen, alm, can, ume, cco, ord, tmo, txt) {
     var posi = (i) + 1;
@@ -1118,7 +1133,7 @@ function savePos(folio, i, mat, cen, alm, can, ume, cco, ord, tmo, txt) {
         }
     });
 }
-function ActualizaFolio(folio)
+function ActualizaFolio(random)
 {
     var acc = "ActualizarFolio";
     $.ajax({
@@ -1127,11 +1142,11 @@ function ActualizaFolio(folio)
         url: 'peticionCrearReserva',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Accion=" + acc + "&FolioF=" + folio,
+        data: "Accion=" + acc  + "&Random=" + random,
         success: function (data) {
             $('#guardar').prop("disabled", false);
             LoadItems();
-            ShowMsg(20, "images/aceptar.png", "audio/sapmsg.wav", folio);
+            ShowMsg(20, "images/aceptar.png", "audio/sapmsg.wav", data);
         }
     });
 }
@@ -1149,7 +1164,7 @@ function LoadItems() {
     $('#Orden').prop('disabled', true);
     $('#Orden').css("background-image", "none)");
 }
-function folioRamdomIP() {
+function GetIp() {
     window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;   //compatibility for firefox and chrome
     var pc = new RTCPeerConnection({iceServers: []}), noop = function () {};
     pc.createDataChannel("");    //create a bogus data channel
@@ -1159,6 +1174,6 @@ function folioRamdomIP() {
             return;
         var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
         pc.onicecandidate = noop;
-        alert(myIP);
+        $('#IpData').val(myIP);
     };
 }
