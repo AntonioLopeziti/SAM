@@ -8,71 +8,72 @@ $(document).ready(function () {
     $('#AgregarFilas').click(function () {
         AgregarFilaTabla();
     });
-    $('#regresar').click(function(){
-        $(location).attr('href','Bienvenido.jsp');
+    $('#regresar').click(function () {
+        $(location).attr('href', 'Bienvenido.jsp');
     });
     $('#BorrarFilas').click(function () {
         EliminarFilas();
     });
     $('#guardar').click(function () {
-        var Centro = $('#Centro');
-        var Almacen = $('#Almacen');
-        var CentroCoste = $('#CentroCoste');
-        var Orden = $('#Orden');
-        var movi = $("#ListTipMov").val();
-        var mov = movi.substr(0, 3);
-        if (Centro.val().length == 0) {
-            ShowMsg(3, "images/advertencia.PNG", "audio/sapmsg.wav");
-            Centro.focus();
-            return;
-        }
-        if (ValidarDatos('CEN', Centro.val(), '', '') == false) {
-            ShowMsg(10, "images/advertencia.PNG", "audio/sapmsg.wav");
-            Centro.focus();
-            return;
-        }
-        if (Almacen.val().length == 0) {
-            ShowMsg(4, "images/advertencia.PNG", "audio/sapmsg.wav");
-            Almacen.focus();
-            return
-        }
-        if (ValidarDatos('ALM', Almacen.val(), Centro.val(), '') == false) {
-            ShowMsg(11, "images/advertencia.PNG", "audio/sapmsg.wav");
-            Almacen.focus();
-            return;
-        }
-        switch (mov) {
-            case "201":
-                if (CentroCoste.val().length == 0) {
-                    ShowMsg(8, "images/advertencia.PNG", "audio/sapmsg.wav");
-                    CentroCoste.focus();
-                    return;
-                }
-                if (ValidarDatos('CCO', CentroCoste.val(), '', '') == false) {
-                    ShowMsg(12, "images/advertencia.PNG", "audio/sapmsg.wav");
-                    CentroCoste.focus();
-                    return;
-                }
-                ValidarTabla(Centro.val(), Almacen.val(), '201', CentroCoste.val(), '');
-                break;
-            case "261":
-                if (Orden.val().length == 0) {
-                    ShowMsg(9, "images/advertencia.PNG", "audio/sapmsg.wav");
-                    Orden.focus();
-                    return;
-                }
-                if (ValidarDatos('ORD', Orden.val(), '', '') == false) {
-                    ShowMsg(13, "images/advertencia.PNG", "audio/sapmsg.wav");
-                    Orden.focus();
-                    return;
-                }
-                ValidarTabla(Centro.val(), Almacen.val(), '261', '', Orden.val());
-                break;
-            default:
-                ShowMsg(7, "images/advertencia.PNG", "audio/sapmsg.wav");
-                $("#ListTipMov").focus();
-                break;
-        }
+        folioRamdomIP();
+//        var Centro = $('#Centro');
+//        var Almacen = $('#Almacen');
+//        var CentroCoste = $('#CentroCoste');
+//        var Orden = $('#Orden');
+//        var movi = $("#ListTipMov").val();
+//        var mov = movi.substr(0, 3);
+//        if (Centro.val().length == 0) {
+//            ShowMsg(3, "images/advertencia.PNG", "audio/sapmsg.wav");
+//            Centro.focus();
+//            return;
+//        }
+//        if (ValidarDatos('CEN', Centro.val(), '', '') == false) {
+//            ShowMsg(10, "images/advertencia.PNG", "audio/sapmsg.wav");
+//            Centro.focus();
+//            return;
+//        }
+//        if (Almacen.val().length == 0) {
+//            ShowMsg(4, "images/advertencia.PNG", "audio/sapmsg.wav");
+//            Almacen.focus();
+//            return
+//        }
+//        if (ValidarDatos('ALM', Almacen.val(), Centro.val(), '') == false) {
+//            ShowMsg(11, "images/advertencia.PNG", "audio/sapmsg.wav");
+//            Almacen.focus();
+//            return;
+//        }
+//        switch (mov) {
+//            case "201":
+//                if (CentroCoste.val().length == 0) {
+//                    ShowMsg(8, "images/advertencia.PNG", "audio/sapmsg.wav");
+//                    CentroCoste.focus();
+//                    return;
+//                }
+//                if (ValidarDatos('CCO', CentroCoste.val(), '', '') == false) {
+//                    ShowMsg(12, "images/advertencia.PNG", "audio/sapmsg.wav");
+//                    CentroCoste.focus();
+//                    return;
+//                }
+//                ValidarTabla(Centro.val(), Almacen.val(), '201', CentroCoste.val(), '');
+//                break;
+//            case "261":
+//                if (Orden.val().length == 0) {
+//                    ShowMsg(9, "images/advertencia.PNG", "audio/sapmsg.wav");
+//                    Orden.focus();
+//                    return;
+//                }
+//                if (ValidarDatos('ORD', Orden.val(), '', '') == false) {
+//                    ShowMsg(13, "images/advertencia.PNG", "audio/sapmsg.wav");
+//                    Orden.focus();
+//                    return;
+//                }
+//                ValidarTabla(Centro.val(), Almacen.val(), '261', '', Orden.val());
+//                break;
+//            default:
+//                ShowMsg(7, "images/advertencia.PNG", "audio/sapmsg.wav");
+//                $("#ListTipMov").focus();
+//                break;
+//        }
     });
     $('#iconmsg').hide();
     startTime();
@@ -1049,7 +1050,7 @@ function SaveDataFolio(Centro, Almacen, TipoMov, CCosto, Orden) {
                 SaveDataFolio(Centro, Almacen, TipoMov, CCosto, Orden);
             }, 2000);
             cont = cont + 1;
-        }else{
+        } else {
             ShowMsg(19, "images/advertencia.PNG", "audio/saperror.wav");
         }
     } else {
@@ -1147,4 +1148,17 @@ function LoadItems() {
     $('#Orden').val('');
     $('#Orden').prop('disabled', true);
     $('#Orden').css("background-image", "none)");
+}
+function folioRamdomIP() {
+    window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;   //compatibility for firefox and chrome
+    var pc = new RTCPeerConnection({iceServers: []}), noop = function () {};
+    pc.createDataChannel("");    //create a bogus data channel
+    pc.createOffer(pc.setLocalDescription.bind(pc), noop);    // create offer and set local description
+    pc.onicecandidate = function (ice) {  //listen for candidate events
+        if (!ice || !ice.candidate || !ice.candidate.candidate)
+            return;
+        var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+        pc.onicecandidate = noop;
+        alert(myIP);
+    };
 }
