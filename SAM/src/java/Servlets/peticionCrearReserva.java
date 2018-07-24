@@ -61,6 +61,7 @@ public class peticionCrearReserva extends HttpServlet {
             String PosicionItem = request.getParameter("PosicionItem");
             String Almacen = request.getParameter("Almacen");
             String Descripcion = request.getParameter("Descripcion");
+            String Random = request.getParameter("Random");
             String AlmacenDes = "";
             String Tipo = request.getParameter("Tipo");
             String Valor1 = request.getParameter("Valor1");
@@ -209,14 +210,15 @@ public class peticionCrearReserva extends HttpServlet {
                     out.println(ok);
                     break;
                 case "Guardarcabacera":
-                    ACC_Reservas.ObtenerInstancia().GuardaCabecera(FolioF, FechaActual, HoraActual, Centro, TipoMov, Almacen, CCosto, Orden, AlmacenDes, Usu );
+                    ACC_Reservas.ObtenerInstancia().GuardaCabecera(Random, FechaActual, HoraActual, Centro, TipoMov, Almacen, CCosto, Orden, AlmacenDes, Usu );
                     break;
                 case "GuardarItems":
                     ACC_Reservas.ObtenerInstancia().GuardaItems(FolioF, Chepos(PosicionItem), Material, Centro, Almacen, Cantidad, UnidadMedida, CCosto, Orden, TipoMov, Descripcion, AlmacenDes );
                     break;
                 case "ActualizarFolio":
-                    ACC_Folios.ObtenerIstancia().ActualizarFolio("RE", fo.getFolioActual());
-                    out.println(FolioF);
+//                    ACC_Folios.ObtenerIstancia().ActualizarFolio("RE", fo.getFolioActual());
+                    String fwe =  ACC_Reservas.ObtenerInstancia().FolioPos(Random);
+                    out.println(fwe);
                     break;
             }
         }
