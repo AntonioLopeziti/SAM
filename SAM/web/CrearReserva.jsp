@@ -206,6 +206,8 @@
                     <label style="padding-left: 2%;">Reserva de materiales para consumo</label>
                     <hr class="lines">
                     <div class="div1R">
+                        <input type="text" hidden id="NombreUser" value="<%=Nombre%>"/>
+                        <input type="text" hidden id="IpData" />
                         <label>Centro</label><input type="text" id="Centro" maxlength="4" style="width: 22%; text-transform: uppercase; background-repeat: no-repeat"><button id="matchCentro" class='BtnMatchIcon2'></button>
                         <hr>
                         <label>Almacén</label><input type="text" id="Almacen" maxlength="4" style="width: 22%; text-transform: uppercase; background-repeat: no-repeat"><button id="MatchAlmacen" class='BtnMatchIcon2'></button>
