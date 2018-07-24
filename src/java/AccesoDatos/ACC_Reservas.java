@@ -1498,14 +1498,14 @@ public class ACC_Reservas {
         }
         return x;
     }
-     public void GuardaCabecera(String folioSAM, String fecha, String hora, String centro, String tmov, String almacen, String ccosto, String norden, String almdes, String user) {
+     public void GuardaCabecera(String random, String fecha, String hora, String centro, String tmov, String almacen, String ccosto, String norden, String almdes, String user) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         String sql = "{call MM.ReservasCrear_GuardarCabecera(?,?,?,?,?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, folioSAM);
+            ps.setString(1, random);
             ps.setString(2, fecha);
             ps.setString(3, hora);
             ps.setString(4, centro);
@@ -1548,4 +1548,24 @@ public class ACC_Reservas {
             cnx.CerrarConexion(con);
         }
     }
+     public String FolioPos(String random){
+         String f = "";
+         Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.ReservasCrear_SavePosFolio(?,?)}";
+        try {
+            ps = con.prepareCall(sql);
+            ps.setString(1, random);
+            ps.registerOutParameter(2, java.sql.Types.VARCHAR);
+            ps.executeUpdate();
+            f = ps.getString(2);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return f;
+     }
 }
