@@ -1045,9 +1045,7 @@ function SaveDataFolio(Centro, Almacen, TipoMov, CCosto, Orden) {
 //        cont = 1;
 //        if (cont == 50) {
 //            var time = Randomtime();
-//            setTimeout(function () {
-//                SaveDataFolio(Centro, Almacen, TipoMov, CCosto, Orden);
-//            }, time);
+//           
 //        } else {
 //            ShowMsg(19, "images/advertencia.PNG", "audio/saperror.wav");
 //        }
@@ -1055,9 +1053,12 @@ function SaveDataFolio(Centro, Almacen, TipoMov, CCosto, Orden) {
 //    } else {
 //      
 //    }
-
+    ShowMsg(18, "images/load.gif", "audio/sapmsg.wav");
+    $('#guardar').prop("disabled", true);
     var random = ObtenerFolioRandom();
-    GuardarCabecera(Centro, Almacen, TipoMov, CCosto, Orden, random);
+    setTimeout(function () {
+        GuardarCabecera(Centro, Almacen, TipoMov, CCosto, Orden, random);
+    }, 4000);
 }
 function ObtenerFolioRandom() {
     var name = $('#NombreUser').val();
