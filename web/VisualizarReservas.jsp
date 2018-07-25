@@ -121,7 +121,7 @@
         </script>
         <link rel="stylesheet" href="css/StyleGeneral.css">
         <link rel="stylesheet" href="css/menu.css" media="screen">
-        <link rel="stylesheet" href="css/StyleModificarReservas.css">
+        <link rel="stylesheet" href="css/VisualizarReservas.css">
         <script src="js/dom-drag.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
@@ -147,10 +147,10 @@
         <div class="contenido">
             <div class="ContentReservas">
                 <section class="DivBusquedaSAMReservas">
-                    <label id="lblTitulo_reporte" style="width: 100%;"><%out.println(po.getProperty("etiqueta.RESERBusuqedti"));%></label>
+                    <label id="lblTitulo_reporte"><%out.println(po.getProperty("etiqueta.RESERBusuqedti"));%></label>
                     <hr id="LineaTituloRev">
                     <section class="DivIzquierda12">
-                        <label><%out.println(po.getProperty("etiqueta.RESERReser"));%></label><input id="NReserva" type="text" onpaste="return false"  style="width: 40%; text-transform: uppercase;" maxlength="10"/><button id="Match_Reser" class='BtnMatchIcon2'></button>
+                        <label><%out.println(po.getProperty("etiqueta.RESERReser"));%></label><input id="NReserva" type="text"   style="width: 25%; text-transform: uppercase;" maxlength="10"/><button id="Match_Reser" class='BtnMatchIcon2'></button><input type="text" readonly style="width: 25%; border: none; background: none;" id="ReserSAM"/>
                         <hr>
                     </section>
                     <span style="margin-top: -20%;"> <img disabled style="vertical-align: middle"  id="ICONAD"><input readOnly type="text" id="mensgesolped" style="border:none; background: none; width:90%;"/></span>
@@ -170,22 +170,22 @@
                         <label style="width: 100%;"><%out.println(po.getProperty("etiqueta.RESImp"));%></label>
                         <hr id="LineaTituloIm">
                         <section class="IzquierdaInterno">
-                            <label><%out.println(po.getProperty("etiqueta.RESCCosto"));%></label><input disabled id="centroco" maxlength="10" type="text" style="width: 25%; margin-left: -5%; text-transform: uppercase; "/><label style="width: 1%; margin-left: 4%;"><%out.println(po.getProperty("etiqueta.RESOTRO"));%></label>
+                            <label><%out.println(po.getProperty("etiqueta.RESCCosto"));%></label><input disabled id="centroco" maxlength="10" type="text" style="width: 38%; margin-left: -5%; text-transform: uppercase; "/>
                             <hr>
                         </section>
                         <section class="DerechaInterno">
-                            <label><%out.println(po.getProperty("etiqueta.RESOrdenin"));%></label><input disabled id="orden" type="text" maxlength="12" style="width: 25%; text-transform: uppercase; margin-left: -8%; "/>
+                            <label><%out.println(po.getProperty("etiqueta.RESOrdenin"));%></label><input disabled id="orden" type="text" maxlength="12" style="width: 38%; text-transform: uppercase; margin-left: -8%; "/>
                             <hr>
                         </section>
                     </section>
-                    <section style="margin-top:0.5%;" class="DivDerecha">
+<!--                    <section style="margin-top:0.5%;" class="DivDerecha">
                         <label style="width: 100%;"><%out.println(po.getProperty("etiqueta.RESMov311"));%></label>
                         <hr id="LineaTituloIm">
                         <section class="IzquierdaInterno">
                             <label><%out.println(po.getProperty("etiqueta.RESAlmRe"));%></label><input id="Arece" type="text" maxlength="12" style="width: 25%; text-transform: uppercase; margin-left: -8%;" disabled/>
                             <hr>
                         </section>        
-                    </section> 
+                    </section> -->
                 </section>
                 <div id="tablaResr">
                     <section id="TableNotfi" >
