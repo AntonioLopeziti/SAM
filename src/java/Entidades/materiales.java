@@ -63,6 +63,22 @@ public class materiales {
     String materia="";
     String descripcion_material="";
 
+    public String getNum_material() {
+        return num_material;
+    }
+
+    public void setNum_material(String num_material) {
+        this.num_material = num_material;
+    }
+    String num_material;
+    public String getTexto_material() {
+        return texto_material;
+    }
+
+    public void setTexto_material(String texto_material) {
+        this.texto_material = texto_material;
+    }
+    String texto_material;
     public String getDescripcion_material() {
         return descripcion_material;
     }
