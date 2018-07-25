@@ -133,8 +133,8 @@ public class peticionCrearReserva extends HttpServlet {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < c.size(); i++) {
-                            out.println("<tr ondblclick=\"seleccionar('" + c.get(i).getCentro_coste() + "', 'VentanaModalCCosto', 'CentroCoste')\">");
-                            out.println("<td style=\"width:40%;\">" + c.get(i).getCentro_coste() + "</td>");
+                            out.println("<tr ondblclick=\"seleccionar('" + c.get(i).getCentro_costo() + "', 'VentanaModalCCosto', 'CentroCoste')\">");
+                            out.println("<td style=\"width:40%;\">" + c.get(i).getCentro_costo() + "</td>");
                             out.println("<td style=\"width:60%; text-align:left;\">" + c.get(i).getDescripcion() + "</td>");
                         }
                         out.println("</tbody");
