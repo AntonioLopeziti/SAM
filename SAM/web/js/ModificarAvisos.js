@@ -330,7 +330,6 @@ $(document).ready(function () {
         UBEQconsul();
     });
     //$("#equipo_CA").click(function () {
-        //alert("vbfbfkj");
         //LLamaequipo();
    // });
 
@@ -785,7 +784,6 @@ function checkTime(i)
 }
 
 function AgragarFilACt() {
-//                            alert("hola");
     var tabla = document.getElementById("AvisoTabla");
     var numfilas = tabla.rows.length;
     var fila = tabla.insertRow(numfilas);
@@ -1081,7 +1079,6 @@ function uploadFiles() {
 //    var equipo = $("#equipo_CA").val();
 //    var Nfolio = GetFolio();
 //    var textobreve = $("#DescripcionCircunstancias_CA").val();
-////            alert(equipo.length +" "+ ubitec.length +" "+textobreve.length );
 //    if (equipo.length < 1 && ubitec.length < 1)
 //    {
 //        //error
@@ -1404,11 +1401,12 @@ function Save(fol) {
     var cod = "";
     //var codi = $("#ubitec2_CA").val();
     var codi = ""
-    var desc = $("#DescripcionCircunstancias_CA").val();
-    var descc = desc.replace(/'/g, "´");
-    //alert(descc);
+    //var desc = $("#DescripcionCircunstancias_CA").val();
+    //var descc = desc.replace(/'/g, "´");
+    var descc = "";
     var folio = $("#folio").val();
-    var textobreve = $("#DescripcionCircunstancias_CA").val();
+    var desaviso = $('#descripcionnotificacion_CA').val();
+    var textobreve = $("#descripcionnotificacion_CA").val();
     var txtbreve = textobreve.replace(/'/g, "´");
     var ip = ObtenerFolioRandom();
     enviarDatos(ubitec, denoubitec, equipo, denoequipo, conjunto, denoconjunto, grupop, centrop, puestot, centro, denopuestot, depres, depres2, responsable, responsable2, autor, fecha, hora, cod, codi, descc, fol, txtbreve, idioma, ip);
@@ -1519,7 +1517,6 @@ function GetFolio() {
         processData: true,
         data: "Action=" + acc,
         success: function (data) {
-            //alert("data"+data+"data");
             folio = data;
         }
     });
@@ -1762,10 +1759,8 @@ function guradraTabFecha() {
             var decodi = $("#deco" + ids).val();
             var textco = $("#teco" + ids).val();
             var txtco = textco.replace(/'/g, "´");
-            //alert(txtco);
             var textac = $("#teac" + ids).val();
             var txtac = textac.replace(/'/g, "´");
-            //alert(txtac);
             var fucant = $("#FCan" + ids).val();
             var feprt1 = $("#fechaAV" + ids).val();
             var hoprt1 = $("#Time" + ids).val();
@@ -1948,7 +1943,6 @@ function CarGarUBT() {
     $("#puestotrabajo2_CA").val(CPTr2);
     var CPTr = $("#CPPTRA2").val();
     $("#puestotrabajo_CA").val(CPTr);
-//            alert($("#GrPL2").val()+" "+CPMa+" "+IDUbc+" "+CPTr2+" "+CPTr);
 }
 
 function RegresPrin(di1, di2) {
