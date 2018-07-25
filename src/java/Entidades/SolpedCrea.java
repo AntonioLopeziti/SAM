@@ -54,6 +54,7 @@ public class SolpedCrea {
     String error = "";
     String Modificado = "";
     String StatusMod = "";
+    String ipusu = "";
 
     public String getStatusMod() {
         return StatusMod;
@@ -417,5 +418,12 @@ public class SolpedCrea {
         this.clave_moneda = clave_moneda;
     }
     
+    public String getipusu(){
+        return ipusu;
+    }
+    
+    public void setipusu(String ipusu){
+        this.ipusu = ipusu;
+    }
 
 }
