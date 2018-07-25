@@ -91,7 +91,7 @@
         String av = po.getProperty("etiqueta.avvCreAv");
         String gra = po.getProperty("etiqueta.grabCreAv");
         String fe = po.getProperty("etiqueta.MsgFechasMoAv");
-        
+
         String Do = po.getProperty("etiqueta.CSPDom");
         String lu = po.getProperty("etiqueta.CSPLun");
         String Ma = po.getProperty("etiqueta.CSPMar");
@@ -99,7 +99,7 @@
         String Ju = po.getProperty("etiqueta.CSPJue");
         String vi = po.getProperty("etiqueta.CSPVie");
         String sa = po.getProperty("etiqueta.CSPSab");
-        
+
         int f;
         String foc;
         folios fo = new folios();
@@ -113,15 +113,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="shortcut icon" href="images/favicon.ico">
-        
+
         <script>
             function msgMatch(val) {
                 switch (val) {
-                    case "MsgFechasMoAv":                        
+                    case "MsgFechasMoAv":
                         var MsgFechasMoAv = '<%=fe%>';
                         $('#msg').html(MsgFechasMoAv);
                         break;
-                    }
+                }
             }
             function CheckResolucion() {
                 if (screen.width <= 500) {
@@ -195,7 +195,7 @@
             <input  id="cancelar"type="image" src="images/cancela.PNG"/>
             <div class="titulo"><span><h1><b><label style="font-size: 1em;"><%out.println(po.getProperty("etiqueta.TituloCrearAviso"));%></label></b><label style="font-size: 1em;" id="tabs"></label></h1></span></div>  
         </div>
-        <div class="contenido">
+        <div class="contenido" id="ConteAvi">
             <input style="display: none" id="folio" value = "<%=foc%>">
             <div class="ContentAvisoCrea">
                 <div id="EquUbi" hidden></div>
@@ -221,8 +221,8 @@
                             <label><%out.println(po.getProperty("etiqueta.ObjetoreferenciaCAA"));%></label>
                             <hr id="lineatitulo">   
                             <div class="divobjavi">
-                                <label><%out.println(po.getProperty("etiqueta.ubitecCAA"));%></label><input tyoe="text" id="ubictec_CA" maxlength="30" style="width:20%;"><button id="match_A1" class='BtnMatchIcon'></button><input style="width:45%; background: none; border: none;" readOnly id="DenominacionUbitec_MAA"/>
-                                <hr>
+<!--                                <label hidden><%out.println(po.getProperty("etiqueta.ubitecCAA"));%></label><input hidden type="text" id="ubictec_CA" maxlength="30" style="width:20%;"><button id="match_A1" class='BtnMatchIcon'></button><input style="width:45%; background: none; border: none;" readOnly id="DenominacionUbitec_MAA"/>
+                                <hr>-->
                                 <label><%out.println(po.getProperty("etiqueta.equipoCAA"));%></label><input type="text" id="equipo_CA" maxlength="18" style="width: 20%;" /><button id="match_A2" class='BtnMatchIcon' ></button><input style="width:45%; border:none; background:none;" readOnly id="DenominacionEquipo_MAA"></label>
                                 <hr>
                                 <label><%out.println(po.getProperty("etiqueta.conjuntoCAA"));%></label><input type="text" id="conjunto_CA" maxlength="40"style="width: 20%;"><button id="match_A3" class='BtnMatchIcon'></button><input readOnly style="width:45%; border: none; background: none;" id="DenominacionConjunto_MAA"/>
@@ -258,7 +258,7 @@
                             </div>
                         </section>
 
-                        <section class="SeccionActividades_CA">
+                        <section hidden class="SeccionActividades_CA">
                             <label><%out.println(po.getProperty("etiqueta.ActividadesCAA"));%></label>
                             <hr id="lineatitulo">   
                             <div class="divcomorden">
@@ -290,14 +290,14 @@
                                                             + "<td><input type=\"text\" id=\"teco" + i + "\" style=\"width: 100%; background-color: #F2F2F2; border-width:0;\" maxlength=\"40\" value=\"\" readonly></td>"
                                                             + "<td><input type=\"text\" id=\"teac" + i + "\" style=\"width: 100%; border-width:0;\" maxlength=\"40\" value=\"\"></td>"
                                                             + "<td></td>"
-//                                                            + "<td><input type=\"text\" id=\"FCan" + i + "\" class=\"numFac\" style=\"width: 100%; border-width:0;\" maxlength=\"3\" value=\"\"></td>"
-//                                                            + "<td><input type=\"date\" id=\"theDate" + i + "\" style=\"width: 100%; border-width:0;\" value=\"\"></td>"
+                                                            //                                                            + "<td><input type=\"text\" id=\"FCan" + i + "\" class=\"numFac\" style=\"width: 100%; border-width:0;\" maxlength=\"3\" value=\"\"></td>"
+                                                            //                                                            + "<td><input type=\"date\" id=\"theDate" + i + "\" style=\"width: 100%; border-width:0;\" value=\"\"></td>"
                                                             + "<td><input maxlength=\"10\" type=\"text\" value=\"\" id=\"fechaAV" + i + "\" onclick=\"OculFe('" + i + "')\" style=\"width: 72%; border-width:0;\" onpaste=\"return false;\" readonly /><button id='dateNew" + i + "' onclick=\"venFee('" + i + "')\" class=\"BtnMatchIcon\" style='margin-left:1px; display:none;'></button></td>"
                                                             + "<td><input type=\"text\" style=\"width: 80%;border-width:0;\" onclick=\"OculBTi(" + i + ")\" id=\"Time" + i + "\" readonly /><button id='matma" + i + "' onclick=\"venTiempoU('" + i + "')\" class='BtnMatchIcon2' style='margin-left:1px; display: none;'></button></td>"
-//                                                            + "<td><input type=\"date\" id=\"theDate1" + i + "\" style=\"width: 100%; border-width:0;\" value=\"\"></td>"
+                                                            //                                                            + "<td><input type=\"date\" id=\"theDate1" + i + "\" style=\"width: 100%; border-width:0;\" value=\"\"></td>"
                                                             + "<td><input maxlength=\"10\" type=\"text\" value=\"\" id=\"fechaAV1" + i + "\" onclick=\"OculFe2('" + i + "')\" style=\"width: 72%; border-width:0;\" onpaste=\"return false;\" readonly /><button id='dateNew1" + i + "' onclick=\"venFee1('" + i + "')\" class=\"BtnMatchIcon\" style='margin-left:1px; display:none;'></button></td>"
                                                             + "<td><input type=\"text\" style=\"width: 80%; border-width:0;\" onclick=\"OculBTi2(" + i + ")\" id=\"Time1" + i + "\" readonly /><button id='matma1" + i + "' onclick=\"venTiempoD('" + i + "')\" class='BtnMatchIcon2' style='margin-left:1px; display: none;'></button></td>"
-//                                                            + "<td><input type=\"text\" id=\"Tpos" + i + "\" style=\"width: 100%; background-color: #F2F2F2; border-width:0;\" value=\"0\" readonly></td>"
+                                                            //                                                            + "<td><input type=\"text\" id=\"Tpos" + i + "\" style=\"width: 100%; background-color: #F2F2F2; border-width:0;\" value=\"0\" readonly></td>"
                                                             + "<td hidden ><input type=\"text\" name=\"valores\" value=\"" + i + "\"/></td> "
                                                             + "</tr>\n");
 
@@ -308,7 +308,7 @@
                                 </div>
                             </div>
                         </section>
-                        <section class="SeccionPestañas_orden">
+                        <section hidden class="SeccionPestañas_orden">
                             <div class="tabsorden">
                                 <button id="match_A546" class='BtnDeleteIcon' ></button> <button id="match_A54" class='BtnAddIcon' ></button>
                             </div>
@@ -327,10 +327,10 @@
                             abrirVentana(ventana8);
                         }
                         function venFee(l) {
-                            OpenCalendario("fechaAV"+l);
+                            OpenCalendario("fechaAV" + l);
                         }
                         function venFee1(l) {
-                            OpenCalendario("fechaAV1"+l);
+                            OpenCalendario("fechaAV1" + l);
                         }
 
                         function venTiempoU(l) {
@@ -786,7 +786,7 @@
                             BE.play();
                             $("#iconmsg").css("visibility", "visible");
                             $("#iconmsg").attr("src", "images/aceptar.png");
-                             $("#msg").html('<%=av%> ' + mensajOk + ' <%=gra%>');
+                            $("#msg").html('<%=av%> ' + mensajOk + ' <%=gra%>');
                         } else {
                             borramsg();
                         }
@@ -833,6 +833,9 @@
                 case 6:
                     mensj = '<%=ubTeec%>' + "," + '<%=msgEq%>';
                     break;
+                case 18:
+                    mensj = 'Guandardo datos, espere un momento...';
+                    break;
 
             }
             var BE = document.createElement('audio');
@@ -842,6 +845,17 @@
             $("#iconmsg").attr("src", im);
             $("#msg").html(mensj);
         }
+
+        function Mens(N, a, i, f) {
+            switch (N) {
+                case 90:
+                    $("#iconmsg").css("visibility", "visible");
+                    $("#iconmsg").attr("src", "images/aceptar.png");
+                    $("#msg").html("Folio " + f);
+                    break;
+            }
+        }
+
         function mensajALer(me) {
 
             switch (me) {
