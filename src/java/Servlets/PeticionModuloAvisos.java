@@ -488,10 +488,6 @@ public class PeticionModuloAvisos extends HttpServlet {
                         out.println(1);
                     }
                     break;
-                case "RevisarFolio":
-                    String ok = ACC_Reservas.ObtenerInstancia().CheckFolioAVISOS(folioSAM);
-                    out.println(folioSAM);
-                    break;
                 case "ActualizarFolioAviso":
                     String fwe = ACC_Aviso.ObtenerInstancia().FolioPosAvisos(Random);
                     out.println(fwe);
