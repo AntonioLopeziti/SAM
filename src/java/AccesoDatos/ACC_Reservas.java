@@ -1247,6 +1247,8 @@ public class ACC_Reservas {
             ps.setString(1, res);
             rs = ps.executeQuery();
             while (rs.next()) {
+                r.setFolio_sap("");
+                r.setFolio_sam(rs.getString("folio_sam"));
                 r.setCentro(rs.getString("centro"));
                 r.setAlmacen(rs.getString("almacen"));
                 r.setClase_movimiento(rs.getString("clase_movimiento"));
@@ -1275,6 +1277,8 @@ public class ACC_Reservas {
             ps.setString(1, res);
             rs = ps.executeQuery();
             while (rs.next()) {
+                r.setFolio_sap(rs.getString("num_reservas"));
+                r.setFolio_sam(rs.getString("folio_sam"));
                 r.setCentro(rs.getString("centro"));
                 r.setAlmacen(rs.getString("almacen"));
                 r.setClase_movimiento(rs.getString("clase_movimientos"));
