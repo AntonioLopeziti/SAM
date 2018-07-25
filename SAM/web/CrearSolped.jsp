@@ -447,7 +447,7 @@
                     <section class="SecD">
                         <textarea style="resize:none;" id="TextCabecera_SP"></textarea>
                     </section>
-                </div>
+                </div> 
                     <input type="text" hidden id="ipss"/>
                     <input type="text" id="NombreUser" value="<%out.println(Nombre);%>" hidden />
                 <div class="divTabla">
