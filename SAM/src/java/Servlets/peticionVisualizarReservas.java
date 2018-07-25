@@ -91,6 +91,8 @@ public class peticionVisualizarReservas extends HttpServlet {
                         j.add(r.getNum_orden());
                         j.add(r.getError());
                         j.add(r.getAlmacen_destino());
+                        j.add(r.getFolio_sap());
+                        j.add(r.getFolio_sam());
                     } else if (Tipo.equals("M")) {
                         reserva_posiciones_crea r = ACC_Reservas.ObtenerInstancia().CargarDatosCabSAM(Nreserva);
                         j.add(r.getCentro());
@@ -100,7 +102,11 @@ public class peticionVisualizarReservas extends HttpServlet {
                         j.add(r.getNum_orden());
                         j.add(r.getError());
                         j.add(r.getAlmacen_destino());
+                        j.add(r.getFolio_sap());
+                        j.add(r.getFolio_sam());
                     } else {
+                        j.add("");
+                        j.add("");
                         j.add("");
                         j.add("");
                         j.add("");
