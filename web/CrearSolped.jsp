@@ -127,7 +127,9 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="shortcut icon" href="images/favicon.ico">
         <script>
-            function CheckResolucion() {
+
+    
+           function CheckResolucion() {
                 if (screen.width <= 500) {
                     var msgResolucion = '<%=reso%>';
                     alert(msgResolucion);
@@ -446,6 +448,8 @@
                         <textarea style="resize:none;" id="TextCabecera_SP"></textarea>
                     </section>
                 </div>
+                    <input type="text" hidden id="ipss"/>
+                    <input type="text" id="NombreUser" value="<%out.println(Nombre);%>" hidden />
                 <div class="divTabla">
                     <label><%out.println(po.getProperty("etiqueta.CSPPosciones"));%></label>
                     <hr>
