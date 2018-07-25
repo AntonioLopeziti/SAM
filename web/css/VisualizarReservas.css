@@ -143,7 +143,7 @@ input{
     height: 15%;
 }
 .DerechaInterno label{
-    width: 70%;
+    width: 60%;
     display: inline-block;
 }
 .DerechaInterno hr{
@@ -157,7 +157,7 @@ input{
     height: 15%;
 }
 .IzquierdaInterno label{
-    width: 50%;
+    width: 45%;
     display: inline-block;
 }
 .IzquierdaInterno hr{
