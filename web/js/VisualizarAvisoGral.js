@@ -11,8 +11,9 @@ $(document).ready(function () {
         $(location).attr('href', 'Bienvenido.jsp');
     });
     $('#regresar').click(function () {
-        event.preventDefault();
-        history.back(1);
+        $(location).attr('href', 'ConsultaAvisos.jsp');
+//        event.preventDefault();
+//        history.back(1);
     });
 });
 function startTime() {
