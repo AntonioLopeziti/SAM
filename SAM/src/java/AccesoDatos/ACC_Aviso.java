@@ -675,14 +675,16 @@ public class ACC_Aviso {
         return AvMatch;
     }
 
-    public boolean GuardarCabecera_avisos_crea(String folio, String hor, String fecha, String centrop, String claseAviso, String textobreve, String equipo, String cod1, String codi2, String statOR, String material, String ubitec, String grupop, String puestot, String centro, String depres, String depres2, String responsable, String responsable2, String autor, String desc) {
+    public String GuardarCabecera_avisos_crea(String folio, String hor, String fecha, String centrop, String claseAviso, String textobreve, String equipo, String cod1, String codi2, String statOR, String material, String ubitec, String grupop, String puestot, String centro, String depres, String depres2, String responsable, String responsable2, String autor, String desc, String Random) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
-        PreparedStatement pst = null;
-        String querys = "{call PM.Cabecera_avisos_crea_GuardarCabavicrea(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
-        boolean validar = false;
+        //PreparedStatement pst = null;
+        CallableStatement pst = null;
+        String querys = "{call PM.Cabecera_avisos_crea_GuardarCabavicrea2(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String Nfolio = "";
         try {
-            pst = conn.prepareStatement(querys);
+            pst = conn.prepareCall(querys);
+            //pst = conn.prepareStatement(querys);
             pst.setString(1, folio);
             pst.setString(2, hor);
             pst.setString(3, fecha);
@@ -704,10 +706,11 @@ public class ACC_Aviso {
             pst.setString(19, responsable2);
             pst.setString(20, autor);
             pst.setString(21, desc);
-            int pe = pst.executeUpdate();
-            if (pe == 1) {
-                validar = true;
-            }
+            pst.registerOutParameter(22, java.sql.Types.VARCHAR);
+            pst.executeUpdate();
+            
+                Nfolio = pst.getString(22);
+            
 
         } catch (Exception ex) {
             System.err.println("Error en metodo Guardar (ACC_Aviso) por:" + ex);
@@ -723,9 +726,30 @@ public class ACC_Aviso {
                 System.err.println("Error: " + a);
             }
         }
-        return validar;
+        return Nfolio;
     }
 
+    public String FolioPosAvisos(String random){
+         String f = "";
+         Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call PM.AvisosCrear_SavePosFolio(?,?)}";
+        try {
+            ps = con.prepareCall(sql);
+            ps.setString(1, random);
+            ps.registerOutParameter(2, java.sql.Types.VARCHAR);
+            ps.executeUpdate();
+            f = ps.getString(2);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return f;
+     }
+    
     public boolean GuardarTEXTos(String fila, String linea, String foli) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
