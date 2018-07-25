@@ -154,7 +154,7 @@
                         msg = 'Campo Unidad Medida debe ser completado registrando un material valido';
                         break;
                     case 18:
-                        msg = 'Guandardo datos, espere un momento...';
+                        msg = 'Guardardo datos, espere un momento...';
                         break;
                     case 19:
                         msg = 'Ocurrio un error inesperado al guardar, Consulte a su administrador';
