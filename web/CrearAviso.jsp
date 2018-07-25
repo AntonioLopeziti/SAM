@@ -251,7 +251,8 @@
                             <div class="divobjavi">
                                 <!--<label><%out.println(po.getProperty("etiqueta.CodificacionCAA"));%></label><input type="text" maxlength="8" id="codificacion_CA" style="width:20%;"/> <input type="text" maxlength="4" id="ubitec2_CA"  style="width:20%;">
                                 <hr>-->
-                                <label><%out.println(po.getProperty("etiqueta.DescripcioncodiCAA"));%></label><input type="text" id="DescripcionCircunstancias_CA" style="width:20%;"  > 
+<!--                                <label><%out.println(po.getProperty("etiqueta.DescripcioncodiCAA"));%></label><input type="text" id="DescripcionCircunstancias_CA" style="width:20%;"  > -->
+                                <label><%out.println(po.getProperty("etiqueta.DescripcioncodiCAA"));%></label>
                                 <hr>
                                 <textarea rows="8" cols="100" style="resize:none;" maxlength="800" id="TexareaCircunstancia_CA" ></textarea>
 
