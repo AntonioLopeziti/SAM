@@ -1034,8 +1034,6 @@ function ValidarTabla(Centro, Almacen, TipoMov, CCosto, Orden) {
 
             }
         }
-        ShowMsg(18, "images/load.gif", "audio/sapmsg.wav");
-        $('#guardar').prop("disabled", true);
         SaveDataFolio(Centro, Almacen, TipoMov, CCosto, Orden);
     }
 }
@@ -1088,10 +1086,14 @@ function Randomtime() {
 //    });
 //    return folio;
 //}
-function GuardarCabecera(Centro, Almacen, TipoMov, CCosto, Orden,  random) {
+function GuardarCabecera(Centro, Almacen, TipoMov, CCosto, Orden, random) {
     var datos = "&Centro=" + Centro + "&Almacen=" + Almacen + "&TipoMov=" + TipoMov + "&CCossto=" + CCosto + "&Orden=" + Orden + "&Random=" + random;
     var acc = "Guardarcabacera";
     $.ajax({
+        beforeSend: function () {
+            ShowMsg(18, "images/load.gif", "audio/sapmsg.wav");
+            $('#guardar').prop("disabled", true);
+        },
         async: false,
         type: 'GET',
         url: 'peticionCrearReserva',
@@ -1123,6 +1125,10 @@ function savePos(folio, i, mat, cen, alm, can, ume, cco, ord, tmo, txt) {
     var acc = "GuardarItems";
     var datos = "&FolioF=" + folio + "&PosicionItem=" + posi + "&Material=" + mat + "&Centro=" + cen + "&Almacen=" + alm + "&CantidadNecesaria=" + GetCantend(can, ume) + "&UnidadMedida=" + ume + "&CCossto=" + cco + "&Orden=" + ord + "&TipoMov=" + tmo + "&Descripcion=" + encodeURIComponent(txt);
     $.ajax({
+        beforeSend: function () {
+            ShowMsg(18, "images/load.gif", "audio/sapmsg.wav");
+            $('#guardar').prop("disabled", true);
+        },
         async: false,
         type: 'GET',
         url: 'peticionCrearReserva',
@@ -1137,12 +1143,16 @@ function ActualizaFolio(random)
 {
     var acc = "ActualizarFolio";
     $.ajax({
+        beforeSend: function () {
+            ShowMsg(18, "images/load.gif", "audio/sapmsg.wav");
+            $('#guardar').prop("disabled", true);
+        },
         async: false,
         type: 'GET',
         url: 'peticionCrearReserva',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Accion=" + acc  + "&Random=" + random,
+        data: "Accion=" + acc + "&Random=" + random,
         success: function (data) {
             $('#guardar').prop("disabled", false);
             LoadItems();
