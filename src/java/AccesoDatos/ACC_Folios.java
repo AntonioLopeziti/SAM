@@ -44,6 +44,25 @@ public class ACC_Folios {
         return fo;
     }
 
+    public boolean InsertFolio(String fo1, String us1){
+        boolean confirmacion = false;
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        CallableStatement cbts = null;
+        String pr = "{CALL dbo.prueba_insert_folio(?, ?)}";
+        try{
+            cbts = con.prepareCall(pr);
+            cbts.setString(1, fo1);
+            cbts.setString(2, us1);
+            if(cbts.executeUpdate() == 1){
+                confirmacion = true;
+            }
+        }catch(Exception e){
+            System.err.println("EEROR DEL PS");
+        }
+        return confirmacion;
+    }
+    
     public folios ObtenerDatosFolios(String pref) {
         folios f = new folios();
         Conexion cnx = new Conexion();
