@@ -6,14 +6,15 @@
 $(document).ready(function () {
     startTime();
     $('#iconmsg').hide();
+    
     CargarModulo();
     $('#finalizar').click(function () {
         $(location).attr('href', 'Bienvenido.jsp');
     });
-    $('#regresar').click(function () {
+   $('#regresar').click(function () {
         $(location).attr('href', 'ConsultaAvisos.jsp');
-//        event.preventDefault();
-//        history.back(1);
+////        event.preventDefault();
+////        history.back(1);
     });
 });
 function startTime() {
@@ -49,7 +50,7 @@ function CargarCabecera(Aviso, tipo) {
             $('#Num_ClaseAviso').val(datas[1]);
             $('#Des_Aviso').val(datas[2]);
             $('#status_mensaje').val(datas[3]);
-            $('#ubitecnica').val(datas[4]);
+            //$('#ubitecnica').val(datas[4]);
             $('#num_equipo').val(datas[5]);
             $('#conjunto').val(datas[6]);
             $('#GrupoPlanificacion').val(datas[7]);
@@ -61,9 +62,10 @@ function CargarCabecera(Aviso, tipo) {
             $('#horaaviso').val(datas[12]);
             $('#inic_ord').val(datas[13]);
             $('#statusOrden_CA').val(datas[17]);
-            if ($('#ubitecnica').val().length > 0) {
-                CargarNombresData("U", $('#ubitecnica').val());
-            }
+            CargarTextos(Aviso, tipo);
+//            if ($('#ubitecnica').val().length > 0) {
+//                CargarNombresData("U", $('#ubitecnica').val());
+//            }
             if ($('#num_equipo').val().length > 0) {
                 CargarNombresData("E", $('#num_equipo').val());
             }
@@ -86,8 +88,10 @@ function CargarCabecera(Aviso, tipo) {
                 $('#MensajeErorAviso').css('display', 'none');
                 $('#menser').val("");
             }
+            
         }
     });
+    
 }
 function CargarNombresData(Tipo, dato) {
     var acc = "GetNameData";
