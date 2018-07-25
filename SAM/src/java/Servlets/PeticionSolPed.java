@@ -48,7 +48,7 @@ public class PeticionSolPed extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, InterruptedException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -75,6 +75,7 @@ public class PeticionSolPed extends HttpServlet {
             String ORD = request.getParameter("OR");
             String fila = request.getParameter("fila");
             String fsp = request.getParameter("fsp");
+            String ipsf = request.getParameter("ipsf");
             String texps = request.getParameter("texps");
             Consultas con = new Consultas();
             String FechaServidor = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
@@ -226,22 +227,14 @@ public class PeticionSolPed extends HttpServlet {
                     ArrayList<SolpedCrea> sl = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user);
                     ArrayList<SolpedServicios> se = ACC_Servicios.ObtenerInstancia().CargarServicios(user, "0");
                     ArrayList<textos_posiciones_solped> t = ACC_Textos_posiciones_solped.ObtenerInstancia().CargarTxtPos(user);
-//                    int posSolpedi = 0;
-//                    int foactu =fo.getFolioActual();
-//                    while( posSolpedi == 0){
-//                      posSolpedi = ACC_SolicitudPedidos.ObtenerInstancia().retornfoliSolped(foactu,fo.getIdFolios());
-//                      if(posSolpedi == 0){            
-//                          foactu++;
-//                      }else{
-//                        folioSAM = fo.getIdFolios() + foactu; 
-//                      }   
-//                    } 
-                    ACC_SolicitudPedidos.ObtenerInstancia().InsertarSolped(sl, fsp, HoraServidor);
-                    ACC_Servicios.ObtenerInstancia().InsertarSolpedServicios(se, fsp, user, HoraServidor);
-                    ACC_Textos_posiciones_solped.ObtenerInstancia().InsertTxtPos(t, fsp, user);
-                    int posSolped = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("N", user, fsp);
-                    int posServic = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("S", user, fsp);
-                    int postextos = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("T", user, fsp);
+
+                    ACC_SolicitudPedidos.ObtenerInstancia().InsertarSolped(sl, ipsf, HoraServidor,ipsf);
+                    ACC_Servicios.ObtenerInstancia().InsertarSolpedServicios(se, ipsf, user, HoraServidor);
+                    ACC_Textos_posiciones_solped.ObtenerInstancia().InsertTxtPos(t, ipsf, user);
+                 
+                    int posSolped = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("N", user, ipsf);
+                    int posServic = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("S", user, ipsf);
+                    int postextos = ACC_SolicitudPedidos.ObtenerInstancia().retornposicionesSolped("T", user, ipsf);
                     if (posSolped != sl.size()) {
                         n = 1;  ////// las posiciones normales no coinciden
                     }
@@ -252,13 +245,13 @@ public class PeticionSolPed extends HttpServlet {
                         n = 3; ////// las posiciones servicios no coinciden
                     }
                     if (n != 0) {
-                        ACC_SolicitudPedidos.ObtenerInstancia().Eliminartablas(fsp, user, "X");
+                        ACC_SolicitudPedidos.ObtenerInstancia().Eliminartablas("", user, "X");
                     } else {
-                        ACC_SolicitudPedidos.ObtenerInstancia().Eliminartablas(fsp, user, "");
+                        ACC_SolicitudPedidos.ObtenerInstancia().Eliminartablas("", user, "");
                     }
                     JSONArray j = new JSONArray();
                     j.add(n);
-                    j.add(folioSAM);
+                    j.add(fsp);
                     out.println(j);
                     break;
                 case "RevisarFolio":
@@ -266,11 +259,11 @@ public class PeticionSolPed extends HttpServlet {
                     out.println(ok);
                     break;
                 case "SAVETEXTCAB":
-                    String fol = request.getParameter("folio");
-                    ACC_Textos_cabecera_solped.ObtenerInstancia().InsertTxtCabecera(fol, fila, user, texps);
+                    ACC_Textos_cabecera_solped.ObtenerInstancia().InsertTxtCabecera(ipsf, fila, user, texps);
                     break;
                 case "FolioAct":
-                    ACC_Folios.ObtenerIstancia().ActualizarFolio("SP", fo.getFolioActual());
+                    String ff = ACC_SolicitudPedidos.ObtenerInstancia().ActualizarFolioss(ipsf);
+                    out.println(ff);
                     break;
                 case "DeletePos":
                     if (ACC_SolicitudPedidos.ObtenerInstancia().solped_tempDelete(user, POS)) {
@@ -419,6 +412,8 @@ public class PeticionSolPed extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(PeticionSolPed.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(PeticionSolPed.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -436,6 +431,8 @@ public class PeticionSolPed extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(PeticionSolPed.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(PeticionSolPed.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
