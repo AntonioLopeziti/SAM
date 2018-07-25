@@ -326,7 +326,7 @@ public class ACC_CentroCosto {
             rs = ps.executeQuery();
             while(rs.next()){
                 centro_coste c = new centro_coste();
-                c.setCentro_costo(rs.getString("centro_costo"));
+                c.setCentro_coste(rs.getString("centro_coste"));
                 c.setDescripcion(rs.getString("descripcion_ES"));
                 cco.add(c);
             }
