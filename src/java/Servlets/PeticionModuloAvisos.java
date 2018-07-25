@@ -18,6 +18,7 @@ import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_Grupo_codigos;
 import AccesoDatos.ACC_PuestoTrabajo;
 import AccesoDatos.ACC_Qmm_avisos_crea;
+import AccesoDatos.ACC_Reservas;
 import AccesoDatos.ACC_UbicacionTecnica;
 import Entidades.puesto_trabajo;
 import Entidades.grupo_planificacion;
@@ -129,6 +130,10 @@ public class PeticionModuloAvisos extends HttpServlet {
             String id = request.getParameter("id");
             String filas = "2";
             String vacio = "";
+
+            String Random = request.getParameter("Random");
+            folios fo = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("AV");
+            String folioSAM = fo.getIdFolios() + fo.getFolioActual();
 
             switch (accion) {
                 case "ConsultaAviso":
@@ -251,9 +256,12 @@ public class PeticionModuloAvisos extends HttpServlet {
                     break;
 
                 case "GuardarAviso":
+                    String folioSAM2 = fo.getIdFolios() + fo.getFolioActual();
                     Consultas c1 = new Consultas();
-                    if (ACC_Aviso.ObtenerInstancia().GuardarCabecera_avisos_crea(folio, hor, c1.DateFormatGuion(fecha), centrop, claseAviso, textobreve, equipo, cod1, codi2, statOR, material, ubitec, grupop, puestot, centro, depres, depres2, responsable, responsable2, autor, desc) == true) {
-                        out.println(2);
+                    String NFolio = ACC_Aviso.ObtenerInstancia().GuardarCabecera_avisos_crea(folio, hor, c1.DateFormatGuion(fecha), centrop, claseAviso, textobreve, equipo, cod1, codi2, statOR, material, ubitec, grupop, puestot, centro, depres, depres2, responsable, responsable2, autor, desc, Random);
+                    //if (ACC_Aviso.ObtenerInstancia().GuardarCabecera_avisos_crea(folio, hor, c1.DateFormatGuion(fecha), centrop, claseAviso, textobreve, equipo, cod1, codi2, statOR, material, ubitec, grupop, puestot, centro, depres, depres2, responsable, responsable2, autor, desc) != "") {
+                    if(NFolio != ""){
+                        out.println(2 + "," + NFolio);
                     } else {
                         out.println(0);
                     }
@@ -281,18 +289,19 @@ public class PeticionModuloAvisos extends HttpServlet {
                     break;
                 case "ValidarCUca":
                     int eq;
-                    int Ubte;
-                    if (ubitec.equals("")) {
-                        Ubte = 1;
-                    } else {
-                        Ubte = ACC_UbicacionTecnica.ObtenerInstancia().ConsultaUbicaciones(ubitec);
-                    }
+//                    int Ubte;
+//                    if (ubitec.equals("")) {
+//                        Ubte = 1;
+//                    } else {
+//                        Ubte = ACC_UbicacionTecnica.ObtenerInstancia().ConsultaUbicaciones(ubitec);
+//                    }
                     if (equipo.equals("")) {
                         eq = 1;
                     } else {
                         eq = ACC_Equipos.ObtenerInstancia().ConsultaEquipos(equipo);
                     }
-                    out.println(Ubte + "," + eq);
+                    //out.println(Ubte + "," + eq);
+                    out.println(eq);
                     break;
 
                 case "MatchGrupCod":
@@ -478,6 +487,14 @@ public class PeticionModuloAvisos extends HttpServlet {
                     } else {
                         out.println(1);
                     }
+                    break;
+                case "RevisarFolio":
+                    String ok = ACC_Reservas.ObtenerInstancia().CheckFolioAVISOS(folioSAM);
+                    out.println(folioSAM);
+                    break;
+                case "ActualizarFolioAviso":
+                    String fwe = ACC_Aviso.ObtenerInstancia().FolioPosAvisos(Random);
+                    out.println(fwe);
                     break;
 
             }
