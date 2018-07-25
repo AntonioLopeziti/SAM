@@ -1,14 +1,10 @@
-//
-///* 
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */ 
-// 
+
 $(document).ready(function () {
     startTime();
     CargarEdicion();
-    $('#iconmsg').hide();
+    $("#iconmsg").css("visibility", "hidden");
+    $('#regresar1').click(function (){
+    });
     $('#regresar').click(function () {
         $(location).attr('href', 'ModificarAvisoAcceso.jsp');
     });
