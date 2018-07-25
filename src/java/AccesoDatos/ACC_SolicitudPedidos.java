@@ -1771,7 +1771,7 @@ public class ACC_SolicitudPedidos {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
-        ResultSet rs = null;
+        ResultSet rs = null; 
         String sql = "{call MM.CrearsolPedidos_RevisarFolio(?)}";
         try {
             ps = con.prepareStatement(sql);
