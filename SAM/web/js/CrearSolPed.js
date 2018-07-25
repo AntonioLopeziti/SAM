@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 $(document).ready(function () {
+    obtenerip();
     AjustarCabecera('TabHead', 'TabBody', 8, 'SecCuerpo');
     $("#DobleSection").scroll(function () {
         $("#SecCuerpo").scrollTop($("#DobleSection").scrollTop());
@@ -20,6 +21,7 @@ $(document).ready(function () {
     CargarTipoImputacion();
     CargarTipoPosicion();
     startTime();
+    
     $('#ctaMayor').prop('disabled', true);
     $('#CenCosto').prop('disabled', true);
     $('#Orde').prop('disabled', true);
@@ -2124,16 +2126,19 @@ $(document).ready(function () {
     }
     
     function ActFol() {
+        var ips = folioIP();
         var acc = "FolioAct";
+        var dat = "&ipsf="+ips;
         $.ajax({
             async: false,
             type: 'GET',
             url: 'PeticionSolPed',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Accion=" + acc,
+            data: "Accion=" + acc+dat,
             success: function (data) {
-
+//                alert(''+data);
+             ShowMsg(29, "images/aceptar.png", "audio/sapmsg.wav", data);
             }
 
         });
@@ -2161,25 +2166,31 @@ $(document).ready(function () {
             });
         }
     }
+    function folioIP() {
+    var name = $('#NombreUser').val();    
+    var ip = document.getElementById("ipss").value ;
+    var n = ip + "" + name;
+    return n;
+}
     $('#guardar').click(function () {
-        GuardarDatosSolped();
+        var ips = folioIP();
+        GuardarDatosSolped(ips);
     });
-    function GuardarDatosSolped() {
+    
+    function GuardarDatosSolped(ips) {
         var tab = $("input[name=DelPos]").length;
         if (tab <= 0) {
             ShowMsg(28, "images/advertencia.PNG", "audio/saperror.wav");
-        } else {
+        } else {            
                 var folio = Getfolio();
                 if (folio == 0) {
                     ShowMsg(25, "images/advertencia.PNG", "audio/saperror.wav");
                 } else if (folio == 1) {
                     setTimeout(function () {
-                        GuardarDatosSolped(folio);
+                        GuardarDatosSolped();
                     }, 2000);
-                } else {            
-                    var p1 = Math.floor((Math.random()*10));
-                    var tiempo = p1+'999'; 
-                    setTimeout(GuardarSolped(),tiempo);
+                } else {
+                    GuardarSolped(folio,ips);
         } 
         }
     }
@@ -2202,9 +2213,9 @@ $(document).ready(function () {
     return folio;
 }
     
-    function GuardarSolped(folio) {
+    function GuardarSolped(folio,ips) {
         var acc = "GuardarSolped";
-        var dat = "&fsp=" + folio;
+        var dat = "&fsp=" + folio+"&ipsf="+ips;
         $.ajax({
             async: false,
             type: 'GET',
@@ -2212,12 +2223,12 @@ $(document).ready(function () {
             url: 'PeticionSolPed',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Accion=" + acc+dat,
+            data: "Accion=" + acc + dat,
             success: function (data) {
                 if (data[0] == 0) {
                     var tc = $('#TextCabecera_SP');
                     if (tc.val().length > 0) {
-                        textCabece(tc.val(), data[1]);
+                        textCabece(tc.val(), ips);
                     }
                     verificaCentPorUsuario();
                     ResetPosicion();
@@ -2236,7 +2247,7 @@ $(document).ready(function () {
                         $("#DobleSection").scrollTop($("#SecCuerpo").scrollTop());
                     });
                     document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
-                    ShowMsg(29, "images/aceptar.png", "audio/sapmsg.wav", data[1]);
+//                    ShowMsg(29, "images/aceptar.png", "audio/sapmsg.wav", data[1]);
                 } else {
                     ShowMsg(30, "images/advertencia.PNG", "audio/saperror.wav");
 
@@ -2256,7 +2267,7 @@ $(document).ready(function () {
             no = txtO.substr(d, 132);
             var acc = "SAVETEXTCAB";
             var fila = i + 1;
-            var enviar = "&fila=" + fila + "&texps=" + encodeURIComponent(no) + "&folio=" + fol;
+            var enviar = "&fila=" + fila + "&texps=" + encodeURIComponent(no) + "&ipsf=" + fol;
             $.ajax({
                 async: false,
                 type: 'GET',
@@ -2623,6 +2634,20 @@ $(document).ready(function () {
         });
     }
     VerificarFolioExcedido();
+    
+    function obtenerip(){
+                  window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+           var pc = new RTCPeerConnection({iceServers:[]}), noop = function(){};      
+           pc.createDataChannel("");    
+           pc.createOffer(pc.setLocalDescription.bind(pc), noop);    
+           pc.onicecandidate = function(ice){  
+                if(!ice || !ice.candidate || !ice.candidate.candidate)  return;
+                var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+                pc.onicecandidate = noop;
+                $("#ipss").val(myIP);
+           };        
+
+}
 });
 
 
@@ -3165,3 +3190,4 @@ function checkDec(num, tam) {
         return "";
     }
 }
+
