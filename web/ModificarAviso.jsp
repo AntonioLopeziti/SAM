@@ -313,7 +313,7 @@
             <input id="TipoAviso" value="<%=Tipo%>" hidden/>
             <input id="aceptar" type="image" src="images/aceptaOFF.png" disabled/>                
             <input  id="guardar" type="image" src="images/guarda.PNG" disabled/> 
-            <input  id="regresar" type="image" src="images/regresa.PNG"/>
+            <input  id="regresar1" type="image" src="images/regresa.PNG"/>
             <input id="finalizar" type="image" src="images/cance.PNG"/>
             <input  id="cancelar"type="image" src="images/cancela.PNG"/>
             <input  id="cietec"  type="image" src="images/cierretecnico.png" />
@@ -342,8 +342,8 @@
                             <label><%out.println(po.getProperty("etiqueta.ObjetoreferenciaCAA"));%></label>
                             <hr id="lineatitulo">     
                             <div class="divobjavi">
-                                <label><%out.println(po.getProperty("etiqueta.ubitecCAA"));%></label><input tyoe="text" id="ubictec_CA" style=" width:20%; text-transform: uppercase;" disabled  maxlength="30" /><button id="match_A1" class='BtnMatchIcon' style="display: none;"></button> <input id="DenominacionUbitec_MAA" style="width:45%; background: none; border: none;" readOnly>
-                                <hr>
+<!--                                <label><%out.println(po.getProperty("etiqueta.ubitecCAA"));%></label><input tyoe="text" id="ubictec_CA" style=" width:20%; text-transform: uppercase;" disabled  maxlength="30" /><button id="match_A1" class='BtnMatchIcon' style="display: none;"></button> <input id="DenominacionUbitec_MAA" style="width:45%; background: none; border: none;" readOnly>
+                                <hr>-->
                                 <label><%out.println(po.getProperty("etiqueta.equipoCAA"));%></label><input type="text" id="equipo_CA"  style=" width: 20%; text-transform: uppercase;" disabled maxlength="18"/><button id="match_A2" class='BtnMatchIcon' style="display: none;"></button> <input id="DenominacionEquipo_MAA" style="width:45%; background: none; border: none;" readOnly>
                                 <hr>
                                 <label><%out.println(po.getProperty("etiqueta.conjuntoCAA"));%></label><input type="text" id="conjunto_CA" style="width: 20%; text-transform: uppercase;" maxlength="40" disabled/><button id="match_A3" class='BtnMatchIcon' style="display: none;"></button> <input id="DenominacionConjunto_MAA" style="width:45%; background: none; border: none;" readOnly>
@@ -373,7 +373,7 @@
                             </div>
                         </section>
                     </section>
-                    <section class="SSeccionActividadesAV">
+                    <section hidden class="SSeccionActividadesAV">
                         <label id="lblTitulo_ord"><%out.println(po.getProperty("etiqueta.ActividadesCAA"));%></label>
                         <hr id="lineatitulo">   
                         <div class="ServAct">
