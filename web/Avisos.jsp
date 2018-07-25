@@ -130,8 +130,8 @@
                 var Aviso = '<%=Aviso%>';
                 var Tipo = '<%=Tipo%>';
                 CargarCabecera(Aviso, Tipo);
-                CargarTextos(Aviso, Tipo);
-                CargarActividades(Aviso, Tipo);
+                //CargarTextos(Aviso, Tipo);
+                //CargarActividades(Aviso, Tipo);
             }
             function inval() {
                 var okcon = "<%=funcioninv%>";
@@ -216,19 +216,20 @@
                                 <label id="lblTitulo_ord"><%=Responsabilidades%></label>
                                 <hr id="lineatitulo_orde">   
                                 <div class="divcomorden">
-                                    <label id="lbl1_ord"><%=Grupo%></label><input tyoe="text" style="width:8%;" id="GrupoPlanificacion" value="" disabled> / <input type="text"   style="width:10%;" id="GrupoPlanificacion2" disabled > <span> <label id="DenoGplan" style="font-size: 0.9em; font-family: 'Tahoma'; width: auto;"/></label> / <label id="DesCen" style="font-size: 0.9em; font-family: 'Tahoma'; "/></label></span>
+                                    <label id="lbl1_ord"><%=Grupo%></label><input tyoe="text" style="width:8%;" id="GrupoPlanificacion" value="" disabled> / <input type="text"   style="width:10%;" id="GrupoPlanificacion2" disabled > <span> <label id="DenoGplan" style="font-size: 0.9em; font-family: 'Tahoma'; width: auto;"/></label>  <label id="DesCen" style="font-size: 0.9em; font-family: 'Tahoma'; "/></label></span>
                                     <hr>
-                                    <label id="lbl1_ord"><%=Puesto%></label><input type="text" id="PtoTrabResp"  style="width:12%;"  value="" disabled> / <input type="text"  style="width:10%;" id="CentroEmplaza" disabled>  <span> <label id="DesPue" style="font-size: 0.9em; font-family: 'Tahoma'; width: auto;"/></label> / <label id="DesCenP" style="font-size: 0.9em; font-family: 'Tahoma'; "/></label></span>
+                                    <label id="lbl1_ord"><%=Puesto%></label><input type="text" id="PtoTrabResp"  style="width:12%;"  value="" disabled> / <input type="text"  style="width:10%;" id="CentroEmplaza" disabled>  <span> <label id="DesPue" style="font-size: 0.9em; font-family: 'Tahoma'; width: auto;"/></label>  <label id="DesCenP" style="font-size: 0.9em; font-family: 'Tahoma'; "/></label></span>
                                     <hr>
-                                    <label id="lbl1_ord"><%=Autor%></label><input type="text" id="AutorAviso"  style="width:18%;" value="" disabled> <label id="lbl1_AutorAviso" style="margin-left: 3%;"><%=FechaAviso%><hr id="lineafecha" style="width: 103.5%; margin-top: 2px;"></label><input style="width:12%; margin-left: -5%; margin-left: 5px;" type="text" id="fechaaviso" disabled><input type="text" id="horaaviso"  style="width:10%; margin-left: 4%;" disabled>
-                                    <hr id="lineaautor" style="margin-top: -8px"> 
+                                    <label id="lbl1_ord"><%=Autor%></label><input type="text" id="AutorAviso"  style="width:18%;" value="" disabled> <label id="lbl1_AutorAviso" style="margin-left: 3%;"><%=FechaAviso%></label><input style="width:12%; margin-left: -5%; margin-left: 5px;" type="text" id="fechaaviso" disabled><input type="text" id="horaaviso"  style="width:10%; margin-left: 4%;" disabled>
+                                    <hr id="lineaautor" style=""> <hr style="margin-top: -10px;margin-left: 292px;width: 230px;">
                                 </div>
                             </section>
                             <section class="divfecha_ord">
                                 <label id="lblTitulo_ord"><%=Circun%></label>
                                 <hr id="lineatitulo_orde">
                                 <div class="divizqorden" >                                       
-                                    <label><%=Des%></label><input id="inic_ord" type="text" disabled style="width:30%;"/>
+                                    <label><%=Des%></label>
+<!--                                    <input id="inic_ord" type="text" disabled style="width:30%;"/>-->
                                     <hr> 
                                     <textarea rows="8" cols="82"  id="TexareaCircunstancia_CA" disabled></textarea>
                                 </div>    
