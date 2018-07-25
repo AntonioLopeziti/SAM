@@ -204,8 +204,8 @@
                                 <label id="lblTitulo_ord" style="width: 60%;"><%=Objeto%></label>
                                 <hr id="lineatitulo_orde">
                                 <section class="SecRespo1_ord">     
-                                    <label><%=Ubicacion%></label><input style="width: 30%;" id="ubitecnica" type="text" disabled> <input type="text" id="DesUbic" style="width: 45%; background: none; border: none;" readonly/>
-                                    <hr>
+<!--                                    <label><%=Ubicacion%></label><input style="width: 30%;" id="ubitecnica" type="text" disabled> <input type="text" id="DesUbic" style="width: 45%; background: none; border: none;" readonly/>
+                                    <hr>-->
                                     <label><%=Equipo%></label><input style="width: 30%;" type="text" id="num_equipo" disabled> <input type="text" id="DesEqu" style="width: 45%; background: none; border: none;" readonly/>
                                     <hr>
                                     <label><%=Conjunto%></label><input style="width: 30%;" type="text" id="conjunto" disabled> <input type="text" id="DesConj" style="width: 45%; background: none; border: none;" readonly/>
@@ -233,7 +233,7 @@
                                     <textarea rows="8" cols="82"  id="TexareaCircunstancia_CA" disabled></textarea>
                                 </div>    
                             </section>
-                            <section class="actividades">
+                            <section hidden class="actividades">
                                 <label id="lblTitulo_ord"><%=Actividades%></label>
                                 <hr id="lineatitulo_orde">  
                                 <div id="tabscrll">
