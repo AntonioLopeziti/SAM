@@ -12,6 +12,7 @@ import Entidades.Solped_Posiciones_vis;
 import Entidades.Solped_Servicios_vis;
 import Entidades.textos_cabecera_solped;
 import Entidades.textos_posiciones_solped;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -823,10 +824,10 @@ public class ACC_SolicitudPedidos {
         return s;
     }
 
-    public void InsertarSolped(ArrayList<SolpedCrea> sl, String folio, String hor) {
+    public void InsertarSolped(ArrayList<SolpedCrea> sl, String folio, String hor, String ipsf) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String sql = "{CALL MM.Solped_GuardarDatos(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{CALL MM.Solped_GuardarDatos(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         PreparedStatement ps = null;
         try {
             for (SolpedCrea s : sl) {
@@ -852,6 +853,7 @@ public class ACC_SolicitudPedidos {
                 ps.setString(19, s.getNum_cuenta_mayor());
                 ps.setString(20, s.getCentro_coste());
                 ps.setString(21, s.getNum_orden());
+                ps.setString(22, ipsf);
                 ps.executeUpdate();
             }
         } catch (Exception e) {
@@ -1789,4 +1791,50 @@ public class ACC_SolicitudPedidos {
     }
 
 
+        public int Checko(String folio) {
+        int x = 0;
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.CrearsolPedidos_RevisarFolio(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, folio);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                x = 1;
+            } else {
+                x = 2;
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return x;
+    }        
+   
+
+     public String ActualizarFolioss(String ipsf){
+         String f = "";
+         Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.creaSOLPED_guardarFolio(?,?)}";
+        try {
+            ps = con.prepareCall(sql);
+            ps.setString(1, ipsf);
+            ps.registerOutParameter(2, java.sql.Types.VARCHAR);
+            ps.executeUpdate();
+            f = ps.getString(2);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return f;
+     }
+        
 }
