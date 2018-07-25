@@ -81,7 +81,7 @@ public class SolpedCrea {
     public void setId_solped(int id_solped) {
         this.id_solped = id_solped;
     }
-
+  
     public String getFolio_sam() {
         return folio_sam;
     }
