@@ -1429,6 +1429,37 @@ public class ACC_Reservas {
         return mater;
     }
 
+    public ArrayList<materiales> Matchmateriales(String material, String descripcion, String centro, String almacen, String cant, String usuario){
+        ArrayList<materiales> mat = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.ReservaCrea_Material(?,?,?,?,?,?)}";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, material);
+            ps.setString(2, descripcion);
+            ps.setString(3, centro);
+            ps.setString(4, almacen);
+            ps.setString(5,cant);
+            ps.setString(6, usuario);
+            rs = ps.executeQuery();
+                while(rs.next()){
+                    materiales m = new materiales();
+                    m.setNum_material(rs.getString("num_material"));
+                    m.setTexto_material(rs.getString("texto_material"));
+                    m.setUnidad_medida(rs.getString("unidad_medida"));
+                    mat.add(m);
+                }
+        } catch(Exception e){
+            System.out.println("Error debido a: "+e);
+        } finally{
+            cnx.CerrarConexion(con);
+        }
+        return mat;
+    }
+            
     public materiales CargarMaterial(String mat, String cen, String alm) {
         materiales m = new materiales();
         Conexion cnx = new Conexion();
