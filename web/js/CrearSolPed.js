@@ -2217,7 +2217,7 @@ $(document).ready(function () {
         var acc = "GuardarSolped";
         var dat = "&fsp=" + folio+"&ipsf="+ips;
         $.ajax({
-            async: false,
+            async: false, 
             type: 'GET',
             dataType: 'json',
             url: 'PeticionSolPed',
