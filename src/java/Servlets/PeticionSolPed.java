@@ -244,7 +244,7 @@ public class PeticionSolPed extends HttpServlet {
                     if (postextos != t.size()) {
                         n = 3; ////// las posiciones servicios no coinciden
                     }
-                    if (n != 0) {
+                    if (n != 0) { 
                         ACC_SolicitudPedidos.ObtenerInstancia().Eliminartablas("", user, "X");
                     } else {
                         ACC_SolicitudPedidos.ObtenerInstancia().Eliminartablas("", user, "");
