@@ -138,8 +138,8 @@ $(document).ready(function () {
                         ShowMsg(3, "images/advertencia.PNG", "audio/saperror.wav", NRes.val());
                         $('input').val('');
                     }
-                    cargarDatosReserv(NRes.val(), nr);
                     cargartablaReserva(NRes.val(), nr);
+                    cargarDatosReserv(NRes.val(), nr);
                 }
             });
         }
@@ -162,6 +162,8 @@ $(document).ready(function () {
                 $('#centroco').val(r[3]);
                 $('#orden').val(r[4]);
                 $('#Arece').val(r[6]);
+                $('#NReserva').val(r[7]);
+                $('#ReserSAM').val(r[8]);
                 var ms = r[5];
                 $('#mensgesolped').val(ms);
                 if (ms.length > 0) {
