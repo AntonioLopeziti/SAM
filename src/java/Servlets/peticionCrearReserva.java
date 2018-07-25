@@ -161,14 +161,15 @@ public class peticionCrearReserva extends HttpServlet {
                     }
                     break;
                 case "ConsultarMaterial":
-                    ArrayList<materiales> ma = ACC_Reservas.ObtenerInstancia().ConsultaMateriales(Material, Descri, Cantid, Centro, Almacen);
+//                  ArrayList<materiales> ma = ACC_Reservas.ObtenerInstancia().ConsultaMateriales(Material, Descri, Cantid, Centro, Almacen);
+                    ArrayList<materiales> ma = ACC_Reservas.ObtenerInstancia().Matchmateriales(Material, Descri, Centro, Almacen, Cantid, Usu);
                     if (ma.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < ma.size(); i++) {
-                            out.println("<tr ondblclick=\"seleccionarMate('" + ma.get(i).getMaterial() + "','" + ma.get(i).getDescripcion() + "', '" + ma.get(i).getUnidad_medida() + "', '" + Posicion + "',  'VentanaModalMateriales')\">");
-                            out.println("<td style=\"width: 30%;\">" + ma.get(i).getMaterial() + "</td>");
-                            out.println("<td style=\"width: 70%; text-align: left;\">" + ma.get(i).getDescripcion() + "</td>");
+                            out.println("<tr ondblclick=\"seleccionarMate('" + ma.get(i).getNum_material() + "','" + ma.get(i).getTexto_material() + "', '" + ma.get(i).getUnidad_medida() + "', '" + Posicion + "',  'VentanaModalMateriales')\">");
+                            out.println("<td style=\"width: 30%;\">" + ma.get(i).getNum_material() + "</td>");
+                            out.println("<td style=\"width: 70%; text-align: left;\">" + ma.get(i).getTexto_material()+ "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
