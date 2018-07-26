@@ -221,12 +221,12 @@
                             <label><%out.println(po.getProperty("etiqueta.ObjetoreferenciaCAA"));%></label>
                             <hr id="lineatitulo">   
                             <div class="divobjavi">
-<!--                                <label hidden><%out.println(po.getProperty("etiqueta.ubitecCAA"));%></label><input hidden type="text" id="ubictec_CA" maxlength="30" style="width:20%;"><button id="match_A1" class='BtnMatchIcon'></button><input style="width:45%; background: none; border: none;" readOnly id="DenominacionUbitec_MAA"/>
-                                <hr>-->
+                                <label><%out.println(po.getProperty("etiqueta.ubitecCAA"));%></label><input type="text" id="ubictec_CA" maxlength="30" style="width:20%;"><button id="match_A1" class='BtnMatchIcon'></button><input style="width:45%; background: none; border: none;" readOnly id="DenominacionUbitec_MAA"/>
+                                <hr>
                                 <label><%out.println(po.getProperty("etiqueta.equipoCAA"));%></label><input type="text" id="equipo_CA" maxlength="18" style="width: 20%;" /><button id="match_A2" class='BtnMatchIcon' ></button><input style="width:45%; border:none; background:none;" readOnly id="DenominacionEquipo_MAA"></label>
                                 <hr>
-                                <label><%out.println(po.getProperty("etiqueta.conjuntoCAA"));%></label><input type="text" id="conjunto_CA" maxlength="40"style="width: 20%;"><button id="match_A3" class='BtnMatchIcon'></button><input readOnly style="width:45%; border: none; background: none;" id="DenominacionConjunto_MAA"/>
-                                <hr>
+<!--                                <label><%out.println(po.getProperty("etiqueta.conjuntoCAA"));%></label><input type="text" id="conjunto_CA" maxlength="40"style="width: 20%;"><button id="match_A3" class='BtnMatchIcon'></button><input readOnly style="width:45%; border: none; background: none;" id="DenominacionConjunto_MAA"/>
+                                <hr>-->
                             </div>
                         </section>
                         <section class="SecRes_avi">
@@ -829,7 +829,8 @@
                     mensj = '<%=av%>  ' + mensajOk + ' <%=gra%>';
                     break;
                 case 5 :
-                    mensj = +'<%=equipoo%>' + "," + '<%=msgEq%>';
+                    //mensj = +'<%=equipoo%>' + "," + '<%=msgEq%>';
+                    mensj = "Equipo no valido";
                     break;
                 case 6:
                     mensj = '<%=ubTeec%>' + "," + '<%=msgEq%>';
@@ -848,13 +849,27 @@
         }
 
         function Mens(N, a, i, f) {
+            var mensaj
             switch (N) {
+                case 00:
+                    mensaj = "Faltan campos obligatorios";
+                    break
+                case 55:
+                    mensaj = "Equipo " + f + ", no valido.";
+                    break;
+                case 66:
+                    mensaj = "Ubicacion " + f + ", no valida";
+                    break;
                 case 90:
                     $("#iconmsg").css("visibility", "visible");
                     $("#iconmsg").attr("src", "images/aceptar.png");
                     $("#msg").html("Folio " + f);
                     break;
+
             }
+            $("#iconmsg").css("visibility", "visible");
+            $("#iconmsg").attr("src", i);
+            $("#msg").html(mensaj);
         }
 
         function mensajALer(me) {
