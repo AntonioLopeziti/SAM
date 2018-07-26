@@ -59,11 +59,11 @@ $(document).ready(function () {
         $('#ubictec_CA').css("background-image", "none");
 
     });
-    $('#ubictec_CA').keypress(function (e) {
-        if (e.which == 13 || e.keyCode == 13) {
-            //validar();
-        }
-    });
+//    $('#ubictec_CA').keypress(function (e) {
+//        if (e.which == 13 || e.keyCode == 13) {
+//            //validar();
+//        }
+//    });
 
     $('#equipo_CA').focus(function () {
         $('#equipo_CA').css("background-image", "none");
@@ -322,20 +322,28 @@ $(document).ready(function () {
         mostrarVentanaModal('conjunto')
     });
 
-    $('#equipo_CA').keyup(function (){
-        UBEQconsul();
-        //LLamaequipo();
-    });
-    $('#equipo_CA').blur(function (){
+    $('#equipo_CA').blur(function () {
         UBEQconsul();
     });
-    //$("#equipo_CA").click(function () {
-        //LLamaequipo();
-   // });
+    $('#equipo_CA').keypress(function (e){
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code == 13){
+            UBEQconsul();
+        }
+    });
 
-    $("#ubictec_CA").click(function () {
-        LLamaUBtecn();
+    $('#ubictec_CA').keypress(function (e){
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code == 13){
+            UBEQconsul();
+        }
     });
+    $('#ubictec_CA').blur(function () {
+        UBEQconsul();
+    });
+//    $("#ubictec_CA").click(function () {
+//        LLamaUBtecn();
+//    });
 
     $("#match_A4").click(function () {
         mostrarVentanaModal('grupop');
@@ -1105,9 +1113,14 @@ function validar() {
     var textobreve = $("#descripcionnotificacion_CA").val();
     //var Nfolio = GetFolio();
     var Nfolio = "";
-    if (equipo.length < 1 || equipo === "" && textobreve.length < 1 || textobreve === "") {
-
-        mensajess(0, "audio/saperror.wav", "images/advertencia.PNG");
+    //if (equipo.length < 1 || equipo === "" && textobreve.length < 1 || textobreve === "") {
+    if(textobreve.length < 1 || textobreve == "" || textobreve == null){
+        //mensajess(0, "audio/saperror.wav", "images/advertencia.PNG");
+        Mens(00, "audio/saperror.wav", "images/advertencia.PNG", "");
+        setTimeout(function () {
+                        $("#msg").html("");
+                        $("#iconmsg").css("visibility", "hidden");
+                    }, 1500);
     } else {
         mensajess(18, "audio/sapmsg.wav", "images/load.gif");
         $('#guardar').prop('disabled', true);
@@ -1432,8 +1445,8 @@ function enviarDatos(ubitec, denoubitec, equipo, denoequipo, conjunto, denoconju
             if (num == 0) {
                 mensajess(3, "audio/saperror.wav", "images/advertencia.PNG");
             } else if (num == 2) {
-                textCircuns(NFol, ip);
                 Mens(90, "audio/sapmsg.wav", "images/aceptar.png", NFol);
+                textCircuns(NFol, ip);
                 NuevoLimpia();
             } else {
                 Reload();
@@ -1857,14 +1870,39 @@ function CerrarCalendario() {
 
 function UBEQconsul() {
 
-    //var ubt = $("#ubictec_CA").val();
+    var ubt = $("#ubictec_CA").val();
     var equ = $("#equipo_CA").val();
 
     //if ((equ.length > 1) || (equ.length > 1 && ubt.length > 1)) {
-    if((equ.length > 1) || (equ.length)){
+    if (equ.length > 1 || equ !== "") {
         var acc = "ValidarEEquip";
-
         var enviar = "&Equi=" + equ;
+        
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: 'PeticionModuloAvisos',
+            contentType: "application/x-www-form-urlencoded",
+            processData: true,
+            data: "Action=" + acc + enviar,
+            success: function (data) {
+                if (data == 0) {
+                    //mensajess(5, "audio/sapmsg.wav", "images/advertencia.PNG");
+                    Mens(55, "audio/sapmsg.waw", "images/advertencia.PNG", equ);
+                    setTimeout(function () {
+                        $("#msg").html("");
+                        $("#iconmsg").css("visibility", "hidden");
+                    }, 1500);
+                } else {
+                    $("#EquUbi").html(data);
+                    CarGarEQ();
+                }
+            }
+        });
+    } //else if (ubt.length > 1) {
+    else if(equ.length < 1){
+        var acc = "ValidarUbitec";
+        var enviar = "&Ubite=" + ubt;
 
         $.ajax({
             async: false,
@@ -1875,47 +1913,22 @@ function UBEQconsul() {
             data: "Action=" + acc + enviar,
             success: function (data) {
                 if (data == 0) {
-                    mensajess(5, "audio/sapmsg.wav", "images/advertencia.PNG");
+                    //mensajess(6, "audio/sapmsg.wav", "images/advertencia.PNG");
+                    Mens(66, "audio/sapmsg.wav", "images/advertencia.PNG", ubt);
                     setTimeout(function () {
                         $("#msg").html("");
-                        $("#iconmsg").css("visibility", "hidden");
-                    }, 5000);
+                        //$("#msg").css("visibility", "hidden");
+                    }, 1500);
                 } else {
+                    //alert("segun ubicacion; " + data);
                     $("#EquUbi").html(data);
-                    CarGarEQ();
+//                    var IDUbc = $("#IDUbc2").val();
+//                    $("#ubictec_CA").val(IDUbc);
+                    CarGarUBT();
                 }
-            },
+            }
         });
-    } 
-    //else if (equ.length < 1 && ubt.length > 1) {
-//    else if(equ.length < 1){
-//        var acc = "ValidarUbitec";
-//
-//        var enviar = "&Ubite=" + "";
-//
-//        $.ajax({
-//            async: false,
-//            type: 'GET',
-//            url: 'PeticionModuloAvisos',
-//            contentType: "application/x-www-form-urlencoded",
-//            processData: true,
-//            data: "Action=" + acc + enviar,
-//            success: function (data) {
-//                if (data == 0) {
-//                    mensajess(6, "audio/sapmsg.wav", "images/advertencia.PNG");
-//
-//                    setTimeout(function () {
-//                        $("#msg").html("");
-//                        $("#msg").css("visibility", "hidden");
-//                    }, 6000);
-//                } else {
-//                    $("#EquUbi").html(data);
-//                    CarGarUBT();
-//                }
-//            },
-//        });
-//    }
-     else {
+    } else {
     }
 }
 
@@ -1924,8 +1937,8 @@ function CarGarEQ() {
     $("#GrpPlanificacion_CA").val(GrPL);
     var CPMa = $("#CPMa").val();
     $("#CentroPlaninificacion_CA").val(CPMa);
-    var IDUbc = $("#IDUbc").val();
-    $("#ubictec_CA").val(IDUbc);
+   var IDUbc = $("#IDUbc").val();
+   $("#ubictec_CA").val(IDUbc);
     var CPTr2 = $("#CPTr").val();
     $("#puestotrabajo2_CA").val(CPTr2);
     var CPTr = $("#CPPTRA").val();
