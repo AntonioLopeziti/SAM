@@ -323,23 +323,31 @@ $(document).ready(function () {
     });
 
     $('#equipo_CA').blur(function () {
-        UBEQconsul();
+        if ($('#equipo_CA').val() == "") {
+
+        } else {
+            UBEQconsul();
+        }
     });
-    $('#equipo_CA').keypress(function (e){
+    $('#equipo_CA').keypress(function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);
-        if(code == 13){
+        if (code == 13) {
             UBEQconsul();
         }
     });
 
-    $('#ubictec_CA').keypress(function (e){
+    $('#ubictec_CA').keypress(function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);
-        if(code == 13){
+        if (code == 13) {
             UBEQconsul();
         }
     });
     $('#ubictec_CA').blur(function () {
-        UBEQconsul();
+        if ($('#ubictec_CA').val() == "") {
+
+        } else {
+            UBEQconsul();
+        }
     });
 //    $("#ubictec_CA").click(function () {
 //        LLamaUBtecn();
@@ -1114,13 +1122,16 @@ function validar() {
     //var Nfolio = GetFolio();
     var Nfolio = "";
     //if (equipo.length < 1 || equipo === "" && textobreve.length < 1 || textobreve === "") {
-    if(textobreve.length < 1 || textobreve == "" || textobreve == null){
+    if (textobreve.length < 1 || textobreve == "" || textobreve == null) {
+        
         //mensajess(0, "audio/saperror.wav", "images/advertencia.PNG");
         Mens(00, "audio/saperror.wav", "images/advertencia.PNG", "");
+        $('#descripcionnotificacion_CA').focus();
         setTimeout(function () {
-                        $("#msg").html("");
-                        $("#iconmsg").css("visibility", "hidden");
-                    }, 1500);
+            $("#msg").html("");
+            $("#iconmsg").css("visibility", "hidden");
+        }, 1500);
+        
     } else {
         mensajess(18, "audio/sapmsg.wav", "images/load.gif");
         $('#guardar').prop('disabled', true);
@@ -1877,7 +1888,7 @@ function UBEQconsul() {
     if (equ.length > 1 || equ !== "") {
         var acc = "ValidarEEquip";
         var enviar = "&Equi=" + equ;
-        
+
         $.ajax({
             async: false,
             type: 'GET',
@@ -1900,7 +1911,7 @@ function UBEQconsul() {
             }
         });
     } //else if (ubt.length > 1) {
-    else if(equ.length < 1){
+    else if (equ.length < 1) {
         var acc = "ValidarUbitec";
         var enviar = "&Ubite=" + ubt;
 
@@ -1937,8 +1948,8 @@ function CarGarEQ() {
     $("#GrpPlanificacion_CA").val(GrPL);
     var CPMa = $("#CPMa").val();
     $("#CentroPlaninificacion_CA").val(CPMa);
-   var IDUbc = $("#IDUbc").val();
-   $("#ubictec_CA").val(IDUbc);
+    var IDUbc = $("#IDUbc").val();
+    $("#ubictec_CA").val(IDUbc);
     var CPTr2 = $("#CPTr").val();
     $("#puestotrabajo2_CA").val(CPTr2);
     var CPTr = $("#CPPTRA").val();
