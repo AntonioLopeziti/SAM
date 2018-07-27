@@ -271,15 +271,17 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    } else if (st !== "NOTP") {
-        $('#msg').html("Complete la Operación " + operacion);
-        var icon = $('#iconmsg');
-        icon.show();
-        icon.attr('src', 'images/advertencia.PNG');
-        var BE = document.createElement('audio');
-        BE.src = 'audio/saperror.wav';
-        BE.play();
-    } else {
+    } 
+//    else if (st !== "NOTP") {
+//        $('#msg').html("Complete la Operación " + operacion);
+//        var icon = $('#iconmsg');
+//        icon.show();
+//        icon.attr('src', 'images/advertencia.PNG');
+//        var BE = document.createElement('audio');
+//        BE.src = 'audio/saperror.wav';
+//        BE.play();
+//    }
+    else {
         for (i = 0; i < ckOpe.length; i++) {
             if (ckOpe[i].checked) {
 //            alert($("#opeClavCon" + ckOpe[i].value).text());
