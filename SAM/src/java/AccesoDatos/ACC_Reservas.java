@@ -1447,8 +1447,8 @@ public class ACC_Reservas {
             rs = ps.executeQuery();
                 while(rs.next()){
                     materiales m = new materiales();
-                    m.setNum_material(rs.getString("num_material"));
-                    m.setTexto_material(rs.getString("texto_material"));
+                    m.setNum_material(rs.getString("material"));
+                    m.setTexto_material(rs.getString("descripcion_ES"));
                     m.setUnidad_medida(rs.getString("unidad_medida"));
                     mat.add(m);
                 }
