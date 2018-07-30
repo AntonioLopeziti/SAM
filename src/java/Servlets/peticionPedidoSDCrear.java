@@ -275,7 +275,7 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         j.add(car[4]);
                         j.add(car[6]);
                         j.add(AreVent);
-                        j.add(car[8]); 
+                        j.add(car[8]);
                         out.println(j);
                     }
                     break;
@@ -315,22 +315,19 @@ public class peticionPedidoSDCrear extends HttpServlet {
                     ACC_CrearPedidoSD.ObtenerInstancia().GuardarCliente(FOLIO, "WE", DESTI, USUAR, FechaActual, HoraActual);
                     break;
                 case "GuardarPosiciones":
-                    String POSFIN = String.valueOf(POSIC) + "0";
                     String FECENTPO = Consultas.ObtenerInstancia().DateFormatGuion(FECEP.trim());
-                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarMateriales(FOLIO, POSFIN, MATER, DESCR, UNIDA, USUAR, FechaActual, HoraActual);
-                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCantidades(FOLIO, POSFIN, CANTI, USUAR, FechaActual, HoraActual, FECENTPO);
+                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarMateriales(FOLIO, Chepos(POSIC), MATER, DESCR, UNIDA, USUAR, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().GuardarCantidades(FOLIO, Chepos(POSIC), CANTI, USUAR, FechaActual, HoraActual, FECENTPO);
                     break;
-                case "ActaulizarFolio":
-                    ACC_Folios.ObtenerIstancia().ActualizarFolio("PV", fo.getFolioActual());
-                    out.println(FOLIO);
+                case "ActualizarFolio":
+                   String FoliFinal =  ACC_CrearPedidoSD.ObtenerInstancia().FolioPos(FOLIO);
+                    out.println(FoliFinal);
                     break;
                 case "GuardarTextCab":
                     ACC_CrearPedidoSD.ObtenerInstancia().InsertTxtCabecera(FOLIO, FILA, USUAR, TEXTOCAB, FechaActual, HoraActual);
                     break;
                 case "GuardarTextPos":
-//                    int POSTXT = Integer.parseInt(POS) + 1;
-                    String POSTF = String.valueOf(POS) + "0";
-                    ACC_CrearPedidoSD.ObtenerInstancia().InsertTxtPosicion(folioSAM, POSTF, FILA, USUAR, TEXTPOS, FechaActual, HoraActual);
+                    ACC_CrearPedidoSD.ObtenerInstancia().InsertTxtPosicion(FOLIO, Chepos(POS), FILA, USUAR, TEXTPOS, FechaActual, HoraActual);
                     break;
                 case "CargarDesRelac":
                     String sql = "{call SD.CrearPedidos_ConsultaDestinatario(?,?,?)}";
@@ -381,8 +378,8 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         out.println("<tbody>");
                         for (int i = 0; i < li.size(); i++) {
                             out.println("<tr ondblclick=\"SeleccionarData('" + li.get(i)[0] + "','VentanaModalListaPrecio','ListaPrecio','" + li.get(i)[1] + "','txtListaPrecio')\">");
-                            out.println("<td>" + li.get(i)[0]+ "</td>");
-                            out.println("<td>" + li.get(i)[1]+ "</td>");
+                            out.println("<td>" + li.get(i)[0] + "</td>");
+                            out.println("<td>" + li.get(i)[1] + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -391,11 +388,49 @@ public class peticionPedidoSDCrear extends HttpServlet {
                         out.println();
                     }
                     break;
+                case "CargarTablaPos":
+                    out.println("<table id=\"TabBody2\">");
+                    out.println("<tbody>");
+                    for (int i = 0; i < 10; i++) {
+                        out.println("<tr id=\"tr"+i+"\">");
+                        out.println("<td><input type=\"checkbox\" name=\"Cehckbx\" value=\""+i+"\"/></td>");
+                        out.println("<td><input type=\"text\" class=\"tdSMatch\" id=\"tdPosic"+i+"\" name=\"PosicTD\" onfocus=\"QuitarMatch()\" readonly/></td>");
+                        out.println("<td><input type=\"text\" class=\"tdCMatch\" id=\"tdMater"+i+"\" name=\"MaterTD\" onfocus=\"MostrarMatch('tdMater', 'matchtdmaterial', '"+i+"')\" maxlength=\"40\"/><button id=\"matchtdmaterial"+i+"\" onclick=\"MostrarMatchGridMateriales('VentanaModalMateriales', 'handle8', '"+i+"');\" name=\"matchMaterial\" class='BtnMatchIconGrid'></button></td>");
+                        out.println("<td><input type=\"text\" class=\"tdSMatch\" id=\"tdDescr"+i+"\" name=\"DesciTD\" onfocus=\"QuitarMatch()\" readOnly/></td>");
+                        out.println("<td><input type=\"text\" class=\"tdSMatch\" id=\"tdCanti"+i+"\" name=\"CantiTD\" onblur=\"this.value = checkDec(this.value, 3)\" onKeyPress=\"return soloNumeros(event)\" onfocus=\"QuitarMatch()\"/></td>");
+                        out.println("<td><input type=\"text\" class=\"tdCMatch\" id=\"tdFecEn"+i+"\" name=\"FecEnTD\" onfocus=\"MostrarMatch('tdFecEn', 'matchtdFecEntre', '"+i+"')\" readOnly/><button id=\"matchtdFecEntre"+i+"\" onclick=\"MostrarCalendarioGrid('tdFecEn"+i+"')\" name=\"matchFecEnt\" class='BtnMatchIconGrid'></button></td>");
+                        out.println("<td><input type=\"text\" class=\"tdCMatch\" id=\"tdUmedi"+i+"\" name=\"UMediTD\" onfocus=\"QuitarMatch()\" readOnly/></td>");
+                        out.println("<td><button id=\"textoPosicion"+i+"\" name=\"matchTxtPos\" class=\"BtnMatchIconDescri\" onclick=\"mostrarVentanaTextoPos("+i+")\"></button><textarea hidden style=\"resize: none;\" id=\"textoposTemp"+i+"\"></textarea><textarea hidden style=\"resize: none;\" id=\"textoposEmbaTemp"+i+"\"></textarea></td>");
+                        out.println("</tr>");
+                    }
+                    out.println("<tr class=\"ocultar\" id=\"temporalro\"><td>00</td><td>00000000</td><td>0000000000000000000</td><td>00000000000000000000000000000000000000000000000000000000</td><td>00000000000000000000000000</td><td>000000000000000000</td><td>0000000000000</td><td>000000000000</td></tr>");
+                    out.println("</tbody>");
+                    out.println("</table>");
+                    break;
 
             }
         }
     }
-
+public String Chepos(String data) {
+        int valor = Integer.parseInt(data);
+        String i = data;
+        if (i.length() == 5) {
+            return i;
+        }
+        if (valor < 10) {
+            i = "000" + data + "0";
+        }
+        if (valor >= 10 && valor < 100) {
+            i = "00" + data + "0";
+        }
+        if (valor >= 100 && valor < 1000) {
+            i = "0" + data + "0";
+        }
+        if (valor >= 1000 && valor < 10000) {
+            i = data + "0";
+        }
+        return i;
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
