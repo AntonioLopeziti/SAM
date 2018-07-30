@@ -14,6 +14,7 @@ import Entidades.materiales_venta;
 import Entidades.oficina_ventas;
 import Entidades.organizacion_ventas;
 import Entidades.unidades_medida;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -625,7 +626,7 @@ public class ACC_CrearPedidoSD {
                 n[0] = rs.getString("tipo_lista_precio");
                 n[1] = rs.getString("descripcion");
                 lista.add(n);
-            }          
+            }
         } catch (Exception e) {
             System.err.println(e);
         } finally {
@@ -634,5 +635,24 @@ public class ACC_CrearPedidoSD {
         return lista;
     }
 
+    public String FolioPos(String random) {
+        String f = "";
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.CrearPedidos_ActualizaFolio(?,?)}";
+        try {
+            ps = con.prepareCall(sql);
+            ps.setString(1, random);
+            ps.registerOutParameter(2, java.sql.Types.VARCHAR);
+            ps.executeUpdate();
+            f = ps.getString(2);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return f;
+    }
 }
-
