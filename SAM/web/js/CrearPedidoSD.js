@@ -1,7 +1,8 @@
 $(document).ready(function () {
     CargarVendedorInicial();
+    GetIp();
+    CargarTablaPosiciones();
     $('#iconmsg').hide();
-    MostrarFolio();
     $('#fechaPrecio').val(GetfechaActual());
     $('#textoventasMat').hide();
     startTime();
@@ -438,6 +439,7 @@ $(document).ready(function () {
             }
         });
     }
+
     $('#CerraMCMateriales').click(function () {
         var pos = $('#postextpos').val();
         var idElem = 'tdMater' + pos;
@@ -745,12 +747,6 @@ $(document).ready(function () {
         }
         $('#destinatario').val(n[0]);
         $('#txtDestMcia').val(n[1]);
-//        var n = validarInterlocutores();
-//        if (n[0] === "") {
-//            $('#destinatario').focus();
-//            ShowMsg(12, "images/advertencia.PNG", "audio/saperror.wav");
-//            return;
-//        }
         if (clase.length > 0) {
             ObtenerDescripcion(clase.trim(), 'P', 'ClasePedido', 'txtClasePedido');
         }
@@ -810,16 +806,27 @@ $(document).ready(function () {
                     }
                 }
             }
-            $('#guardar').prop("disabled", true);
-            ShowMsg(24, "images/load.gif", "audio/sapmsg.wav");
             SaveDataFolio();
         } else {
             ShowMsg(23, "images/advertencia.PNG", "audio/saperror.wav");
         }
 
     });
-
+    function SaveDataFolio() {
+        $('#guardar').prop("disabled", true);
+        ShowMsg(24, "images/load.gif", "audio/sapmsg.wav");
+        var random = ObtenerFolioRandom();
+        setTimeout(function () {
+            GuardarCabecera(random);
+        }, 4000);
+    }
 });
+function ObtenerFolioRandom() {
+    var name = $('#CreadoPor').val();
+    var ip = $('#IpData').val();
+    var n = ip + "-" + name;
+    return n;
+}
 function inval() {
     ShowMsg(0, "images/advertencia.PNG", "audio/saperror.wav");
 }
@@ -1791,6 +1798,7 @@ function GuardarCabecera(folio) {
         processData: true,
         data: "Accion=" + acc + datos,
         success: function (data) {
+            GuardarTextoCab(folio);
         }
     });
 }
@@ -1832,6 +1840,7 @@ function GuardarPosiciones(folio) {
             pos = pos + 1;
         }
     }
+    ActualizaFolio(folio);
 }
 
 
@@ -1851,18 +1860,21 @@ function savePos(mat, des, um, can, i, fe, folio) {
         }
     });
 }
-function ActualizaFolio(folio)
+
+function ActualizaFolio(random)
 {
-    var acc = "ActaulizarFolio";
+    var acc = "ActualizarFolio";
     $.ajax({
         async: false,
         type: 'GET',
         url: 'peticionPedidoSDCrear',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Accion=" + acc + "&FOLIO=" + folio,
+        data: "Accion=" + acc + "&FOLIO=" + random,
         success: function (data) {
-            window.location.href = "CrearPedidoSD.jsp?FolioPV=" + data;
+            $('#guardar').prop("disabled", false);
+            LoadItems();
+            ShowMsg(27, "images/aceptar.png", "audio/sapmsg.wav", data);
         }
     });
 }
@@ -1891,6 +1903,7 @@ function GuardarTextoCab(folio) {
 
         });
     }
+    GuardarPosiciones(folio);
 }
 function GuardarTextoPos(pos, a, folio) {
     pos = (pos) + 1;
@@ -1940,39 +1953,6 @@ function MostrarCalendarioGrid(id) {
     Drag.init(theHandle, theRoot);
     $('#datapicker').datepicker().show();
 }
-function SaveDataFolio() {
-    var folio = Getfolio();
-    if (folio == 0) {
-        ShowMsg(25, "images/advertencia.PNG", "audio/saperror.wav");
-    } else if (folio == 1) {
-        setTimeout(function () {
-            SaveDataFolio();
-        }, 2000);
-    } else {
-        GuardarCabecera(folio);
-        GuardarTextoCab(folio);
-        GuardarPosiciones(folio);
-        ActualizaFolio(folio);
-    }
-}
-
-function Getfolio() {
-    var folio;
-    acc = "RevisarFolio";
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: 'peticionPedidoSDCrear',
-        contentType: "application/x-www-form-urlencoded",
-        processData: true,
-        data: "Accion=" + acc,
-        success: function (data) {
-            folio = data;
-
-        }
-    });
-    return folio;
-}
 function BanBlo(active) {
     if (active == 0) {
         $('#ClasePedido').prop('disabled', true);
@@ -1995,4 +1975,59 @@ function VerificarDatosBl() {
     } else {
         BanBlo(1);
     }
+}
+
+function CargarTablaPosiciones() {
+    var acc = "CargarTablaPos";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionPedidoSDCrear',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc,
+        success: function (data) {
+            $('#SecCuerpo2').html(data);
+            loadDoubleScroll("DobleSection2", "SecCuerpo2", "DobleContainer2", "TabBody2");
+            AjustarCabecera('TabHead2', 'TabBody2', 3, 'SecCuerpo2');
+        }
+    });
+}
+function GetIp() {
+    window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;   //compatibility for firefox and chrome
+    var pc = new RTCPeerConnection({iceServers: []}), noop = function () {};
+    pc.createDataChannel("");    //create a bogus data channel
+    pc.createOffer(pc.setLocalDescription.bind(pc), noop);    // create offer and set local description
+    pc.onicecandidate = function (ice) {  //listen for candidate events
+        if (!ice || !ice.candidate || !ice.candidate.candidate)
+            return;
+        var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+        pc.onicecandidate = noop;
+        $('#IpData').val(myIP);
+    };
+}
+function LoadItems() {
+    CargarTablaPosiciones();
+    CargarVendedorInicial();
+    $('#solicitante').css('background-image', 'url(images/necesario.PNG)');
+    $('#destinatario').css('background-image', 'url(images/necesario.PNG)');
+    $('#ListaPrecio').css('background-image', 'url(images/necesario.PNG)');
+    $('#refcliente').css('background-image', 'url(images/necesario.PNG)');
+    $('#fechaEntrega').css('background-image', 'url(images/necesario.PNG)');
+    $('#solicitante').val("");
+    $('#destinatario').val("");
+    $('#ListaPrecio').val("");
+    $('#ListaPrecio').prop('disabled', false);
+    $('#ClasePedido').prop('disabled', false);
+    $('#txtSolicitante').val("");
+    $('#txtDestMcia').val("");
+    $('#txtAreaVentas').val("");
+    $('#txtListaPrecio').val("");
+    $('#orgVentas').val("");
+    $('#CanalDis').val("");
+    $('#Sector').val("");
+    $('#refcliente').val("");
+    $('#fechaEntrega').val("");
+    $('#textoCabecera').val("");
+    $('#fechaPrecio').val(GetfechaActual());
 }
