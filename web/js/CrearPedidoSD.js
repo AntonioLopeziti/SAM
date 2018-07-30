@@ -1848,7 +1848,7 @@ function savePos(mat, des, um, can, i, fe, folio) {
     var usuario = $('#CreadoPor').val();
     var posi = (i) + 1;
     var acc = "GuardarPosiciones";
-    var datos = "&MATER=" + mat + "&DESCR=" + encodeURIComponent(des) + "&UNIDA=" + um + "&CANTI=" + can + "&POSIC=" + posi + "&USUAR=" + usuario + "&FECEP=" + fe + "&FOLIO=" + folio;
+    var datos = "&MATER=" + mat + "&DESCR=" + encodeURIComponent(des) + "&UNIDA=" + um + "&CANTI=" + GetCantend(can,um) + "&POSIC=" + posi + "&USUAR=" + usuario + "&FECEP=" + fe + "&FOLIO=" + folio;
     $.ajax({
         async: false,
         type: 'GET',
@@ -2030,4 +2030,54 @@ function LoadItems() {
     $('#fechaEntrega').val("");
     $('#textoCabecera').val("");
     $('#fechaPrecio').val(GetfechaActual());
+}
+function GetCantend(C, U) {
+    var findata = "";
+    var umc = parseInt(CheckUnidaMed(U));
+    if (umc == 0) {
+        findata = Math.floor(C);
+        findata += ".000";
+    }
+    if (umc == 3) {
+        findata = cantconvert(C.toString());
+    }
+    return findata;
+}
+function CheckUnidaMed(valor)
+{
+    var resp = "";
+    var acc = "umed";
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionCrearSolPed',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + "&UM=" + valor,
+        success: function (data) {
+            resp = data;
+        }
+    });
+    return resp;
+}
+function cantconvert(valor) {
+    if (valor.indexOf(".") != -1) {
+        va = valor.split(".");
+        v0 = va[0];
+        v1 = va[1];
+        if (v1.length == 1) {
+            var valorfinal = v0 + "." + v1 + "00";
+            return valorfinal;
+        } else if (v1.length == 2) {
+            var valorfinal = v0 + "." + v1 + "0";
+            return valorfinal;
+        } else {
+            return valor;
+        }
+
+    } else {
+        valor = valor + ".000";
+        return valor
+    }
+    return valor;
 }
