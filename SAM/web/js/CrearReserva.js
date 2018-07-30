@@ -878,7 +878,7 @@ function cantconvert(valor) {
         valor = valor + ".000";
         return valor
     }
-    return val;
+    return valor;
 }
 function CargarTablaPosiciones() {
     var acc = "CargarTablaPos";
