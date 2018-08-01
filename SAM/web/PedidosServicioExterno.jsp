@@ -116,7 +116,7 @@
                     window.location.href = "Bienvenido.jsp";
                 }
             }
-            checkPermisoPag();            
+            checkPermisoPag();
             function ShowMsg(m, im, au, mn) {
                 var msg;
                 switch (m) {
@@ -179,6 +179,15 @@
                         break;
                     case 19:
                         msg = '<%=ESEntradaArchAdj%>';
+                        break;
+                    case 20:
+                        msg = 'Guardando documento, espere un momento...';
+                        break;
+                    case 21:
+                        msg = 'No se pudo realizar la operación, se completo el pedido';
+                        break;
+                    case 22:
+                        msg = 'Documento creado: ' + mn;
                         break;
 
                 }
@@ -255,11 +264,21 @@
                         Cant.focus();
                         return;
                     }
-                    abrirVentanaMsgAddFile();
+                    ShowMsg(20, "images/load.gif", "audio/sapmsg.wav");
+                    $('#guardar').prop("disabled", true);
+                    var random = ObtenerFolioRandom();
+                    setTimeout(function () {
+                        guardardata(random);
+                    }, 4000);
                 }
             }
-
-            function guardardata() {
+            function ObtenerFolioRandom() {
+                var name = "<%=Nombre%>";
+                var ip = $('#IpData').val();
+                var n = ip + "-" + name;
+                return n;
+            }
+            function guardardata(random) {
                 var n1 = -1;
                 $("input[name=checkbo]").each(function (i, v) {
                     if (this.checked)
@@ -267,7 +286,7 @@
                         n1 = i;
                     }
                 });
-                n = parseInt(n1);
+                var n = parseInt(n1);
                 var DCom = $('#txtPedidoMM').val();
                 var Cent = $('#etCentro').val();
                 var CanE = $('#etCantEntregada' + n).text();
@@ -282,13 +301,17 @@
                 var refpse = $("#refpse").val();
                 var tedcpse = $("#tedcpse").val();
                 var texbrpse = $("#texbrpse").val();
-                var calidadS = $('#CaliServ');
-                var plazpS = $('#PlazServ');
+                var calidadS = $('#CaliServ').val();
+                var plazpS = $('#PlazServ').val();
                 var usu = "<%=Nombre%>";
+                var folio = random;
                 var de = Desc.val();
                 var des = de.replace(/'/g, "´");
                 var cf = (parseInt(Cant.val()) + parseInt(CanE));
-                var datosSer = "&DocCom=" + DCom + "&Posicion=" + PosD + "&Centro=" + Cent + "&NoServicio=" + Serv + "&CantEntrar=" + Cant.val() + "&DesServicio=" + encodeURIComponent(des) + "&PrecioUni=" + Prec + "&linea=" + PosL + "&CantEntregada=" + cf + "&UMS=" + UniM + "&CS=" + CanS + "&refpsee=" + refpse + "&tedcpsee=" + tedcpse + "&texbrpsee=" + texbrpse + "&usu=" + usu + "&Calidad=" + calidadS.val() + "&Plazos=" + plazpS.val();
+                SaveDatos(DCom, PosD, Cent, Serv, Cant.val(), des, Prec, PosL, cf, UniM, CanS, refpse, tedcpse, texbrpse, usu, calidadS, plazpS, folio, n);
+            }
+            function SaveDatos(DCom, PosD, Cent, Serv, Cant, des, Prec, PosL, cf, UniM, CanS, refpse, tedcpse, texbrpse, usu, calidadS, plazpS, folior, n) {
+                var datosSer = "&DocCom=" + DCom + "&Posicion=" + PosD + "&Centro=" + Cent + "&NoServicio=" + Serv + "&CantEntrar=" + Cant + "&DesServicio=" + encodeURIComponent(des) + "&PrecioUni=" + Prec + "&linea=" + PosL + "&CantEntregada=" + cf + "&UMS=" + UniM + "&CS=" + CanS + "&refpsee=" + refpse + "&tedcpsee=" + tedcpse + "&texbrpsee=" + texbrpse + "&usu=" + usu + "&Calidad=" + calidadS + "&Plazos=" + plazpS + "&FolioRandom=" + folior;
                 var acc = "InsertarPedidoServicio";
                 $.ajax({
                     async: false,
@@ -298,187 +321,193 @@
                     processData: true,
                     data: "Action=" + acc + datosSer,
                     success: function (data) {
-                        CleanTable();
-                        $('#guardar').prop('disabled', true);
-                        if (data == 1) {
-                            ShowMsg(10, "images/adver.PNG", "audio/saperror.wav");
-                        } else if (data == 2) {
-                            ShowMsg(12, "images/adver.PNG", "audio/saperror.wav");
-                        } else if (data == 3) {
-                            ShowMsg(13, "images/adver.PNG", "audio/saperror.wav");
+                        if (data === "X") {
+                            ShowMsg(9, "images/adver.PNG", "audio/saperror.wav");
+                            $('#guardar').prop("disabled", false);
+                            CleanTable();
                         } else {
-                            guardarTexarea(n);
+                            guardarTexarea(n, folior);
                         }
+//                        $('#guardar').prop('disabled', true);
+//                        if (data == 1) {
+//                            ShowMsg(10, "images/adver.PNG", "audio/saperror.wav");
+//                        } else if (data == 2) {
+//                            ShowMsg(12, "images/adver.PNG", "audio/saperror.wav");
+//                        } else if (data == 3) {
+//                            ShowMsg(13, "images/adver.PNG", "audio/saperror.wav");
+//                        } else {
+//                            guardarTexarea(n);
+//                        }
                     }
                 });
             }
-            function abrirVentanaMsgAddFile() {
-                var theHandle = document.getElementById('handleFile');
-                var theRoot = document.getElementById('VentanaModalMsgAddFile');
-                Drag.init(theHandle, theRoot);
-                var ven = document.getElementById('VentanaModalMsgAddFile');
-                var ancho = 900;
-                var alto = 250;
-                var x = (screen.width / 2) - (ancho / 2);
-                var y = (screen.height / 2) - (alto / 2);
-                ven.style.left = x + "px";
-                ven.style.top = y + "px";
-                ven.style.display = 'block';
-            }
-            function AbrirVentanaAddFile() {
-                OcultarMensajeFile('VentanaModalMsgAddFile');
-                var theHandle = document.getElementById('handleFileAdd');
-                var theRoot = document.getElementById('VentanaModalAddFile');
-                Drag.init(theHandle, theRoot);
-                var ven = document.getElementById('VentanaModalAddFile');
-                var ancho = 800;
-                var alto = 600;
-                var x = (screen.width / 2) - (ancho / 2);
-                var y = (screen.height / 2) - (alto / 2);
-                ven.style.left = x + "px";
-                ven.style.top = y + "px";
-                ven.style.display = 'block';
-            }
-            function OcultarMensajeFile(window) {
-                var ventana = document.getElementById(window);
-                ventana.style.display = 'none';
+//            function abrirVentanaMsgAddFile() {
+//                var theHandle = document.getElementById('handleFile');
+//                var theRoot = document.getElementById('VentanaModalMsgAddFile');
+//                Drag.init(theHandle, theRoot);
+//                var ven = document.getElementById('VentanaModalMsgAddFile');
+//                var ancho = 900;
+//                var alto = 250;
+//                var x = (screen.width / 2) - (ancho / 2);
+//                var y = (screen.height / 2) - (alto / 2);
+//                ven.style.left = x + "px";
+//                ven.style.top = y + "px";
+//                ven.style.display = 'block';
+//            }
+//            function AbrirVentanaAddFile() {
+//                OcultarMensajeFile('VentanaModalMsgAddFile');
+//                var theHandle = document.getElementById('handleFileAdd');
+//                var theRoot = document.getElementById('VentanaModalAddFile');
+//                Drag.init(theHandle, theRoot);
+//                var ven = document.getElementById('VentanaModalAddFile');
+//                var ancho = 800;
+//                var alto = 600;
+//                var x = (screen.width / 2) - (ancho / 2);
+//                var y = (screen.height / 2) - (alto / 2);
+//                ven.style.left = x + "px";
+//                ven.style.top = y + "px";
+//                ven.style.display = 'block';
+//            }
+//            function OcultarMensajeFile(window) {
+//                var ventana = document.getElementById(window);
+//                ventana.style.display = 'none';
+//
+//            }
+//            var output = [];
+//            function uploadFiles() {
+//                var Formdata = new FormData($('#FormCreate')[0]);
+//                for (var i = 0; i < output.length; i++) {
+//                    Formdata.append('file[]', output[i]);
+//                }
+//                if (output.length == 0) {
+//                    ShowMsg(18, "images/advertencia.PNG", "audio/saperror.wav");
+//                    return;
+//                }
+//                $.ajax({
+//                    url: 'ArchivosEntradasServicios',
+//                    type: 'POST',
+//                    data: Formdata,
+//                    async: false,
+//                    cache: false,
+//                    contentType: false,
+//                    processData: false,
+//                    success: function (data) {
+//                        if (data == 1) {
+//                            OcultarMensajeFile('VentanaModalAddFile');
+//                            guardardata();
+//                            output.length = 0;
+//                            var elementos = $('[name = "rb"]');
+//                            for (var i = 0; i < elementos.length; i++) {
+//                                $('#table12').find('input[name="rb"]').each(function () {
+//                                    $(this).parents("tr").remove();
+//                                });
+//                            }
+//
+//                        }
+//                    }
+//
+//                });
+//                return false;
+//            }
+//            function cancelarFile() {
+//                OcultarMensajeFile('VentanaModalAddFile');
+//                guardardata();
+//                output.length = 0;
+//                var elementos = $('[name = "rb"]');
+//                for (var i = 0; i < elementos.length; i++) {
+//                    $('#table12').find('input[name="rb"]').each(function () {
+//                        $(this).parents("tr").remove();
+//                    });
+//                }
+//            }
+//            function datos() {
+//                var archivos = document.getElementById('archivos').files;
+//                for (var i = 0; i < archivos.length; i++) {
+//                    output.push(archivos[i]);
+//                }
+//
+//                for (var i = 0; i < output.length; i++) {
+//                    var name = output[i].name;
+//                    var ext = name.substring(name.lastIndexOf('.') + 1).toLowerCase();
+//                    var size = output[i].size / 1024 / 1024;
+//                    var tamano = size.toFixed(2);
+//                    var peso = "";
+//                    if (tamano >= 1) {
+//                        peso = tamano + " mb";
+//                    } else {
+//                        peso = tamano + " kb";
+//                    }
+//                    var fila = '<tr><td><input type="checkbox" id="rb' + i + '" name="rb" value="' + i + '"</td>\n\
+//                                            <td><label id="nombre' + i + '">' + name + '</label></td>\n\
+//                                            <td><label id="tipo' + i + '">' + ext + '</label></td>\n\
+//                                            <td><label id="tamaño' + i + '">' + peso + '</label></td></tr>';
+//
+//                    $('#table12 > tbody').append(fila);
+//                }
+//            }
 
-            }
-            var output = [];
-            function uploadFiles() {
-                var Formdata = new FormData($('#FormCreate')[0]);
-                for (var i = 0; i < output.length; i++) {
-                    Formdata.append('file[]', output[i]);
-                }
-                if (output.length == 0) {
-                    ShowMsg(18, "images/advertencia.PNG", "audio/saperror.wav");
-                    return;
-                }
-                $.ajax({
-                    url: 'ArchivosEntradasServicios',
-                    type: 'POST',
-                    data: Formdata,
-                    async: false,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        if (data == 1) {
-                            OcultarMensajeFile('VentanaModalAddFile');
-                            guardardata();
-                            output.length = 0;
-                            var elementos = $('[name = "rb"]');
-                            for (var i = 0; i < elementos.length; i++) {
-                                $('#table12').find('input[name="rb"]').each(function () {
-                                    $(this).parents("tr").remove();
-                                });
-                            }
-
-                        }
-                    }
-
-                });
-                return false;
-            }
-            function cancelarFile() {
-                OcultarMensajeFile('VentanaModalAddFile');
-                guardardata();
-                output.length = 0;
-                var elementos = $('[name = "rb"]');
-                for (var i = 0; i < elementos.length; i++) {
-                    $('#table12').find('input[name="rb"]').each(function () {
-                        $(this).parents("tr").remove();
-                    });
-                }
-            }
-            function datos() {
-                var archivos = document.getElementById('archivos').files;
-                for (var i = 0; i < archivos.length; i++) {
-                    output.push(archivos[i]);
-                }
-
-                for (var i = 0; i < output.length; i++) {
-                    var name = output[i].name;
-                    var ext = name.substring(name.lastIndexOf('.') + 1).toLowerCase();
-                    var size = output[i].size / 1024 / 1024;
-                    var tamano = size.toFixed(2);
-                    var peso = "";
-                    if (tamano >= 1) {
-                        peso = tamano + " mb";
-                    } else {
-                        peso = tamano + " kb";
-                    }
-                    var fila = '<tr><td><input type="checkbox" id="rb' + i + '" name="rb" value="' + i + '"</td>\n\
-                                            <td><label id="nombre' + i + '">' + name + '</label></td>\n\
-                                            <td><label id="tipo' + i + '">' + ext + '</label></td>\n\
-                                            <td><label id="tamaño' + i + '">' + peso + '</label></td></tr>';
-
-                    $('#table12 > tbody').append(fila);
-                }
-            }
-
-            function DatosArchivos() {
-                var extensions = new Array(".jpg", ".png", ".jpeg", ".xml", ".pdf", ".txt", ".docx", ".doc", ".xls", ".xlsx", ".pptx", ".txt");
-                var nomb = document.getElementById("archivos").files[0].name;
-                var ban = false;
-                for (var i = 0; i < output.length; i++) {
-                    var nam = output[i].name;
-                    if (nam == nomb) {
-                        ban = true;
-                        break;
-                    }
-                }
-                if (ban == true) {
-                    ShowMsg(19, "images/advertencia.PNG", "audio/saperror.wav");
-                } else {
-                    var ext = (nomb.substring(nomb.lastIndexOf("."))).toLowerCase();
-                    var perm = false;
-                    for (var i = 0; i < extensions.length; i++) {
-                        if (ext == extensions[i]) {
-                            perm = true;
-                            break;
-                        }
-                    }
-                    if (perm) {
-                        borramsg();
-                        Datafiless();
-                    } else {
-                        ShowMsg(17, "images/advertencia.PNG", "audio/saperror.wav");
-                        document.getElementById("archivos").focus();
-                    }
-                }
-            }
-            function Datafiless() {
-                var trs = $("#table12 tr").length;
-                var final = trs - 1;
-                if (final >= 1) {
-                    for (var i = 0; i < final; i++) {
-                        $("#table12 tr:last").remove();
-                    }
-                    datos();
-                } else if (final >= 2) {
-                    for (var i = 0; i < final; i++) {
-                        $("#table12").remove();
-                    }
-                    datos();
-                } else {
-                    datos();
-                }
-            }
-
-            function DeleteFile() {
-                var elementos = $('[name = "rb"]');
-                for (var i = 0; i < output.length; i++) {
-                    if (elementos[i].checked) {
-                        output.splice(i, 1);
-                        $('#table12').find('input[name="rb"]').each(function () {
-                            if ($(this).is(":checked")) {
-                                $(this).parents("tr").remove();
-                            }
-                        });
-                    }
-                }
-            }
+//            function DatosArchivos() {
+//                var extensions = new Array(".jpg", ".png", ".jpeg", ".xml", ".pdf", ".txt", ".docx", ".doc", ".xls", ".xlsx", ".pptx", ".txt");
+//                var nomb = document.getElementById("archivos").files[0].name;
+//                var ban = false;
+//                for (var i = 0; i < output.length; i++) {
+//                    var nam = output[i].name;
+//                    if (nam == nomb) {
+//                        ban = true;
+//                        break;
+//                    }
+//                }
+//                if (ban == true) {
+//                    ShowMsg(19, "images/advertencia.PNG", "audio/saperror.wav");
+//                } else {
+//                    var ext = (nomb.substring(nomb.lastIndexOf("."))).toLowerCase();
+//                    var perm = false;
+//                    for (var i = 0; i < extensions.length; i++) {
+//                        if (ext == extensions[i]) {
+//                            perm = true;
+//                            break;
+//                        }
+//                    }
+//                    if (perm) {
+//                        borramsg();
+//                        Datafiless();
+//                    } else {
+//                        ShowMsg(17, "images/advertencia.PNG", "audio/saperror.wav");
+//                        document.getElementById("archivos").focus();
+//                    }
+//                }
+//            }
+//            function Datafiless() {
+//                var trs = $("#table12 tr").length;
+//                var final = trs - 1;
+//                if (final >= 1) {
+//                    for (var i = 0; i < final; i++) {
+//                        $("#table12 tr:last").remove();
+//                    }
+//                    datos();
+//                } else if (final >= 2) {
+//                    for (var i = 0; i < final; i++) {
+//                        $("#table12").remove();
+//                    }
+//                    datos();
+//                } else {
+//                    datos();
+//                }
+//            }
+//
+//            function DeleteFile() {
+//                var elementos = $('[name = "rb"]');
+//                for (var i = 0; i < output.length; i++) {
+//                    if (elementos[i].checked) {
+//                        output.splice(i, 1);
+//                        $('#table12').find('input[name="rb"]').each(function () {
+//                            if ($(this).is(":checked")) {
+//                                $(this).parents("tr").remove();
+//                            }
+//                        });
+//                    }
+//                }
+//            }
         </script>
         <link rel="stylesheet" href="css/StyleGeneral.css"> 
         <link rel="stylesheet" href="css/menu.css" media="screen">  
@@ -510,6 +539,7 @@
                 <label><%out.println(po.getProperty("etiqueta.ESEntradaServPedidoC"));%></label>
                 <hr id="hrblue">
                 <div class="buqueOr">
+                    <input type="text" id="IpData" hidden/>
                     <label><%out.println(po.getProperty("etiqueta.ESEntradaServPeMM"));%></label><input type="text" id="txtPedidoMM" maxlength="10" style="width: 15%; text-transform: uppercase;"/><button id="match_C1" class='BtnMatchIcon'></button> / <input type="text" id="PosIten" maxlength="5" style="width: 8%;" /> <input hidden type="text" id="etCentro"> <button id="LeerServicios" class="BtnIconLeer"><%out.println(po.getProperty("etiqueta.ESEntradaSeLeerSer"));%></button> <label id="etTiempo"></label>
                     <hr>
                     <label><%out.println(po.getProperty("etiqueta.ESEntradaServRefe"));%></label><input type="text" id="refpse" maxlength="16" style="width: 15%;" /><button id="textlib" class="BtnIcontelib"><%out.println(po.getProperty("etiqueta.ESEntradaSeTxtLi"));%></button> <label style="margin: .5%;"><%out.println(po.getProperty("etiqueta.ESEntradaCalServ"));%></label> <input type="text" style="width: 6%; background-repeat: no-repeat;" id="CaliServ" maxlength="3"/>
@@ -654,16 +684,16 @@
             </div>
         </div>
 
-        <div id="VentanaModalMsgAddFile" class="VentanaModalAv">
-            <div id="handleFile"><label id="TituloMatch">Advertencia</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalMsgAddFile', 'bxPedido');"><label >X</label></div></div>
-            <div id="BuscarParamAv" class="BuscarParam_u">
-                <div class="fondo_MatchAv">
-                    <img src="images/adver_1.PNG" />
-                    <label id="lbAv">¿Desea agregar archivos?</label>
-                    <button id='addFile' onclick="AbrirVentanaAddFile();" >sí</button><button id='btnCancelar'>no</button>
-                </div>
-            </div>
-        </div>
+        <!--        <div id="VentanaModalMsgAddFile" class="VentanaModalAv">
+                    <div id="handleFile"><label id="TituloMatch">Advertencia</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalMsgAddFile', 'bxPedido');"><label >X</label></div></div>
+                    <div id="BuscarParamAv" class="BuscarParam_u">
+                        <div class="fondo_MatchAv">
+                            <img src="images/adver_1.PNG" />
+                            <label id="lbAv">¿Desea agregar archivos?</label>
+                            <button id='addFile' onclick="AbrirVentanaAddFile();" >sí</button><button id='btnCancelar'>no</button>
+                        </div>
+                    </div>
+                </div>-->
         <div id="VentanaModalAddFile" class="VentanaModalFiles">
             <div id="handleFileAdd"><label id="TituloMatch">Agregar Archivos</label></div>
             <div id="BuscarParamAv" class="BuscarParam_u">
