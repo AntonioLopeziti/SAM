@@ -7,6 +7,7 @@
 
 $(document).ready(function () {
     VerificarFolioExcedido();
+    GetIp();
     AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
     $("#DobleSection").scroll(function () {
         $("#SecCuerpo").scrollTop($("#DobleSection").scrollTop());
@@ -233,10 +234,10 @@ $(document).ready(function () {
     $('#guardar').click(function () {
         validarGuarda();
     });
-    $('#btnCancelar').click(function () {
-        OcultarMensajeFile('VentanaModalMsgAddFile');
-        guardardata();
-    });
+//    $('#btnCancelar').click(function () {
+//        OcultarMensajeFile('VentanaModalMsgAddFile');
+//        guardardata();
+//    });
 });
 function VerificarFolioExcedido() {
     var acc = "VerificarFolio";
@@ -370,7 +371,7 @@ function borramsg() {
     $('#iconmsg').hide();
     $('#msg').html("");
 }
-function guardarTexarea(n) {
+function guardarTexarea(n, folio) {
     var Textlib_pse = $("#Textlib_pse").val();
     var PosD = $('#etnumlinea' + n).text();
     var nota2 = Textlib_pse.replace(/'/g, "´");
@@ -383,8 +384,7 @@ function guardarTexarea(n) {
         no = nota2.substr(d, 132);
         var acc = "GuardaTEXTos";
         var fila = i + 1;
-        var enviar = "&fila=" + fila + "&lineas=" + encodeURIComponent(no) + "&foliD=" + PosD;
-
+        var enviar = "&fila=" + fila + "&lineas=" + encodeURIComponent(no) + "&PosicionTxt=" + PosD + "&FolioRandom=" + folio;
         $.ajax({
             async: false,
             type: 'GET',
@@ -400,27 +400,43 @@ function guardarTexarea(n) {
 
         });
     }
-    CONSUMIRFOLI();
+    ActualizaFolio(folio);
 }
-
-function CONSUMIRFOLI() {
-    var confole = 'confole';
-    var enviar = "&Action=" + confole;
-
+function ActualizaFolio(random)
+{
+    var acc = "ActualizarFolio";
     $.ajax({
         async: false,
         type: 'GET',
         url: 'PeticionPedidoServicio',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: enviar,
+        data: "Action=" + acc + "&FolioRandom=" + random,
         success: function (data) {
-            VerificarFolioExcedido();
-            ShowMsg(11, "images/aceptar.png", "audio/sapmsg.wav", data);
+            $('#guardar').prop("disabled", false);
+            ShowMsg(22, "images/aceptar.png", "audio/sapmsg.wav", data);
+            CleanTable();
         }
-
     });
 }
+//function CONSUMIRFOLI() {
+//    var confole = 'confole';
+//    var enviar = "&Action=" + confole;
+//
+//    $.ajax({
+//        async: false,
+//        type: 'GET',
+//        url: 'PeticionPedidoServicio',
+//        contentType: "application/x-www-form-urlencoded",
+//        processData: true,
+//        data: enviar,
+//        success: function (data) {
+//            VerificarFolioExcedido();
+//            ShowMsg(11, "images/aceptar.png", "audio/sapmsg.wav", data);
+//        }
+//
+//    });
+//}
 function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
 {
     var myTable = document.getElementById(cuerpo);
@@ -446,4 +462,17 @@ function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
         arrCb[i].style.width = (arr[i].offsetWidth - diferiencia) + "px";
     }
     document.getElementById(section).style.width = val + 17 + "px";
+}
+function GetIp() {
+    window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;   //compatibility for firefox and chrome
+    var pc = new RTCPeerConnection({iceServers: []}), noop = function () {};
+    pc.createDataChannel("");    //create a bogus data channel
+    pc.createOffer(pc.setLocalDescription.bind(pc), noop);    // create offer and set local description
+    pc.onicecandidate = function (ice) {  //listen for candidate events
+        if (!ice || !ice.candidate || !ice.candidate.candidate)
+            return;
+        var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+        pc.onicecandidate = noop;
+        $('#IpData').val(myIP);
+    };
 }
