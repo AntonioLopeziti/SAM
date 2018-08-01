@@ -215,6 +215,7 @@
                                     <tr>
                                         <th>Usuario</th>
                                         <th>Nombre</th>
+                                        <th>Centro</th>
                                     </tr>
                                 </thead>
                             </table>
