@@ -350,8 +350,8 @@
                 </div>
                 <div id="ConsultaTablaOrFa" style="display: none;">
                     <div class="tablaCab">
-                        <div class="table-scroll" id="table-scrollUsuarios">
-                            <div class="fixedY" id="fixedYUsuario">
+                        <div class="table-scroll" id="table-scrollOrdFab">
+                            <div class="fixedY" id="fixedYOrdFab">
                                 <table>
                                     <thead>
                                         <tr>
