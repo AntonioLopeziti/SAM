@@ -205,10 +205,11 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     if (ACC_NotificarTiempos.ObtenerInstancia().InsertarCabNotTiempo(cnta)) {
                         if (ACC_NotificarTiempos.ObtenerInstancia().InsertarPosNotTiempo(posno)) {
                             ACC_Folios.ObtenerIstancia().ActualizarFolio("PP", Integer.parseInt(folAct));
-                            if(!v23.equals("PP03")){ ACC_NotificarTiempos.ObtenerInstancia().ActualizaStatusOrdenPP(orden, v21); }
-                            else{
+                            if (!v23.equals("PP03")) {
+                                ACC_NotificarTiempos.ObtenerInstancia().ActualizaStatusOrdenPP(orden, v21);
+                            } else {
                                 //Descontar a la operacion PP03 (Cantidad)
-                                
+
                             }
                             out.println(fl);
                         } else {
@@ -255,28 +256,34 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     break;
                 case "ConsultarOrdenesFab":
                     ArrayList<PlanPP> pl = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().ConsultarOrdenesFabPP(matchOr, matchTxt, matchCnt, v1);
-                    int conta = 0;
-                    ArrayList<ControlListaOrdenes> lo = new ArrayList<>();
                     if (pl.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
-                        for (conta = 0; conta < pl.size(); conta++) {
-                            lo = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().FiltroOrdenesLib();
-                            for (ControlListaOrdenes cnt : lo) {
-                                String name = cnt.getNum_orden();
-                                String nameRe = pl.get(conta).getNum_orden();
-                                if (nameRe.equals(name)) {
-                                } else {
-                                    out.println("<tr ondblclick=\"SelectOrd('" + pl.get(conta).getNum_orden() + "', 'Orden' , '" + pl.get(conta).getTexto_breve() + "')\">");
-                                    out.println("<td>" + pl.get(conta).getNum_orden() + "</td>");
-                                    out.println("<td>" + pl.get(conta).getTexto_material() + "</td>");
-                                    out.println("</tr>");
-                                }
-                            }
+                        for (int i = 0; i < pl.size(); i++) {
+                            out.println("<tr ondblclick=\"SelectOrd('" + pl.get(i).getNum_orden() + "', 'Orden' , '" + pl.get(i).getTexto_breve() + "')\">");
+                            out.println("<td>" + pl.get(i).getNum_orden() + "</td>");
+                            out.println("<td>" + pl.get(i).getTexto_material() + "</td>");
+                            out.println("</tr>");
                         }
-
                         out.println("</tbody>");
                         out.println("</table>");
+//                    int conta = 0;
+//                    ArrayList<ControlListaOrdenes> lo = new ArrayList<>();
+//                    if (pl.size() > 0) {
+//                        for (conta = 0; conta < pl.size(); conta++) {
+//                            lo = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().FiltroOrdenesLib();
+//                            if (lo.size() > 0) {
+//                                for (ControlListaOrdenes cnt : lo) {
+//                                    String name = cnt.getNum_orden();
+//                                    String nameRe = pl.get(conta).getNum_orden();
+//                                    if (nameRe.equals(name)) {
+//                                        out.println(0);
+//                                    } else {
+//                                    }
+//                                }
+//                            }
+//                        }
+//
                     } else {
                         out.println(0);
                     }
@@ -347,7 +354,7 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     break;
                 case "getMotivosRC":
                     ArrayList<MotivosRechazo> mc = AccesoDatos.ACC_NotificarTiempos.ObtenerInstancia().GetMotivosRC(v1);
-                    for(int i = 0; i < mc.size(); i++){
+                    for (int i = 0; i < mc.size(); i++) {
                         out.println("<input class=\"ckhRechazo\" type=\"radio\" name=\"ckRechazoIT\" value=\"" + mc.get(i).getMotivo() + "\"> " + mc.get(i).getMotivo() + "<br>");
                     }
                     break;
