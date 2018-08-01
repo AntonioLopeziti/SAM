@@ -425,21 +425,32 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     break;
                 case "TabOperacionesPP":
                     int opp = 0;
+                    String status = "";
                     ArrayList<operaciones_ordenes_crea> opeO = ACC_Ordenes_pp_notificaciones.ObtenerInstancia().MostrarTabOperaciones(ord);
                     out.println("<table id=\"TabBodyOpe\">\n"
                             + "<tbody>");
                     for (opp = 0; opp < opeO.size(); opp++) {
+                        if (ACC_Ordenes_pp_notificaciones.ObtenerInstancia().statusoperacionIn(ord, opeO.get(opp).getNum_operacion())) {
+                            status = "INIC";
+                        } else {
+                            status = opeO.get(opp).getStatus_orden();
+                        }
                         String input = "";
                         String color = "";
-                        if(opeO.get(opp).getStatus_orden().equals("NOTP")){
+                        if (status.equals("NOTP")) {
                             input = "<td></td>";
                             color = "style=\"background-color:#ffff33;\"";
-                        }else{
+                        } else {
+                            if (status.equals("INIC")) {
+                                input = "<td></td>";
+                                color = "style=\"background-color:#06DE17;\"";
+                            }
                             input = "<td><input onclick=\"verificarContenidoUs();\" type=\"radio\" name=\"ckOperPP\" value=\"" + opp + "\"></td>";
                         }
                         out.println("<tr " + color + ">"
                                 + input
                                 + "<td id=\"opeNumOrd" + opp + "\">" + opeO.get(opp).getNum_orden() + ""
+                                + "<input type=\"text\" name=\"bxStOrd2\" value=\"" + status + "\" hidden></td>"
                                 + "<input type=\"text\" name=\"bxStOrd\" value=\"" + opeO.get(opp).getStatus_orden() + "\" hidden></td>"
                                 + "<td id=\"opeTxtB" + opp + "\">" + opeO.get(opp).getTexto_breve_operacion() + "</td>"
                                 + "<td id=\"opeNumOpe" + opp + "\">" + opeO.get(opp).getNum_operacion() + "</td>"
