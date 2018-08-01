@@ -107,6 +107,7 @@ public class Conexiones extends HttpServlet {
                                 out.println("<tr ondblclick=\"seleccionar('" + user.get(i).getUsuario() + "','" + user.get(i).getNombre() + "')\">");
                                 out.println("<td>" + user.get(i).getUsuario() + "</td>");
                                 out.println("<td>" + user.get(i).getNombre() + "</td>");
+                                out.println("<td>" + user.get(i).getCentro() + "</td>");
                                 out.println("</tr>");
                             }
                             out.println("</tbody>");
