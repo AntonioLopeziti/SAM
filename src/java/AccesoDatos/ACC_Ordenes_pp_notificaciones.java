@@ -28,16 +28,16 @@ import java.util.LinkedList;
  * @author Jhonatan
  */
 public class ACC_Ordenes_pp_notificaciones {
-
+    
     private static ACC_Ordenes_pp_notificaciones Instance = null;
-
+    
     public static ACC_Ordenes_pp_notificaciones ObtenerInstancia() {
         if (Instance == null) {
             Instance = new ACC_Ordenes_pp_notificaciones();
         }
         return Instance;
     }
-
+    
     public void PosicionInsertaMovNot(String folio_sam, String orden, String hora, String fecha, String contador, String material, String cantidad, String um, String lote, String centro, String claseMov, String posL, String ancho, String ee, String op) {
         
         String query = "{CALL PP.Notif_InsertaPosMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
@@ -72,7 +72,7 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(24, "");
             pst.setString(25, "0.000");
             pst.setString(26, "");
-            pst.setString(27, "0.000");     
+            pst.setString(27, "0.000");            
             pst.setString(28, "");
             pst.setString(18, "0.000");
             pst.setString(19, "");
@@ -128,7 +128,7 @@ public class ACC_Ordenes_pp_notificaciones {
             }
         }
     }
-
+    
     public void CabeceraInsertaMovNot(String folio_sam, String orden, String mate, String hora, String fecha, String centro, String clasMov, String usuario, String operacion, String buena) {
         String query = "{CALL PP.Notif_InsertaCabMovNot(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         Conexion con = new Conexion();
@@ -178,7 +178,7 @@ public class ACC_Ordenes_pp_notificaciones {
             }
         }
     }
-
+    
     public LinkedList<PlanPP> ObtenerNotificPP(String cant, String orden, String deso) {
         LinkedList<PlanPP> pln = new LinkedList<>();
         String query = "{call PP.NotOrden_TodosMatchNotiPP(?,?,?)}";
@@ -218,7 +218,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return pln;
     }
-
+    
     public LinkedList<ordenes_pp_notificaciones> ObtenOrdenNOTIPP(String cann, String orde, String deso, String plao) {
         LinkedList<ordenes_pp_notificaciones> orn = new LinkedList<>();
         String query = "{call PP.NotOrden_TodosMatchNotiPP(?,?,?,?)}";
@@ -226,9 +226,9 @@ public class ACC_Ordenes_pp_notificaciones {
         Connection conn = con.ObtenerConexion();
         ResultSet rs = null;
         PreparedStatement pst = null;
-
+        
         try {
-
+            
             pst = conn.prepareStatement(query);
             pst.setString(1, cann);
             pst.setString(2, orde);
@@ -261,7 +261,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return orn;
     }
-
+    
     public boolean COMPORdenNOTPP(String ord) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -297,7 +297,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return false;
     }
-
+    
     public boolean COMPFOLORdenNOTPP(String ord) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -334,7 +334,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return false;
     }
-
+    
     public PlanPP ObtenerStatusOrdenSAPPP(String orde) {
         PlanPP pn = new PlanPP();
         Conexion con = new Conexion();
@@ -359,7 +359,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return pn;
     }
-
+    
     public ordenes_pp_notificaciones ObtenStatusCNPMNOTPP(String orde) {
         ordenes_pp_notificaciones or = new ordenes_pp_notificaciones();
         Conexion con = new Conexion();
@@ -380,7 +380,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 or.setClase_orden(rs.getString("clase_orden"));
                 or.setTipo_orden(rs.getString("tipo_orden"));
                 or.setCentro(rs.getString("centro"));
-
+                
             }
             con.CerrarConexion(conn);
         } catch (Exception e) {
@@ -388,7 +388,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return or;
     }
-
+    
     public boolean POSNOCRE_INSERTAPP(String folpnc, String ord, String ope, String honot, String fenot, String durp1, String trrep1, String nf, String nofip1, String durp2) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -427,7 +427,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return false;
     }
-
+    
     public boolean CANOCRE_INSERTAPP(String folicn, String ord, String ope, String honot, String fenot, String fecco, String usu) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -463,7 +463,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return false;
     }
-
+    
     public ordenes_pp_notificaciones ObtStatusCNPP(String orde) {
         ordenes_pp_notificaciones or = new ordenes_pp_notificaciones();
         Conexion con = new Conexion();
@@ -471,14 +471,14 @@ public class ACC_Ordenes_pp_notificaciones {
         String query = "{call PP.ord_pp_not_ObtStatusCNPP(?)}";
         ResultSet rs = null;
         PreparedStatement pst = null;
-
+        
         try {
-
+            
             pst = conn.prepareStatement(query);
             pst.setString(1, orde);
             rs = pst.executeQuery();
             while (rs.next()) {
-
+                
                 or.setId_opmn(rs.getInt("id_opmn"));
                 or.setNum_orden(rs.getString("num_orden"));
                 or.setSociedad_co(rs.getString("sociedad_co"));
@@ -487,7 +487,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 or.setClase_orden(rs.getString("clase_orden"));
                 or.setTipo_orden(rs.getString("tipo_orden"));
                 or.setCentro(rs.getString("centro"));
-
+                
             }
         } catch (Exception e) {
             System.err.println("Error: " + e);
@@ -508,7 +508,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return or;
     }
-
+    
     public boolean InsertStatus_notificacionessapPP(String fsam, String fecha, String hora, String stats, String orden, String orpm, String usu) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -544,7 +544,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return false;
     }
-
+    
     public boolean ordpmnotiActualPP(String operacion, String orden) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -575,7 +575,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return false;
     }
-
+    
     public LinkedList<ordenes_pp_notificaciones> OrdenesMatchNOTPP(String CtdMax, String Orden, String TxtBrv) {
         LinkedList<ordenes_pp_notificaciones> pmorden = new LinkedList<>();
         Conexion con = new Conexion();
@@ -613,7 +613,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return pmorden;
     }
-
+    
     public ordenes_pp_notificaciones OrdenesMatchNOTextPP(String Orden) {
         ordenes_pp_notificaciones opmn = new ordenes_pp_notificaciones();
         Conexion con = new Conexion();
@@ -621,7 +621,7 @@ public class ACC_Ordenes_pp_notificaciones {
         PreparedStatement pst = null;
         ResultSet rs = null;
         String query = "{call PP.ordenes_pp_noti_OrdenesMatctexopPP(?)}";
-
+        
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, Orden);
@@ -648,7 +648,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return opmn;
     }
-
+    
     public boolean ValidarOrdenesVisualNOPP(String orden) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -684,7 +684,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return false;
     }
-
+    
     public notificaciones_cabecera_vis ObtenerDatosPP(String orden) {
         notificaciones_cabecera_vis vis = new notificaciones_cabecera_vis();
         Conexion con = new Conexion();
@@ -692,7 +692,7 @@ public class ACC_Ordenes_pp_notificaciones {
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
-
+        
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, orden);
@@ -719,7 +719,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return vis;
     }
-
+    
     public LinkedList<notificaciones_cabecera_vis> GetResumenNotificacionesPP(String orden, String opera) {
         LinkedList<notificaciones_cabecera_vis> cabevis = new LinkedList<>();
         Conexion con = new Conexion();
@@ -727,7 +727,7 @@ public class ACC_Ordenes_pp_notificaciones {
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
-
+        
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, orden);
@@ -781,7 +781,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return cabevis;
     }
-
+    
     public cabecera_ordenes_crea CargarDataCabPP(String ord) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -803,7 +803,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return coc;
     }
-
+    
     public operaciones_ordenes_crea cargarTablaNoOperacionesCreaP3PP(String ord, String ope) {
         operaciones_ordenes_crea op = new operaciones_ordenes_crea();
         Conexion cnx = new Conexion();
@@ -817,7 +817,7 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(2, ope);
             rs = pst.executeQuery();
             while (rs.next()) {
-
+                
                 op.setFolio_sam(rs.getString("folio_sam"));
                 op.setNum_orden(rs.getString("num_orden"));
                 op.setNum_hoja_ruta_operaciones_orden(rs.getString("num_hoja_ruta_operaciones_orden"));
@@ -866,7 +866,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 op.setClase_coste(rs.getString("clase_coste"));
                 op.setSolicitante(rs.getString("solicitante"));
                 op.setNum_notificacion_operacion(rs.getString("num_notificacion_operacion"));
-
+                
             }
         } catch (Exception e) {
             System.err.println("Error en Metodo cargaroperacionescrea por " + e);
@@ -888,7 +888,7 @@ public class ACC_Ordenes_pp_notificaciones {
         return op;
     }
     
-    public String TextoLargoP(String orden){
+    public String TextoLargoP(String orden) {
         String rtn = "";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -909,7 +909,8 @@ public class ACC_Ordenes_pp_notificaciones {
         
         return rtn;
     }
-    public String TextoLargoP2(String orden){
+
+    public String TextoLargoP2(String orden) {
         String rtn = "";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -930,7 +931,8 @@ public class ACC_Ordenes_pp_notificaciones {
         
         return rtn;
     }
-    public String TextoLargoP3(String orden){
+
+    public String TextoLargoP3(String orden) {
         String rtn = "";
         String var1 = "";
         String var2 = "";
@@ -951,14 +953,15 @@ public class ACC_Ordenes_pp_notificaciones {
             System.err.println("Error: " + e);
         }
         con.CerrarConexion(conn);
-        if(var1.trim().isEmpty()){
+        if (var1.trim().isEmpty()) {
             rtn = var2;
-        }else{
+        } else {
             rtn = var1;
         }
         return rtn;
     }
-    public String GetUMoper(String orden){
+
+    public String GetUMoper(String orden) {
         String rtn = "";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -979,7 +982,8 @@ public class ACC_Ordenes_pp_notificaciones {
         
         return rtn;
     }
-    public String GetCentroUsr(String usuario){
+
+    public String GetCentroUsr(String usuario) {
         String rtn = "";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -1000,7 +1004,8 @@ public class ACC_Ordenes_pp_notificaciones {
         
         return rtn;
     }
-    public String GetFIoper(String orden, String ope){
+
+    public String GetFIoper(String orden, String ope) {
         String rtn = "";
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -1022,6 +1027,7 @@ public class ACC_Ordenes_pp_notificaciones {
         
         return rtn;
     }
+
     public ArrayList<componentesPP> MostraTABPM01NOPP(String ord, String cnt, String ll) {
         ArrayList<componentesPP> mpm = new ArrayList<>();
         String ope = "", ped = "", pos = "";
@@ -1050,9 +1056,9 @@ public class ACC_Ordenes_pp_notificaciones {
                 ma.setAlmacen("1400");
                 ma.setCl_mov("101");
                 ma.setCantidad(rs.getString("cantidad_total"));
-                if(rs.getString("cadena").equals("")){
+                if (rs.getString("cadena").equals("")) {
                     ma.setDescripcion(rs.getString("texto_material"));
-                }else{
+                } else {
                     ma.setDescripcion(rs.getString("cadena"));
                 }
                 ma.setCantidad2(cnt);
@@ -1083,7 +1089,7 @@ public class ACC_Ordenes_pp_notificaciones {
 //                ma.setPosListaM(rs2.getString("num_pos_lista_materiales"));
                 ma.setDisabled("disabled");
                 ma.setStock_especial(rs2.getString("stock_especial"));
-                if(!ma.getCantidad().equals("0.000")){
+                if (!ma.getCantidad().equals("0.000")) {
                     mpm.add(ma);
                 }
             }
@@ -1106,6 +1112,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return mpm;
     }
+
     public ArrayList<operaciones_ordenes_crea> MostrarTabOperaciones(String ord) {
         ArrayList<operaciones_ordenes_crea> ope = new ArrayList<>();
         Conexion con = new Conexion();
@@ -1149,7 +1156,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return ope;
     }
-
+    
     public pp_operaciones_noti INPGRNOTPMNOTPP(String ord, String ope) {
         pp_operaciones_noti pmon = new pp_operaciones_noti();
         Conexion con = new Conexion();
@@ -1158,13 +1165,13 @@ public class ACC_Ordenes_pp_notificaciones {
         PreparedStatement pst = null;
         String query = "{call PP.pp_operaciones_notificaciones_INPGRNOTPPNOTPP(?,?)}";
         try {
-
+            
             pst = conn.prepareStatement(query);
             pst.setString(1, ord);
             pst.setString(2, ope);
             rs = pst.executeQuery();
             while (rs.next()) {
-
+                
                 pmon.setActividad_ya_notificada01(rs.getString("actividad_ya_notificada01"));
                 pmon.setActividad_ya_notificada02(rs.getString("Actividad_ya_notificada02"));
                 pmon.setActividad_ya_notificada03(rs.getString("Actividad_ya_notificada03"));
@@ -1201,7 +1208,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 pmon.setOrganizacion_compras(rs.getString("organizacion_compras"));
                 pmon.setProveedor(rs.getString("proveedor"));
                 pmon.setSolicitante(rs.getString("solicitante"));
-
+                
             }
         } catch (Exception e) {
             System.err.println("Error: " + e);
@@ -1222,6 +1229,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return pmon;
     }
+
     public String NombreMaterial(String mate) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -1230,7 +1238,7 @@ public class ACC_Ordenes_pp_notificaciones {
         System.out.println(mate);
         String query = "{call MM.NombreMaterial(?)}";
         try {
-
+            
             pst = conn.prepareStatement(query);
             pst.setString(1, mate);
             rs = pst.executeQuery();
@@ -1256,7 +1264,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return "";
     }
-
+    
     public LinkedList<pp01_notifi> ShowDatPP1PP(String ord, String ope) {
         LinkedList<pp01_notifi> np1 = new LinkedList<>();
         Conexion con = new Conexion();
@@ -1325,7 +1333,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return np1;
     }
-
+    
     public operaciones_ordenes_crea cartabopecrP3PP(String ord, String ope) {
         operaciones_ordenes_crea op = new operaciones_ordenes_crea();
         Conexion con = new Conexion();
@@ -1339,7 +1347,7 @@ public class ACC_Ordenes_pp_notificaciones {
             pst.setString(2, ope);
             rs = pst.executeQuery();
             while (rs.next()) {
-
+                
                 op.setFolio_sam(rs.getString("folio_sam"));
                 op.setNum_orden(rs.getString("num_orden"));
                 op.setNum_hoja_ruta_operaciones_orden(rs.getString("num_hoja_ruta_operaciones_orden"));
@@ -1388,7 +1396,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 op.setClase_coste(rs.getString("clase_coste"));
                 op.setSolicitante(rs.getString("solicitante"));
                 op.setNum_notificacion_operacion(rs.getString("num_notificacion_operacion"));
-
+                
             }
         } catch (Exception e) {
             System.err.println("Error en Metodo cargaroperacionescrea por " + e);
@@ -1409,7 +1417,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return op;
     }
-
+    
     public LinkedList<servicios_ordenes_crea> COnsuTAMNOPP023PP(String ord) {
         LinkedList<servicios_ordenes_crea> so = new LinkedList<>();
         Conexion con = new Conexion();
@@ -1418,7 +1426,7 @@ public class ACC_Ordenes_pp_notificaciones {
         ResultSet rs = null;
         String query = "{call PP.servicios_ordenes_crea_COnsuTAMPP023PP(?)}";
         try {
-
+            
             pst = conn.prepareStatement(query);
             pst.setString(1, ord);
             rs = pst.executeQuery();
@@ -1544,7 +1552,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 sc.setFecha_fin_periodo_prestacion_servicios(rs.getString("fecha_fin_periodo_prestacion_servicios"));
                 so.add(sc);
             }
-
+            
         } catch (Exception e) {
             System.err.println("Error: " + e);
         } finally {
@@ -1564,7 +1572,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return so;
     }
-
+    
     public PlanPP ObtenerCntroOrden(String orden) {
         PlanPP cnt = new PlanPP();
         Conexion con = new Conexion();
@@ -1598,7 +1606,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return cnt;
     }
-
+    
     public pp_operaciones_noti INPGRNOTPPNOTPP(String ord, String ope) {
         pp_operaciones_noti pmon = new pp_operaciones_noti();
         Conexion con = new Conexion();
@@ -1648,7 +1656,7 @@ public class ACC_Ordenes_pp_notificaciones {
                 pmon.setOrganizacion_compras(rs.getString("organizacion_compras"));
                 pmon.setProveedor(rs.getString("proveedor"));
                 pmon.setSolicitante(rs.getString("solicitante"));
-
+                
             }
         } catch (Exception e) {
             System.err.println("Error: " + e);
@@ -1669,7 +1677,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return pmon;
     }
-
+    
     public LinkedList<pp03_1_notificaciones> TABGRNOTPP(String ord) {
         LinkedList<pp03_1_notificaciones> tpn = new LinkedList<>();
         Conexion con = new Conexion();
@@ -1727,7 +1735,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return tpn;
     }
-
+    
     public LinkedList<pp03_2_notificaciones> TABGRNOTPP_2(String ord) {
         LinkedList<pp03_2_notificaciones> tpn = new LinkedList<>();
         Conexion con = new Conexion();
@@ -1736,7 +1744,7 @@ public class ACC_Ordenes_pp_notificaciones {
         ResultSet rs = null;
         PreparedStatement pst = null;
         try {
-
+            
             pst = conn.prepareStatement(query);
             pst.setString(1, ord);
             rs = pst.executeQuery();
@@ -1778,7 +1786,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return tpn;
     }
-
+    
     public LinkedList<pp_03_3_notificaciones> TABGRNOTPM_3(String ord) {
         LinkedList<pp_03_3_notificaciones> tpn = new LinkedList<>();
         Conexion con = new Conexion();
@@ -1787,7 +1795,7 @@ public class ACC_Ordenes_pp_notificaciones {
         PreparedStatement pst = null;
         String query = "{call PP.pp03_3_notificaciones_TABGRNOTPP(?)}";
         try {
-
+            
             pst = conn.prepareStatement(query);
             pst.setString(1, ord);
             rs = pst.executeQuery();
@@ -1828,7 +1836,7 @@ public class ACC_Ordenes_pp_notificaciones {
         }
         return tpn;
     }
-
+    
     public boolean PONACACNOTPP(String dutr, String nuOrd) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
@@ -1860,4 +1868,27 @@ public class ACC_Ordenes_pp_notificaciones {
         return false;
     }
 
+    public boolean statusoperacionIn(String ord, String op) {
+        boolean ban = false;
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call PP.NotificarTiemposVerificarInicio(?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ord);
+            ps.setString(2, op);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                ban = true;
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ban;
+    }
+    
 }
