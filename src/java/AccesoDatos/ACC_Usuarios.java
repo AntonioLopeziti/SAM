@@ -410,6 +410,7 @@ public class ACC_Usuarios {
                 usuarios u = new usuarios();
                 u.setUsuario(rs.getString("Usuario"));
                 u.setNombre(rs.getString("Nombre"));
+                u.setCentro(rs.getString("centro"));
                 user.add(u);
             }
         } catch (Exception e) {
