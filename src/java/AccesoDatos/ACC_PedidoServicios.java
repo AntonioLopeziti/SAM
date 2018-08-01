@@ -9,6 +9,7 @@ import Entidades.entrada_servicios_crea;
 import Entidades.pedido_historial;
 import Entidades.pedido_servicios;
 import Entidades.textos_entrada_servicios;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,14 +69,14 @@ public class ACC_PedidoServicios {
         return pese;
     }
 
-    public boolean InsertarEntradaServicio(entrada_servicios_crea en) {
-        boolean ban = false;
-        PreparedStatement ps = null;
+    public String  InsertarEntradaServicio(entrada_servicios_crea en) {
+        String res = "";
+        CallableStatement ps = null;
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String prco = "{call MM.EntradasServicio_InsertarEnSer(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String prco = "{call MM.EntradasServicio_InsertarEnSer(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
-            ps = con.prepareStatement(prco);
+            ps = con.prepareCall(prco);
             ps.setString(1, en.getFolio_sam());
             ps.setString(2, en.getNum_doc_compras());
             ps.setString(3, en.getNum_posicion_doc_compras());
@@ -94,22 +95,21 @@ public class ACC_PedidoServicios {
             ps.setString(16, en.getUsuario());
             ps.setString(17, en.getNota_calidad_prestacion());
             ps.setString(18, en.getNota_cumplim_prestacion());
-            if (ps.executeUpdate()> 0) {
-                ban = true;
-            }
+            ps.registerOutParameter(19, java.sql.Types.VARCHAR);
+            ps.executeUpdate();
+            res = ps.getString(19);
         } catch (Exception e) {
             System.err.println("Error en EntradaServicio por:  " + e);
         } finally {
             cnx.CerrarConexion(con);
         }
-        return ban;
+        return res;
     }
 
-    public boolean ActualizarCantidadPedidoSer(String Doc, String Pos, String Linea, String Serv, String Cantidad) {
+    public void ActualizarCantidadPedidoSer(String Doc, String Pos, String Linea, String Serv, String Cantidad) {
         PreparedStatement ps = null;
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        boolean ban = false;
         String pro = "{CALL  MM.PedidosServicios_ActualizarCantidadPedSer(?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(pro);
@@ -118,19 +118,15 @@ public class ACC_PedidoServicios {
             ps.setString(3, Linea);
             ps.setString(4, Serv);
             ps.setString(5, Cantidad);
-            if (ps.executeUpdate() == 1) {
-                ban = true;
-            }
+            ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error en ActualizarCantidadPedidoSer por: " + e);
         } finally {
             cnx.CerrarConexion(con);
         }
-        return ban;
     }
 
-    public boolean InsertResgitroPedidoHistorial(pedido_historial p, String pos) {
-        boolean ban = false;
+    public void InsertResgitroPedidoHistorial(pedido_historial p, String pos) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
@@ -148,20 +144,15 @@ public class ACC_PedidoServicios {
             ps.setString(9, p.getFecha_entrega_posicion());
             ps.setString(10, p.getFecha_contabilizacion_doc());
             ps.setString(11, p.getFolio_sam());
-            if(ps.executeUpdate() == 1){
-                ban = true;
-            }
+            ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error en InsertResgitroPedidoHistorial por " + e);
         } finally {
             cnx.CerrarConexion(con);
         }
-        return ban;
     }
-    
-    
-    public boolean InsertartextEntradaServicio(textos_entrada_servicios tes) {
-        boolean ban = false;
+
+    public void InsertartextEntradaServicio(textos_entrada_servicios tes) {
         PreparedStatement ps = null;
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -172,17 +163,33 @@ public class ACC_PedidoServicios {
             ps.setString(2, tes.getContador_posicion());
             ps.setString(3, tes.getFormato());
             ps.setString(4, tes.getTexto());
-            
-            if (ps.executeUpdate() == 1) {
-                ban = true;
-            }
+            ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error en EntradaServicio por:  " + e);
         } finally {
             cnx.CerrarConexion(con);
         }
-        return ban;
     }
+    public String FolioEServicios(String random){
+         String f = "";
+         Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.EntradasServicio_SaveFolio(?,?)}";
+        try {
+            ps = con.prepareCall(sql);
+            ps.setString(1, random);
+            ps.registerOutParameter(2, java.sql.Types.VARCHAR);
+            ps.executeUpdate();
+            f = ps.getString(2);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return f;
+     }
 
 //    public static void main(String[] args) {
 //        String doccom = "4500000016";
