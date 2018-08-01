@@ -70,6 +70,10 @@ public class PeticionPedidoServicio extends HttpServlet {
             String usu = request.getParameter("usu");
             String calidad = request.getParameter("Calidad");
             String plazos = request.getParameter("Plazos");
+            String FolioRandom = request.getParameter("FolioRandom");
+            String PosicionTXT = request.getParameter("PosicionTxt");
+            String fila = request.getParameter("fila");
+            String lineas = request.getParameter("lineas");
 
             switch (accion) {
                 case "VerificarFolio":
@@ -114,8 +118,8 @@ public class PeticionPedidoServicio extends HttpServlet {
                                 for (int i = 0; i < pse.size(); i++) {
                                     out.println("<tr>");
                                     out.println("<td><input type=\"radio\"  name=\"checkbo\" value=\"" + i + "\"/> <label style=\"display:none;\" id=\"etId" + i + "\">" + pse.get(i).getId_ps() + "</label> </td>");
-                                    out.println("<td id=\"etPosicion" + i + "\">" + Integer.parseInt(pse.get(i).getNum_posicion_doc_compras()) + "</td>");
-                                    out.println("<td  id=\"etnumlinea" + i + "\">" + Integer.parseInt(pse.get(i).getNum_linea()) + "</td>");
+                                    out.println("<td id=\"etPosicion" + i + "\">" + pse.get(i).getNum_posicion_doc_compras() + "</td>");
+                                    out.println("<td  id=\"etnumlinea" + i + "\">" + pse.get(i).getNum_linea() + "</td>");
                                     out.println("<td id=\"etServicio" + i + "\">" + pse.get(i).getNum_servicio() + "</td>");
                                     out.println("<td> <input type=\"text\" maxlength=\"7\" onfocus=\"numericdata('txtCantidad" + i + "');\" style=\"width:100%; border:none;\" id=\"txtCantidad" + i + "\" /> </td>");
                                     out.println("<td id=\"etUnidadMedida" + i + "\">" + pse.get(i).getUnidad_medida_base() + "</td>");
@@ -197,12 +201,10 @@ public class PeticionPedidoServicio extends HttpServlet {
                     }
                     break;
                 case "InsertarPedidoServicio":
-                    folios fo = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("EN");
-                    String folioSAM = fo.getIdFolios() + fo.getFolioActual();
                     String fecha = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
                     String hora = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
                     entrada_servicios_crea en = new entrada_servicios_crea();
-                    en.setFolio_sam(folioSAM);
+                    en.setFolio_sam(FolioRandom);
                     en.setNum_doc_compras(doccom);
                     en.setNum_posicion_doc_compras(posicion);
                     en.setIndice_registro_no_valido(1);
@@ -220,37 +222,32 @@ public class PeticionPedidoServicio extends HttpServlet {
                     en.setUsuario(usu);
                     en.setNota_calidad_prestacion(calidad);
                     en.setNota_cumplim_prestacion(plazos);
-                    
+
                     String fechaActual = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
                     String FContable = Consultas.ObtenerInstancia().ObtenerFechaContableMov();
                     String Fch = FContable.equals("") ? fechaActual : FContable;
-                    
+
                     pedido_historial ph = new pedido_historial();
                     ph.setNum_doc_compras(doccom);
                     ph.setNum_posicion_doc_compras(posicion);
                     ph.setTexto_breve(desservicio);
                     ph.setCantidad_pedido(CanS);
                     ph.setUnidad_medida_base(ums);
-                    ph.setNum_doc_material(folioSAM);
+                    ph.setNum_doc_material(FolioRandom);
                     ph.setCantidad(cantetrar + ".000");
                     ph.setUnidad_medida_base2(ums);
                     ph.setFecha_entrega_posicion(fecha);
                     ph.setFecha_contabilizacion_doc(Fch);
-                    ph.setFolio_sam(folioSAM);
+                    ph.setFolio_sam(FolioRandom);
                     String pos1 = checkpos(Integer.parseInt(posicion));
-                    if (ACC_PedidoServicios.ObtenerInstancia().InsertarEntradaServicio(en)) {
-                        if (ACC_PedidoServicios.ObtenerInstancia().ActualizarCantidadPedidoSer(doccom, posicion, linea, noservicio, cantentregada + ".000")) {
-                            if (ACC_PedidoServicios.ObtenerInstancia().InsertResgitroPedidoHistorial(ph, pos1)) {
-                                out.println(4);
-                            } else {
-                                out.println(3); //// Error al insertar registro en pedido Historial
-                            }
-                        } else {
-                            out.println(2); // Error al Actualizar la cantidad del pedido
-                        }
+                    String xx = ACC_PedidoServicios.ObtenerInstancia().InsertarEntradaServicio(en);
+                    if (xx == "0") {
+                        out.println("X");
                     } else {
-                        out.println(1); /// Error al insertar
+                        ACC_PedidoServicios.ObtenerInstancia().InsertResgitroPedidoHistorial(ph, pos1);
                     }
+                    out.println(xx);
+//                    ACC_PedidoServicios.ObtenerInstancia().ActualizarCantidadPedidoSer(doccom, posicion, linea, noservicio, cantentregada + ".000");
                     break;
                 case "CleanTable":
                     out.println("<table id=\"TabBody\">");
@@ -287,33 +284,29 @@ public class PeticionPedidoServicio extends HttpServlet {
 
                     break;
                 case "GuardaTEXTos":
-                    folios fol = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("EN");
-                    String folSAM = fol.getIdFolios() + fol.getFolioActual();
-                    String foli = request.getParameter("foliD");
-                    String fila = request.getParameter("fila");
-                    String lineas = request.getParameter("lineas");
                     textos_entrada_servicios tes = new textos_entrada_servicios();
-                    tes.setFolio_sam(folSAM);
-                    tes.setContador_posicion(foli);
+                    tes.setFolio_sam(FolioRandom);
+                    tes.setContador_posicion(PosicionTXT);
                     tes.setFormato(fila);
                     tes.setTexto(lineas);
-                    if (ACC_PedidoServicios.ObtenerInstancia().InsertartextEntradaServicio(tes)) {
-                        out.println(folSAM);
-                    } else {
-                        out.println(0);
-                    }
+                    ACC_PedidoServicios.ObtenerInstancia().InsertartextEntradaServicio(tes);
                     break;
                 case "confole":
                     folios fole = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("EN");
                     ACC_Folios.ObtenerIstancia().ActualizarFolio("EN", fole.getFolioActual());
                     out.println(fole.getIdFolios() + fole.getFolioActual());
                     break;
+                case "ActualizarFolio":
+                    String fwe =  ACC_PedidoServicios.ObtenerInstancia().FolioEServicios(FolioRandom);
+                    out.println(fwe);
+                    break;
 
             }
 
         }
     }
-      public String checkpos(int data) {
+
+    public String checkpos(int data) {
         String i = String.valueOf(data);
         if (data < 10) {
             i = "000" + data + "0";
@@ -325,7 +318,7 @@ public class PeticionPedidoServicio extends HttpServlet {
             i = "00" + data;
         }
         if (data >= 1000 && data < 10000) {
-            i =  "0"  + data;
+            i = "0" + data;
         }
         return i;
     }
