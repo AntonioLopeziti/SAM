@@ -730,6 +730,9 @@ function CargarContenido() {
             } else {
                 $("#ConsultaTablaUsu").css("display", "block");
                 $("#cargarDatosUsuarios").html(data);
+                document.getElementById("table-scrollUsuarios").onscroll = function () {
+                    document.getElementById("fixedYUsuario").style.top = document.getElementById("table-scrollUsuarios").scrollTop + 'px';
+                };
                 borrarmsg();
             }
         }
@@ -760,6 +763,9 @@ function CargarContenidoOrdFab() {
                 $('#BuscarParamOrden').hide();
                 $('#ConsultaTablaOrFa').show();
                 $('#cargarDatosOrdenFab').html(data);
+                document.getElementById("table-scrollOrdFab").onscroll = function () {
+                    document.getElementById("fixedYOrdFab").style.top = document.getElementById("table-scrollOrdFab").scrollTop + 'px';
+                };
 //                $("#ConsultaTablaOrFa").css("display", "block");
                 borrarmsg();
             }
