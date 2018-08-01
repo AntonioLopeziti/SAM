@@ -192,10 +192,10 @@ function verificarContenidoUs() {
     var op;
     var ckOpe = document.getElementsByName("ckOperPP");
     for (i = 0; i < ckOpe.length; i++) {
-        document.getElementById("TabBodyOpe").rows[ckOpe[i].value].style.backgroundColor = "#E6EBEB";
+//        document.getElementById("TabBodyOpe").rows[ckOpe[i].value].style.backgroundColor = "#E6EBEB";
         if (ckOpe[i].checked) {
             op = $("#opeNumOpe" + ckOpe[i].value).text();
-            document.getElementById("TabBodyOpe").rows[ckOpe[i].value].style.backgroundColor = "#86C3FF";
+//            document.getElementById("TabBodyOpe").rows[ckOpe[i].value].style.backgroundColor = "#86C3FF";
         }
     }
 
@@ -251,7 +251,9 @@ function validarCantidades() {
     }
     var ckOpe = document.getElementsByName("ckOperPP");
     var bxSts = document.getElementsByName("bxStOrd");
+    var bxSts2 = document.getElementsByName("bxStOrd2");
     var st = "NOTP";
+    var st2 = "";
     var operacion = "";
     var bn = false;
     for (i = 0; i < ckOpe.length; i++) {
@@ -259,10 +261,12 @@ function validarCantidades() {
             bn = true;
             if (i > 0) {
                 st = bxSts[parseInt(ckOpe[i].value) - 1].value;
+                st2 = bxSts2[parseInt(ckOpe[i].value) - 1].value;
                 operacion = $("#opeNumOpe" + parseInt(ckOpe[i].value - 1)).text();
             }
         }
     }
+    alert(st2);
     if (!bn) {
         $('#msg').html("Seleccione una Operación");
         var icon = $('#iconmsg');
@@ -271,7 +275,21 @@ function validarCantidades() {
         var BE = document.createElement('audio');
         BE.src = 'audio/saperror.wav';
         BE.play();
-    } 
+        return;
+    }
+    if (st2 !== "") {
+        if (st2 !== "INIC") {
+            $('#msg').html("Debe iniciar la operación " + operacion);
+            var icon = $('#iconmsg');
+            icon.show();
+            icon.attr('src', 'images/advertencia.PNG');
+            var BE = document.createElement('audio');
+            BE.src = 'audio/saperror.wav';
+            BE.play();
+            return;
+        }
+    }
+
 //    else if (st !== "NOTP") {
 //        $('#msg').html("Complete la Operación " + operacion);
 //        var icon = $('#iconmsg');
@@ -281,24 +299,24 @@ function validarCantidades() {
 //        BE.src = 'audio/saperror.wav';
 //        BE.play();
 //    }
-    else {
-        for (i = 0; i < ckOpe.length; i++) {
-            if (ckOpe[i].checked) {
+//    else {
+    for (i = 0; i < ckOpe.length; i++) {
+        if (ckOpe[i].checked) {
 //            alert($("#opeClavCon" + ckOpe[i].value).text());
-                switch ($("#opeClavCon" + ckOpe[i].value).text()) {
-                    case "PP03":
-                        if (buena == "") {
-                            $('#cntBuena').focus();
-                            $('#cntBuena').css('background-image', 'none');
-                            $('#msg').html("Complete los campos obligatorios");
-                            var icon = $('#iconmsg');
-                            icon.show();
-                            icon.attr('src', 'images/advertencia.PNG');
-                            var BE = document.createElement('audio');
-                            BE.src = 'audio/saperror.wav';
-                            BE.play();
-                        } else if (mala == "") {
-                            $('#cntMala').val("0.000");
+            switch ($("#opeClavCon" + ckOpe[i].value).text()) {
+                case "PP03":
+                    if (buena == "") {
+                        $('#cntBuena').focus();
+                        $('#cntBuena').css('background-image', 'none');
+                        $('#msg').html("Complete los campos obligatorios");
+                        var icon = $('#iconmsg');
+                        icon.show();
+                        icon.attr('src', 'images/advertencia.PNG');
+                        var BE = document.createElement('audio');
+                        BE.src = 'audio/saperror.wav';
+                        BE.play();
+                    } else if (mala == "") {
+                        $('#cntMala').val("0.000");
 //                            $('#cntMala').focus();
 //                            $('#cntMala').css('background-image', 'none');
 //                            $('#msg').html("Complete los campos obligatorios");
@@ -308,52 +326,52 @@ function validarCantidades() {
 //                            var BE = document.createElement('audio');
 //                            BE.src = 'audio/saperror.wav';
 //                            BE.play();
-                        } else if (parseInt(restante) == 0) {
-                            $('#OrdFab').focus();
-                            $('#OrdFab').css('background-image', 'none');
-                            $('#msg').html("Orden notificada");
-                            var icon = $('#iconmsg');
-                            icon.show();
-                            icon.attr('src', 'images/advertencia.PNG');
-                            var BE = document.createElement('audio');
-                            BE.src = 'audio/saperror.wav';
-                            BE.play();
+                    } else if (parseInt(restante) == 0) {
+                        $('#OrdFab').focus();
+                        $('#OrdFab').css('background-image', 'none');
+                        $('#msg').html("Orden notificada");
+                        var icon = $('#iconmsg');
+                        icon.show();
+                        icon.attr('src', 'images/advertencia.PNG');
+                        var BE = document.createElement('audio');
+                        BE.src = 'audio/saperror.wav';
+                        BE.play();
+                    } else {
+                        if ($('#checkCntExceso').prop('checked')) {
+                            validarDatos();
                         } else {
-                            if ($('#checkCntExceso').prop('checked')) {
-                                validarDatos();
-                            } else {
-                                var acc = "validarCant";
-                                $.ajax({
-                                    async: false,
-                                    type: 'GET',
-                                    url: 'PeticionNotificarTiemposPP',
-                                    contentType: "application/x-www-form-urlencoded",
-                                    processData: true,
-                                    data: "acc=" + acc + "&buena=" + buena + "&mala=" + mala + "&orden=" + orden,
-                                    success: function (data) {
-                                        if (data == 0) {
-                                            $('#msg').html("Las cantidades sobrepasan la cantidad total de la orden");
-                                            var icon = $('#iconmsg');
-                                            icon.show();
-                                            icon.attr('src', 'images/advertencia.PNG');
-                                            var BE = document.createElement('audio');
-                                            BE.src = 'audio/saperror.wav';
-                                            BE.play();
-                                            $("#cntBuena").focus();
-                                        } else {
-                                            validarDatos();
-                                        }
+                            var acc = "validarCant";
+                            $.ajax({
+                                async: false,
+                                type: 'GET',
+                                url: 'PeticionNotificarTiemposPP',
+                                contentType: "application/x-www-form-urlencoded",
+                                processData: true,
+                                data: "acc=" + acc + "&buena=" + buena + "&mala=" + mala + "&orden=" + orden,
+                                success: function (data) {
+                                    if (data == 0) {
+                                        $('#msg').html("Las cantidades sobrepasan la cantidad total de la orden");
+                                        var icon = $('#iconmsg');
+                                        icon.show();
+                                        icon.attr('src', 'images/advertencia.PNG');
+                                        var BE = document.createElement('audio');
+                                        BE.src = 'audio/saperror.wav';
+                                        BE.play();
+                                        $("#cntBuena").focus();
+                                    } else {
+                                        validarDatos();
                                     }
-                                });
-                            }
+                                }
+                            });
                         }
-                        break;
-                    case "PP01":
-                        validarDatos2();
-                        break;
-                }
+                    }
+                    break;
+                case "PP01":
+                    validarDatos2();
+                    break;
             }
         }
+//        }
     }
 }
 //Insertar datos a tabla interna
@@ -1018,6 +1036,7 @@ function limpiarCampos() {
     $('#cntNN').html("");
     $('#cntRR').html("");
     $('#lblUM').html("");
+    $('#MaterialPP').html("");
     $("#secMala").hide();
 }
 function bloquearCampos() {
