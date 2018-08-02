@@ -145,6 +145,7 @@
             <div class="titulo"><h1><%out.println(po.getProperty("etiqueta.RESERVisualizar_Title"));%></h1></div>
         </div>
         <div class="contenido">
+            <input type="text" id="UsuRes" value="<%=Nombre%>" hidden />
             <div class="ContentReservas">
                 <section class="DivBusquedaSAMReservas">
                     <label id="lblTitulo_reporte"><%out.println(po.getProperty("etiqueta.RESERBusuqedti"));%></label>
@@ -244,6 +245,8 @@
                     <div class="busquedaMatch">
                         <label><%out.println(po.getProperty("etiqueta.RESNumb"));%></label><input type="text" id="ReservaBus"  maxlength="12" style="width:35%; text-transform: uppercase;"/>
                         <hr>
+                        <label>Usuario</label><input type="text" id="Usubus"  maxlength="12" style="width:35%; text-transform: uppercase;"/>
+                        <hr>
                         <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text"  id="numAcMax"  style="width:10%;" maxlength="3"/>
                         <hr>
                     </div>        
@@ -260,7 +263,9 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.RESNumb"));%></th><th><%out.println(po.getProperty("etiqueta.GralFolioSAM"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.RESNumb"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralFolioSAM"));%></th>
+                                        <th>Usuario</th>
                                     </tr>
                                 </thead>
                             </table>
