@@ -485,7 +485,7 @@ function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
 function CargarUsuarioBusqueda() {
     var usuario = $('#UsuarioSolpedV').val();
     if(usuario === "ADMIN"){
-        $('#UsuarioSolpedV').val('');
+        $('#UsuarioSPBus').val('');
         $('#UsuarioSPBus').prop('readonly',false);
     }else{
         $('#UsuarioSPBus').val(usuario);
