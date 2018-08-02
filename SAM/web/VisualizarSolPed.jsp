@@ -154,7 +154,8 @@
                 <div class="divCab">
                     <section id="cabeceraTemp" hidden></section>
                     <section class="SecI">
-                        <label><%out.println(po.getProperty("etiqueta.CSPClaseDocumento"));%></label><select id="ClaseDoc" style="width: 40%">
+                        <input type='text' id='UsuarioSolpedV' value='<%=Nombre%>' hidden/>
+                        <label><%out.println(po.getProperty("etiqueta.CSPClaseDocumento"));%></label><select id="ClaseDoc" disabled style="width: 40%">
                         </select>
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.CSPVisNumSol"));%></label><input type="text" id="Numsoli" maxlength="10"/><button id="matchFolSolped"  class='BtnMatchIcon2'></button>
@@ -366,7 +367,9 @@
                     <div class="busquedaMatch">
                         <label><%out.println(po.getProperty("etiqueta.CSPVisNumSol2"));%></label><input type="text" id="BusSolpedSAP" style="width:35%;"  focus/>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.GralFecha"));%></label><input type="date" id="fechasol" maxlength="10" style="width:35%;"  focus/>
+                        <label><%out.println(po.getProperty("etiqueta.GralFecha"));%></label><input type="date" id="fechasol" maxlength="10" style="width:35%;"  />
+                        <hr>
+                        <label>Usuario</label><input type="text" id="UsuarioSPBus" maxlength="12" style="width:30%;" />
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3" id="numAcMax" style="width:10%;"/>
                         <hr>
@@ -384,7 +387,10 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.CSPVisNumSol2"));%></th><th><%out.println(po.getProperty("etiqueta.GralFolioSAM"));%></th><th><%out.println(po.getProperty("etiqueta.GralFecha"));%></th>
+                                        <th style="width: 20%;"><%out.println(po.getProperty("etiqueta.CSPVisNumSol2"));%></th>
+                                        <th style="width: 20%;"><%out.println(po.getProperty("etiqueta.GralFolioSAM"));%></th>
+                                        <th style="width: 15%;"><%out.println(po.getProperty("etiqueta.GralFecha"));%></th>
+                                        <th style="width: 20%;">Usuario</th>
                                     </tr>
                                 </thead>
                             </table>
