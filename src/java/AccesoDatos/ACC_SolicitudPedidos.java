@@ -184,23 +184,25 @@ public class ACC_SolicitudPedidos {
         }
     }
 
-    public ArrayList<Solped_Posiciones_vis> ConsultaMCSolped(String sol, String fecha) {
+    public ArrayList<Solped_Posiciones_vis> ConsultaMCSolped(String sol, String fecha, String usuario) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
         ArrayList<Solped_Posiciones_vis> so = new ArrayList<>();
-        String sql = "{CALL MM.VisualizarSolped_CargarConsultaMCSolped(?,?)}";
+        String sql = "{CALL MM.VisualizarSolped_CargarConsultaMCSolped(?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, sol);
             ps.setString(2, fecha);
+            ps.setString(3, usuario);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Solped_Posiciones_vis s = new Solped_Posiciones_vis();
                 s.setFolio_sap(rs.getString("folio_sap"));
                 s.setFolio_sam(rs.getString("folio_sam"));
-                s.setFecha(rs.getString("fecha"));
+                s.setFecha(rs.getString("fecha_solicitud"));
+                s.setSolicitante(rs.getString("solicitante"));
                 so.add(s);
             }
         } catch (Exception e) {
