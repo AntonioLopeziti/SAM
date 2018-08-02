@@ -42,10 +42,11 @@ public class peticionVisualizarReservas extends HttpServlet {
             String Accion = request.getParameter("Action");
             String Nreserva = request.getParameter("NReserva");
             String Cantidad = request.getParameter("Cantidad");
+            String Usuario = request.getParameter("UsuarioReserva");
             String Tipo = request.getParameter("Tipo");
             switch (Accion) {
                 case "ConsultarReserva":
-                    ArrayList<reserva_cabecera_crea> re = ACC_Reservas.ObtenerInstancia().ConsultaMCReserva(Nreserva);
+                    ArrayList<reserva_cabecera_crea> re = ACC_Reservas.ObtenerInstancia().ConsultaMCReserva(Nreserva, Usuario);
                     if (re.size() > 0) {
                         if (IsNumeric(Cantidad)) {
                             int lim = Integer.parseInt(Cantidad);
@@ -55,6 +56,7 @@ public class peticionVisualizarReservas extends HttpServlet {
                                 out.println("<tr ondblclick=\"Seleccionar('" + re.get(i).getFolio_sap() + "', '" + re.get(i).getFolio_sam() + "');\">");
                                 out.println("<td>" + re.get(i).getFolio_sap() + "</td>");
                                 out.println("<td>" + re.get(i).getFolio_sam() + "</td>");
+                                out.println("<td>" + re.get(i).getUsuario() + "</td>");
                                 out.println("</tr>");
                             }
                             out.println("</tbody>");
