@@ -6,6 +6,7 @@
 
 $(document).ready(function () {
     startTime();
+    CargarUsarioBusqueda();
     AjustarCabecera('TabHead', 'TabBody', 2, 'SecCuerpo');
     $('#Match_Reser').hide();
     $('#iconmsg').hide();
@@ -26,7 +27,7 @@ $(document).ready(function () {
     $('#CerraMCR2').click(function () {
         ocultarVentana();
     });
-    $.each([$('#ReservaBus'), $('#numAcMax'), $('#OkReserva')], function (i, v) {
+    $.each([$('#ReservaBus'), $('#numAcMax'), $('#OkReserva'), $('#Usubus')], function (i, v) {
 
         if (i == 0) {
             v.keypress(function (e) {
@@ -61,6 +62,20 @@ $(document).ready(function () {
                 ConsultaMCReserva();
             });
         }
+        if (i == 3) {
+            v.keypress(function (e) {
+                var tecla = (document).all ? e.keyCode : e.which;
+                if (tecla == 13) {
+                    ConsultaMCReserva();
+                }
+                if (tecla == 32) {
+                    return false;
+                }
+                patron = /[a-zA-Z0-9]/;
+                te = String.fromCharCode(tecla);
+                return patron.test(te);
+            });
+        }
     });
     function ConsultaMCReserva() {
         var acc = "ConsultarReserva";
@@ -70,7 +85,7 @@ $(document).ready(function () {
             url: "peticionVisualizarReservas",
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Action=" + acc + "&NReserva=" + $('#ReservaBus').val() + "&Cantidad=" + $('#numAcMax').val(),
+            data: "Action=" + acc + "&NReserva=" + $('#ReservaBus').val() + "&Cantidad=" + $('#numAcMax').val() + "&UsuarioReserva=" + $('#Usubus').val(),
             success: function (data) {
                 if (data == 0) {
                     ShowMsg(1, "images/aceptar.png", "audio/sapmsg.wav");
@@ -278,12 +293,12 @@ function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
     document.getElementById(section).style.width = val + 17 + "px";
 }
 function CargarUsarioBusqueda(){
-   var usuario = $('#UsuarioSolpedV').val();
+   var usuario = $('#UsuRes').val();
     if(usuario === "ADMIN"){
-        $('#UsuarioSPBus').val('');
-        $('#UsuarioSPBus').prop('readonly',false);
+        $('#Usubus').val('');
+        $('#Usubus').prop('readonly',false);
     }else{
-        $('#UsuarioSPBus').val(usuario);
-        $('#UsuarioSPBus').prop('readonly',true);
+        $('#Usubus').val(usuario);
+        $('#Usubus').prop('readonly',true);
     }
 }
