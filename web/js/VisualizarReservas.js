@@ -277,3 +277,13 @@ function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
     }
     document.getElementById(section).style.width = val + 17 + "px";
 }
+function CargarUsarioBusqueda(){
+   var usuario = $('#UsuarioSolpedV').val();
+    if(usuario === "ADMIN"){
+        $('#UsuarioSPBus').val('');
+        $('#UsuarioSPBus').prop('readonly',false);
+    }else{
+        $('#UsuarioSPBus').val(usuario);
+        $('#UsuarioSPBus').prop('readonly',true);
+    }
+}
