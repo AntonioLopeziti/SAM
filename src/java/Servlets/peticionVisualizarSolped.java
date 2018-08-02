@@ -46,6 +46,7 @@ public class peticionVisualizarSolped extends HttpServlet {
             String Accion = request.getParameter("Accion");
             String NumSol = request.getParameter("NumSol");
             String FechaS = request.getParameter("FECHS");
+            String usuaSP = request.getParameter("UsuarioSP");
             String ctd = request.getParameter("Ctd");
             String Tipo = request.getParameter("Tipo");
             String Pos = request.getParameter("Pos");
@@ -53,24 +54,26 @@ public class peticionVisualizarSolped extends HttpServlet {
 
             switch (Accion) {
                 case "ConsultaSolpeds":
-                    ArrayList<Solped_Posiciones_vis> so = ACC_SolicitudPedidos.ObtenerInstancia().ConsultaMCSolped(NumSol, FechaS);
+                    ArrayList<Solped_Posiciones_vis> so = ACC_SolicitudPedidos.ObtenerInstancia().ConsultaMCSolped(NumSol, FechaS, usuaSP);
                     if (so.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         if (ctd.length() > 0) {
                             for (int n = 0; n < Integer.parseInt(ctd); n++) {
                                 out.println("<tr ondblclick=\"seleccionar('" + so.get(n).getFolio_sap() + "', '" + so.get(n).getFolio_sam() + "')\">");
-                                out.println("<td>" + so.get(n).getFolio_sap() + "</td>");
-                                out.println("<td>" + so.get(n).getFolio_sam() + "</td>");
-                                out.println("<td>" + con.DateFormat(so.get(n).getFecha()) + "</td>");
+                                out.println("<td style=\"width: 20%;\">" + so.get(n).getFolio_sap() + "</td>");
+                                out.println("<td style=\"width: 20%;\">" + so.get(n).getFolio_sam() + "</td>");
+                                out.println("<td style=\"width: 15%;\">" + con.DateFormat(so.get(n).getFecha()) + "</td>");
+                                out.println("<td style=\"width: 20%;\">" + so.get(n).getSolicitante() + "</td>");
                                 out.println("</tr>");
                             }
                         } else {
                             for (int n = 0; n <= so.size(); n++) {
                                 out.println("<tr ondblclick=\"seleccionar('" + so.get(n).getFolio_sap() + "', '" + so.get(n).getFolio_sam() + "')\">");
-                                out.println("<td>" + so.get(n).getFolio_sap() + "</td>");
-                                out.println("<td>" + so.get(n).getFolio_sam() + "</td>");
-                                out.println("<td>" + con.DateFormat(so.get(n).getFecha()) + "</td>");
+                                out.println("<td style=\"width: 20%;\">" + so.get(n).getFolio_sap() + "</td>");
+                                out.println("<td style=\"width: 20%;\">" + so.get(n).getFolio_sam() + "</td>");
+                                out.println("<td style=\"width: 15%;\">" + con.DateFormat(so.get(n).getFecha()) + "</td>");
+                                out.println("<td style=\"width: 20%;\">" + so.get(n).getSolicitante() + "</td>");
                                 out.println("</tr>");
                             }
 
