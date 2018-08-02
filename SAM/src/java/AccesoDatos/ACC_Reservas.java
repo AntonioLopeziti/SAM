@@ -321,21 +321,23 @@ public class ACC_Reservas {
         }
     }
 
-    public ArrayList<reserva_cabecera_crea> ConsultaMCReserva(String nres) {
+    public ArrayList<reserva_cabecera_crea> ConsultaMCReserva(String nres, String usua) {
         ArrayList<reserva_cabecera_crea> res = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{CALL MM.VisualReservas_CargarMCReservas(?)}";
+        String sql = "{CALL MM.VisualReservas_CargarMCReservas(?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, nres);
+            ps.setString(2, usua);
             rs = ps.executeQuery();
             while (rs.next()) {
                 reserva_cabecera_crea rc = new reserva_cabecera_crea();
                 rc.setFolio_sap(rs.getString("num_reservas"));
                 rc.setFolio_sam(rs.getString("folio_sam"));
+                rc.setUsuario(rs.getString("usuario"));
                 res.add(rc);
             }
         } catch (Exception e) {
