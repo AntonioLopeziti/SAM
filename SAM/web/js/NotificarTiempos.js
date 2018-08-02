@@ -266,7 +266,6 @@ function validarCantidades() {
             }
         }
     }
-    alert(st2);
     if (!bn) {
         $('#msg').html("Seleccione una Operación");
         var icon = $('#iconmsg');
@@ -1747,17 +1746,17 @@ function ConsMaterial() {
         } else {
             borrarmsg();
         }
-        if (anch[i].value == "") {
-            if (anch[i].disabled == false) {
-                if (centro[i].textContent != "3000") {
-                    msjError("Ancho es Obligatorio");
-                    anch[i].focus();
-                    return;
-                }
-            }
-        } else {
-            borrarmsg();
-        }
+//        if (anch[i].value == "") {
+//            if (anch[i].disabled == false) {
+//                if (centro[i].textContent != "3000") {
+//                    msjError("Ancho es Obligatorio");
+//                    anch[i].focus();
+//                    return;
+//                }
+//            }
+//        } else {
+//            borrarmsg();
+//        }
     }
     validacnt101();
 }
