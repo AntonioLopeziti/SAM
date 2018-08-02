@@ -65,7 +65,7 @@ public class peticionModVisSolped extends HttpServlet {
 
             switch (Accion) {
                 case "ConsultaSolpeds":
-                    ArrayList<Solped_Posiciones_vis> soi = ACC_SolicitudPedidos.ObtenerInstancia().ConsultaMCSolped(NumSol, fechas);
+                    ArrayList<Solped_Posiciones_vis> soi = ACC_SolicitudPedidos.ObtenerInstancia().ConsultaMCSolped(NumSol, fechas, us);
                     if (soi.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
