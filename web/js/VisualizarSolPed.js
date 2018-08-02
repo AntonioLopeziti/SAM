@@ -5,6 +5,7 @@
  */
 $(document).ready(function () {
     CargarTipoSolped();
+    CargarUsuarioBusqueda();
     AjustarCabecera('TabHead', 'TabBody', 8, 'SecCuerpo');
     $("#DobleSection").scroll(function () {
         $("#SecCuerpo").scrollTop($("#DobleSection").scrollTop());
@@ -52,6 +53,15 @@ $(document).ready(function () {
             ConsultaSolped();
         }
     });
+    $('#UsuarioSPBus').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            ConsultaSolped();
+        }
+        patron = /[0-9a-zA-ZÑñ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
     $('#numAcMax').keypress(function (e) {
         var tecla = (document).all ? e.keyCode : e.which;
         if (tecla == 13) {
@@ -69,7 +79,7 @@ $(document).ready(function () {
     });
     function ConsultaSolped() {
         var acc = "ConsultaSolpeds";
-        var datos = "Accion=" + acc + "&NumSol=" + $('#BusSolpedSAP').val() + "&Ctd=" + $('#numAcMax').val() + "&FECHS=" + $('#fechasol').val();
+        var datos = "Accion=" + acc + "&NumSol=" + $('#BusSolpedSAP').val() + "&Ctd=" + $('#numAcMax').val() + "&FECHS=" + $('#fechasol').val() + "&UsuarioSP=" + $('#UsuarioSPBus').val();
         $.ajax({
             async: false,
             type: "GET",
@@ -471,4 +481,14 @@ function AjustarCabecera(cabecera, cuerpo, diferiencia, section)
         arrCb[i].style.width = (arr[i].offsetWidth - diferiencia) + "px";
     }
     document.getElementById(section).style.width = val + 17 + "px";
+}
+function CargarUsuarioBusqueda() {
+    var usuario = $('#UsuarioSolpedV').val();
+    if(usuario === "ADMIN"){
+        $('#UsuarioSolpedV').val('');
+        $('#UsuarioSPBus').prop('readonly',false);
+    }else{
+        $('#UsuarioSPBus').val(usuario);
+        $('#UsuarioSPBus').prop('readonly',true);
+    }
 }
