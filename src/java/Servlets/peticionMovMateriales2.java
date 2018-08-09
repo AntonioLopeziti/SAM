@@ -60,8 +60,9 @@ public class peticionMovMateriales2 extends HttpServlet {
             String Docume = request.getParameter("Documento");
             String Posici = request.getParameter("Posicion");
             String IndPos = request.getParameter("Indice");
+            String us = request.getParameter("IpData");
             HttpSession session = request.getSession();
-            String us = (String) session.getAttribute("Usuario");
+            String user = (String) session.getAttribute("Usuario");
             Properties po = new Properties();
             po.load(getServletContext().getResourceAsStream("/WEB-INF/LanguageES.properties"));
             switch (Accion) {
@@ -72,8 +73,8 @@ public class peticionMovMateriales2 extends HttpServlet {
                         out.println("<tbody>");
                         for (int i = 0; i < mat.size(); i++) {
                             out.println("<tr ondblclick=\"seleccionarMCNuevo('" + mat.get(i).getMaterial() + "','" + mat.get(i).getDescripcion() + "', '" + mat.get(i).getUnidad_medida() + "', '" + ClaseM + "');\">");
-                            out.println("<td>" + mat.get(i).getMaterial() + "</td>");
-                            out.println("<td>" + mat.get(i).getDescripcion() + "</td>");
+                            out.println("<td style=\"width:25%;\">" + mat.get(i).getMaterial() + "</td>");
+                            out.println("<td style=\"width:65%; text-align: left\">" + mat.get(i).getDescripcion() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -260,8 +261,8 @@ public class peticionMovMateriales2 extends HttpServlet {
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
-                                + "<td name=\"mmpedid\">" + pmovs.get(c).getNum_solped() + "</td>"
-                                + "<td name=\"mmPosPed\">" + pmovs.get(c).getNum_posicion_solped() + "</td>"
+                                + "<td name=\"mmped\">" + pmovs.get(c).getNum_solped() + "</td>"
+                                + "<td name=\"mmnpe\">" + pmovs.get(c).getNum_posicion_solped() + "</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
