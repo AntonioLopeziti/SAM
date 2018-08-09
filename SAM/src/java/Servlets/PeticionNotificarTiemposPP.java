@@ -198,8 +198,8 @@ public class PeticionNotificarTiemposPP extends HttpServlet {
                     posno.setUsuario(usuario);
                     posno.setRecibido("");
                     posno.setProcesado("");
-                    posno.setFecha_recibido("");
-                    posno.setHora_recibido("");
+                    posno.setFecha_recibido(fechaActual);
+                    posno.setHora_recibido(horaActual);
                     posno.setMensaje("");
                     posno.setMotivo(v22);
                     if (ACC_NotificarTiempos.ObtenerInstancia().InsertarCabNotTiempo(cnta)) {
