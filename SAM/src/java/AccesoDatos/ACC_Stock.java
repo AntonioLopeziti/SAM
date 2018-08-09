@@ -452,7 +452,7 @@ public class ACC_Stock {
                 s.setStock_traslado(rs.getString("stock_traslado"));
                 s.setNum_doc(rs.getString(10));
                 s.setPos_doc(rs.getString(11));
-                s.setIndicador_se(rs.getString(12));               
+                s.setIndicador_se(rs.getString(12));
                 st.add(s);
             }
         } catch (Exception e) {
@@ -3919,23 +3919,23 @@ public class ACC_Stock {
         }
         return st;
     }
-    
-    public componentesPP getPedPos(String lote){
+
+    public componentesPP getPedPos(String lote) {
         componentesPP c = new componentesPP();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps;
         ResultSet rs;
         String sql = "{call MM.ObtenerLoteFirst(?)}";
-        try{
+        try {
             ps = con.prepareStatement(sql);
             ps.setString(1, lote);
             rs = ps.executeQuery();
             while (rs.next()) {
                 c.setPedido(rs.getString("num_documento"));
-                c.setPosicion( rs.getString("num_posicion"));
+                c.setPosicion(rs.getString("num_posicion"));
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println("Error ACC_Stock - getPedPos pos: " + e);
         }
         return c;
@@ -3994,6 +3994,120 @@ public class ACC_Stock {
             cnx.CerrarConexion(con);
         }
         return sto;
+    }
+
+    public void Guardar313StrockTrasladoE(String cen, String alm, String almor, String lote, String mat, String stctr, String num_doc, String num_pos) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String sql = "{call MM.StockTraslado315StockE(?,?,?,?,?,?,?,?)}";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cen);
+            ps.setString(2, alm);
+            ps.setString(3, almor);
+            ps.setString(4, lote);
+            ps.setString(5, mat);
+            ps.setString(6, stctr);
+            ps.setString(7, num_doc);
+            ps.setString(8, num_pos);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
+
+    public void Guardar313StrockTraslado(String cen, String alm, String almor, String lote, String mat, String stctr) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String sql = "{call MM.StockTraslado315Stock(?,?,?,?,?,?)}";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cen);
+            ps.setString(2, alm);
+            ps.setString(3, almor);
+            ps.setString(4, lote);
+            ps.setString(5, mat);
+            ps.setString(6, stctr);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
+    public void ActualizarTras313(String cen, String alm, String lote, String mat, String stctr, String doc, String pos, String ind) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String sql = "{call MM.ActualizaStockTrnasf(?,?,?,?,?,?,?,?)}";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cen);
+            ps.setString(2, alm);
+            ps.setString(3, lote);
+            ps.setString(4, mat);
+            ps.setString(5, doc);
+            ps.setString(6, pos);
+            ps.setString(7, stctr);
+            ps.setString(8, ind);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
+    public String obtenersotcktras(String cen, String alm, String almor, String lote, String mat, String num_doc, String num_pos, String ind) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String stk = "0.000";
+        String sql = "{call mm.obtenersotcktras(?,?,?,?,?,?,?,?)}";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cen);
+            ps.setString(2, alm);
+            ps.setString(3, almor);
+            ps.setString(4, lote);
+            ps.setString(5, mat);
+            ps.setString(6, num_doc);
+            ps.setString(7, num_pos);
+            ps.setString(8, ind);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                stk = rs.getString("stock_traslado");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return stk;
+    }
+    public String obtenersotcktras315(String cen, String alm, String lote, String mat, String num_doc, String num_pos, String ind) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String stk = "0.000";
+        String sql = "{call mm.obtenersotcktras315(?,?,?,?,?,?,?)}";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cen);
+            ps.setString(2, alm);
+            ps.setString(3, lote);
+            ps.setString(4, mat);
+            ps.setString(5, num_doc);
+            ps.setString(6, num_pos);
+            ps.setString(7, ind);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                stk = rs.getString("stock_traslado");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return stk;
     }
 
 }
