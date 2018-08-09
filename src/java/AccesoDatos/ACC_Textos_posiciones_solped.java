@@ -77,14 +77,15 @@ public class ACC_Textos_posiciones_solped {
         return tes;
     }
 
-    public void EliminarTxtTemp(String user) {
+    public void EliminarTxtTemp(String user,String ipsf) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
-        String sql = "{CALL MM.Solped_EliminarTxtTemp(?)}";
+        String sql = "{CALL MM.Solped_EliminarTxtTemp(?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, user);
+            ps.setString(2,ipsf);
             ps.executeQuery();
         } catch (Exception e) {
             System.err.println("Error en EliminarTxtTemp, ACC_Textos_posiciones_solped por: " + e);
@@ -93,15 +94,16 @@ public class ACC_Textos_posiciones_solped {
         }
     }
 
-    public void EliminarModTexto(String pos, String user) {
+    public void EliminarModTexto(String pos, String user, String ipsf) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
-        String sql = "{CALL MM.Solped_EliminarModTxtPosicion(?,?)}";
+        String sql = "{CALL MM.Solped_EliminarModTxtPosicion(?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, pos);
             ps.setString(2, user);
+            ps.setString(3, ipsf);
             ps.executeQuery();
         } catch (Exception e) {
             System.err.println("Error en EliminarModTexto, ACC_Textos_posiciones_solped por: " + e);
@@ -128,17 +130,18 @@ public class ACC_Textos_posiciones_solped {
         }
     }
 
-    public void InsertartxtPosTemp(String pos, String fila, String user, String linea) {
+    public void InsertartxtPosTemp(String pos, String fila, String user, String linea, String ipsf) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
-        String sql = "{CALL MM.Solped_InsertarTxtPosicionTemp(?,?,?,?)}";
+        String sql = "{CALL MM.Solped_InsertarTxtPosicionTemp(?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, pos);
             ps.setString(2, fila);
             ps.setString(3, user);
             ps.setString(4, linea);
+            ps.setString(5, ipsf);
             ps.executeQuery();
         } catch (Exception e) {
             System.err.println("Error en InsertartxtPosTemp, ACC_Textos_posiciones_solped por: " + e);
@@ -173,17 +176,18 @@ public class ACC_Textos_posiciones_solped {
         return tp;
     }
 
-    public ArrayList<textos_posiciones_solped> CargarTextoPosicionTemp(String user, String pos) {
+    public ArrayList<textos_posiciones_solped> CargarTextoPosicionTemp(String user, String pos, String ipsf) {
         ArrayList<textos_posiciones_solped> tes = new ArrayList<>();
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{CALL MM.Solped_CargarTextoPosicionTemp(?,?)}";
+        String sql = "{CALL MM.Solped_CargarTextoPosicionTemp(?,?,?)}";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, user);
             ps.setString(2, pos);
+            ps.setString(3, ipsf);
             rs = ps.executeQuery();
             while (rs.next()) {
                 textos_posiciones_solped tsp = new textos_posiciones_solped();
