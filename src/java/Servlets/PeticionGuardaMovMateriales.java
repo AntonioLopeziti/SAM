@@ -1,6 +1,7 @@
 package Servlets;
 
 import AccesoDatos.ACC_Almacenes;
+import AccesoDatos.ACC_DetallesDocMateriales;
 import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_Pedidos;
 import AccesoDatos.ACC_Stock;
@@ -41,6 +42,7 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
             HttpSession ses = request.getSession();
             String user = (String) ses.getAttribute("Usuario");
             String Idioma = (String) session.getAttribute("Idioma");
+
             pp.setNum_posicion(request.getParameter("pos"));
             pp.setPor_recibir(request.getParameter("v1"));
             pp.setLote(request.getParameter("v2"));
@@ -64,6 +66,7 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
             pp.setTipo_imputacion(request.getParameter("v20"));
             pp.setFecha_entrega_posicion(request.getParameter("v21"));
             pp.setCentro(request.getParameter("v22"));
+            String us = request.getParameter("ipFolio");
 
             String Action = request.getParameter("Action");
             String mov = request.getParameter("mov");
@@ -94,7 +97,7 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
             String FContable = Consultas.ObtenerInstancia().ObtenerFechaContableMov();
 
             String Fch, n2, fl;
-            String us = (String) session.getAttribute("Usuario");
+            String mouser = (String) session.getAttribute("Usuario");
             Fch = FContable.equals("") ? fechaActual : FContable;
             folios fo = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("MO");
             folios fp = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("QP");
@@ -209,6 +212,8 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     break;
                 case "EliminaTemporal":
                     LinkedList<pedido_detalle> p = ACC_Pedidos.ObtenerInstancia().EliminaTempt(pp.getPedido(), mov, us);
+                    String ppos = "";
+                    String pedd = "";
                     out.println("<table class=\"TablaCont\" id=\"TablaMov\">\n"
                             + "                                    <tr id=\"CabeceraTabla\">\n"
                             + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
@@ -233,26 +238,38 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                             + "                                    </tr> \n"
                             + "                                    <tbody>");
                     for (c = 0; c < p.size(); c++) {
+
                         int nn = c + 1;
+                        String StockE = "";
+                        pedd = p.get(c).getPedido();
+                        ppos = p.get(c).getNum_posicion();
+                        if (mov.trim().equals("301") || mov.trim().equals("311") || mov.trim().equals("313") || mov.trim().equals("315")) {
+                            pedd = p.get(c).getNum_solped();
+                            ppos = p.get(c).getNum_posicion_solped();
+                            if (!p.get(c).getNum_solped().isEmpty()) {
+                                StockE = "E";
+                            }
+                        }
+
                         out.println("<tr>"
                                 + "<td><input type=\"checkbox\" name=\"Pedidos\" value=\"" + p.get(c).getNum_posicion() + "\"></td>"
                                 + "<td name=\"mmmat\">" + p.get(c).getMaterial() + "</td>"
                                 + "<td name=\"mmprr\">" + p.get(c).getPor_recibir() + "</td>"
                                 + "<td name=\"mmumb\">" + p.get(c).getUnidad_medida_base() + "</td>"
                                 + "<td name=\"mmnlt\">" + p.get(c).getNuevo_lote() + "</td>"
-                                + "<td>&nbsp;</td>"
+                                + "<td name=\"mmStEs\">" + StockE + "</td>"
                                 + "<td class=\"ajustar\" name=\"mmdsc\">" + p.get(c).getDescripcion() + "</td>"
                                 + "<td name=\"mmnord\">" + p.get(c).getNum_orden() + "</td>"
                                 + "<td name=\"mmcec\">" + p.get(c).getCentro_coste() + "</td>"
                                 + "<td name=\"mmclco\">" + p.get(c).getClase_coste() + "</td>"
-                                + "<td name=\"mmped\">" + p.get(c).getPedido() + "</td>"
-                                + "<td name=\"mmnpe\">" + p.get(c).getNum_posicion() + "</td>"
+                                + "<td name=\"mmped\">" + pedd + "</td>"
+                                + "<td name=\"mmnpe\">" + ppos + "</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"//proveedor
                                 + "<td>&nbsp;</td>"
-                                + "<td name=\"mmctr\">" + p.get(c).getCentro() + "</td>"
-                                + "<td name=\"mmalm\">" + p.get(c).getAlmacen() + "</td>"
+                                + "<td name=\"mmCentro\">" + p.get(c).getCentro() + "</td>"
+                                + "<td name=\"mmAlmace\">" + p.get(c).getAlmacen() + "</td>"
                                 + "<td class=\"ocultar\" name=\"mmcnt\">" + p.get(c).getCantidad() + "</td>"
                                 + "<td class=\"ocultar\" name=\"mmtimp\">" + p.get(c).getTipo_imputacion() + "</td>"
                                 + "<td class=\"ocultar\" name=\"mmLoteProvd\">" + p.get(c).getLote_proveedor() + "</td>"
@@ -369,21 +386,20 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
 
                     break;
                 case "Guarda101Cabecera":
-                    fl = "MO" + fo.getFolioActual();
-                    if (Consultas.ObtenerInstancia().posicionesMM(fl, v19)) {
-                        Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", Fch, us);
+                    if (Consultas.ObtenerInstancia().posicionesMM(us, v19)) {
+                        Consultas.ObtenerInstancia().CabeceraCreaMov(us, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", Fch, mouser);
                         out.println(1);
                     } else {
-                        Consultas.ObtenerInstancia().BorrarRegistroMM(fl);
-                        Consultas.ObtenerInstancia().BorrarHistorialMM(fl);
+                        Consultas.ObtenerInstancia().BorrarRegistroMM(us);
+                        Consultas.ObtenerInstancia().BorrarHistorialMM(us);
                         out.println(2);
                     }
                     break;
                 case "Guarda102Cabecera":
                     fl = "MO" + fo.getFolioActual();
 
-                    if (Consultas.ObtenerInstancia().posicionesMM(fl, v19)) {
-                        Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", Fch, us);
+                    if (Consultas.ObtenerInstancia().posicionesMM(us, v19)) {
+                        Consultas.ObtenerInstancia().CabeceraCreaMov(us, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", Fch, mouser);
                         out.println(1);
                     } else {
                         Consultas.ObtenerInstancia().BorrarRegistroMM(fl);
@@ -461,7 +477,7 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     fl = "MO" + fo.getFolioActual();
 
 //                    if(Consultas.ObtenerInstancia().posicionesMM(fl, v19)){
-                    Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", us);
+                    Consultas.ObtenerInstancia().CabeceraCreaMov(us, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", mouser);
                     out.println(1);
 //                    }else{
 //                        Consultas.ObtenerInstancia().BorrarRegistroMM(fl);
@@ -470,21 +486,20 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     break;
                 case "Guarda312Cabecera":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", Fch, us);
+                    Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", Fch, mouser);
                     break;
                 case "Guarda301Cabecera":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", us);
+                    Consultas.ObtenerInstancia().CabeceraCreaMov(us, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", mouser);
                     out.println(1);
                     break;
                 case "Guarda313Cabecera":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", us);
+                    Consultas.ObtenerInstancia().CabeceraCreaMov(us, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", mouser);
                     out.println(1);
                     break;
                 case "Guarda315Cabecera":
-                    fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaMov(fl, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", us);
+                    Consultas.ObtenerInstancia().CabeceraCreaMov(us, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", mouser);
                     out.println(1);
                     break;
                 case "Guarda101Posiciones":
@@ -496,15 +511,17 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     String cp = ACC_Pedidos.ObtenerInstancia().cantidad(v7, n);
 
                     //String query2 = "insert into movimientos_detalle_crea values ('MO" + fo.getFolioActual() + "','" + v9 + "','" + v1 + "','" + Chepos(Integer.parseInt(v10)) + "','','" + v2 + "','','" + v16 + "','" + v3 + "','" + v13 + "','','','','','','" + v4 + "','" + v17 + "','','','','','" + v5 + "','" + v6 + "','','','','','','','','','" + v12 + "','" + v7 + "','" + n + "','','','','" + v14 + "','','','','','','" + v18 + "','" + v15 + "','0.000','','','','','')";
-                    fl = "MO" + fo.getFolioActual();
+//                    fl = "MO" + fo.getFolioActual();
 //                    Consultas.ObtenerInstancia().InsertarMovDetallesCrea(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v10)), "", v2, "", v16, v3, v13, "", "", "", "", "", v4, v17, "", "", "", "", v5, v6, "", "", "", "", "", "", "", "", v12, v7, n, "", "", "", v14, "", "", "", "", "", v18, v15, "0.000", "", "", "", "", "");
-                    Consultas.ObtenerInstancia().InsertarMovDetallesCrea(fl, Chepos(Integer.parseInt(v10)), horaActual, fechaActual, "", v2, "", v16, v3, v13, "0.000", "0.000", "", "0.000", "", v4, v17, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v12, v7, n, "", "", "", v14, "", "", "", "", "", v18, v15, "", "", "", "", "", "", "", "", "", "");
+                    Consultas.ObtenerInstancia().PosicionesCreaDet(us, Chepos(Integer.parseInt(v10)), horaActual, fechaActual, "", v2, "", v16, v3, v13, "0.000", "0.000", "", "0.000", "", v4, v17, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v12, v7, n, "", "", "", v14, "", "", "", "", "", v18, v15, "", "", "", "", "", "", "", "", "", "", "");
                     //queryUT = "insert into pedidos_historial values ('" + v7 + "','" + n + "','" + v6 + "','" + v5 + "','" + cp + "','" + v13 + "','WE','" + v2 + "','','000','" + v4 + "','" + v13 + "','" + calendar + "','" + v1 + "','MO" + fo.getFolioActual() + "','X')";
                     Consultas.ObtenerInstancia().InsertarPedidosHistorial(v7, n, v6, v5, cp, v13, "WE", v2, "", "000", v4, v13, calendar, v1, "MO" + fo.getFolioActual(), "X");
 
                     Double ncnt = Double.parseDouble(v4) + Double.parseDouble(v11);
-                    // Consultas.ObtenerInstancia().ActualizarMovDetallesCrea("pedidos_detalle", "ultima_cantidad = '" + Num(String.valueOf(ncnt)) + "', nuevo_lote = '" + v3 + "'", "num_doc_compras = '" + v7 + "' and num_posicion_doc_compras = '" + n + "'");
+//                     Consultas.ObtenerInstancia().ActualizarMovDetallesCrea("pedidos_detalle", "ultima_cantidad = '" + Num(String.valueOf(ncnt)) + "', nuevo_lote = '" + v3 + "'", "num_doc_compras = '" + v7 + "' and num_posicion_doc_compras = '" + n + "'");
                     Consultas.ObtenerInstancia().ActualizarPedidosDetalle(v7, n, Num(String.valueOf(ncnt)), v3);
+                    ///// Documento Mov, pos_mov,  pedido, pos_pedido, material, lote, cantidacan, centro, almacen
+//                    Consultas.ObtenerInstancia().ActualizarPedidosDetalle(v7, n, Num(String.valueOf(ncnt)), v3);
                     break;
                 case "Guarda102Posiciones":
                     fl = "MO" + fo.getFolioActual();
@@ -516,11 +533,12 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     String cp1 = ACC_Pedidos.ObtenerInstancia().cantidad(v7, n1);
                     // String query4 = "insert into movimientos_detalle_crea values ('MO" + fo.getFolioActual() + "','" + v9 + "','" + v1 + "','" + Chepos(Integer.parseInt(v10)) + "','','" + v2 + "','','','" + v3 + "','" + v13 + "','','','','','','" + v4 + "','" + v16 + "','','','','','" + v5 + "','" + v6 + "','','','','','','','','','" + v12 + "','" + v7 + "','" + n1 + "','','','','','','','','','','','','" + v4 + "','" + v14 + "','" + v17 + "','','','')";
 //                    Consultas.ObtenerInstancia().InsertarMovDetallesCrea(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v10)), "", v2, "", "", v3, v13, "", "", "", "", "", v4, v16, "", "", "", "", v5, v6, "", "", "", "", "", "", "", "", v12, v7, n1, "", "", "", "", "", "", "", "", "", "", "", v4, v14, v17, "", "", "");
-                    Consultas.ObtenerInstancia().InsertarMovDetallesCrea(fl, Chepos(Integer.parseInt(v10)), horaActual, fechaActual, "", v2, "", "", v3, v13, "0.000", "0.000", "", "0.000", "", v4, v16, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v12, v7, n1, "", "", "", "", "", "", "", "", "", "", "", "", "", "", v14, v17, "", "", "", "", "");
+                    Consultas.ObtenerInstancia().PosicionesCreaDet(us, Chepos(Integer.parseInt(v10)), horaActual, fechaActual, "", v2, "", "", v3, v13, "0.000", "0.000", "", "0.000", "", v4, v16, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v12, v7, n1, "", "", "", "", "", "", "", "", "", "", "", "", "", "", v14, v17, "", "", "", "", "", "");
                     // queryUT = "insert into pedidos_historial values ('" + v7 + "','" + n1 + "','" + v6 + "','" + v5 + "','" + cp1 + "','" + v13 + "','WE','" + v2 + "','','000','-" + v4 + "','" + v13 + "','" + calendar + "','" + v1 + "','MO" + fo.getFolioActual() + "','X')";
                     Consultas.ObtenerInstancia().InsertarPedidosHistorial(v7, n1, v6, v5, cp1, v13, "WE", v2, "", "000", "-" + v4, v13, calendar, v1, "MO" + fo.getFolioActual(), "X");
 
                     Double ncnt1 = Double.parseDouble(v11) + Double.parseDouble(v15);
+                    Double cant12 = Double.parseDouble(v4) + Double.parseDouble(v15);
 
                     String nf = "";
                     for (int i = v8.length(); i < 5; i++) {
@@ -528,6 +546,7 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     }
                     nf += v8;
                     //Consultas.ObtenerInstancia().Update("detalles_doc_materiales", "cantidad_cancelada = '" + Num(String.valueOf(ncnt1)) + "'", "num_doc_material='" + v14 + "' AND num_posicion_doc_compras = '" + nf + "'");
+                    ACC_DetallesDocMateriales.ObtenerInstancia().ActualizrCantidadCancelMov101(v14, v17, v7, v8, v6, v3, v12, v16, Num(String.valueOf(cant12)));
                     Consultas.ObtenerInstancia().ActualizarDetallesDocMateriales(Num(String.valueOf(ncnt1)), v14, nf);
                     // Consultas.ObtenerInstancia().Update("movimientos_detalle_crea", "cantidad_cancelada = '" + Num(String.valueOf(ncnt1)) + "'", "folio_sam='" + v14 + "' AND num_posicion_doc_compras = '" + nf + "'");
                     //Consultas.ObtenerInstancia().ActualizarMovimientosDetalleCrea(Num(String.valueOf(ncnt1)), v14, nf); 
@@ -547,11 +566,11 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     break;
                 case "Guarda261Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", v10, v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", v13, v14, "", "0.000", "", "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21 );
+                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", v10, v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", v13, v14, "", "0.000", "", "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21);
                     break;
                 case "Guarda262Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", v10, v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21 );
+                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", v10, v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21);
                     break;
                 case "Guarda303Posiciones":
                     fl = "MO" + fo.getFolioActual();
@@ -572,7 +591,7 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
 //                    }else{
 //                        Consultas.ObtenerInstancia().CabeceraCreaDet(fl, horaActual, fechaActual, Chepos(Integer.parseInt(v8)), "", v2, "", "", v3, v11, "", "", "", "", "", v4, v12, "", "", "", "", v5, v6, "", "", v13, v14, "", "", v10, "", v9, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 //                    }
-                    Consultas.ObtenerInstancia().PosicionesCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", v13, v14, "", "0.000", v10, "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21);
+                    Consultas.ObtenerInstancia().PosicionesCreaDet(us, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", v13, v14, "", "0.000", v10, "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21, "");
                     break;
                 case "Guarda312Posiciones":
                     fl = "MO" + fo.getFolioActual();
@@ -580,15 +599,15 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     break;
                 case "Guarda301Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().PosicionesCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", v10, "0", v9, "", "", StockEspecial, "", v15, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21);
+                    Consultas.ObtenerInstancia().PosicionesCreaDet(us, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", v10, "0", v9, "", "", StockEspecial, "", v15, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21, "");
                     break;
                 case "Guarda313Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().PosicionesCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", v10, "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21);
+                    Consultas.ObtenerInstancia().PosicionesCreaDet(us, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", v10, "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21, "");
                     break;
                 case "Guarda315Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().PosicionesCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", v12, "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21);
+                    Consultas.ObtenerInstancia().PosicionesCreaDet(us, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", v12, "0", v9, "", "", StockEspecial, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21, "");
                     break;
                 case "Lote101Posiciones":
                     int cl1 = Integer.parseInt(v2);
@@ -918,6 +937,13 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                                 ACC_Stock.ObtenerInstancia().ActualizaInvE(M311k[i][2], M311k[i][0], M311k[i][3], orik, M311k[i][4], M311k[i][7], M311k[i][8]);
                                 //Destino
                                 ACC_Stock.ObtenerInstancia().ActualizaInvET(M311k[i][2], M311k[i][0], M311k[i][3], desk, M311k[i][5], M311k[i][7], M311k[i][8]);
+
+                                //// Stock Transferencia 
+                                String Stok0 = ACC_Stock.ObtenerInstancia().obtenersotcktras(M311k[i][3], M311k[i][5], M311k[i][4], M311k[i][0], M311k[i][2], M311k[i][7], M311k[i][8], "E");
+                                float STE = Float.parseFloat(Stok0) + Float.parseFloat(M311k[i][1]);
+                                String STEF = dfk.format(STE);
+                                ACC_Stock.ObtenerInstancia().Guardar313StrockTrasladoE(M311k[i][3], M311k[i][5], M311k[i][4], M311k[i][0], M311k[i][2], STEF, M311k[i][7], M311k[i][8]);
+
                             } else {
                                 origenk = ACC_Stock.ObtenerInstancia().StockLibre(M311k[i][2], M311k[i][0], M311k[i][3], M311k[i][4]) - Double.parseDouble(M311k[i][1]);
                                 destinok = ACC_Stock.ObtenerInstancia().StockLibreT(M311k[i][2], M311k[i][0], M311k[i][3], M311k[i][5]) + Double.parseDouble(M311k[i][1]);
@@ -927,6 +953,12 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                                 ACC_Stock.ObtenerInstancia().ActualizaInv(M311k[i][2], M311k[i][0], M311k[i][3], orik, M311k[i][4]);
                                 //Destino
                                 ACC_Stock.ObtenerInstancia().ActualizaInvT(M311k[i][2], M311k[i][0], M311k[i][3], desk, M311k[i][5]);
+
+                                //// Stock Transferencia 
+                                String Stok1 = ACC_Stock.ObtenerInstancia().obtenersotcktras(M311k[i][3], M311k[i][5], M311k[i][4], M311k[i][0], M311k[i][2], "", "", "");
+                                float ST = Float.parseFloat(Stok1) + Float.parseFloat(M311k[i][1]);
+                                String STF = dfk.format(ST);
+                                ACC_Stock.ObtenerInstancia().Guardar313StrockTraslado(M311k[i][3], M311k[i][5], M311k[i][4], M311k[i][0], M311k[i][2], STF);
                             }
                         }
 
@@ -963,6 +995,13 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                                 ACC_Stock.ObtenerInstancia().ActualizaInvE(M311kj[i][2], M311kj[i][0], M311kj[i][3], orikj, M311kj[i][4], M311kj[i][7], M311kj[i][8]);
                                 //Destino
                                 ACC_Stock.ObtenerInstancia().ActualizaInvET(M311kj[i][2], M311kj[i][0], M311kj[i][3], deskj, M311kj[i][4], M311kj[i][7], M311kj[i][8]);
+
+                                /// Stock Tranferencia
+                                String Stok0 = ACC_Stock.ObtenerInstancia().obtenersotcktras315(M311kj[i][3], M311kj[i][4], M311kj[i][0], M311kj[i][2], M311kj[i][7], M311kj[i][8], "E");
+                                float STE = Float.parseFloat(Stok0) - Float.parseFloat(M311kj[i][1]);
+                                String STEF = dfkj.format(STE);
+
+                                ACC_Stock.ObtenerInstancia().ActualizarTras313(M311kj[i][3], M311kj[i][4], M311kj[i][0], M311kj[i][2], STEF, M311kj[i][7], M311kj[i][8], "E");
                             } else {
                                 origenkj = ACC_Stock.ObtenerInstancia().StockLibre(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4]) + Double.parseDouble(M311kj[i][1]);
                                 destinokj = ACC_Stock.ObtenerInstancia().StockLibreT(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4]) - Double.parseDouble(M311kj[i][1]);
@@ -972,6 +1011,12 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                                 ACC_Stock.ObtenerInstancia().ActualizaInv(M311kj[i][2], M311kj[i][0], M311kj[i][3], orikj, M311kj[i][4]);
                                 //Destino
                                 ACC_Stock.ObtenerInstancia().ActualizaInvT(M311kj[i][2], M311kj[i][0], M311kj[i][3], deskj, M311kj[i][4]);
+
+                                //// Stock Transferencia 
+                                String Stok1 = ACC_Stock.ObtenerInstancia().obtenersotcktras315(M311kj[i][3], M311kj[i][4], M311kj[i][0], M311kj[i][2], "", "", "");
+                                float ST = Float.parseFloat(Stok1) - Float.parseFloat(M311kj[i][1]);
+                                String STF = dfkj.format(ST);
+                                ACC_Stock.ObtenerInstancia().ActualizarTras313(M311kj[i][3], M311kj[i][4], M311kj[i][0], M311kj[i][2], STF, "", "", "");
                             }
                         }
 
@@ -1157,7 +1202,7 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                         for (int i = 0; i < cc3t6; i++) {
                             if (M311t6[i][7].equals("E")) {
                                 origent6 = ACC_Stock.ObtenerInstancia().StockLibreE(M311t6[i][2], M311t6[i][0], M311t6[i][3], M311t6[i][4], M311t6[i][5], M311t6[i][6]) - Double.parseDouble(M311t6[i][1]);
-                                
+
                                 orit6 = (origent6 >= 1) ? ddt.format(origent6) : "0" + ddt.format(origent6);
                                 //Oriden
                                 ACC_Stock.ObtenerInstancia().ActualizaInvE(M311t6[i][2], M311t6[i][0], M311t6[i][3], orit6, M311t6[i][4], M311t6[i][5], M311t6[i][6]);
@@ -1210,7 +1255,7 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                         for (int i = 0; i < cc3t62; i++) {
                             if (M311t62[i][7].equals("E")) {
                                 origent62 = ACC_Stock.ObtenerInstancia().StockLibreE(M311t62[i][2], M311t62[i][0], M311t62[i][3], M311t62[i][4], M311t62[i][5], M311t62[i][6]) + Double.parseDouble(M311t62[i][1]);
-                                
+
                                 orit62 = (origent62 >= 1) ? dd62.format(origent62) : "0" + dd62.format(origent62);
                                 //Oriden
                                 ACC_Stock.ObtenerInstancia().ActualizaInvE(M311t62[i][2], M311t62[i][0], M311t62[i][3], orit62, M311t62[i][4], M311t62[i][5], M311t62[i][6]);
@@ -1226,6 +1271,10 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     } catch (Exception e) {
                         System.err.println("Error: " + e);
                     }
+                    break;
+                case "ActualizarFoliosMO":
+                    String fwe = ACC_Pedidos.ObtenerInstancia().FolioPos(us);
+                    out.println(fwe);
                     break;
 
                 default:
