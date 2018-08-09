@@ -44,7 +44,7 @@
                 <div class="user">
                     <label>Usuario</label><input style="text-transform: uppercase;" name="Usuario" id="Usuario"  type="text" maxlength="20" required>
                     <hr>    
-                    <label>Clv.acc.</label><input  name="Password" id="Password"  placeholder="******************************" type="password">
+                    <label>Clv.acc.</label><input  name="Password" id="Password"  placeholder="******************************" type="password"><input type="text" id="ipdata" hidden/>
                     <hr>
                 </div>    
                 <div class="idioma">
