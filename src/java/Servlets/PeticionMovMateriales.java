@@ -70,6 +70,8 @@ public class PeticionMovMateriales extends HttpServlet {
             HttpSession session = request.getSession();
             String accion = request.getParameter("Action");
             String idioma = request.getParameter("lang");
+            String centro102 = request.getParameter("centro102");
+            String almacen102 = request.getParameter("almacen102");
             String v1 = request.getParameter("v1");
             String v2 = request.getParameter("v2");
             String v3 = request.getParameter("v3");
@@ -520,7 +522,7 @@ public class PeticionMovMateriales extends HttpServlet {
                     }
                     if ((v7.equals("201") || v7.equals("311") || v7.equals("303") || v7.equals("261")) && lote.equals("")) {
                         if (docEE.equals("")) {
-                             int rs = ACC_Stock.ObtenerInstancia().ConsultaLote(v1, v3, v4, v5, lote);
+                            int rs = ACC_Stock.ObtenerInstancia().ConsultaLote(v1, v3, v4, v5, lote);
                             out.println(rs + ",Cantidad en Almacén Stock Especial no suficiente,1,0");
                         } else {
                             int rs = ACC_Stock.ObtenerInstancia().ConsultaLote(v1, v3, v4, v5, lote);
@@ -760,7 +762,7 @@ public class PeticionMovMateriales extends HttpServlet {
                     out.println(Tol);
                     break;
                 case "DocMovimiento102":
-                    ArrayList<detalles_doc_materiales> dd = ACC_DetallesDocMateriales.ObtenerInstancia().ObtenerMov101Doc(NDocCom);
+                    ArrayList<detalles_doc_materiales> dd = ACC_DetallesDocMateriales.ObtenerInstancia().ObtenerMov101Doc(NDocCom, centro102, almacen102);
                     if (dd.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
@@ -979,6 +981,58 @@ public class PeticionMovMateriales extends HttpServlet {
                         out.println(0);
                     } else {
                         out.println(1);
+                    }
+                    break;
+                case "ConsultaMaterial":
+                    ArrayList<materiales> mate = ACC_Material.ObtenerInstancia().ConsultaMaterial(v1, v2, v3, v4);
+                    if (mate.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        for (int i = 0; i < mate.size(); i++) {
+
+                            out.println("<tr ondblclick=\"seleccionarMatok('" + mate.get(i).getMaterial() + "', '" + mate.get(i).getDescripcion() + "', '" + mate.get(i).getUnidad_medida() + "', '" + v5 + "')\">");
+                            out.println("<td style=\"width:25%;\">" + mate.get(i).getMaterial() + "</td>");
+                            out.println("<td style=\"width:65%; text-align: left;\">" + mate.get(i).getDescripcion() + "</td>");
+                            out.println("</tr>");
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println(0);
+                    }
+                    break;
+                case "ConsultaLote":
+                    ArrayList<stock> so1 = ACC_Stock.ObtenerInstancia().ConsultaInventariosC2(v1, v2, v3, v4);
+                    if (so1.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        for (int i = 0; i < so1.size(); i++) {
+
+                            out.println("<tr ondblclick=\"SelecLoteM('" + so1.get(i).getLote() + "', '" + v3 + "')\">");
+                            out.println("<td>" + so1.get(i).getMaterial() + "</td>");
+                            out.println("<td>" + so1.get(i).getCentro() + "</td>");
+                            out.println("<td>" + so1.get(i).getAlmacen() + "</td>");
+                            out.println("<td>" + so1.get(i).getLote() + "</td>");
+                            out.println("<td>" + so1.get(i).getStocklibre_utilizacion() + "</td>");
+                            out.println("</tr>");
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println(0);
+                    }
+                    break;
+                case "ObtenerDatosMateriales":
+                    materiales m12 = ACC_Material.ObtenerInstancia().gtedataMovimientosInfo(v1);
+                    if (m12.getMaterial().equals("")) {
+                        out.println(0);
+                    } else {
+                        JSONArray ja = new JSONArray();
+                        ja.add(m12.getMaterial());
+                        ja.add(m12.getDescripcion());
+                        ja.add(m12.getUnidad_medida());
+                        ja.add(m12.getSujeto_lote());
+                        out.println(ja);
                     }
                     break;
             }
