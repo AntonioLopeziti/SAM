@@ -195,11 +195,11 @@ public class ACC_CentroCosto {
         return cco;
     }
 
-    public ArrayList<CeCos> ConsultaCeCOS(String clc, String ceco, String text, String tex2) {
+    public ArrayList<CeCos> ConsultaCeCOS(String clc, String ceco, String text, String tex2, String can) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         ArrayList<CeCos> cco = new ArrayList<>();
-        String query = "{call MM.cecos_match_MOM(?,?,?,?)}";
+        String query = "{call MM.cecos_match_MOM(?,?,?,?,?)}";
 
         try {
             PreparedStatement sp = con.prepareStatement(query);
@@ -207,6 +207,7 @@ public class ACC_CentroCosto {
             sp.setString(2, ceco);
             sp.setString(3, text);
             sp.setString(4, tex2);
+            sp.setString(5, can);
             ResultSet rs = sp.executeQuery();
             while (rs.next()) {
                 CeCos c = new CeCos();
