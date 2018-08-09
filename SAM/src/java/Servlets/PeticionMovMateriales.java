@@ -351,7 +351,7 @@ public class PeticionMovMateriales extends HttpServlet {
                     }
                     break;
                 case "VentanaModalCC":
-                    ArrayList<CeCos> cc = ACC_CentroCosto.ObtenerInstancia().ConsultaCeCOS(v1, v2, v3, v4);
+                    ArrayList<CeCos> cc = ACC_CentroCosto.ObtenerInstancia().ConsultaCeCOS(v1, v2, v3, v4,v5);
                     if (cc.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
@@ -1033,6 +1033,25 @@ public class PeticionMovMateriales extends HttpServlet {
                         ja.add(m12.getUnidad_medida());
                         ja.add(m12.getSujeto_lote());
                         out.println(ja);
+                    }
+                    break;
+                case "ConsultaCeCos":
+                    ArrayList<CeCos> cecos = ACC_CentroCosto.ObtenerInstancia().ConsultaCeCOS(v1, v2, v3, v4, v5);
+                    if (cecos.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        for (int i = 0; i < cecos.size(); i++) {
+                            out.println("<tr ondblclick=\"seleccionarCCosto('" + cecos.get(i).getCentroCos() + "','" + v6 + "')\">");
+                            out.println("<td style=\"width: 20%;\">" + cecos.get(i).getClaseCoste() + "</td>");
+                            out.println("<td style=\"width: 30%; text-align: left;\">" + cecos.get(i).getDescripcion() + "</td>");
+                            out.println("<td style=\"width: 20%;\">" + cecos.get(i).getCentroCos() + "</td>");
+                            out.println("<td style=\"width: 30%; text-align: left;\">" + cecos.get(i).getDenominacion() + "</td>");
+                            out.println("</tr>");
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println(0 + ",VentanaModalCC,bxccs201,");
                     }
                     break;
             }
