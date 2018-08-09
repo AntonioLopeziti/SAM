@@ -118,7 +118,8 @@ public class peticionCrearSolPed extends HttpServlet {
             ////// Servicios
             String Servicio = request.getParameter("Servicio");
             String DServicio = request.getParameter("DServicio");
-
+            ////// IP de usuario
+            String ipsf = request.getParameter("ipsf");            
             //////
             String dato = request.getParameter("dato");
             String CVal = request.getParameter("CVAL");
@@ -475,7 +476,7 @@ public class peticionCrearSolPed extends HttpServlet {
                     out.println(sad);
                     break;
                 case "CargarListaPos":
-                    ArrayList<SolpedCrea> spl = ACC_SolicitudPedidos.ObtenerInstancia().CargarPosicion(Usu);
+                    ArrayList<SolpedCrea> spl = ACC_SolicitudPedidos.ObtenerInstancia().CargarPosicion(Usu,ipsf);
                     out.println("<option></option>");
                     for (int c = 0; c < spl.size(); c++) {
                         out.println("<option>" + spl.get(c).getNum_posicion_solped() + "</option>");
@@ -496,12 +497,12 @@ public class peticionCrearSolPed extends HttpServlet {
                     out.println("</table>");
                     break;
                 case "Limpiartemporal":
-                    ACC_SolicitudPedidos.ObtenerInstancia().BorrarTemporal(Usu);
-                    ACC_Textos_posiciones_solped.ObtenerInstancia().EliminarTxtTemp(Usu);
-                    ACC_Servicios.ObtenerInstancia().EliminarSerTemporal(Usu);
+                    ACC_SolicitudPedidos.ObtenerInstancia().BorrarTemporal(Usu,ipsf);
+                    ACC_Textos_posiciones_solped.ObtenerInstancia().EliminarTxtTemp(Usu,ipsf);
+                    ACC_Servicios.ObtenerInstancia().EliminarSerTemporal(Usu,ipsf);
                     break;
                 case "CargarDatosPosicion":
-                    SolpedCrea sc = ACC_SolicitudPedidos.ObtenerInstancia().ObtenerDatosposicion(dato, Usu);
+                    SolpedCrea sc = ACC_SolicitudPedidos.ObtenerInstancia().ObtenerDatosposicion(dato, Usu,ipsf);
                     JSONArray JSol = new JSONArray();
                     JSol.add(sc.getNum_material());
                     JSol.add(sc.getCantidad_solped());
@@ -519,7 +520,7 @@ public class peticionCrearSolPed extends HttpServlet {
                     out.println(JSol);
                     break;
                 case "CargartTxtPos":
-                    ArrayList<textos_posiciones_solped> tx = ACC_Textos_posiciones_solped.ObtenerInstancia().CargarTextoPosicionTemp(Usu, dato);
+                    ArrayList<textos_posiciones_solped> tx = ACC_Textos_posiciones_solped.ObtenerInstancia().CargarTextoPosicionTemp(Usu, dato,ipsf);
                     JSONArray jat = new JSONArray();
                     String arr = "";
                     for (int i = 0; i < tx.size(); i++) {
