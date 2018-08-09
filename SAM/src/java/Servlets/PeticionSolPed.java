@@ -105,9 +105,9 @@ public class PeticionSolPed extends HttpServlet {
                     s.setNum_orden(ORD);
                     s.setFecha(FechaServidor);
                     s.setHora_dia(HoraServidor);
-                    boolean b = ACC_SolicitudPedidos.ObtenerInstancia().InsertTemporal(s);
+                    boolean b = ACC_SolicitudPedidos.ObtenerInstancia().InsertTemporal(s,ipsf);
                     if (b) {
-                        ArrayList<SolpedCrea> so = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user);
+                        ArrayList<SolpedCrea> so = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user,ipsf);
                         if (so.size() > 0) {
                             int a;
                             out.println("<table>");
@@ -170,9 +170,9 @@ public class PeticionSolPed extends HttpServlet {
                     s.setNum_orden(ORD);
                     s.setFecha(FechaServidor);
                     s.setHora_dia(HoraServidor);
-                    boolean upd = ACC_SolicitudPedidos.ObtenerInstancia().UpdateTemporal(s);
+                    boolean upd = ACC_SolicitudPedidos.ObtenerInstancia().UpdateTemporal(s,ipsf);
                     if (upd) {
-                        ArrayList<SolpedCrea> so = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user);
+                        ArrayList<SolpedCrea> so = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user,ipsf);
                         if (so.size() > 0) {
                             int a;
                             out.println("<table>");
@@ -215,16 +215,16 @@ public class PeticionSolPed extends HttpServlet {
                     }
                     break;
                 case "DElTEXTPos":
-                    ACC_Textos_posiciones_solped.ObtenerInstancia().EliminarModTexto(POS, user);
+                    ACC_Textos_posiciones_solped.ObtenerInstancia().EliminarModTexto(POS, user,ipsf);
                     break;
                 case "SAVETEX":
-                    ACC_Textos_posiciones_solped.ObtenerInstancia().InsertartxtPosTemp(Chepos(POS), fila, user, texps);
+                    ACC_Textos_posiciones_solped.ObtenerInstancia().InsertartxtPosTemp(Chepos(POS), fila, user, texps,ipsf);
                     break;
                     
                 case "GuardarSolped":
                     String retorn = "";
                     int n = 0;
-                    ArrayList<SolpedCrea> sl = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user);
+                    ArrayList<SolpedCrea> sl = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user,ipsf);
                     ArrayList<SolpedServicios> se = ACC_Servicios.ObtenerInstancia().CargarServicios(user, "0");
                     ArrayList<textos_posiciones_solped> t = ACC_Textos_posiciones_solped.ObtenerInstancia().CargarTxtPos(user);
 
@@ -266,10 +266,10 @@ public class PeticionSolPed extends HttpServlet {
                     out.println(ff);
                     break;
                 case "DeletePos":
-                    if (ACC_SolicitudPedidos.ObtenerInstancia().solped_tempDelete(user, POS)) {
-                        ACC_SolicitudPedidos.ObtenerInstancia().solped_serviciosDelete(user, POS);
-                        ACC_SolicitudPedidos.ObtenerInstancia().tex_pos_solped_tempDelete(user, POS);
-                        ArrayList<SolpedCrea> so = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user);
+                    if (ACC_SolicitudPedidos.ObtenerInstancia().solped_tempDelete(user, POS,ipsf)) {
+                        ACC_SolicitudPedidos.ObtenerInstancia().solped_serviciosDelete(user, POS,ipsf);
+                        ACC_SolicitudPedidos.ObtenerInstancia().tex_pos_solped_tempDelete(user, POS,ipsf);
+                        ArrayList<SolpedCrea> so = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user,ipsf);
                         int a;
                         out.println("<table>");
                         out.println("<tbody>");
@@ -309,15 +309,15 @@ public class PeticionSolPed extends HttpServlet {
                     break;
                 case "Reasic":
                     int Tamnua = Integer.parseInt(request.getParameter("NewPos"));
-                    ArrayList<SolpedCrea> serv = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user);
+                    ArrayList<SolpedCrea> serv = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user,ipsf);
                     int hola = serv.size();
                     for (int i = 0; i < hola; i++) {
                         if (Tamnua == i) {
                             int valn = i + 1;
                             String lon = String.valueOf(valn);
-                            if (ACC_SolicitudPedidos.ObtenerInstancia().solped_serviciosUpdate(user, serv.get(i).getNum_posicion_solped(), Chepos(lon)) == true) {
-                                if (ACC_SolicitudPedidos.ObtenerInstancia().solped_tempUpdate(user, serv.get(i).getNum_posicion_solped(), Chepos(lon)) == true) {
-                                    if (ACC_SolicitudPedidos.ObtenerInstancia().tex_pos_solped_tempUpdate(user, serv.get(i).getNum_posicion_solped(), Chepos(lon)) == true) {
+                            if (ACC_SolicitudPedidos.ObtenerInstancia().solped_serviciosUpdate(user, serv.get(i).getNum_posicion_solped(), Chepos(lon),ipsf) == true) {
+                                if (ACC_SolicitudPedidos.ObtenerInstancia().solped_tempUpdate(user, serv.get(i).getNum_posicion_solped(), Chepos(lon),ipsf) == true) {
+                                    if (ACC_SolicitudPedidos.ObtenerInstancia().tex_pos_solped_tempUpdate(user, serv.get(i).getNum_posicion_solped(), Chepos(lon),ipsf) == true) {
                                         out.println(1);
                                     } else {
                                         out.println(0);
@@ -325,7 +325,7 @@ public class PeticionSolPed extends HttpServlet {
                                 } else {
                                     out.println(0);
                                 }
-                            } else if (ACC_SolicitudPedidos.ObtenerInstancia().solped_tempUpdate(user, serv.get(i).getNum_posicion_solped(), Chepos(lon)) == true) {
+                            } else if (ACC_SolicitudPedidos.ObtenerInstancia().solped_tempUpdate(user, serv.get(i).getNum_posicion_solped(), Chepos(lon),ipsf) == true) {
                                 out.println(1);
                             } else {
                                 out.println(0);
@@ -334,7 +334,7 @@ public class PeticionSolPed extends HttpServlet {
                     }
                     break;
                 case "CargarNuevaPosi":
-                    ArrayList<SolpedCrea> so = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user);
+                    ArrayList<SolpedCrea> so = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user,ipsf);
                     int a;
                     out.println("<table>");
                     out.println("<tbody>");
