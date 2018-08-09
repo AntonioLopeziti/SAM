@@ -550,12 +550,12 @@ public class ACC_SolicitudPedidos {
         return solp;
     }
 
-    public boolean InsertTemporal(SolpedCrea s) {
+    public boolean InsertTemporal(SolpedCrea s, String ipsf) {
         boolean ban = false;
         Conexion cnx = new Conexion();
         Connection cnn = cnx.ObtenerConexion();
         PreparedStatement ps = null;
-        String sql = "{CALL MM.Solped_InsertarPosTemporal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{CALL MM.Solped_InsertarPosTemporal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             ps = cnn.prepareStatement(sql);
             ps.setString(1, s.getNum_posicion_solped());
@@ -579,6 +579,7 @@ public class ACC_SolicitudPedidos {
             ps.setString(19, s.getFecha());
             ps.setString(20, s.getHora_dia());
             ps.setString(21, s.getSolicitante());
+            ps.setString(22, ipsf);
             if (ps.executeUpdate() == 1) {
                 ban = true;
             }
@@ -590,12 +591,12 @@ public class ACC_SolicitudPedidos {
         return ban;
     }
 
-    public boolean UpdateTemporal(SolpedCrea s) {
+    public boolean UpdateTemporal(SolpedCrea s,String ipsf) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         boolean ban = false;
         PreparedStatement ps = null;
-        String sql = "{CALL MM.Solped_ActualizarPosTemporal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{CALL MM.Solped_ActualizarPosTemporal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, s.getNum_posicion_solped());
@@ -614,6 +615,8 @@ public class ACC_SolicitudPedidos {
             ps.setString(14, s.getCentro_coste());
             ps.setString(15, s.getNum_orden());
             ps.setString(16, s.getSolicitante());
+            ps.setString(17, ipsf);
+            
             if (ps.executeUpdate() == 1) {
                 ban = true;
             }
@@ -661,16 +664,17 @@ public class ACC_SolicitudPedidos {
         return ban;
     }
 
-    public ArrayList<SolpedCrea> CargarTablaTemp(String user) {
+    public ArrayList<SolpedCrea> CargarTablaTemp(String user, String ipsf) {
         ArrayList<SolpedCrea> sol = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement sp = null;
         ResultSet rs = null;
-        String sql = "{CALL MM.Solped_CargarTemp(?)}";
+        String sql = "{CALL MM.Solped_CargarTemp(?,?)}";
         try {
             sp = con.prepareStatement(sql);
             sp.setString(1, user);
+            sp.setString(2, ipsf);
             rs = sp.executeQuery();
             while (rs.next()) {
                 SolpedCrea s = new SolpedCrea();
@@ -749,16 +753,17 @@ public class ACC_SolicitudPedidos {
         return sol;
     }
 
-    public ArrayList<SolpedCrea> CargarPosicion(String user) {
+    public ArrayList<SolpedCrea> CargarPosicion(String user, String ipsf) {
         ArrayList<SolpedCrea> so = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{CALL MM.Solped_CargarPosicion(?)}";
+        String sql = "{CALL MM.Solped_CargarPosicion(?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, user);
+            ps.setString(2, ipsf);
             rs = ps.executeQuery();
             while (rs.next()) {
                 SolpedCrea s = new SolpedCrea();
@@ -773,14 +778,15 @@ public class ACC_SolicitudPedidos {
         return so;
     }
 
-    public void BorrarTemporal(String user) {
+    public void BorrarTemporal(String user,String ipsf) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
-        String sql = "{CALL MM.Solped_EliminarDatosTemporal(?)}";
+        String sql = "{CALL MM.Solped_EliminarDatosTemporal(?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, user);
+            ps.setString(2, ipsf);
             ps.executeQuery();
         } catch (Exception e) {
             System.err.println("Error en BorrarTemporal, ACC_SolicitudPedidos por: " + e);
@@ -789,17 +795,18 @@ public class ACC_SolicitudPedidos {
         }
     }
 
-    public SolpedCrea ObtenerDatosposicion(String pos, String user) {
+    public SolpedCrea ObtenerDatosposicion(String pos, String user, String ipsf) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         SolpedCrea s = new SolpedCrea();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{CALL MM.Solped_CargarDatosPosicion(?,?)}";
+        String sql = "{CALL MM.Solped_CargarDatosPosicion(?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, pos);
             ps.setString(2, user);
+            ps.setString(3, ipsf);
             rs = ps.executeQuery();
             while (rs.next()) {
                 s.setTipo_imputacion(rs.getString("tipo_imputacion"));
@@ -1146,17 +1153,18 @@ public class ACC_SolicitudPedidos {
         }
     }
 
-    public boolean solped_tempDelete(String us, String pos) {
+    public boolean solped_tempDelete(String us, String pos,String ipsf) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
-        String query = "{call MM.solped_temp_ELIMINAR(?,?)}";
+        String query = "{call MM.solped_temp_ELIMINAR(?,?,?)}";
         int validar;
         try {
 
             pst = conn.prepareStatement(query);
             pst.setString(1, us);
             pst.setString(2, pos);
+            pst.setString(3,ipsf);
             validar = pst.executeUpdate();
             if (validar >= 0) {
                 return true;
@@ -1236,17 +1244,18 @@ public class ACC_SolicitudPedidos {
         return se;
     }
 
-    public boolean solped_serviciosDelete(String us, String pos) {
+    public boolean solped_serviciosDelete(String us, String pos,String ipsf) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
-        String query = "{call  MM.solped_servicios_crea_temp_ELIMINARPO(?,?)}";
+        String query = "{call  MM.solped_servicios_crea_temp_ELIMINARPO(?,?,?)}";
         int validar;
         try {
 
             pst = conn.prepareStatement(query);
             pst.setString(1, us);
             pst.setString(2, pos);
+            pst.setString(3, ipsf);
             validar = pst.executeUpdate();
             if (validar >= 0) {
                 return true;
@@ -1259,17 +1268,18 @@ public class ACC_SolicitudPedidos {
         return false;
     }
 
-    public boolean tex_pos_solped_tempDelete(String us, String pos) {
+    public boolean tex_pos_solped_tempDelete(String us, String pos, String ipsf) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
-        String query = "{call  MM.textos_posiciones_solped_temp_POSELIM(?,?)}";
+        String query = "{call  MM.textos_posiciones_solped_temp_POSELIM(?,?,?)}";
         int validar;
         try {
 
             pst = conn.prepareStatement(query);
             pst.setString(1, us);
             pst.setString(2, pos);
+            pst.setString(3, ipsf);
             validar = pst.executeUpdate();
             if (validar >= 0) {
                 return true;
@@ -1282,17 +1292,18 @@ public class ACC_SolicitudPedidos {
         return false;
     }
 
-    public boolean solped_serviciosUpdate(String user, String posv, String posn) {
+    public boolean solped_serviciosUpdate(String user, String posv, String posn,String ipsf) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         int validar;
-        String query = "{call MM.solped_servicios_crea_tempACTUALIZAR(?,?,?)}";
+        String query = "{call MM.solped_servicios_crea_tempACTUALIZAR(?,?,?,?)}";
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, user);
             pst.setString(2, posv);
             pst.setString(3, posn);
+            pst.setString(4, ipsf);
             validar = pst.executeUpdate();
             if (validar >= 0) {
                 return true;
@@ -1305,17 +1316,18 @@ public class ACC_SolicitudPedidos {
         return false;
     }
 
-    public boolean solped_tempUpdate(String user, String posv, String posn) {
+    public boolean solped_tempUpdate(String user, String posv, String posn,String ipsf) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         int validar;
-        String query = "{call MM.solped_temp_tempACTUALIZAR(?,?,?)}";
+        String query = "{call MM.solped_temp_tempACTUALIZAR(?,?,?,?)}";
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, user);
             pst.setString(2, posv);
             pst.setString(3, posn);
+            pst.setString(4, ipsf);
             validar = pst.executeUpdate();
             if (validar >= 0) {
                 return true;
@@ -1328,17 +1340,18 @@ public class ACC_SolicitudPedidos {
         return false;
     }
 
-    public boolean tex_pos_solped_tempUpdate(String user, String posv, String posn) {
+    public boolean tex_pos_solped_tempUpdate(String user, String posv, String posn,String ipsf) {
         Conexion con = new Conexion();
         Connection conn = con.ObtenerConexion();
         PreparedStatement pst = null;
         int validar;
-        String query = "{call MM.textos_posiciones_solped_tempACTUALIZAR(?,?,?)}";
+        String query = "{call MM.textos_posiciones_solped_tempACTUALIZAR(?,?,?,?)}";
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, user);
             pst.setString(2, posv);
             pst.setString(3, posn);
+            pst.setString(4, ipsf);
             validar = pst.executeUpdate();
             if (validar >= 0) {
                 return true;
