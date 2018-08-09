@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 $(document).ready(function () {
+    GetIp();
     checbrowser();
     $('#iconmsg').hide();
     $('#header').prop('disabled', true);
@@ -132,6 +133,19 @@ $(document).ready(function () {
             }
         });
     });
+    function GetIp() {
+        window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;   //compatibility for firefox and chrome
+        var pc = new RTCPeerConnection({iceServers: []}), noop = function () {};
+        pc.createDataChannel("");    //create a bogus data channel
+        pc.createOffer(pc.setLocalDescription.bind(pc), noop);    // create offer and set local description
+        pc.onicecandidate = function (ice) {  //listen for candidate events
+            if (!ice || !ice.candidate || !ice.candidate.candidate)
+                return;
+            var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+            pc.onicecandidate = noop;
+            $('#ipdata').val(myIP);
+        };
+    }
 });
 function Validar()
 {
@@ -215,7 +229,7 @@ function enviarDatos(use, pwd, lan)
         url: 'Autenticar',
         contentType: "application/x-www-form-urlencoded",
         processData: true,
-        data: "Usuario=" + user + "&Password=" + pwd + "&Idioma=" + lan,
+        data: "Usuario=" + user + "&Password=" + pwd + "&Idioma=" + lan + "&IPDATA=" +  $('#ipdata').val(),
         success: function (data) {
             $("button").prop("disabled", false);
             $("input:text").prop("disabled", false);
