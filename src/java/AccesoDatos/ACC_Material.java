@@ -950,6 +950,7 @@ public class ACC_Material {
                 materiales m = new materiales();
                 m.setMaterial(rs.getString("material"));
                 m.setDescripcion(rs.getString("descripcion_" + lang));
+                m.setUnidad_medida(rs.getString("unidad_medida"));
                 mm.add(m);
             }
         } catch (Exception e) {
@@ -2811,7 +2812,7 @@ public class ACC_Material {
 //        return eq;
 //    }
 
-    public ArrayList<materiales> ConsultaMaterialesMov(String mat, String des, String can , String clm, String cen, String alm) {
+    public ArrayList<materiales> ConsultaMaterialesMov(String mat, String des, String can, String clm, String cen, String alm) {
         ArrayList<materiales> mater = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -2866,7 +2867,7 @@ public class ACC_Material {
         }
         return m;
     }
-
+    
     public int ValidaSujetoLote(String mat) {
         int n = 0;
         Conexion cnx = new Conexion();
@@ -2876,9 +2877,9 @@ public class ACC_Material {
         String sql = "{call MM.MovimientosMateriales_SujetoLote(?)}";
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1,mat);
+            ps.setString(1, mat);
             rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 n = 1;
             }
         } catch (Exception e) {
@@ -2887,6 +2888,30 @@ public class ACC_Material {
             cnx.CerrarConexion(con);
         }
         return n;
+    }
+
+    public materiales gtedataMovimientosInfo(String mnaterial) {
+        materiales ma = new materiales();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String sql = "{call mm.Movimientos_GetDataInfoMaterial(?)}";
+        try {
+            PreparedStatement ps  = con.prepareStatement(sql);
+            ps.setString(1, mnaterial);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                ma.setMaterial(rs.getString("material"));
+                ma.setDescripcion(rs.getString("descripcion_ES"));
+                ma.setUnidad_medida(rs.getString("unidad_medida"));
+                ma.setSujeto_lote(rs.getString("sujeto_lote"));
+            }
+            
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ma;
     }
     
 }
