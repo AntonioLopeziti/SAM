@@ -80,9 +80,11 @@ public class PeticionTablasMovMateriales extends HttpServlet {
             String CDestino = request.getParameter("CDestino");
             String NDocCom = request.getParameter("DocCom");
             String tipFol = request.getParameter("TipoFolio");
-
-            String us = (String) session.getAttribute("Usuario");
+            String us = request.getParameter("ipFolio");
+            String user = (String) session.getAttribute("Usuario");
             String Idioma = (String) session.getAttribute("Idioma");
+            String IP = (String) session.getAttribute("IP");
+            String perso = IP + user;
             Conexion cnx = new Conexion();
             accion += clase;
 
@@ -204,7 +206,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                                                     + "                <td name=\"tdMaterial\">" + pe.get(c).getMaterial() + "</td>\n"
                                                     + "                <td name=\"tdtxt\">" + pe.get(c).getDescripcion() + "</td>\n"
                                                     + "                <td name=\"tdAlmacen\">" + pe.get(c).getAlmacen() + "</td>\n"
-                                                    + "                <td><input maxlength=\"13\" type=\"text\"  value=\"" + Num(String.valueOf(c1)) + "\"name=\"bx101Prb\"  class=\"bx101N\" id=\"bxPrb" + c + "\" onblur=\"this.value = checkDec(this.value, 3)\"   onKeyUp=\"this.value = check99(this.value, '999999', 7)\" onfocus=\"loteBtnHide('" + pe.size() + "')\"></td>\n"
+                                                    + "                <td><input maxlength=\"13\" type=\"text\"  value=\"" + Num(String.valueOf(c1)) + "\"name=\"bx101Prb\"  class=\"bx101N\" id=\"bxPrb" + c + "\" onblur=\"this.value = checkDec(this.value, 3)\"   onKeyPress=\"return soloNumeros(event)\" onfocus=\"loteBtnHide('" + pe.size() + "')\"></td>\n"
                                                     + "                <td><input type=\"text\" name=\"bx101Lote\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bx101NL\" id=\"bxLote" + c + "\" onfocus=\"loteBtnShow('" + c + "', '" + pe.size() + "')\"></td>\n"
                                                     + "                <td><button id=\"btnLote" + c + "\" class='BtnMatchIcon' style=\"display : none;\" onclick=\"MatchLote('" + c + "', '" + pe.get(c).getMaterial() + "')\"></button></td>\n"
                                                     + "                <td><input type=\"text\" style=\"text-transform: uppercase;\" disabled maxlength=\"3\" value=\"" + pe.get(c).getUnidad_medida_base() + "\" name=\"bx101UEAN\" class=\"bx101N\" id=\"bxUEAN" + c + "\" onfocus=\"loteBtnHide('" + pe.size() + "')\"></td>\n"
@@ -329,7 +331,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                                         + "                <td name=\"tdMaterial102\">" + msap.get(c).getNum_material() + "</td>\n"
                                         + "                <td name=\"tdtxt102\">" + msap.get(c).getDescripcion() + "</td>\n"
                                         + "                <td name=\"tdAlmacen102\">" + msap.get(c).getAlmacen() + "</td>\n"
-                                        + "                <td><input type=\"text\" maxlength=\"13\" value=\"0.000\" name=\"bx102Prb\" class=\"bx101N\" id=\"bxPrb" + c + "\" onKeyPress=\"return soloNumeros(event)\"  onblur=\"this.value = checkDec(this.value, 3)\"   onKeyUp=\"this.value = check99(this.value, '999999', 7)\"></td>\n"
+                                        + "                <td><input type=\"text\" maxlength=\"13\" value=\"0.000\" name=\"bx102Prb\" class=\"bx101N\" id=\"bxPrb" + c + "\" onKeyPress=\"return soloNumeros(event)\"  onblur=\"this.value = checkDec(this.value, 3)\"   onKeyPress=\"return soloNumeros(event)\"></td>\n"
                                         + "                <td name=\"tdLote102\">" + msap.get(c).getNum_lote() + "</td>\n"
                                         + "                <td name=\"tdCantCa102\">" + msap.get(c).getCantidad_cancelada() + "</td>\n"
                                         + "                <td name=\"tdCanEnt102\">" + msap.get(c).getCantidad_unidad_medida_entrada() + "</td>\n"
@@ -431,7 +433,7 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                                         + "                <td name=\"tdMaterial102\">" + md.get(c).getNum_material() + "</td>\n"
                                         + "                <td name=\"tdtxt102\">" + md.get(c).getTexto_breve_material() + "</td>\n"
                                         + "                <td name=\"tdAlmacen102\">" + md.get(c).getAlmacen() + "</td>\n"
-                                        + "                <td><input type=\"text\" maxlength=\"13\" value=\"0.000\" name=\"bx102Prb\" class=\"bx101N\" id=\"bxPrb" + c + "\" onKeyPress=\"return soloNumeros(event)\" onblur=\"this.value = checkDec(this.value, 3)\"   onKeyUp=\"this.value = check99(this.value, '999999', 7)\"></td>\n"
+                                        + "                <td><input type=\"text\" maxlength=\"13\" value=\"0.000\" name=\"bx102Prb\" class=\"bx101N\" id=\"bxPrb" + c + "\" onKeyPress=\"return soloNumeros(event)\" onblur=\"this.value = checkDec(this.value, 3)\"  onKeyPress=\"return soloNumeros(event)\"></td>\n"
                                         + "                <td name=\"tdLote102\">" + md.get(c).getNum_lote() + "</td>\n"
                                         + "                <td name=\"tdCantCa102\">" + md.get(c).getCantidad_cancelada() + "</td>\n"
                                         + "                <td name=\"tdCanEnt102\">" + md.get(c).getCantidad1() + "</td>\n"
@@ -843,12 +845,16 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                                 + "</tr>");
                     }
                     break;
-                case "LimpiarPpal102":
+                case "LimpiarPpal":
                 case "LimpiarPpal101":
+                case "LimpiarPpal102":
                 case "LimpiarPpal201":
                 case "LimpiarPpal202":
                 case "LimpiarPpal261":
+                case "LimpiarPpal301":
                 case "LimpiarPpal311":
+                case "LimpiarPpal313":
+                case "LimpiarPpal315":
                 case "LimpiarPpal305":
                     out.println("<table class=\"TablaCont\" id=\"TablaMov\">\n"
                             + "                                    <tr id=\"CabeceraTabla\">\n"
@@ -894,10 +900,12 @@ public class PeticionTablasMovMateriales extends HttpServlet {
                                 + "<td>&nbsp;</td>"
                                 + "<td>&nbsp;</td>"
                                 + "</tr>");
+                       
                     }
-                    String q = "DELETE FROM relaciontablausuario WHERE Usuario='" + us + "'";
+                    String q = "DELETE FROM pedidos_detalle_temp WHERE Usuario='" + perso + "'";
                     Consultas.ObtenerInstancia().ExecuteQuery(q);
                     break;
+                    
             }
         }
     }
