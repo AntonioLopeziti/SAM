@@ -4,6 +4,7 @@ import Entidades.pedido_detalle;
 import Entidades.pedido_historial;
 import Entidades.pedido_servicios;
 import Entidades.pedidos;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -194,9 +195,9 @@ public class ACC_Pedidos {
             while (rs.next()) {
                 pedido_detalle p = new pedido_detalle();
                 p.setPedido(rs.getString("num_doc_compras"));
-                p.setG_nombre(rs.getString("nombre"));
-                p.setCentro(rs.getString("centro"));
-                p.setNum_posicion(rs.getString("num_posicion_doc_compras"));
+//                p.setG_nombre(rs.getString("nombre"));
+//                p.setCentro(rs.getString("centro"));
+//                p.setNum_posicion(rs.getString("num_posicion_doc_compras"));
                 p.setNum_solped(rs.getString("num_solped"));
                 p.setFolio_sam(rs.getString("folio_sam_solped"));
                 p.setFecha_doc_compras(rs.getString("fecha_doc_compras"));
@@ -1074,6 +1075,7 @@ public class ACC_Pedidos {
                 p.setTipo_imputacion(rs.getString("tipo_imputacion"));
                 p.setCentro(rs.getString("centro"));
                 p.setAlmacen(rs.getString("almacen"));
+                p.setNum_solped(rs.getString("num_solped"));
                 p.setNum_posicion_solped(rs.getString("num_posicion_solped"));
                 ped.add(p);
             }
@@ -1717,5 +1719,25 @@ public class ACC_Pedidos {
         cnx.CerrarConexion(con);
         return ped;
     }
+     public String FolioPos(String random){
+         String f = "";
+         Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call MM.Movimientos_Foliio(?,?)}";
+        try {
+            ps = con.prepareCall(sql);
+            ps.setString(1, random);
+            ps.registerOutParameter(2, java.sql.Types.VARCHAR);
+            ps.executeUpdate();
+            f = ps.getString(2);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return f;
+     }
 
 }
