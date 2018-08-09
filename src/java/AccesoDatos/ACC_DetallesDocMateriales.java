@@ -1558,16 +1558,18 @@ public class ACC_DetallesDocMateriales {
         return doc;
     }
 
-    public ArrayList<detalles_doc_materiales> ObtenerMov101Doc(String doc) {
+    public ArrayList<detalles_doc_materiales> ObtenerMov101Doc(String doc, String centro, String almacen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String sql = "{CALL MM.Movimientos_CargarMov101Doc(?)}";
+        String sql = "{CALL MM.Movimientos_CargarMov101Doc(?,?,?)}";
         ArrayList<detalles_doc_materiales> ddm = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, doc);
+            ps.setString(2, centro);
+            ps.setString(3, almacen);
             rs = ps.executeQuery();
             while (rs.next()) {
                 detalles_doc_materiales d = new detalles_doc_materiales();
@@ -1634,25 +1636,26 @@ public class ACC_DetallesDocMateriales {
             while (rs.next()) {
                 movimientos_detalle m = new movimientos_detalle();
                 m.setFolio_sam(rs.getString("folio_sam"));
-                m.setIndice_registro_no_valido(rs.getString("indice_registro_no_valido"));
-                m.setNum_material(rs.getString("num_material"));
-                m.setTexto_breve_material(rs.getString("texto_breve_material"));
+                m.setIndice_registro_no_valido(rs.getString("indice"));
+                m.setNum_material(rs.getString("numero_material"));
+                m.setTexto_breve_material(rs.getString("texto_material"));
                 m.setAlmacen(rs.getString("almacen"));
-                m.setNum_lote(rs.getString("num_lote"));
+                m.setNum_lote(rs.getString("lote"));
                 m.setCantidad1(rs.getString("cantidad1"));
-                m.setUnidad_medida_base(rs.getString("unidad_medida_base"));
+                m.setUnidad_medida_base(rs.getString("unidad_medida"));
                 m.setCentro(rs.getString("centro"));
                 m.setFecha(rs.getString("fecha"));
-                m.setNum_doc_compras(rs.getString("num_doc_compras"));
-                m.setNum_posicion_doc_compras(rs.getString("num_posicion_doc_compras"));
+                m.setNum_doc_compras(rs.getString("doc_compras"));
+                m.setNum_posicion_doc_compras(rs.getString("pos_compras"));
                 m.setCentro_coste(rs.getString("centro_coste"));
-                m.setNum_orden(rs.getString("num_orden"));
+                m.setNum_orden(rs.getString("numero_orden"));
                 m.setClase_coste(rs.getString("clase_coste"));
 
-                String query = "{CALL  MM.MovimientosCantidadCancelada(?,?)}";
+                String query = "{CALL  MM.MovimientosCantidadCancelada(?,?,?)}";
                 PreparedStatement ps2 = con.prepareStatement(query);
                 ps2.setString(1, doc);
-                ps2.setString(2, m.getNum_posicion_doc_compras());
+                ps2.setString(2, m.getNum_doc_compras());
+                ps2.setString(3, m.getNum_posicion_doc_compras());
                 ResultSet rs2 = ps2.executeQuery();
                 while (rs2.next()) {
                     m.setCantidad_cancelada(rs2.getString("cantidad_cancelada") + "00");
@@ -1907,5 +1910,27 @@ public class ACC_DetallesDocMateriales {
         }
         cnx.CerrarConexion(con);
         return dm;
+    }
+    public void ActualizrCantidadCancelMov101(String mov, String posmov, String ped, String posped, String mat, String lote, String centro, String alm, String cant){
+         Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String query = "{CALL MM.Movimientos_ActualizarCantidadCan(?,?,?,?,?,?,?,?,?)}";
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, mov);
+            ps.setString(2, posmov);
+            ps.setString(3, ped);
+            ps.setString(4, posped);
+            ps.setString(5, centro);
+            ps.setString(6, alm);
+            ps.setString(7, lote);
+            ps.setString(8, mat);
+            ps.setString(9, cant);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Error  por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
     }
 }
