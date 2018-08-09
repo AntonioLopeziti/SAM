@@ -43,6 +43,7 @@ public class Login extends HttpServlet {
             String Usuario = request.getParameter("Usuario");
             String Password = request.getParameter("Password");
             String Idioma = request.getParameter("Idioma");
+            String IPDATA = request.getParameter("IPDATA");
             String Usuarioroot = "ADMINISTRADOR";
             String Pwdroot = "321783e29ce5511a28416a84bce3bc48a19d03ba";
             String PwdDefault = "63f10d08837efc789bdf65edb02f440bdb6a35c3";
@@ -64,6 +65,7 @@ public class Login extends HttpServlet {
                                 session.setAttribute("Usuario", u.getUsuario());
                                 session.setAttribute("Idioma", Idioma);
                                 session.setAttribute("CentroUsuario", u.getCentro());
+                                session.setAttribute("IP", IPDATA);
                                 out.println(1); //// Acceso al sistema SAM
                             }
                         } else {
