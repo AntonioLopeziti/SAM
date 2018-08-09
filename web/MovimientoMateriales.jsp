@@ -323,7 +323,7 @@
             </div>
         </div>
         <div id="VentanaModal101" class="VentanaModal101">
-            <div id="handle4"><label id="TituloMatch" class="Titles"></label></div>
+            <div id="handle101"><label id="TituloMatch" class="Titles"></label></div>
             <br><div id="BuscarParam101" class="BuscarParam_u">
                 <div class="fondo_Match101">
                     <div class="PedidoCompra">
@@ -353,7 +353,7 @@
             </div>
         </div>
         <div id="VentanaModal201" class="VentanaModal201">
-            <div id="handle7"><label id="TituloMatch" class="Titles"></label></div>
+            <div id="handle201"><label id="TituloMatch" class="Titles"></label></div>
             <br><div id="BuscarParam201" class="BuscarParam_u">
                 <div class="fondo_Match201">
                     <div class="content200">
@@ -692,11 +692,12 @@
             <div id="BuscarParamMaterial" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatch">
-                        <label><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%></label><input type="text" id="bxtxtm" style="width:50%;"/>
+                        <label><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%></label><input type="text" id="bxtxtm" style="width:50%;" maxlength="40"/>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.Clveidiom_Mov"));%></label><input type="text" id="bxclim" style="width:10%;" value="<%=Idioma%>"/>
+                        <label><%out.println(po.getProperty("etiqueta.Clveidiom_Mov"));%></label><input type="text" id="bxclim" style="width:10%; text-transform: uppercase;"  maxlength="2"/>
+                        <input type="text" id="bxclim2" style="width:10%;"  value="<%=Idioma%>" hidden/>
                         <hr>
-                        <label><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></label><input type="text" id="bxmatm" style="width:50%;"/>
+                        <label><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></label><input type="text" id="bxmatm" style="width:50%;text-transform: uppercase;" maxlength="40"/>
                         <hr><br><br>
                         <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="bxcnmm" value="500" style="width:10%;"/>
                         <hr>
@@ -771,7 +772,7 @@
             </div>
         </div>
         <div id="VentanaModalCC" class="VentanaModalCC">
-            <div id="handle9"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.MAPMCentrodecoste"));%> (1)</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalCC', 'bxccs201');"><label >X</label></div></div>
+            <div id="handlecc"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.MAPMCentrodecoste"));%> (1)</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalCC', 'bxccs201');"><label >X</label></div></div>
             <div class="PanelBntMatch"><button id="btnPnCC"><%out.println(po.getProperty("etiqueta.MAPMCentrodecoste"));%></button><hr></div>
             <div id="BuscarParamCC" class="BuscarParam_u">
                 <div class="fondo_Match">
@@ -784,6 +785,8 @@
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.DescripCcoso"));%></label><input type="text" id="bxtxc2" style="width:40%;"/>
                         <hr>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text"   id="numAcMaxCeco"  style="width:10%;"/>
+                        <hr>
                     </div>
                 </div>
                 <div class="Botones_Match">
@@ -794,17 +797,20 @@
             <div id="ConsultaTablaCC" style="display: none;">
                 <div class="tablaCab">
                     <div class="table-scroll" id="table-scrollCC">
-                        <div class="fixedYL" id="fixedYCC">
+                        <div class="fixedY" id="fixedYCC">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.CSPClaseCoste"));%></th><th><%out.println(po.getProperty("etiqueta.GralDescripcion"));%></th><th><%out.println(po.getProperty("etiqueta.MAPMCentrodecoste"));%></th><th><%out.println(po.getProperty("etiqueta.GralDescripcion"));%></th>
+                                        <th style="width: 20%;">Cl.Cos.</th>
+                                        <th style="width: 30%; text-align: left;"><%out.println(po.getProperty("etiqueta.GralDescripcion"));%></th>
+                                        <th style="width: 20%;">C.Cos.</th>
+                                        <th style="width: 30%; text-align: left;"><%out.println(po.getProperty("etiqueta.GralDescripcion"));%></th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
                         <div id="cuerpoDatos">
-                            <div class="nofixedXL" id="cargarDatosCC">
+                            <div class="nofixedX" id="cargarDatosCC">
                             </div>
                         </div>
                     </div>
@@ -4118,10 +4124,10 @@
                                 document.getElementById("bxDC").value = "";
                                 document.getElementById("bxSolp").value = "";
                                 break;
-                            case "VentanaModalMaterial":
-                                document.getElementById("bxtxtm").value = "";
-                                document.getElementById("bxmatm").value = "";
-                                break;
+//                            case "VentanaModalMaterial":
+//                                document.getElementById("bxtxtm").value = "";
+//                                document.getElementById("bxmatm").value = "";
+//                                break;
                             case "VentanaModalCC":
                                 document.getElementById("bxcc").value = "";
                                 document.getElementById("bxsc").value = "";
