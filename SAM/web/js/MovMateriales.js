@@ -497,13 +497,13 @@ $(document).ready(function () {
         {
             case "101":
             case "102":
-                var theHandle = document.getElementById('handle4');
+                var theHandle = document.getElementById('handle101');
                 var theRoot = document.getElementById('VentanaModal101');
                 Drag.init(theHandle, theRoot);
                 break;
             case "201":
             case "202":
-                var theHandle = document.getElementById('handle7');
+                var theHandle = document.getElementById('handle201');
                 var theRoot = document.getElementById('VentanaModal201');
                 Drag.init(theHandle, theRoot);
                 break;
@@ -585,19 +585,34 @@ $(document).ready(function () {
         $('#ConsultaTablaCC').hide();
     });
     $('#okCC').click(function () {
-        $('#BuscarParamCC').hide();
-        $('#ConsultaTablaCC').show();
-        peticiones('PeticionMovMateriales', 'cargarDatosCC', 'VentanaModalCC', 'CC');
+        CeCosGet();
+//        $('#BuscarParamCC').hide();
+//        $('#ConsultaTablaCC').show();
+//        peticiones('PeticionMovMateriales', 'cargarDatosCC', 'VentanaModalCC', 'CC');
     });
     $('#btnCcs201').click(function () {
         $('#BuscarParamCC').show();
         $('#ConsultaTablaCC').hide();
-        LimpiarPantalla('VentanaModalCC');
-        mostrarVentana('VentanaModalCC');
-        document.getElementById('bxcc').focus();
-        var theHandle = document.getElementById('handle9');
+        $('#bxcc').val("");
+        $('#bxtxc').val("");
+        $('#bxsc').val("");
+        $('#bxtxc2').val("");
+        $('#numAcMaxCeco').val("500");
+        var ven = document.getElementById("VentanaModalCC");
+        abrirVentana(ven);
+        document.getElementById('bxtxtm').focus();
+        var theHandle = document.getElementById('handlecc');
         var theRoot = document.getElementById('VentanaModalCC');
         Drag.init(theHandle, theRoot);
+        $('#bxcc').focus();
+//        $('#BuscarParamCC').show();
+//        $('#ConsultaTablaCC').hide();
+//        LimpiarPantalla('VentanaModalCC');
+//        mostrarVentana('VentanaModalCC');
+//        document.getElementById('bxcc').focus();
+//        var theHandle = document.getElementById('handle9');
+//        var theRoot = document.getElementById('VentanaModalCC');
+//        Drag.init(theHandle, theRoot);
 
     });
 
@@ -605,13 +620,16 @@ $(document).ready(function () {
     $('#btnMat201').click(function () {
         $('#BuscarParamMaterial').show();
         $('#ConsultaTablaMaterial').hide();
-        LimpiarPantalla('VentanaModalMaterial');
-        mostrarVentana('VentanaModalMaterial');
+        $('#bxtxtm').val("");
+        $('#bxclim').val($('#bxclim2').val());
+        $('#bxmatm').val("");
+        $('#bxcnmm').val("500");
+        var ven = document.getElementById("VentanaModalMaterial");
+        abrirVentana(ven);
         document.getElementById('bxtxtm').focus();
         var theHandle = document.getElementById('handle8');
         var theRoot = document.getElementById('VentanaModalMaterial');
         Drag.init(theHandle, theRoot);
-
     });
     $('#btnPnMaterial').click(function () {
         $('#BuscarParamMaterial').show();
@@ -1144,19 +1162,40 @@ $(document).ready(function () {
 
     //Match Material
     $('#bxtxtm').keypress(function (e) {
-        if (e.which == 13 || e.keyCode == 13) {
+        var te = (document).all ? e.keyCode : e.which;
+        if (te == 32) {
+            return true;
+        }
+        if (te == 13) {
             MaterialesGet();
         }
+        t = String.fromCharCode(te);
+        patron = /[0-9a-zA-Z]/;
+        return patron.test(t);
     });
     $('#bxclim').keypress(function (e) {
-        if (e.which == 13 || e.keyCode == 13) {
+        var te = (document).all ? e.keyCode : e.which;
+        if (te == 32) {
+            return false;
+        }
+        if (te == 13) {
             MaterialesGet();
         }
+        t = String.fromCharCode(te);
+        patron = /[0-9a-zA-Z]/;
+        return patron.test(t);
     });
     $('#bxmatm').keypress(function (e) {
-        if (e.which == 13 || e.keyCode == 13) {
+        var te = (document).all ? e.keyCode : e.which;
+        if (te == 32) {
+            return false;
+        }
+        if (te == 13) {
             MaterialesGet();
         }
+        t = String.fromCharCode(te);
+        patron = /[0-9a-zA-Z]/;
+        return patron.test(t);
     });
     $('#bxcnmm').keypress(function (e) {
         var te = (document).all ? e.keyCode : e.which;
@@ -1173,32 +1212,55 @@ $(document).ready(function () {
 
     //Match Centro Coste
     $('#bxcc').keypress(function (e) {
-        if (e.which == 13 || e.keyCode == 13) {
-            $('#BuscarParamCC').hide();
-            $('#ConsultaTablaCC').show();
-            peticiones('PeticionMovMateriales', 'cargarDatosCC', 'VentanaModalCC', 'CC');
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            CeCosGet();
         }
+        patron = /[0-9a-zA-ZÑñ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
     });
     $('#bxsc').keypress(function (e) {
-        if (e.which == 13 || e.keyCode == 13) {
-            $('#BuscarParamCC').hide();
-            $('#ConsultaTablaCC').show();
-            peticiones('PeticionMovMateriales', 'cargarDatosCC', 'VentanaModalCC', 'CC');
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            CeCosGet();
         }
+        patron = /[0-9a-zA-ZÑñ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
     });
     $('#bxtxc').keypress(function (e) {
-        if (e.which == 13 || e.keyCode == 13) {
-            $('#BuscarParamCC').hide();
-            $('#ConsultaTablaCC').show();
-            peticiones('PeticionMovMateriales', 'cargarDatosCC', 'VentanaModalCC', 'CC');
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            CeCosGet();
         }
+        if (tecla == 32) {
+            return true;
+        }
+        patron = /[0-9a-zA-ZÑñ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
     });
     $('#bxtxc2').keypress(function (e) {
-        if (e.which == 13 || e.keyCode == 13) {
-            $('#BuscarParamCC').hide();
-            $('#ConsultaTablaCC').show();
-            peticiones('PeticionMovMateriales', 'cargarDatosCC', 'VentanaModalCC', 'CC');
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            CeCosGet();
         }
+        if (tecla == 32) {
+            return true;
+        }
+        patron = /[0-9a-zA-ZÑñ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+    $('#numAcMaxCeco').keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        if (tecla == 13) {
+            CeCosGet();
+        }
+        patron = /[0-9]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
     });
 
     //Match Proveedor
@@ -4787,6 +4849,37 @@ function MaterialesGet() {
         }
     });
 }
+function CeCosGet() {
+    var acc = "ConsultaCeCos";
+    var datos = "&v1=" + $('#bxcc').val()
+            + "&v3=" + encodeURIComponent($('#bxtxc').val().trim())
+            + "&v2=" + $('#bxsc').val()
+            + "&v4=" + encodeURIComponent($('#bxtxc2').val().trim())
+            + "&v5=" + $('#numAcMaxCeco').val()
+            + "&v6=" + $('#bxClase').val();
+    
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionMovMateriales',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Action=" + acc + datos,
+        success: function (data) {
+            if (data == 0) {
+                mensajesNuevo(0, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                $('#cargarDatosCC').html(data);
+                $('#BuscarParamCC').css('display', 'none');
+                $('#ConsultaTablaCC').css('display', 'block');
+                document.getElementById('table-scrollCC').onscroll = function () {
+                    document.getElementById('fixedYCC').style.top = document.getElementById('table-scrollCC').scrollTop + 'px';
+                };
+                borramsg();
+            }
+        }
+    });
+}
 function LoteGet() {
     var clas = $('#bxClase').val();
     var acc = "ConsultaLote";
@@ -4888,4 +4981,16 @@ function SelecLoteM(lote, clase) {
     $('#bxLote' + clase).css('background-image', 'none');
     $('#bxLote' + clase).focus();
     ocultarVentana("VentanaModalLote", id);
+}
+function seleccionarCCosto(valor, clase) {
+    alert(valor + " - " + clase);
+    var id = "";
+    if (clase == "202") {
+        clase = "201";
+        id = $('#bxMaterial' + clase);
+    }
+    $('#bxccs' + clase).val(valor);
+    $('#bxccs' + clase).focus();
+    $('#bxccs' + clase).css('background-image', 'none');
+    ocultarVentana("VentanaModalCC", id);
 }
