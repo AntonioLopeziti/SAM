@@ -117,6 +117,40 @@
             checkPermisoPag();
             var usuario = '<%=Nombre%>';
             var idioma = '<%=Idioma%>';
+            function ShowMsg(m, im, au, va) {
+                var msg;
+                switch (m) {
+                    case 0:
+                        msg = '<%=funcioninv%>';
+                        break;
+                    case 1:
+                        msg = 'Espere un momento... cargando posiciones';
+                        break;
+                    case 2:
+                        msg = 'Documento Contabilizado: ' + va;
+                        break;
+                    case 3:
+                        msg = 'Espere un momento, guardando documento'
+                        break;
+                    case 4:
+                        msg = 'Almacén destino obligatorio';
+                        break;
+                    case 5:
+                        msg = 'Centro destino obligatorio';
+                        break;
+                    case 6:
+                        msg = 'Material no existe o no ha sido creado';
+                        break;
+
+                }
+                $('#msg').html(msg);
+                var icon = $('#iconmsg');
+                icon.show();
+                icon.attr('src', im);
+                var BE = document.createElement('audio');
+                BE.src = au;
+                BE.play();
+            }
         </script>
         <link rel="stylesheet" href="css/StyleGeneral.css">
         <link rel="stylesheet" href="css/styleMovMaterial.css">
@@ -166,17 +200,19 @@
                     </li>
                 </ul>
             </div>
-            <input id="aceptar" type="image" src="images/aceptar.png"/>                
+            <input id="aceptar" type="image" src="images/aceptaOFF.png" disabled/>                
             <input id="guardar" type="image" src="images/guarda.PNG" />
             <input  id="regresar" type="image" src="images/regresa.PNG" onclick="back()"/>
             <input id="finalizar" type="image" style="margin-bottom: -1px;" src="images/canceOFF.png" disabled/>
             <input  id="cancelar" type="image" src="images/cancela.PNG" onclick="window.location.href = 'MovimientoMateriales.jsp'"/>
-            <div class="titulo"><h1><% out.println(po.getProperty("etiqueta.Mov_title")); %></h1></div>
+            <div class="titulo"><h1><% out.println(po.getProperty("etiqueta.Mov_title"));%></h1></div>
         </div>
         <div class="contenido">                      
             <div class="ContenidoScrollbar">
                 <div class="bkcontainer">
                     <div class="bkn1">
+                        <input type="text" id="IpData" hidden/>
+                        <input type="text" value="<%=Nombre%>" id="NombreUser" hidden/>
                         <label><% out.println(po.getProperty("etiqueta.MovParameEj")); %></label>
                         <hr class="lnMov">
 
@@ -328,7 +364,8 @@
                             <input type="text" class="bx200" id="bxMaterial201" maxlength="40">
                             <button id="btnMat201" class='BtnMatchIcon'></button>
                             <hr>
-                            <p id="txtMaterial" class="material200G"></p>
+                            <input type="text" id="bxTxtMaterial201" style="width: 80%; margin-left: 35%; border:none; background: none;" readonly/>
+                            <!--<p id="txtMaterial" class="material200G"></p>-->
                             <br>
                             <label><%out.println(po.getProperty("etiqueta.GralCantidad"));%></label>
                             <input type="text" class="bxMD200" id="bxcnt201" maxlength="11" onblur="this.value = checkDec(this.value, 3)">
@@ -661,7 +698,7 @@
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></label><input type="text" id="bxmatm" style="width:50%;"/>
                         <hr><br><br>
-                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="number" min="1"  id="bxcnmm" value="500" style="width:10%;"/>
+                        <label><%out.println(po.getProperty("etiqueta.CantMaxAcier"));%></label><input type="text" maxlength="3"  id="bxcnmm" value="500" style="width:10%;"/>
                         <hr>
                     </div>        
                 </div>
@@ -677,7 +714,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%></th><th><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></th>
+                                        <th style="width:25%;"><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></th>
+                                        <th style="width:65%; text-align: left;"><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -901,7 +939,11 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa1_Mov"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa2_Mov"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa3_Mov"));%></th><th><%out.println(po.getProperty("etiqueta.LoteMa4_Mov"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.LoteMa1_Mov"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.LoteMa2_Mov"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.LoteMa3_Mov"));%></th>
+                                        <th><%out.println(po.getProperty("etiqueta.LoteMa4_Mov"));%></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -1114,17 +1156,17 @@
                 <div class="fondo_MatchAv">
                     <section class="secBC" id="secAlmDesBC">
                         <label>Almacén destino:</label>
-                        <input type="text" id="313tdAlmacPP"/>
+                        <input type="text" id="313tdAlmacPP" maxlength="4"/>
                         <button id="313MCAlmPP" onclick="ConsultaAlmaNBuevo('PP')"  class="BtnMatchIconGrid" style="display: inline-block;"></button>
                     </section>
                     <section class="secBC" id="secAlmDesBC2">
                         <label>Almacén destino:</label>
-                        <input type="text" id="311tdAlmacPP"/>
+                        <input type="text" id="311tdAlmacPP"  maxlength="4"/>
                         <button id="311MCAlmPP" onclick="ConsultaAlmaNBuevo('PP')"  class="BtnMatchIconGrid" style="display: inline-block;"></button>
                     </section>
                     <section class="secBC" id="secCenDesBC">
                         <label>Centro Destino:</label>
-                        <input type="text" id="301tdCentrPP"/>
+                        <input type="text" id="301tdCentrPP"  maxlength="4"/>
                         <button id="301MCCenPP" onclick="ConsultaCentroNuevo('PP')" class="BtnMatchIconGrid" style="display: inline-block;"></button>
                     </section>
                     <section class="secBC" id="secBarCodeBC">
@@ -1502,8 +1544,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></th>
-                                        <th><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%></th>
+                                        <th style="width:25%;"><%out.println(po.getProperty("etiqueta.GralMaterialAll"));%></th>
+                                        <th style="width:65%; text-align: left"><%out.println(po.getProperty("etiqueta.CSPTxtBrv"));%></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -1745,15 +1787,15 @@
                                 break;
                         }
                     }
-                    function inv() {
-                        var funinva = "<%=funcioninv%>";
-                        im = "images/advertencia.PNG";
-                        var icon = $('#iconmsg');
-                        icon.show();
-                        icon.attr('src', im);
-                        var men = document.getElementById("msg");
-                        men.innerHTML = funinva;
-                    }
+//                    function inv() {
+//                        var funinva = "<%=funcioninv%>";
+//                        im = "images/advertencia.PNG";
+//                        var icon = $('#iconmsg');
+//                        icon.show();
+//                        icon.attr('src', im);
+//                        var men = document.getElementById("msg");
+//                        men.innerHTML = funinva;
+//                    }
                     function inval()
                     {
                         var funinva = "<%=CampoOb%>";
@@ -1904,6 +1946,7 @@
                     }
                     function mostrarVentana(t)
                     {
+                        borramsg();
                         switch (t) {
                             case "VentanaModalInspCod":
                                 var ven = document.getElementById(t);
@@ -1992,7 +2035,6 @@
                                 break;
                             case "VentanaModal201":
                                 descm();
-                                //Limpiar registros por usuario
                                 var tmov = document.getElementById('bxClase').value;
                                 var sm = "&v1=" + tmov;
                                 GuardarMovimientos("VaciarMovimientos", sm);
@@ -2001,7 +2043,6 @@
                                 }
                                 var ven = document.getElementById(t);
                                 abrirVentana200(ven);
-                                document.getElementById("bxMaterial" + tmov).focus();
                                 break;
                             case "VentanaModal301":
                                 descm();
@@ -2075,6 +2116,8 @@
                     function DocComprasMov(ped) {
                         var url = "PeticionMovMateriales";
                         var acc = "DocMovimiento102";
+                        var centro = $('#bxCentro').val();
+                        var almacen = $('#bxAlmacen').val();
                         var xmlhttp = new XMLHttpRequest();
                         xmlhttp.onreadystatechange = function () {
                             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
@@ -2095,7 +2138,7 @@
                                 }
                             }
                         };
-                        xmlhttp.open("GET", url + "?Action=" + acc + "&DocCom=" + ped, true);
+                        xmlhttp.open("GET", url + "?Action=" + acc + "&DocCom=" + ped + "&centro102=" + centro + "&almacen102=" + almacen, true);
                         xmlhttp.send();
                     }
                     function seleccionaMov101(docmat, foliosam) {
@@ -2238,19 +2281,7 @@
                         xmlhttp.send();
                     }
 
-                    function LimpiarPpal(accion)
-                    {
-                        var clase = document.getElementById('bxClase').value;
-                        var xmlhttp = new XMLHttpRequest();
-                        xmlhttp.onreadystatechange = function () {
-                            if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
-                            {
-                                document.getElementById("SecTabPpal").innerHTML = xmlhttp.responseText;
-                            }
-                        };
-                        xmlhttp.open("GET", "PeticionTablasMovMateriales?Action=" + accion + "&clase=" + clase, true);
-                        xmlhttp.send();
-                    }
+
                     function abrirVentanaModalClsInf(ventana) {
                         var ancho = 350;
                         var alto = 650;
@@ -2362,6 +2393,19 @@
                         ventana.style.left = x + "px";
                         ventana.style.top = y + "px";
                         ventana.style.display = 'block';
+                        $('#bxLote201').prop('disabled',true);
+                        $('#bxTxtMaterial201').val("");
+                        $('#bxMaterial201').val("");
+                        $('#bxcnt201').css('background-image', 'url(images/necesario.PNG)');
+                        $('#bxMaterial201').css('background-image', 'url(images/necesario.PNG)');
+                        $('#bxUM201').css('background-image', 'url(images/necesario.PNG)');
+                        $('#bxccs201').css('background-image', 'url(images/necesario.PNG)');
+                        $('#bxUM201').val("");
+                        $('#bxcnt201').val("");
+                        $('#bxLote201').val("");
+                        $('#bxLote201').css('background-image', 'none');
+                        $('#bxccs201').val("");
+                        $('#bxMaterial201').focus();
                     }
                     function abrirVentana101(ventana)
                     {
@@ -2396,10 +2440,10 @@
                         if (M === "m") {
                             actcm();
                         }
+                        $('#msg').html("");
+                        $('#iconmsg').hide();
                         var ventana = document.getElementById(ven);
                         ventana.style.display = 'none';
-                        document.getElementById("msg").innerHTML = "";
-                        $('#iconmsg').hide();
                         try {
                             var txt = document.getElementById(id);
                             txt.focus();
@@ -2932,9 +2976,8 @@
                         xmlhttp.open("GET", "PeticionMovMateriales?Action=ValidarCampos" + extras, true);
                         xmlhttp.send();
                     }
-                    function ObtenerMaterial200()
+                    function ObtenerMaterialAll(material,clase)
                     {
-                        var material = document.getElementById('bxMaterial201').value;
                         var lang = "<%=Idioma%>";
                         if (material.length > 0) {
                             var xmlhttp = new XMLHttpRequest();
@@ -2944,10 +2987,10 @@
                                     if (xmlhttp.responseText == 0)
                                     {
                                         invalido("Material no creado para el Centro e Idioma de Trab");
-                                        document.getElementById("txtMaterial").innerHTML = "";
+                                        document.getElementById("bxTxtMaterial"+clase).value = "";
                                     } else
                                     {
-                                        document.getElementById("txtMaterial").innerHTML = xmlhttp.responseText;
+                                        document.getElementById("bxTxtMaterial"+clase).value = xmlhttp.responseText;
                                         document.getElementById("msg").innerHTML = "";
                                         $('#iconmsg').hide();
                                     }
@@ -3749,19 +3792,19 @@
 
                         var registros = 0;
 
-                        if (parseInt(r2[cc].value) > 0) {
-                            ValidaMaterialHabilitado(r1[cc].textContent);
-                            if (habl === 0) {
-                                var icon = $('#iconmsg');
-                                icon.show();
-                                im = "images/advertencia.PNG";
-                                icon.attr('src', im);
-                                var men = document.getElementById("msg");
-                                men.innerHTML = "Material inhabilitado";
-                                r2[cc].focus();
-                                return;
-                            }
-                        }
+//                        if (parseInt(r2[cc].value) > 0) {
+//                            ValidaMaterialHabilitado(r1[cc].textContent);
+//                            if (habl === 0) {
+//                                var icon = $('#iconmsg');
+//                                icon.show();
+//                                im = "images/advertencia.PNG";
+//                                icon.attr('src', im);
+//                                var men = document.getElementById("msg");
+//                                men.innerHTML = "Material inhabilitado";
+//                                r2[cc].focus();
+//                                return;
+//                            }
+//                        }
 
                         for (tdr = 0; tdr < r1.length; tdr++)
                         {
@@ -3873,14 +3916,16 @@
                         var UM = document.getElementById('bxUM201').value.toUpperCase();
                         var CenCos = document.getElementById('bxccs201').value.toUpperCase();
                         var lote = document.getElementById('bxLote201').value.toUpperCase();
-                        var loted = document.getElementById('bxLote201').value.toUpperCase();
-
+                        var random = ObtenerFolioRandom();
                         var centro = document.getElementById('bxCentro').value.toUpperCase();
                         var almacen = document.getElementById('bxAlmacen').value.toUpperCase();
                         var movimiento = document.getElementById('bxClase').value;
                         var posicion = document.getElementsByName('tdPoss');
                         var CentroC = document.getElementsByName('mmcec');
-
+                        if (ValidamaterialDes(material, centro, almacen, ) == 0) {
+                            mensajesNuevo(11, "images/advertencia.PNG", "audio/saperror.wav");
+                            return;
+                        }
                         var pp = 1;
                         if (posicion.length > 0)
                         {
@@ -3891,7 +3936,7 @@
                             if (CentroC[CentroC.length - 1].textContent !== CenCos)
                             {
                                 var ven = document.getElementById('VentanaModalAv');
-                                var msg = "Centro de Coste diferente al Ingresado";
+                                var msg = "El centro coste no se puede cambiar al ingresado anteriormente";
                                 abrirVentanaAv(ven, msg);
                                 var theHandle = document.getElementById("handleAV");
                                 var theRoot = document.getElementById("VentanaModalAv");
@@ -3965,8 +4010,8 @@
                                         {
                                             if (cgd < 1) {
 
-                                                ObtenerMaterial200();
-                                                var texto = document.getElementById('txtMaterial').innerHTML;
+                                                ObtenerMaterialAll(material, movimiento);
+                                                var texto = document.getElementById('bxTxtMaterial201').innerHTML;
                                                 if (texto != "")
                                                 {
                                                     var pos_;
@@ -3983,8 +4028,8 @@
                                                             "&v5=" + texto + "&v6=" + CenCos +
                                                             "&v7=" + centro + "&clase=" + clas +
                                                             "&v8=" + pp + "&v9=" + movimiento +
-                                                            "&v12=" + pos_;
-                                                    Tabla200('VentanaModal201', extr);
+                                                            "&v12=" + pos_ + "&ipFolio=" + random ;
+                                                            Tabla200('VentanaModal201', extr);
                                                     var ven = document.getElementById('VentanaModalAv');
                                                     var msg = "Posición añadida correctamente";
                                                     abrirVentanaAv(ven, msg);
@@ -4488,262 +4533,7 @@
                             }
                         });
                     }
-                    function ObtenerDatos101()
-                    {
-                        //movimiento
-                        var movimiento = document.getElementById('bxClase').value;
-                        //inputs
-                        var porrc = document.getElementsByName('bx101Prb');
-                        var lote = document.getElementsByName('bx101Lote');
-                        //                        var nae = document.getElementsByName('bx101Nae');
-                        //                        var cean = document.getElementsByName('bx101CEAN');
-                        var uean = document.getElementsByName('bx101UEAN');//Unidad Medida
-                        var prov = document.getElementsByName('bx101Prov');
 
-                        //td's
-                        var cnr = document.getElementsByName('tdCR');//Cantidad Recepcionada
-                        var cnp = document.getElementsByName('tdCP');//Cantidad
-                        var ped = document.getElementsByName('tdPedido');
-                        var pos = document.getElementsByName('tdPos');
-                        var mat = document.getElementsByName('tdMaterial');
-                        var alm = document.getElementsByName('tdAlmacen');
-                        var doc = document.getElementsByName('tdDocCom');
-                        var cls = document.getElementsByName('tdClase');
-                        var pro = document.getElementsByName('tdProveedor');
-                        var txt = document.getElementsByName('tdtxt');
-                        var ulc = document.getElementsByName('tdulc');
-                        var cec = document.getElementsByName('tdCeCo');
-                        var ord = document.getElementsByName('tdOrder');
-                        var clc = document.getElementsByName('tdClCoste');
-                        var tim = document.getElementsByName("tdTImp"); ////// Imputacion
-
-                        var n1 = 0;
-                        var n2 = 0;
-
-                        var registros = 0;
-
-                        switch (movimiento)
-                        {
-                            case "101":
-                                for (i = 0; i < porrc.length; i++)
-                                {
-                                    n1 = parseFloat(porrc[i].value);
-                                    n2 += n1;
-                                }
-                                if (n2 <= 0.000) {
-                                    var ven = document.getElementById('VentanaModalAv');
-                                    var msg = "No existen posiciones listas para su recepción";
-                                    abrirVentanaAv(ven, msg);
-                                    var theHandle = document.getElementById("handleAV");
-                                    var theRoot = document.getElementById("VentanaModalAv");
-                                    Drag.init(theHandle, theRoot);
-                                    return;
-                                }
-
-                                for (i = 0; i < porrc.length; i++)
-                                {
-                                    if (porrc[i].value.length < 1) {
-                                        porrc[i].focus();
-                                        invalido("Cantidad Obligatoria no puede ir vacio");
-                                        return;
-                                    }
-                                }
-                                for (i = 0; i < porrc.length; i++)
-                                {
-                                    if (uean[i].value == "") {
-                                        uean[i].focus();
-                                        invalido("Unidad de Medida Obligatorio");
-                                        return;
-                                    }
-                                }
-                                for (i = 0; i < lote.length; i++) {
-                                    ValidaMaterialHabilitado(mat[i].textContent);
-                                    if (habl === 0) {
-                                        var icon = $('#iconmsg');
-                                        im = "images/advertencia.PNG";
-                                        icon.show();
-                                        icon.attr('src', im);
-                                        var men = document.getElementById("msg");
-                                        men.innerHTML = "Material inhabilitado";
-                                        porrc[i].focus();
-                                        return;
-                                    }
-                                }
-                                for (i = 0; i < porrc.length; i++)
-                                {
-                                    if (!(porrc[i].value == "0")) {
-                                        var tole = GetCantFinal(cnp[i].textContent, uean[i].value, ped[i].textContent, pos[i].textContent);
-                                        var pr2 = parseFloat(cnp[i].textContent) + parseFloat(tole);
-                                        var ccc = parseFloat(porrc[i].value) + parseFloat(cnr[i].textContent);
-                                        if (ccc > pr2) {
-                                            var ven = document.getElementById('VentanaModalAv');
-                                            var msg = "El Material" + " " + mat[i].textContent + " excede la cantidad de pedido aplicada con tolerancia";
-                                            abrirVentanaAv(ven, msg);
-                                            var theHandle = document.getElementById("handleAV");
-                                            var theRoot = document.getElementById("VentanaModalAv");
-                                            Drag.init(theHandle, theRoot);
-                                            return;
-                                        }
-                                    }
-                                }
-                                for (i = 0; i < lote.length; i++)
-                                {
-                                    if (tim[i].textContent == "" && !(mat[i].textContent == "")) {
-                                        var isDisabled = $('#bxLote' + i).prop('disabled');
-                                        if (parseInt(porrc[i].value) !== 0) {
-                                            if (isDisabled === false) {
-                                                if (lote[i].value === "")
-                                                {
-                                                    var ven = document.getElementById('VentanaModalAv');
-                                                    var msg = "El Material" + " " + mat[i].textContent + " esta sujeto a Lote  <br> el campo lote es obligatorio";
-                                                    abrirVentanaAv(ven, msg);
-                                                    var theHandle = document.getElementById("handleAV");
-                                                    var theRoot = document.getElementById("VentanaModalAv");
-                                                    Drag.init(theHandle, theRoot);
-                                                    return;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-
-                                for (i = 0; i < lote.length; i++)
-                                {
-
-                                    var pr = parseFloat(porrc[i].value);
-                                    var tolera = GetCantend(porrc[i].value, uean[i].value);
-                                    if (pr > 0.000) {
-                                        registros++;
-                                        var extras = "";
-                                        if (tim[i].textContent == "" && !(mat[i].textContent == "")) {
-                                            extras = "&v1=" + tolera + "&v2=" + encodeURIComponent(lote[i].value.toUpperCase()) +
-                                                    "&v3=&v4=" +
-                                                    "&v5=" + uean[i].value + "&v6=" + prov[i].value.toUpperCase() + "&ped=" + ped[i].textContent + "&pos=" + pos[i].textContent +
-                                                    "&v7=" + mat[i].textContent + "&v8=" + alm[i].textContent + "&v9=" + doc[i].textContent + "&v10=" + cls[i].textContent +
-                                                    "&v11=" + pro[i].textContent + "&v12=" + txt[i].textContent +
-                                                    "&v13=" + cnr[i].textContent + "&v14=" + cnp[i].textContent +
-                                                    "&v15=" + ulc[i].textContent + "&v16=" + movimiento +
-                                                    "&v17=" + cec[i].textContent + "&v18=" + clc[i].textContent +
-                                                    "&v19=" + ord[i].textContent + "&v20=" + tim[i].textContent + "&v22=";
-                                        }
-                                        if (tim[i].textContent == "K") {
-                                            if (!(cec[i].textContent == "") || clc[i].textContent == "") {
-                                                extras = "&v1=" + tolera + "&v2=" + encodeURIComponent(lote[i].value.toUpperCase()) +
-                                                        "&v3=&v4=" +
-                                                        "&v5=" + uean[i].value + "&v6=" + prov[i].value.toUpperCase() + "&ped=" + ped[i].textContent + "&pos=" + pos[i].textContent +
-                                                        "&v7=" + mat[i].textContent + "&v8=" + alm[i].textContent + "&v9=" + doc[i].textContent + "&v10=" + cls[i].textContent +
-                                                        "&v11=" + pro[i].textContent + "&v12=" + txt[i].textContent +
-                                                        "&v13=" + cnr[i].textContent + "&v14=" + cnp[i].textContent +
-                                                        "&v15=" + ulc[i].textContent + "&v16=" + movimiento +
-                                                        "&v17=" + cec[i].textContent + "&v18=" + clc[i].textContent +
-                                                        "&v19=" + ord[i].textContent + "&v20=" + tim[i].textContent + "&v22=";
-                                            }
-                                        }
-                                        if (tim[i].textContent == "F") {
-                                            if (!(ord[i].textContent == "")) {
-                                                extras = "&v1=" + tolera + "&v2=" + encodeURIComponent(lote[i].value.toUpperCase()) +
-                                                        "&v3=&v4=" +
-                                                        "&v5=" + uean[i].value + "&v6=" + prov[i].value.toUpperCase() + "&ped=" + ped[i].textContent + "&pos=" + pos[i].textContent +
-                                                        "&v7=" + mat[i].textContent + "&v8=" + alm[i].textContent + "&v9=" + doc[i].textContent + "&v10=" + cls[i].textContent +
-                                                        "&v11=" + pro[i].textContent + "&v12=" + txt[i].textContent +
-                                                        "&v13=" + cnr[i].textContent + "&v14=" + cnp[i].textContent +
-                                                        "&v15=" + ulc[i].textContent + "&v16=" + movimiento +
-                                                        "&v17=" + cec[i].textContent + "&v18=" + clc[i].textContent +
-                                                        "&v19=" + ord[i].textContent + "&v20=" + tim[i].textContent + "&v22=";
-                                            }
-                                        }
-                                        ActualizaTemp('ActualizaTemporal', extras);
-                                    }
-                                }
-                                break;
-                            case "102":
-                                var porrec = document.getElementsByName("bx102Prb");
-                                var claspe = "";
-                                var lotepr = "";
-                                var tdmateri = document.getElementsByName("tdMaterial102");
-                                var tdtxtmat = document.getElementsByName("tdtxt102");
-                                var tdalmace = document.getElementsByName("tdAlmacen102");
-                                var tdlote = document.getElementsByName("tdLote102");
-                                var tdccance = document.getElementsByName("tdCantCa102");
-                                var tdccanen = document.getElementsByName("tdCanEnt102");
-                                var tdunme = document.getElementsByName("tdUME102");
-                                var tdcentr = document.getElementsByName("tdCentro102");
-                                var tdfecha = document.getElementsByName("tdFecEnt102");
-                                var tdprove = document.getElementsByName("tdNumProv102");
-                                var tddocco = document.getElementsByName("tdNumDocCom102");
-                                var tdposco = document.getElementsByName("tdPosDoc102");
-                                var tdceco = document.getElementsByName("tdCeCo102");
-                                var tdorden = document.getElementsByName("tdOrd102");
-                                var tdclaco = document.getElementsByName("tdClaCos102");
-                                var tdmovim = document.getElementsByName("tdnumMov");
-                                var n1 = 0;
-                                var n2 = 0;
-                                for (i = 0; i < porrec.length; i++) {
-                                    n1 = parseInt(porrec[i].value);
-                                    n2 += n1
-                                }
-                                if (n2 === 0)
-                                {
-                                    var ven = document.getElementById('VentanaModalAv');
-                                    var msg = "No existen posiciones listas para su recepción";
-                                    abrirVentanaAv(ven, msg);
-                                    var theHandle = document.getElementById("handleAV");
-                                    var theRoot = document.getElementById("VentanaModalAv");
-                                    Drag.init(theHandle, theRoot);
-                                    return;
-                                }
-                                for (i = 0; i < porrec.length; i++) {
-                                    //                                    var po = 0;
-                                    //                                    if(porrec[i].value == ""){
-                                    //                                      porrec[i].value == po;  
-                                    //                                    }
-                                    if (!(parseInt(porrec[i].value) == 0)) {
-                                        var cf = (parseFloat(tdccance[i].textContent)) + (parseFloat(porrec[i].value));
-                                        if (cf > parseFloat(tdccanen[i].textContent)) {
-                                            var ven = document.getElementById('VentanaModalAv');
-                                            var msg = "Cantidad Por Devolver mas Cantidad Cancelada, supera <br> a cantidad Entrante  en posición " + tdposco[i].textContent;
-                                            abrirVentanaAv(ven, msg);
-                                            var theHandle = document.getElementById("handleAV");
-                                            var theRoot = document.getElementById("VentanaModalAv");
-                                            Drag.init(theHandle, theRoot);
-                                            return;
-                                        }
-                                    }
-                                }
-                                for (i = 0; i < tddocco.length; i++) {
-                                    var pr = parseInt(porrec[i].value);
-                                    if (pr !== 0) {
-                                        registros++;
-                                        var extras = "";
-                                        if (tdorden[i].textContent.lentgh > 0 || tdceco[i].textContent.length > 0) {
-                                            extras = "&v7=" + tdmateri[i].textContent + "&v12=" + tdtxtmat[i].textContent +
-                                                    "&v8=" + tdalmace[i].textContent + "&v2=" + tdlote[i].textContent +
-                                                    "&v1=" + GetCantend(porrec[i].value, tdunme[i].textContent) + "&v14=" + tdccanen[i].textContent +
-                                                    "&v5=" + tdunme[i].textContent + "&v22=" + tdcentr[i].textContent +
-                                                    "&v13=" + tdccance[i].textContent + "&v3=" + tdmovim[i].textContent +
-                                                    "&v21=" + tdfecha[i].textContent + "&v16=" + movimiento + "&v9=" + "&v11=" + tdprove[i].textContent + "&ped=" + tddocco[i].textContent +
-                                                    "&pos=" + tdposco[i].textContent + "&v17=" + tdceco[i].textContent +
-                                                    "&v19=" + tdorden[i].textContent + "&v18=" + tdclaco[i].textContent + "&v20=" + "&v15=" + GetCantend(porrec[i].value, tdunme[i].textContent) + "&v6=" + lotepr + "&v10=" + claspe;
-                                        } else {
-                                            extras = "&v7=" + tdmateri[i].textContent + "&v12=" + tdtxtmat[i].textContent +
-                                                    "&v8=" + tdalmace[i].textContent + "&v2=" + tdlote[i].textContent +
-                                                    "&v1=" + GetCantend(porrec[i].value, tdunme[i].textContent) + "&v14=" + tdccanen[i].textContent +
-                                                    "&v5=" + tdunme[i].textContent + "&v22=" + tdcentr[i].textContent +
-                                                    "&v13=" + tdccance[i].textContent + "&v3=" + tdmovim[i].textContent +
-                                                    "&v21=" + tdfecha[i].textContent + "&v16=" + movimiento + "&v9=" + "&v11=" + tdprove[i].textContent + "&ped=" + tddocco[i].textContent +
-                                                    "&pos=" + tdposco[i].textContent + "&v17=" + tdceco[i].textContent +
-                                                    "&v19=" + tdorden[i].textContent + "&v18=" + tdclaco[i].textContent + "&v20=V" + "&v15=" + GetCantend(porrec[i].value, tdunme[i].textContent) + "&v6=" + lotepr + "&v10=" + claspe;
-                                        }
-                                        ActualizaTemp('ActualizaTemporal', extras);
-                                    }
-                                }
-                                break;
-                        }
-                        setTimeout(function () {
-                            verificarRegistros101('VerificarRegistros', registros, movimiento);
-                        }, 2000);
-                    }
 
                     function verificarRegistrosRG(action, cantidad, movimiento)
                     {
@@ -4810,38 +4600,7 @@
                         xmlhttp.open("GET", "PeticionGuardaMovMateriales?Action=" + action + "&v1=" + cantidad + "&v2=" + movimiento, true);
                         xmlhttp.send();
                     }
-                    function verificarRegistros101(action, cantidad, movimiento)
-                    {
-                        var xmlhttp = new XMLHttpRequest();
-                        xmlhttp.onreadystatechange = function () {
-                            if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
-                            {
-                                if (xmlhttp.responseText == 0) {
-                                    GuardarMovimientos("VaciarTemporal", "");
-                                    var ven = document.getElementById('VentanaModalAv');
-                                    var msg = "Error de conexión";
-                                    abrirVentanaAv(ven, msg);
-                                    var theHandle = document.getElementById("handleAV");
-                                    var theRoot = document.getElementById("VentanaModalAv");
-                                    Drag.init(theHandle, theRoot);
-                                    LimpiarPpal("LimpiarPpal");
-                                } else {
-                                    $('#iconmsg');
-                                    var men = document.getElementById("msg");
-                                    men.innerHTML = "";
-                                    var ven = document.getElementById('VentanaModalAv');
-                                    var msg = "Lineas adoptadas para su recepción";
-                                    abrirVentanaAv(ven, msg);
-                                    var theHandle = document.getElementById("handleAV");
-                                    var theRoot = document.getElementById("VentanaModalAv");
-                                    Drag.init(theHandle, theRoot);
-                                    ocultarVentana('VentanaModal101', 'btnAdd');
-                                }
-                            }
-                        };
-                        xmlhttp.open("GET", "PeticionGuardaMovMateriales?Action=" + action + "&v1=" + cantidad + "&v2=" + movimiento, true);
-                        xmlhttp.send();
-                    }
+
                     function ActualizaTemp(action, extras)
                     {
                         var xmlhttp = new XMLHttpRequest();
@@ -4879,6 +4638,7 @@
                     function EliminaTemporal(val)
                     {
                         var xmlhttp = new XMLHttpRequest();
+                        var ipda = ObtenerFolioRandom();
                         var mov = document.getElementById('bxClase').value;
                         xmlhttp.onreadystatechange = function () {
                             if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
@@ -4888,7 +4648,7 @@
                                 acttm();
                             }
                         };
-                        xmlhttp.open("GET", "PeticionGuardaMovMateriales?Action=EliminaTemporal&ped=" + val + "&mov=" + mov, true);
+                        xmlhttp.open("GET", "PeticionGuardaMovMateriales?Action=EliminaTemporal&ped=" + val + "&mov=" + mov + "&ipFolio=" + ipda, true);
                         xmlhttp.send();
                     }
                     function Verificar305()
@@ -4937,14 +4697,7 @@
                             return true;
                         }
                     }
-                    function dataxxxx() {
-                        document.getElementById('VentanaModalCalidad').style.display = 'none';
-                        if (document.getElementById('bxClase').value === "101" || document.getElementById('bxClase').value === "303") {
-                            abrirVentanaMsgAddFile();
-                        } else {
-                            MovimientosMO();
-                        }
-                    }
+
                     function MovimientosMO()
                     {
                         if (gg < 1)
@@ -4967,20 +4720,17 @@
                             var pedido = document.getElementsByName('mmped');
                             var posicion = document.getElementsByName('mmnpe');
                             var tabix = document.getElementsByName('mmidx');
-                            var ultima = document.getElementsByName('mmuct');
                             var almDes = document.getElementsByName('mmalm');
                             var cdes = document.getElementsByName('mmctr');
-                            var unmms = document.getElementsByName('mmumb');
-                            var almpe = document.getElementsByName('mmalmped');
 
 
                             var cdese = document.getElementsByName('mmCentro');
                             var almDese = document.getElementsByName('mmAlmace');
 
-                            var eeped = document.getElementsByName('mmpedid');
-                            var eepos = document.getElementsByName('mmPosPed');
+                            var eeped = document.getElementsByName('mmped');
+                            var eepos = document.getElementsByName('mmnpe');
                             var eeese = document.getElementsByName('mmStEs');
-
+                            var ipdatam = ObtenerFolioRandom();
 
 
                             //                        var tab = document.getElementsByName("Pedidos");
@@ -4994,13 +4744,13 @@
                             var cad = "";
                             var extra = "&v1=" + centro + "&v2=" + almacen + "&v3=" + fecha + "&v4=" + tmov +
                                     "&v5=" + encodeURIComponent(texto) + "&v6=" + encodeURIComponent(nota) +
-                                    "&v7=" + encodeURIComponent(carta) + "&v8=" + cad;
+                                    "&v7=" + encodeURIComponent(carta) + "&v8=" + cad + "&ipFolio=" + ipdatam;
                             var tt = "Guarda" + tmov + "Cabecera";
                             switch (tmov)
                             {
                                 case "101":
-                                    //                                    saveDatos101();
-                                    GestionLoteInsp(0);
+                                    saveDatos101();
+//                                    GestionLoteInsp(0);
                                     //                                var tim = document.getElementsByName('mmtimp');
                                     //                                var extrass = "&v1=";
                                     //                                for (i = 0; i < lote.length; i++)
@@ -5239,6 +4989,7 @@
                     }
                     function Lote311(extrass, tt, extra, cad, action)//NuevoLalo
                     {
+                        var ipdatam = ObtenerFolioRandom();
                         var centro = document.getElementById('bxCentro').value.toUpperCase();
                         var alm = document.getElementById('bxAlmacen').value.toUpperCase();
                         var fecha = document.getElementById('bxFecha').value;
@@ -5251,8 +5002,8 @@
 //                        var almdes = document.getElementsByName('mmalm');
                         var almdes = document.getElementsByName('mmAlmace');
                         var unmms = document.getElementsByName('mmumb');
-                        var eeped = document.getElementsByName('mmpedid');
-                        var eepos = document.getElementsByName('mmPosPed');
+                        var eeped = document.getElementsByName('mmped');
+                        var eepos = document.getElementsByName('mmnpe');
                         var eeese = document.getElementsByName('mmStEs');
 //                        var cdes = document.getElementsByName('mmctr');
                         var cdes = document.getElementsByName('mmCentro');
@@ -5275,7 +5026,7 @@
                                     "&v10=" + almdes[i].textContent + "&v11=" + unmms[i].textContent +
                                     "&v12=" + alm + "&v13=" + rsv_ + "&v14=" + pos_ + "&v15=" + cdes[i].textContent +
                                     "&v20=" + eeped[i].textContent + "&v21=" + eepos[i].textContent +
-                                    "&v22=" + eeese[i].textContent;
+                                    "&v22=" + eeese[i].textContent + "&ipFolio=" + ipdatam;
                             GuardarMovimientos(actt, extras);
                         }
                         setTimeout(function () {
@@ -5284,6 +5035,7 @@
                     }
                     function Lote301(extrass, tt, extra, cad, action)//NuevoLalo
                     {
+                        var ipdatam = ObtenerFolioRandom();
                         var centro = document.getElementById('bxCentro').value.toUpperCase();
                         var alm = document.getElementById('bxAlmacen').value.toUpperCase();
                         var fecha = document.getElementById('bxFecha').value;
@@ -5295,8 +5047,8 @@
                         var tabix = document.getElementsByName('mmidx');
                         var almdes = document.getElementsByName('mmAlmace');
                         var unmms = document.getElementsByName('mmumb');
-                        var eeped = document.getElementsByName('mmpedid');
-                        var eepos = document.getElementsByName('mmPosPed');
+                        var eeped = document.getElementsByName('mmped');
+                        var eepos = document.getElementsByName('mmnpe');
                         var eeese = document.getElementsByName('mmStEs');
                         var cdes = document.getElementsByName('mmCentro');
 
@@ -5318,7 +5070,7 @@
                                     "&v10=" + almdes[i].textContent + "&v11=" + unmms[i].textContent +
                                     "&v12=" + alm + "&v13=" + rsv_ + "&v14=" + pos_ + "&v15=" + cdes[i].textContent +
                                     "&v20=" + eeped[i].textContent + "&v21=" + eepos[i].textContent +
-                                    "&v22=" + eeese[i].textContent;
+                                    "&v22=" + eeese[i].textContent + "&ipFolio=" + ipdatam;
                             GuardarMovimientos(actt, extras);
                         }
                         setTimeout(function () {
@@ -5395,7 +5147,7 @@
                         var centro = document.getElementById('bxCentro').value.toUpperCase();
                         var fecha = document.getElementById('bxFecha').value;
                         var tmov = document.getElementById('bxClase').value;
-
+                        var ipdatam = ObtenerFolioRandom();
                         var lotePro = document.getElementsByName('mmLoteProvd');
                         var lote = document.getElementsByName('mmnlt');
                         var cantidad = document.getElementsByName('mmprr');//Por recibir
@@ -5427,7 +5179,7 @@
                                     "&v7=" + pedido[i].textContent + "&v8=" + posicion[i].textContent +
                                     "&v9=" + cad + "&v10=" + tabix[i].textContent + "&v11=" + ultima[i].textContent +
                                     "&v12=" + centro + "&v13=" + unmms[i].textContent + "&v14=" + cencos[i].textContent +
-                                    "&v15=" + ClCost[i].textContent + "&v16=" + orden[i].textContent + "&v17=" + almacen + "&v18=" + lotePro[i].textContent;
+                                    "&v15=" + ClCost[i].textContent + "&v16=" + orden[i].textContent + "&v17=" + almacen + "&v18=" + lotePro[i].textContent + "&ipFolio=" + ipdatam;
                             GuardarMovimientos(actt, extras);
                         }
                         setTimeout(function () {
@@ -5443,7 +5195,7 @@
                         var fecha = document.getElementById('bxFecha').value;
                         var tmov = document.getElementById('bxClase').value;
                         var alm = document.getElementById('bxAlmacen').value.toUpperCase();
-
+                        var ipdatam = ObtenerFolioRandom();
                         var lote = document.getElementsByName('mmnlt');
                         var cantidad = document.getElementsByName('mmprr');//Por recibir
                         var Descripc = document.getElementsByName('mmdsc');
@@ -5481,7 +5233,7 @@
                         var almacen = document.getElementById('bxAlmacen').value.toUpperCase();
                         var fecha = document.getElementById('bxFecha').value;
                         var tmov = document.getElementById('bxClase').value;
-
+                        var ipdatam = ObtenerFolioRandom();
                         var lote = document.getElementsByName('mmnlt');
                         var cantidad = document.getElementsByName('mmprr');//Por recibir
                         var Descripc = document.getElementsByName('mmdsc');
@@ -5505,7 +5257,7 @@
                                     "&v7=" + pedido[i].textContent + "&v8=" + posicion[i].textContent +
                                     "&v9=" + cad + "&v10=" + tabix[i].textContent + "&v11=" + ultima[i].textContent +
                                     "&v12=" + centro + "&v13=" + unmms[i].textContent + "&v14=" + folim[i].textContent +
-                                    "&v15=" + cantc[i].textContent + "&v16=" + almacen + "&v17=" + posmo[i].textContent;
+                                    "&v15=" + cantc[i].textContent + "&v16=" + almacen + "&v17=" + posmo[i].textContent + "&ipFolio=" + ipdatam;
                             GuardarMovimientos(actt, extras);
                         }
                         setTimeout(function () {
@@ -5527,7 +5279,7 @@
                         for (i = 0; i < lote.length; i++)
                         {
                             var extrass = "&v3=" + lote[i].textContent + "&v4=" + cantidad[i].textContent +
-                                    "&v6=" + material[i].textContent + "&v12=" + centro + "&v13=" + almacen;
+                                    "&v6=" + material[i].textContent + "&v12=" + centro + "&v13=" + almacen + "&";
                             GuardarMovimientos(acct, extrass);
                         }
 
@@ -5577,6 +5329,7 @@
                                     }
                                 }
                                 if (xmlhttp.responseText == 2) {
+                                    borrarmsg();
                                     gg = 0;
                                     $("#guardar").prop("disabled", false);
                                     var ven = document.getElementById('VentanaModalAv');
@@ -5585,8 +5338,8 @@
                                     var theHandle = document.getElementById("handleAV");
                                     var theRoot = document.getElementById("VentanaModalAv");
                                     Drag.init(theHandle, theRoot);
-                                    var men = document.getElementById("msg");
-                                    men.innerHTML = "Error en la Red";
+//                                    var men = document.getElementById("msg");
+//                                    men.innerHTML = "Error en la Red";
                                     switch (mov) {
                                         case "101":
                                             for (var i = 0; i < ultima.length; i++) {
@@ -5615,16 +5368,6 @@
                     function Guarda310(extrass, acc) {
                         var dtrer = "Action=" + acc + extrass;
                         $.ajax({
-                            beforeSend: function () {
-                                $("button").prop("disabled", true);
-                                $("input").prop("disabled", true);
-                                var icon = $('#iconmsg');
-                                icon.show();
-                                im = "images/load.gif";
-                                icon.attr('src', im);
-                                var men = document.getElementById("msg");
-                                men.innerHTML = "Espere un momento por favor......";
-                            },
                             type: 'GET',
                             url: 'PeticionGuardaMovMateriales',
                             contentType: "application/x-www-form-urlencoded",
@@ -5812,9 +5555,9 @@
                                     }
                                 } else
                                 {
-                                    llenaCalidad();
-                                    insertarCabLotInsp();
-                                    insertarPosLotIns();
+//                                    llenaCalidad();
+//                                    insertarCabLotInsp();
+//                                    insertarPosLotIns();
                                     ActualizaFolio();
                                 }
                             }
@@ -5839,15 +5582,49 @@
                     }
                     function ActualizaFolio()
                     {
+                        var ipdc = ObtenerFolioRandom();
                         var xmlhttp = new XMLHttpRequest();
                         xmlhttp.onreadystatechange = function () {
                             if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
                             {
-                                var men = "Documento Contabilizado MO" + xmlhttp.responseText;
-                                window.location.href = "MovimientoMateriales.jsp?FolioMO=" + men;
+                                LimpiarPpal("LimpiarPpal");
+                                $('#bxCentro').val('');
+                                $('#bxCentro').prop('disabled', false);
+                                $('#bxCentro').css('background-image', 'url(images/necesario.PNG)');
+
+                                $('#bxAlmacen').val('');
+                                $('#bxAlmacen').prop('disabled', false);
+                                $('#bxAlmacen').css('background-image', 'url(images/necesario.PNG)');
+
+                                $('#bxClase').val('');
+                                $('#bxClase').prop('disabled', false);
+                                $('#bxClase').css('background-image', 'url(images/necesario.PNG)');
+
+                                $('#bxFecha').prop('disabled', false);
+
+                                $('#bxTexto').val('');
+                                $('#bxTexto').prop('disabled', false);
+                                $('#bxTexto').css('background-image', 'url(images/necesario.PNG)');
+
+                                $('#bxNota').val('');
+                                $('#bxNota').prop('disabled', false);
+
+                                $('#btnReserva').prop('disabled', false);
+                                $('#bxReserva').prop('disabled', false);
+                                $('#bxReserva').val('');
+
+                                $('#bxCarta').val('');
+                                $('#bxCarta').prop('disabled', false);
+                                $('#bxCarta').css('background-image', 'url(images/necesario.PNG)');
+                                borrarmsg();
+                                $('#guardar').prop("disabled", false);
+                                ShowMsg(2, "images/aceptar.png", "audio/sapmsg.wav", xmlhttp.responseText);
+                                gg = 0;
+//                                var men = "Documento Contabilizado MO" + xmlhttp.responseText;
+//                                window.location.href = "MovimientoMateriales.jsp?FolioMO=" + men;
                             }
                         };
-                        xmlhttp.open("GET", "PeticionGuardaMovMateriales?Action=ActualizarFolio", true);
+                        xmlhttp.open("GET", "PeticionGuardaMovMateriales?Action=ActualizarFoliosMO" + "&ipFolio=" + ipdc, true);
                         xmlhttp.send();
                     }
                     function validaDefectos(pos)
@@ -6496,21 +6273,6 @@
                         return;
                     }
 
-                    function Limpia200()
-                    {
-                        document.getElementById('bxMaterial201').value = "";
-                        document.getElementById('bxcnt201').value = "";
-                        document.getElementById('bxUM201').value = "";
-                        document.getElementById('bxLote201').value = "";
-                        document.getElementById('bxccs201').value = "";
-                        document.getElementById('txtMaterial').innerHTML = "";
-
-                        $('#bxMaterial201').css('background-image', 'url(images/necesario.PNG)');
-                        $('#bxcnt201').css('background-image', 'url(images/necesario.PNG)');
-                        $('#bxUM201').css('background-image', 'url(images/necesario.PNG)');
-                        $('#bxLote201').css('background-image', 'url(images/necesario.PNG)');
-                        $('#bxccs201').css('background-image', 'url(images/necesario.PNG)');
-                    }
 
                     function Limpia260()
                     {
@@ -6554,7 +6316,7 @@
                         var texto = document.getElementById('bxTexto').value;
                         var nota = document.getElementById('bxNota').value;
                         var carta = document.getElementById('bxCarta').value;
-
+                        var ipdatam = ObtenerFolioRandom();
                         var lote = document.getElementsByName('mmnlt');
                         var cantidad = document.getElementsByName('mmprr');//Por recibir
                         var Descripc = document.getElementsByName('mmdsc');
@@ -6575,7 +6337,7 @@
                         var cad = "";
                         var extra = "&v1=" + centro + "&v2=" + almacen + "&v3=" + fecha + "&v4=" + tmov +
                                 "&v5=" + texto + "&v6=" + nota +
-                                "&v7=" + carta + "&v8=" + cad;
+                                "&v7=" + carta + "&v8=" + cad + "&ipFolio=" + ipdatam;
                         var tt = "Guarda" + tmov + "Cabecera";
                         var tim = document.getElementsByName('mmtimp');
                         var extrass = "&v1=";
@@ -7026,11 +6788,18 @@
                                 funinva = "Material no encontrado";
                                 break;
                             case 13:
-                                funinva = "Seleccione otro centro difente al origen";
+                                funinva = "Seleccione otro centro diferente al origen";
                                 break;
                             case 14:
                                 funinva = "Lote obligatorio";
                                 break;
+                            case 15:
+                                funinva = "Almacenes identicos, seleccione almacén origen diferente";
+                                break;
+                            case 16:
+                                funinva = "El almacén destino debe ser el mismo en todo el documento";
+                                break;
+
                         }
                         var icon = $('#iconmsg');
                         icon.attr('src', img);
