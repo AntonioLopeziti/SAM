@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 $(document).ready(function () {
-    obtenerip();
+    setTimeout(obtenerip(),0001);
     AjustarCabecera('TabHead', 'TabBody', 8, 'SecCuerpo');
     $("#DobleSection").scroll(function () {
         $("#SecCuerpo").scrollTop($("#DobleSection").scrollTop());
@@ -15,12 +15,12 @@ $(document).ready(function () {
     });
     document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
     CargarTipoSolped();
-    LimpiarTemporal();
     verificaCentPorUsuario();
     CargarOrgCompra();
     CargarTipoImputacion();
     CargarTipoPosicion();
     startTime();
+    setTimeout(LimpiarTemporal,4000);
     
     $('#ctaMayor').prop('disabled', true);
     $('#CenCosto').prop('disabled', true);
@@ -1887,6 +1887,7 @@ $(document).ready(function () {
     function AgregarPosicionTemp(acc) {
         var val = "";
         var po = $('#Distribucion_SP > option').length;
+        
         if (po > 0) {
             if (acc == "ADD") {
                 val = po;
@@ -1894,13 +1895,16 @@ $(document).ready(function () {
                 val = DIS.val();
             }
         }
+        alert(DIS.val());
         if (DIS.val() == null || DIS.val() == null) {
             val = parseInt(po) + 1;
         }
+        alert(po+"  "+acc+" "+val);
+        var ips = folioIP();
         var datos = "&PO=" + val + "&CD=" + CDO.val() + "&OC=" + OCO.val().toUpperCase() + "&GC=" + GCO.val().toUpperCase() + "&TI=" + TIM.val().toUpperCase() +
                 "&TP=" + TPO.val().toUpperCase() + "&MA=" + MAT.val() + "&TB=" + encodeURIComponent(TBR.val()) + "&UM=" + UME.val().toUpperCase() +
                 "&GA=" + GAR.val().toUpperCase() + "&CA=" + GetCantend(CAN.val(), UME.val()) + "&FE=" + checkFecha(FCE.val()) + "&CE=" + CEN.val().toUpperCase() +
-                "&AL=" + ALM.val().toUpperCase() + "&SO=" + SOL.val().toUpperCase() + "&CM=" + CTM.val() + "&CC=" + CCO.val() + "&OR=" + ORD.val();
+                "&AL=" + ALM.val().toUpperCase() + "&SO=" + SOL.val().toUpperCase() + "&CM=" + CTM.val() + "&CC=" + CCO.val() + "&OR=" + ORD.val()+"&ipsf="+ips;
         $.ajax({
             async: false,
             type: 'GET',
@@ -1972,6 +1976,7 @@ $(document).ready(function () {
         DIS.focus();
     }
     function LimpiarTemporal() {
+        var ips = folioIP();      
         acc = "Limpiartemporal";
         $.ajax({
             async: false,
@@ -1979,7 +1984,7 @@ $(document).ready(function () {
             url: 'peticionCrearSolPed',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Accion=" + acc,
+            data: "Accion=" + acc+"&ipsf="+ips,
             success: function (data) {
             }
         });
@@ -1999,14 +2004,15 @@ $(document).ready(function () {
         });
     }
     function CargarListPos() {
-        acc = "CargarListaPos";
+        var ips = folioIP(); 
+         acc = "CargarListaPos";
         $.ajax({
             async: false,
             type: 'GET',
             url: 'peticionCrearSolPed',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Accion=" + acc,
+            data: "Accion=" + acc+"&ipsf="+ips, 
             success: function (data) {
                 DIS.html(data);
             }
@@ -2043,6 +2049,8 @@ $(document).ready(function () {
         CerrarMensajeSalirModulo();
     });
     function CargarDatosPosicio(pos) {
+        var ips = folioIP();
+//        alert("hola "+ips);
         var acc = "CargarDatosPosicion";
         $.ajax({
             async: false,
@@ -2051,7 +2059,7 @@ $(document).ready(function () {
             url: 'peticionCrearSolPed',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Accion=" + acc + "&dato=" + pos,
+            data: "Accion=" + acc + "&dato=" + pos+"&ipsf="+ips,
             success: function (data) {
                 MAT.val(data[0]);
                 MAT.css('background-image', 'none');
@@ -2090,11 +2098,12 @@ $(document).ready(function () {
                 } else {
                     MAT.prop('disabled', false);
                 }
-                CargarTxtPosiion(pos);
+                CargarTxtPosiion(pos,ips);
             }
         });
     }
-    function CargarTxtPosiion(pos) {
+    function CargarTxtPosiion(pos,ips) {
+        alert(ips)
         var acc = "CargartTxtPos";
         $.ajax({
             async: false,
@@ -2103,7 +2112,7 @@ $(document).ready(function () {
             url: 'peticionCrearSolPed',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Accion=" + acc + "&dato=" + pos,
+            data: "Accion=" + acc + "&dato=" + pos+"&ipsf="+ips,
             success: function (data) {
                 TXP.val(data[0]);
             }
@@ -2112,6 +2121,7 @@ $(document).ready(function () {
     }
 
     function DelPosText(vlor) {
+        var ips = folioIP();
         var acc = "DElTEXTPos";
         $.ajax({
             async: false,
@@ -2119,7 +2129,7 @@ $(document).ready(function () {
             url: 'PeticionSolPed',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Accion=" + acc + "&PO=" + vlor,
+            data: "Accion=" + acc + "&PO=" + vlor+"&ipsf="+ips,
             success: function (data) {
             }
         });
@@ -2147,13 +2157,14 @@ $(document).ready(function () {
         var txtPo = txtPos.replace(/'/g, "´");
         var tamCar = txtPo.length;
         var lim = tamCar / 132;
+        var ips = folioIP();
         var l = Math.ceil(lim);
         for (var i = 0; i < l; i++) {
             var d = i * 132;
             no = txtPo.substr(d, 132);
             var acc = "SAVETEX";
             var fila = i + 1;
-            var enviar = "&fila=" + fila + "&texps=" + encodeURIComponent(no) + "&PO=" + pos;
+            var enviar = "&fila=" + fila + "&texps=" + encodeURIComponent(no) + "&PO=" + pos+"&ipsf="+ips;
             $.ajax({
                 async: false,
                 type: 'GET',
@@ -2557,7 +2568,8 @@ $(document).ready(function () {
             ShowMsg(37, "images/adver.PNG", "audio/saperror.wav");
         } else {
             var acc = "DeletePos";
-            var enviar = "&Accion=" + acc + "&PO=" + n;
+             var ips = folioIP();
+            var enviar = "&Accion=" + acc + "&PO=" + n+"&ipsf="+ips;
             $.ajax({
                 async: false,
                 type: 'GET',
@@ -2577,9 +2589,10 @@ $(document).ready(function () {
 
     function ReasicnarPos(i) {
         var po = $("input[name=DelPos]");
+        var ips = folioIP();
         var acc = "Reasic";
         if (i < po.length) {
-            var enviar = "&Accion=" + acc + "&NewPos=" + i;
+            var enviar = "&Accion=" + acc + "&NewPos=" + i+"&ipsf="+ips ;
             $.ajax({
                 async: false,
                 type: 'GET',
@@ -2604,8 +2617,9 @@ $(document).ready(function () {
         ReasicnarPos(i + 1);
     }
     function cargarNuevoPosionFol() {
+        var ips = folioIP();
         var acc = "CargarNuevaPosi";
-        var enviar = "&Accion=" + acc;
+        var enviar = "&Accion=" + acc+"&ipsf="+ips;
         $.ajax({
             async: false,
             type: 'GET',
@@ -2645,6 +2659,7 @@ $(document).ready(function () {
                 var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
                 pc.onicecandidate = noop;
                 $("#ipss").val(myIP);
+//                 alert(myIP);
            };        
 
 }
