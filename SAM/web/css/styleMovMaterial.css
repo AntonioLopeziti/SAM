@@ -879,12 +879,12 @@ and open the template in the editor.
     border-collapse: collapse;
     width: 100%;
 }
-.fixedYL table th, #fixedYL table td, #fixedYCC table td {
-    width: 20%;
+.fixedYL table th, .fixedYCC table th, #fixedYCC table td, #fixedYL table td {
+    width: 25%;
 }
 .fixedYL table th {
     background-color: #ddd;
-    font: 11% 1em Tahoma;
+    font: 1em Tahoma;
     color:#000;
 }
 #cuerpoDatos > div.nofixedXL table{
@@ -892,8 +892,9 @@ and open the template in the editor.
     width: 100%;
 }
 #cuerpoDatos > div.nofixedXL table td {
-    width: 20%;
+    width: 25%;
 }
+
 .VentanaModalLoteL
 {    
     position: fixed; 
@@ -925,6 +926,27 @@ and open the template in the editor.
     color: #000000;
     display:none;
     z-index:1002;
+}
+#handlecc{
+    height: 6%;
+    padding-left: 2%;
+    width: 98%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+#handle101{
+    height: 4%;
+    padding-left: 2%;
+    width: 98%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+}
+#handle201{
+    height: 8%;
+    padding-left: 2%;
+    width: 98%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
 }
 /*----Fin-----*/
 .material200G
