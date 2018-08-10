@@ -190,15 +190,16 @@ public class ACC_Servicios {
         return solp;
     }
 
-    public ArrayList<SolpedServicios> CargarServicios(String user, String pos) {
+    public ArrayList<SolpedServicios> CargarServicios(String user, String pos, String ipsf) {
         ArrayList<SolpedServicios> solp = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String sql = "{CALL MM.Solped_CargarServTemp(?,?)}";
+        String sql = "{CALL MM.Solped_CargarServTemp(?,?,?)}";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, user);
             st.setString(2, pos);
+            st.setString(3, ipsf);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 SolpedServicios s = new SolpedServicios();
