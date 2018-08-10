@@ -2372,6 +2372,7 @@ $(document).ready(function () {
         cargarserviciosposi();
     }
     function cargarserviciosposi() {
+        var ips = folioIP();
         var pos = '';
         if (DIS.val() == null || DIS.val() == '') {
             pos = '';
@@ -2384,7 +2385,7 @@ $(document).ready(function () {
             url: 'peticionCargarServiciosPosicion',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "posicion=" + pos,
+            data: "posicion=" + pos+"&ipsf="+ips,
             success: function (data) {
                 $('#glob').html(data);
             }
