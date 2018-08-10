@@ -45,6 +45,7 @@ public class peticionCargarServiciosPosicion extends HttpServlet {
             String u = (String) session.getAttribute("Usuario");
             String valorDatoSer = request.getParameter("ValorFila");
             session.setAttribute("ValorFServicio", valorDatoSer);
+            String ipsf = request.getParameter("ipsf");
             out.println("<table>");
             out.println("<tbody>");
             if (posicion == null || posicion == "" || posicion == "0") {
@@ -61,7 +62,7 @@ public class peticionCargarServiciosPosicion extends HttpServlet {
                 }
             } else {
                 int v;
-                ArrayList<SolpedServicios> s = ACC_Servicios.ObtenerInstancia().CargarServicios(u, posicion);
+                ArrayList<SolpedServicios> s = ACC_Servicios.ObtenerInstancia().CargarServicios(u, posicion, ipsf);
                 if (s.size() > 0) {
                     for (v = 0; v < s.size(); v++) {
                         out.println("<tr>"
