@@ -225,7 +225,7 @@ public class PeticionSolPed extends HttpServlet {
                     String retorn = "";
                     int n = 0;
                     ArrayList<SolpedCrea> sl = ACC_SolicitudPedidos.ObtenerInstancia().CargarTablaTemp(user,ipsf);
-                    ArrayList<SolpedServicios> se = ACC_Servicios.ObtenerInstancia().CargarServicios(user, "0");
+                    ArrayList<SolpedServicios> se = ACC_Servicios.ObtenerInstancia().CargarServicios(user, "0",ipsf);
                     ArrayList<textos_posiciones_solped> t = ACC_Textos_posiciones_solped.ObtenerInstancia().CargarTxtPos(user);
 
                     ACC_SolicitudPedidos.ObtenerInstancia().InsertarSolped(sl, ipsf, HoraServidor,ipsf);
