@@ -504,6 +504,7 @@
                 <button id="btnCld3" class="btnCalidad3" type="submit" onclick="EliminaFila()"></button>
             </div>
             <div class="Botpm">
+                <button onclick="ajustaCantidades(0);">Propuesto</button>
                 <button style="" onclick="ConsMaterial();" > <img style="height:15px;" src="images/cosma2.png" /> <%out.println(po.getProperty("etiqueta.NPMConsumoMate_PP"));%></button>
                 <button onclick="cerraventabs('ventaPM01')" ><img  src="images/S_B_CANC.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%out.println(po.getProperty("etiqueta.NPMFinaliproce_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
             </div> 
