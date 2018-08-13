@@ -366,13 +366,17 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     out.println("<table id=\"TabBody\">\n"
                             + "<tbody>");
                     for (con = 0; con < tno.size(); con++) {
+                        String can = tno.get(con).getCantidad_restante();
+                        if(tno.get(con).getCl_mov().equals("101")){
+                            can = tno.get(con).getCantidad2();
+                        }
                         out.println("<tr>"
                                 + "<td><input type=\"checkbox\" name=\"ckMovMer\" value=\"" + con + "\"></td>"
                                 + "<td hidden><label id=\"tdDes" + con + "\">" + tno.get(con).getDescripcion() + "</label></td>"
                                 + "<td><label id=\"tdOpr" + con + "\">" + tno.get(con).getNum_operacion() + "</label></td>"
                                 + "<td><label name=\"tdMaterial\" id=\"tdMat" + con + "\">" + tno.get(con).getMaterial() + "</label></td>"
                                 + "<td><label id=\"tddmt" + con + "\">" + tno.get(con).getTxt_material() + "</label></td>"
-                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" name=\"bxcantidad\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDecc(this.value, 3);ajustaCantidades(" + con + ");\" value=\"" + tno.get(con).getCantidad2() + "\">"
+                                + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" name=\"bxcantidad\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDecc(this.value, 3);\" value=\"" + can + "\">"
                                 + "<input hidden type=\"text\" id=\"bxcntT" + con + "\" name=\"bxcantidadT\" value=\"" + tno.get(con).getCantidad() + "\">"
                                 + "<input hidden type=\"text\" id=\"bxposM" + con + "\" name=\"bxlistaM\" value=\"" + tno.get(con).getPosListaM() + "\">"
                                 + "<input hidden type=\"text\" id=\"bxEE" + con + "\" name=\"bxinvEE\" value=\"" + tno.get(con).getStock_especial() + "\">"
