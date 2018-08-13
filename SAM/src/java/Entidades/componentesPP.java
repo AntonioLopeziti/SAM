@@ -30,6 +30,16 @@ public class componentesPP {
     String stock_especial = "";
     String pedido = "";
     String posicion = "";
+    String cantidad_restante = "";
+
+    public String getCantidad_restante() {
+        return cantidad_restante;
+    }
+
+    public void setCantidad_restante(String cantidad_restante) {
+        this.cantidad_restante = cantidad_restante;
+    }
+    
 
     public String getPedido() {
         return pedido;
