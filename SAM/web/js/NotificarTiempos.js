@@ -920,7 +920,7 @@ function validarOrdenLib() {
                 var BE = document.createElement('audio');
                 BE.src = "audio/sapmsg.wav";
                 BE.play();
-                $('#msg').html("Número de orden incorrecto");
+                $('#msg').html("Número de orden incorrectossss");
                 $('#iconmsg').show();
                 $('#iconmsg').attr('src', 'images/advertencia.PNG');
                 $('#OrdFab').val("");
@@ -1310,31 +1310,38 @@ function selecoftabPP() {
         var ckOpe = document.getElementsByName("ckOperPP");
         for (x = 0; x < ckOpe.length; x++) {
             if (ckOpe[x].checked) {
-//            alert($("#opeClavCon" + ckOpe[x].value).text());
-                switch ($("#opeClavCon" + ckOpe[x].value).text()) {
-                    case "PP03":
-                        pp1prt3FORSAMPP($("#OrdFab").val());
-                        mostrarventabs("ventaPM01");
-                        var theHandle = document.getElementById("handlePM01");
-                        var theRoot = document.getElementById("ventaPM01");
-                        Drag.init(theHandle, theRoot);
-                        AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpoCld');
-                        fisrtChild();
-                        ajustaCantidades(0);
-                        document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
-                        sujetoLote();
-                        obtenerLote();
-                        break;
-                    case "PP01":
-                        mostrarventabs("VentanaModalActividades");
-                        var theHandle = document.getElementById("handle4");
-                        var theRoot = document.getElementById("VentanaModalActividades");
-                        Drag.init(theHandle, theRoot);
-                        getFechaInicio(ckOpe[x].value);
-                        getActividades($("#opeTrabOpe" + ckOpe[x].value).text(), ckOpe[x].value);
-                        borrarmsg();
-                        break;
-                }
+                var claveOp = $("#opeClavCon" + ckOpe[x].value).text();
+                mostrarventabs("VentanaModalActividades");
+                var theHandle = document.getElementById("handle4");
+                var theRoot = document.getElementById("VentanaModalActividades");
+                Drag.init(theHandle, theRoot);
+                getFechaInicio(ckOpe[x].value);
+                getActividades($("#opeTrabOpe" + ckOpe[x].value).text(), ckOpe[x].value);
+                borrarmsg();
+//                switch ($("#opeClavCon" + ckOpe[x].value).text()) {
+//                    case "PP03":
+//                        pp1prt3FORSAMPP($("#OrdFab").val());
+//                        mostrarventabs("ventaPM01");
+//                        var theHandle = document.getElementById("handlePM01");
+//                        var theRoot = document.getElementById("ventaPM01");
+//                        Drag.init(theHandle, theRoot);
+//                        AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpoCld');
+//                        fisrtChild();
+//                        ajustaCantidades(0);
+//                        document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+//                        sujetoLote();
+//                        obtenerLote();
+//                        break;
+//                    case "PP01":
+//                        mostrarventabs("VentanaModalActividades");
+//                        var theHandle = document.getElementById("handle4");
+//                        var theRoot = document.getElementById("VentanaModalActividades");
+//                        Drag.init(theHandle, theRoot);
+//                        getFechaInicio(ckOpe[x].value);
+//                        getActividades($("#opeTrabOpe" + ckOpe[x].value).text(), ckOpe[x].value);
+//                        borrarmsg();
+//                        break;
+//                }
             }
         }
     }
@@ -1524,14 +1531,6 @@ function ajustaCantidades(pos) {
             var res = parseFloat(cnt) * parseFloat(y);
             var tx = res / parseFloat(x) + "";
             var tx2 = res / parseFloat(x);
-//            var va = tx.split(".");
-//            var vl = va[1];
-//            alert(tx2.toFixed(3));
-//            
-//            for(j = va[1].length; j < 3; j++){
-//                vl+="0";
-//            }
-//            cants[i].value = va[0] + "." + vl;
             cants[i].value = tx2.toFixed(3);
             if (cnt == "") {
                 cants[i].value = "";
@@ -2401,7 +2400,31 @@ function finTiempos() {
             return;
         }
     }
-    validarLlenado();
+    var ckOpe = document.getElementsByName("ckOperPP");
+        for (x = 0; x < ckOpe.length; x++) {
+            if (ckOpe[x].checked) {
+                switch ($("#opeClavCon" + ckOpe[x].value).text()) {
+                    case "PP03":
+                        ocultarVentana('VentanaModalActividades', '');
+                        pp1prt3FORSAMPP($("#OrdFab").val());
+                        mostrarventabs("ventaPM01");
+                        var theHandle = document.getElementById("handlePM01");
+                        var theRoot = document.getElementById("ventaPM01");
+                        Drag.init(theHandle, theRoot);
+                        AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpoCld');
+                        fisrtChild();
+//                        ajustaCantidades(0);
+                        document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
+                        sujetoLote();
+                        obtenerLote();
+                        break;
+                    case "PP01":
+                            validarLlenado();
+                        break;
+                }
+            }
+        }
+
 }
 function getUmOpe() {
     var acc = "getUMoper";
