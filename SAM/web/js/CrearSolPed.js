@@ -1895,11 +1895,11 @@ $(document).ready(function () {
                 val = DIS.val();
             }
         }
-        alert(DIS.val());
+//        alert(DIS.val());
         if (DIS.val() == null || DIS.val() == null) {
             val = parseInt(po) + 1;
         }
-        alert(po+"  "+acc+" "+val);
+//        alert(po+"  "+acc+" "+val);
         var ips = folioIP();
         var datos = "&PO=" + val + "&CD=" + CDO.val() + "&OC=" + OCO.val().toUpperCase() + "&GC=" + GCO.val().toUpperCase() + "&TI=" + TIM.val().toUpperCase() +
                 "&TP=" + TPO.val().toUpperCase() + "&MA=" + MAT.val() + "&TB=" + encodeURIComponent(TBR.val()) + "&UM=" + UME.val().toUpperCase() +
@@ -2103,7 +2103,7 @@ $(document).ready(function () {
         });
     }
     function CargarTxtPosiion(pos,ips) {
-        alert(ips)
+//        alert(ips)
         var acc = "CargartTxtPos";
         $.ajax({
             async: false,
