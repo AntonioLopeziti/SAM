@@ -150,16 +150,17 @@ public class ACC_Textos_posiciones_solped {
         }
     }
 
-    public ArrayList<textos_posiciones_solped> CargarTxtPos(String user) {
+    public ArrayList<textos_posiciones_solped> CargarTxtPos(String user,String ipsf) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "{CALL MM.Solped_CargarTextosPos(?)}";
+        String sql = "{CALL MM.Solped_CargarTextosPos(?,?)}";
         ArrayList<textos_posiciones_solped> tp = new ArrayList<>();
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, user);
+            ps.setString(2, ipsf);
             rs = ps.executeQuery();
             while (rs.next()) {
                 textos_posiciones_solped t = new textos_posiciones_solped();
