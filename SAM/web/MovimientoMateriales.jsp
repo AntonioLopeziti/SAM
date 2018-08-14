@@ -347,8 +347,10 @@
 
                 </div>
                 <div class="Botones_Match">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="ok101"/>                       
-                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('VentanaModal101', 'btnAdd', 'm');"/>
+                    <button  class="BtnMatchOKMats"  style="margin-right:-4%; cursor:pointer;" id="ok101"></button>
+                    <button  class="BtnMatchCEMats"  style="cursor:pointer;" onclick="ocultarVentana('VentanaModal101', 'btnAdd', 'm');" id="Cerra101Taba"></button>
+                    <!--<img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" id="ok101"/>-->                       
+                    <!--<img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('VentanaModal101', 'btnAdd', 'm');"/>-->
                 </div>
             </div>
         </div>
@@ -1517,8 +1519,10 @@
                     </section>
                 </div>
                 <div class="Botones_Match">
-                    <img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" onclick="Validarmovis()"/>
-                    <img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('VentanaModal301', 'btnAdd', 'm');"/>
+                    <button  class="BtnMatchOKMats"  style="margin-right:-4%; cursor:pointer;" onclick="Validarmovis()" id="Btnmosnews"></button>
+                    <button  class="BtnMatchCEMats"  style="cursor:pointer;" id="CerrarMatnews" onclick="ocultarVentana('VentanaModal301', 'btnAdd', 'm');"></button>
+                    <!--<img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" onclick="Validarmovis()" id="Btnmosnews"/>-->
+                    <!--<img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('VentanaModal301', 'btnAdd', 'm');"/>-->
                 </div>
             </div>
         </div>
