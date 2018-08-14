@@ -2530,18 +2530,20 @@ $(document).ready(function () {
     }
     function GuardarServiciosPosicio(action, pos, extras)
     {
+        var ips = folioIP();
         $.ajax({
             async: false,
             type: 'GET',
             url: 'PeticionSolPedV',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Action=" + action + "&PosN=" + pos + extras,
+            data: "Action=" + action + "&PosN=" + pos + extras+"&ipsf="+ips,
             success: function (data) {
             }
         });
     }
     function deletedataservicio(vlor) {
+        var ips = folioIP();
         var acc = "DElTEXTSERV";
         $.ajax({
             async: false,
@@ -2549,7 +2551,7 @@ $(document).ready(function () {
             url: 'PeticionSolPedV',
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Action=" + acc + "&Pos=" + vlor,
+            data: "Action=" + acc + "&Pos=" + vlor+"&ipsf="+ips,
             success: function (data) {
             }
         });
@@ -3174,7 +3176,7 @@ function checkDec(num, tam) {
             v01 = va[0];
             if (v01.length == 0) {
                 v01 = "0";
-            }
+                }
             v0 = parseInt(v01);
             v1 = va[1];
             if (num.indexOf(".") != -1) {
