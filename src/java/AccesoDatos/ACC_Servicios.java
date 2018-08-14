@@ -49,10 +49,10 @@ public class ACC_Servicios {
         return se;
     }
 
-    public void InsertarServiciosTemp(String v1, String v2, String v3, String v4, String v5, String v6, String v7, String v8, String v9, String v10, String v11, String v12, String v13, String v14) {
+    public void InsertarServiciosTemp(String v1, String v2, String v3, String v4, String v5, String v6, String v7, String v8, String v9, String v10, String v11, String v12, String v13, String v14,String ipsf) {
         Conexion cnx = new Conexion();
         Connection cn = cnx.ObtenerConexion();
-        String sql = "{CALL MM.Solped_InsertServiciosTemp(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{CALL MM.Solped_InsertServiciosTemp(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         PreparedStatement ps = null;
         try {
             ps = cn.prepareStatement(sql);
@@ -70,6 +70,7 @@ public class ACC_Servicios {
             ps.setString(12, v12);
             ps.setString(13, v13);
             ps.setString(14, v14);
+            ps.setString(15, ipsf);
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println(e);
@@ -108,15 +109,16 @@ public class ACC_Servicios {
         }
     }
 
-    public void EliminarPosSerTemporal(String user, String pos) {
+    public void EliminarPosSerTemporal(String user, String pos,String ipsf) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
-        String sql = "{CALL MM.SolpedEliminarSerPos(?,?)}";
+        String sql = "{CALL MM.SolpedEliminarSerPos(?,?,?)}";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, user);
             ps.setString(2, pos);
+            ps.setString(3, ipsf);
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println(e);
