@@ -4997,7 +4997,6 @@ function SelecLoteM(lote, clase) {
     ocultarVentana("VentanaModalLote", id);
 }
 function seleccionarCCosto(valor, clase) {
-    alert(valor + " - " + clase);
     var id = "";
     if (clase == "202") {
         clase = "201";
