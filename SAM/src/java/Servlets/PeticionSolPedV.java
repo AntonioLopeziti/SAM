@@ -60,14 +60,15 @@ public class PeticionSolPedV extends HttpServlet {
             String v9 = request.getParameter("v9");
             String v10 = request.getParameter("v10");
             String posdel = request.getParameter("Pos");
+            String ipsf = request.getParameter("ipsf");
             switch (Action) {
                 case "GuardaServicio":
                     String FechaServidor = Consultas.ObtenerInstancia().ObtenerFechaActualServidor();
                     String HoraServidor = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
-                    ACC_Servicios.ObtenerInstancia().InsertarServiciosTemp(Posici, v10, v1, FechaServidor, HoraServidor, v5, v2, v3, v4, v6, v7, v8, v9, us);
+                    ACC_Servicios.ObtenerInstancia().InsertarServiciosTemp(Posici, v10, v1, FechaServidor, HoraServidor, v5, v2, v3, v4, v6, v7, v8, v9, us,ipsf);
                     break;
                 case "DElTEXTSERV":
-                    ACC_Servicios.ObtenerInstancia().EliminarPosSerTemporal(us, posdel);
+                    ACC_Servicios.ObtenerInstancia().EliminarPosSerTemporal(us, posdel,ipsf);
                     break;
             }
         }
