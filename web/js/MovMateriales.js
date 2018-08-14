@@ -4145,6 +4145,8 @@ function Validarmovis() {
             }
         }
     }
+    $('#Btnmosnews').prop("disabled", true);
+    $('#CerrarMatnews').prop("disabled", true);
     ShowMsg(1, "images/load.gif", "audio/sapmsg.wav");
     $('#guardar').prop("disabled", true);
     setTimeout(function () {
@@ -4509,6 +4511,8 @@ function ObtenerDatos101()
                 }
             }
             ShowMsg(1, "images/load.gif", "audio/sapmsg.wav");
+            $('#ok101').prop("disabled", true);
+            $('#Cerra101Taba').prop("disabled", true);
             $('#guardar').prop("disabled", true);
             var random = ObtenerFolioRandom();
             setTimeout(function () {
@@ -4576,6 +4580,8 @@ function ObtenerDatos101()
                 }
             }
             ShowMsg(1, "images/load.gif", "audio/sapmsg.wav");
+              $('#ok101').prop("disabled", true);
+            $('#Cerra101Taba').prop("disabled", true);
             $('#guardar').prop("disabled", true);
             var random = ObtenerFolioRandom();
             setTimeout(function () {
@@ -4655,7 +4661,7 @@ function GuardaTem101() {
 }
 function verificarRegistros101(action, cantidad, movimiento, ipd)
 {
-    $('#guardar').prop("disabled", false);
+
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
@@ -4670,6 +4676,9 @@ function verificarRegistros101(action, cantidad, movimiento, ipd)
                 Drag.init(theHandle, theRoot);
                 LimpiarPpal("LimpiarPpal");
                 borramsg();
+                $('#ok101').prop("disabled", false);
+                $('#Cerra101Taba').prop("disabled", false);
+                $('#guardar').prop("disabled", false);
             } else {
                 borramsg();
                 var ven = document.getElementById('VentanaModalAv');
@@ -4679,6 +4688,9 @@ function verificarRegistros101(action, cantidad, movimiento, ipd)
                 var theRoot = document.getElementById("VentanaModalAv");
                 Drag.init(theHandle, theRoot);
                 ocultarVentana('VentanaModal101', 'btnAdd');
+                $('#ok101').prop("disabled", false);
+                $('#Cerra101Taba').prop("disabled", false);
+                $('#guardar').prop("disabled", false);
             }
         }
     };
@@ -4810,6 +4822,8 @@ function GuardarTempMovs() {
         }
     }
     $('#guardar').prop('disabled', false);
+    $('#Btnmosnews').prop("disabled", false);
+    $('#CerrarMatnews').prop("disabled", false);
     $('#iconmsg').hide();
     var men = document.getElementById("msg");
     men.innerHTML = "";
@@ -4857,7 +4871,7 @@ function CeCosGet() {
             + "&v4=" + encodeURIComponent($('#bxtxc2').val().trim())
             + "&v5=" + $('#numAcMaxCeco').val()
             + "&v6=" + $('#bxClase').val();
-    
+
     $.ajax({
         async: false,
         type: 'GET',
