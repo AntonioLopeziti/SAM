@@ -25,6 +25,30 @@ and open the template in the editor.
     margin-left: 20px;
     margin-top: 15px;
 }
+.BtnMatchOKMats{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/HR_ok.png');
+    background-position: center;
+    background-repeat:no-repeat;
+    vertical-align:middle;
+    margin-top: -2.5px;
+    height: 18px;
+    width: 19px;
+    cursor: pointer;
+}
+.BtnMatchCEMats{
+    border: solid 1px rgb(163,163,163);
+    background: rgb(229,229,229);
+    background-image: url('../images/HR_not.png');
+    background-position: center;
+    background-repeat:no-repeat;
+    vertical-align:middle;
+    margin-top: -2.5px;
+    height: 18px;
+    width: 19px;
+    cursor: pointer;
+}
 .secBC button{
     margin-top: 14px;
 }
