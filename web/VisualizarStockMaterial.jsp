@@ -329,11 +329,13 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th><%out.println(po.getProperty("etiqueta.materialmatch"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.Descripcion_MAT"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.LoteMa3_Mov"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.CSPAlmacen"));%></th>
-                                            <th><%out.println(po.getProperty("etiqueta.Centro_CC"));%></th>
+                                            <th style="width: 15%;"><%out.println(po.getProperty("etiqueta.LoteMa3_Mov"));%></th>
+                                            <th style="width: 15%;">Num.Doc.</th>
+                                            <th style="width: 10%;">Pos.Doc.</th>
+                                            <th style="width: 10%;"><%out.println(po.getProperty("etiqueta.materialmatch"));%></th>
+                                            <th style="width: 30%; text-align: left;">Txt brve. Mat.</th>
+                                            <th style="width: 10%;"><%out.println(po.getProperty("etiqueta.Centro_CC"));%></th>
+                                            <th style="width: 10%;"><%out.println(po.getProperty("etiqueta.CSPAlmacen"));%></th>
                                         </tr>
                                     </thead>
                                 </table>
