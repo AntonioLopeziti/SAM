@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import Entidades.pedido_detalle;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -865,7 +866,9 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     }
                     break;
                 case "Movimiento311":
-                    DecimalFormat df = new DecimalFormat("#.000");
+                    DecimalFormatSymbols simbol311 = new DecimalFormatSymbols();
+                    simbol311.setDecimalSeparator('.');
+                    DecimalFormat df = new DecimalFormat("0.000", simbol311);
                     String ori,
                      des;
                     Double origen,
@@ -910,7 +913,9 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     }
                     break;
                 case "Movimiento313":
-                    DecimalFormat dfk = new DecimalFormat("#.000");
+                    DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+                    simbolos.setDecimalSeparator('.');
+                    DecimalFormat dfk = new DecimalFormat("0.000", simbolos);
                     String orik,
                      desk;
                     Double origenk,
@@ -930,13 +935,13 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                         for (int i = 0; i < cc3k; i++) {
                             if (M311k[i][9].equals("E")) {
                                 origenk = ACC_Stock.ObtenerInstancia().StockLibreE(M311k[i][2], M311k[i][0], M311k[i][3], M311k[i][4], M311k[i][7], M311k[i][8]) - Double.parseDouble(M311k[i][1]);
-                                destinok = ACC_Stock.ObtenerInstancia().StockLibreET(M311k[i][2], M311k[i][0], M311k[i][3], M311k[i][5], M311k[i][7], M311k[i][8]) + Double.parseDouble(M311k[i][1]);
+                                destinok = ACC_Stock.ObtenerInstancia().GetStockTrasladoEspecial(M311k[i][2], M311k[i][0], M311k[i][3], M311k[i][5], M311k[i][7], M311k[i][8]) + Double.parseDouble(M311k[i][1]);
                                 orik = dfk.format(origenk);
                                 desk = dfk.format(destinok);
                                 //Oriden
                                 ACC_Stock.ObtenerInstancia().ActualizaInvE(M311k[i][2], M311k[i][0], M311k[i][3], orik, M311k[i][4], M311k[i][7], M311k[i][8]);
                                 //Destino
-                                ACC_Stock.ObtenerInstancia().ActualizaInvET(M311k[i][2], M311k[i][0], M311k[i][3], desk, M311k[i][5], M311k[i][7], M311k[i][8]);
+                                ACC_Stock.ObtenerInstancia().ActualizaInvStockEspecialTraslado(M311k[i][2], M311k[i][0], M311k[i][3], desk, M311k[i][5], M311k[i][7], M311k[i][8]);
 
                                 //// Stock Transferencia 
                                 String Stok0 = ACC_Stock.ObtenerInstancia().obtenersotcktras(M311k[i][3], M311k[i][5], M311k[i][4], M311k[i][0], M311k[i][2], M311k[i][7], M311k[i][8], "E");
@@ -946,13 +951,13 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
 
                             } else {
                                 origenk = ACC_Stock.ObtenerInstancia().StockLibre(M311k[i][2], M311k[i][0], M311k[i][3], M311k[i][4]) - Double.parseDouble(M311k[i][1]);
-                                destinok = ACC_Stock.ObtenerInstancia().StockLibreT(M311k[i][2], M311k[i][0], M311k[i][3], M311k[i][5]) + Double.parseDouble(M311k[i][1]);
+                                destinok = ACC_Stock.ObtenerInstancia().GetStockTraslado(M311k[i][2], M311k[i][0], M311k[i][3], M311k[i][5]) + Double.parseDouble(M311k[i][1]);
                                 orik = dfk.format(origenk);
                                 desk = dfk.format(destinok);
                                 //Oriden
                                 ACC_Stock.ObtenerInstancia().ActualizaInv(M311k[i][2], M311k[i][0], M311k[i][3], orik, M311k[i][4]);
                                 //Destino
-                                ACC_Stock.ObtenerInstancia().ActualizaInvT(M311k[i][2], M311k[i][0], M311k[i][3], desk, M311k[i][5]);
+                                ACC_Stock.ObtenerInstancia().ActualizaInvTraslado(M311k[i][2], M311k[i][0], M311k[i][3], desk, M311k[i][5]);
 
                                 //// Stock Transferencia 
                                 String Stok1 = ACC_Stock.ObtenerInstancia().obtenersotcktras(M311k[i][3], M311k[i][5], M311k[i][4], M311k[i][0], M311k[i][2], "", "", "");
@@ -968,7 +973,9 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     }
                     break;
                 case "Movimiento315":
-                    DecimalFormat dfkj = new DecimalFormat("#.000");
+                    DecimalFormatSymbols simbol315 = new DecimalFormatSymbols();
+                    simbol315.setDecimalSeparator('.');
+                    DecimalFormat dfkj = new DecimalFormat("0.000", simbol315);
                     String orikj,
                      deskj;
                     Double origenkj,
@@ -988,29 +995,28 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                         for (int i = 0; i < cc3kj; i++) {
                             if (M311kj[i][9].equals("E")) {
                                 origenkj = ACC_Stock.ObtenerInstancia().StockLibreE(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4], M311kj[i][7], M311kj[i][8]) + Double.parseDouble(M311kj[i][1]);
-                                destinokj = ACC_Stock.ObtenerInstancia().StockLibreET(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4], M311kj[i][7], M311kj[i][8]) - Double.parseDouble(M311kj[i][1]);
+                                destinokj = ACC_Stock.ObtenerInstancia().GetStockTrasladoEspecial(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4], M311kj[i][7], M311kj[i][8]) - Double.parseDouble(M311kj[i][1]);
                                 orikj = dfkj.format(origenkj);
                                 deskj = dfkj.format(destinokj);
                                 //Oriden
                                 ACC_Stock.ObtenerInstancia().ActualizaInvE(M311kj[i][2], M311kj[i][0], M311kj[i][3], orikj, M311kj[i][4], M311kj[i][7], M311kj[i][8]);
                                 //Destino
-                                ACC_Stock.ObtenerInstancia().ActualizaInvET(M311kj[i][2], M311kj[i][0], M311kj[i][3], deskj, M311kj[i][4], M311kj[i][7], M311kj[i][8]);
+                                ACC_Stock.ObtenerInstancia().ActualizaInvStockEspecialTraslado(M311kj[i][2], M311kj[i][0], M311kj[i][3], deskj, M311kj[i][4], M311kj[i][7], M311kj[i][8]);
 
                                 /// Stock Tranferencia
                                 String Stok0 = ACC_Stock.ObtenerInstancia().obtenersotcktras315(M311kj[i][3], M311kj[i][4], M311kj[i][0], M311kj[i][2], M311kj[i][7], M311kj[i][8], "E");
                                 float STE = Float.parseFloat(Stok0) - Float.parseFloat(M311kj[i][1]);
                                 String STEF = dfkj.format(STE);
-
                                 ACC_Stock.ObtenerInstancia().ActualizarTras313(M311kj[i][3], M311kj[i][4], M311kj[i][0], M311kj[i][2], STEF, M311kj[i][7], M311kj[i][8], "E");
                             } else {
                                 origenkj = ACC_Stock.ObtenerInstancia().StockLibre(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4]) + Double.parseDouble(M311kj[i][1]);
-                                destinokj = ACC_Stock.ObtenerInstancia().StockLibreT(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4]) - Double.parseDouble(M311kj[i][1]);
+                                destinokj = ACC_Stock.ObtenerInstancia().GetStockTraslado(M311kj[i][2], M311kj[i][0], M311kj[i][3], M311kj[i][4]) - Double.parseDouble(M311kj[i][1]);
                                 orikj = dfkj.format(origenkj);
                                 deskj = dfkj.format(destinokj);
                                 //Oriden
                                 ACC_Stock.ObtenerInstancia().ActualizaInv(M311kj[i][2], M311kj[i][0], M311kj[i][3], orikj, M311kj[i][4]);
                                 //Destino
-                                ACC_Stock.ObtenerInstancia().ActualizaInvT(M311kj[i][2], M311kj[i][0], M311kj[i][3], deskj, M311kj[i][4]);
+                                ACC_Stock.ObtenerInstancia().ActualizaInvTraslado(M311kj[i][2], M311kj[i][0], M311kj[i][3], deskj, M311kj[i][4]);
 
                                 //// Stock Transferencia 
                                 String Stok1 = ACC_Stock.ObtenerInstancia().obtenersotcktras315(M311kj[i][3], M311kj[i][4], M311kj[i][0], M311kj[i][2], "", "", "");
@@ -1026,7 +1032,9 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     }
                     break;
                 case "Movimiento301":
-                    DecimalFormat dft = new DecimalFormat("#.000");
+                    DecimalFormatSymbols simbol301 = new DecimalFormatSymbols();
+                    simbol301.setDecimalSeparator('.');
+                    DecimalFormat dft = new DecimalFormat("0.000", simbol301);
                     String orit,
                      dest;
                     Double origent,
