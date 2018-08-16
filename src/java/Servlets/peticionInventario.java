@@ -136,17 +136,19 @@ public class peticionInventario extends HttpServlet {
                     }
                     break;
                 case "ConsultarLote":
-                    ArrayList<stock> lo = ACC_Stock.ObtenerInstancia().StockCargarLote(lan);
+                    ArrayList<stock> lo = ACC_Stock.ObtenerInstancia().StockCargarLote(lan,material);
                     if (lo.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < lo.size(); i++) {
                             out.println("<tr ondblclick=\"Select('" + lo.get(i).getLote() + "','lote','VentanaModalLote','','','')\">");
-                            out.println("<td>" + lo.get(i).getLote() + "</td>");
-                            out.println("<td>" + lo.get(i).getAlmacen() + "</td>");
-                            out.println("<td>" + lo.get(i).getMaterial() + "</td>");
-                            out.println("<td>" + lo.get(i).getDescripcion() + "</td>");
-                            out.println("<td>" + lo.get(i).getCentro() + "</td>");
+                            out.println("<td style=\"width: 15%;\">" + lo.get(i).getLote() + "</td>");
+                            out.println("<td style=\"width: 15%;\">" + lo.get(i).getNum_doc() + "</td>");
+                            out.println("<td style=\"width: 10%;\">" + lo.get(i).getPos_doc() + "</td>");
+                            out.println("<td style=\"width: 10%;\">" + lo.get(i).getMaterial() + "</td>");
+                            out.println("<td style=\"width: 30%; text-align: left;\">" + lo.get(i).getDescripcion() + "</td>");
+                            out.println("<td style=\"width: 10%;\">" + lo.get(i).getCentro() + "</td>");
+                            out.println("<td style=\"width: 10%;\">" + lo.get(i).getAlmacen() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
