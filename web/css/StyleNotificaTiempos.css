@@ -303,7 +303,7 @@ and open the template in the editor.
     color: #000000;
     display:none;
 }
-#handleAv2, #handleAv4{
+#handleAv2, #handleAv4, #handleAv5{
     font-size: 0.8em;
     margin-left: -2px;
     height: 15%;
