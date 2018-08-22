@@ -312,6 +312,18 @@
 
             </div>
         </div>
+        <!--Nueva ventana de aviso mensaje PP02-->
+        <div id="ventanaAvisoPP02" class="VenAvisoss">
+            <div id="handleAv5"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NPMInformacion_PP"));%></label><div class="BotonCerrar_Matc" onclick="cerravisosPP02();"><label >X</label></div></div>
+            <div class="imgeninfo"><IMG SRC="images/S_B_HINT.gif"  ALT="Info"></div>
+            <div class="ContenidoAv">
+                <br>
+                <label id="etavv">Operación PP02 es trabajo externo revisar en SAP.</label>
+            </div>
+            <div class="BotenAv">
+                <button id="FinalizarSIDoc" onclick="cerravisosPP02()"><img src="images/palomal.png"/> </button>
+            </div>
+        </div>
 
         <div id="ventanaavis3" class="VenAvisoss">
             <div id="handleAv4"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.NPMInformacion_PP"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('ventanaavis3', '');"><label >X</label></div></div>
@@ -504,7 +516,7 @@
                 <button id="btnCld3" class="btnCalidad3" type="submit" onclick="EliminaFila()"></button>
             </div>
             <div class="Botpm">
-                <button onclick="ajustaCantidades(0);">Propuesto</button>
+                <button onclick="ajustaCantidades(0);"> <img style="height: 15px;" src="images/montar.png"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Propuesto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
                 <button style="" onclick="ConsMaterial();" > <img style="height:15px;" src="images/cosma2.png" /> <%out.println(po.getProperty("etiqueta.NPMConsumoMate_PP"));%></button>
                 <button onclick="cerraventabs('ventaPM01')" ><img  src="images/S_B_CANC.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%out.println(po.getProperty("etiqueta.NPMFinaliproce_PP"));%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
             </div> 
@@ -537,6 +549,10 @@
                 function cerravisos() {
                     $("#etav").html("<%=NPMAvisoPant%>");
                     $("#ventanaavis").css("display", "none");
+                }
+                function cerravisosPP02() {
+//                    $("#etavv").html("<%=NPMAvisoPant%>");
+                    $("#ventanaAvisoPP02").css("display", "none");
                 }
                 function checkDec(num, tam) {
                     var limit;
