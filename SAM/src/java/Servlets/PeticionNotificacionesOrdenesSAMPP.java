@@ -454,7 +454,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                         out.println("<tr " + color + ">"
                                 + input
                                 + "<td id=\"opeNumOrd" + opp + "\">" + opeO.get(opp).getNum_orden() + ""
-                                + "<input type=\"text\" name=\"bxStOrd2\" value=\"" + status + "\" hidden></td>"
+                                + "<input type=\"text\" class=\"clStOrd2\" name=\"bxStOrd2\" value=\"" + status + "\" hidden></td>"
                                 + "<input type=\"text\" name=\"bxStOrd\" value=\"" + opeO.get(opp).getStatus_orden() + "\" hidden></td>"
                                 + "<td id=\"opeTxtB" + opp + "\">" + opeO.get(opp).getTexto_breve_operacion() + "</td>"
                                 + "<td id=\"opeNumOpe" + opp + "\">" + opeO.get(opp).getNum_operacion() + "</td>"
