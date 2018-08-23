@@ -290,8 +290,7 @@ function validarCantidades() {
     }
     if (op !== "PP02") {
         if (st2 !== "") {
-            if (st2 !== "INIC" && ops !== "PP02" || st3 !== "INIC") {
-                alert(ops);
+            if (st2 !== "INIC" && ops !== "PP02" || st3 !== "INIC") {                
                 if (ops == "PP02")
                 {
                     $('#msg').html("Debe iniciar la operación " + operacion2);
