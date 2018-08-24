@@ -67,7 +67,7 @@ public class pruebasServlet extends HttpServlet {
                     Descripcion                    
                     };                    
                     String ip =  Pruebas_Test.ObtenerInstancia().getImp(PtoTrabajo);
-                    String iplocal = "ZDesigner GK420t Tester";                    
+                    String iplocal = "\\\\192.168.0.9\\Impresora YISUS";                    
                    int res =  Pruebas_Test.ObtenerInstancia().PrintDoc(send, iplocal);
                    out.println(res);
                     break;
