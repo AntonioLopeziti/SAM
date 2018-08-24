@@ -131,7 +131,7 @@
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script src="js/TimeEndSession.js" type="text/javascript"></script>
         <script src="js/VisualizarStockMateriales.js"></script> 
-        <title><%out.println(po.getProperty("etiqueta.STOCKnventario_Title"));%></title>
+        <title><%out.println(po.getProperty("etiqueta.rsm_Titulo_MM"));%></title>
     </head>
     <body>
         <div id="main-header">
@@ -148,7 +148,7 @@
             <input id="finalizar" type="image" style="margin-bottom: -1px;" src="images/cance.PNG" onclick="finali();"/>
             <input  id="cancelar" type="image" src="images/cancelaOFF.png" disabled/>
             <div class="titulo">
-                <h1><%out.println(po.getProperty("etiqueta.STOCKnventario_Title"));%></h1>
+                <h1><%out.println(po.getProperty("etiqueta.rsm_Titulo_MM"));%></h1>
             </div>
         </div>            
         <div class="contenido">
