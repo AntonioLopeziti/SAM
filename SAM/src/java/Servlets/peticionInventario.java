@@ -365,6 +365,74 @@ public class peticionInventario extends HttpServlet {
                             out.println("</section>");
                             break;
                     }
+                case "CargarTablaReserva":
+                    Properties prop = new Properties();
+                    prop.load(getServletContext().getResourceAsStream("/WEB-INF/Language" + lan + ".properties"));
+                    String mate = prop.getProperty("etiqueta.GralMaterialAll");
+                    String Desc = prop.getProperty("etiqueta.GralDescripcion");
+                    String Alma = prop.getProperty("etiqueta.GralAlmacenAll");
+                    String Cent = prop.getProperty("etiqueta.GralCentroAll");
+                    String lot = prop.getProperty("etiqueta.STOCKNumLote");
+                    String umn = prop.getProperty("etiqueta.CSPUM");
+                    String gal = prop.getProperty("etiqueta.STOCKGeupoArtc");
+                    String stoklibr = prop.getProperty("etiqueta.STOCKLibreUtili");
+                    String stoktra = prop.getProperty("etiqueta.STOCKStocktras");
+
+                    String data2[] = {lan, material, almacen, centro};
+                            out.println("<section class=\"SecHead\">");
+                            out.println("<table id=\"TabHead\">");
+                            out.println("<thead>");
+                            out.println("<tr>");
+                            out.println("<td>" + mate + "</td>");
+                            out.println("<td>" + Desc + "</td>");
+                            out.println("<td>" + Alma + "</td>");
+                            out.println("<td>" + Cent + "</td>");
+                            out.println("<td>" + lot + "</td>");
+                            out.println("<td>" + umn + "</td>");
+                            out.println("<td>" + gal + "</td>");
+                            out.println("<td> Stk.E </td>");
+                            out.println("<td>" + stoklibr + "</td>");
+                            out.println("<td>" + stoktra + "</td>");
+                            out.println("<td> Num.Doc. </td>");
+                            out.println("<td> Pos. </td>");
+                            out.println("</tr>");
+                            out.println("</thead>");
+                            out.println("</table>");
+                            out.println("</section>");
+                            out.println("<section class=\"SecBody\" id=\"SecCuerpo\">");
+                            out.println("<table id=\"TabBody\">");
+                            for (stock st : ACC_Stock.ObtenerInstancia().StockCargarQueryTodoReservas(data2)) {
+                                out.println("<tr>");
+                                out.println("<td>" + st.getMaterial() + "</td>");
+                                out.println("<td>" + st.getDescripcion() + "</td>");
+                                out.println("<td>" + st.getAlmacen() + "</td>");
+                                out.println("<td>" + st.getCentro() + "</td>");
+                                out.println("<td>" + st.getLote() + "</td>");
+                                out.println("<td>" + st.getUnidad_medida() + "</td>");
+                                out.println("<td>" + st.getGrupoArticulos() + "</td>");
+                                out.println("<td>" + st.getIndicador_se() + "</td>");
+                                out.println("<td>" + st.getStocklibre_utilizacion() + "</td>");
+                                out.println("<td>" + st.getStock_traslado() + "</td>");
+                                out.println("<td>" + st.getNum_doc() + "</td>");
+                                out.println("<td>" + st.getPos_doc() + "</td>");
+                                out.println("</tr>");
+                            }
+                            out.println("<tr class=\"ocultar\">");
+                            out.println("<td>00000000000000</td>");//12
+                            out.println("<td>0000000000000000000000000000000000</td>");//40
+                            out.println("<td>00000000000</td>");//6
+                            out.println("<td>00000000000</td>");//12
+                            out.println("<td>000000000000000</td>");//12
+                            out.println("<td>000000000</td>");//12
+                            out.println("<td>0000000000000000</td>");//12
+                            out.println("<td>000000</td>");//12
+                            out.println("<td>0000000000000</td>");//12
+                            out.println("<td>0000000000000</td>");//12
+                            out.println("<td>0000000000000</td>");//12
+                            out.println("<td>0000000000</td>");//12
+                            out.println("</tr>");
+                            out.println("</table>");
+                            out.println("</section>");
                     break;
             }
         }
