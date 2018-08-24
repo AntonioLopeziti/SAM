@@ -256,6 +256,7 @@
         String gestMant_NPP_Vis = verificarP(p.charAt(128));            // GestiÃ³n Mantenimiento Notificaciones PP1 Visualizar
         String gestCome_Fljdocum = verificarP(p.charAt(129));           // Gestion Comercial Flujo de Dcoumentos
         String gestCome_Fljdeudores = verificarP(p.charAt(130));           // Gestion Comercial Flujo de Deudores
+        String gestMat_Stockmat = verificarP(p.charAt(131));                //Reporte stock de material
     %>
 
     <head>
@@ -398,7 +399,8 @@
                                                     <li style="display: <%=gestMat_GSMov_EntSer%>"><a href="PedidosServicioExterno.jsp"><%out.println(po.getProperty("etiqueta.GestionStockMovimEntServicios_menu"));%></a></li>
                                                 </ul>
                                             </li>
-                                            <li class="current" style="display: <%=gestMat_GSStockM%>"><a href="VisualizarStockMaterial.jsp"><%out.println(po.getProperty("etiqueta.GestionStockStockMaterial_menu"));%></a>     
+                                            <li class="current" style="display: <%=gestMat_GSStockM%>"><a href="VisualizarStockMaterial.jsp"><%out.println(po.getProperty("etiqueta.GestionStockStockMaterial_menu"));%></a>  
+                                                <li class="current" style="display: <%=gestMat_GSStockM%>"><a href="ReporteStockMaterial.jsp"><%out.println(po.getProperty("etiqueta.rsm_TituloMenu_MM"));%></a> 
                                             </li>
                                         </ul>
                                     </li>
