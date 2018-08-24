@@ -296,7 +296,30 @@ public class ACC_Stock {
         }
         return ban;
     }
-
+    public int StockValidarQueryTodoReservas(String d[]) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        ResultSet rs;
+        int ban = 0;
+        String sql = "{call MM.InventarioReservas_ConsultaTodo(?,?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, d[0]);
+            ps.setString(2, d[1]);
+            ps.setString(3, d[2]);
+            ps.setString(4, d[3]);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ban = 1;
+            }
+        } catch (Exception e) {
+            System.out.println("Error en StockValidarQueryTodo, ACC_Stock por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ban;
+    }
     public int StockValidarQuerySuma(String d[]) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -390,7 +413,43 @@ public class ACC_Stock {
         }
         return st;
     }
-
+    public ArrayList<stock> StockCargarQueryTodoReservas(String d[]) {
+        ArrayList<stock> st = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "{call MM.InventarioReservas_ConsultaTodo(?,?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, d[0]);
+            ps.setString(2, d[1]);
+            ps.setString(3, d[2]);
+            ps.setString(4, d[3]);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                stock s = new stock();
+                s.setMaterial(rs.getString("material"));
+                s.setDescripcion(rs.getString("descripcion_" + d[0]));
+                s.setAlmacen(rs.getString("almacen"));
+                s.setCentro(rs.getString("centro"));
+                s.setLote(rs.getString("lote"));
+                s.setUnidad_medida(rs.getString("unidad_medida"));
+                s.setGrupoArticulos(rs.getString("grupo_articulos"));
+                s.setStocklibre_utilizacion(rs.getString("stocklibre_utilizacion"));
+                s.setStock_traslado(rs.getString("stock_traslado"));
+                s.setNum_doc(rs.getString(10));
+                s.setPos_doc(rs.getString(11));
+                s.setIndicador_se(rs.getString(12));
+                st.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en StockValidarQueryTodo, ACC_Stock por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return st;
+    }
     public ArrayList<stock> StockCargarQuerySuma(String d[]) {
         ArrayList<stock> st = new ArrayList<>();
         Conexion cnx = new Conexion();
