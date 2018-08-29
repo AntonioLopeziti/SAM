@@ -76,6 +76,32 @@ public class peticionInventario extends HttpServlet {
                         out.println(0);
                     }
                     break;
+                    case "ConsultaMaterialesStock":
+                    ArrayList<stock> mater = ACC_Stock.ObtenerInstancia().CargarMaterialesStock(lan, v1, v2);
+                    if (mater.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        if (v3.length() > 0) {
+                            for (int i = 0; i < Integer.parseInt(v3); i++) {
+                                out.println("<tr ondblclick=\"Select('" + mater.get(i).getMaterial() + "','material','VentanaModalMaterial','BuscarParamMaterial','ConsultaTablaMaterial','namemate')\">");
+                                out.println("<td>" + mater.get(i).getMaterial() + "</td>");
+                                out.println("<td>" + mater.get(i).getDescripcion() + "</td>");
+                                out.println("</tr>");
+                            }
+                        } else {
+                            for (int i = 0; i < mater.size(); i++) {
+                                out.println("<tr ondblclick=\"Select('" + mater.get(i).getMaterial() + "','material','VentanaModalMaterial','BuscarParamMaterial','ConsultaTablaMaterial','namemate')\">");
+                                out.println("<td>" + mater.get(i).getMaterial() + "</td>");
+                                out.println("<td>" + mater.get(i).getDescripcion() + "</td>");
+                                out.println("</tr>");
+                            }
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println(0);
+                    }
+                    break;
                 case "ConsultaGrupoArticulo":
                     ArrayList<stock> ga = ACC_Stock.ObtenerInstancia().StockCargarGArticulo(lan, v1, v2);
                     if (ga.size() > 0) {
