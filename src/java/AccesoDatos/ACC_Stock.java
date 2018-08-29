@@ -52,7 +52,32 @@ public class ACC_Stock {
         }
         return inv;
     }
-
+    public ArrayList<stock> CargarMaterialesStock(String lan, String mat, String des) {
+        ArrayList<stock> inv = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "{call MM.Inventario_CargarMaterialesStock(?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, lan);
+            ps.setString(2, mat);
+            ps.setString(3, des);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                stock s = new stock();
+                s.setMaterial(rs.getString("material"));
+                s.setDescripcion(rs.getString("descripcion_" + lan));
+                inv.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en StrockCargarMateriales, ACC_Stock por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return inv;
+    }
     public ArrayList<stock> StockCargarGArticulo(String lan, String gar, String des) {
         ArrayList<stock> inv = new ArrayList<>();
         Conexion cnx = new Conexion();
