@@ -6,6 +6,7 @@
 package Servlets;
 
 import AccesoDatos.Consultas;
+import AccesoDatos.EnvioDatosEtiqueta;
 import AccesoDatos.Pruebas_Test;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -67,9 +68,13 @@ public class pruebasServlet extends HttpServlet {
                     Descripcion                    
                     };                    
                     String ip =  Pruebas_Test.ObtenerInstancia().getImp(PtoTrabajo);
-                    String iplocal = "\\\\192.168.0.9\\Impresora YISUS";                    
-                   int res =  Pruebas_Test.ObtenerInstancia().PrintDoc(send, iplocal);
-                   out.println(res);
+                    String iplocal = "\\\\192.168.0.9\\Impresora YISUS";    
+                    EnvioDatosEtiqueta en = new EnvioDatosEtiqueta();
+                    Pruebas_Test p = new Pruebas_Test();
+                    String code = p.ConvertCodeZebra(send);
+                    en.EnviarDatosSocket(code);
+//                   int res =  Pruebas_Test.ObtenerInstancia().PrintDoc(send, iplocal);
+//                   out.println(res);
                     break;
             }
         }
