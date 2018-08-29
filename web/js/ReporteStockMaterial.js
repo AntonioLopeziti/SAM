@@ -291,7 +291,7 @@ $(document).ready(function () {
         ocultarVentana("lote", "VentanaModalLote", "", "", '');
     });
     function ConsultaMateriales() {
-        var acc = "ConsultaMateriales";
+        var acc = "ConsultaMaterialesStock";
         $.ajax({
             async: false,
             type: 'GET',
