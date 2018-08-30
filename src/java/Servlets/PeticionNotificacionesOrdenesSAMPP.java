@@ -607,7 +607,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     String env = CodigoEnviar + "<>" + Imp;
                     EnvioDatosEtiqueta en = new EnvioDatosEtiqueta();
                     String rs = en.EnviarDatosSocket(env, Ip);
-                    out.println(rs);
+                    out.println(Integer.parseInt(rs));
 //
 //                    Date date = new Date();
 //                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
