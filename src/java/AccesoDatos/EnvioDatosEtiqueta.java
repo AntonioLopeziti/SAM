@@ -14,19 +14,23 @@ import java.io.*;
  */
 public class EnvioDatosEtiqueta {
 
-    final String IPHost = "192.168.0.9";
     final int port = 2500;
     Socket socket;
     DataOutputStream salida;
     DataInputStream entrada;
 
-    public void EnviarDatosSocket(String datos) {
+    public String EnviarDatosSocket(String datos, String IP) {
+        String res = "0";
         try {
-            Socket sc = new Socket(IPHost, port);
+            Socket sc = new Socket(IP, port);
             salida = new DataOutputStream(sc.getOutputStream());
             salida.writeUTF(datos);
+            entrada = new DataInputStream(sc.getInputStream());
+            res = (String) entrada.readUTF();
+            System.out.println(res);
         } catch (Exception e) {
         }
+        return res;
     }
 
 }
