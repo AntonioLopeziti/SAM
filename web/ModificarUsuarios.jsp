@@ -139,6 +139,7 @@
         String CorreoInv = po.getProperty("etiqueta.CorrNoVal");
         String flujoDoc = "Flujo de documentos";
         String flujoDeu = "Saldo de clientes";
+        String RporteStock1000 = "Reporte Almacén 1000";
     %>
     <%!
         String verificarP(char per) {
@@ -530,7 +531,8 @@
                                                         {title: '<%=MovEntSer_m%>', key: "gestMat_GesStk_Movim_EntSer"}
                                                     ]
                                                 },
-                                                {title: '<%=StkMov_m%>', key: "gestMat_GesStk_StkMat"}
+                                                {title: '<%=StkMov_m%>', key: "gestMat_GesStk_StkMat"},
+                                                {title: '<%=RporteStock1000%>', key: "gestMat_GesStk_Repor1000"}
                                             ]}
                                     ]},
                                 {title: 'Gest.Comercial', key: "gestCom", expand: true,
@@ -634,7 +636,8 @@
                                                 {title: 'Monitor PP', key: "gestProd_NotTi_MonPP"},
                                                 {title: 'Notifica Tiempos', key: "gestProd_NotTi_NotTi"},
                                                 {title: 'Reporte de Notificaciones', key: "gestProd_NotTi_RepBot"},
-                                                {title: 'Reporte Estatus', key: "gestProd_NotTi_RepStat"}
+                                                {title: 'Reporte Estatus', key: "gestProd_NotTi_RepStat"},
+                                                {title: 'Reporte Etiquetas', key: "gestMat_GesStk_ReporEtiquetas"}
                                             ]},
                                         {title: 'Ordenes PP', key: "gestProd_OrdPP", expand: true,
                                             children: [
@@ -811,6 +814,8 @@
                     getPermission("gestProd_NotPP_vis", p.charAt(128)); // // G. Produccion - Notificaciones PP - Visualizar    
                     getPermission("gestCome_Fljdocum", p.charAt(129)); // // G. Comercial - Flujo de documentos   
                     getPermission("gestCome_FljDeudores", p.charAt(130)); // // G. Comercial - Flujo deudores   
+                    getPermission("gestMat_GesStk_Repor1000", p.charAt(131)); // // G. Materiales - Reporte Stock Alamcen 1000   
+                    getPermission("gestMat_GesStk_ReporEtiquetas", p.charAt(132)); // // G. Produccion - Reporte Etiquetas 
 
 
                 }
@@ -949,6 +954,8 @@
             key = key + getCheckPermission("gestProd_NotPP_vis"); // 128 G. Produccion - Notificaciones PP - Visualizar                    
             key = key + getCheckPermission("gestCome_Fljdocum"); // 129 G. Comercial - Flujo de documentos                   
             key = key + getCheckPermission("gestCome_FljDeudores"); // 130 G. Comercial - Flujo deudores             
+            key = key + getCheckPermission("gestMat_GesStk_Repor1000"); // 131 G. Materiales - Reporte Almacen 1000             
+            key = key + getCheckPermission("gestMat_GesStk_ReporEtiquetas"); // 132 G. Produccion - Reporte Etiquetas           
 
             return key;
         }
