@@ -135,6 +135,7 @@
         String GesProd = "Gestión Producción";
         String DatosM = "Datos Maestros";
         String DatosMMat = "Materiales";
+        String RporteStock1000 = "Reporte Almacén 1000";
     %>
     <%!
         String verificarP(char per) {
@@ -480,7 +481,8 @@
                                                         {title: '<%=MovEntSer_m%>', key: "gestMat_GesStk_Movim_EntSer"}
                                                     ]
                                                 },
-                                                {title: '<%=StkMov_m%>', key: "gestMat_GesStk_StkMat"}
+                                                {title: '<%=StkMov_m%>', key: "gestMat_GesStk_StkMat"},
+                                                {title: '<%=RporteStock1000%>', key: "gestMat_GesStk_Repor1000"}
                                             ]}
                                     ]},
                                 {title: '<%=GesComer%>', key: "gestCom", expand: true,
@@ -497,8 +499,8 @@
                                                 {title: '<%=modif_m%>', key: "gestCom_Ped_mod"},
                                                 {title: '<%=visua_m%>', key: "gestCom_Ped_vis"}
                                             ]},
-                                                {title: '<%=flujoDoc%>', key: "gestCome_Fljdocum"},
-                                                {title: '<%=flujoDeu%>', key: "gestCome_FljDeudores"}
+                                        {title: '<%=flujoDoc%>', key: "gestCome_Fljdocum"},
+                                        {title: '<%=flujoDeu%>', key: "gestCome_FljDeudores"}
                                     ]},
                                 {title: '<%=GesMan_m%>', key: "gestMant", expand: true,
                                     children: [
@@ -586,7 +588,8 @@
                                                 {title: 'Monitor PP', key: "gestProd_NotTi_MonPP"},
                                                 {title: 'Notifica Tiempos', key: "gestProd_NotTi_NotTi"},
                                                 {title: 'Reporte de Notificaciones', key: "gestProd_NotTi_RepBot"},
-                                                {title: 'Reporte Estatus', key: "gestProd_NotTi_RepStat"}
+                                                {title: 'Reporte Estatus', key: "gestProd_NotTi_RepStat"},
+                                                {title: 'Reporte Etiquetas', key: "gestMat_GesStk_ReporEtiquetas"}
                                             ]},
                                         {title: 'Ordenes PP', key: "gestProd_OrdPP", expand: true,
                                             children: [
@@ -762,6 +765,8 @@
                     getPermission("gestProd_NotPP_vis", p.charAt(128)); // // G. Produccion - Notificaciones PP - Visualizar                    
                     getPermission("gestCome_Fljdocum", p.charAt(129)); // // G. Comercial - Flujo de documentos                    
                     getPermission("gestCome_FljDeudores", p.charAt(130)); // // G. Comercial - Flujo de documentos                    
+                    getPermission("gestMat_GesStk_Repor1000", p.charAt(131)); // // G. Materiales - Reporte Almacen 1000                    
+                    getPermission("gestMat_GesStk_ReporEtiquetas", p.charAt(132)); // // G. Produccion - Reporte Etiquetas                    
                 }
             });
         }
