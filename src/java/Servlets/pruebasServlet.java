@@ -72,7 +72,7 @@ public class pruebasServlet extends HttpServlet {
                     EnvioDatosEtiqueta en = new EnvioDatosEtiqueta();
                     Pruebas_Test p = new Pruebas_Test();
                     String code = p.ConvertCodeZebra(send);
-                    en.EnviarDatosSocket(code);
+//                    en.EnviarDatosSocket(code);
 //                   int res =  Pruebas_Test.ObtenerInstancia().PrintDoc(send, iplocal);
 //                   out.println(res);
                     break;
