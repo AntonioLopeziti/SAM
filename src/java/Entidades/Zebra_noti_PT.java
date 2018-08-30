@@ -23,6 +23,35 @@ public class Zebra_noti_PT {
     String fol_sam = "";//v7
     String um = "";
     String centro = "";
+    String ruta = "";
+    String stock = "";
+    String usuario = "";
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+
+    public String getStock() {
+        return stock;
+    }
+
+    public void setStock(String stock) {
+        this.stock = stock;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 
     public String getCentro() {
         return centro;
