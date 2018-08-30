@@ -135,7 +135,7 @@
             function ponerUsuarioDefault() {
                 var us = usuario;
                 document.getElementById("NoPers").value = us;
-                
+
 //                $('#NoPers').val(usuario);
             }
         </script>
@@ -542,6 +542,14 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="Windowmsg" class="VentanaModalMensajes">
+            <div id="handleMsg"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.CSPInfom"));%></label></div>
+            <div class="imginfo"><IMG id="iocnomsgso" ALT="Info"></div>
+            <div class="InfoMensaje"><label id="msgss"></label></div>
+            <div class="okmsg">
+                <input id="CloMsg" type="image" src="images/HR_ok.png" style="margin-right:-4%; cursor: pointer;"/>   
             </div>
         </div>
         <footer>
