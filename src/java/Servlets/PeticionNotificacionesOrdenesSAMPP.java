@@ -15,6 +15,7 @@ import AccesoDatos.ACC_Material;
 import AccesoDatos.ACC_Pm_operaciones_notificaciones;
 import AccesoDatos.ACC_Zebra;
 import AccesoDatos.Consultas;
+import AccesoDatos.EnvioDatosEtiqueta;
 import Entidades.ControlListaOrdenes;
 import Entidades.cabecera_ordenes_crea;
 import Entidades.ordenes_pp_notificaciones;
@@ -74,6 +75,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             String Idioma = (String) session.getAttribute("Idioma");
+            String USUARIO = (String) session.getAttribute("Usuario");
             String ord = request.getParameter("ord");
             String acc = request.getParameter("acc");
 
@@ -117,6 +119,19 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             folios xx = ACC_Folios.ObtenerIstancia().ObtenerDatosFolios("XX");
             double ccnt = 0.00;
             String fol = "ES";
+
+            ////// ParametrosEtiqueta
+            String CLIENTE = request.getParameter("CLIENTE");
+            String OPERACION = request.getParameter("OPERACION");
+            String ORDEN = request.getParameter("ORDEN");
+            String SAM = request.getParameter("SAM");
+            String LOTE = request.getParameter("LOTE");
+            String CENTRO = request.getParameter("CENTRO");
+            String ANCHO = request.getParameter("ANCHO");
+            String CANTIDAD = request.getParameter("CANTIDAD");
+            String UM = request.getParameter("UM");
+            String DESCRIPCION = request.getParameter("DESCRIPCION");
+            String MATERIAL = request.getParameter("MATERIAL");
             switch (acc) {
                 case "guardaCabecera":
                     String fl = "PP" + folioActual.getFolioActual();
@@ -367,7 +382,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                             + "<tbody>");
                     for (con = 0; con < tno.size(); con++) {
                         String can = tno.get(con).getCantidad_restante();
-                        if(tno.get(con).getCl_mov().equals("101")){
+                        if (tno.get(con).getCl_mov().equals("101")) {
                             can = tno.get(con).getCantidad2();
                         }
                         out.println("<tr>"
@@ -557,29 +572,60 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     out.println(ACC_Ordenes_pp_notificaciones.ObtenerInstancia().GetFIoper(v1, v2));
                     break;
                 case "imprimePT":
-                    Zebra_noti_PT z1 = ACC_Zebra.ObtenerInstancia().DatosFaltantesCabecera(v1);
-                    Zebra_noti_PT z2 = ACC_Zebra.ObtenerInstancia().DatosFaltantesPosiciones(v1, v6);
-
+                    Zebra_noti_PT z1 = ACC_Zebra.ObtenerInstancia().DatosFaltantesCabecera(ORDEN);
+                    String PUESTOT = ACC_Zebra.ObtenerInstancia().DatosFaltantesPosiciones(ORDEN, OPERACION);
                     Zebra_noti_PT zb = new Zebra_noti_PT();
-
-                    Date date = new Date();
-                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-                    zb.setPuesto_trabajo(z2.getPuesto_trabajo());
-                    zb.setDescripcion(v3);//Cambiar a nuevo Campo
-                    zb.setFecha(dateFormat.format(date));
+                    zb.setOrden(ORDEN);
+                    zb.setPuesto_trabajo(PUESTOT);
+                    zb.setFol_sam(SAM);
+                    zb.setLote(LOTE);
+                    zb.setCentro(CENTRO);
+                    zb.setAncho(ANCHO);
+                    zb.setFecha(fechaActual.replace("-", "/"));
                     zb.setHora(horaActual);
-                    zb.setAncho(v10);
-                    zb.setOrden(v1);
-                    zb.setLote(v4);
-                    zb.setCantidad(Double.parseDouble(v5) + "0");
-//                    zb.setCantidad("999999.999");
-                    zb.setCliente(z1.getCliente());
-                    zb.setNro_material(v2);
-                    zb.setFol_sam(v7);
-                    zb.setCentro(v8);
-                    zb.setUm(v9);
+                    zb.setCantidad(CANTIDAD);
+                    zb.setUm(UM);
+                    zb.setCliente(CLIENTE);
+                    zb.setDescripcion(DESCRIPCION);
+                    zb.setNro_material(MATERIAL);
+                    zb.setRuta(z1.getRuta());
+                    zb.setStock(z1.getStock());
+                    zb.setUsuario(USUARIO);
                     ACC_Zebra.ObtenerInstancia().guardaEtiquetaDB(zb);
+                    String[] prop = ACC_Zebra.ObtenerInstancia().getImp(PUESTOT);
+                    String Dir = prop[0];
+                    String tipo = prop[1];
+                    String[] pa = Dir.split("-");
+                    String Ip = pa[0];
+                    String Imp = pa[1];
+                    String CodigoEnviar = "";
+                    if (tipo.trim().equals("1")) {
+                        CodigoEnviar = ACC_Zebra.ObtenerInstancia().ConvertCodeZebraTLP(zb);
+                    } else {
+                        CodigoEnviar = ACC_Zebra.ObtenerInstancia().ConvertCodeZebra(zb);
+                    }
+                    String env = CodigoEnviar + "<>" + Imp;
+                    EnvioDatosEtiqueta en = new EnvioDatosEtiqueta();
+                    String rs = en.EnviarDatosSocket(env, Ip);
+                    out.println(rs);
+//
+//                    Date date = new Date();
+//                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//
+//                    zb.setPuesto_trabajo(z2.getPuesto_trabajo());
+//                    zb.setDescripcion(v3);//Cambiar a nuevo Campo
+//                    zb.setFecha(dateFormat.format(date));
+//                    zb.setHora(horaActual);
+//                    zb.setAncho(v10);
+//                    zb.setOrden(v1);
+//                    zb.setLote(v4);
+//                    zb.setCantidad(Double.parseDouble(v5) + "0");
+////                    zb.setCantidad("999999.999");
+//                    zb.setCliente(z1.getCliente());
+//                    zb.setNro_material(v2);
+//                    zb.setFol_sam(v7);
+//                    zb.setCentro(v8);
+//                    zb.setUm(v9);
 //                    ACC_Zebra.ObtenerInstancia().PrintTargetPT(zb);
                     break;
                 case "pp1prt1PP":
