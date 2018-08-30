@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 $(document).ready(function () {
+    $('#CloMsg').click(function () {
+        var BE = document.createElement('audio');
+        BE.src = "audio/sapsnd05.wav";
+        BE.play();
+        $('#Windowmsg').css('display', 'none');
+    });
     ponerUsuarioDefault();
     getCtrUsr();
     AjustarCabecera('TabHeadOpe', 'TabBodyOpe', 3, 'SecCuerpoOpe');
@@ -265,15 +271,15 @@ function validarCantidades() {
         if (ckOpe[i].checked) {
             op = $("#opeClavCon" + parseInt(ckOpe[i].value)).text();
             ops = $("#opeClavCon" + parseInt(ckOpe[i].value - 1)).text();
-            bn = true;            
+            bn = true;
             if (op !== "PP02") {
                 if (i > 0) {
                     st = bxSts[parseInt(ckOpe[i].value) - 1].value;
                     st2 = bxSts2[parseInt(ckOpe[i].value) - 1].value;
-                    st3 = $(".clStOrd2").val();                   
+                    st3 = $(".clStOrd2").val();
 //                    st3 = clSts[parseInt(ckOpe[i].value - 2)].value;
                     operacion = $("#opeNumOpe" + parseInt(ckOpe[i].value - 1)).text();
-                    operacion2 = $("#opeNumOpe" + parseInt(ckOpe[i].value - 2)).text();                 
+                    operacion2 = $("#opeNumOpe" + parseInt(ckOpe[i].value - 2)).text();
                 }
             }
         }
@@ -290,7 +296,7 @@ function validarCantidades() {
     }
     if (op !== "PP02") {
         if (st2 !== "") {
-            if (st2 !== "INIC" && ops !== "PP02" || st3 !== "INIC") {                
+            if (st2 !== "INIC" && ops !== "PP02" || st3 !== "INIC") {
                 if (ops == "PP02")
                 {
                     $('#msg').html("Debe iniciar la operación " + operacion2);
@@ -2053,16 +2059,16 @@ function Print_PT() {
     var acc = "imprimePT";
 
     if ($("#tdCmov0").text() == "101") {
-        var send = "&ORDEN=" + $("#OrdFab").val() 
-                + "&acc=" + acc 
-                + "&MATERIAL=" + $("#tdMat0").text() 
-                + "&DESCRIPCION=" + encodeURIComponent($("#tdDes0").text()) 
+        var send = "&ORDEN=" + $("#OrdFab").val()
+                + "&acc=" + acc
+                + "&MATERIAL=" + $("#tdMat0").text()
+                + "&DESCRIPCION=" + encodeURIComponent($("#tdDes0").text())
                 + "&LOTE=" + $("#bxLote0").val().toUpperCase()
                 + "&CLIENTE=" + $('#lblTextoLargo3').html()
-                + "&CANTIDAD=" + $("#bxcnt0").val() 
-                + "&OPERACION=" + $("#tdOpr0").text() 
-                + "&SAM=" + folio101 
-                + "&CENTRO=" + $("#tdCtr0").text() 
+                + "&CANTIDAD=" + $("#bxcnt0").val()
+                + "&OPERACION=" + $("#tdOpr0").text()
+                + "&SAM=" + folio101
+                + "&CENTRO=" + $("#tdCtr0").text()
                 + "&UM=" + $("#tdUM0").text()
                 + "&ANCHO=" + $("#bxanc0").val().replace("+", "%2b");
         $.ajax({
@@ -2073,7 +2079,32 @@ function Print_PT() {
             processData: true,
             data: send,
             success: function (data) {
-                alert(data);
+                var msg = "Error";
+                if (data == 0){
+                    msg = "Error en los servicios para impresión, verifique si esta conectada y/o encendida";
+                }
+                if (data == 1){
+                    msg = "No se pudo imprimir, se guardaron los datos revise en el reporte";
+                }
+                if (data == 2){
+                    msg = "La impresión fue correcta";
+                }
+                var ancho = 570;
+                var alto = 150;
+                var x = (screen.width / 2) - (ancho / 2);
+                var y = (screen.height / 2) - (alto / 2);
+                var ventana = $('#Windowmsg');
+                ventana.css({top: y + "px", left: x + "px"});
+                ventana.css('display', 'block');
+                var icon = $('#iocnomsgso');
+                icon.show();
+                icon.attr('src', "images/infoicono.PNG");
+                $('#msgss').html(msg);
+                var theHandle = document.getElementById("handleMsg");
+                var theRoot = document.getElementById("Windowmsg");
+                document.getElementById("CloMsg").focus();
+                Drag.init(theHandle, theRoot);
+//                borramsg();
             }
         });
     }
