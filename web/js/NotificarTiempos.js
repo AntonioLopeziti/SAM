@@ -1528,6 +1528,20 @@ function sujetoLote() {
         });
     }
 }
+function GeLote531() {
+    var lo = document.getElementsByName("bxlote");
+    var cl = document.getElementsByName("tdClaseM");
+    var mat = document.getElementsByName("tdMaterial");
+    for (i = 0; i < lo.length; i++) {
+        if (lo[i].disabled == false) {
+            if (cl[i].innerHTML === "531") {
+                lo[i].value = lo[0].value;
+                lo[i].disabled = true;
+            }
+        }
+
+    }
+}
 function obtenerLote() {
     var mat = document.getElementsByName("btnShowLot");
     var acc;
@@ -2021,6 +2035,7 @@ function guardaPos() {
                 if (i == mat.length - 1) {
 //                    guardaCabecera2();
                     Print_PT();
+                    Print_PT531();
                     ocultarVentana('ventaPM01', '');
 //                    $('#LimPantalla').trigger('click');
 //                    updateFolio();
@@ -2069,6 +2084,7 @@ function Print_PT() {
                 + "&OPERACION=" + $("#tdOpr0").text()
                 + "&SAM=" + folio101
                 + "&CENTRO=" + $("#tdCtr0").text()
+                + "&CLASE=" + $("#tdCmov0").text()
                 + "&UM=" + $("#tdUM0").text()
                 + "&ANCHO=" + $("#bxanc0").val().replace("+", "%2b");
         $.ajax({
@@ -2080,14 +2096,14 @@ function Print_PT() {
             data: send,
             success: function (data) {
                 var msg = "Error";
-                if (data == 0){
+                if (data == 0) {
                     msg = "Error en los servicios para impresión, verifique si esta conectada y/o encendida";
                 }
-                if (data == 1){
+                if (data == 1) {
                     msg = "No se pudo imprimir, se guardaron los datos revise en el reporte";
                 }
-                if (data == 2){
-                    msg = "La impresión fue correcta";
+                if (data == 2) {
+                    msg = "La impresión fue correcta, Etiqueta para mov 101";
                 }
                 var ancho = 570;
                 var alto = 150;
@@ -2108,6 +2124,66 @@ function Print_PT() {
             }
         });
     }
+}
+function Print_PT531() {
+    var acc = "imprimePT";
+    var mv = document.getElementsByName("tdClaseM");
+    var lot = document.getElementsByName("bxlote");
+    for (i = 0; i < mv.length; i++) {
+        if (mv[i].innerHTML === '531') {
+            if (lot[i].value.length > 0) {
+                var send = "&ORDEN=" + $("#OrdFab").val()
+                        + "&acc=" + acc
+                        + "&MATERIAL=" + $("#tdMat"+i).text()
+                        + "&DESCRIPCION=" + encodeURIComponent($("#tdDes0").text())
+                        + "&LOTE=" + $("#bxLote"+i).val().toUpperCase()
+                        + "&CLIENTE=" + $('#lblTextoLargo3').html()
+                        + "&CANTIDAD=" + $("#bxcnt"+i).val()
+                        + "&OPERACION=" + $("#tdOpr"+i).text()
+                        + "&SAM=" + folio101
+                        + "&CENTRO=" + $("#tdCtr"+i).text()
+                        + "&CLASE=" + $("#tdCmov"+i).text()
+                        + "&UM=" + $("#tdUM"+i).text()
+                        + "&ANCHO=" + $("#bxanc"+i).val().replace("+", "%2b");
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    url: "PeticionNotificacionesOrdenesSAMPP",
+                    contentType: "application/x-www-form-urlencoded",
+                    processData: true,
+                    data: send,
+                    success: function (data) {
+                        var msg = "Error";
+                        if (data == 0) {
+                            msg = "Error en los servicios para impresión, verifique si esta conectada y/o encendida";
+                        }
+                        if (data == 1) {
+                            msg = "No se pudo imprimir, se guardaron los datos revise en el reporte";
+                        }
+                        if (data == 2) {
+                            msg = "La impresión fue correcta, Etiqueta para mov 531";
+                        }
+                        var ancho = 570;
+                        var alto = 150;
+                        var x = (screen.width / 2) - (ancho / 2);
+                        var y = (screen.height / 2) - (alto / 2);
+                        var ventana = $('#Windowmsg');
+                        ventana.css({top: y + "px", left: x + "px"});
+                        ventana.css('display', 'block');
+                        var icon = $('#iocnomsgso');
+                        icon.show();
+                        icon.attr('src', "images/infoicono.PNG");
+                        $('#msgss').html(msg);
+                        var theHandle = document.getElementById("handleMsg");
+                        var theRoot = document.getElementById("Windowmsg");
+                        document.getElementById("CloMsg").focus();
+                        Drag.init(theHandle, theRoot);
+                    }
+                });
+            }
+        }
+    }
+    
 }
 function motivoRechazo() {
     if (document.getElementById("OrdFab").disabled == true) {
@@ -2503,6 +2579,7 @@ function finTiempos() {
                     document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
                     sujetoLote();
                     obtenerLote();
+                    GeLote531();
                     break;
                 case "PP01":
                     validarLlenado();
