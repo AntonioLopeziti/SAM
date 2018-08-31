@@ -259,7 +259,7 @@
                                     <td>Operación</td>
                                     <td>Puesto Trabajo</td>
                                     <td>Clave Control</td>
-                                    <td>Cantidad</td>
+                                    <td>Tiempo</td>
                                     <td>UM</td>
                                     <td>Centro</td>
                                 </tr>
