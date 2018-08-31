@@ -132,6 +132,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
             String UM = request.getParameter("UM");
             String DESCRIPCION = request.getParameter("DESCRIPCION");
             String MATERIAL = request.getParameter("MATERIAL");
+            String CLASE = request.getParameter("CLASE");
             switch (acc) {
                 case "guardaCabecera":
                     String fl = "PP" + folioActual.getFolioActual();
@@ -591,6 +592,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     zb.setRuta(z1.getRuta());
                     zb.setStock(z1.getStock());
                     zb.setUsuario(USUARIO);
+                    zb.setClmovi(CLASE);
                     ACC_Zebra.ObtenerInstancia().guardaEtiquetaDB(zb);
                     String[] prop = ACC_Zebra.ObtenerInstancia().getImp(PUESTOT);
                     String Dir = prop[0];
