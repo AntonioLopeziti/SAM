@@ -26,6 +26,16 @@ public class Zebra_noti_PT {
     String ruta = "";
     String stock = "";
     String usuario = "";
+    String clmovi = "";
+
+    public String getClmovi() {
+        return clmovi;
+    }
+
+    public void setClmovi(String clmovi) {
+        this.clmovi = clmovi;
+    }
+    
 
     public String getRuta() {
         return ruta;
