@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.print.Doc;
 import javax.print.DocFlavor;
 import javax.print.DocPrintJob;
@@ -347,6 +348,7 @@ public class ACC_Zebra {
                 + Concatedes
                 + "^XZ";
     }
+
     public String ConvertCodeZebraTLP(Zebra_noti_PT z) {
         String Concatedes = "";
         if (z.getDescripcion().length() < 70) {
@@ -357,7 +359,141 @@ public class ACC_Zebra {
                     + "^FT799,285^A0I,21,21^FB792,1,0^FH\\^FD" + z.getDescripcion().substring(0, 69).replace("°", "_C2_B0") + "^FS\n";
         }
         return "N\n"
-               +"A677,362,2,4,1,1,N,\"LEON01\"";
+                + "A677,362,2,4,1,1,N,\"LEON01\"";
     }
-    
+
+    public int ValidarDatos(String tipo, String variable) {
+        int ban = 0;
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{CALL  pp.ValidarDatosEtiqueta(?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, tipo);
+            ps.setString(2, variable);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ban = 1;
+            }
+        } catch (Exception e) {
+            System.err.println("Error por: " + e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ban;
+    }
+
+    public ArrayList<Zebra_noti_PT> ConsultaOrdenReporte() {
+        ArrayList<Zebra_noti_PT> ord = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call pp.ReporteEtiquetasConsultaOrden}";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Zebra_noti_PT o = new Zebra_noti_PT();
+                o.setOrden(rs.getString("num_orden"));
+                ord.add(o);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ord;
+    }
+
+    public ArrayList<Zebra_noti_PT> ConsultaSAMReporte() {
+        ArrayList<Zebra_noti_PT> ord = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call pp.ReporteEtiquetasConsultaFolioSAM}";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Zebra_noti_PT o = new Zebra_noti_PT();
+                o.setFol_sam(rs.getString("folio_sam"));
+                ord.add(o);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ord;
+    }
+
+    public ArrayList<Zebra_noti_PT> ConsultaPuestoReporte() {
+        ArrayList<Zebra_noti_PT> ord = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call pp.ReporteEtiquetasConsultaPuesto}";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Zebra_noti_PT o = new Zebra_noti_PT();
+                o.setPuesto_trabajo(rs.getString("puesto_trabajo"));
+                ord.add(o);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ord;
+    }
+
+    public ArrayList<Zebra_noti_PT> CargarTablaEtiqueta(String ord, String sam, String pto, String fecha) {
+        ArrayList<Zebra_noti_PT> orde = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "{call pp.ReporteEtiquetasCargarTabla(?,?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ord);
+            ps.setString(2, sam);
+            ps.setString(3, pto);
+            ps.setString(4, fecha);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Zebra_noti_PT o = new Zebra_noti_PT();
+                o.setOrden(rs.getString("num_orden"));
+                o.setFol_sam(rs.getString("folio_sam"));
+                o.setFecha(rs.getString("fecha"));
+                o.setHora(rs.getString("hora"));
+                o.setNro_material(rs.getString("material"));
+                o.setDescripcion(rs.getString("descripcion"));
+                o.setCliente(rs.getString("cliente"));
+                o.setCentro(rs.getString("centro"));
+                o.setLote(rs.getString("lote"));
+                o.setCantidad(rs.getString("cantidad"));
+                o.setUm(rs.getString("unidad_medida"));
+                o.setAncho(rs.getString("ancho"));
+                o.setRuta(rs.getString("ruta"));
+                o.setStock(rs.getString("stock"));
+                o.setUsuario(rs.getString("usuario"));
+                o.setPuesto_trabajo(rs.getString("puesto_trabajo"));
+                orde.add(o);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return orde;
+    }
+
 }
