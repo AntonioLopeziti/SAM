@@ -221,7 +221,7 @@ public class ACC_Zebra {
     public void guardaEtiquetaDB(Zebra_noti_PT zl) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
-        String query = "{CALL PP.guarda_etiquetaPT(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL PP.guarda_etiquetaPT(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, zl.getOrden());
@@ -241,6 +241,7 @@ public class ACC_Zebra {
             ps.setString(15, zl.getRuta());
             ps.setString(16, zl.getStock());
             ps.setString(17, zl.getUsuario());
+            ps.setString(18, zl.getClmovi());
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error por: " + e);
