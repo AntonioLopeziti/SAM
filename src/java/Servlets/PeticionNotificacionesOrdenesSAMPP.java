@@ -581,7 +581,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                     zb.setLote(LOTE);
                     zb.setCentro(CENTRO);
                     zb.setAncho(ANCHO);
-                    zb.setFecha(fechaActual.replace("-", "/"));
+                    zb.setFecha(fechaActual);
                     zb.setHora(horaActual);
                     zb.setCantidad(CANTIDAD);
                     zb.setUm(UM);
