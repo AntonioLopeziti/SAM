@@ -318,7 +318,7 @@ public class ACC_Zebra {
                 + "Q3MbxE+s+ecLk19GzzZcke6TkUNvPEk2OWVvkjrtr8ycRwaOMx90jHdfcYwLGUiWUfONproVKBPa2pt86lqeZXdMvpY3lx03rki/mv6xduwusD:C017\n"
                 + "^FT704,322^A0I,28,28^FB108,1,0^FH\\^FDPto Tbjo:^FS\n"
                 + "^FT424,368^A0I,27,26^FB79,1,0^FH\\^FDFECHA:^FS\n"
-                + "^FT334,369^A0I,27,26^FB120,1,0^FH\\^FD " + z.getFecha() + "^FS\n"
+                + "^FT334,369^A0I,27,26^FB120,1,0^FH\\^FD " + z.getFecha().replace("-", "/") + "^FS\n"
                 + //// Fecha
                 "^FT198,370^A0I,27,26^FB70,1,0^FH\\^FDHORA:^FS\n"
                 + "^FT114,370^A0I,27,26^FB94,1,0^FH\\^FD" + z.getHora() + "^FS\n"
