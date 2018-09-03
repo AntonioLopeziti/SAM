@@ -388,8 +388,8 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                         }
                         out.println("<tr>"
                                 + "<td><input type=\"checkbox\" name=\"ckMovMer\" value=\"" + con + "\"></td>"
-                                + "<td hidden><label id=\"tdDes" + con + "\">" + tno.get(con).getDescripcion() + "</label></td>"
-                                + "<td><label id=\"tdOpr" + con + "\">" + tno.get(con).getNum_operacion() + "</label></td>"
+                                + "<td hidden><label name=\"tdDescripcion\" id=\"tdDes" + con + "\">" + tno.get(con).getDescripcion() + "</label></td>"
+                                + "<td><label name=\"tdoperacion\" id=\"tdOpr" + con + "\">" + tno.get(con).getNum_operacion() + "</label></td>"
                                 + "<td><label name=\"tdMaterial\" id=\"tdMat" + con + "\">" + tno.get(con).getMaterial() + "</label></td>"
                                 + "<td><label id=\"tddmt" + con + "\">" + tno.get(con).getTxt_material() + "</label></td>"
                                 + "<td><input type=\"text\" class=\"bxMed\" id=\"bxcnt" + con + "\" name=\"bxcantidad\" maxlength=\"11\" onfocus=\"btnloteHide()\" onblur=\"this.value = checkDecc(this.value, 3);\" value=\"" + can + "\">"
