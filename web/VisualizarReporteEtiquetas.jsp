@@ -197,6 +197,7 @@
                                                 <td>Ancho</td>
                                                 <td>Ruta</td>
                                                 <td>Stock</td>
+                                                <td>Tpo.Mov.</td>
                                             </tr>
                                         </thead>
                                     </table>
