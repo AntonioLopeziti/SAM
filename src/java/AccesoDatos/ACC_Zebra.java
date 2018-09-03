@@ -487,6 +487,7 @@ public class ACC_Zebra {
                 o.setStock(rs.getString("stock"));
                 o.setUsuario(rs.getString("usuario"));
                 o.setPuesto_trabajo(rs.getString("puesto_trabajo"));
+                o.setClmovi(rs.getString("clase"));
                 orde.add(o);
             }
         } catch (Exception e) {
