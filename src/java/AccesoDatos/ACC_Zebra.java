@@ -353,14 +353,36 @@ public class ACC_Zebra {
     public String ConvertCodeZebraTLP(Zebra_noti_PT z) {
         String Concatedes = "";
         if (z.getDescripcion().length() < 70) {
-            Concatedes = "^FT799,253^A0I,21,21^FB793,1,0^FH\\^FD^FS\n"
-                    + "^FT799,285^A0I,21,21^FB792,1,0^FH\\^FD" + z.getDescripcion().substring(0, z.getDescripcion().length()).replace("°", "_C2_B0") + "^FS\n";
+            Concatedes = "A793,262,2,4,1,1,N,\"" + z.getDescripcion().substring(0, z.getDescripcion().length()).replace("°", "_C2_B0") + "\"";
         } else {
-            Concatedes = "^FT799,253^A0I,21,21^FB793,1,0^FH\\^FD" + z.getDescripcion().substring(69, z.getDescripcion().length()).replace("°", "_C2_B0") + "^FS\n"
-                    + "^FT799,285^A0I,21,21^FB792,1,0^FH\\^FD" + z.getDescripcion().substring(0, 69).replace("°", "_C2_B0") + "^FS\n";
+            Concatedes = "A793,262,2,4,1,1,N,\"" + z.getDescripcion().substring(69, z.getDescripcion().length()).replace("°", "_C2_B0") + "\""
+                    + "A793,290,2,4,1,1,N,\"" + z.getDescripcion().substring(0, 69).replace("°", "_C2_B0") + "\"";
         }
         return "N\n"
-                + "A677,362,2,4,1,1,N,\"LEON01\"";
+                + "A677,362,2,4,1,1,N,\"" + z.getRuta() + "\""
+                + "A784,362,2,4,1,1,N,\"" + z.getStock() + "\""
+                + "A633,328,2,4,1,1,N,\"" + z.getPuesto_trabajo() + "\""
+                + "A793,328,2,4,1,1,N,\"Pto.Tbjo:\""
+                + "A554,325,2,4,1,1,N,\"CANTIDAD:\""
+                + "A555,362,2,4,1,1,N,\"FECHA:\""
+                + "A446,363,2,4,1,1,N,\"" + z.getFecha() + "\""
+                + "A260,363,2,4,1,1,N,\"HORA:\""
+                + "A166,364,2,4,1,1,N,\"" + z.getHora() + "\""
+                + "A396,326,2,4,1,1,N,\"" + z.getCantidad() + "\""
+                + "A216,330,2,4,1,1,N,\"A:\""
+                + "A660,40,2,4,1,1,N,\"" + z.getCliente() + "\""
+                + Concatedes
+                + "B721,228,2,1,2,6,107,B,\"" + z.getNro_material() + "-" + z.getLote() + "-" + z.getCantidad() + "\""
+                + "A795,77,2,4,1,1,N,\"ORDEN:\""
+                + "A688,80,2,4,1,1,N,\"" + z.getOrden() + "\""
+                + "A501,82,2,4,1,1,N,\"LOTE:\""
+                + "A406,82,2,4,1,1,N,\"" + z.getLote() + "\""
+                + "A221,84,2,4,1,1,N,\"A:\""
+                + "A173,85,2,4,1,1,N,\"" + z.getAncho() + "\""
+                + "A796,42,2,4,1,1,N,\"CLIENTE:\""
+                + "A184,328,2,4,1,1,N,\"1234567890\""
+                + "A703,396,2,4,1,1,R,\"GRUPO INDUSTRIAL GASAER DE RL DE CV\""
+                + "FE";
     }
 
     public int ValidarDatos(String tipo, String variable) {
