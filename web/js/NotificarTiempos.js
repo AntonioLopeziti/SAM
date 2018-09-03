@@ -204,7 +204,6 @@ function verificarContenidoUs() {
 //            document.getElementById("TabBodyOpe").rows[ckOpe[i].value].style.backgroundColor = "#86C3FF";
         }
     }
-
     var acc = "validarNotifCread";
     $.ajax({
         async: false,
