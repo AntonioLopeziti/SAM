@@ -2078,7 +2078,7 @@ function Print_PT() {
                 + "&acc=" + acc
                 + "&MATERIAL=" + $("#tdMat0").text()
                 + "&DESCRIPCION=" + encodeURIComponent($("#tdDes0").text())
-                + "&LOTE=" + $("#bxLote0").val().toUpperCase()
+                + "&LOTE=" + $("#bxLote0").val()
                 + "&CLIENTE=" + $('#lblTextoLargo3').html()
                 + "&CANTIDAD=" + $("#bxcnt0").val()
                 + "&OPERACION=" + $("#tdOpr0").text()
@@ -2129,22 +2129,29 @@ function Print_PT531() {
     var acc = "imprimePT";
     var mv = document.getElementsByName("tdClaseM");
     var lot = document.getElementsByName("bxlote");
+    var mat = document.getElementsByName("tdMaterial");
+    var des = document.getElementsByName("tdDescripcion");
+    var can = document.getElementsByName("bxcantidad");
+    var ope = document.getElementsByName("tdoperacion");
+    var cen = document.getElementsByName("tdCentro");
+    var ume = document.getElementsByName("tdUnM");
+    var anc = document.getElementsByName("bxancho");
     for (i = 0; i < mv.length; i++) {
         if (mv[i].innerHTML === '531') {
             if (lot[i].value.length > 0) {
                 var send = "&ORDEN=" + $("#OrdFab").val()
                         + "&acc=" + acc
-                        + "&MATERIAL=" + $("#tdMat"+i).text()
-                        + "&DESCRIPCION=" + encodeURIComponent($("#tdDes0").text())
-                        + "&LOTE=" + $("#bxLote"+i).val().toUpperCase()
+                        + "&MATERIAL=" + mat[i].innerHTML
+                        + "&DESCRIPCION=" + encodeURIComponent(des[i].innerHTML)
+                        + "&LOTE=" + lot[i].value
                         + "&CLIENTE=" + $('#lblTextoLargo3').html()
-                        + "&CANTIDAD=" + $("#bxcnt"+i).val()
-                        + "&OPERACION=" + $("#tdOpr"+i).text()
+                        + "&CANTIDAD=" + can[i].value
+                        + "&OPERACION=" + ope[i].innerHTML
                         + "&SAM=" + folio101
-                        + "&CENTRO=" + $("#tdCtr"+i).text()
-                        + "&CLASE=" + $("#tdCmov"+i).text()
-                        + "&UM=" + $("#tdUM"+i).text()
-                        + "&ANCHO=" + $("#bxanc"+i).val().replace("+", "%2b");
+                        + "&CENTRO=" + cen[i].innerHTML
+                        + "&CLASE=" + mv[i].innerHTML
+                        + "&UM=" + ume[i].innerHTML
+                        + "&ANCHO=" + anc[i].value.replace("+", "%2b");
                 $.ajax({
                     async: false,
                     type: 'GET',
