@@ -143,6 +143,7 @@ public class peticionReporteEtiquetas extends HttpServlet {
                         out.println("<td name=\"tdancho\">" + rs.getAncho() + "</td>");
                         out.println("<td name=\"tdruta\">" + rs.getRuta() + "</td>");
                         out.println("<td name=\"tdstock\">" + rs.getStock() + "</td>");
+                        out.println("<td name=\"tdstock\">" + rs.getClmovi() + "</td>");
                         out.println("</tr>");
                     }
                     out.println("<tr class=\"ocultar\">"
@@ -161,6 +162,7 @@ public class peticionReporteEtiquetas extends HttpServlet {
                             + "<td>00000000</td>"
                             + "<td>000000000000</td>"
                             + "<td>000000000000</td>"
+                            + "<td>0000000000</td>"
                             + "</tr>");
                     out.println("</tbody>");
                     out.println("</table>");
