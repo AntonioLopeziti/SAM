@@ -1431,37 +1431,37 @@ public class ACC_Reservas {
         return mater;
     }
 
-    public ArrayList<materiales> Matchmateriales(String material, String descripcion, String centro, String almacen, String cant, String usuario){
+    public ArrayList<materiales> Matchmateriales(String material, String descripcion, String centro, String almacen, String cant, String usuario) {
         ArrayList<materiales> mat = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = "{call MM.ReservaCrea_Material(?,?,?,?,?,?)}";
-        try{
+        try {
             ps = con.prepareStatement(sql);
             ps.setString(1, material);
             ps.setString(2, descripcion);
             ps.setString(3, centro);
             ps.setString(4, almacen);
-            ps.setString(5,cant);
+            ps.setString(5, cant);
             ps.setString(6, usuario);
             rs = ps.executeQuery();
-                while(rs.next()){
-                    materiales m = new materiales();
-                    m.setNum_material(rs.getString("material"));
-                    m.setTexto_material(rs.getString("descripcion_ES"));
-                    m.setUnidad_medida(rs.getString("unidad_medida"));
-                    mat.add(m);
-                }
-        } catch(Exception e){
-            System.out.println("Error debido a: "+e);
-        } finally{
+            while (rs.next()) {
+                materiales m = new materiales();
+                m.setNum_material(rs.getString("material"));
+                m.setTexto_material(rs.getString("descripcion_ES"));
+                m.setUnidad_medida(rs.getString("unidad_medida"));
+                mat.add(m);
+            }
+        } catch (Exception e) {
+            System.out.println("Error debido a: " + e);
+        } finally {
             cnx.CerrarConexion(con);
         }
         return mat;
     }
-            
+
     public materiales CargarMaterial(String mat, String cen, String alm) {
         materiales m = new materiales();
         Conexion cnx = new Conexion();
@@ -1502,7 +1502,7 @@ public class ACC_Reservas {
             ps.setString(3, valor2);
             ps.setString(4, valor3);
             rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 ret = 1;
             }
         } catch (Exception e) {
@@ -1512,6 +1512,7 @@ public class ACC_Reservas {
         }
         return ret;
     }
+
     public String CheckFolio(String folio) {
         String x = "0";
         Conexion cnx = new Conexion();
@@ -1535,7 +1536,8 @@ public class ACC_Reservas {
         }
         return x;
     }
-     public void GuardaCabecera(String random, String fecha, String hora, String centro, String tmov, String almacen, String ccosto, String norden, String almdes, String user) {
+
+    public void GuardaCabecera(String random, String fecha, String hora, String centro, String tmov, String almacen, String ccosto, String norden, String almdes, String user) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
@@ -1559,7 +1561,8 @@ public class ACC_Reservas {
             cnx.CerrarConexion(con);
         }
     }
-     public void GuardaItems(String folio, String pos, String mat, String cen, String alm, String can, String ume, String cco, String orden, String tipm, String txt, String almdes) {
+
+    public void GuardaItems(String folio, String pos, String mat, String cen, String alm, String can, String ume, String cco, String orden, String tipm, String txt, String almdes) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps = null;
@@ -1585,9 +1588,10 @@ public class ACC_Reservas {
             cnx.CerrarConexion(con);
         }
     }
-     public String FolioPos(String random){
-         String f = "";
-         Conexion cnx = new Conexion();
+
+    public String FolioPos(String random) {
+        String f = "";
+        Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         CallableStatement ps = null;
         ResultSet rs = null;
@@ -1604,5 +1608,40 @@ public class ACC_Reservas {
             cnx.CerrarConexion(con);
         }
         return f;
-     }
+    }
+
+    public ArrayList<reserva_posiciones_crea> CargarReservaMC(String cen, String alm, String cm, String res, String pos, String mat, String des) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<reserva_posiciones_crea> ress = new ArrayList<>();
+        String sql = "{call mm.MovimientosMateriales_ConsultaReservasMC(?,?,?,?,?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, cen);
+            ps.setString(2, alm);
+            ps.setString(3, cm);
+            ps.setString(4, mat);
+            ps.setString(5, des);
+            ps.setString(6, res);
+            ps.setString(7, pos);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                reserva_posiciones_crea r = new reserva_posiciones_crea();
+                r.setAlmacen(rs.getString("almacen"));
+                r.setFolio_sap(rs.getString("num_reservas"));
+                r.setFolio_sam(rs.getString("folio_sam"));
+                r.setPosicion_reserva(rs.getString("num_posicion"));
+                r.setNum_material(rs.getString("num_material"));
+                r.setTexto_posicion(rs.getString("texto_posicion"));
+                ress.add(r);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return ress;
+    }
 }
