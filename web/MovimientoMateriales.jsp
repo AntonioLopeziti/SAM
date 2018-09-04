@@ -1097,26 +1097,20 @@
             </div>
         </div>
         <div id="VentanaModalReserva" class="VentanaModalReservasL">
-            <div id="handle14"><label id="TituloMatch">Limitar ambito de valores (1)</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalReserva', 'bxReserva');"><label >X</label></div></div>
+            <div id="handleResm"><label id="TituloMatch">Limitar ambito de valores (1)</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalReserva', 'bxReserva');"><label >X</label></div></div>
             <div class="PanelBntMatch"><button id="btnPnRese">Restricciones</button><hr></div>
             <div id="BuscarParamReserva" class="BuscarParam_u">
                 <div class="fondo_Match">
                     <div class="busquedaMatchRes">
-                        <label>Reserva</label><input type="text" id="SReserva" style="width:25%;"/>
+                        <label>Reserva ó Folio SAM</label><input type="text" id="SReserva" style="width:25%; text-transform: uppercase;" maxlength="12"/>
                         <hr>
-                        <label>Posición</label><input type="text" id="SPosicion" style="width:15%;"/>
+                        <label>Posición</label><input type="text" id="SPosicion" style="width:15%;" maxlength="8"/>
                         <hr>
-                        <label>Material</label><input type="text" id="SMaterial" style="width:25%;"/>
+                        <label>Material</label><input type="text" id="SMaterial" style="width:25%; text-transform: uppercase;" maxlength="40"/>
                         <hr>
-                        <label>Texto Material</label><input type="text" id="STMaterial" style="width:25%;"/>
+                        <label>Texto Material</label><input type="text" id="STMaterial" style="width:25%;" maxlength="40"/>
                         <hr>
-                        <label>Centro</label><input type="text" id="SCentro" style="width:10%;"/>
-                        <hr>
-                        <label>Almacén</label><input type="text" id="SAlmacen" style="width:10%;"/>
-                        <hr>
-                        <label>Usuario</label><input type="text" id="SUsuario" style="width:15%;"/>
-                        <hr>
-                        <label>Ctd.máxima aciertos </label><input type="text"  id="CtdAccmax" value="500" style="width:5%;" maxlength="3"/>
+                        <label>Ctd.máxima aciertos </label><input type="text"  id="CtdAccmaxReserva"  style="width:5%;" maxlength="3"/>
                         <hr>
                     </div>        
                 </div>
@@ -1132,7 +1126,12 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Num Reserva</th><th>Folio SAM</th><th>Posición</th><th>Clase.mov.</th><th>Material</th><th>TextoMaterial</th><th>Centro</th><th>Almacén</th><th>Usuario</th>
+                                        <th style="width: 15%">Num. Res.</th>
+                                        <th style="width: 15%">Folio SAM</th>
+                                        <th style="width: 10%">Pos.</th>
+                                        <th style="width: 20%">Material</th>
+                                        <th style="width: 30%">Txt.Brv.</th>
+                                        <th style="width: 10%">Almacén</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -6808,6 +6807,12 @@
                                 break;
                             case 16:
                                 funinva = "El almacén destino debe ser el mismo en todo el documento";
+                                break;
+                            case 17:
+                                funinva = "Ingrese un centro";
+                                break;
+                            case 18:
+                                funinva = "Ingrese clase de movimiento";
                                 break;
 
                         }
