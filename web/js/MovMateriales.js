@@ -1968,9 +1968,9 @@ $(document).ready(function () {
         peticiones('PeticionMovMateriales', 'cargarDatosOrd', 'VentanaModalOrden', 'Orden', '');
     }
     function peticionReserva() {
-        $('#BuscarParamReserva').hide();
-        $('#ConsultaTablaReserva').show();
-        peticiones('PeticionMovMateriales', 'cargarDatosReserva', 'VentanaModalReserva', 'Reserva', '');
+//        $('#BuscarParamReserva').hide();
+//        $('#ConsultaTablaReserva').show();
+//        peticiones('PeticionMovMateriales', 'cargarDatosReserva', 'VentanaModalReserva', 'Reserva', '');
     }
 
     /////// reservas
@@ -1993,10 +1993,27 @@ $(document).ready(function () {
     });
 
     $('#btnMacthreserv').click(function () {
-        mostrarVentana('VentanaModalReserva');
+        if ($('#bxCentro').val().trim().length == 0) {
+            mensajesNuevo(17, "images/advertencia.PNG", "audio/sapmsg.wav");
+            $('#bxCentro').focus();
+            return;
+        }
+        if ($('#bxClase').val().trim().length == 0) {
+            mensajesNuevo(18, "images/advertencia.PNG", "audio/sapmsg.wav");
+            $('#bxClase').focus();
+            return;
+        }
+        var ven = document.getElementById("VentanaModalReserva");
+        abrirVentanaReserva(ven);
+        $('#CtdAccmaxReserva').val("500");
+        $('#SReserva').val("");
+        $('#SPosicion').val("");
+        $('#SMaterial').val("");
+        $('#STMaterial').val("");
         $('#BuscarParamReserva').show();
         $('#ConsultaTablaReserva').hide();
-        var theHandle = document.getElementById('handle14');
+        $('#SReserva').focus();
+        var theHandle = document.getElementById('handleResm');
         var theRoot = document.getElementById('VentanaModalReserva');
         Drag.init(theHandle, theRoot);
     });
@@ -2008,21 +2025,62 @@ $(document).ready(function () {
         var theRoot = document.getElementById('VentanaModalReserva');
         Drag.init(theHandle, theRoot);
     });
-    $.each([$('#SReserva'), $('#SPosicion'), $('#SCMov'), $('#SMaterial'), $('#STMaterial'), $('#SCentro'), $('#SAlmacen'), $('#SUsuario'), $('#CtdAccmax')], function (i, v) {
-        v.keypress(function (e) {
-            var te = (document).all ? e.keyCode : e.which;
-            if (te == 13) {
-                peticionReserva();
-            }
-            if (i == 8) {
-                patron = /[0-9]/;
-                tec = String.fromCharCode(te);
-                return patron.test(tec);
-            }
-        });
+//    $.each([$('#SReserva'), $('#SPosicion'), $('#SCMov'), $('#SMaterial'), $('#STMaterial'),  $('#CtdAccmaxReserva')], function (i, v) {
+//        v.keypress(function (e) {
+//          
+//        });
+//    });
+    $('#SReserva').keypress(function (e) {
+        var te = (document).all ? e.keyCode : e.which;
+        if (te == 13) {
+            ConsultaReservasMC();
+        }
+        patron = /[a-zA-ZñÑ0-9]/;
+        tec = String.fromCharCode(te);
+        return patron.test(tec);
+    });
+    $('#SMaterial').keypress(function (e) {
+        var te = (document).all ? e.keyCode : e.which;
+        if (te == 13) {
+            ConsultaReservasMC();
+        }
+        patron = /[a-zA-ZñÑ0-9]/;
+        tec = String.fromCharCode(te);
+        return patron.test(tec);
+    });
+    $('#STMaterial').keypress(function (e) {
+        var te = (document).all ? e.keyCode : e.which;
+        if (te == 13) {
+            ConsultaReservasMC();
+        }
+        if(te == 32){
+            return true;
+        }
+        patron = /[a-zA-ZñÑ0-9]/;
+        tec = String.fromCharCode(te);
+        return patron.test(tec);
+    });
+    $('#SPosicion').keypress(function (e) {
+        var te = (document).all ? e.keyCode : e.which;
+        if (te == 13) {
+            ConsultaReservasMC();
+        }
+        patron = /[0-9]/;
+        tec = String.fromCharCode(te);
+        return patron.test(tec);
+    });
+    $('#CtdAccmaxReserva').keypress(function (e) {
+        var te = (document).all ? e.keyCode : e.which;
+        if (te == 13) {
+            ConsultaReservasMC();
+        }
+        patron = /[0-9]/;
+        tec = String.fromCharCode(te);
+        return patron.test(tec);
     });
     $('#okReser').click(function () {
-        peticionReserva();
+        ConsultaReservasMC();
+
     });
     $('#btnReserva').click(function () {
         $('#btnCentro').hide();
@@ -3660,6 +3718,38 @@ function ConsultaMaterialesNBuevo() {
         }
     });
 }
+function ConsultaReservasMC() {
+    var acc = "ConsultaReserva";
+    var datos = "&NReservaR=" + $('#SReserva').val()
+            + "&PosicionR=" + $('#SPosicion').val()
+            + "&MaterialR=" + $('#SMaterial').val()
+            + "&CentroR=" + $('#bxCentro').val()
+            + "&AlmacenR=" + $('#bxAlmacen').val()
+            + "&ClaMovR=" + $('#bxClase').val()
+            + "&DescripcionR=" + encodeURIComponent($('#STMaterial').val().trim())
+            + "&CantidadR=" + $('#CtdAccmaxReserva').val();
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            if (data == 0) {
+                mensajesNuevo(0, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                $('#cargarDatosReserva').html(data);
+                $('#BuscarParamReserva').css('display', 'none');
+                $('#ConsultaTablaReserva').css('display', 'block');
+                document.getElementById('table-scrollReserva').onscroll = function () {
+                    document.getElementById('fixedYReserva').style.top = document.getElementById('table-scrollReserva').scrollTop + 'px';
+                };
+                borramsg();
+            }
+        }
+    });
+}
 function ocultarVentanaNuevo(id, bp, ct, obj, clm)
 {
     var pos = $('#posGrid').val();
@@ -4580,7 +4670,7 @@ function ObtenerDatos101()
                 }
             }
             ShowMsg(1, "images/load.gif", "audio/sapmsg.wav");
-              $('#ok101').prop("disabled", true);
+            $('#ok101').prop("disabled", true);
             $('#Cerra101Taba').prop("disabled", true);
             $('#guardar').prop("disabled", true);
             var random = ObtenerFolioRandom();
@@ -5006,4 +5096,17 @@ function seleccionarCCosto(valor, clase) {
     $('#bxccs' + clase).focus();
     $('#bxccs' + clase).css('background-image', 'none');
     ocultarVentana("VentanaModalCC", id);
+}
+function SelectReserM(sap, sam, alm){
+    $('#bxAlmacen').val(alm);
+    $('#bxAlmacen').css('background-image','none');
+    var f = "";
+    if(sap.length>0){
+        f = sap;
+    }else{
+        f = sam;
+    }
+    $('#bxReserva').val(f);
+    $('#bxReserva').focus();
+    ocultarVentana("VentanaModalReserva", bxReserva);
 }
