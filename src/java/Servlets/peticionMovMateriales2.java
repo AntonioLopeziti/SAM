@@ -9,12 +9,14 @@ import AccesoDatos.ACC_Almacenes;
 import AccesoDatos.ACC_Centro;
 import AccesoDatos.ACC_Material;
 import AccesoDatos.ACC_Pedidos;
+import AccesoDatos.ACC_Reservas;
 import AccesoDatos.ACC_Stock;
 import Entidades.almacenes;
 import Entidades.centros;
 import Entidades.componentesPP;
 import Entidades.materiales;
 import Entidades.pedido_detalle;
+import Entidades.reserva_posiciones_crea;
 import Entidades.stock;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -65,6 +67,16 @@ public class peticionMovMateriales2 extends HttpServlet {
             String user = (String) session.getAttribute("Usuario");
             Properties po = new Properties();
             po.load(getServletContext().getResourceAsStream("/WEB-INF/LanguageES.properties"));
+          
+            ////RESERVAS
+            String NReservaR = request.getParameter("NReservaR");
+            String PosicionR = request.getParameter("PosicionR");
+            String MaterialR = request.getParameter("MaterialR");
+            String DescripcionR = request.getParameter("DescripcionR");
+            String CantidadR = request.getParameter("CantidadR");
+            String CentroR = request.getParameter("CentroR");
+            String AlmacenR = request.getParameter("AlmacenR");
+            String ClaseMovR = request.getParameter("ClaMovR");
             switch (Accion) {
                 case "ConsultaMaterial":
                     ArrayList<materiales> mat = ACC_Material.ObtenerInstancia().ConsultaMaterialesMov(Materi, Descri, Cantid, ClaseM, Centro, Almace);
@@ -324,6 +336,27 @@ public class peticionMovMateriales2 extends HttpServlet {
                     jc.add(cc.getPedido());
                     jc.add(cc.getPosicion());
                     out.println(jc);
+                    break;
+                case "ConsultaReserva":
+                      ArrayList<reserva_posiciones_crea> res = ACC_Reservas.ObtenerInstancia().CargarReservaMC(CentroR,AlmacenR,ClaseMovR,NReservaR,PosicionR,MaterialR,DescripcionR);
+                    if (res.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        for (int i = 0; i < res.size(); i++) {
+                            out.println("<tr ondblclick=\"SelectReserM('" + res.get(i).getFolio_sap() + "','"+res.get(i).getFolio_sam()+"', '"+res.get(i).getAlmacen()+"');\">");
+                            out.println("<td style=\"width: 15%\">" + res.get(i).getFolio_sap() + "</td>");
+                            out.println("<td style=\"width: 15%\">" + res.get(i).getFolio_sam() + "</td>");
+                            out.println("<td style=\"width: 10%\">" + res.get(i).getPosicion_reserva() + "</td>");
+                            out.println("<td style=\"width: 20%\">" + res.get(i).getNum_material() + "</td>");
+                            out.println("<td style=\"width: 30%; text-align:left;\">" + res.get(i).getTexto_posicion() + "</td>");
+                            out.println("<td style=\"width: 10%\">" + res.get(i).getAlmacen() + "</td>");
+                            out.println("</tr>");
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println(0);
+                    }
                     break;
             }
 
