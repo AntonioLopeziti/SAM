@@ -286,19 +286,22 @@ public class ACC_Zebra {
 //        zb.setCliente("TEXTO DEL CLIENTE DE SANPER DE LEON DEL CENTRO DE MEXICO");
 //        zb.setNro_material("1234567890");
 //        ACC_Zebra.ObtenerInstancia().PrintTargetPT(zb);
-
+        String texto = "MILÃN (MAQ) ÁZUL CIELO EVA 2.0 MM 32° NGO BOMBAY NEGRO (MAQ) MAQUINARIA SANPER TEXTOS DE PRUEBA PRUEBAS 12346789123456789";
+        ACC_Zebra z = new ACC_Zebra();
+        System.out.println(z.caracterEspecialReplace(texto));
     }
 
     public String ConvertCodeZebra(Zebra_noti_PT z) {
         String Concatedes = "";
-        if (z.getDescripcion().length() < 70) {
+        if (z.getDescripcion().length() < 78) {
             Concatedes = "^FT799,253^A0I,21,21^FB793,1,0^FH\\^FD^FS\n"
-                    + "^FT799,285^A0I,21,21^FB792,1,0^FH\\^FD" + z.getDescripcion().substring(0, z.getDescripcion().length()).replace("°", "_C2_B0") + "^FS\n";
+                    + "^FT799,285^A0I,21,21^FB792,1,0^FH\\^FD" + caracterEspecialReplace(z.getDescripcion().substring(0, z.getDescripcion().length())) + "^FS\n";
         } else {
-            Concatedes = "^FT799,253^A0I,21,21^FB793,1,0^FH\\^FD" + z.getDescripcion().substring(69, z.getDescripcion().length()).replace("°", "_C2_B0") + "^FS\n"
-                    + "^FT799,285^A0I,21,21^FB792,1,0^FH\\^FD" + z.getDescripcion().substring(0, 69).replace("°", "_C2_B0") + "^FS\n";
+            Concatedes = "^FT799,253^A0I,21,21^FB793,1,0^FH\\^FD" + caracterEspecialReplace(z.getDescripcion().substring(77, z.getDescripcion().length())) + "^FS\n"
+                    + "^FT799,285^A0I,21,21^FB792,1,0^FH\\^FD" + caracterEspecialReplace(z.getDescripcion().substring(0, 77)) + "^FS\n";
         }
         return "^XA\n"
+                //                + "^CI28\n"
                 + "^MMT\n"
                 + "^PW807\n"
                 + "^LL0408\n"
@@ -322,7 +325,7 @@ public class ACC_Zebra {
                 + //// Fecha
                 "^FT198,370^A0I,27,26^FB70,1,0^FH\\^FDHORA:^FS\n"
                 + "^FT114,370^A0I,27,26^FB94,1,0^FH\\^FD" + z.getHora() + "^FS\n"
-                + "^FT707,28^A0I,23,24^FB700,1,0^FH\\^FD" + z.getCliente() + "^FS\n"
+                + "^FT707,28^A0I,23,24^FB700,1,0^FH\\^FD" + caracterEspecialReplace(z.getCliente()) + "^FS\n"
                 + "^BY2,3,99^FT744,139^BCI,,Y,N\n"
                 + "^FD>;" + z.getNro_material() + ">6-" + z.getLote() + "->5123456>" + z.getCantidad() + "^FS\n"
                 + "^FT423,328^A0I,27,26^FB121,1,0^FH\\^FDCANTIDAD:^FS\n"
@@ -352,37 +355,39 @@ public class ACC_Zebra {
 
     public String ConvertCodeZebraTLP(Zebra_noti_PT z) {
         String Concatedes = "";
-        if (z.getDescripcion().length() < 70) {
-            Concatedes = "A793,262,2,4,1,1,N,\"" + z.getDescripcion().substring(0, z.getDescripcion().length()).replace("°", "_C2_B0") + "\"";
+        if (z.getDescripcion().length() < 49) {
+            Concatedes = "A793,262,2,4,1,1,N,\"" + z.getDescripcion().substring(0, z.getDescripcion().length()) + "\"\n";
         } else {
-            Concatedes = "A793,262,2,4,1,1,N,\"" + z.getDescripcion().substring(69, z.getDescripcion().length()).replace("°", "_C2_B0") + "\""
-                    + "A793,290,2,4,1,1,N,\"" + z.getDescripcion().substring(0, 69).replace("°", "_C2_B0") + "\"";
+            Concatedes = "A793,262,2,4,1,1,N,\"" + z.getDescripcion().substring(48, z.getDescripcion().length())+ "\"\n"
+                    + "A793,290,2,4,1,1,N,\"" + z.getDescripcion().substring(0, 48) + "\"\n";
         }
         return "N\n"
-                + "A677,362,2,4,1,1,N,\"" + z.getRuta() + "\""
-                + "A784,362,2,4,1,1,N,\"" + z.getStock() + "\""
-                + "A633,328,2,4,1,1,N,\"" + z.getPuesto_trabajo() + "\""
-                + "A793,328,2,4,1,1,N,\"Pto.Tbjo:\""
-                + "A554,325,2,4,1,1,N,\"CANTIDAD:\""
-                + "A555,362,2,4,1,1,N,\"FECHA:\""
-                + "A446,363,2,4,1,1,N,\"" + z.getFecha() + "\""
-                + "A260,363,2,4,1,1,N,\"HORA:\""
-                + "A166,364,2,4,1,1,N,\"" + z.getHora() + "\""
-                + "A396,326,2,4,1,1,N,\"" + z.getCantidad() + "\""
-                + "A216,330,2,4,1,1,N,\"A:\""
-                + "A660,40,2,4,1,1,N,\"" + z.getCliente() + "\""
+                + "N\n"
+                + "A677,362,2,4,1,1,N,\"" + z.getRuta() + "\"\n"
+                + "A784,362,2,4,1,1,N,\"" + z.getStock() + "\"\n"
+                + "A633,328,,4,1,1,N,\"" + z.getPuesto_trabajo() + "\"\n"
+                + "A793,328,20,4,1,1,N,\"Pto.Tbjo:\"\n"
+                + "A554,328,2,4,1,1,N,\"CANTIDAD:\"\n"
+                + "A555,362,2,4,1,1,N,\"FECHA:\"\n"
+                + "A446,363,2,4,1,1,N,\"" + z.getFecha() + "\"\n"
+                + "A260,363,2,4,1,1,N,\"HORA:\"\n"
+                + "A166,364,2,4,1,1,N,\"" + z.getHora() + "\"\n"
+                + "A396,326,2,4,1,1,N,\"" + z.getCantidad() + "\"\n"
+                + "A216,328,2,4,1,1,N,\"A:\"\n"
+                + "A660,40,2,4,1,1,N,\"" + z.getCliente() + "\"\n"
                 + Concatedes
-                + "B721,228,2,1,2,6,107,B,\"" + z.getNro_material() + "-" + z.getLote() + "-" + z.getCantidad() + "\""
-                + "A795,77,2,4,1,1,N,\"ORDEN:\""
-                + "A688,80,2,4,1,1,N,\"" + z.getOrden() + "\""
-                + "A501,82,2,4,1,1,N,\"LOTE:\""
-                + "A406,82,2,4,1,1,N,\"" + z.getLote() + "\""
-                + "A221,84,2,4,1,1,N,\"A:\""
-                + "A173,85,2,4,1,1,N,\"" + z.getAncho() + "\""
-                + "A796,42,2,4,1,1,N,\"CLIENTE:\""
-                + "A184,328,2,4,1,1,N,\"1234567890\""
-                + "A703,396,2,4,1,1,R,\"GRUPO INDUSTRIAL GASAER DE RL DE CV\""
-                + "FE";
+                + "B721,228,2,1,2,6,107,B,\"" + z.getNro_material() + "-" + z.getLote() + "-" + z.getCantidad() + "\"\n"
+                + "A795,77,2,4,1,1,N,\"ORDEN:\"\n"
+                + "A688,80,2,4,1,1,N,\"" + z.getOrden() + "\"\n"
+                + "A501,82,2,4,1,1,N,\"LOTE:\"\n"
+                + "A406,82,2,4,1,1,N,\"" + z.getLote() + "\"\n"
+                + "A221,84,2,4,1,1,N,\"A:\"\n"
+                + "A173,85,2,4,1,1,N,\"" + z.getAncho() + "\"\n"
+                + "A796,42,2,4,1,1,N,\"CLIENTE:\"\n"
+                + "A184,328,2,4,1,1,N,\"1234567890\"\n"
+                + "A703,396,2,4,1,1,R,\"GRUPO INDUSTRIAL GASAER DE RL DE CV\"\n"
+                + "FE\n"
+                + "P1,1";
     }
 
     public int ValidarDatos(String tipo, String variable) {
@@ -518,6 +523,67 @@ public class ACC_Zebra {
             cnx.CerrarConexion(con);
         }
         return orde;
+    }
+
+    public String caracterEspecialReplace(String texto) {
+        String text = "";
+        if (texto.length() > 0) {
+            char[] arr = texto.toCharArray();
+            for (int i = 0; i < arr.length; i++) {
+                String var = String.valueOf(arr[i]);
+                switch (var) {
+                    case "°":
+                        var = "\\F8";
+                        break;
+
+                    case "Á":
+                    case "À":
+                        var = "\\B5";
+                        break;
+                    case "É":
+                    case "È":
+                        var = "\\90";
+                        break;
+                    case "Ì":
+                    case "Í":
+                        var = "\\D6";
+                        break;
+                    case "Ò":
+                    case "Ó":
+                        var = "\\E3";
+                        break;
+                    case "Ù":
+                    case "Ú":
+                        var = "\\E9";
+                        break;
+                    case "á":
+                    case "à":
+                        var = "\\A0";
+                        break;
+                    case "é":
+                    case "è":
+                        var = "\\82";
+                        break;
+                    case "í":
+                    case "ì":
+                        var = "\\A1";
+                        break;
+                    case "ó":
+                    case "ò":
+                        var = "\\A2";
+                        break;
+                    case "ú":
+                    case "ù":
+                        var = "\\A3";
+                        break;
+                }
+                text += var;
+            }
+        } else {
+            text = "";
+        }
+
+        return text;
     }
 
 }
