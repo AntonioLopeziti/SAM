@@ -21,9 +21,9 @@ import java.util.StringTokenizer;
  *
  */
 public class ACC_Reservas {
-
+    
     private static ACC_Reservas Instance = null;
-
+    
     public static ACC_Reservas ObtenerInstancia() {
         if (Instance == null) {
             Instance = new ACC_Reservas();
@@ -247,7 +247,7 @@ public class ACC_Reservas {
         }
         return ban;
     }
-
+    
     public int ReservaPosC(String fol) {
         int cc = 0;
         Conexion cnx = new Conexion();
@@ -305,7 +305,7 @@ public class ACC_Reservas {
         }
         return false;
     }
-
+    
     public void EliminaPosRes(String fol) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -320,7 +320,7 @@ public class ACC_Reservas {
             cnx.CerrarConexion(con);
         }
     }
-
+    
     public ArrayList<reserva_cabecera_crea> ConsultaMCReserva(String nres, String usua) {
         ArrayList<reserva_cabecera_crea> res = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -347,7 +347,7 @@ public class ACC_Reservas {
         }
         return res;
     }
-
+    
     public LinkedList<almacenes> ConsultaMatchAlmacen(String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -368,7 +368,7 @@ public class ACC_Reservas {
         }
         return alm;
     }
-
+    
     public LinkedList<centro_coste> ConsultaMatchCentroCoste(String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -389,7 +389,7 @@ public class ACC_Reservas {
         }
         return cen;
     }
-
+    
     public boolean ValidarCEN(String cen) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -423,7 +423,7 @@ public class ACC_Reservas {
         }
         return false;
     }
-
+    
     public boolean ValidarALM(String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -444,7 +444,7 @@ public class ACC_Reservas {
         cnx.CerrarConexion(con);
         return false;
     }
-
+    
     public boolean ValidarCCO(String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -465,7 +465,7 @@ public class ACC_Reservas {
         cnx.CerrarConexion(con);
         return false;
     }
-
+    
     public ArrayList<plan_orden> MMConsultaMatchOrdenMM(String lim, String numord, String des) {
         ArrayList<plan_orden> ordmm = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -504,7 +504,7 @@ public class ACC_Reservas {
         }
         return ordmm;
     }
-
+    
     public boolean ValidarOrdMM(String ord) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -541,7 +541,7 @@ public class ACC_Reservas {
         }
         return false;
     }
-
+    
     public boolean ValidarOR(String query) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -614,7 +614,7 @@ public class ACC_Reservas {
         }
         return false;
     }
-
+    
     public boolean ValidarSAM(String sam) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -700,7 +700,7 @@ public class ACC_Reservas {
         }
         return sam;
     }
-
+    
     public LinkedList<reserva_cabecera_crea> ConsultaReservas(String query) {
         LinkedList<reserva_cabecera_crea> sam = new LinkedList<>();
         Conexion cnx = new Conexion();
@@ -716,7 +716,7 @@ public class ACC_Reservas {
                 rc.setFolio_sam(rs.getString("folio_sam"));
                 sam.add(rc);
             }
-
+            
         } catch (Exception ex) {
             System.err.println("Error en el metodo ConsultaReservas por:" + ex);
             cnx.CerrarConexion(con);
@@ -761,7 +761,7 @@ public class ACC_Reservas {
         }
         return reser;
     }
-
+    
     public reserva_cabecera_crea MMConsultaAllDatosReservaCabecera(String folio) {
         reserva_cabecera_crea reser = new reserva_cabecera_crea();
         Conexion cnx = new Conexion();
@@ -834,7 +834,7 @@ public class ACC_Reservas {
                 reserva.setProcesado(rs.getString("procesado"));
                 reserva.setError(rs.getString("error"));
                 reserva.setAlmacen_destino(rs.getString("almacen_destino"));
-
+                
             }
             cnx.CerrarConexion(con);
         } catch (Exception ex) {
@@ -995,7 +995,7 @@ public class ACC_Reservas {
         }
         return posiciones;
     }
-
+    
     public ArrayList<reserva_posiciones_crea> CargarreservasMC(String pos, String clas, String mat, String ctr, String alm, String resv, String usr, String txt) {
         ArrayList<reserva_posiciones_crea> rpc = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -1036,7 +1036,7 @@ public class ACC_Reservas {
         cnx.CerrarConexion(con);
         return rpc;
     }
-
+    
     public int ValidarReservAmbas(String v) {
         int n = 0;
         Conexion cnx = new Conexion();
@@ -1049,7 +1049,7 @@ public class ACC_Reservas {
         } catch (Exception e) {
             query = "{call MM.reservas_materiales_valida2_MOM(?,?)} ";
         }
-
+        
         try {
             PreparedStatement sp = con.prepareStatement(query);
             sp.setString(1, vl.toString());
@@ -1077,7 +1077,7 @@ public class ACC_Reservas {
         cnx.CerrarConexion(con);
         return n;
     }
-
+    
     public String ValidarDataRes(String cl, String v) {
         String n = "0";
         Long vl = 0L;
@@ -1120,7 +1120,7 @@ public class ACC_Reservas {
         cnx.CerrarConexion(con);
         return n;
     }
-
+    
     public int ValidarErrorReserva(String reserva) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1144,13 +1144,13 @@ public class ACC_Reservas {
         }
         return ban;
     }
-
+    
     public static void main(String[] args) {
         ACC_Reservas r = new ACC_Reservas();
         System.out.println(r.ValidarErrorReserva("RE59000020"));
 //        System.out.println(r.ValidarErrorReserva("0000000641"));
     }
-
+    
     public ArrayList<reserva_posiciones_crea> cargarPosiResMov(String query, String nr, String folio, String clase) {
         String nquery = "{call MM." + query + "(?,?,?)}";
         ArrayList<reserva_posiciones_crea> res = new ArrayList<>();
@@ -1188,7 +1188,7 @@ public class ACC_Reservas {
                 } catch (Exception e) {
                     r.setAlmacen_destino(rs.getString("almacen_destino"));
                 }
-
+                
                 res.add(r);
             }
         } catch (Exception e) {
@@ -1196,7 +1196,7 @@ public class ACC_Reservas {
         }
         return res;
     }
-
+    
     public int ValidarReservaSAP(String NRes) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1216,7 +1216,7 @@ public class ACC_Reservas {
         }
         return ban;
     }
-
+    
     public int ValidarReservaSAM(String NRes) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1236,7 +1236,7 @@ public class ACC_Reservas {
         }
         return ban;
     }
-
+    
     public reserva_posiciones_crea CargarDatosCabSAM(String res) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1266,7 +1266,7 @@ public class ACC_Reservas {
         }
         return r;
     }
-
+    
     public reserva_posiciones_crea CargarDatosCabSAP(String res) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1296,7 +1296,7 @@ public class ACC_Reservas {
         }
         return r;
     }
-
+    
     public ArrayList<reserva_posiciones_crea> LoadTabResSAP(String reserva) {
         ArrayList<reserva_posiciones_crea> rsp = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -1323,7 +1323,7 @@ public class ACC_Reservas {
         }
         return rsp;
     }
-
+    
     public ArrayList<reserva_posiciones_crea> LoadTabResSAM(String reservas) {
         ArrayList<reserva_posiciones_crea> rsp = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -1350,7 +1350,7 @@ public class ACC_Reservas {
         }
         return rsp;
     }
-
+    
     public ArrayList<centros> ConsultaCentrosReserva() {
         ArrayList<centros> cen = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -1374,7 +1374,7 @@ public class ACC_Reservas {
         }
         return cen;
     }
-
+    
     public ArrayList<almacenes> ConsultaAlmacenReserva(String centro) {
         ArrayList<almacenes> alm = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -1400,7 +1400,7 @@ public class ACC_Reservas {
         }
         return alm;
     }
-
+    
     public ArrayList<materiales> ConsultaMateriales(String mat, String des, String can, String cen, String alm) {
         ArrayList<materiales> mater = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -1430,7 +1430,7 @@ public class ACC_Reservas {
         }
         return mater;
     }
-
+    
     public ArrayList<materiales> Matchmateriales(String material, String descripcion, String centro, String almacen, String cant, String usuario) {
         ArrayList<materiales> mat = new ArrayList<>();
         Conexion cnx = new Conexion();
@@ -1461,7 +1461,7 @@ public class ACC_Reservas {
         }
         return mat;
     }
-
+    
     public materiales CargarMaterial(String mat, String cen, String alm) {
         materiales m = new materiales();
         Conexion cnx = new Conexion();
@@ -1487,7 +1487,7 @@ public class ACC_Reservas {
         }
         return m;
     }
-
+    
     public int ValidarDato(String tipo, String valor, String valor2, String valor3) {
         int ret = 0;
         Conexion cnx = new Conexion();
@@ -1512,7 +1512,7 @@ public class ACC_Reservas {
         }
         return ret;
     }
-
+    
     public String CheckFolio(String folio) {
         String x = "0";
         Conexion cnx = new Conexion();
@@ -1536,7 +1536,7 @@ public class ACC_Reservas {
         }
         return x;
     }
-
+    
     public void GuardaCabecera(String random, String fecha, String hora, String centro, String tmov, String almacen, String ccosto, String norden, String almdes, String user) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1561,7 +1561,7 @@ public class ACC_Reservas {
             cnx.CerrarConexion(con);
         }
     }
-
+    
     public void GuardaItems(String folio, String pos, String mat, String cen, String alm, String can, String ume, String cco, String orden, String tipm, String txt, String almdes) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1588,7 +1588,7 @@ public class ACC_Reservas {
             cnx.CerrarConexion(con);
         }
     }
-
+    
     public String FolioPos(String random) {
         String f = "";
         Conexion cnx = new Conexion();
@@ -1609,7 +1609,7 @@ public class ACC_Reservas {
         }
         return f;
     }
-
+    
     public ArrayList<reserva_posiciones_crea> CargarReservaMC(String cen, String alm, String cm, String res, String pos, String mat, String des) {
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
@@ -1627,7 +1627,7 @@ public class ACC_Reservas {
             ps.setString(6, res);
             ps.setString(7, pos);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 reserva_posiciones_crea r = new reserva_posiciones_crea();
                 r.setAlmacen(rs.getString("almacen"));
                 r.setFolio_sap(rs.getString("num_reservas"));
@@ -1644,4 +1644,36 @@ public class ACC_Reservas {
         }
         return ress;
     }
-}
+    
+    public ArrayList<reserva_posiciones_crea> CargarTablaResMovimientos(String Reserva) {
+        ArrayList<reserva_posiciones_crea> res = new ArrayList<>();
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;        
+        ResultSet rs = null;
+        String sql = "{ CALL MM.MovimientosMaterial_ReservaCargarPos(?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, Reserva);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                reserva_posiciones_crea r = new reserva_posiciones_crea();
+                r.setPosicion_reserva(rs.getString(1));
+                r.setNum_material(rs.getString(2));
+                r.setTexto_posicion(rs.getString(3));
+                r.setCantidad_necesaria(rs.getString(4));
+                r.setCantida_tomada(rs.getString(5));
+                r.setCentro_coste(rs.getString(6));
+                r.setNum_orden(rs.getString(7));
+                r.setAlmacen_destino(rs.getString(8));
+                r.setUnidad_medida_base(rs.getString(9));
+                res.add(r);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+        return res;
+    }
+} 
