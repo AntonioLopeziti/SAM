@@ -391,6 +391,7 @@ public class peticionInventario extends HttpServlet {
                             out.println("</section>");
                             break;
                     }
+                    break;
                 case "CargarTablaReserva":
                     Properties prop = new Properties();
                     prop.load(getServletContext().getResourceAsStream("/WEB-INF/Language" + lan + ".properties"));
