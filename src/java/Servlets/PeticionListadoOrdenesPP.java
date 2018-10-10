@@ -515,7 +515,7 @@ public class PeticionListadoOrdenesPP extends HttpServlet {
                     so.setUsuario(v5);
                     so.setStatus(v7);
                     ACC_ListadoOrdenesPP.ObtenerInstancia().guardaStatusOrden(so);
-//                    ACC_ListadoOrdenesPP.ObtenerInstancia().CambiaStatusOrden(so, v6);
+                    ACC_ListadoOrdenesPP.ObtenerInstancia().CambiarStatusOrdDM(v2, v6);
                     out.println("LT" + fo.getFolioActual());
                     ACC_Folios.ObtenerIstancia().ActualizarFolio("LT", fo.getFolioActual());
                     break;
