@@ -29,6 +29,16 @@ public class reserva_posiciones_crea {
     String modificar;
     String almacen_destino;
     String usuario = "";
+    String Cantida_tomada = "";
+
+    public String getCantida_tomada() {
+        return Cantida_tomada;
+    }
+
+    public void setCantida_tomada(String Cantida_tomada) {
+        this.Cantida_tomada = Cantida_tomada;
+    }
+    
     int num_posicion;
 
     public String getUsuario() {
