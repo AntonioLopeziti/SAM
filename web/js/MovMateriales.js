@@ -2053,7 +2053,7 @@ $(document).ready(function () {
         if (te == 13) {
             ConsultaReservasMC();
         }
-        if(te == 32){
+        if (te == 32) {
             return true;
         }
         patron = /[a-zA-ZñÑ0-9]/;
@@ -5097,16 +5097,259 @@ function seleccionarCCosto(valor, clase) {
     $('#bxccs' + clase).css('background-image', 'none');
     ocultarVentana("VentanaModalCC", id);
 }
-function SelectReserM(sap, sam, alm){
+function SelectReserM(sap, sam, alm) {
     $('#bxAlmacen').val(alm);
-    $('#bxAlmacen').css('background-image','none');
+    $('#bxAlmacen').css('background-image', 'none');
     var f = "";
-    if(sap.length>0){
+    if (sap.length > 0) {
         f = sap;
-    }else{
+    } else {
         f = sam;
     }
     $('#bxReserva').val(f);
     $('#bxReserva').focus();
     ocultarVentana("VentanaModalReserva", bxReserva);
+}
+
+function CargarTablaReserva() {
+    descm();
+    document.getElementById("btnAdd").disabled = true;
+    var Resr = $('#bxReserva').val();
+    var ClMo = $('#bxClase').val();
+    var acc = "CargarTablaReserva";
+    var datos = "&ReservN=" + Resr + "&ClaMo=" + ClMo;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionMovMateriales',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Action=" + acc + datos,
+        success: function (data) {
+            var title = "Centro Coste";
+            if (ClMo === "261") {
+                title = "Num. Orden";
+            }
+            if (ClMo === "311") {
+                title = "Alm. Dest.";
+            }
+            $('#TDCasoTitl').text(title);
+            $('#ReseNumT').html("Tratar Reserva: Num.Reserva. " + $('#bxReserva').val() + " Cl.Mov. " + $('#bxClase').val());
+            var ven = document.getElementById("VentanaModalReservasTratar");
+            abrirVentanaLote(ven);
+            var theHandle = document.getElementById('hanldeResTr');
+            var theRoot = document.getElementById('VentanaModalReservasTratar');
+            Drag.init(theHandle, theRoot);
+            $('#SecCuerpoRes').html(data);
+            AjustarCabecera('TabHeadRes', 'TabBodyRes', 8, 'SecCuerpoRes');
+            loadDoubleScroll("DobleSectionRes", "SecCuerpoRes", "DobleContainerRes", "TabBodyRes");
+        }
+    });
+}
+function MostrarMatchReserva(pos) {
+    QuitarMatchRe();
+    $('#Rtdlot' + pos).css('width', '80%');
+    $('#MCLotesRes' + pos).css('display', 'inline-block');
+    $('#Rtdlot' + pos).keypress(function (e) {
+        var tecla = (document).all ? e.keyCode : e.which;
+        patron = /[0-9a-zA-ZÑñ]/;
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    });
+}
+function QuitarMatchRe() {
+    var lot = document.getElementsByName("tdLotR");
+    var match = document.getElementsByName("ResmatchLote");
+    for (i = 0; i < lot.length; i++) {
+        lot[i].style.width = '100%';
+    }
+    for (i = 0; i < match.length; i++) {
+        match[i].style.display = 'none';
+    }
+}
+function ConsultaLotesNRese(pos) {
+    var acc = "ConsultaLotesReservas";
+    var datos = "&MatRes=" + $('#Rtdmat' + pos).val()
+            + "&CenRes=" + $('#bxCentro').val()
+            + "&PosRes=" + pos
+            + "&ClaMovR=" + $('#bxClase').val()
+            + "&AlmRes=" + $('#bxAlmacen').val();
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionMovMateriales',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Action=" + acc + datos,
+        success: function (data) {
+            if (data == 0) {
+                mensajesNuevo(0, "images/aceptar.png", "audio/sapmsg.wav");
+            } else {
+                var BE = document.createElement('audio');
+                BE.src = "audio/sapsnd05.wav";
+                BE.play();
+                var ventana = $('#VentanaModalLoteRes');
+                var ancho = 600;
+                var alto = 650;
+                var x = (screen.width / 2) - (ancho / 2);
+                var y = (screen.height / 2) - (alto / 2);
+                ventana.css({top: y + "px", left: x + "px"});
+                ventana.css('display', 'block');
+                borramsg();
+                var theHandle = document.getElementById("handleLoteres");
+                var theRoot = document.getElementById("VentanaModalLoteRes");
+                Drag.init(theHandle, theRoot);
+                $('#cargarDatosLoteRes').html(data);
+                document.getElementById('table-scrollLoteRes').onscroll = function () {
+                    document.getElementById('fixedYLoteRes').style.top = document.getElementById('table-scrollLoteRes').scrollTop + 'px';
+                };
+            }
+        }
+    });
+}
+function seleccionarLoteReserv(dat, pos) {
+    $('#Rtdlot' + pos).val(dat);
+    $('#Rtdlot' + pos).focus();
+    ocultarVentana('VentanaModalLoteRes', '');
+}
+function ValidarReservasTratar() {
+    var pos = document.getElementsByName("tdPosR");
+    var mat = document.getElementsByName("tdMateR");
+    var lot = document.getElementsByName("tdLotR");
+    var can = document.getElementsByName("tdCanR");
+    var canTomada = document.getElementsByName("tdCatTomR");
+    var canTotal = document.getElementsByName("tdCatTotR");
+    for (i = 0; i < pos.length; i++) {
+        if (mat[i].value.length > 0) {
+            if (can[i].value.length == 0) {
+                mensajesNuevo(20, "images/advertencia.PNG", "audio/saperror.wav");
+                can[i].focus();
+                return;
+            }
+            if (can[i].value !== '0.000') {
+                if (lot[i].disabled === false) {
+                    if (lot[i].value.length == 0) {
+                        mensajesNuevo(19, "images/advertencia.PNG", "audio/saperror.wav");
+                        lot[i].focus();
+                        return;
+                    }
+                }
+                var resu = ExistenciaStock(mat[i].value, $('#bxCentro').val(), $('#bxAlmacen').val(), lot[i].value.trim(), '', '', can[i].value.trim(), $('#bxClase').val());
+                if (parseFloat(resu) <= 0) {
+                    mensajesNuevo(22, "images/advertencia.PNG", "audio/saperror.wav");
+                    can[i].focus();
+                    return;
+                }
+                if (parseFloat(can[i].value) > parseFloat(resu)) {
+                    mensajesNuevo(23, "images/advertencia.PNG", "audio/saperror.wav");
+                    can[i].focus();
+                }
+                canf = parseFloat(can[i].value) + parseFloat(canTomada[i].value);
+                if (canf > parseFloat(canTotal[i].value)) {
+                    mensajesNuevo(21, "images/advertencia.PNG", "audio/saperror.wav");
+                    can[i].focus();
+                }
+                $('#BtnResAcp').prop("disabled", true);
+                $('#CerrarMatResr').prop("disabled", true);
+                ShowMsg(1, "images/load.gif", "audio/sapmsg.wav");
+                $('#guardar').prop("disabled", true);
+                setTimeout(function () {
+                    SaveResepos();
+                }, 4000);
+            }
+        }
+    }
+}
+function SaveResepos() {
+    var pos = document.getElementsByName("tdPosR");
+    var mat = document.getElementsByName("tdMateR");
+    var des = document.getElementsByName("tdDescR");
+    var can = document.getElementsByName("tdCanR");
+    var ume = document.getElementsByName("tdUmeR");
+    var lot = document.getElementsByName("tdLotR");
+    var ctm = document.getElementsByName("tdCatTomR");
+    var cat = document.getElementsByName("tdCatTotR");
+    var random = ObtenerFolioRandom();
+    var ClaseM = $('#bxClase').val().trim();
+    var Reserv = $('#bxReserva').val().trim();
+    var CCostoRes = "";
+    var NOrdenRes = "";
+    var AlmDesRes = "";
+    switch (ClaseM) {
+        case "201":
+            CCostoRes1 = document.getElementsByName("tdCCostoR");
+            CCostoRes = CCostoRes1[i].value;
+            break;
+        case "261":
+            NOrdenRes1 = document.getElementsByName("tdNOrdenR");
+            NOrdenRes = NOrdenRes1[i].value;
+            break;
+        case "311":
+            AlmDesRes1 = document.getElementsByName("tdAlmDesR");
+            AlmDesRes = AlmDesRes1[i].value;
+            break;
+    }
+    for (i = 0; i < mat.length; i++) {
+        if (mat[i].value.length != 0) {
+            var extr = "&ReservaPosicion=" + pos[i].value
+                    + "&ReservaMaterial=" + mat[i].value
+                    + "&ReservaDescripcion=" + des[i].value
+                    + "&ReservaCantidad=" + can[i].value
+                    + "&ReservaCanTomada=" + ctm[i].value
+                    + "&ReservaCanTotal=" + cat[i].value
+                    + "&ReservaUnidadM=" + ume[i].value
+                    + "&ReservaLote=" + lot[i].value
+                    + "&ReservaCantidadRes=" + cat[i].value
+                    + "&ReservaDoc=" + Reserv
+                    + "&ReservaCMov=" + ClaseM
+                    + "&ReservaCCosto=" + CCostoRes
+                    + "&ReservaNOrden=" + NOrdenRes
+                    + "&ReservaAlmDes=" + AlmDesRes
+                    + "&IpData=" + random;
+            InserMovsNuevosTemp('VentanaModalReservasTratar', extr);
+        }
+    }
+    $('#guardar').prop('disabled', false);
+    $('#Btnmosnews').prop("disabled", false);
+    $('#btnCancelReservas').prop("disabled", false);
+    $('#iconmsg').hide();
+    var men = document.getElementById("msg");
+    men.innerHTML = "";
+    var ven = document.getElementById('VentanaModalAv');
+    var msg = "Posicion(s) cargada correctamente";
+    abrirVentanaAv(ven, msg);
+    var theHandle = document.getElementById("handleAV");
+    var theRoot = document.getElementById("VentanaModalAv");
+    Drag.init(theHandle, theRoot);
+    ocultarVentana('VentanaModalReservasTratar', 'btnAdd');
+
+}
+function ExistenciaStock(mat, cen, alm, lot, doc, pos, can, clm) {
+    var res = 0;
+    var acc = "ValidarExistencia";
+    var datos = "&Material=" + mat + "&ClaseMov=" + clm
+            + "&Centro=" + cen + "&Almacen=" + alm
+            + "&Lote=" + lot + "&Documento=" + doc
+            + "&Posicion=" + pos + "&CantidadGrid=" + can;
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'peticionMovMateriales2',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Accion=" + acc + datos,
+        success: function (data) {
+            res = data;
+//            if (data != 0) {
+//                var v1 = parseFloat(can);
+//                var v2 = parseFloat(data);
+//                if (v1 > v2) {
+//                    res = 1;
+//                } else {
+//                    res = 2;
+//                }
+//            }
+        }
+    });
+    return res;
 }
