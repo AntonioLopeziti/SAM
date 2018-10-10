@@ -137,6 +137,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                 case "guardaCabecera":
                     String fl = "PP" + folioActual.getFolioActual();
                     AccesoDatos.ACC_Ordenes_pp_notificaciones.ObtenerInstancia().CabeceraInsertaMovNot(fl, v1, v2, horaActual, fechaActual, v3, v4, v5, v6, v7);
+                    ACC_Folios.ObtenerIstancia().ActualizarFolio("XX", xx.getFolioActual());
                     out.println(fl);
                     break;
                 case "guardaPos":
@@ -429,10 +430,10 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                             + "<td hidden>000</td>"
                             + "<td>000000000</td>"
                             + "<td>0000000000</td>"
-                            + "<td>0000000000000000000000000000000000000000000</td>"
+                            + "<td>00000000000000000000000000000000000000000</td>"
                             + "<td>000000000000</td>"
                             + "<td>000</td>"
-                            + "<td>000000</td>"
+                            + "<td>0000000</td>"
                             + "<td>0000000</td>"
                             + "<td>00000000000</td>"
                             + "<td>00</td>"
@@ -441,7 +442,7 @@ public class PeticionNotificacionesOrdenesSAMPP extends HttpServlet {
                             + "</tr>"
                             + "</tbody>"
                             + "</table>");
-                    ACC_Folios.ObtenerIstancia().ActualizarFolio("XX", xx.getFolioActual());
+//                    ACC_Folios.ObtenerIstancia().ActualizarFolio("XX", xx.getFolioActual());
                     break;
                 case "TabOperacionesPP":
                     int opp = 0;
