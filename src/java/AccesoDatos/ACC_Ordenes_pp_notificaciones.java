@@ -1061,9 +1061,21 @@ public class ACC_Ordenes_pp_notificaciones {
                 } else {
                     ma.setDescripcion(rs.getString("cadena"));
                 }
+                String prfo = "";
+                switch(ma.getCentro()){
+                    case "1000":
+                        prfo = "BON";
+                        break;
+                    case "2000":
+                        prfo = "EVA";
+                        break;
+                    case "3000":
+                        prfo = "PRE";
+                        break;
+                }
                 ma.setCantidad2(cnt);
                 ma.setHidden("disabled");
-                ma.setLote("LOTE" + ll.substring(1, ll.length()));
+                ma.setLote(prfo + ll.substring(1, ll.length()));
                 ma.setAncho(rs.getString("ancho"));
                 mpm.add(ma);
             }
