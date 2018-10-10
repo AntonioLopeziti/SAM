@@ -25,9 +25,9 @@ $(document).ready(function () {
         iconm.src = "images/aceptar.png";
         var men = document.getElementById("msg");
         men.innerHTML = "Se han grabado los cambios";
-        setTimeout(function () {
-            tablaListadoOrdenesPP();
-        }, 1000);
+//        setTimeout(function () {
+//            tablaListadoOrdenesPP();
+//        }, 1000);
     });
 
     $("#imgLib").click(function () {
@@ -36,16 +36,26 @@ $(document).ready(function () {
         for (i = 0; i < radiosPP.length; i++) {
             if (radiosPP[i].checked) {
                 var stat = $("#tdPP6" + radiosPP[i].value).text().substring(0, 4);
-                if (stat !== "ABIE") {
+                var lond = $("#tdPP6" + radiosPP[i].value).text().trim().length;
+                if (lond > 4) {
+                    if (stat !== "ABIE") {
+                        var iconm = document.getElementById("iconmsg");
+                        iconm.style.display = "inline";
+                        iconm.style.visibility = "visible";
+                        iconm.src = "images/advertencia.PNG";
+                        var men = document.getElementById("msg");
+                        men.innerHTML = "No se puede aplicar el status a la orden";
+                    } else {
+                        EnviaStatusOrden(radiosPP[i].value, "LIB.", "L");
+                        return;
+                    }
+                } else {
                     var iconm = document.getElementById("iconmsg");
                     iconm.style.display = "inline";
                     iconm.style.visibility = "visible";
                     iconm.src = "images/advertencia.PNG";
                     var men = document.getElementById("msg");
-                    men.innerHTML = "No se puede aplicar el status a la orden";
-                } else {
-                    EnviaStatusOrden(radiosPP[i].value, "LIB.", "L");
-                    return;
+                    men.innerHTML = "No se puede aplicar cambios, espere respuesta de estatus de SAP";
                 }
             }
         }
@@ -57,16 +67,27 @@ $(document).ready(function () {
         for (i = 0; i < radiosPP.length; i++) {
             if (radiosPP[i].checked) {
                 var stat = $("#tdPP6" + radiosPP[i].value).text().substring(0, 4);
-                if (stat !== "LIB.") {
+                var lond = $("#tdPP6" + radiosPP[i].value).text().trim().length;
+                if (lond > 4) {
+                    if (stat !== "LIB.") {
+                        var iconm = document.getElementById("iconmsg");
+                        iconm.style.display = "inline";
+                        iconm.style.visibility = "visible";
+                        iconm.src = "images/advertencia.PNG";
+                        var men = document.getElementById("msg");
+                        men.innerHTML = "No se puede aplicar el status a la orden";
+                    } else {
+                        EnviaStatusOrden(radiosPP[i].value, "CTEC", "C");
+
+                        return;
+                    }
+                } else {
                     var iconm = document.getElementById("iconmsg");
                     iconm.style.display = "inline";
                     iconm.style.visibility = "visible";
                     iconm.src = "images/advertencia.PNG";
                     var men = document.getElementById("msg");
-                    men.innerHTML = "No se puede aplicar el status a la orden";
-                } else {
-                    EnviaStatusOrden(radiosPP[i].value, "CTEC", "C");
-                    return;
+                    men.innerHTML = "No se puede aplicar cambios, espere respuesta de estatus de SAP";
                 }
             }
         }
@@ -78,16 +99,26 @@ $(document).ready(function () {
         for (i = 0; i < radiosPP.length; i++) {
             if (radiosPP[i].checked) {
                 var stat = $("#tdPP6" + radiosPP[i].value).text().substring(0, 4);
-                if (stat !== "CTEC") {
+                var lond = $("#tdPP6" + radiosPP[i].value).text().trim().length;
+                if (lond > 4) {
+                    if (stat !== "CTEC") {
+                        var iconm = document.getElementById("iconmsg");
+                        iconm.style.display = "inline";
+                        iconm.style.visibility = "visible";
+                        iconm.src = "images/advertencia.PNG";
+                        var men = document.getElementById("msg");
+                        men.innerHTML = "No se puede aplicar el status a la orden";
+                    } else {
+                        EnviaStatusOrden(radiosPP[i].value, "LIB.", "A");
+                        return;
+                    }
+                } else {
                     var iconm = document.getElementById("iconmsg");
                     iconm.style.display = "inline";
                     iconm.style.visibility = "visible";
                     iconm.src = "images/advertencia.PNG";
                     var men = document.getElementById("msg");
-                    men.innerHTML = "No se puede aplicar el status a la orden";
-                } else {
-                    EnviaStatusOrden(radiosPP[i].value, "LIB.", "A");
-                    return;
+                    men.innerHTML = "No se puede aplicar cambios, espere respuesta de estatus de SAP";
                 }
             }
         }
@@ -163,7 +194,8 @@ function EnviaStatusOrden(pos, stat, ope) {
             iconm.src = "images/aceptar.png";
             var men = document.getElementById("msg");
             men.innerHTML = "Se ha grabado la orden con el número " + data;
-            tablaListadoOrdenesPP(pos);
+            $('#tdPP6' + pos).html(stat);
+//            tablaListadoOrdenesPP(pos);
         }
     });
 }
@@ -268,7 +300,7 @@ function tablaListadoOrdenesPorCenFol(centro, folio) {
             if (data == 0) {
                 document.getElementById('SecCuerpo').innerHTML = data;
                 AjustarCabecera('TabHead', 'TabBody', 3, 'SecCuerpo');
-                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";                
+                document.getElementById('DobleContainer').style.height = document.getElementById("TabBody").offsetHeight + "px";
                 ShowMsg(1, "images/aceptar.png", "audio/sapmsg.wav");
             } else {
                 document.getElementById('SecCuerpo').innerHTML = data;
