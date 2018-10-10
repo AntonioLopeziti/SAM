@@ -646,6 +646,54 @@
                 </div>
             </div>
         </div>
+
+        <!----  Reservas ---->
+        <div id="VentanaModalReservasTratar" class="VentanaModal301">
+            <div id="hanldeResTr"><label class="TituRese" id="ReseNumT"></label></div>
+            <div id="BuscarParamRes" class="BuscarParam_u">
+                <div class="fondo_MatchRes">
+                    <div class="DivTablaRes">
+                        <div id="tabscrllRes">
+                            <section id="TableComRes" >
+                                <section class="TableContainerRes">
+                                    <section class="SecHeadRes">
+                                        <table id="TabHeadRes">
+                                            <thead>
+                                                <tr>
+                                                    <td>Pos.</td>
+                                                    <td>Material</td>
+                                                    <td>Descripción</td>
+                                                    <td>Cantidad</td>
+                                                    <td>Un.Medida</td>
+                                                    <td>Lote</td>
+                                                    <td>Can.Tomada</td>
+                                                    <td>Can.T.Res.</td>
+                                                    <td id="TDCasoTitl"></td>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </section>
+                                    <section class="SecBodyRes" id="SecCuerpoRes">
+                                    </section>
+                                </section>
+                            </section>
+                        </div>
+                        <section style="border:1px solid #ddd" class="DobleScrollRes" id="DobleSectionRes">
+                            <section id="DobleContainerRes"></section>
+                        </section>
+                    </div>
+                </div>
+                 <div  class="Botones_Match" style="margin-top: 50px">
+                    <button  class="BtnMatchOKMats"  style="margin-right:-4%; cursor:pointer;" onclick="ValidarReservasTratar()" id="BtnResAcp"></button>
+                    <button  class="BtnMatchCEMats"  style="cursor:pointer;" id="CerrarMatResr" onclick="ocultarVentana('VentanaModalReservasTratar', 'btnReserva', 'm');"></button>
+                    <!--<img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" onclick="Validarmovis()" id="Btnmosnews"/>-->
+                    <!--<img class="BtnMatchIcon" src="images/HR_not.png" style="cursor:pointer;" onclick="ocultarVentana('VentanaModal301', 'btnAdd', 'm');"/>-->
+                </div>
+            </div>
+        </div>
+
+
+
         <div id="VentanaModalStockT" class="VentanaModal">
             <div id="handle21"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.STOCKNumMaterial"));%> (1)</label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalStockT', 'bxMaterial305');"><label >X</label></div></div>
             <div class="PanelBntMatch"><button id="btnPnStockT"><%out.println(po.getProperty("etiqueta.NTextBDocVlD"));%></button><hr></div>
@@ -1577,11 +1625,11 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Material</th>
-                                        <th>Lote</th>
-                                        <th>L.U</th>
-                                        <th>Num.Doc</th>
-                                        <th>Pos.</th>
+                                        <th style="width: 25%;">Material</th>
+                                        <th style="width: 25%;">Lote</th>
+                                        <th style="width: 20%;">L.U</th>
+                                        <th style="width: 20%;">Num.Doc</th>
+                                        <th style="width: 10%;">Pos.</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -1637,6 +1685,31 @@
                         </div>
                         <div id="cuerpoDatos">
                             <div class="nofixedX" id="cargarDatosCentroDesNuevo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="VentanaModalLoteRes" class="VentanaModalLoteRes">
+            <div id="handleLoteres"><label id="TituloMatch"><%out.println(po.getProperty("etiqueta.LoteMa_Mov"));%></label><div class="BotonCerrar_Matc" onclick="ocultarVentana('VentanaModalLoteRes', '');"><label >X</label></div></div>
+            <div class="PanelBntMatch"><button><%out.println(po.getProperty("etiqueta.GralRestriciones"));%></button><hr></div>
+            <div id="ConsultaTablaLoteRes">
+                <div class="tablaCab">
+                    <div class="table-scroll" id="table-scrollLoteRes">
+                        <div class="fixedYL" id="fixedYLoteRes">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Material</th>
+                                        <th>Lote</th>
+                                        <th>Stock L.U</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="cuerpoDatos">
+                            <div class="nofixedXL" id="cargarDatosLoteRes">
                             </div>
                         </div>
                     </div>
@@ -2402,7 +2475,7 @@
                         ventana.style.left = x + "px";
                         ventana.style.top = y + "px";
                         ventana.style.display = 'block';
-                        $('#bxLote201').prop('disabled',true);
+                        $('#bxLote201').prop('disabled', true);
                         $('#bxTxtMaterial201').val("");
                         $('#bxMaterial201').val("");
                         $('#bxcnt201').css('background-image', 'url(images/necesario.PNG)');
@@ -2985,7 +3058,7 @@
                         xmlhttp.open("GET", "PeticionMovMateriales?Action=ValidarCampos" + extras, true);
                         xmlhttp.send();
                     }
-                    function ObtenerMaterialAll(material,clase)
+                    function ObtenerMaterialAll(material, clase)
                     {
                         var lang = "<%=Idioma%>";
                         if (material.length > 0) {
@@ -2996,10 +3069,10 @@
                                     if (xmlhttp.responseText == 0)
                                     {
                                         invalido("Material no creado para el Centro e Idioma de Trab");
-                                        document.getElementById("bxTxtMaterial"+clase).value = "";
+                                        document.getElementById("bxTxtMaterial" + clase).value = "";
                                     } else
                                     {
-                                        document.getElementById("bxTxtMaterial"+clase).value = xmlhttp.responseText;
+                                        document.getElementById("bxTxtMaterial" + clase).value = xmlhttp.responseText;
                                         document.getElementById("msg").innerHTML = "";
                                         $('#iconmsg').hide();
                                     }
@@ -4037,8 +4110,8 @@
                                                             "&v5=" + texto + "&v6=" + CenCos +
                                                             "&v7=" + centro + "&clase=" + clas +
                                                             "&v8=" + pp + "&v9=" + movimiento +
-                                                            "&v12=" + pos_ + "&ipFolio=" + random ;
-                                                            Tabla200('VentanaModal201', extr);
+                                                            "&v12=" + pos_ + "&ipFolio=" + random;
+                                                    Tabla200('VentanaModal201', extr);
                                                     var ven = document.getElementById('VentanaModalAv');
                                                     var msg = "Posición añadida correctamente";
                                                     abrirVentanaAv(ven, msg);
@@ -4096,6 +4169,7 @@
                         document.getElementById("bxCarta").disabled = true;
                         document.getElementById("btnReserva").disabled = true;
                         document.getElementById("bxReserva").disabled = true;
+
                     }
                     function actcm() {
                         var tab = document.getElementsByName("Pedidos");
@@ -5967,32 +6041,32 @@
                                 nr = res[6];
                                 fl = res[7];
                                 cl = res[8];
-                                TomarPosiciones();
+                                CargarTablaReserva();
                             }
                         });
                     }
-                    function TomarPosiciones() {
-                        var lang = "<%=Idioma%>";
-                        $.ajax({
-                            async: false,
-                            type: 'GET',
-                            url: 'PeticionMovMateriales',
-                            contentType: "application/x-www-form-urlencoded",
-                            processData: true,
-                            data: "Action=CargarPosicionReserva" + "&q=" + vr + "&v1=" + nr + "&v2=" + fl + "&v3=" + cl + "&lang=" + lang,
-                            success: function (data) {
-                                document.getElementById("SecRG").innerHTML = data;
-                                if (document.getElementsByName('reserv1').length > 0)
-                                {
-                                    TitulosVentanas();
-                                    mostrarVentana("VentanaRG");
-                                    var theHandle = document.getElementById('handle20');
-                                    var theRoot = document.getElementById('VentanaRG');
-                                    Drag.init(theHandle, theRoot);
-                                }
-                            }
-                        });
-                    }
+//                    function TomarPosiciones() {
+//                        var lang = "<%=Idioma%>";
+//                        $.ajax({
+//                            async: false,
+//                            type: 'GET',
+//                            url: 'PeticionMovMateriales',
+//                            contentType: "application/x-www-form-urlencoded",
+//                            processData: true,
+//                            data: "Action=CargarPosicionReserva" + "&q=" + vr + "&v1=" + nr + "&v2=" + fl + "&v3=" + cl + "&lang=" + lang,
+//                            success: function (data) {
+//                              
+//                                CargarTablaReserva();
+////                                 document.getElementById("SecRG").innerHTML = data;
+////                                if (document.getElementsByName('reserv1').length > 0)
+////                                {
+////                                    TitulosVentanas();
+////                                    mostrarVentana("VentanaRG");
+////                                   
+////                                }
+//                            }
+//                        });
+//                    }
                     function AgregarPosisciones()
                     {
                         var c1 = document.getElementsByName('reserv1');
@@ -6813,6 +6887,21 @@
                                 break;
                             case 18:
                                 funinva = "Ingrese clase de movimiento";
+                                break;
+                            case 19:
+                                funinva = "El material esta sujero a lote, ingrese lote";
+                                break;
+                            case 20:
+                                funinva = "La cantidad no puede ir vacia";
+                                break;
+                            case 21:
+                                funinva = "La cantidad supera el limite de reserva";
+                                break;
+                            case 22:
+                                funinva = "Sin stock libre utilización para disposición";
+                                break;
+                            case 23:
+                                funinva = "No hay suficiente stock libre para disposición";
                                 break;
 
                         }
