@@ -525,7 +525,8 @@
                                 children: [
                                     {title: '<%=crear_m%>', key: "conf_userCrear"},
                                     {title: '<%=modif_m%>', key: "conf_userModif"},
-                                    {title: '<%=visua_m%>', key: "conf_userVisual"}
+                                    {title: '<%=visua_m%>', key: "conf_userVisual"},
+                                    {title: 'prueba', key: "conf_userVisual4"}
                                 ]},
                             {title: '<%=folios_m%>', key: "conf_fol", expand: true,
                                 children: [
