@@ -67,7 +67,7 @@ public class peticionMovMateriales2 extends HttpServlet {
             String user = (String) session.getAttribute("Usuario");
             Properties po = new Properties();
             po.load(getServletContext().getResourceAsStream("/WEB-INF/LanguageES.properties"));
-          
+
             ////RESERVAS
             String NReservaR = request.getParameter("NReservaR");
             String PosicionR = request.getParameter("PosicionR");
@@ -101,12 +101,12 @@ public class peticionMovMateriales2 extends HttpServlet {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < st.size(); i++) {
-                            out.println("<tr ondblclick=\"seleccionarMCLoteNuevo('" + st.get(i).getLote() + "','" + st.get(i).getNum_doc() + "', '" + st.get(i).getPos_doc() + "', '" + ClaseM + "','"+st.get(i).getStocklibre_utilizacion()+"');\">");
-                            out.println("<td>" + st.get(i).getMaterial() + "</td>");
-                            out.println("<td>" + st.get(i).getLote() + "</td>");
-                            out.println("<td>" + st.get(i).getStocklibre_utilizacion() + "</td>");
-                            out.println("<td>" + st.get(i).getNum_doc() + "</td>");
-                            out.println("<td>" + st.get(i).getPos_doc() + "</td>");
+                            out.println("<tr ondblclick=\"seleccionarMCLoteNuevo('" + st.get(i).getLote() + "','" + st.get(i).getNum_doc() + "', '" + st.get(i).getPos_doc() + "', '" + ClaseM + "','" + st.get(i).getStocklibre_utilizacion() + "');\">");
+                            out.println("<td style=\"width: 25%;\">" + st.get(i).getMaterial() + "</td>");
+                            out.println("<td style=\"width: 25%;\">" + st.get(i).getLote() + "</td>");
+                            out.println("<td style=\"width: 20%;\">" + st.get(i).getStocklibre_utilizacion() + "</td>");
+                            out.println("<td style=\"width: 20%;\">" + st.get(i).getNum_doc() + "</td>");
+                            out.println("<td style=\"width: 10%;\">" + st.get(i).getPos_doc() + "</td>");
                             out.println("</tr>");
                         }
                         out.println("</tbody>");
@@ -326,7 +326,7 @@ public class peticionMovMateriales2 extends HttpServlet {
                     out.println(j3);
                     break;
                 case "ValidarCantidMaterial315":
-                    String stk = ACC_Stock.ObtenerInstancia().ValidarCantidadMaterial(Materi, Centro, Almace, Lote,Docume, Posici );
+                    String stk = ACC_Stock.ObtenerInstancia().ValidarCantidadMaterial(Materi, Centro, Almace, Lote, Docume, Posici);
                     out.println(stk);
                     break;
                 case "PedidoPos":
@@ -338,12 +338,12 @@ public class peticionMovMateriales2 extends HttpServlet {
                     out.println(jc);
                     break;
                 case "ConsultaReserva":
-                      ArrayList<reserva_posiciones_crea> res = ACC_Reservas.ObtenerInstancia().CargarReservaMC(CentroR,AlmacenR,ClaseMovR,NReservaR,PosicionR,MaterialR,DescripcionR);
+                    ArrayList<reserva_posiciones_crea> res = ACC_Reservas.ObtenerInstancia().CargarReservaMC(CentroR, AlmacenR, ClaseMovR, NReservaR, PosicionR, MaterialR, DescripcionR);
                     if (res.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
                         for (int i = 0; i < res.size(); i++) {
-                            out.println("<tr ondblclick=\"SelectReserM('" + res.get(i).getFolio_sap() + "','"+res.get(i).getFolio_sam()+"', '"+res.get(i).getAlmacen()+"');\">");
+                            out.println("<tr ondblclick=\"SelectReserM('" + res.get(i).getFolio_sap() + "','" + res.get(i).getFolio_sam() + "', '" + res.get(i).getAlmacen() + "');\">");
                             out.println("<td style=\"width: 15%\">" + res.get(i).getFolio_sap() + "</td>");
                             out.println("<td style=\"width: 15%\">" + res.get(i).getFolio_sam() + "</td>");
                             out.println("<td style=\"width: 10%\">" + res.get(i).getPosicion_reserva() + "</td>");
@@ -356,6 +356,96 @@ public class peticionMovMateriales2 extends HttpServlet {
                         out.println("</table>");
                     } else {
                         out.println(0);
+                    }
+                    break;
+                case "VentanaModalReservasTratar":
+                    pedido_detalle pdr = new pedido_detalle();
+                    pdr.setNum_posicion(request.getParameter("indiceRes"));
+                    pdr.setMaterial(request.getParameter("ReservaMaterial"));
+                    pdr.setDescripcion(request.getParameter("ReservaDescripcion"));
+                    pdr.setUnidad_medida_base(request.getParameter("ReservaUnidadM"));
+                    pdr.setLote(request.getParameter("ReservaLote"));
+                    pdr.setCantidad(request.getParameter("ReservaCantidad"));
+                    pdr.setTipo_mov(request.getParameter("ReservaCMov"));
+                    pdr.setNum_solped(request.getParameter("ReservaDoc"));
+                    pdr.setNum_posicion_solped(request.getParameter("ReservaPosicion"));
+                    pdr.setCentro_coste(request.getParameter("ReservaCCosto"));
+                    pdr.setNum_orden(request.getParameter("ReservaNOrden"));
+                    pdr.setAlmacen(request.getParameter("ReservaAlmDes"));
+                    pdr.setLote_proveedor(request.getParameter("ReservaCanTomada"));
+                    pdr.setDenominacion_clase_doc_compras(request.getParameter("ReservaCanTotal"));
+                    ArrayList<pedido_detalle> pres = ACC_Pedidos.ObtenerInstancia().IngresaTratarReservas(pdr, us);
+                    out.println("<table class=\"TablaCont\" id=\"TablaMov\">\n"
+                            + "                                    <tr id=\"CabeceraTabla\">\n"
+                            + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.Tmaterial_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.Tcantidad_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TUM_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.Tlote_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TstockEspecial_MOM") + "</td>\n"
+                            + "                                        <td class=\"ajustar\">" + po.getProperty("etiqueta.Ttextobreve_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.Torden_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TCentroDeCostos_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TclasCost_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TPedido_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TPosPed_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.Treserva_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TPosRes_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TProveedor_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TMaterialDestino_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TCentroDestino_MOM") + "</td>\n"
+                            + "                                        <td>" + po.getProperty("etiqueta.TAlmacenDestino_MOM") + "</td>\n"
+                            + "                                        <td class=\"ocultar\">&nbsp;</td>\n"
+                            + "                                    </tr> \n"
+                            + "                                    <tbody>");
+                    int c1;
+                    for (c1 = 0; c1 < pres.size(); c1++) {
+                        out.println("<tr>\n"
+                                + "<td><input type=\"checkbox\" name=\"Pedidos\" value=\"" + pres.get(c1).getNum_posicion() + "\"></td>"
+                                + "<td name=\"mmmat\">" + pres.get(c1).getMaterial() + "</td>"
+                                + "<td name=\"mmprr\">" + pres.get(c1).getPor_recibir() + "</td>"
+                                + "<td name=\"mmumb\">" + pres.get(c1).getUnidad_medida_base() + "</td>"
+                                + "<td name=\"mmnlt\">" + pres.get(c1).getNuevo_lote() + "</td>"
+                                + "<td></td>"
+                                + "<td class=\"ajustar\" name=\"mmdsc\">" + pres.get(c1).getDescripcion() + "</td>"
+                                + "<td name=\"mmNOrden\">" + pres.get(c1).getNum_orden() + "</td>"
+                                + "<td name=\"mmcCosto\">" + pres.get(c1).getCentro_coste() + "</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td name=\"mmped\">" + pres.get(c1).getNum_solped() + "</td>"
+                                + "<td name=\"mmnpe\">" + pres.get(c1).getNum_posicion_solped() + "</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td</td>"
+                                + "<td name=\"mmAlmace\">" + pres.get(c1).getAlmacen() + "</td>"
+                                + "<td class=\"ocultar\" name=\"mmCantTomada\">" + pres.get(c1).getLote_proveedor() + "</td>"
+                                + "<td class=\"ocultar\" name=\"mmCantTotal\">" + pres.get(c1).getDenominacion_clase_doc_compras() + "</td>"
+                                + "<td class=\"ocultar\" name=\"mmidx\">" + (Integer.parseInt(c1 + "") + 1) + "</td>"
+                                + "</tr>");
+                    }
+                    for (int d = c1; d <= 14; d++) {
+                        out.println("<tr>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "<td>&nbsp;</td>"
+                                + "</tr>");
                     }
                     break;
             }
