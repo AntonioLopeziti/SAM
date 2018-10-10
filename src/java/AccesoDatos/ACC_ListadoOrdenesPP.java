@@ -444,6 +444,20 @@ public class ACC_ListadoOrdenesPP {
         }
         return lo;
     }
+    public void CambiarStatusOrdDM(String x, String s){
+            Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        String query = "{call PP.CambiarTampStatusPP(?,?)}";
+        try {
+            PreparedStatement pss = con.prepareStatement(query);
+            pss.setString(1, x);
+            pss.setString(2, s);
+            pss.executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Error en ACC_ListadoOrdenesPP(), CambiaStatusOrden() por: " + e);
+        }
+        cnx.CerrarConexion(con);
+    }
     
     public void guardaStatusOrden(StatusOrdenes so){
         Conexion cnx = new Conexion();
