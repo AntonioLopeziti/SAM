@@ -409,6 +409,7 @@ and open the template in the editor.
     float: right;
     z-index: 1; position:relative;
 }
+
 #DobleSection { height: 60px; }
 #DobleSectionN { height: 90px; margin-top: 50px;}
 
@@ -1060,6 +1061,22 @@ and open the template in the editor.
 
 
 /*VENTANA MODAL RESERVAS MATCH*/
+.VentanaModalLoteRes
+{    
+    position: fixed; 
+    width: 500px;
+    height: 380px;
+    margin-top: 20px;
+    left: 100%; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    border: #333333 3px solid; 
+    background-color: #f2f2f2; 
+    color: #000000;
+    display:none;
+    z-index:1002;
+}
 .VentanaModalReservasL
 {    
     position: fixed; 
@@ -1082,6 +1099,20 @@ and open the template in the editor.
     color:#E1F0D0;
     background: #333  top repeat-x;
 }
+#hanldeResTr{
+    height: 6%;
+    font-size: 1.5em;
+    padding-left: 2%;
+    width: 98%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+} 
+#handleLoteres{
+    height: 8%;
+    width: 100%;
+    color:#E1F0D0;
+    background: #333  top repeat-x;
+} 
 .fixedYR{
     position: relative;
     top: 0;
@@ -1294,6 +1325,27 @@ and open the template in the editor.
     overflow-y: scroll;
     overflow-x: hidden; 
 }
+.DivTablaRes{
+    padding-left: 1%;
+    width: 99%;
+    height: 90%;
+    /*border: 1px solid #000;*/
+}
+#tabscrllRes{
+    width: 99%;
+    display: inline-block;
+}
+.DobleScrollRes { 
+    height: 280px;
+    width: 17px; 
+    background-color: #007CC0;
+    display: inline-block;
+    margin-bottom: 17px;
+    margin-left: -22px;
+    overflow-y: scroll;
+    overflow-x: hidden; 
+    z-index: 1; position:relative;
+}
 #hanlde301{
     height: 6%;
     width: 100%;
@@ -1301,6 +1353,16 @@ and open the template in the editor.
     background: #333  top repeat-x;
 }
 .tdSMatch{
+    text-align: center;
+    border:none;
+    width:100%;
+}
+.tdSMatchP{
+    text-align: center;
+    border:none;
+    width:100%;
+}
+.tdSMatchP{
     text-align: center;
     border:none;
     width:100%;
@@ -1371,6 +1433,55 @@ td{
     overflow-x: hidden;    
 }
 #SecCuerpo301 { height: 280px; }
+
+
+#TableComRes
+{
+    width: 100%;
+    background-color: #E6EBEB;
+}
+.TableContainerRes
+{   
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.TableContainerRes table
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    border: rgba(193, 193, 193, 0.48) 1px solid;
+    table-layout: auto;
+    padding-right: 0.5em;
+}
+.SecBodyRes tr
+{
+    background-color: #E6EBEB;
+    font-size:small;
+    font-family: sans-serif;
+}
+td{
+    text-align: center;
+}
+.SecHeadRes thead> tr
+{
+    margin-top: 0;
+    background-color:#DDDDDD;
+    font-family: Tahoma;
+    font-size:small;
+    margin-top: 0;
+    bottom: 0;
+}
+.SecHeadRes
+{
+    display: block;
+}
+.SecBodyRes
+{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+#SecCuerpoRes { height: 280px; }
 
 
 
