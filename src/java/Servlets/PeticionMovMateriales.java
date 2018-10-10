@@ -45,6 +45,8 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 
 import java.util.LinkedList;
@@ -94,6 +96,14 @@ public class PeticionMovMateriales extends HttpServlet {
             String horaActual = Consultas.ObtenerInstancia().ObtenerhoraActualServidor();
             String docEE = request.getParameter("DocEE");
             String docPEE = request.getParameter("DocPEE");
+            String NResr = request.getParameter("ReservN");
+            String ClasM = request.getParameter("ClaMo");
+            ///// Res
+            String MatR = request.getParameter("MatRes");
+            String CenR = request.getParameter("CenRes");
+            String AlmR = request.getParameter("AlmRes");
+            String PosR = request.getParameter("PosRes");
+            String ClmR = request.getParameter("ClaMovR");
 
             switch (accion) {
                 case "VentanaModalCentro":
@@ -351,7 +361,7 @@ public class PeticionMovMateriales extends HttpServlet {
                     }
                     break;
                 case "VentanaModalCC":
-                    ArrayList<CeCos> cc = ACC_CentroCosto.ObtenerInstancia().ConsultaCeCOS(v1, v2, v3, v4,v5);
+                    ArrayList<CeCos> cc = ACC_CentroCosto.ObtenerInstancia().ConsultaCeCOS(v1, v2, v3, v4, v5);
                     if (cc.size() > 0) {
                         out.println("<table>");
                         out.println("<tbody>");
@@ -584,156 +594,156 @@ public class PeticionMovMateriales extends HttpServlet {
                     break;
                 case "CargarPosicionReserva":
                     ArrayList<reserva_posiciones_crea> rp = ACC_Reservas.ObtenerInstancia().cargarPosiResMov(queryrespos, v1, v2, v3);
-                    int x;
-                    switch (v3) {
-                        case "201":
-                            out.println("<table class=\"TablaCont\" id=\"TablaRG\">\n"
-                                    + "                                    <tr id=\"CabeceraTabla\">\n"
-                                    + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
-                                    + "                                        <td>Material&nbsp;</td>\n"
-                                    + "                                        <td>Descripción&nbsp;</td>\n"
-                                    + "                                        <td>Cantidad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
-                                    + "                                        <td>UM&nbsp;</td>\n"
-                                    + "                                        <td>Lote&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
-                                    + "                                        <td></td>\n"
-                                    + "                                        <td>CentroCostos&nbsp;</td>\n"
-                                    + "                                        <td>Folio&nbsp;</td>\n"
-                                    + "                                        <td>Pos&nbsp;</td>\n"
-                                    + "                                    </tr> \n"
-                                    + "                                    <tbody>");
-                            for (x = 0; x < rp.size(); x++) {
-                                out.println("<tr>");
-                                out.println("<td>&nbsp;&nbsp;&nbsp;</td>");
-                                out.println("<td name=\"reserv1\">" + rp.get(x).getNum_material() + " </td>");
-                                out.println("<td name=\"reserv8\">" + ACC_Material.ObtenerInstancia().ConsultaNombreMaterial(rp.get(x).getNum_material(), idioma) + " </td>");
-                                out.println("<td class=\"tdcRG\"><input maxlength=\"13\" type=\"text\"  value=\"" + rp.get(x).getCantidad_necesaria() + "\"name=\"reserv2\"  class=\"bxcRG\" id=\"cntRG" + x + "\" onblur=\"this.value = checkDec(this.value, 3)\" onfocus=\"loteBtnHide('" + rp.size() + "')\"></td>");
-                                out.println("<td name=\"reserv3\">" + rp.get(x).getUnidad_medida_base() + " </td>");
-                                if (ACC_Material.ObtenerInstancia().ConsultaLoteMaterial(rp.get(x).getNum_material()) == 1) {
-                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\"></td>");
-                                } else {
-                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\" disabled></td>");
-                                }
-                                out.println("<td><button id=\"btnLote" + x + "\" class='BtnMatchIcon' style=\"display : none;\" onclick=\"MatchLote('" + x + "', '" + rp.get(x).getNum_material() + "')\"></button></td>");
-                                out.println("<td name=\"reserv5\">" + rp.get(x).getCentro_coste() + " </td>");
-                                if (rp.get(x).getFolio_sap().equals("")) {
-                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sam() + " </td>");
-                                } else {
-                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sap() + " </td>");
-                                }
-                                out.println("<td name=\"reserv7\">" + rp.get(x).getNum_posicion() + " </td>");
-                                out.println("</tr>");
-                            }
-                            out.println("<tr>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">ADMON_PORTUARIA__INTEGRAL_DE_TOPO_S_Mas_Esp</td>\n"
-                                    + "                <td class=\"ocultar\"></td>\n"
-                                    + "                <td class=\"ocultar\"></td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "           </tr>");
-                            out.println("</table>");
-                            break;
-                        case "261":
-                            out.println("<table class=\"TablaCont\" id=\"TablaRG\">\n"
-                                    + "                                    <tr id=\"CabeceraTabla\">\n"
-                                    + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
-                                    + "                                        <td>Material&nbsp;</td>\n"
-                                    + "                                        <td>Descripción&nbsp;</td>\n"
-                                    + "                                        <td>Cantidad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
-                                    + "                                        <td>UM&nbsp;</td>\n"
-                                    + "                                        <td>Lote&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
-                                    + "                                        <td></td>\n"
-                                    + "                                        <td>Orden&nbsp;</td>\n"
-                                    + "                                        <td>Folio&nbsp;</td>\n"
-                                    + "                                        <td>Pos&nbsp;</td>\n"
-                                    + "                                    </tr> \n"
-                                    + "                                    <tbody>");
-                            for (x = 0; x < rp.size(); x++) {
-                                out.println("<tr>");
-                                out.println("<td>&nbsp;&nbsp;&nbsp;</td>");
-                                out.println("<td name=\"reserv1\">" + rp.get(x).getNum_material() + " </td>");
-                                out.println("<td name=\"reserv8\">" + ACC_Material.ObtenerInstancia().ConsultaNombreMaterial(rp.get(x).getNum_material(), idioma) + " </td>");
-                                out.println("<td class=\"tdcRG\"><input maxlength=\"13\" type=\"text\"  value=\"" + rp.get(x).getCantidad_necesaria() + "\"name=\"reserv2\"  class=\"bxcRG\" id=\"cntRG" + x + "\" onblur=\"this.value = checkDec(this.value, 3)\" onfocus=\"loteBtnHide('" + rp.size() + "')\"></td>");
-                                out.println("<td name=\"reserv3\">" + rp.get(x).getUnidad_medida_base() + " </td>");
-                                if (ACC_Material.ObtenerInstancia().ConsultaLoteMaterial(rp.get(x).getNum_material()) == 1) {
-                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\"></td>");
-                                } else {
-                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\" disabled></td>");
-                                }
-                                out.println("<td><button id=\"btnLote" + x + "\" class='BtnMatchIcon' style=\"display : none;\" onclick=\"MatchLote('" + x + "', '" + rp.get(x).getNum_material() + "')\"></button></td>");
-                                out.println("<td name=\"reserv5\">" + rp.get(x).getNum_orden() + " </td>");
-                                if (rp.get(x).getFolio_sap().equals("")) {
-                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sam() + " </td>");
-                                } else {
-                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sap() + " </td>");
-                                }
-                                out.println("<td name=\"reserv7\">" + rp.get(x).getNum_posicion() + " </td>");
-                                out.println("</tr>");
-                            }
-                            out.println("<tr>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">ADMON_PORTUARIA__INTEGRAL_DE_TOPO_S_Mas_Esp</td>\n"
-                                    + "                <td class=\"ocultar\"></td>\n"
-                                    + "                <td class=\"ocultar\"></td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "           </tr>");
-                            out.println("</table>");
-                            break;
-                        case "311":
-                            out.println("<table class=\"TablaCont\" id=\"TablaRG\">\n"
-                                    + "                                    <tr id=\"CabeceraTabla\">\n"
-                                    + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
-                                    + "                                        <td>Material&nbsp;</td>\n"
-                                    + "                                        <td>Descripción&nbsp;</td>\n"
-                                    + "                                        <td>Cantidad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
-                                    + "                                        <td>UM&nbsp;</td>\n"
-                                    + "                                        <td>Lote&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
-                                    + "                                        <td></td>\n"
-                                    + "                                        <td>AlmacénDestino&nbsp;</td>\n"
-                                    + "                                        <td>Folio&nbsp;</td>\n"
-                                    + "                                        <td>Pos&nbsp;</td>\n"
-                                    + "                                    </tr> \n"
-                                    + "                                    <tbody>");
-                            for (x = 0; x < rp.size(); x++) {
-                                out.println("<tr>");
-                                out.println("<td>&nbsp;&nbsp;&nbsp;</td>");
-                                out.println("<td name=\"reserv1\">" + rp.get(x).getNum_material() + " </td>");
-                                out.println("<td name=\"reserv8\">" + ACC_Material.ObtenerInstancia().ConsultaNombreMaterial(rp.get(x).getNum_material(), idioma) + " </td>");
-                                out.println("<td class=\"tdcRG\"><input maxlength=\"13\" type=\"text\"  value=\"" + rp.get(x).getCantidad_necesaria() + "\"name=\"reserv2\"  class=\"bxcRG\" id=\"cntRG" + x + "\" onblur=\"this.value = checkDec(this.value, 3)\" onfocus=\"loteBtnHide('" + rp.size() + "')\"></td>");
-                                out.println("<td name=\"reserv3\">" + rp.get(x).getUnidad_medida_base() + " </td>");
-                                if (ACC_Material.ObtenerInstancia().ConsultaLoteMaterial(rp.get(x).getNum_material()) == 1) {
-                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\"></td>");
-                                } else {
-                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\" disabled></td>");
-                                }
-                                out.println("<td><button id=\"btnLote" + x + "\" class='BtnMatchIcon' style=\"display : none;\" onclick=\"MatchLote('" + x + "', '" + rp.get(x).getNum_material() + "')\"></button></td>");
-                                out.println("<td name=\"reserv5\">" + rp.get(x).getAlmacen_destino() + " </td>");
-                                if (rp.get(x).getFolio_sap().equals("")) {
-                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sam() + " </td>");
-                                } else {
-                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sap() + " </td>");
-                                }
-                                out.println("<td name=\"reserv7\">" + rp.get(x).getNum_posicion() + " </td>");
-                                out.println("</tr>");
-                            }
-                            out.println("<tr>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">ADMON_PORTUARIA__INTEGRAL_DE_TOPO_S_Mas_Esp</td>\n"
-                                    + "                <td class=\"ocultar\"></td>\n"
-                                    + "                <td class=\"ocultar\"></td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
-                                    + "           </tr>");
-                            out.println("</table>");
-                            break;
-                    }
+//                    int x;
+//                    switch (v3) {
+//                        case "201":
+//                            out.println("<table class=\"TablaCont\" id=\"TablaRG\">\n"
+//                                    + "                                    <tr id=\"CabeceraTabla\">\n"
+//                                    + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
+//                                    + "                                        <td>Material&nbsp;</td>\n"
+//                                    + "                                        <td>Descripción&nbsp;</td>\n"
+//                                    + "                                        <td>Cantidad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
+//                                    + "                                        <td>UM&nbsp;</td>\n"
+//                                    + "                                        <td>Lote&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
+//                                    + "                                        <td></td>\n"
+//                                    + "                                        <td>CentroCostos&nbsp;</td>\n"
+//                                    + "                                        <td>Folio&nbsp;</td>\n"
+//                                    + "                                        <td>Pos&nbsp;</td>\n"
+//                                    + "                                    </tr> \n"
+//                                    + "                                    <tbody>");
+//                            for (x = 0; x < rp.size(); x++) {
+//                                out.println("<tr>");
+//                                out.println("<td>&nbsp;&nbsp;&nbsp;</td>");
+//                                out.println("<td name=\"reserv1\">" + rp.get(x).getNum_material() + " </td>");
+//                                out.println("<td name=\"reserv8\">" + ACC_Material.ObtenerInstancia().ConsultaNombreMaterial(rp.get(x).getNum_material(), idioma) + " </td>");
+//                                out.println("<td class=\"tdcRG\"><input maxlength=\"13\" type=\"text\"  value=\"" + rp.get(x).getCantidad_necesaria() + "\"name=\"reserv2\"  class=\"bxcRG\" id=\"cntRG" + x + "\" onblur=\"this.value = checkDec(this.value, 3)\" onfocus=\"loteBtnHide('" + rp.size() + "')\"></td>");
+//                                out.println("<td name=\"reserv3\">" + rp.get(x).getUnidad_medida_base() + " </td>");
+//                                if (ACC_Material.ObtenerInstancia().ConsultaLoteMaterial(rp.get(x).getNum_material()) == 1) {
+//                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\"></td>");
+//                                } else {
+//                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\" disabled></td>");
+//                                }
+//                                out.println("<td><button id=\"btnLote" + x + "\" class='BtnMatchIcon' style=\"display : none;\" onclick=\"MatchLote('" + x + "', '" + rp.get(x).getNum_material() + "')\"></button></td>");
+//                                out.println("<td name=\"reserv5\">" + rp.get(x).getCentro_coste() + " </td>");
+//                                if (rp.get(x).getFolio_sap().equals("")) {
+//                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sam() + " </td>");
+//                                } else {
+//                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sap() + " </td>");
+//                                }
+//                                out.println("<td name=\"reserv7\">" + rp.get(x).getNum_posicion() + " </td>");
+//                                out.println("</tr>");
+//                            }
+//                            out.println("<tr>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">ADMON_PORTUARIA__INTEGRAL_DE_TOPO_S_Mas_Esp</td>\n"
+//                                    + "                <td class=\"ocultar\"></td>\n"
+//                                    + "                <td class=\"ocultar\"></td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "           </tr>");
+//                            out.println("</table>");
+//                            break;
+//                        case "261":
+//                            out.println("<table class=\"TablaCont\" id=\"TablaRG\">\n"
+//                                    + "                                    <tr id=\"CabeceraTabla\">\n"
+//                                    + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
+//                                    + "                                        <td>Material&nbsp;</td>\n"
+//                                    + "                                        <td>Descripción&nbsp;</td>\n"
+//                                    + "                                        <td>Cantidad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
+//                                    + "                                        <td>UM&nbsp;</td>\n"
+//                                    + "                                        <td>Lote&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
+//                                    + "                                        <td></td>\n"
+//                                    + "                                        <td>Orden&nbsp;</td>\n"
+//                                    + "                                        <td>Folio&nbsp;</td>\n"
+//                                    + "                                        <td>Pos&nbsp;</td>\n"
+//                                    + "                                    </tr> \n"
+//                                    + "                                    <tbody>");
+//                            for (x = 0; x < rp.size(); x++) {
+//                                out.println("<tr>");
+//                                out.println("<td>&nbsp;&nbsp;&nbsp;</td>");
+//                                out.println("<td name=\"reserv1\">" + rp.get(x).getNum_material() + " </td>");
+//                                out.println("<td name=\"reserv8\">" + ACC_Material.ObtenerInstancia().ConsultaNombreMaterial(rp.get(x).getNum_material(), idioma) + " </td>");
+//                                out.println("<td class=\"tdcRG\"><input maxlength=\"13\" type=\"text\"  value=\"" + rp.get(x).getCantidad_necesaria() + "\"name=\"reserv2\"  class=\"bxcRG\" id=\"cntRG" + x + "\" onblur=\"this.value = checkDec(this.value, 3)\" onfocus=\"loteBtnHide('" + rp.size() + "')\"></td>");
+//                                out.println("<td name=\"reserv3\">" + rp.get(x).getUnidad_medida_base() + " </td>");
+//                                if (ACC_Material.ObtenerInstancia().ConsultaLoteMaterial(rp.get(x).getNum_material()) == 1) {
+//                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\"></td>");
+//                                } else {
+//                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\" disabled></td>");
+//                                }
+//                                out.println("<td><button id=\"btnLote" + x + "\" class='BtnMatchIcon' style=\"display : none;\" onclick=\"MatchLote('" + x + "', '" + rp.get(x).getNum_material() + "')\"></button></td>");
+//                                out.println("<td name=\"reserv5\">" + rp.get(x).getNum_orden() + " </td>");
+//                                if (rp.get(x).getFolio_sap().equals("")) {
+//                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sam() + " </td>");
+//                                } else {
+//                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sap() + " </td>");
+//                                }
+//                                out.println("<td name=\"reserv7\">" + rp.get(x).getNum_posicion() + " </td>");
+//                                out.println("</tr>");
+//                            }
+//                            out.println("<tr>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">ADMON_PORTUARIA__INTEGRAL_DE_TOPO_S_Mas_Esp</td>\n"
+//                                    + "                <td class=\"ocultar\"></td>\n"
+//                                    + "                <td class=\"ocultar\"></td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "           </tr>");
+//                            out.println("</table>");
+//                            break;
+//                        case "311":
+//                            out.println("<table class=\"TablaCont\" id=\"TablaRG\">\n"
+//                                    + "                                    <tr id=\"CabeceraTabla\">\n"
+//                                    + "                                        <td>&nbsp;&nbsp;&nbsp;</td>\n"
+//                                    + "                                        <td>Material&nbsp;</td>\n"
+//                                    + "                                        <td>Descripción&nbsp;</td>\n"
+//                                    + "                                        <td>Cantidad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
+//                                    + "                                        <td>UM&nbsp;</td>\n"
+//                                    + "                                        <td>Lote&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"
+//                                    + "                                        <td></td>\n"
+//                                    + "                                        <td>AlmacénDestino&nbsp;</td>\n"
+//                                    + "                                        <td>Folio&nbsp;</td>\n"
+//                                    + "                                        <td>Pos&nbsp;</td>\n"
+//                                    + "                                    </tr> \n"
+//                                    + "                                    <tbody>");
+//                            for (x = 0; x < rp.size(); x++) {
+//                                out.println("<tr>");
+//                                out.println("<td>&nbsp;&nbsp;&nbsp;</td>");
+//                                out.println("<td name=\"reserv1\">" + rp.get(x).getNum_material() + " </td>");
+//                                out.println("<td name=\"reserv8\">" + ACC_Material.ObtenerInstancia().ConsultaNombreMaterial(rp.get(x).getNum_material(), idioma) + " </td>");
+//                                out.println("<td class=\"tdcRG\"><input maxlength=\"13\" type=\"text\"  value=\"" + rp.get(x).getCantidad_necesaria() + "\"name=\"reserv2\"  class=\"bxcRG\" id=\"cntRG" + x + "\" onblur=\"this.value = checkDec(this.value, 3)\" onfocus=\"loteBtnHide('" + rp.size() + "')\"></td>");
+//                                out.println("<td name=\"reserv3\">" + rp.get(x).getUnidad_medida_base() + " </td>");
+//                                if (ACC_Material.ObtenerInstancia().ConsultaLoteMaterial(rp.get(x).getNum_material()) == 1) {
+//                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\"></td>");
+//                                } else {
+//                                    out.println("<td><input type=\"text\" name=\"reserv4\" style=\"text-transform: uppercase;\" maxlength=\"10\" class=\"bxcRG\" id=\"bxLote" + x + "\" onfocus=\"loteBtnShow('" + x + "', '" + rp.size() + "')\" disabled></td>");
+//                                }
+//                                out.println("<td><button id=\"btnLote" + x + "\" class='BtnMatchIcon' style=\"display : none;\" onclick=\"MatchLote('" + x + "', '" + rp.get(x).getNum_material() + "')\"></button></td>");
+//                                out.println("<td name=\"reserv5\">" + rp.get(x).getAlmacen_destino() + " </td>");
+//                                if (rp.get(x).getFolio_sap().equals("")) {
+//                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sam() + " </td>");
+//                                } else {
+//                                    out.println("<td name=\"reserv6\">" + rp.get(x).getFolio_sap() + " </td>");
+//                                }
+//                                out.println("<td name=\"reserv7\">" + rp.get(x).getNum_posicion() + " </td>");
+//                                out.println("</tr>");
+//                            }
+//                            out.println("<tr>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">ADMON_PORTUARIA__INTEGRAL_DE_TOPO_S_Mas_Esp</td>\n"
+//                                    + "                <td class=\"ocultar\"></td>\n"
+//                                    + "                <td class=\"ocultar\"></td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "                <td class=\"ocultar\">&nbsp;</td>\n"
+//                                    + "           </tr>");
+//                            out.println("</table>");
+//                            break;
+//                    }
                     break;
                 case "ValidarMaterialLote":
                     String m = ACC_Stock.ObtenerInstancia().VerificarMatLote(matelote);
@@ -1052,6 +1062,94 @@ public class PeticionMovMateriales extends HttpServlet {
                         out.println("</table>");
                     } else {
                         out.println(0 + ",VentanaModalCC,bxccs201,");
+                    }
+                    break;
+                case "CargarTablaReserva":
+                    ArrayList<reserva_posiciones_crea> rpa = ACC_Reservas.ObtenerInstancia().CargarTablaResMovimientos(NResr);
+                    DecimalFormatSymbols simbol311 = new DecimalFormatSymbols();
+                    simbol311.setDecimalSeparator('.');
+                    DecimalFormat df = new DecimalFormat("0.000", simbol311);
+                    out.println("<table id=\"TabBodyRes\">");
+                    out.println("<tbody>");
+                    String imp = "";
+                    int x1;
+                    for (x1 = 0; x1 < rpa.size(); x1++) {
+                        int sl = ACC_Material.ObtenerInstancia().ConsultaLoteMaterial(rpa.get(x1).getNum_material());
+                        String disasj = "";
+                        String disacn = "";
+                        if (sl == 0) {
+                            disasj = "disabled";
+                        }
+                        float cantf = Float.parseFloat(rpa.get(x1).getCantidad_necesaria()) - Float.parseFloat(rpa.get(x1).getCantida_tomada());
+                        if (cantf == 0.00) {
+                            disasj = "disabled";
+                            disacn = "disabled";
+                        }
+                        if (ClasM.equals("201")) {
+                            imp = "<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\" id=\"RtdCCosto" + x1 + "\" name=\"tdCCostoR\" onfocus=\"QuitarMatchRe()\" readOnly value=\"" + rpa.get(x1).getCentro_coste() + "\"/></td>";
+                        }
+                        if (ClasM.equals("261")) {
+                            imp = "<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\" id=\"RtdNOrden" + x1 + "\" name=\"tdNOrdenR\" onfocus=\"QuitarMatchRe()\" readOnly value=\"" + rpa.get(x1).getNum_orden() + "\"/></td>";
+                        }
+                        if (ClasM.equals("311")) {
+                            imp = "<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\" id=\"RtdAlDest" + x1 + "\" name=\"tdAlmDesR\" onfocus=\"QuitarMatchRe()\" readOnly value=\"" + rpa.get(x1).getAlmacen_destino() + "\"/></td>";
+                        }
+                        out.println("<tr>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatchP\" id=\"Rtdpos" + x1 + "\" name=\"tdPosR\" onfocus=\"QuitarMatchRe()\" value=\"" + rpa.get(x1).getPosicion_reserva() + "\" readOnly/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatchP\" id=\"Rtdmat" + x1 + "\" name=\"tdMateR\" onfocus=\"QuitarMatchRe()\" value=\"" + rpa.get(x1).getNum_material() + "\" readOnly/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatchP\" id=\"Rtddes" + x1 + "\" name=\"tdDescR\" onfocus=\"QuitarMatchRe()\" value=\"" + rpa.get(x1).getTexto_posicion() + "\"readOnly/></td>");
+                        out.println("<td><input type=\"text\" class=\"tdSMatch\" id=\"RtdCan" + x1 + "\" name=\"tdCanR\"  onblur=\"this.value = checkDec(this.value, 3)\" maxlength=\"13\" onKeyPress=\"return soloNumeros(event)\" onfocus=\"QuitarMatchRe()\" " + disacn + " value=\"" + df.format(cantf) + "\"/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatchP\" id=\"RtdUme" + x1 + "\" name=\"tdUmeR\" onfocus=\"QuitarMatchRe()\" value=\"" + rpa.get(x1).getUnidad_medida_base() + "\"readOnly/></td>");
+                        out.println("<td><input type=\"text\" style=\"text-transform: uppercase;\" class=\"tdSMatch\" id=\"Rtdlot" + x1 + "\" name=\"tdLotR\" onfocus=\"MostrarMatchReserva('" + x1 + "')\" " + disasj + " maxlength=\"15\"/><button id=\"MCLotesRes" + x1 + "\" onclick=\"ConsultaLotesNRese('" + x1 + "');\" name=\"ResmatchLote\" class='BtnMatchIconGrid'></button></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\" id=\"RtdCanTom" + x1 + "\" name=\"tdCatTomR\" onfocus=\"QuitarMatchRe()\"  readOnly value=\"" + rpa.get(x1).getCantida_tomada() + "\"/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\" id=\"RtdCanTot" + x1 + "\" name=\"tdCatTotR\" onfocus=\"QuitarMatchRe()\"  readOnly value=\"" + rpa.get(x1).getCantidad_necesaria() + "\"/></td>");
+                        out.println(imp);
+                        out.println("</tr>");
+                    }
+                    String imp2 = "";
+                    for (int a1 = x1; a1 < 15; a1++) {
+                        if (ClasM.equals("201")) {
+                            imp2 = "<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\"  name=\"tdCCostoR\" onfocus=\"QuitarMatchRe()\" readOnly /></td>";
+                        }
+                        if (ClasM.equals("261")) {
+                            imp2 = "<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\"  name=\"tdNOrdenR\" onfocus=\"QuitarMatchRe()\" readOnly/></td>";
+                        }
+                        if (ClasM.equals("311")) {
+                            imp2 = "<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\"  name=\"tdAlmDesR\" onfocus=\"QuitarMatchRe()\" readOnly/></td>";
+                        }
+                        out.println("<tr>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatchP\" name=\"tdPosR\"  onfocus=\"QuitarMatchRe()\" readOnly/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatchP\" name=\"tdMateR\" onfocus=\"QuitarMatchRe()\" readOnly/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatchP\" name=\"tdDescR\" onfocus=\"QuitarMatchRe()\" readOnly/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\"  name=\"tdCanR\" onfocus=\"QuitarMatchRe()\" readOnly/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatchP\" name=\"tdUmeR\"  onfocus=\"QuitarMatchRe()\" readOnly/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\"  name=\"tdLotR\"  onfocus=\"QuitarMatchRe()\" readOnly/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\"  name=\"tdCatTomR\"  onfocus=\"QuitarMatchRe()\" readOnly/></td>");
+                        out.println("<td><input type=\"text\" style=\"background:none\" class=\"tdSMatch\"  name=\"tdCatTotR\"  onfocus=\"QuitarMatchRe()\" readOnly/></td>");
+                        out.println(imp2);
+                        out.println("</tr>");
+                    }
+                    out.println("<tr id=\"TempRod\" class=\"ocultar\"><td>0000000</td><td>00000000000</td><td>00000000000000000000000000000000000000000000000</td><td>0000000000000</td><td>000000000</td><td>00000000000000000</td><td>0000000000000</td><td>0000000000000</td><td>0000000000000</td></tr>");
+                    out.println("</tbody>");
+                    out.println("</table>");
+                    break;
+                case "ConsultaLotesReservas":
+                    ArrayList<stock> Lo2 = ACC_Stock.ObtenerInstancia().ConsultaInventariosC2(CenR, MatR, ClmR, AlmR);
+                    if (Lo2.size() > 0) {
+                        out.println("<table>");
+                        out.println("<tbody>");
+                        for (int i = 0; i < Lo2.size(); i++) {
+
+                            out.println("<tr ondblclick=\"seleccionarLoteReserv('" + Lo2.get(i).getLote() + "','" + PosR + "')\">");
+                            out.println("<td>" + Lo2.get(i).getMaterial() + "</td>");
+                            out.println("<td>" + Lo2.get(i).getLote() + "</td>");
+                            out.println("<td>" + Lo2.get(i).getStocklibre_utilizacion() + "</td>");
+                            out.println("</tr>");
+                        }
+                        out.println("</tbody>");
+                        out.println("</table>");
+                    } else {
+                        out.println(0);
                     }
                     break;
             }
