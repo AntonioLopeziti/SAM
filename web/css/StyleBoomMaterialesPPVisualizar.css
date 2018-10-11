@@ -13,11 +13,15 @@ and open the template in the editor.
 input{
     font-family: "Courier New";
 }
+#ListTipoMat{
+    width: 22.5%;
+    font-family: "Courier New";
+}
 .divParamBus{
     width: 100%;
     background: #fff;
     margin-top: 10px;
-    height: 165px;
+    height: 200px;
     padding-left: 2%;
 }
 #lineaBomtitu{
