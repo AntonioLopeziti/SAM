@@ -4,6 +4,7 @@ import AccesoDatos.ACC_Almacenes;
 import AccesoDatos.ACC_DetallesDocMateriales;
 import AccesoDatos.ACC_Folios;
 import AccesoDatos.ACC_Pedidos;
+import AccesoDatos.ACC_Reservas;
 import AccesoDatos.ACC_Stock;
 //import AccesoDatos.CallWS;
 import AccesoDatos.Conexion;
@@ -361,8 +362,8 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     break;
                 case "BorraCabPos":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().BorrarCabMM(fl);
-                    Consultas.ObtenerInstancia().BorrarRegistroMM(fl);
+                    Consultas.ObtenerInstancia().BorrarCabMM(us);
+                    Consultas.ObtenerInstancia().BorrarRegistroMM(us);
                     break;
                 case "retrocesoMov101":
                     String nr = "";
@@ -559,11 +560,12 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                     break;
                 case "Guarda201Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", v13, v14, "", "0.000", "", "0", v9, "", "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    Consultas.ObtenerInstancia().PosicionesCreaDet(us, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", v13, v14, "", "0.000", v10, "0", v9, "", "", StockEspecial, "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "", v20, v21, "");
+//                    Consultas.ObtenerInstancia().PosicionesCreaDet(us, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", v13, v14, "", "0.000", "", "0", v9, "", "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     break;
                 case "Guarda202Posiciones":
                     fl = "MO" + fo.getFolioActual();
-                    Consultas.ObtenerInstancia().CabeceraCreaDet(fl, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v9, "", "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+//                    Consultas.ObtenerInstancia().PosicionesCreaDet(us, Chepos(Integer.parseInt(v8)), horaActual, fechaActual, "", v2, "", "", v3, v11, "0.000", "0.000", "", "0.000", "", v4, v12, "", "0.000", "", "0.000", v5, v6, "0.000", "", "0", "0", "", "0.000", "", "0", v9, "", "", "", "", "", v10, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     break;
                 case "Guarda261Posiciones":
                     fl = "MO" + fo.getFolioActual();
@@ -1283,6 +1285,27 @@ public class PeticionGuardaMovMateriales extends HttpServlet {
                 case "ActualizarFoliosMO":
                     String fwe = ACC_Pedidos.ObtenerInstancia().FolioPos(us);
                     out.println(fwe);
+                    break;
+                case "Movimiento201Reserva":
+//                    Double ul = ACC_Stock.ObtenerInstancia().UltimoLU(n2, M102[f][10], M102[f][2], M102[f][11]);
+//                    ACC_Stock.ObtenerInstancia().UpdateMovimiento201UltimoStock(Num(String.valueOf(ul)), n2, M102[f][10], M102[f][2], M102[f][11]);
+                    break;
+                case "Guarda201ReservaPosicion":
+                    Consultas.ObtenerInstancia().PosicionesCreaDet(us, Chepos(Integer.parseInt(v1)), horaActual, fechaActual, "", v2, "", v3, v4, v5, "0.000", "0.000", "", "0.000", "", v6, v7, "", "0.000", "", "0.000", v8, v9, "0.000", "", v10, v11, "", "0.000", v12, "0", v13, "", "", v14, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    DecimalFormat formatores = new DecimalFormat("#.000");
+                    Double desc;
+                    desc = ACC_Stock.ObtenerInstancia().StockLibre(v9, v4, v13, v7) - Double.parseDouble(v6);
+                    String canval = (desc >= 1) ? formatores.format(desc) : "0" + formatores.format(desc);
+                    ACC_Stock.ObtenerInstancia().ActualizaInv(v9, v4, v13, canval, v7);
+                        Double cntf = Double.parseDouble(v6) + Double.parseDouble(v15);
+                    if(v10.substring(0, 2).equals("RE")){
+                        ACC_Reservas.ObtenerInstancia().ActualizaCantidadTomada("0", v10, v11, v9,formatores.format(cntf));
+                    }else{
+                        ACC_Reservas.ObtenerInstancia().ActualizaCantidadTomada("1", v10, v11, v9,formatores.format(cntf));
+                    }
+                    break;
+                case "Guarda201ReservaCabecera":
+                    Consultas.ObtenerInstancia().CabeceraCreaMov(us, horaActual, fechaActual, "", v1, v2, "", v7, v5, "", "", "", "", v6, "", "", "", "", "", mouser);
                     break;
 
                 default:
