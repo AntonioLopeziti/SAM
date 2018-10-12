@@ -683,7 +683,7 @@
                         </section>
                     </div>
                 </div>
-                 <div  class="Botones_Match" style="margin-top: 50px">
+                <div  class="Botones_Match" style="margin-top: 50px">
                     <button  class="BtnMatchOKMats"  style="margin-right:-4%; cursor:pointer;" onclick="ValidarReservasTratar()" id="BtnResAcp"></button>
                     <button  class="BtnMatchCEMats"  style="cursor:pointer;" id="CerrarMatResr" onclick="ocultarVentana('VentanaModalReservasTratar', 'btnReserva', 'm');"></button>
                     <!--<img class="BtnMatchIcon" src="images/HR_ok.png" style="margin-right:-4%; cursor:pointer;" onclick="Validarmovis()" id="Btnmosnews"/>-->
@@ -4863,15 +4863,19 @@
                                     Lote102(extrass, tt, extra, cad);
                                     break;
                                 case "201":
-                                    var extrass = "&v1=";
-                                    for (i = 0; i < lote.length; i++)
-                                    {
-                                        extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen + ",";
+                                    if ($('#bxReserva').val().trim().length > 0) {
+                                        ProcesoReserva(extra);
+                                    } else {
+                                        var extrass = "&v1=";
+                                        for (i = 0; i < lote.length; i++)
+                                        {
+                                            extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
+                                                    "," + almacen + ",";
+                                        }
+                                        extrass = extrass.substring(0, extrass.length - 1);
+                                        extrass += "&v2=" + lote.length;
+                                        Lote201(extrass, tt, extra, cad, 'Movimiento201');
                                     }
-                                    extrass = extrass.substring(0, extrass.length - 1);
-                                    extrass += "&v2=" + lote.length;
-                                    Lote201(extrass, tt, extra, cad, 'Movimiento201');
                                     break;
                                 case "202":
                                     var extrass = "&v1=";
@@ -4885,16 +4889,20 @@
                                     Lote201(extrass, tt, extra, cad, 'Lote202Posiciones');
                                     break;
                                 case "261":
-                                    var extrass = "&v1=";
-                                    for (i = 0; i < lote.length; i++)
-                                    {
-                                        extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
-                                                "," + almacen +
-                                                "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
+                                    if ($('#bxReserva').val().trim().length > 0) {
+                                        ProcesoReserva(extra);
+                                    } else {
+                                        var extrass = "&v1=";
+                                        for (i = 0; i < lote.length; i++)
+                                        {
+                                            extrass += lote[i].textContent + "," + cantidad[i].textContent + "," + material[i].textContent + "," + centro +
+                                                    "," + almacen +
+                                                    "," + eeped[i].textContent + "," + eepos[i].textContent + "," + eeese[i].textContent + "," + "K,";
+                                        }
+                                        extrass = extrass.substring(0, extrass.length - 1);
+                                        extrass += "&v2=" + lote.length;
+                                        Lote261(extrass, tt, extra, cad, "Movimiento261");
                                     }
-                                    extrass = extrass.substring(0, extrass.length - 1);
-                                    extrass += "&v2=" + lote.length;
-                                    Lote261(extrass, tt, extra, cad, "Movimiento261");
                                     break;
                                 case "262":
                                     var extrass = "&v1=";
@@ -5303,7 +5311,7 @@
                                     "&v5=" + Descripc[i].textContent + "&v6=" + material[i].textContent +
                                     "&v7=" + cad + "&v8=" + tabix[i].textContent + "&v9=" + centro +
                                     "&v10=" + cecos[i].textContent + "&v11=" + unmms[i].textContent +
-                                    "&v12=" + alm + "&v13=" + rsv_ + "&v14=" + pos_;
+                                    "&v12=" + alm + "&v13=" + rsv_ + "&v14=" + pos_ + "&ipFolio=" + ipdatam;
                             GuardarMovimientos(actt, extras);
                         }
                         setTimeout(function () {
@@ -5651,13 +5659,14 @@
                     }
                     function RetrocesoMov(action, ex)
                     {
+                        var ipdatam = ObtenerFolioRandom();
                         var xmlhttp = new XMLHttpRequest();
                         xmlhttp.onreadystatechange = function () {
                             if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
                             {
                             }
                         };
-                        xmlhttp.open("GET", "PeticionGuardaMovMateriales?Action=" + action + ex, true);
+                        xmlhttp.open("GET", "PeticionGuardaMovMateriales?Action=" + action + ex + "&ipFolio=" + ipdatam, true);
                         xmlhttp.send();
                     }
                     function clickParaGenteDesesperada() {
@@ -5692,6 +5701,7 @@
                                 $('#bxNota').val('');
                                 $('#bxNota').prop('disabled', false);
 
+                                $('#btnAdd').prop('disabled', false);
                                 $('#btnReserva').prop('disabled', false);
                                 $('#bxReserva').prop('disabled', false);
                                 $('#bxReserva').val('');
@@ -6826,7 +6836,7 @@
                             }
                         });
                     }
-                    function mensajesNuevo(msg, img, au)
+                    function mensajesNuevo(msg, img, au, va)
                     {
                         var funinva = "";
                         switch (msg)
@@ -6902,6 +6912,12 @@
                                 break;
                             case 23:
                                 funinva = "No hay suficiente stock libre para disposición";
+                                break;
+                            case 24:
+                                funinva = "No hay suficiente stock del material " + va;
+                                break;
+                            case 25:
+                                funinva = "No hay posiciones para agregar";
                                 break;
 
                         }
