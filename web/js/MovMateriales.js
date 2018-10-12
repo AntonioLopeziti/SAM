@@ -484,6 +484,7 @@ $(document).ready(function () {
         ocultarVentana('VentanaModal305', 'btnAdd', 'm');
     });
     $('#btnAdd').click(function () {
+        $('#bxReserva').val('');
         $('#btnCentro').hide();
         $('#btnAlmacen').hide();
         $('#btnClase').hide();
@@ -5219,6 +5220,8 @@ function ValidarReservasTratar() {
     var can = document.getElementsByName("tdCanR");
     var canTomada = document.getElementsByName("tdCatTomR");
     var canTotal = document.getElementsByName("tdCatTotR");
+    var con = 0;
+    var cantopo = 0;
     for (i = 0; i < pos.length; i++) {
         if (mat[i].value.length > 0) {
             if (can[i].value.length == 0) {
@@ -5227,6 +5230,7 @@ function ValidarReservasTratar() {
                 return;
             }
             if (can[i].value !== '0.000') {
+                cantopo += 1;
                 if (lot[i].disabled === false) {
                     if (lot[i].value.length == 0) {
                         mensajesNuevo(19, "images/advertencia.PNG", "audio/saperror.wav");
@@ -5235,7 +5239,7 @@ function ValidarReservasTratar() {
                     }
                 }
                 var resu = ExistenciaStock(mat[i].value, $('#bxCentro').val(), $('#bxAlmacen').val(), lot[i].value.trim(), '', '', can[i].value.trim(), $('#bxClase').val());
-                if (parseFloat(resu) <= 0) {
+                if (parseFloat(resu) <= 0.00) {
                     mensajesNuevo(22, "images/advertencia.PNG", "audio/saperror.wav");
                     can[i].focus();
                     return;
@@ -5249,15 +5253,23 @@ function ValidarReservasTratar() {
                     mensajesNuevo(21, "images/advertencia.PNG", "audio/saperror.wav");
                     can[i].focus();
                 }
-                $('#BtnResAcp').prop("disabled", true);
-                $('#CerrarMatResr').prop("disabled", true);
-                ShowMsg(1, "images/load.gif", "audio/sapmsg.wav");
-                $('#guardar').prop("disabled", true);
-                setTimeout(function () {
-                    SaveResepos();
-                }, 4000);
+            } else {
+                con += 1;
             }
         }
+    }
+    if (con == cantopo) {
+        mensajesNuevo(25, "images/advertencia.PNG", "audio/saperror.wav");
+        con = 0;
+    } else {
+        $('#BtnResAcp').prop("disabled", true);
+        $('#CerrarMatResr').prop("disabled", true);
+        ShowMsg(1, "images/load.gif", "audio/sapmsg.wav");
+        $('#guardar').prop("disabled", true);
+        setTimeout(function () {
+            SaveResepos();
+        }, 4000);
+
     }
 }
 function SaveResepos() {
@@ -5275,43 +5287,46 @@ function SaveResepos() {
     var CCostoRes = "";
     var NOrdenRes = "";
     var AlmDesRes = "";
-    switch (ClaseM) {
-        case "201":
-            CCostoRes1 = document.getElementsByName("tdCCostoR");
-            CCostoRes = CCostoRes1[i].value;
-            break;
-        case "261":
-            NOrdenRes1 = document.getElementsByName("tdNOrdenR");
-            NOrdenRes = NOrdenRes1[i].value;
-            break;
-        case "311":
-            AlmDesRes1 = document.getElementsByName("tdAlmDesR");
-            AlmDesRes = AlmDesRes1[i].value;
-            break;
-    }
     for (i = 0; i < mat.length; i++) {
         if (mat[i].value.length != 0) {
-            var extr = "&ReservaPosicion=" + pos[i].value
-                    + "&ReservaMaterial=" + mat[i].value
-                    + "&ReservaDescripcion=" + des[i].value
-                    + "&ReservaCantidad=" + can[i].value
-                    + "&ReservaCanTomada=" + ctm[i].value
-                    + "&ReservaCanTotal=" + cat[i].value
-                    + "&ReservaUnidadM=" + ume[i].value
-                    + "&ReservaLote=" + lot[i].value
-                    + "&ReservaCantidadRes=" + cat[i].value
-                    + "&ReservaDoc=" + Reserv
-                    + "&ReservaCMov=" + ClaseM
-                    + "&ReservaCCosto=" + CCostoRes
-                    + "&ReservaNOrden=" + NOrdenRes
-                    + "&ReservaAlmDes=" + AlmDesRes
-                    + "&IpData=" + random;
-            InserMovsNuevosTemp('VentanaModalReservasTratar', extr);
+            if (parseFloat(can[i].value) > 0.00) {
+                switch (ClaseM) {
+                    case "201":
+                        CCostoRes1 = document.getElementsByName("tdCCostoR");
+                        CCostoRes = CCostoRes1[i].value;
+                        break;
+                    case "261":
+                        NOrdenRes1 = document.getElementsByName("tdNOrdenR");
+                        NOrdenRes = NOrdenRes1[i].value;
+                        break;
+                    case "311":
+                        AlmDesRes1 = document.getElementsByName("tdAlmDesR");
+                        AlmDesRes = AlmDesRes1[i].value;
+                        break;
+                }
+                var extr = "&ReservaPosicion=" + pos[i].value
+                        + "&ReservaMaterial=" + mat[i].value
+                        + "&ReservaDescripcion=" + des[i].value
+                        + "&ReservaCantidad=" + can[i].value
+                        + "&ReservaCanTomada=" + ctm[i].value
+                        + "&ReservaCanTotal=" + cat[i].value
+                        + "&ReservaUnidadM=" + ume[i].value
+                        + "&ReservaLote=" + lot[i].value
+                        + "&ReservaCantidadRes=" + cat[i].value
+                        + "&ReservaDoc=" + Reserv
+                        + "&ReservaCMov=" + ClaseM
+                        + "&ReservaCCosto=" + CCostoRes
+                        + "&ReservaNOrden=" + NOrdenRes
+                        + "&ReservaAlmDes=" + AlmDesRes
+                        + "&indiceRes=" + i
+                        + "&IpData=" + random;
+                InserMovsNuevosTemp('VentanaModalReservasTratar', extr);
+            }
         }
     }
     $('#guardar').prop('disabled', false);
-    $('#Btnmosnews').prop("disabled", false);
-    $('#btnCancelReservas').prop("disabled", false);
+    $('#BtnResAcp').prop("disabled", false);
+    $('#CerrarMatResr').prop("disabled", false);
     $('#iconmsg').hide();
     var men = document.getElementById("msg");
     men.innerHTML = "";
@@ -5321,7 +5336,7 @@ function SaveResepos() {
     var theHandle = document.getElementById("handleAV");
     var theRoot = document.getElementById("VentanaModalAv");
     Drag.init(theHandle, theRoot);
-    ocultarVentana('VentanaModalReservasTratar', 'btnAdd');
+    ocultarVentana('VentanaModalReservasTratar', 'guardar');
 
 }
 function ExistenciaStock(mat, cen, alm, lot, doc, pos, can, clm) {
@@ -5352,4 +5367,66 @@ function ExistenciaStock(mat, cen, alm, lot, doc, pos, can, clm) {
         }
     });
     return res;
+}
+function ProcesoReserva(datosCab) {
+    var ipdatam = ObtenerFolioRandom();
+    var cent = $('#bxCentro').val();
+    var alma = $('#bxAlmacen').val();
+    var clmv = $('#bxClase').val();
+    var mate = document.getElementsByName("mmmat");
+    var desc = document.getElementsByName("mmdsc");
+    var lote = document.getElementsByName("mmnlt");
+    var cant = document.getElementsByName("mmprr");
+    var cantTomada = document.getElementsByName("mmCantTomada");
+    var cantTotal = document.getElementsByName("mmCantTotal");
+    var cecos = document.getElementsByName("mmcCosto");
+    var nord = document.getElementsByName("mmNOrden");
+    var almd = document.getElementsByName("mmAlmace");
+    var ume = document.getElementsByName("mmumb");
+    var docr = document.getElementsByName("mmped");
+    var posr = document.getElementsByName("mmnpe");
+    for (i = 0; i < mate.length; i++) {
+        var stocn = ExistenciaStock(mate[i].textContent, cent, alma, lote[i].textContent, '', '', cant[i].textContent, clmv);
+        if (parseFloat(stocn) <= 0.00) {
+            mensajesNuevo(24, "images/advertencia.PNG", "audio/saperror.wav", mate[i].textContent);
+            return;
+        }
+        var nu = i + 1;
+        var actt = "Guarda201ReservaPosicion";
+        var cadena = "&v1=" + nu    ///// pos
+                + "&v2=" + clmv  //// ClaseMov
+                + "&v3=" + nord[i].textContent   ///// Orden
+                + "&v4=" + lote[i].textContent   ///// Lote
+                + "&v5=" + ume[i].textContent   ///// UM
+                + "&v6=" + cant[i].textContent   ///// Cant
+                + "&v7=" + alma   ///// alm
+                + "&v8=" + desc[i].textContent   ///// desc
+                + "&v9=" + mate[i].textContent   ///// material
+                + "&v10=" + docr[i].textContent   ///// reserva
+                + "&v11=" + posr[i].textContent   ///// pos reserva
+                + "&v12=" + almd[i].textContent   ///// almacen recp
+                + "&v13=" + cent   ///// centro
+                + "&v14=" + cecos[i].textContent    ///// centro coste
+                + "&v15=" + cantTomada[i].textContent    ///// cant tomada
+                + "&ipFolio=" + ipdatam;    ///// folio
+        GuardarPosReservas(actt, cadena);
+    }
+    setTimeout(function () {
+        GuardarPosReservas("Guarda201ReservaCabecera", datosCab + "&ipFolio=" + ipdatam);
+    }, 2000);
+}
+function GuardarPosReservas(acc, cadena) {
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'PeticionGuardaMovMateriales',
+        contentType: "application/x-www-form-urlencoded",
+        processData: true,
+        data: "Action=" + acc + cadena,
+        success: function (data) {
+            if (acc === "Guarda201ReservaCabecera") {
+                ActualizaFolio();
+            }
+        }
+    });
 }
