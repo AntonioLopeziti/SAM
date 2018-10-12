@@ -1676,4 +1676,23 @@ public class ACC_Reservas {
         }
         return res;
     }
+     public void ActualizaCantidadTomada(String ind, String res, String pos, String mat, String cnt) {
+        Conexion cnx = new Conexion();
+        Connection con = cnx.ObtenerConexion();
+        PreparedStatement ps = null;
+        String sql = "{call MM.MovimientosMateriales_ActualizaImvCanTomada(?,?,?,?,?)}";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ind);
+            ps.setString(2, res);
+            ps.setString(3, pos);
+            ps.setString(4, mat);
+            ps.setString(5, cnt);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            cnx.CerrarConexion(con);
+        }
+    }
 } 
