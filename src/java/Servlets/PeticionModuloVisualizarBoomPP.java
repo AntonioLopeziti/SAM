@@ -53,6 +53,7 @@ public class PeticionModuloVisualizarBoomPP extends HttpServlet {
             String Centros = request.getParameter("Centro");
             String NCentro = request.getParameter("NCentro");
             String Alterna = request.getParameter("Alter");
+            String Utilizacion = request.getParameter("Util");
             HttpSession session = request.getSession();
             String idioma = (String) session.getAttribute("Idioma");
             String Mate = request.getParameter("Mte");
@@ -99,7 +100,7 @@ public class PeticionModuloVisualizarBoomPP extends HttpServlet {
                     }
                 break;
                 case "CargarDatosBoomMate":
-                    ArrayList<boom_material> re = ACC_Boom_Mate.ObtenerInstancia().ObtenerDatosBOMATEPP(Mate, Centros, Alterna);
+                    ArrayList<boom_material> re = ACC_Boom_Mate.ObtenerInstancia().ObtenerDatosBOMATEPP(Mate, Centros, Alterna, Utilizacion);
                     if(re.size() > 0){
                         out.println("<table id=\"TabBody\">");
                         out.println("<tbody>");

@@ -20,10 +20,12 @@ $(document).ready(function () {
     var equ = $('#EquBoom');
     var cen = $('#centrotrab');
     var alt = $('#Altern');
+    var utl = $('#ListTipoMat');
     var arr = [
         equ,
         cen,
-        alt
+        alt,
+        utl
     ];
     $.each(arr, function (i, v) {
         if (i < 2) {
@@ -244,6 +246,10 @@ $(document).ready(function () {
             ShowMsg(2, "images/advertencia.PNG", "audio/saperror.wav");
             return;
         }
+        if(utl.val() === "0"){
+            ShowMsg(5, "images/advertencia.PNG", "audio/saperror.wav");
+            return;
+        }
         cargarData();
     }
     function cargarData() {
@@ -255,7 +261,7 @@ $(document).ready(function () {
             url: "PeticionModuloVisualizarBoomPP",
             contentType: "application/x-www-form-urlencoded",
             processData: true,
-            data: "Action=" + acc + "&Mte=" + equ.val() + "&Centro=" + cen.val() + "&Alter=" + alt.val(),
+            data: "Action=" + acc + "&Mte=" + equ.val() + "&Centro=" + cen.val() + "&Alter=" + alt.val() + "&Util=" + utl.val(),
             success: function (data) {                
                 if (data == 0) {
                     CleanTable();     

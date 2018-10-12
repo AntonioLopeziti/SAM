@@ -23,18 +23,19 @@ public class ACC_Boom_Mate {
         }
         return Instance;
     }
-    public ArrayList<boom_material> ObtenerDatosBOMATEPP (String mate, String centro, String alt){
+    public ArrayList<boom_material> ObtenerDatosBOMATEPP (String mate, String centro, String alt, String utl){
         ArrayList<boom_material> mat = new ArrayList<>();
         Conexion cnx = new Conexion();
         Connection con = cnx.ObtenerConexion();
         PreparedStatement ps;
         ResultSet rs;
-        String query = "{CALL PP.BoomMate_ObtenerBOOMAtePP(?,?,?)}";
+        String query = "{CALL PP.BoomMate_ObtenerBOOMAtePP(?,?,?,?)}";
         try{
             ps = con.prepareStatement(query);
             ps.setString(1, mate);
             ps.setString(2, centro);
             ps.setString(3, alt);
+            ps.setString(4, utl);
             rs = ps.executeQuery();
             while(rs.next()){
                 boom_material bm = new boom_material();

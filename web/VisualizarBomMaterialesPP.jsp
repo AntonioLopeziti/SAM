@@ -115,6 +115,9 @@
                     case 4:
                         msg = '<%=OKconsul%>';
                         break;
+                    case 5:
+                        msg = 'Seleccione una utilización';
+                        break;
                 }
                 $('#msg').html(msg);
                 var icon = $('#iconmsg');
@@ -160,6 +163,11 @@
                     <label><%out.println(po.getProperty("etiqueta.ParametrosBus_PP"));%></label>
                     <hr id="lineaBomtitu">
                     <div class="Contenidobus">
+                        <label>Utilización</label><select id="ListTipoMat">
+                            <option value="0"></option>
+                            <option value="1">Producción</option>
+                            <option value="5">Ventas</option></select> 
+                        <hr>
                         <label><%out.println(po.getProperty("etiqueta.Mteriales_PP"));%></label><input type="text" id="EquBoom" maxlength="18" style="width: 22%; background-repeat: no-repeat; text-transform: uppercase;"/><button id="btnmatch"  class="BtnMatchIcon"></button> <input type="text" id="DesEquBM" style="width: 52%; background: none; border: none;" readonly/>
                         <hr>
                         <label><%out.println(po.getProperty("etiqueta.centrotrabajoBOOM_PP"));%></label><input type="text" maxlength="4" id="centrotrab" style="width: 10%; text-transform: uppercase; background-repeat: no-repeat;"><button id="btnmatch2"  class="BtnMatchIcon2"></button>
